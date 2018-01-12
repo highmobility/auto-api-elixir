@@ -43,6 +43,9 @@ defmodule AutoApi.DoorLocksCapability do
       [%{atom: :state, bin: <<0x2>>, name: "Get State", title: ""}]
   """
 
+  @spec_file nil
+  @properties []
+
   @identifier <<0x00, 0x20>>
   @name :door_locks
   @desc "Door Locks"

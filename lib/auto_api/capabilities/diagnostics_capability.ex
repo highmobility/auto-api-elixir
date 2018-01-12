@@ -33,29 +33,16 @@ defmodule AutoApi.DiagnosticsCapability do
       :get_diagnostics_state
       iex> D.command_name(0x01)
       :diagnostics_state
-      iex> D.to_map(<<0x1, 0x0>>)
-      [%{bin: <<0x00>>, name: "Unavailable", atom: :unavailable, title: ""}]
-      iex> D.to_map(<<0x1, 0x1>>)
-      [%{atom: :available, bin: <<0x1>>, name: "Available", title: ""}]
+      iex> length(D.properties)
+      14
+      iex> List.last(D.properties)
+      {0x0e, :distance_since_start}
   """
 
-  @identifier <<0x00, 0x33>>
-  @name :diagnostics
-  @desc "Diagnostics"
-  @commands %{
-    0x00 => :get_diagnostics_state,
-    0x01 => :diagnostics_state,
-  }
+  @spec_file "specs/diagnostics.json"
   @type command_type :: :get_diagnostics_state | :diagnostics_state
   @capability_size 1
-  @sub_capabilities [
-    %{
-      options: %{
-        :unavailable => %{name: "Unavailable", bin: <<0x00>>},
-        :available => %{name: "Available", bin: <<0x01>>},
-      }
-    }
-  ]
+  @sub_capabilities []
 
   @command_module AutoApi.DiagnosticsCommand
   @state_module AutoApi.DiagnosticsState

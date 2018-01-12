@@ -46,6 +46,9 @@ defmodule AutoApi.ChargeCapability do
 
   """
 
+  @spec_file nil
+  @properties []
+
   @identifier <<0x00, 0x23>>
   @name :charging
   @desc "Charging"

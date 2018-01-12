@@ -39,6 +39,9 @@ defmodule AutoApi.MaintenanceCapability do
       [%{atom: :available, bin: <<0x1>>, name: "Available", title: ""}]
   """
 
+  @spec_file nil
+  @properties []
+
   @identifier <<0x00, 0x34>>
   @name :maintenance
   @desc "Maintenance"

@@ -41,6 +41,9 @@ defmodule AutoApi.RooftopCapability do
       [%{atom: :available, bin: <<0x1>>, name: "Available", title: "Dimming"}, %{atom: :no_name, bin: <<0x3>>, name: "0% or 100% Available", title: "Open/Close"}]
   """
 
+  @spec_file nil
+  @properties []
+
   @identifier <<0x00, 0x25>>
   @name :rooftop
   @desc "Rooftop"

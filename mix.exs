@@ -20,6 +20,7 @@ defmodule AutoApi.Mixfile do
 
   defp deps do
     [
+      {:poison, "~> 3.1", runtime: false},
       {:ex_guard, "~> 1.3", only: :dev},
       {:ex_unit_notifier, "~> 0.1", only: :test},
       {:dialyxir, "~> 0.5", only: [:dev, :test], runtime: false},

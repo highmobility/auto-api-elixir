@@ -1,0 +1,170 @@
+{
+    "category": "diagnostics",
+    "id_lsb": 51,
+    "name": "diagnostics",
+    "api_intro": 3,
+    "message_types": [
+        {
+            "id": 0,
+            "name": "get_diagnostics_state"
+        },
+        {
+            "id": 1,
+            "name": "diagnostics_state"
+        }
+    ],
+    "id_msb": 0,
+    "properties": [
+        {
+            "size": 2,
+            "type": "integer",
+            "description": "The car mileage (odometer) in km",
+            "name": "mileage",
+            "id": 1
+        },
+        {
+            "size": 2,
+            "type": "integer",
+            "description": "Engine oil temperature in Celsius, whereas can be negative",
+            "name": "engine_oil_temperature",
+            "id": 2
+        },
+        {
+            "size": 2,
+            "type": "integer",
+            "description": "The car speed on km/h, whereas can be negative",
+            "name": "speed",
+            "id": 3
+        },
+        {
+            "pretty_name": "Engine RPM",
+            "description": "Engine RPM (revolutions per minute)",
+            "name": "engine_rpm",
+            "type": "integer",
+            "id": 4,
+            "size": 2
+        },
+        {
+            "size": 1,
+            "type": "integer",
+            "description": "Fuel level percentage between 0-100",
+            "name": "fuel_level",
+            "id": 5
+        },
+        {
+            "size": 2,
+            "type": "integer",
+            "description": "Estimated range (with combustion engine)",
+            "name": "estimated_range",
+            "id": 6
+        },
+        {
+            "size": 4,
+            "type": "float",
+            "description": "Current fuel consumption in liters/100km per IEEE 754 formatting",
+            "name": "current_fuel_consumption",
+            "id": 7
+        },
+        {
+            "pretty_name": "Average fuel consumption for current trip",
+            "description": "Average fuel consumption in liters/100km per IEEE 754 formatting",
+            "name": "average_fuel_consumption",
+            "type": "float",
+            "id": 8,
+            "size": 4
+        },
+        {
+            "type": "enum",
+            "size": 1,
+            "values": [
+                {
+                    "name": "low",
+                    "id": 0
+                },
+                {
+                    "name": "filled",
+                    "id": 1
+                }
+            ],
+            "id": 9,
+            "name": "washer_fluid_level"
+        },
+        {
+            "items": [
+                {
+                    "type": "enum",
+                    "values": [
+                        {
+                            "name": "front_left",
+                            "id": 0
+                        },
+                        {
+                            "name": "front_right",
+                            "id": 1
+                        },
+                        {
+                            "name": "rear_right",
+                            "id": 2
+                        },
+                        {
+                            "name": "rear_left",
+                            "id": 3
+                        }
+                    ],
+                    "name": "tire_position",
+                    "size": 1
+                },
+                {
+                    "size": 4,
+                    "type": "float",
+                    "description": "Tire pressure in celsius formatted in 4-bytes per IEEE 754",
+                    "name": "tire_pressure"
+                },
+                {
+                    "size": 4,
+                    "type": "float",
+                    "description": "Tire temperature in celsius formatted in 4-bytes per IEEE 754",
+                    "name": "tire_temperature"
+                },
+                {
+                    "size": 4,
+                    "type": "integer",
+                    "description": "The RPM measured at this wheel",
+                    "name": "wheel_rpm"
+                }
+            ],
+            "id": 10,
+            "name": "tire",
+            "size": 17
+        },
+        {
+            "size": 4,
+            "type": "float",
+            "description": "Battery voltage per IEEE 754 formatting",
+            "name": "battery_voltage",
+            "id": 11
+        },
+        {
+            "size": 4,
+            "type": "float",
+            "description": "AdBlue level in liters formatted in 4-bytes per IEEE 754 formatting",
+            "name": "adblue_level",
+            "id": 12
+        },
+        {
+            "size": 2,
+            "type": "integer",
+            "description": "The distance driven in km since reset",
+            "name": "distance_since_reset",
+            "id": 13
+        },
+        {
+            "size": 2,
+            "type": "integer",
+            "description": "The distance driven in km since trip start",
+            "name": "distance_since_start",
+            "id": 14
+        }
+    ],
+    "api_update": 5
+}

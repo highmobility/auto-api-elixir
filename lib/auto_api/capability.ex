@@ -28,6 +28,23 @@ defmodule AutoApi.Capability do
 
   defmacro __using__(_opts) do
     quote do
+      if @spec_file do
+        spec = Poison.decode!(File.read!(@spec_file))
+        @identifier <<spec["id_msb"], spec["id_lsb"]>>
+        @name String.to_atom(spec["name"])
+        @desc String.capitalize(spec["name"])
+        message_types =
+          spec["message_types"]
+          |> Enum.map(fn msg_type -> {msg_type["id"], String.to_atom(msg_type["name"])} end)
+          |> Enum.into(%{})
+        @commands message_types
+        properties =
+          spec["properties"]
+          |> Enum.map(fn prop -> {prop["id"], String.to_atom(prop["name"])} end)
+        @properties properties
+      end
+
+
       @command_ids Enum.into(Enum.map(@commands, fn {k,v} -> {v, k} end ), %{})
 
       def command, do: @command_module
@@ -71,28 +88,70 @@ defmodule AutoApi.Capability do
       def command_id(name), do: Map.get(@command_ids, name, -1)
 
       @doc """
+      Deprecated. Use API level 5 and above.
+
       Returns capability size: #{@capability_size}
       """
+      @deprecated "Use API level 5 and above"
       @spec capability_size :: integer
       def capability_size, do: @capability_size
 
       @doc """
+      Deprecated. Use API level 5 and above.
+
       Retunrs capabilities under #{@desc}:
+
       ```
       #{inspect @sub_capabilities}
       ```
       """
+      @deprecated "Use API level 5 and above"
       @spec capabilities :: list(map())
       def capabilities, do: @sub_capabilities
 
-      @doc """
-      Converts full capability in binary to capability value in map
 
-      for example:
-          iex> AutoApi.DoorLocksCapability.to_map(<<0x1, 0x0>>)
-          [%{bin: <<0x00>>, name: "Unavailable", atom: :unavailable, title: ""}]
+      @doc """
+      Retunrs properties under #{@desc}:
+      ```
+      #{inspect @properties, base: :hex}
+      ```
       """
-      def to_map(<<size, sub_caps::binary-size(size), rest::binary>>) do
+      @spec properties :: list(tuple())
+      def properties, do: @properties
+
+      @doc """
+      Returns list of supported sub capability based on binary value
+
+      Level 5:
+
+          ie> HmAutoApi.DoorLocksCapability.to_map(<<0x00, 0x20, 0x01, 0x00, 0x02>>)
+          [:lock_state, :get_lock_state, :lock_unlock_doors]
+
+
+      Level 4:
+          ie> HmAutoApi.DoorLocksCapability.to_map(<<0x1, 0x0>>)
+          [%{bin: <<0x00>>, name: "Unavailable", atom: :unavailable, title: ""}]
+
+
+      """
+      @spec to_map(binary) :: list(command_type) :: list(map)
+      def to_map(capability_bin) do
+        id = @identifier
+        case capability_bin do
+          <<^id::binary-size(2), caps::binary>> ->
+            caps
+            |> :binary.bin_to_list
+            |> Enum.map(fn action -> command_name(action) end)
+          _ -> to_map_l4(capability_bin)
+        end
+      end
+
+
+      @doc """
+      Deprecated. Use API level 5 and above.
+      """
+      @deprecated "Use API level 5 and above"
+      def to_map_l4(<<size, sub_caps::binary-size(size), rest::binary>>) do
         len = capability_size()
         sub_caps_list = :binary.bin_to_list(sub_caps)
         for index <- 0..len-1 do
@@ -102,13 +161,9 @@ defmodule AutoApi.Capability do
       end
 
       @doc """
-      Converts the binary value on given position to capability value in map.
-
-      for example:
-
-          iex> AutoApi.DoorLocksCapability.to_map(<<0x0>>, 0)
-          %{bin: <<0x00>>, name: "Unavailable", atom: :unavailable, title: ""}
+      Deprecated. Use API level 5 and above.
       """
+      @deprecated "Use API level 5 and above"
       def to_map(sub_cap_bin, index) when is_binary(sub_cap_bin) do
         sub_cap = Enum.at(@sub_capabilities, index)
         title = Map.get(sub_cap, :title, "")
@@ -118,6 +173,19 @@ defmodule AutoApi.Capability do
         cap_detail
         |> Map.put(:atom, cap_atom)
         |> Map.put(:title, title)
+      end
+
+      @doc """
+      Returns binary value of capability based on list of available supported capabilities
+      """
+      @spec to_bin(list(command_type)) :: binary
+      def to_bin(actions_list) do
+        cap_iden = identifier()
+        caps_binary =
+          actions_list
+          |> Enum.map(fn cap -> command_id(cap) end)
+          |> :binary.list_to_bin
+        cap_iden <> caps_binary
       end
     end
   end

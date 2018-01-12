@@ -45,6 +45,9 @@ defmodule AutoApi.TrunkAccessCapability do
       [%{atom: :state_unlock, bin: <<0x3>>, name: "Get State, Unlock Available", title: "Lock"}, %{bin: <<0x03>>, name: "Get State, Open Available", atom: :state_open, title: "Position"}]
   """
 
+  @spec_file nil
+  @properties []
+
   @identifier <<0x00, 0x21>>
   @name :trunk_access
   @desc "Trunk Access"

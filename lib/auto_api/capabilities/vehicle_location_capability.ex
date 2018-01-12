@@ -39,6 +39,9 @@ defmodule AutoApi.VehicleLocationCapability do
       [%{atom: :available, bin: <<0x1>>, name: "Available", title: ""}]
   """
 
+  @spec_file nil
+  @properties []
+
   @identifier <<0x00, 0x30>>
   @name :vehicle_location
   @desc "Vehicle Location"

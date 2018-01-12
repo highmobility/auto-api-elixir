@@ -44,6 +44,9 @@ defmodule AutoApi.EngineCapability do
 
   """
 
+  @spec_file nil
+  @properties []
+
   @identifier <<0x00, 0x35>>
   @name :engine
   @desc "Engine"
