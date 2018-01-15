@@ -28,23 +28,21 @@ defmodule AutoApi.Capability do
 
   defmacro __using__(_opts) do
     quote do
-      if @spec_file do
-        spec = Poison.decode!(File.read!(@spec_file))
-        @identifier <<spec["id_msb"], spec["id_lsb"]>>
-        @name String.to_atom(spec["name"])
-        @desc String.capitalize(spec["name"])
-        message_types =
-          spec["message_types"]
-          |> Enum.map(fn msg_type -> {msg_type["id"], String.to_atom(msg_type["name"])} end)
-          |> Enum.into(%{})
+      spec = Poison.decode!(File.read!(@spec_file))
+      @identifier <<spec["id_msb"], spec["id_lsb"]>>
+      @name String.to_atom(spec["name"])
+      @desc spec["name"] |> String.split("_") |> Enum.map(&String.capitalize/1) |> Enum.join(" ")
+      message_types =
+        spec["message_types"]
+        |> Enum.map(fn msg_type -> {msg_type["id"], String.to_atom(msg_type["name"])} end)
+        |> Enum.into(%{})
 
-        @commands message_types
-        properties =
-          spec["properties"]
-          |> Enum.map(fn prop -> {prop["id"], String.to_atom(prop["name"])} end)
+      @commands message_types
+      properties =
+        spec["properties"]
+        |> Enum.map(fn prop -> {prop["id"], String.to_atom(prop["name"])} end)
 
-        @properties properties
-      end
+      @properties properties
 
       @command_ids Enum.into(Enum.map(@commands, fn {k, v} -> {v, k} end), %{})
 
@@ -198,7 +196,8 @@ defmodule AutoApi.Capability do
   end
 
   @capabilities %{
-    <<0x00, 0x33>> => AutoApi.DiagnosticsCapability
+    <<0x00, 0x33>> => AutoApi.DiagnosticsCapability,
+    <<0x00, 0x20>> => AutoApi.DoorLocksCapability
   }
 
   @doc """
