@@ -29,7 +29,6 @@ defmodule AutoApi.CommonData do
   def atom_location_to_bin(:rear_right), do: 0x02
   def atom_location_to_bin(:rear_left), do: 0x03
 
-
   @type position :: :closed | :open | :unavailable
 
   def atom_position_to_bin(:closed), do: 0x00
@@ -39,7 +38,6 @@ defmodule AutoApi.CommonData do
   def bin_position_to_atom(0x00), do: :closed
   def bin_position_to_atom(0x01), do: :open
   def bin_position_to_atom(_), do: :unavailable
-
 
   @type lock :: :unlocked | :locked
 
@@ -64,6 +62,7 @@ defmodule AutoApi.CommonData do
   end
 
   def convert_bin_to_integer(<<i_value::integer-16>>), do: i_value
+
   def convert_bin_to_float(<<f_value::float-32>>) do
     f_value
     |> Float.ceil(3)

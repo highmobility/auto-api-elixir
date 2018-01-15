@@ -24,6 +24,7 @@ defmodule AutoApi.DiagnosticsCommand do
 
   alias AutoApi.DiagnosticsState
   alias AutoApi.DiagnosticsCapability
+
   @doc """
   Parses the binary command and makes changes or returns the state
 
@@ -35,13 +36,14 @@ defmodule AutoApi.DiagnosticsCommand do
         {:state_changed, %AutoApi.DiagnosticsState{engine_oil_temperature: 20,engine_rpm: 70, fuel_level: 99, mileage: 2000, speed: 100,washer_fluid_level: :low, tires: [%{position: :front_left, pressure: 20.79}]}}
 
   """
-  @spec execute(DiagnosticsState.t, binary) :: {:state|:state_changed, DiagnosticsState.t}
+  @spec execute(DiagnosticsState.t(), binary) :: {:state | :state_changed, DiagnosticsState.t()}
   def execute(%DiagnosticsState{} = state, <<0x00>>) do
     {:state, state}
   end
 
   def execute(%DiagnosticsState{} = state, <<0x01, ds::binary>>) do
     new_state = DiagnosticsState.from_bin(ds)
+
     if new_state == state do
       {:state, state}
     else
@@ -57,7 +59,7 @@ defmodule AutoApi.DiagnosticsCommand do
         ie> AutoApi.DiagnosticsCommand.state(%AutoApi.DiagnosticsState{engine_oil_temperature: 20,engine_rpm: 70, fuel_level: 99, mileage: 2000, speed: 100,washer_fluid_level: :low, tires: [%{position: :front_left, pressure: 1.0}]})
         <<0x01, 2000::integer-24, 20::integer-16, 100::integer-16, 70::integer-16, 99::integer-8, 0x00, 0x01, 0x0, 1.0::float-32>>
   """
-  @spec state(DiagnosticsState.t) :: <<_::88>>
+  @spec state(DiagnosticsState.t()) :: <<_::88>>
   def state(%DiagnosticsState{} = state) do
     <<0x01, DiagnosticsState.to_bin(state)::binary>>
   end
@@ -68,7 +70,7 @@ defmodule AutoApi.DiagnosticsCommand do
         ie> AutoApi.DiagnosticsCommand.vehicle_state(%AutoApi.DiagnosticsState{engine_oil_temperature: 20,engine_rpm: 70, fuel_level: 99, mileage: 2000, speed: 100,washer_fluid_level: :low, tires: [%{position: :front_left, pressure: 1.0}]})
         <<0x0B, 2000::integer-24, 20::integer-16, 100::integer-16, 70::integer-16, 99::integer-8, 0x00>>
   """
-  @spec vehicle_state(DiagnosticsState.t) :: binary
+  @spec vehicle_state(DiagnosticsState.t()) :: binary
   def vehicle_state(%DiagnosticsState{} = state) do
     <<0x0B, DiagnosticsState.to_bin(state)::binary-size(0x0B)>>
   end
@@ -79,7 +81,7 @@ defmodule AutoApi.DiagnosticsCommand do
       ie> AutoApi.DiagnosticsCommand.to_bin(:get_diagnostics_state, [])
       <<0x00>>
   """
-  @spec to_bin(DiagnosticsCapability.command_type, list(any())) :: binary
+  @spec to_bin(DiagnosticsCapability.command_type(), list(any())) :: binary
   def to_bin(:get_diagnostics_state, []) do
     cmd_id = DiagnosticsCapability.command_id(:get_diagnostics_state)
     <<cmd_id>>

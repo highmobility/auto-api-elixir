@@ -20,4 +20,3 @@ defmodule AutoApi.PermissionsTest do
   use ExUnit.Case, async: true
   doctest AutoApi.Permissions
 end
-

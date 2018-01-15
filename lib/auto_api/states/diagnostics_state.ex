@@ -37,21 +37,25 @@ defmodule AutoApi.DiagnosticsState do
   * `engine_oil_temperature`: Engine oil temperature in Celsius, whereas can be negative
   * `tires`: List of tire pressures
   """
-  defstruct mileage: 0, engine_oil_temperature: 0,
-            speed: 0, engine_rpm: 0, fuel_level: 0,
-            washer_fluid_level: :low, tire: []
-
+  defstruct mileage: 0,
+            engine_oil_temperature: 0,
+            speed: 0,
+            engine_rpm: 0,
+            fuel_level: 0,
+            washer_fluid_level: :low,
+            tire: []
 
   use AutoApi.State, spec_file: "specs/diagnostics.json"
 
-
   @type t :: %__MODULE__{
-    mileage: integer, engine_oil_temperature: integer,
-    speed: integer, engine_rpm: integer,
-    fuel_level: integer, washer_fluid_level: fluid_level,
-    tire: list(tire_data)
-  }
-
+          mileage: integer,
+          engine_oil_temperature: integer,
+          speed: integer,
+          engine_rpm: integer,
+          fuel_level: integer,
+          washer_fluid_level: fluid_level,
+          tire: list(tire_data)
+        }
 
   alias AutoApi.CommonData
 
@@ -66,28 +70,30 @@ defmodule AutoApi.DiagnosticsState do
   iex> AutoApi.DiagnosticsState.from_bin(<<0xA, 13::integer-16, 0x03, 4.0::float-32, 8.0::float-32, 16.0::float-32>>)
   %AutoApi.DiagnosticsState{tire: [%{tire_position: <<3>>, tire_pressure: <<64, 128, 0, 0>>, tire_temperature: <<65, 0, 0, 0>>, wheel_rpm: <<65, 128, 0, 0>>}]}
   """
-  @spec from_bin(binary) :: __MODULE__.t
+  @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
     parse_properties(bin, %__MODULE__{})
   end
 
-
   defp fluid_to_bin(:low), do: 0x00
   defp fluid_to_bin(:filled), do: 0x01
 
-  @spec to_bin(__MODULE__.t) :: binary
+  @spec to_bin(__MODULE__.t()) :: binary
   def to_bin(%__MODULE__{} = state) do
-    <<state.mileage::integer-24,
+    <<
+      state.mileage::integer-24,
       state.engine_oil_temperature::integer-16,
       state.speed::integer-16,
       state.engine_rpm::integer-16,
       state.fuel_level,
       fluid_to_bin(state.washer_fluid_level),
       length(state.tires),
-      atom_tire_to_bin(state.tires)::binary>>
+      atom_tire_to_bin(state.tires)::binary
+    >>
   end
 
   defp atom_tire_to_bin(<<>>), do: <<>>
+
   defp atom_tire_to_bin(tiers) do
     tiers
     |> Enum.map(fn %{position: position, pressure: pressure} ->

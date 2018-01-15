@@ -20,7 +20,7 @@ defmodule AutoApi.Capability do
   @callback name() :: atom
   @callback command_name(integer) :: atom
   @callback command_name(integer) :: atom
-  @callback description :: String.t
+  @callback description :: String.t()
   @callback capability_size :: integer
   @callback capabilities :: list(any)
   @callback to_map(binary) :: list(any)
@@ -37,15 +37,16 @@ defmodule AutoApi.Capability do
           spec["message_types"]
           |> Enum.map(fn msg_type -> {msg_type["id"], String.to_atom(msg_type["name"])} end)
           |> Enum.into(%{})
+
         @commands message_types
         properties =
           spec["properties"]
           |> Enum.map(fn prop -> {prop["id"], String.to_atom(prop["name"])} end)
+
         @properties properties
       end
 
-
-      @command_ids Enum.into(Enum.map(@commands, fn {k,v} -> {v, k} end ), %{})
+      @command_ids Enum.into(Enum.map(@commands, fn {k, v} -> {v, k} end), %{})
 
       def command, do: @command_module
       def state, do: @state_module
@@ -65,7 +66,7 @@ defmodule AutoApi.Capability do
       @doc """
       Returns capability's description: #{@desc}
       """
-      @spec description :: String.t
+      @spec description :: String.t()
       def description, do: @desc
 
       @doc """
@@ -77,14 +78,13 @@ defmodule AutoApi.Capability do
       #{inspect @commands, base: :hex}
       ```
       """
-      @spec command_name(integer) :: __MODULE__.command_type | nil
+      @spec command_name(integer) :: __MODULE__.command_type() | nil
       def command_name(id), do: Map.get(@commands, id)
-
 
       @doc """
       Return commands id based on atom
       """
-      @spec command_id(__MODULE__.command_type) :: integer | nil
+      @spec command_id(__MODULE__.command_type()) :: integer | nil
       def command_id(name), do: Map.get(@command_ids, name, -1)
 
       @doc """
@@ -108,7 +108,6 @@ defmodule AutoApi.Capability do
       @deprecated "Use API level 5 and above"
       @spec capabilities :: list(map())
       def capabilities, do: @sub_capabilities
-
 
       @doc """
       Retunrs properties under #{@desc}:
@@ -137,15 +136,17 @@ defmodule AutoApi.Capability do
       @spec to_map(binary) :: list(command_type) :: list(map)
       def to_map(capability_bin) do
         id = @identifier
+
         case capability_bin do
           <<^id::binary-size(2), caps::binary>> ->
             caps
-            |> :binary.bin_to_list
+            |> :binary.bin_to_list()
             |> Enum.map(fn action -> command_name(action) end)
-          _ -> to_map_l4(capability_bin)
+
+          _ ->
+            to_map_l4(capability_bin)
         end
       end
-
 
       @doc """
       Deprecated. Use API level 5 and above.
@@ -154,7 +155,8 @@ defmodule AutoApi.Capability do
       def to_map_l4(<<size, sub_caps::binary-size(size), rest::binary>>) do
         len = capability_size()
         sub_caps_list = :binary.bin_to_list(sub_caps)
-        for index <- 0..len-1 do
+
+        for index <- 0..(len - 1) do
           cap_bin = Enum.at(sub_caps_list, index)
           to_map(<<cap_bin>>, index)
         end
@@ -167,9 +169,12 @@ defmodule AutoApi.Capability do
       def to_map(sub_cap_bin, index) when is_binary(sub_cap_bin) do
         sub_cap = Enum.at(@sub_capabilities, index)
         title = Map.get(sub_cap, :title, "")
-        {cap_atom, cap_detail} = sub_cap.options
-                                 |> Enum.filter(fn {_, opt} -> opt[:bin] == sub_cap_bin end)
-                                 |> List.first
+
+        {cap_atom, cap_detail} =
+          sub_cap.options
+          |> Enum.filter(fn {_, opt} -> opt[:bin] == sub_cap_bin end)
+          |> List.first()
+
         cap_detail
         |> Map.put(:atom, cap_atom)
         |> Map.put(:title, title)
@@ -181,18 +186,19 @@ defmodule AutoApi.Capability do
       @spec to_bin(list(command_type)) :: binary
       def to_bin(actions_list) do
         cap_iden = identifier()
+
         caps_binary =
           actions_list
           |> Enum.map(fn cap -> command_id(cap) end)
-          |> :binary.list_to_bin
+          |> :binary.list_to_bin()
+
         cap_iden <> caps_binary
       end
     end
   end
 
-
   @capabilities %{
-    <<0x00, 0x33>> => AutoApi.DiagnosticsCapability,
+    <<0x00, 0x33>> => AutoApi.DiagnosticsCapability
   }
 
   @doc """
@@ -206,14 +212,16 @@ defmodule AutoApi.Capability do
   """
   def blank_capabilities do
     caps_len = length(Map.keys(@capabilities))
+
     for {_, cap_module} <- @capabilities do
       iden = apply(cap_module, :identifier, [])
+
       cap_module
       |> apply(:capabilities, [])
       |> Enum.map(fn _ -> <<0>> end)
-      |> Enum.reduce(iden, fn (i, x) -> x <> i end)
+      |> Enum.reduce(iden, fn i, x -> x <> i end)
     end
-    |> Enum.reduce(<<caps_len>>, fn (i, x) -> x <> i end)
+    |> Enum.reduce(<<caps_len>>, fn i, x -> x <> i end)
   end
 
   def list_capabilities, do: @capabilities

@@ -22,7 +22,15 @@ defmodule AutoApi.Command do
   @callback state(struct) :: binary
   @callback vehicle_state(struct) :: binary
 
-  @type capability_name :: :door_locks | :charging | :diagnostics | :engine | :maintenance | :rooftop | :trunk_access | :vehicle_location
+  @type capability_name ::
+          :door_locks
+          | :charging
+          | :diagnostics
+          | :engine
+          | :maintenance
+          | :rooftop
+          | :trunk_access
+          | :vehicle_location
 
   @doc """
   Extracts commands meta data  including the capability that
@@ -44,12 +52,14 @@ defmodule AutoApi.Command do
 
 
   """
-  def meta_data(<<id::binary-size(2), type, _data::binary >>) do
-    capabilities = AutoApi.Capability.list_capabilities
-    with {:capability, capability_module} when not is_nil(capability_module) <- {:capability, capabilities[id]},
+  def meta_data(<<id::binary-size(2), type, _data::binary>>) do
+    capabilities = AutoApi.Capability.list_capabilities()
+
+    with {:capability, capability_module} when not is_nil(capability_module) <-
+           {:capability, capabilities[id]},
          capability_name <- apply(capability_module, :name, []),
          command_name <- apply(capability_module, :command_name, [type]) do
-           %{message_id: capability_name, message_type: command_name, module: capability_module}
+      %{message_id: capability_name, message_type: command_name, module: capability_module}
     else
       {:capability, nil} ->
         %{}
@@ -66,6 +76,7 @@ defmodule AutoApi.Command do
   def to_bin(capability_name, action) do
     to_bin(capability_name, action, [])
   end
+
   def to_bin(capability_name, action, args) do
     with {:ok, capability} <- export_cap(capability_name) do
       command_bin = capability.command.to_bin(action, args)
@@ -77,7 +88,7 @@ defmodule AutoApi.Command do
 
   defp export_cap(capability_name) do
     cap =
-      AutoApi.Capability.list_capabilities
+      AutoApi.Capability.list_capabilities()
       |> Enum.filter(fn {_, c} -> apply(c, :name, []) == capability_name end)
       |> Enum.map(fn {_, c} -> c end)
 
