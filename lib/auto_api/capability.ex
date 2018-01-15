@@ -192,23 +192,16 @@ defmodule AutoApi.Capability do
 
 
   @capabilities %{
-    <<0x00, 0x21>> => AutoApi.TrunkAccessCapability,
-    <<0x0, 0x20>>  => AutoApi.DoorLocksCapability,
-    <<0x0, 0x25>>  => AutoApi.RooftopCapability,
-    <<0x0, 0x23>>  => AutoApi.ChargeCapability,
     <<0x00, 0x33>> => AutoApi.DiagnosticsCapability,
-    <<0x00, 0x35>> => AutoApi.EngineCapability,
-    <<0x00, 0x34>> => AutoApi.MaintenanceCapability,
-    <<0x00, 0x30>> => AutoApi.VehicleLocationCapability,
   }
 
   @doc """
     Returns full capabilities with all of them marked as disabled
 
-      iex> <<cap_len, first_cap :: binary-size(3), _::binary>> = AutoApi.Capability.blank_capabilities
-      iex> cap_len
+      ie> <<cap_len, first_cap :: binary-size(3), _::binary>> = AutoApi.Capability.blank_capabilities
+      ie> cap_len
       8
-      iex> first_cap
+      ie> first_cap
       <<0, 0x20, 0>>
   """
   def blank_capabilities do

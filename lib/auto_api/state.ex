@@ -30,11 +30,74 @@ defmodule AutoApi.State do
   @callback from_bin(binary) :: struct
   @callback to_bin(struct) :: binary
   @callback base() :: struct
-  defmacro __using__(_opts) do
-    quote do
+  defmacro __using__(opts) do
+    base = quote do
+      alias AutoApi.CommonData
       @behaviour AutoApi.State
       @spec base :: t
       def base, do: %__MODULE__{}
+      def parse_properties(<<id, size::integer-16, data::binary-size(size)>>, state)  do
+		do_parse_properties(id, data, state)
+      end
+
+      def parse_properties(<<id, size::integer-16, data::binary-size(size), rest::binary>>, state)  do
+		state = do_parse_properties(id, data, state)
+        parse_properties(rest, state)
+      end
+
+      def parse_properties(d, state) do
+        state
+      end
+
+	  def do_parse_properties(id, data, state) do
+		{prop, value} = parse_property(id, data)
+		if is_map(value) do
+          current_value = Map.get(state, prop)
+		  %{state| prop => [value | current_value]}
+		else
+		  %{state| prop => value}
+		end
+	  end
+
     end
+
+    spec = Poison.decode!(File.read!(opts[:spec_file]))
+    prop_funs = for prop <- spec["properties"] do
+      quote do
+        case unquote(prop["type"]) do
+          "enum" ->
+            def parse_property(unquote(prop["id"]), <<value>>) do
+              enum_values = unquote(Macro.escape(prop["values"]))
+              enum_values
+              |> Enum.filter(fn v -> v["id"] == value end)
+              |> List.first
+              |> case do
+                nil ->
+                  {:error, {:can_not_parse, value}}
+                matched_value ->
+                  {String.to_atom(unquote(prop["name"])), matched_value["name"]}
+              end
+            end
+          nil ->
+            def parse_property(unquote(prop["id"]), data) do
+              data_list = :binary.bin_to_list(data)
+              {_, result} =
+                unquote(Macro.escape(prop["items"]))
+                |> Enum.reduce({0, []}, fn (x, {counter, acc}) ->
+                  data_slice = :binary.list_to_bin(Enum.slice(data_list, counter, x["size"]))
+                  #TODO: convert binary slices to their types
+                  {counter + x["size"], [{String.to_atom(x["name"]), data_slice} | acc]}
+                end)
+              {String.to_atom(unquote(prop["name"])), Enum.into(result, %{})}
+            end
+          _ ->
+            def parse_property(unquote(prop["id"]), data) do
+              value = apply(AutoApi.CommonData, :"convert_bin_to_#{unquote(prop["type"])}", [data])
+              {String.to_atom(unquote(prop["name"])), value}
+            end
+        end
+      end
+    end
+    [base | prop_funs]
   end
 end

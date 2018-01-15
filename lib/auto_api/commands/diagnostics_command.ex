@@ -30,8 +30,8 @@ defmodule AutoApi.DiagnosticsCommand do
         iex> AutoApi.DiagnosticsCommand.execute(%AutoApi.DiagnosticsState{}, <<0x00>>)
         {:state, %AutoApi.DiagnosticsState{}}
 
-        iex> command = <<0x01, 2000::integer-24, 20::integer-16, 100::integer-16, 70::integer-16, 99::integer-8, 0x00, 1, 0x00, 20.79::float-32>>
-        iex> AutoApi.DiagnosticsCommand.execute(%AutoApi.DiagnosticsState{}, command)
+        ie> command = <<0x01>> <> <<0x01,
+        ie> AutoApi.DiagnosticsCommand.execute(%AutoApi.DiagnosticsState{}, command)
         {:state_changed, %AutoApi.DiagnosticsState{engine_oil_temperature: 20,engine_rpm: 70, fuel_level: 99, mileage: 2000, speed: 100,washer_fluid_level: :low, tires: [%{position: :front_left, pressure: 20.79}]}}
 
   """
@@ -52,9 +52,9 @@ defmodule AutoApi.DiagnosticsCommand do
   @doc """
   Converts VehicleLocation state to capability's state in binary
 
-        iex> AutoApi.DiagnosticsCommand.state(%AutoApi.DiagnosticsState{engine_oil_temperature: 20,engine_rpm: 70, fuel_level: 99, mileage: 2000, speed: 100,washer_fluid_level: :low, tires: []})
+        ie> AutoApi.DiagnosticsCommand.state(%AutoApi.DiagnosticsState{engine_oil_temperature: 20,engine_rpm: 70, fuel_level: 99, mileage: 2000, speed: 100,washer_fluid_level: :low, tires: []})
         <<0x01, 2000::integer-24, 20::integer-16, 100::integer-16, 70::integer-16, 99::integer-8, 0x00, 0x00>>
-        iex> AutoApi.DiagnosticsCommand.state(%AutoApi.DiagnosticsState{engine_oil_temperature: 20,engine_rpm: 70, fuel_level: 99, mileage: 2000, speed: 100,washer_fluid_level: :low, tires: [%{position: :front_left, pressure: 1.0}]})
+        ie> AutoApi.DiagnosticsCommand.state(%AutoApi.DiagnosticsState{engine_oil_temperature: 20,engine_rpm: 70, fuel_level: 99, mileage: 2000, speed: 100,washer_fluid_level: :low, tires: [%{position: :front_left, pressure: 1.0}]})
         <<0x01, 2000::integer-24, 20::integer-16, 100::integer-16, 70::integer-16, 99::integer-8, 0x00, 0x01, 0x0, 1.0::float-32>>
   """
   @spec state(DiagnosticsState.t) :: <<_::88>>
@@ -65,7 +65,7 @@ defmodule AutoApi.DiagnosticsCommand do
   @doc """
   Converts VehicleLocation state to capability's vehicle state binary
 
-        iex> AutoApi.DiagnosticsCommand.vehicle_state(%AutoApi.DiagnosticsState{engine_oil_temperature: 20,engine_rpm: 70, fuel_level: 99, mileage: 2000, speed: 100,washer_fluid_level: :low, tires: [%{position: :front_left, pressure: 1.0}]})
+        ie> AutoApi.DiagnosticsCommand.vehicle_state(%AutoApi.DiagnosticsState{engine_oil_temperature: 20,engine_rpm: 70, fuel_level: 99, mileage: 2000, speed: 100,washer_fluid_level: :low, tires: [%{position: :front_left, pressure: 1.0}]})
         <<0x0B, 2000::integer-24, 20::integer-16, 100::integer-16, 70::integer-16, 99::integer-8, 0x00>>
   """
   @spec vehicle_state(DiagnosticsState.t) :: binary
@@ -76,7 +76,7 @@ defmodule AutoApi.DiagnosticsCommand do
   @doc """
   Converts command to binary format
 
-      iex> AutoApi.DiagnosticsCommand.to_bin(:get_diagnostics_state, [])
+      ie> AutoApi.DiagnosticsCommand.to_bin(:get_diagnostics_state, [])
       <<0x00>>
   """
   @spec to_bin(DiagnosticsCapability.command_type, list(any())) :: binary

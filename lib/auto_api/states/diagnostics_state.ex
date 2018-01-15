@@ -39,48 +39,38 @@ defmodule AutoApi.DiagnosticsState do
   """
   defstruct mileage: 0, engine_oil_temperature: 0,
             speed: 0, engine_rpm: 0, fuel_level: 0,
-            washer_fluid_level: :low,
-            tires: []
+            washer_fluid_level: :low, tire: []
 
 
-  use AutoApi.State
+  use AutoApi.State, spec_file: "specs/diagnostics.json"
+
 
   @type t :: %__MODULE__{
     mileage: integer, engine_oil_temperature: integer,
     speed: integer, engine_rpm: integer,
     fuel_level: integer, washer_fluid_level: fluid_level,
-    tires: list(tire_data)
+    tire: list(tire_data)
   }
 
 
   alias AutoApi.CommonData
 
+  @doc """
+  Build state based on binary value
+
+  iex> AutoApi.DiagnosticsState.from_bin(<<0x01, 2::integer-16, 100::integer-16>>)
+  %AutoApi.DiagnosticsState{mileage: 100}
+  iex> AutoApi.DiagnosticsState.from_bin(<<0x01, 2::integer-16, 100::integer-16, 0x02, 2::integer-16, 26::integer-16>>)
+  %AutoApi.DiagnosticsState{mileage: 100, engine_oil_temperature: 26}
+
+  iex> AutoApi.DiagnosticsState.from_bin(<<0xA, 13::integer-16, 0x03, 4.0::float-32, 8.0::float-32, 16.0::float-32>>)
+  %AutoApi.DiagnosticsState{tire: [%{tire_position: <<3>>, tire_pressure: <<64, 128, 0, 0>>, tire_temperature: <<65, 0, 0, 0>>, wheel_rpm: <<65, 128, 0, 0>>}]}
+  """
   @spec from_bin(binary) :: __MODULE__.t
-  def from_bin(<<mileage::integer-24, eoiltemp::integer-16, speed::integer-16, erpm::integer-16, fuel::integer, wfl, tire_data::binary>>) do
-    %__MODULE__{
-      mileage: mileage, engine_oil_temperature: eoiltemp,
-      speed: speed, engine_rpm: erpm, fuel_level: fuel,
-      washer_fluid_level: fluid_to_atom(wfl),
-      tires: convert_tires_to_map(tire_data)
-    }
+  def from_bin(bin) do
+    parse_properties(bin, %__MODULE__{})
   end
 
-  defp convert_tires_to_map(<<0x00, _::binary>>), do: []
-  defp convert_tires_to_map(<<_num_tires, tires_data::binary>>) do
-    tires_data
-    |> :binary.bin_to_list
-    |> Enum.chunk_every(5)
-    |> Enum.map(fn [position|bin_pressure] ->
-      pressure =
-        bin_pressure
-        |> :binary.list_to_bin
-        |> CommonData.bin_to_ieee_754_float
-      %{position: bin_position_to_atom(position), pressure: pressure}
-    end)
-  end
-
-  defp fluid_to_atom(0x00), do: :low
-  defp fluid_to_atom(0x01), do: :filled
 
   defp fluid_to_bin(:low), do: 0x00
   defp fluid_to_bin(:filled), do: 0x01
@@ -97,21 +87,11 @@ defmodule AutoApi.DiagnosticsState do
       atom_tire_to_bin(state.tires)::binary>>
   end
 
-  defp bin_position_to_atom(0x00), do: :front_left
-  defp bin_position_to_atom(0x01), do: :front_right
-  defp bin_position_to_atom(0x02), do: :rear_right
-  defp bin_position_to_atom(0x03), do: :rear_left
-
-  defp atom_position_to_bin(:front_left), do: 0x00
-  defp atom_position_to_bin(:front_right), do: 0x01
-  defp atom_position_to_bin(:rear_right), do: 0x02
-  defp atom_position_to_bin(:rear_left), do: 0x03
-
   defp atom_tire_to_bin(<<>>), do: <<>>
   defp atom_tire_to_bin(tiers) do
     tiers
     |> Enum.map(fn %{position: position, pressure: pressure} ->
-      <<atom_position_to_bin(position), pressure::float-32>>
+      <<CommonData.atom_position_to_bin(position), pressure::float-32>>
     end)
     |> Enum.reduce(<<>>, fn x, acc -> acc <> x end)
   end

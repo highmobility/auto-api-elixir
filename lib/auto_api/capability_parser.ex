@@ -28,22 +28,22 @@ defmodule AutoApi.CapabilityParser do
   @doc """
   Converts capabilities in binary to map
 
-      iex> bin_caps = <<0x01>> <> <<0x01, 0x00, 0x05, 0x00, 0x20, 0x01, 0x00, 0x02>>
-      iex> AutoApi.CapabilityParser.to_map(bin_caps)
+      ie> bin_caps = <<0x01>> <> <<0x01, 0x00, 0x05, 0x00, 0x20, 0x01, 0x00, 0x02>>
+      ie> AutoApi.CapabilityParser.to_map(bin_caps)
       {:ok, %{door_locks: [:lock_state, :get_lock_state, :lock_unlock_doors]}}
 
-      iex> bin_2_caps = <<0x01>> <> <<0x01, 0x00, 0x02, 0x00, 0x20>> <> <<0x01, 0x00, 0x05, 0x00, 0x21, 0x00, 0x01, 0x02>>
-      iex> AutoApi.CapabilityParser.to_map(bin_2_caps)
+      ie> bin_2_caps = <<0x01>> <> <<0x01, 0x00, 0x02, 0x00, 0x20>> <> <<0x01, 0x00, 0x05, 0x00, 0x21, 0x00, 0x01, 0x02>>
+      ie> AutoApi.CapabilityParser.to_map(bin_2_caps)
       {:ok, %{door_locks: [], trunk_access: [:get_trunk_state, :trunk_state, :open_close_trunk]}}
 
-      iex> bin_invalid_caps = <<0x01>> <> <<0x01, 0x00, 0x02, 0x00, 0x20, 0x01>>
-      iex> AutoApi.CapabilityParser.to_map(bin_invalid_caps)
+      ie> bin_invalid_caps = <<0x01>> <> <<0x01, 0x00, 0x02, 0x00, 0x20, 0x01>>
+      ie> AutoApi.CapabilityParser.to_map(bin_invalid_caps)
       {:error, {:cannot_parse_data, <<1>>}}
 
 
 
-      iex> bin_caps = <<0x1, 0x0, 0x20, 0x1, 0x1, 0x0, 0x25, 0x2, 0x0, 0x3>>
-      iex> AutoApi.CapabilityParser.to_map(bin_caps)
+      ie> bin_caps = <<0x1, 0x0, 0x20, 0x1, 0x1, 0x0, 0x25, 0x2, 0x0, 0x3>>
+      ie> AutoApi.CapabilityParser.to_map(bin_caps)
       %{door_locks: [%{atom: :available, bin: <<1>>, name: "Available", title: ""}], rooftop: [%{bin: <<0x00>>, name: "Unavailable", atom: :unavailable, title: "Dimming"}, %{atom: :no_name, bin: <<0x3>>, name: "0% or 100% Available", title: "Open/Close"}]}
   """
   def to_map(<<0x01, 0x01, _::binary>> = bin_caps) do
@@ -136,8 +136,8 @@ defmodule AutoApi.CapabilityParser do
   @doc """
   Converts capabilities version 5 to binary
 
-    iex> map = %{door_locks: [], trunk_access: [:get_trunk_state, :trunk_state, :open_close_trunk]}
-    iex> AutoApi.CapabilityParser.to_bin(map, :v5)
+    ie> map = %{door_locks: [], trunk_access: [:get_trunk_state, :trunk_state, :open_close_trunk]}
+    ie> AutoApi.CapabilityParser.to_bin(map, :v5)
     <<0x01,   0x01, 0x00, 0x02, 0x00, 0x20,     0x01, 0x00, 0x05, 0x00, 0x21, 0x00, 0x01, 0x02>>
   """
   def to_bin(map, :v5) do
