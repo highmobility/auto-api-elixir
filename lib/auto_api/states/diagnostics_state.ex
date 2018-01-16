@@ -84,16 +84,16 @@ defmodule AutoApi.DiagnosticsState do
   Parse state to bin
 
     iex> AutoApi.DiagnosticsState.to_bin(%AutoApi.DiagnosticsState{engine_oil_temperature: 20,engine_rpm: 70, fuel_level: 99, mileage: 2000, speed: 100, washer_fluid_level: :low, tire: []})
-    <<12, 0, 4, 0, 0, 0, 0, 8, 0, 4, 0, 0, 0, 0, 11, 0, 4, 0, 0, 0, 0, 7, 0, 4, 0, \
-    0, 0, 0, 13, 0, 2, 0, 0, 14, 0, 2, 0, 0, 2, 0, 2, 0, 20, 4, 0, 2, 0, 70, 6, 0, \
+    <<12, 0, 4, 0, 0, 0, 0, 8, 0, 4, 0, 0, 0, 0, 11, 0, 4, 0, 0, 0, 0, 7, 0, 4, 0,\
+    0, 0, 0, 13, 0, 2, 0, 0, 14, 0, 2, 0, 0, 2, 0, 2, 0, 20, 4, 0, 2, 0, 70, 6, 0,\
     2, 0, 0, 5, 0, 1, 99, 1, 0, 2, 7, 208, 3, 0, 2, 0, 100, 9, 0, 1, 0>>
-    iex> tiers = [%{tire_position: :front_lef, tire_pressure: 250.00, tire_temperature: 20.00, wheel_rpm: 2900}]
-    iex> AutoApi.DiagnosticsState.to_bin(%AutoApi.DiagnosticsState{tire: tiers})
-    <<12, 0, 4, 0, 0, 0, 0, 8, 0, 4, 0, 0, 0, 0, 11, 0, 4, 0, 0, 0, 0, 7, 0, 4, 0, \
-    0, 0, 0, 13, 0, 2, 0, 0, 14, 0, 2, 0, 0, 2, 0, 2, 0, 0, 4, 0, 2, 0, 0, 6, 0, \
-    2, 0, 0, 5, 0, 1, 0, 1, 0, 2, 0, 0, 3, 0, 2, 0, 0, 10, 0, 13, 67, 122, 0, 0, \
-    65, 160, 0, 0, 0, 0, 11, 84, 9, 0, 1, 0>>
 
+    iex> tiers = [%{tire_position: :front_left, tire_pressure: 250.00, tire_temperature: 20.00, wheel_rpm: 2900}]
+    iex> AutoApi.DiagnosticsState.to_bin(%AutoApi.DiagnosticsState{tire: tiers})
+    <<12, 0, 4, 0, 0, 0, 0, 8, 0, 4, 0, 0, 0, 0, 11, 0, 4, 0, 0, 0, 0, 7, 0, 4, 0,\
+      0, 0, 0, 13, 0, 2, 0, 0, 14, 0, 2, 0, 0, 2, 0, 2, 0, 0, 4, 0, 2, 0, 0, 6, 0,\
+      2, 0, 0, 5, 0, 1, 0, 1, 0, 2, 0, 0, 3, 0, 2, 0, 0, 10, 0, 13, 0, 67, 122, 0,\
+      0, 65, 160, 0, 0, 0, 0, 11, 84, 9, 0, 1, 0>>
   """
   def to_bin(%__MODULE__{} = state) do
     parse_state_properties(state)

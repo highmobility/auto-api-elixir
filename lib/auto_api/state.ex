@@ -131,6 +131,7 @@ defmodule AutoApi.State do
               end
 
               def parse_state_property(unquote(prop_name), data) do
+                # TODO: should go through the items in order!
                 data
                 |> Enum.map(fn item ->
                   parse_state_property_list(unquote(prop_name), item)
@@ -141,7 +142,7 @@ defmodule AutoApi.State do
               def parse_state_property_list(unquote(prop_name), data) do
                 enum_values = unquote(Macro.escape(prop["items"]))
 
-                find_type_fun = fn key_name, value ->
+                find_type_fun = fn enum_values, key_name, value ->
                   enum_values
                   |> Enum.filter(fn v -> v[key_name] == value end)
                   |> List.first()
@@ -151,7 +152,13 @@ defmodule AutoApi.State do
                   bin =
                     case sub_prop["type"] do
                       "enum" ->
-                        <<>>
+                        case find_type_fun.(sub_prop["values"], "name", Atom.to_string(value)) do
+                          nil ->
+                            throw({:error, {:can_not_parse_enum, value}})
+
+                          matched_value ->
+                            <<matched_value["id"]>>
+                        end
 
                       type ->
                         apply(AutoApi.CommonData, :"convert_state_to_bin_#{type}", [
@@ -165,7 +172,7 @@ defmodule AutoApi.State do
 
                 data
                 |> Enum.map(fn {key, value} ->
-                  {find_type_fun.("name", Atom.to_string(key)), value}
+                  {find_type_fun.(enum_values, "name", Atom.to_string(key)), value}
                 end)
                 |> Enum.reduce(
                   <<unquote(prop_id), unquote(prop_size)::integer-16>>,

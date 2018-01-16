@@ -42,7 +42,7 @@ defmodule AutoApi.DoorLocksState do
   @doc """
   Parse state to bin
     iex> AutoApi.DoorLocksState.to_bin(%AutoApi.DoorLocksState{door: [%{door_location: :front_left, door_lock: :unlocked, door_position: :open}]})
-    <<1, 0, 3>>
+    <<0x01, 3::integer-16, 0x00, 0x00, 0x01>>
   """
   @spec to_bin(__MODULE__.t()) :: binary
   def to_bin(%__MODULE__{} = state) do
