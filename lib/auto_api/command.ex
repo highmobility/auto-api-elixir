@@ -20,7 +20,6 @@ defmodule AutoApi.Command do
   @type execute_return_atom :: :state | :state_changed
   @callback execute(struct, binary) :: {execute_return_atom, struct}
   @callback state(struct) :: binary
-  @callback vehicle_state(struct) :: binary
 
   @type capability_name ::
           :door_locks
@@ -42,9 +41,9 @@ defmodule AutoApi.Command do
       ie> binary_command = <<0x00, 0x20, 0x1, 0x01, 0x00, 0x00, 0x00>>
       ie> %{module: cap} = AutoApi.Command.meta_data(binary_command)
       ie> base_state = cap.state.base
-      %AutoApi.DiagnosticsState{}
+      %AutoApi.DoorLocksState{}
       ie> AutoApi.Command.execute(base_state, cap.command, binary_command)
-      {:state_changed, %AutoApi.DiagnosticsState{}]}}
+      {:state_changed, %AutoApi.DoorLocksState{}}
       ie> AutoApi.Command.to_bin(:door_locks, :get_lock_state, [])
       <<0x0, 0x20, 0x0>>
       ie> AutoApi.Command.to_bin(:door_locks, :lock_unlock_doors, [:lock])
