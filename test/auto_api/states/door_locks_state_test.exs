@@ -18,5 +18,5 @@
 # licensing@high-mobility.com
 defmodule AutoApi.DoorLocksStateTest do
   use ExUnit.Case
-  # doctest AutoApi.DoorLocksState
+  doctest AutoApi.DoorLocksState
 end

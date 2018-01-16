@@ -31,11 +31,21 @@ defmodule AutoApi.DoorLocksState do
   @doc """
   Build state based on binary value
 
-  iex> AutoApi.DoorLocksState.from_bin(<<0x01, 3::integer-16, 0x00, 0x01, 0x00>>)
-  %AutoApi.DoorLocksState{door: [%{door_location: <<0>>, door_lock: <<0>>, door_position: <<1>>}]}
+    iex> AutoApi.DoorLocksState.from_bin(<<0x01, 3::integer-16, 0x00, 0x01, 0x00>>)
+    %AutoApi.DoorLocksState{door: [%{door_location: :front_left, door_lock: :unlocked, door_position: :open}]}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
     parse_bin_properties(bin, %__MODULE__{})
+  end
+
+  @doc """
+  Parse state to bin
+    iex> AutoApi.DoorLocksState.to_bin(%AutoApi.DoorLocksState{door: [%{door_location: :front_left, door_lock: :unlocked, door_position: :open}]})
+    <<1, 0, 3>>
+  """
+  @spec to_bin(__MODULE__.t()) :: binary
+  def to_bin(%__MODULE__{} = state) do
+    parse_state_properties(state)
   end
 end
