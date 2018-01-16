@@ -36,6 +36,6 @@ defmodule AutoApi.DoorLocksState do
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
-    parse_properties(bin, %__MODULE__{})
+    parse_bin_properties(bin, %__MODULE__{})
   end
 end

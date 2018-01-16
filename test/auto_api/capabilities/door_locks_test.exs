@@ -16,7 +16,7 @@
 #
 # Please inquire about commercial licensing options at
 # licensing@high-mobility.com
-defmodule AutoApi.DoorkLocksCapabilityTest do
+defmodule AutoApi.DoorLocksCapabilityTest do
   use ExUnit.Case
-  doctest AutoApi.DoorkLocksCapability
+  doctest AutoApi.DoorLocksCapability
 end

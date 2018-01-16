@@ -16,11 +16,11 @@
 #
 # Please inquire about commercial licensing options at
 # licensing@high-mobility.com
-defmodule AutoApi.DoorkLocksCapability do
+defmodule AutoApi.DoorLocksCapability do
   @moduledoc """
   Basic settings for Diagnostics Capability
 
-      iex> alias AutoApi.DoorkLocksCapability, as: D
+      iex> alias AutoApi.DoorLocksCapability, as: D
       iex> D.identifier
       <<0x00, 0x20>>
       iex> D.capability_size
@@ -44,8 +44,8 @@ defmodule AutoApi.DoorkLocksCapability do
   @capability_size 1
   @sub_capabilities []
 
-  @command_module AutoApi.DoorkLocksCommand
-  @state_module AutoApi.DoorkLocksState
+  @command_module AutoApi.DoorLocksCommand
+  @state_module AutoApi.DoorLocksState
 
   use AutoApi.Capability
 end
