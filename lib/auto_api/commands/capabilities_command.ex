@@ -85,10 +85,17 @@ defmodule AutoApi.CapabilitiesCommand do
 
       iex> AutoApi.CapabilitiesCommand.to_bin(:get_capabilities, [])
       <<0x00>>
+      iex> caps = %AutoApi.CapabilitiesState{diagnostics: [:get_diagnostics_state, :diagnostics_state], door_locks: [:lock_unlock_doors]}
+      iex> AutoApi.CapabilitiesCommand.to_bin(:capabilities, [caps])
+      <<1, 1, 0, 4, 0, 51, 0, 1, 1, 0, 3, 0, 32, 2>>
   """
   @spec to_bin(CapabilitiesCapability.command_type(), list(any())) :: binary
   def to_bin(:get_capabilities, []) do
     cmd_id = CapabilitiesCapability.command_id(:get_capabilities)
     <<cmd_id>>
+  end
+
+  def to_bin(:capabilities, [capability_state]) do
+    state(capability_state)
   end
 end

@@ -44,7 +44,7 @@ defmodule AutoApi.CapabilitiesState do
   %AutoApi.CapabilitiesState{diagnostics: [:get_diagnostics_state, :diagnostics_state], door_locks: []}
   """
   @spec from_bin(binary) :: __MODULE__.t()
-  def from_bin(<<0x01, size :: integer-16, cap :: binary-size(2), commands :: binary-size(size), rest :: binary>>) do
+  def from_bin(<<0x01, size :: integer-16, _cap :: binary-size(2), _commands :: binary-size(size), _rest :: binary>>) do
     raise "Not implemented!"
   end
 
