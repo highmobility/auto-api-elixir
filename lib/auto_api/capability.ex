@@ -20,6 +20,7 @@ defmodule AutoApi.Capability do
   @callback name() :: atom
   @callback command_name(integer) :: atom
   @callback command_name(integer) :: atom
+  @callback commands :: list({integer, atom})
   @callback description :: String.t()
   @callback capability_size :: integer
   @callback capabilities :: list(any)
@@ -46,7 +47,26 @@ defmodule AutoApi.Capability do
 
       @command_ids Enum.into(Enum.map(@commands, fn {k, v} -> {v, k} end), %{})
 
+      @commands_list Enum.into(@commands, [])
+
+      @doc """
+      Returns map of commands id and thier name
+
+        #{inspect @commands_list, base: :hex}
+      """
+      @spec commands :: list({integer, atom})
+      def commands, do: @commands_list
+
+      @doc """
+      Returns the command module related to this capability
+      """
+      @spec command :: atom
       def command, do: @command_module
+
+      @doc """
+      Returns the command module related to this capability
+      """
+      #@spec state() :: atom
       def state, do: @state_module
 
       @doc """
