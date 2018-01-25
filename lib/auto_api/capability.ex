@@ -29,18 +29,18 @@ defmodule AutoApi.Capability do
 
   defmacro __using__(_opts) do
     quote do
-      spec = Poison.decode!(File.read!(@spec_file))
-      @identifier <<spec["id_msb"], spec["id_lsb"]>>
-      @name String.to_atom(spec["name"])
-      @desc spec["name"] |> String.split("_") |> Enum.map(&String.capitalize/1) |> Enum.join(" ")
+      @raw_spec Poison.decode!(File.read!(@spec_file))
+      @identifier <<@raw_spec["id_msb"], @raw_spec["id_lsb"]>>
+      @name String.to_atom(@raw_spec["name"])
+      @desc @raw_spec["name"] |> String.split("_") |> Enum.map(&String.capitalize/1) |> Enum.join(" ")
       message_types =
-        spec["message_types"]
+        @raw_spec["message_types"]
         |> Enum.map(fn msg_type -> {msg_type["id"], String.to_atom(msg_type["name"])} end)
         |> Enum.into(%{})
 
       @commands message_types
       properties =
-        spec["properties"]
+        @raw_spec["properties"]
         |> Enum.map(fn prop -> {prop["id"], String.to_atom(prop["name"])} end)
 
       @properties properties
@@ -48,6 +48,10 @@ defmodule AutoApi.Capability do
       @command_ids Enum.into(Enum.map(@commands, fn {k, v} -> {v, k} end), %{})
 
       @commands_list Enum.into(@commands, [])
+
+      @doc false
+      @spec raw_spec() :: map()
+      def raw_spec, do: @raw_spec
 
       @doc """
       Returns map of commands id and thier name
