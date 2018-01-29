@@ -226,7 +226,8 @@ defmodule AutoApi.Capability do
     <<0x00, 0x10>> => AutoApi.CapabilitiesCapability,
     <<0x00, 0x33>> => AutoApi.DiagnosticsCapability,
     <<0x00, 0x20>> => AutoApi.DoorLocksCapability,
-    <<0x00, 0x42>> ==> AutoApi.WindscreenCapability,
+    <<0x00, 0x42>> => AutoApi.WindscreenCapability,
+    <<0x00, 0x45>> => AutoApi.WindowsCapability,
   }
 
   @doc """
