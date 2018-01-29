@@ -4,6 +4,7 @@
     "id_lsb": 89,
     "name": "wi_fi",
     "api_intro": 6,
+    "pretty_name": "Wi-Fi",
     "properties": [
         {
             "pretty_name": "Wi-Fi Enabled",

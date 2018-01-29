@@ -35,7 +35,11 @@ defmodule AutoApi.Capability do
       @raw_spec Poison.decode!(File.read!(@spec_file))
       @identifier <<@raw_spec["id_msb"], @raw_spec["id_lsb"]>>
       @name String.to_atom(@raw_spec["name"])
-      @desc @raw_spec["name"] |> String.split("_") |> Enum.map(&String.capitalize/1) |> Enum.join(" ")
+      if @raw_spec["pretty_name"] do
+        @desc @raw_spec["pretty_name"]
+      else
+        @desc @raw_spec["name"] |> String.split("_") |> Enum.map(&String.capitalize/1) |> Enum.join(" ")
+      end
       message_types =
         @raw_spec["message_types"]
         |> Enum.map(fn msg_type -> {msg_type["id"], String.to_atom(msg_type["name"])} end)
@@ -228,6 +232,7 @@ defmodule AutoApi.Capability do
     <<0x00, 0x20>> => AutoApi.DoorLocksCapability,
     <<0x00, 0x42>> => AutoApi.WindscreenCapability,
     <<0x00, 0x45>> => AutoApi.WindowsCapability,
+    <<0x00, 0x59>> => AutoApi.WiFiCapability,
   }
 
   @doc """
