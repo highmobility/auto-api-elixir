@@ -16,36 +16,32 @@
 #
 # Please inquire about commercial licensing options at
 # licensing@high-mobility.com
-defmodule AutoApi.DoorLocksCapability do
+defmodule AutoApi.EngineCapability do
   @moduledoc """
-  Basic settings for Door Locks Capability
+  Basic settings for Engine Capability
 
-      iex> alias AutoApi.DoorLocksCapability, as: D
-      iex> D.identifier
-      <<0x00, 0x20>>
-      iex> D.capability_size
-      1
-      iex> D.name
-      :door_locks
-      iex> D.description
-      "Door Locks"
-      iex> D.command_name(0x00)
-      :get_lock_state
-      iex> D.command_name(0x01)
-      :lock_state
-      iex> D.command_name(0x02)
-      :lock_unlock_doors
-      iex> List.last(D.properties)
-      {0x01, :door}
+      iex> alias AutoApi.EngineCapability, as: E
+      iex> E.identifier
+      <<0x00, 0x35>>
+      iex> E.name
+      :engine
+      iex> E.description
+      "Engine"
+      iex> E.command_name(0x00)
+      :get_ignition_state
+      iex> E.command_name(0x01)
+      :ignition_state
+      iex> E.command_name(0x02)
+      :turn_engine_on_off
+      iex> List.last(E.properties)
+      {0x01, :ignition}
   """
 
-  @spec_file "specs/door_locks.json"
-  @type command_type :: :door_locks | :get_lock_state | :lock_state
-  @capability_size 1
-  @sub_capabilities []
+  @spec_file "specs/engine.json"
+  @type command_type :: :engine_state | :get_ignition_state | :turn_engine_on_off
 
-  @command_module AutoApi.DoorLocksCommand
-  @state_module AutoApi.DoorLocksState
+  @command_module AutoApi.NotImplemented
+  @state_module AutoApi.NotImplemented
 
   use AutoApi.Capability
 end
