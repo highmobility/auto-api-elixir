@@ -16,28 +16,7 @@
 #
 # Please inquire about commercial licensing options at
 # licensing@high-mobility.com
-defmodule AutoApi.BrowserCapability do
-  @moduledoc """
-  Basic settings for Browser Capability
-
-      iex> alias AutoApi.BrowserCapability, as: B
-      iex> B.identifier
-      <<0x00, 0x49>>
-      iex> B.name
-      :browser
-      iex> B.description
-      "Browser"
-      iex> B.command_name(0x00)
-      :load_url
-      iex> length(B.properties)
-      0
-  """
-
-  @spec_file "specs/browser.json"
-  @type command_type :: :browser
-
-  @command_module AutoApi.NotImplemented
-  @state_module AutoApi.NotImplemented
-
-  use AutoApi.Capability
+defmodule AutoApi.DriverFatigueCapabilityTest do
+  use ExUnit.Case
+  doctest AutoApi.DriverFatigueCapability
 end

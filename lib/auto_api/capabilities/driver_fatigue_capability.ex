@@ -16,25 +16,25 @@
 #
 # Please inquire about commercial licensing options at
 # licensing@high-mobility.com
-defmodule AutoApi.BrowserCapability do
+defmodule AutoApi.DriverFatigueCapability do
   @moduledoc """
-  Basic settings for Browser Capability
+  Basic settings for Driver Fatigue Capability
 
-      iex> alias AutoApi.BrowserCapability, as: B
-      iex> B.identifier
-      <<0x00, 0x49>>
-      iex> B.name
-      :browser
-      iex> B.description
-      "Browser"
-      iex> B.command_name(0x00)
-      :load_url
-      iex> length(B.properties)
+      iex> alias AutoApi.DriverFatigueCapability, as: D
+      iex> D.identifier
+      <<0x00, 0x41>>
+      iex> D.name
+      :driver_fatigue
+      iex> D.description
+      "Driver Fatigue"
+      iex> D.command_name(0x01)
+      :driver_fatigue_detected
+      iex> length(D.properties)
       0
   """
 
-  @spec_file "specs/browser.json"
-  @type command_type :: :browser
+  @spec_file "specs/driver_fatigue.json"
+  @type command_type :: :driver_fatigue_detected
 
   @command_module AutoApi.NotImplemented
   @state_module AutoApi.NotImplemented
