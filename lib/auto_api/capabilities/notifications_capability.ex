@@ -38,7 +38,7 @@ defmodule AutoApi.NotificationsCapability do
   """
 
   @spec_file "specs/notifications.json"
-  @type command_type :: :notifications
+  @type command_type :: :notification | :notification_action | :clear_notification
 
   @command_module AutoApi.NotImplemented
   @state_module AutoApi.NotImplemented
