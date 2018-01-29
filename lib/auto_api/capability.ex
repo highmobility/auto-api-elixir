@@ -38,8 +38,10 @@ defmodule AutoApi.Capability do
       if @raw_spec["pretty_name"] do
         @desc @raw_spec["pretty_name"]
       else
-        @desc @raw_spec["name"] |> String.split("_") |> Enum.map(&String.capitalize/1) |> Enum.join(" ")
+        @desc @raw_spec["name"] |> String.split("_") |> Enum.map(&String.capitalize/1)
+              |> Enum.join(" ")
       end
+
       message_types =
         @raw_spec["message_types"]
         |> Enum.map(fn msg_type -> {msg_type["id"], String.to_atom(msg_type["name"])} end)
@@ -77,7 +79,7 @@ defmodule AutoApi.Capability do
       @doc """
       Returns the command module related to this capability
       """
-      #@spec state() :: atom
+      # @spec state() :: atom
       def state, do: @state_module
 
       @doc """
@@ -233,6 +235,7 @@ defmodule AutoApi.Capability do
     <<0x00, 0x42>> => AutoApi.WindscreenCapability,
     <<0x00, 0x45>> => AutoApi.WindowsCapability,
     <<0x00, 0x59>> => AutoApi.WiFiCapability,
+    <<0x00, 0x55>> => AutoApi.WeatherConditionsCapability
   }
 
   @doc """
