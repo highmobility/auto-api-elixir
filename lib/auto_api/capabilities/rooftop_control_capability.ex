@@ -16,33 +16,34 @@
 #
 # Please inquire about commercial licensing options at
 # licensing@high-mobility.com
-defmodule AutoApi.HonkHornFlashLightsCapability do
+defmodule AutoApi.RooftopControlCapability do
   @moduledoc """
-  Basic settings for HonkHornFlashLights Capability
+  Basic settings for RooftopControl Capability
 
-      iex> alias AutoApi.HonkHornFlashLightsCapability, as: H
-      iex> H.identifier
-      <<0x00, 0x26>>
-      iex> H.capability_size
-      1
-      iex> H.name
-      :honk_horn_flash_lights
-      iex> H.description
-      "Honk Horn Flash Lights"
-      iex> H.command_name(0x00)
-      :get_flashers_state
-      iex> H.command_name(0x01)
-      :flashers_state
-      iex> length(H.properties)
-      1
-      iex> List.last(H.properties)
-      {0x01, :flashers}
+      iex> alias AutoApi.RooftopControlCapability, as: R
+      iex> R.identifier
+      <<0x00, 0x25>>
+      iex> R.name
+      :rooftop_control
+      iex> R.description
+      "Rooftop Control"
+      iex> R.command_name(0x00)
+      :get_rooftop_state
+      iex> R.command_name(0x01)
+      :rooftop_state
+      iex> R.command_name(0x02)
+      :control_rooftop
+      iex> length(R.properties)
+      2
+      iex> R.properties
+      [{1, :dimming}, {2, :position}]
   """
 
-  @spec_file "specs/honk_horn_flash_lights.json"
-  @type command_type :: :get_flashers_state | :flashers_state | :honk_flash | :activate_deactivate_emergency_flashers
+  @spec_file "specs/rooftop_control.json"
+  @type command_type :: :get_rooftop_state | :rooftop_state | :control_rooftop
 
   @command_module AutoApi.NotImplemented
   @state_module AutoApi.NotImplemented
+
   use AutoApi.Capability
 end

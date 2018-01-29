@@ -16,33 +16,28 @@
 #
 # Please inquire about commercial licensing options at
 # licensing@high-mobility.com
-defmodule AutoApi.HonkHornFlashLightsCapability do
+defmodule AutoApi.WakeUpCapability do
   @moduledoc """
-  Basic settings for HonkHornFlashLights Capability
+  Basic settings for Wake Up Capability
 
-      iex> alias AutoApi.HonkHornFlashLightsCapability, as: H
-      iex> H.identifier
-      <<0x00, 0x26>>
-      iex> H.capability_size
-      1
-      iex> H.name
-      :honk_horn_flash_lights
-      iex> H.description
-      "Honk Horn Flash Lights"
-      iex> H.command_name(0x00)
-      :get_flashers_state
-      iex> H.command_name(0x01)
-      :flashers_state
-      iex> length(H.properties)
-      1
-      iex> List.last(H.properties)
-      {0x01, :flashers}
+      iex> alias AutoApi.WakeUpCapability, as: W
+      iex> W.identifier
+      <<0x00, 0x22>>
+      iex> W.name
+      :wake_up
+      iex> W.description
+      "Wake Up"
+      iex> W.command_name(0x02)
+      :wake_up
+      iex> length(W.properties)
+      0
   """
 
-  @spec_file "specs/honk_horn_flash_lights.json"
-  @type command_type :: :get_flashers_state | :flashers_state | :honk_flash | :activate_deactivate_emergency_flashers
+  @spec_file "specs/wake_up.json"
+  @type command_type :: :wake_up
 
   @command_module AutoApi.NotImplemented
   @state_module AutoApi.NotImplemented
+
   use AutoApi.Capability
 end

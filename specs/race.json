@@ -1,0 +1,208 @@
+{
+    "category": "diagnostics",
+    "id_msb": 0,
+    "id_lsb": 87,
+    "name": "race",
+    "api_intro": 5,
+    "properties": [
+        {
+            "items": [
+                {
+                    "type": "enum",
+                    "values": [
+                        {
+                            "name": "longitudinal_acceleration",
+                            "id": 0
+                        },
+                        {
+                            "name": "lateral_acceleration",
+                            "id": 1
+                        },
+                        {
+                            "name": "front_lateral_acceleration",
+                            "id": 2
+                        },
+                        {
+                            "name": "rear_lateral_acceleration",
+                            "id": 3
+                        }
+                    ],
+                    "name": "type",
+                    "size": 1
+                },
+                {
+                    "size": 4,
+                    "type": "float",
+                    "description": "The accelaration in g-force per IEEE 754",
+                    "name": "g_force"
+                }
+            ],
+            "size": 5,
+            "id": 1,
+            "name": "acceleration"
+        },
+        {
+            "size": 1,
+            "type": "integer",
+            "description": "The understeering percentage between 0-100% whereas up to 20% is considered OK, up to 30% marginal, over 30% critical",
+            "name": "understeering",
+            "id": 2
+        },
+        {
+            "size": 1,
+            "type": "integer",
+            "description": "The oversteering percentage between 0-100% whereas up to 20% is considered OK, up to 30% marginal, over 30% critical",
+            "name": "oversteering",
+            "id": 3
+        },
+        {
+            "size": 1,
+            "type": "integer",
+            "description": "The gas pedal position between 0-100%, whereas 100% is full throttle",
+            "name": "gas_pedal_position",
+            "id": 4
+        },
+        {
+            "size": 1,
+            "type": "integer",
+            "description": "The steering angle in degrees, whereas 0 degrees is straight ahead, positive number to the left and negative number to the right",
+            "name": "steering_angle",
+            "id": 5
+        },
+        {
+            "size": 4,
+            "type": "float",
+            "description": "Brake pressure in bar, whereas 100bar is max value, full brake",
+            "name": "brake_pressure",
+            "id": 6
+        },
+        {
+            "size": 4,
+            "type": "float",
+            "description": "Yaw rate in degrees per second [\u00b0/s] per IEEE 754 formatting",
+            "name": "yaw_rate",
+            "id": 7
+        },
+        {
+            "size": 1,
+            "type": "integer",
+            "description": "Rear suspension steering in degrees",
+            "name": "rear_suspension_steering",
+            "id": 8
+        },
+        {
+            "values": [
+                {
+                    "name": "inactive",
+                    "id": 0
+                },
+                {
+                    "name": "active",
+                    "id": 1
+                }
+            ],
+            "description": "ESP (Electronic Stability Program) intervention",
+            "name": "electronic_stability_program",
+            "type": "enum",
+            "id": 9,
+            "size": 1
+        },
+        {
+            "items": [
+                {
+                    "type": "enum",
+                    "values": [
+                        {
+                            "name": "front_axle",
+                            "id": 0
+                        },
+                        {
+                            "name": "rear_axle",
+                            "id": 1
+                        }
+                    ],
+                    "name": "axle",
+                    "size": 1
+                },
+                {
+                    "type": "enum",
+                    "values": [
+                        {
+                            "name": "inactive",
+                            "id": 0
+                        },
+                        {
+                            "name": "active",
+                            "id": 1
+                        }
+                    ],
+                    "name": "vectoring",
+                    "size": 1
+                }
+            ],
+            "size": 2,
+            "id": 10,
+            "name": "brake_torque_vectoring"
+        },
+        {
+            "type": "enum",
+            "size": 1,
+            "values": [
+                {
+                    "name": "manual",
+                    "id": 0
+                },
+                {
+                    "name": "park",
+                    "id": 1
+                },
+                {
+                    "name": "reverse",
+                    "id": 2
+                },
+                {
+                    "name": "neutral",
+                    "id": 3
+                },
+                {
+                    "name": "drive",
+                    "id": 4
+                },
+                {
+                    "name": "low_gear",
+                    "id": 5
+                },
+                {
+                    "name": "sport",
+                    "id": 6
+                }
+            ],
+            "id": 11,
+            "name": "gear_mode"
+        },
+        {
+            "size": 1,
+            "type": "integer",
+            "description": "The selected gear value, if any",
+            "name": "selected_gear",
+            "id": 12
+        },
+        {
+            "size": 1,
+            "type": "integer",
+            "description": "The brake pedal position between 0-100%, wheras 100% is full brakes",
+            "name": "brake_pedal_position",
+            "id": 13
+        }
+    ],
+    "message_types": [
+        {
+            "id": 0,
+            "name": "get_race_state"
+        },
+        {
+            "id": 1,
+            "name": "race_state"
+        }
+    ]
+}

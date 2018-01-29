@@ -16,33 +16,28 @@
 #
 # Please inquire about commercial licensing options at
 # licensing@high-mobility.com
-defmodule AutoApi.HonkHornFlashLightsCapability do
+defmodule AutoApi.VideoHandoverCapability do
   @moduledoc """
-  Basic settings for HonkHornFlashLights Capability
+  Basic settings for Video Handover Capability
 
-      iex> alias AutoApi.HonkHornFlashLightsCapability, as: H
-      iex> H.identifier
-      <<0x00, 0x26>>
-      iex> H.capability_size
-      1
-      iex> H.name
-      :honk_horn_flash_lights
-      iex> H.description
-      "Honk Horn Flash Lights"
-      iex> H.command_name(0x00)
-      :get_flashers_state
-      iex> H.command_name(0x01)
-      :flashers_state
-      iex> length(H.properties)
-      1
-      iex> List.last(H.properties)
-      {0x01, :flashers}
+      iex> alias AutoApi.VideoHandoverCapability, as: VH
+      iex> VH.identifier
+      <<0x00, 0x43>>
+      iex> VH.name
+      :video_handover
+      iex> VH.description
+      "Video Handover"
+      iex> VH.command_name(0x00)
+      :video_handover
+      iex> length(VH.properties)
+      0
   """
 
-  @spec_file "specs/honk_horn_flash_lights.json"
-  @type command_type :: :get_flashers_state | :flashers_state | :honk_flash | :activate_deactivate_emergency_flashers
+  @spec_file "specs/video_handover.json"
+  @type command_type :: :video_handover
 
   @command_module AutoApi.NotImplemented
   @state_module AutoApi.NotImplemented
+
   use AutoApi.Capability
 end

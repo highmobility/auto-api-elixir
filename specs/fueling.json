@@ -1,0 +1,40 @@
+{
+    "category": "parking",
+    "id_lsb": 64,
+    "name": "fueling",
+    "api_intro": 4,
+    "message_types": [
+        {
+            "id": 0,
+            "name": "get_gas_flap_state"
+        },
+        {
+            "id": 1,
+            "name": "gas_flap_state"
+        },
+        {
+            "id": 2,
+            "name": "open_gas_flap"
+        }
+    ],
+    "id_msb": 0,
+    "properties": [
+        {
+            "type": "enum",
+            "size": 1,
+            "values": [
+                {
+                    "name": "closed",
+                    "id": 0
+                },
+                {
+                    "name": "opened",
+                    "id": 1
+                }
+            ],
+            "id": 1,
+            "name": "gas_flap"
+        }
+    ],
+    "api_update": 5
+}

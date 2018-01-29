@@ -16,33 +16,37 @@
 #
 # Please inquire about commercial licensing options at
 # licensing@high-mobility.com
-defmodule AutoApi.HonkHornFlashLightsCapability do
+defmodule AutoApi.WeatherConditionsCapability do
   @moduledoc """
-  Basic settings for HonkHornFlashLights Capability
+  Basic settings for WeatherConditions Capability
 
-      iex> alias AutoApi.HonkHornFlashLightsCapability, as: H
-      iex> H.identifier
-      <<0x00, 0x26>>
-      iex> H.capability_size
+      iex> alias AutoApi.WeatherConditionsCapability, as: W
+      iex> W.identifier
+      <<0x00, 0x55>>
+      iex> W.name
+      :weather_conditions
+      iex> W.description
+      "Weather Conditions"
+      iex> W.command_name(0x00)
+      :get_weather_conditions
+      iex> W.command_name(0x01)
+      :weather_conditions
+      iex> length(W.properties)
       1
-      iex> H.name
-      :honk_horn_flash_lights
-      iex> H.description
-      "Honk Horn Flash Lights"
-      iex> H.command_name(0x00)
-      :get_flashers_state
-      iex> H.command_name(0x01)
-      :flashers_state
-      iex> length(H.properties)
-      1
-      iex> List.last(H.properties)
-      {0x01, :flashers}
+      iex> W.properties
+      [{1, :rain_intensity}]
   """
 
-  @spec_file "specs/honk_horn_flash_lights.json"
-  @type command_type :: :get_flashers_state | :flashers_state | :honk_flash | :activate_deactivate_emergency_flashers
+  @spec_file "specs/weather_conditions.json"
+  @type command_type ::
+          :get_wi_fi_state
+          | :wi_fi_state
+          | :connect_to_network
+          | :forget_network
+          | :enable_disable_wi_fi
 
   @command_module AutoApi.NotImplemented
   @state_module AutoApi.NotImplemented
+
   use AutoApi.Capability
 end

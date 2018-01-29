@@ -1,0 +1,14 @@
+{
+    "category": "digital_key",
+    "id_msb": 0,
+    "id_lsb": 34,
+    "name": "wake_up",
+    "api_update": 5,
+    "api_intro": 2,
+    "message_types": [
+        {
+            "id": 2,
+            "name": "wake_up"
+        }
+    ]
+}

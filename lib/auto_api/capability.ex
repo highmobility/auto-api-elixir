@@ -29,10 +29,19 @@ defmodule AutoApi.Capability do
 
   defmacro __using__(_opts) do
     quote do
+      @capability_size 1
+      @sub_capabilities []
+
       @raw_spec Poison.decode!(File.read!(@spec_file))
       @identifier <<@raw_spec["id_msb"], @raw_spec["id_lsb"]>>
       @name String.to_atom(@raw_spec["name"])
-      @desc @raw_spec["name"] |> String.split("_") |> Enum.map(&String.capitalize/1) |> Enum.join(" ")
+      if @raw_spec["pretty_name"] do
+        @desc @raw_spec["pretty_name"]
+      else
+        @desc @raw_spec["name"] |> String.split("_") |> Enum.map(&String.capitalize/1)
+              |> Enum.join(" ")
+      end
+
       message_types =
         @raw_spec["message_types"]
         |> Enum.map(fn msg_type -> {msg_type["id"], String.to_atom(msg_type["name"])} end)
@@ -40,7 +49,7 @@ defmodule AutoApi.Capability do
 
       @commands message_types
       properties =
-        @raw_spec["properties"]
+        (@raw_spec["properties"] || [])
         |> Enum.map(fn prop -> {prop["id"], String.to_atom(prop["name"])} end)
 
       @properties properties
@@ -70,7 +79,7 @@ defmodule AutoApi.Capability do
       @doc """
       Returns the command module related to this capability
       """
-      #@spec state() :: atom
+      # @spec state() :: atom
       def state, do: @state_module
 
       @doc """
@@ -223,6 +232,23 @@ defmodule AutoApi.Capability do
     <<0x00, 0x10>> => AutoApi.CapabilitiesCapability,
     <<0x00, 0x33>> => AutoApi.DiagnosticsCapability,
     <<0x00, 0x20>> => AutoApi.DoorLocksCapability,
+    <<0x00, 0x42>> => AutoApi.WindscreenCapability,
+    <<0x00, 0x45>> => AutoApi.WindowsCapability,
+    <<0x00, 0x59>> => AutoApi.WiFiCapability,
+    <<0x00, 0x55>> => AutoApi.WeatherConditionsCapability,
+    <<0x00, 0x22>> => AutoApi.WakeUpCapability,
+    <<0x00, 0x43>> => AutoApi.VideoHandoverCapability,
+    <<0x00, 0x50>> => AutoApi.VehicleTimeCapability,
+    <<0x00, 0x11>> => AutoApi.VehicleStatusCapability,
+    <<0x00, 0x30>> => AutoApi.VehicleLocationCapability,
+    <<0x00, 0x21>> => AutoApi.TrunkCapability,
+    <<0x00, 0x46>> => AutoApi.TheftAlarmCapability,
+    <<0x00, 0x44>> => AutoApi.TextInputCapability,
+    <<0x00, 0x25>> => AutoApi.RooftopControlCapability,
+    <<0x00, 0x27>> => AutoApi.RemoteControlCapability,
+    <<0x00, 0x57>> => AutoApi.RaceCapability,
+    <<0x00, 0x47>> => AutoApi.ParkingTicketCapability,
+    <<0x00, 0x58>> => AutoApi.ParkingBrakeCapability,
     <<0x00, 0x56>> => AutoApi.SeatsCapability
   }
 

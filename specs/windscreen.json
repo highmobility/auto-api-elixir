@@ -1,0 +1,213 @@
+{
+    "category": "chassis",
+    "id_lsb": 66,
+    "name": "windscreen",
+    "api_intro": 4,
+    "message_types": [
+        {
+            "id": 0,
+            "name": "get_windscreen_state"
+        },
+        {
+            "id": 1,
+            "name": "windscreen_state"
+        },
+        {
+            "id": 2,
+            "name": "set_windscreen_damage"
+        }
+    ],
+    "id_msb": 0,
+    "properties": [
+        {
+            "type": "enum",
+            "size": 1,
+            "values": [
+                {
+                    "name": "inactive",
+                    "id": 0
+                },
+                {
+                    "name": "active",
+                    "id": 1
+                },
+                {
+                    "name": "automatic",
+                    "id": 2
+                }
+            ],
+            "id": 1,
+            "name": "wipers"
+        },
+        {
+            "type": "enum",
+            "size": 1,
+            "values": [
+                {
+                    "pretty_name": "Level 0, inactive",
+                    "name": "level_0",
+                    "id": 0
+                },
+                {
+                    "name": "level_1",
+                    "id": 1
+                },
+                {
+                    "name": "level_2",
+                    "id": 2
+                },
+                {
+                    "name": "level_3",
+                    "id": 3
+                }
+            ],
+            "id": 2,
+            "name": "wipers_intensity"
+        },
+        {
+            "type": "enum",
+            "size": 1,
+            "values": [
+                {
+                    "name": "no_impact_detected",
+                    "id": 0
+                },
+                {
+                    "name": "impact_but_no_damage_detected",
+                    "id": 1
+                },
+                {
+                    "name": "damage_smaller_than_1_inch",
+                    "id": 2
+                },
+                {
+                    "name": "damage_larger_than_1_inch",
+                    "id": 3
+                }
+            ],
+            "id": 3,
+            "name": "windscreen_damage"
+        },
+        {
+            "type": "enum",
+            "size": 1,
+            "values": [
+                {
+                    "name": "unavailable",
+                    "id": 0
+                },
+                {
+                    "pretty_name": "4 bits representing the horizontal size of the matrix seen from the inside of the car, starting from index 1",
+                    "name": "horizontal_size",
+                    "id": "value & 0xF0"
+                },
+                {
+                    "pretty_name": "4 bits representing the vertical size of the matrix, starting from index 1",
+                    "name": "vertical_size",
+                    "id": "value & 0x0F"
+                }
+            ],
+            "id": 4,
+            "name": "windscreen_zone_matrix"
+        },
+        {
+            "type": "enum",
+            "size": 1,
+            "values": [
+                {
+                    "name": "unknown",
+                    "id": 0
+                },
+                {
+                    "pretty_name": "4 bits representing the horizontal position of the zone in a matrix seen from the inside of the car, starting from index 1",
+                    "name": "horizontal_position",
+                    "id": "value & 0xF0"
+                },
+                {
+                    "pretty_name": "4 bits representing the vertical position of the zone, starting from index 1",
+                    "name": "vertical_position",
+                    "id": "value & 0x0F"
+                }
+            ],
+            "id": 5,
+            "name": "windscreen_damage_zone"
+        },
+        {
+            "type": "enum",
+            "size": 1,
+            "values": [
+                {
+                    "name": "unknown",
+                    "id": 0
+                },
+                {
+                    "name": "no_replacement_needed",
+                    "id": 1
+                },
+                {
+                    "name": "replacement_needed",
+                    "id": 2
+                }
+            ],
+            "id": 6,
+            "name": "windscreen_needs_replacement"
+        },
+        {
+            "size": 1,
+            "type": "integer",
+            "description": "Percentage between 0-100%, confidence of damage detection. Zero if no impact detected.",
+            "name": "windscreen_damage_confidence",
+            "id": 7
+        },
+        {
+            "items": [
+                {
+                    "size": 1,
+                    "type": "integer",
+                    "description": "Value between 0 and 99, which corresponds to 2000-2099",
+                    "name": "year"
+                },
+                {
+                    "size": 1,
+                    "type": "integer",
+                    "description": "Value between 1 and 12",
+                    "name": "month"
+                },
+                {
+                    "size": 1,
+                    "type": "integer",
+                    "description": "Value between 1 and 31",
+                    "name": "day"
+                },
+                {
+                    "size": 1,
+                    "type": "integer",
+                    "description": "Value between 0 and 23",
+                    "name": "hour"
+                },
+                {
+                    "size": 1,
+                    "type": "integer",
+                    "description": "Value between 0 and 59",
+                    "name": "minute"
+                },
+                {
+                    "size": 1,
+                    "type": "integer",
+                    "description": "Value between 0 and 59",
+                    "name": "second"
+                },
+                {
+                    "size": 2,
+                    "type": "integer",
+                    "description": "UTC time offset in minutes, which can be negative",
+                    "name": "utc_time_offset"
+                }
+            ],
+            "size": 8,
+            "id": 8,
+            "name": "windscreen_damage_detection_time"
+        }
+    ],
+    "api_update": 5
+}

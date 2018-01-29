@@ -1,0 +1,140 @@
+{
+    "category": "chassis",
+    "id_msb": 0,
+    "id_lsb": 83,
+    "name": "chassis_settings",
+    "api_intro": 5,
+    "properties": [
+        {
+            "type": "enum",
+            "size": 1,
+            "values": [
+                {
+                    "name": "regular",
+                    "id": 0
+                },
+                {
+                    "name": "eco",
+                    "id": 1
+                },
+                {
+                    "name": "sport",
+                    "id": 2
+                },
+                {
+                    "name": "sport+",
+                    "id": 3
+                }
+            ],
+            "id": 1,
+            "name": "driving_mode"
+        },
+        {
+            "type": "enum",
+            "size": 1,
+            "values": [
+                {
+                    "name": "inactive",
+                    "id": 0
+                },
+                {
+                    "name": "active",
+                    "id": 1
+                }
+            ],
+            "id": 2,
+            "name": "sport_chrono"
+        },
+        {
+            "items": [
+                {
+                    "type": "enum",
+                    "values": [
+                        {
+                            "name": "front_axle",
+                            "id": 0
+                        },
+                        {
+                            "name": "rear_axle",
+                            "id": 1
+                        }
+                    ],
+                    "name": "axle",
+                    "size": 1
+                },
+                {
+                    "size": 1,
+                    "type": "integer",
+                    "description": "The suspension spring rate in N/mm",
+                    "name": "spring_rate"
+                },
+                {
+                    "size": 1,
+                    "type": "integer",
+                    "description": "The maximum possible value for the spring rate",
+                    "name": "maximum_value"
+                },
+                {
+                    "size": 1,
+                    "type": "integer",
+                    "description": "The minimum value for the spring rate",
+                    "name": "minimum_value"
+                }
+            ],
+            "size": 4,
+            "id": 3,
+            "name": "spring_rate"
+        },
+        {
+            "items": [
+                {
+                    "size": 1,
+                    "type": "integer",
+                    "description": "The chassis position in mm calculated from the lowest point",
+                    "name": "chassis_position"
+                },
+                {
+                    "size": 1,
+                    "type": "integer",
+                    "description": "The maximum possible value for the chassis position",
+                    "name": "maximum_value"
+                },
+                {
+                    "size": 1,
+                    "type": "integer",
+                    "description": "The minimum value for the chassis position",
+                    "name": "minimum_value"
+                }
+            ],
+            "size": 3,
+            "id": 4,
+            "name": "chassis_position"
+        }
+    ],
+    "message_types": [
+        {
+            "id": 0,
+            "name": "get_chassis_settings"
+        },
+        {
+            "id": 1,
+            "name": "chassis_settings"
+        },
+        {
+            "id": 2,
+            "name": "set_driving_mode"
+        },
+        {
+            "id": 3,
+            "name": "start_stop_sport_chrono"
+        },
+        {
+            "id": 4,
+            "name": "set_spring_rate"
+        },
+        {
+            "id": 5,
+            "name": "set_chassis_position"
+        }
+    ]
+}

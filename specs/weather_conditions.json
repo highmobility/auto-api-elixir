@@ -1,0 +1,26 @@
+{
+    "category": "environment",
+    "id_msb": 0,
+    "id_lsb": 85,
+    "name": "weather_conditions",
+    "api_intro": 5,
+    "properties": [
+        {
+            "size": 1,
+            "type": "integer",
+            "description": "Measured raining intensity percentage, whereas 0% is no rain and 100% is maximum rain",
+            "name": "rain_intensity",
+            "id": 1
+        }
+    ],
+    "message_types": [
+        {
+            "id": 0,
+            "name": "get_weather_conditions"
+        },
+        {
+            "id": 1,
+            "name": "weather_conditions"
+        }
+    ]
+}

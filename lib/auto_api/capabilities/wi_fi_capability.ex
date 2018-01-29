@@ -16,33 +16,43 @@
 #
 # Please inquire about commercial licensing options at
 # licensing@high-mobility.com
-defmodule AutoApi.HonkHornFlashLightsCapability do
+defmodule AutoApi.WiFiCapability do
   @moduledoc """
-  Basic settings for HonkHornFlashLights Capability
+  Basic settings for WiFi Capability
 
-      iex> alias AutoApi.HonkHornFlashLightsCapability, as: H
-      iex> H.identifier
-      <<0x00, 0x26>>
-      iex> H.capability_size
-      1
-      iex> H.name
-      :honk_horn_flash_lights
-      iex> H.description
-      "Honk Horn Flash Lights"
-      iex> H.command_name(0x00)
-      :get_flashers_state
-      iex> H.command_name(0x01)
-      :flashers_state
-      iex> length(H.properties)
-      1
-      iex> List.last(H.properties)
-      {0x01, :flashers}
+      iex> alias AutoApi.WiFiCapability, as: W
+      iex> W.identifier
+      <<0x00, 0x59>>
+      iex> W.name
+      :wi_fi
+      iex> W.description
+      "Wi-Fi"
+      iex> W.command_name(0x00)
+      :get_wi_fi_state
+      iex> W.command_name(0x01)
+      :wi_fi_state
+      iex> W.command_name(0x02)
+      :connect_to_network
+      iex> W.command_name(0x03)
+      :forget_network
+      iex> W.command_name(0x04)
+      :enable_disable_wi_fi
+      iex> length(W.properties)
+      4
+      iex> W.properties
+      [{1, :wi_fi_enabled}, {2, :network_connected}, {3, :network_ssid}, {4, :network_security}]
   """
 
-  @spec_file "specs/honk_horn_flash_lights.json"
-  @type command_type :: :get_flashers_state | :flashers_state | :honk_flash | :activate_deactivate_emergency_flashers
+  @spec_file "specs/wi_fi.json"
+  @type command_type ::
+          :get_wi_fi_state
+          | :wi_fi_state
+          | :connect_to_network
+          | :forget_network
+          | :enable_disable_wi_fi
 
   @command_module AutoApi.NotImplemented
   @state_module AutoApi.NotImplemented
+
   use AutoApi.Capability
 end

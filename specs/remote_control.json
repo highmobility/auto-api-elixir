@@ -1,0 +1,71 @@
+{
+    "category": "parking",
+    "id_lsb": 39,
+    "name": "remote_control",
+    "api_intro": 2,
+    "message_types": [
+        {
+            "id": 0,
+            "name": "get_control_mode"
+        },
+        {
+            "id": 1,
+            "name": "control_mode"
+        },
+        {
+            "id": 2,
+            "name": "start_control_mode"
+        },
+        {
+            "id": 3,
+            "name": "stop_control_mode"
+        },
+        {
+            "id": 4,
+            "name": "control_command"
+        }
+    ],
+    "id_msb": 0,
+    "properties": [
+        {
+            "type": "enum",
+            "size": 1,
+            "values": [
+                {
+                    "name": "control_mode_unavailable",
+                    "id": 0
+                },
+                {
+                    "name": "control_mode_available",
+                    "id": 1
+                },
+                {
+                    "name": "control_started",
+                    "id": 2
+                },
+                {
+                    "name": "control_failed_to_start",
+                    "id": 3
+                },
+                {
+                    "name": "control_aborted",
+                    "id": 4
+                },
+                {
+                    "name": "control_ended",
+                    "id": 5
+                }
+            ],
+            "id": 1,
+            "name": "control_mode"
+        },
+        {
+            "size": 2,
+            "type": "integer",
+            "description": "Wheel base angle in degrees",
+            "name": "angle",
+            "id": 2
+        }
+    ],
+    "api_update": 5
+}

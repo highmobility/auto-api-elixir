@@ -16,33 +16,34 @@
 #
 # Please inquire about commercial licensing options at
 # licensing@high-mobility.com
-defmodule AutoApi.HonkHornFlashLightsCapability do
+defmodule AutoApi.WindowsCapability do
   @moduledoc """
-  Basic settings for HonkHornFlashLights Capability
+  Basic settings for Windows Capability
 
-      iex> alias AutoApi.HonkHornFlashLightsCapability, as: H
-      iex> H.identifier
-      <<0x00, 0x26>>
-      iex> H.capability_size
+      iex> alias AutoApi.WindowsCapability, as: W
+      iex> W.identifier
+      <<0x00, 0x45>>
+      iex> W.name
+      :windows
+      iex> W.description
+      "Windows"
+      iex> W.command_name(0x00)
+      :get_windows_state
+      iex> W.command_name(0x01)
+      :windows_state
+      iex> W.command_name(0x02)
+      :open_close_windows
+      iex> length(W.properties)
       1
-      iex> H.name
-      :honk_horn_flash_lights
-      iex> H.description
-      "Honk Horn Flash Lights"
-      iex> H.command_name(0x00)
-      :get_flashers_state
-      iex> H.command_name(0x01)
-      :flashers_state
-      iex> length(H.properties)
-      1
-      iex> List.last(H.properties)
-      {0x01, :flashers}
+      iex> W.properties
+      [{0x01, :window}]
   """
 
-  @spec_file "specs/honk_horn_flash_lights.json"
-  @type command_type :: :get_flashers_state | :flashers_state | :honk_flash | :activate_deactivate_emergency_flashers
+  @spec_file "specs/windows.json"
+  @type command_type :: :get_windows_state | :windows_state | :open_close_windows
 
   @command_module AutoApi.NotImplemented
   @state_module AutoApi.NotImplemented
+
   use AutoApi.Capability
 end

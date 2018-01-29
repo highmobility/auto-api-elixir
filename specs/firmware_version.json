@@ -1,0 +1,57 @@
+{
+    "category": "api_structure",
+    "id_lsb": 3,
+    "name": "firmware_version",
+    "api_intro": 4,
+    "message_types": [
+        {
+            "id": 0,
+            "name": "get_firmware_version"
+        },
+        {
+            "id": 1,
+            "name": "firmware_version"
+        }
+    ],
+    "id_msb": 0,
+    "properties": [
+        {
+            "items": [
+                {
+                    "size": 1,
+                    "type": "integer",
+                    "description": "Car SDK version major number",
+                    "name": "version_major"
+                },
+                {
+                    "size": 1,
+                    "type": "integer",
+                    "description": "Car SDK version minor number",
+                    "name": "version_minor"
+                },
+                {
+                    "size": 1,
+                    "type": "integer",
+                    "description": "Car SDK version patch number",
+                    "name": "version_patch"
+                }
+            ],
+            "size": 3,
+            "id": 1,
+            "name": "car_sdk_version"
+        },
+        {
+            "type": "string",
+            "description": "Car SDK version build name bytes formatted in UTF-8",
+            "name": "car_sdk_build_name",
+            "id": 2
+        },
+        {
+            "type": "string",
+            "description": "Application version bytes formatted in UTF-8",
+            "name": "application_version",
+            "id": 3
+        }
+    ],
+    "api_update": 5
+}

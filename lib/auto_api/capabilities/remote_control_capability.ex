@@ -16,33 +16,43 @@
 #
 # Please inquire about commercial licensing options at
 # licensing@high-mobility.com
-defmodule AutoApi.HonkHornFlashLightsCapability do
+defmodule AutoApi.RemoteControlCapability do
   @moduledoc """
-  Basic settings for HonkHornFlashLights Capability
+  Basic settings for RemoteControl Capability
 
-      iex> alias AutoApi.HonkHornFlashLightsCapability, as: H
-      iex> H.identifier
-      <<0x00, 0x26>>
-      iex> H.capability_size
-      1
-      iex> H.name
-      :honk_horn_flash_lights
-      iex> H.description
-      "Honk Horn Flash Lights"
-      iex> H.command_name(0x00)
-      :get_flashers_state
-      iex> H.command_name(0x01)
-      :flashers_state
-      iex> length(H.properties)
-      1
-      iex> List.last(H.properties)
-      {0x01, :flashers}
+      iex> alias AutoApi.RemoteControlCapability, as: R
+      iex> R.identifier
+      <<0x00, 0x27>>
+      iex> R.name
+      :remote_control
+      iex> R.description
+      "Remote Control"
+      iex> R.command_name(0x00)
+      :get_control_mode
+      iex> R.command_name(0x01)
+      :control_mode
+      iex> R.command_name(0x02)
+      :start_control_mode
+      iex> R.command_name(0x03)
+      :stop_control_mode
+      iex> R.command_name(0x04)
+      :control_command
+      iex> length(R.properties)
+      2
+      iex> R.properties
+      [{1, :control_mode}, {2, :angle}]
   """
 
-  @spec_file "specs/honk_horn_flash_lights.json"
-  @type command_type :: :get_flashers_state | :flashers_state | :honk_flash | :activate_deactivate_emergency_flashers
+  @spec_file "specs/remote_control.json"
+  @type command_type ::
+          :get_control_mode
+          | :control_mode
+          | :start_control_mode
+          | :stop_control_mode
+          | :control_command
 
   @command_module AutoApi.NotImplemented
   @state_module AutoApi.NotImplemented
+
   use AutoApi.Capability
 end

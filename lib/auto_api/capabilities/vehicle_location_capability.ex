@@ -16,33 +16,32 @@
 #
 # Please inquire about commercial licensing options at
 # licensing@high-mobility.com
-defmodule AutoApi.HonkHornFlashLightsCapability do
+defmodule AutoApi.VehicleLocationCapability do
   @moduledoc """
-  Basic settings for HonkHornFlashLights Capability
+  Basic settings for Vehicle Location Capability
 
-      iex> alias AutoApi.HonkHornFlashLightsCapability, as: H
-      iex> H.identifier
-      <<0x00, 0x26>>
-      iex> H.capability_size
-      1
-      iex> H.name
-      :honk_horn_flash_lights
-      iex> H.description
-      "Honk Horn Flash Lights"
-      iex> H.command_name(0x00)
-      :get_flashers_state
-      iex> H.command_name(0x01)
-      :flashers_state
-      iex> length(H.properties)
-      1
-      iex> List.last(H.properties)
-      {0x01, :flashers}
+      iex> alias AutoApi.VehicleLocationCapability, as: VL
+      iex> VL.identifier
+      <<0x00, 0x30>>
+      iex> VL.name
+      :vehicle_location
+      iex> VL.description
+      "Vehicle Location"
+      iex> VL.command_name(0x00)
+      :get_vehicle_location
+      iex> VL.command_name(0x01)
+      :vehicle_location
+      iex> length(VL.properties)
+      2
+      iex> VL.properties
+      [{1, :coordinates}, {2, :heading}]
   """
 
-  @spec_file "specs/honk_horn_flash_lights.json"
-  @type command_type :: :get_flashers_state | :flashers_state | :honk_flash | :activate_deactivate_emergency_flashers
+  @spec_file "specs/vehicle_location.json"
+  @type command_type :: :vehicle_location | :get_vehicle_location
 
   @command_module AutoApi.NotImplemented
   @state_module AutoApi.NotImplemented
+
   use AutoApi.Capability
 end
