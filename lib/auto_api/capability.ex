@@ -246,7 +246,8 @@ defmodule AutoApi.Capability do
     <<0x00, 0x44>> => AutoApi.TextInputCapability,
     <<0x00, 0x25>> => AutoApi.RooftopControlCapability,
     <<0x00, 0x27>> => AutoApi.RemoteControlCapability,
-    <<0x00, 0x57>> => AutoApi.RaceCapability
+    <<0x00, 0x57>> => AutoApi.RaceCapability,
+    <<0x00, 0x47>> => AutoApi.ParkingTicketCapability
   }
 
   @doc """
