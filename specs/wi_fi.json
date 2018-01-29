@@ -1,0 +1,98 @@
+{
+    "category": "headunit",
+    "id_msb": 0,
+    "id_lsb": 89,
+    "name": "wi_fi",
+    "api_intro": 6,
+    "properties": [
+        {
+            "pretty_name": "Wi-Fi Enabled",
+            "values": [
+                {
+                    "name": "disabled",
+                    "id": 0
+                },
+                {
+                    "name": "enabled",
+                    "id": 1
+                }
+            ],
+            "name": "wi_fi_enabled",
+            "type": "enum",
+            "id": 1,
+            "size": 1
+        },
+        {
+            "type": "enum",
+            "size": 1,
+            "values": [
+                {
+                    "name": "disconnected",
+                    "id": 0
+                },
+                {
+                    "name": "connected",
+                    "id": 1
+                }
+            ],
+            "id": 2,
+            "name": "network_connected"
+        },
+        {
+            "pretty_name": "Network SSID",
+            "type": "string",
+            "description": "The network SSID formatted in UTF-8",
+            "name": "network_ssid",
+            "id": 3
+        },
+        {
+            "type": "enum",
+            "size": 1,
+            "values": [
+                {
+                    "name": "none",
+                    "id": 0
+                },
+                {
+                    "pretty_name": "WEP",
+                    "name": "wep",
+                    "id": 1
+                },
+                {
+                    "pretty_name": "WPA/WPA2 Personal",
+                    "name": "wpa",
+                    "id": 2
+                },
+                {
+                    "pretty_name": "WPA2 Personal",
+                    "name": "wep",
+                    "id": 3
+                }
+            ],
+            "id": 4,
+            "name": "network_security"
+        }
+    ],
+    "message_types": [
+        {
+            "id": 0,
+            "name": "get_wi_fi_state"
+        },
+        {
+            "id": 1,
+            "name": "wi_fi_state"
+        },
+        {
+            "id": 2,
+            "name": "connect_to_network"
+        },
+        {
+            "id": 3,
+            "name": "forget_network"
+        },
+        {
+            "id": 4,
+            "name": "enable_disable_wi_fi"
+        }
+    ]
+}

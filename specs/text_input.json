@@ -1,0 +1,14 @@
+{
+    "category": "headunit",
+    "id_msb": 0,
+    "id_lsb": 68,
+    "name": "text_input",
+    "api_update": 5,
+    "api_intro": 4,
+    "message_types": [
+        {
+            "id": 0,
+            "name": "text_input"
+        }
+    ]
+}

@@ -1,0 +1,14 @@
+{
+    "category": "headunit",
+    "id_msb": 0,
+    "id_lsb": 82,
+    "name": "graphics",
+    "api_update": 5,
+    "api_intro": 4,
+    "message_types": [
+        {
+            "id": 0,
+            "name": "display_image"
+        }
+    ]
+}

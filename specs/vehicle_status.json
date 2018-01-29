@@ -1,0 +1,124 @@
+{
+    "category": "api_structure",
+    "id_lsb": 17,
+    "name": "vehicle_status",
+    "api_intro": 2,
+    "message_types": [
+        {
+            "id": 0,
+            "name": "get_vehicle_status"
+        },
+        {
+            "id": 1,
+            "name": "vehicle_status"
+        }
+    ],
+    "id_msb": 0,
+    "properties": [
+        {
+            "pretty_name": "VIN",
+            "description": "The unique Vehicle Identification Number",
+            "name": "vin",
+            "type": "string",
+            "id": 1,
+            "size": 17
+        },
+        {
+            "type": "enum",
+            "size": 1,
+            "values": [
+                {
+                    "name": "unknown",
+                    "id": 0
+                },
+                {
+                    "name": "all_electric",
+                    "id": 1
+                },
+                {
+                    "name": "combustion_engine",
+                    "id": 2
+                },
+                {
+                    "pretty_name": "Plug-in Hybrid (PHEV)",
+                    "name": "phev",
+                    "id": 3
+                },
+                {
+                    "name": "hydrogen",
+                    "id": 4
+                },
+                {
+                    "name": "hydrogen_hybrid",
+                    "id": 5
+                }
+            ],
+            "id": 2,
+            "name": "powertrain"
+        },
+        {
+            "type": "string",
+            "description": "The car model name bytes formatted in UTF-8",
+            "name": "model_name",
+            "id": 3
+        },
+        {
+            "type": "string",
+            "description": "The car name (nickname) bytes formatted in UTF-8",
+            "name": "name",
+            "id": 4
+        },
+        {
+            "type": "string",
+            "description": "The license plate bytes formatted in UTF-8",
+            "name": "license_plate",
+            "id": 5
+        },
+        {
+            "type": "string",
+            "description": "The sales designation of the model formatted in UTF-8",
+            "name": "sales_designation",
+            "id": 6
+        },
+        {
+            "size": 2,
+            "type": "integer",
+            "description": "The car model manufacturing year number",
+            "name": "model_year",
+            "id": 7
+        },
+        {
+            "type": "string",
+            "description": "The color name formatted in UTF-8",
+            "name": "color_name",
+            "id": 8
+        },
+        {
+            "size": 2,
+            "type": "integer",
+            "description": "The power of the car measured in kw",
+            "name": "power_in_kw",
+            "id": 9
+        },
+        {
+            "size": 1,
+            "type": "integer",
+            "description": "The number of doors",
+            "name": "number_of_doors",
+            "id": 10
+        },
+        {
+            "size": 1,
+            "type": "integer",
+            "description": "The number of seats",
+            "name": "number_of_seats",
+            "id": 11
+        },
+        {
+            "type": "capability_state",
+            "id": 153,
+            "name": "state"
+        }
+    ],
+    "api_update": 5
+}

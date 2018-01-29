@@ -1,0 +1,49 @@
+{
+    "category": "poi",
+    "id_lsb": 49,
+    "name": "navi_destination",
+    "api_intro": 4,
+    "message_types": [
+        {
+            "id": 0,
+            "name": "get_navi_destination"
+        },
+        {
+            "id": 1,
+            "name": "navi_destination"
+        },
+        {
+            "id": 2,
+            "name": "set_navi_destination"
+        }
+    ],
+    "id_msb": 0,
+    "properties": [
+        {
+            "items": [
+                {
+                    "size": 4,
+                    "type": "float",
+                    "description": "Latitude in 4-bytes per IEEE 754",
+                    "name": "latitude"
+                },
+                {
+                    "size": 4,
+                    "type": "float",
+                    "description": "Longitude in 4-bytes per IEEE 754",
+                    "name": "longitude"
+                }
+            ],
+            "size": 8,
+            "id": 1,
+            "name": "coordinates"
+        },
+        {
+            "type": "string",
+            "description": "Destination name bytes formatted in UTF-8",
+            "name": "destination_name",
+            "id": 2
+        }
+    ],
+    "api_update": 5
+}

@@ -1,0 +1,44 @@
+{
+    "category": "parking",
+    "id_lsb": 70,
+    "name": "theft_alarm",
+    "api_intro": 4,
+    "message_types": [
+        {
+            "id": 0,
+            "name": "get_theft_alarm_state"
+        },
+        {
+            "id": 1,
+            "name": "theft_alarm_state"
+        },
+        {
+            "id": 2,
+            "name": "set_theft_alarm_state"
+        }
+    ],
+    "id_msb": 0,
+    "properties": [
+        {
+            "type": "enum",
+            "size": 1,
+            "values": [
+                {
+                    "name": "not_armed",
+                    "id": 0
+                },
+                {
+                    "name": "armed",
+                    "id": 1
+                },
+                {
+                    "name": "triggered",
+                    "id": 2
+                }
+            ],
+            "id": 1,
+            "name": "theft_alarm"
+        }
+    ],
+    "api_update": 5
+}

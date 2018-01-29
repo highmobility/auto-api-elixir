@@ -1,0 +1,14 @@
+{
+    "category": "health",
+    "id_msb": 0,
+    "id_lsb": 41,
+    "name": "heart_rate",
+    "api_update": 5,
+    "api_intro": 4,
+    "message_types": [
+        {
+            "id": 2,
+            "name": "send_heart_rate"
+        }
+    ]
+}

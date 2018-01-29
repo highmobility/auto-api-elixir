@@ -1,0 +1,155 @@
+{
+    "category": "parking",
+    "id_lsb": 71,
+    "name": "parking_ticket",
+    "api_intro": 4,
+    "message_types": [
+        {
+            "id": 0,
+            "name": "get_parking_ticket"
+        },
+        {
+            "id": 1,
+            "name": "parking_ticket"
+        },
+        {
+            "id": 2,
+            "name": "start_parking"
+        },
+        {
+            "id": 3,
+            "name": "end_parking"
+        }
+    ],
+    "id_msb": 0,
+    "properties": [
+        {
+            "type": "enum",
+            "size": 1,
+            "values": [
+                {
+                    "name": "ended",
+                    "id": 0
+                },
+                {
+                    "name": "started",
+                    "id": 1
+                }
+            ],
+            "id": 1,
+            "name": "parking_ticket_state"
+        },
+        {
+            "type": "string",
+            "description": "Operator Name bytes formatted in UTF-8",
+            "name": "operator_name",
+            "id": 2
+        },
+        {
+            "pretty_name": "Operator ticket ID",
+            "type": "string",
+            "description": "Operator Ticket ID bytes formatted in UTF-8",
+            "name": "operator_ticket_id",
+            "id": 3
+        },
+        {
+            "items": [
+                {
+                    "size": 1,
+                    "type": "integer",
+                    "description": "Value between 0 and 99, which corresponds to 2000-2099",
+                    "name": "year"
+                },
+                {
+                    "size": 1,
+                    "type": "integer",
+                    "description": "Value between 1 and 12",
+                    "name": "month"
+                },
+                {
+                    "size": 1,
+                    "type": "integer",
+                    "description": "Value between 1 and 31",
+                    "name": "day"
+                },
+                {
+                    "size": 1,
+                    "type": "integer",
+                    "description": "Value between 0 and 23",
+                    "name": "hour"
+                },
+                {
+                    "size": 1,
+                    "type": "integer",
+                    "description": "Value between 0 and 59",
+                    "name": "minute"
+                },
+                {
+                    "size": 1,
+                    "type": "integer",
+                    "description": "Value between 0 and 59",
+                    "name": "second"
+                },
+                {
+                    "size": 2,
+                    "type": "integer",
+                    "description": "UTC time offset in minutes, which can be negative",
+                    "name": "utc_time_offset"
+                }
+            ],
+            "size": 8,
+            "id": 4,
+            "name": "ticket_start_time"
+        },
+        {
+            "items": [
+                {
+                    "size": 1,
+                    "type": "integer",
+                    "description": "Value between 0 and 99, which corresponds to 2000-2099",
+                    "name": "year"
+                },
+                {
+                    "size": 1,
+                    "type": "integer",
+                    "description": "Value between 1 and 12",
+                    "name": "month"
+                },
+                {
+                    "size": 1,
+                    "type": "integer",
+                    "description": "Value between 1 and 31",
+                    "name": "day"
+                },
+                {
+                    "size": 1,
+                    "type": "integer",
+                    "description": "Value between 0 and 23",
+                    "name": "hour"
+                },
+                {
+                    "size": 1,
+                    "type": "integer",
+                    "description": "Value between 0 and 59",
+                    "name": "minute"
+                },
+                {
+                    "size": 1,
+                    "type": "integer",
+                    "description": "Value between 0 and 59",
+                    "name": "second"
+                },
+                {
+                    "size": 2,
+                    "type": "integer",
+                    "description": "UTC time offset in minutes, which can be negative",
+                    "name": "utc_time_offset"
+                }
+            ],
+            "size": 8,
+            "id": 5,
+            "name": "ticket_end_time"
+        }
+    ],
+    "api_update": 5
+}

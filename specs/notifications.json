@@ -1,0 +1,22 @@
+{
+    "category": "headunit",
+    "id_msb": 0,
+    "id_lsb": 56,
+    "name": "notifications",
+    "api_update": 5,
+    "api_intro": 4,
+    "message_types": [
+        {
+            "id": 0,
+            "name": "notification"
+        },
+        {
+            "id": 1,
+            "name": "notification_action"
+        },
+        {
+            "id": 2,
+            "name": "clear_notification"
+        }
+    ]
+}

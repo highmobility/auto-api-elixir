@@ -1,0 +1,40 @@
+{
+    "category": "digital_key",
+    "id_lsb": 53,
+    "name": "engine",
+    "api_intro": 3,
+    "message_types": [
+        {
+            "id": 0,
+            "name": "get_ignition_state"
+        },
+        {
+            "id": 1,
+            "name": "ignition_state"
+        },
+        {
+            "id": 2,
+            "name": "turn_engine_on_off"
+        }
+    ],
+    "id_msb": 0,
+    "properties": [
+        {
+            "type": "enum",
+            "size": 1,
+            "values": [
+                {
+                    "name": "engine_off",
+                    "id": 0
+                },
+                {
+                    "name": "engine_on",
+                    "id": 1
+                }
+            ],
+            "id": 1,
+            "name": "ignition"
+        }
+    ],
+    "api_update": 5
+}

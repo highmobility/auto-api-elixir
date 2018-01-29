@@ -1,0 +1,38 @@
+{
+    "category": "chassis",
+    "id_lsb": 37,
+    "name": "rooftop_control",
+    "api_intro": 3,
+    "message_types": [
+        {
+            "id": 0,
+            "name": "get_rooftop_state"
+        },
+        {
+            "id": 1,
+            "name": "rooftop_state"
+        },
+        {
+            "id": 2,
+            "name": "control_rooftop"
+        }
+    ],
+    "id_msb": 0,
+    "properties": [
+        {
+            "size": 1,
+            "type": "integer",
+            "description": "Percentage value between 0-100 whereas 100 is opaque",
+            "name": "dimming",
+            "id": 1
+        },
+        {
+            "size": 1,
+            "type": "integer",
+            "description": "Percentage value between 0-100 whereas 100 is fully open",
+            "name": "position",
+            "id": 2
+        }
+    ],
+    "api_update": 5
+}

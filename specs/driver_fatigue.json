@@ -1,0 +1,14 @@
+{
+    "category": "health",
+    "id_msb": 0,
+    "id_lsb": 65,
+    "name": "driver_fatigue",
+    "api_update": 5,
+    "api_intro": 4,
+    "message_types": [
+        {
+            "id": 1,
+            "name": "driver_fatigue_detected"
+        }
+    ]
+}

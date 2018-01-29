@@ -1,0 +1,52 @@
+{
+    "category": "chassis",
+    "id_lsb": 72,
+    "name": "keyfob_position",
+    "api_intro": 4,
+    "message_types": [
+        {
+            "id": 0,
+            "name": "get_keyfob_position"
+        },
+        {
+            "id": 1,
+            "name": "keyfob_position"
+        }
+    ],
+    "id_msb": 0,
+    "properties": [
+        {
+            "type": "enum",
+            "size": 1,
+            "values": [
+                {
+                    "name": "out_of_range",
+                    "id": 0
+                },
+                {
+                    "name": "outside_driver_side",
+                    "id": 1
+                },
+                {
+                    "name": "outside_in_front_of_car",
+                    "id": 2
+                },
+                {
+                    "name": "outside_passenger_side",
+                    "id": 3
+                },
+                {
+                    "name": "outside_behind_car",
+                    "id": 4
+                },
+                {
+                    "name": "inside_car",
+                    "id": 5
+                }
+            ],
+            "id": 1,
+            "name": "keyfob_position"
+        }
+    ],
+    "api_update": 5
+}

@@ -1,0 +1,73 @@
+{
+    "category": "chassis",
+    "id_lsb": 69,
+    "name": "windows",
+    "api_intro": 2,
+    "message_types": [
+        {
+            "id": 0,
+            "name": "get_windows_state"
+        },
+        {
+            "id": 1,
+            "name": "windows_state"
+        },
+        {
+            "id": 2,
+            "name": "open_close_windows"
+        }
+    ],
+    "id_msb": 0,
+    "properties": [
+        {
+            "items": [
+                {
+                    "type": "enum",
+                    "values": [
+                        {
+                            "name": "front_left",
+                            "id": 0
+                        },
+                        {
+                            "name": "front_right",
+                            "id": 1
+                        },
+                        {
+                            "name": "rear_right",
+                            "id": 2
+                        },
+                        {
+                            "name": "rear_left",
+                            "id": 3
+                        },
+                        {
+                            "name": "hatch",
+                            "id": 4
+                        }
+                    ],
+                    "name": "window_position",
+                    "size": 1
+                },
+                {
+                    "type": "enum",
+                    "values": [
+                        {
+                            "name": "closed",
+                            "id": 0
+                        },
+                        {
+                            "name": "open",
+                            "id": 1
+                        }
+                    ],
+                    "name": "window_state",
+                    "size": 1
+                }
+            ],
+            "size": 2,
+            "id": 1,
+            "name": "window"
+        }
+    ],
+    "api_update": 5
+}
