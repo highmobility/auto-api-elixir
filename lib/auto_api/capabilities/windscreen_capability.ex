@@ -18,7 +18,7 @@
 # licensing@high-mobility.com
 defmodule AutoApi.WindscreenCapability do
   @moduledoc """
-  Basic settings for Diagnostics Capability
+  Basic settings for Windscreen Capability
 
       iex> alias AutoApi.WindscreenCapability, as: W
       iex> W.identifier
