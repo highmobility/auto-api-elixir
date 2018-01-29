@@ -253,6 +253,7 @@ defmodule AutoApi.Capability do
     <<0x00, 0x34>> => AutoApi.MaintenanceCapability,
     <<0x00, 0x49>> => AutoApi.BrowserCapability,
     <<0x00, 0x23>> => AutoApi.ChargingCapability,
+    <<0x00, 0x53>> => AutoApi.ChassisSettingsCapability
   }
 
   @doc """
