@@ -16,34 +16,34 @@
 #
 # Please inquire about commercial licensing options at
 # licensing@high-mobility.com
-defmodule AutoApi.HonkHornFlashLightsCapability do
+defmodule AutoApi.WindscreenCapability do
   @moduledoc """
-  Basic settings for HonkHornFlashLights Capability
+  Basic settings for Diagnostics Capability
 
-      iex> alias AutoApi.HonkHornFlashLightsCapability, as: H
-      iex> H.identifier
-      <<0x00, 0x26>>
-      iex> H.capability_size
-      1
-      iex> H.name
-      :honk_horn_flash_lights
-      iex> H.description
-      "Honk Horn Flash Lights"
-      iex> H.command_name(0x00)
-      :get_flashers_state
-      iex> H.command_name(0x01)
-      :flashers_state
-      iex> length(H.properties)
-      1
-      iex> List.last(H.properties)
-      {0x01, :flashers}
+      iex> alias AutoApi.WindscreenCapability, as: W
+      iex> W.identifier
+      <<0x00, 0x42>>
+      iex> W.name
+      :windscreen
+      iex> W.description
+      "Windscreen"
+      iex> W.command_name(0x00)
+      :get_windscreen_state
+      iex> W.command_name(0x01)
+      :windscreen_state
+      iex> W.command_name(0x02)
+      :set_windscreen_damage
+      iex> length(W.properties)
+      8
+      iex> List.last(W.properties)
+      {0x08, :windscreen_damage_detection_time}
   """
 
-  @spec_file "specs/honk_horn_flash_lights.json"
-  @type command_type :: :get_flashers_state | :flashers_state | :honk_flash | :activate_deactivate_emergency_flashers
+  @spec_file "specs/windscreen.json"
+  @type command_type :: :get_windscreen_state | :windscreen_state | :set_windscreen_damage
 
   @command_module AutoApi.NotImplemented
   @state_module AutoApi.NotImplemented
+
   use AutoApi.Capability
 end
-

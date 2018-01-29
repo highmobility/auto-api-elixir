@@ -29,6 +29,9 @@ defmodule AutoApi.Capability do
 
   defmacro __using__(_opts) do
     quote do
+      @capability_size 1
+      @sub_capabilities []
+
       @raw_spec Poison.decode!(File.read!(@spec_file))
       @identifier <<@raw_spec["id_msb"], @raw_spec["id_lsb"]>>
       @name String.to_atom(@raw_spec["name"])
