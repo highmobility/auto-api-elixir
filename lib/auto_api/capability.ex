@@ -236,7 +236,8 @@ defmodule AutoApi.Capability do
     <<0x00, 0x45>> => AutoApi.WindowsCapability,
     <<0x00, 0x59>> => AutoApi.WiFiCapability,
     <<0x00, 0x55>> => AutoApi.WeatherConditionsCapability,
-    <<0x00, 0x22>> => AutoApi.WakeUpCapability
+    <<0x00, 0x22>> => AutoApi.WakeUpCapability,
+    <<0x00, 0x43>> => AutoApi.VideoHandoverCapability
   }
 
   @doc """
