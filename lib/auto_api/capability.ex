@@ -265,7 +265,8 @@ defmodule AutoApi.Capability do
     <<0x00, 0x36>> => AutoApi.LightsCapability,
     <<0x00, 0x54>> => AutoApi.LightConditionsCapability,
     <<0x00, 0x37>> => AutoApi.MessagingCapability,
-    <<0x00, 0x31>> => AutoApi.NaviDestinationCapability
+    <<0x00, 0x31>> => AutoApi.NaviDestinationCapability,
+    <<0x00, 0x38>> => AutoApi.NotificationsCapability
   }
 
   @doc """
