@@ -22,7 +22,7 @@ defmodule AutoApi.GraphicsCapability do
 
       iex> alias AutoApi.GraphicsCapability, as: G
       iex> G.identifier
-      <<0x00, 0x52>>
+      <<0x00, 0x51>>
       iex> G.name
       :graphics
       iex> G.description

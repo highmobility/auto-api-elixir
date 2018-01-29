@@ -258,7 +258,7 @@ defmodule AutoApi.Capability do
     <<0x00, 0x41>> => AutoApi.DriverFatigueCapability,
     <<0x00, 0x35>> => AutoApi.EngineCapability,
     <<0x00, 0x40>> => AutoApi.FuelingCapability,
-    <<0x00, 0x52>> => AutoApi.GraphicsCapability,
+    <<0x00, 0x51>> => AutoApi.GraphicsCapability,
     <<0x00, 0x29>> => AutoApi.HeartRateCapability,
     <<0x00, 0x60>> => AutoApi.HomeChargerCapability,
     <<0x00, 0x48>> => AutoApi.KeyfobPositionCapability,
