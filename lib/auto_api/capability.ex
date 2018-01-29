@@ -262,7 +262,8 @@ defmodule AutoApi.Capability do
     <<0x00, 0x29>> => AutoApi.HeartRateCapability,
     <<0x00, 0x60>> => AutoApi.HomeChargerCapability,
     <<0x00, 0x48>> => AutoApi.KeyfobPositionCapability,
-    <<0x00, 0x54>> => AutoApi.LightsCapability
+    <<0x00, 0x36>> => AutoApi.LightsCapability,
+    <<0x00, 0x54>> => AutoApi.LightConditionsCapability
   }
 
   @doc """
