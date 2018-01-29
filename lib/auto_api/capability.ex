@@ -241,7 +241,8 @@ defmodule AutoApi.Capability do
     <<0x00, 0x50>> => AutoApi.VehicleTimeCapability,
     <<0x00, 0x11>> => AutoApi.VehicleStatusCapability,
     <<0x00, 0x30>> => AutoApi.VehicleLocationCapability,
-    <<0x00, 0x21>> => AutoApi.TrunkCapability
+    <<0x00, 0x21>> => AutoApi.TrunkCapability,
+    <<0x00, 0x21>> => AutoApi.TheftAlarmCapability
   }
 
   @doc """
