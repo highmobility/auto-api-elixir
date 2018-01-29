@@ -18,7 +18,7 @@
 # licensing@high-mobility.com
 defmodule AutoApi.WeatherConditionsCapability do
   @moduledoc """
-  Basic settings for WiFi Capability
+  Basic settings for WeatherConditions Capability
 
       iex> alias AutoApi.WeatherConditionsCapability, as: W
       iex> W.identifier
