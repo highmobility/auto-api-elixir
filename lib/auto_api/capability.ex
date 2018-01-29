@@ -49,7 +49,7 @@ defmodule AutoApi.Capability do
 
       @commands message_types
       properties =
-        @raw_spec["properties"]
+        (@raw_spec["properties"] || [])
         |> Enum.map(fn prop -> {prop["id"], String.to_atom(prop["name"])} end)
 
       @properties properties
@@ -235,7 +235,8 @@ defmodule AutoApi.Capability do
     <<0x00, 0x42>> => AutoApi.WindscreenCapability,
     <<0x00, 0x45>> => AutoApi.WindowsCapability,
     <<0x00, 0x59>> => AutoApi.WiFiCapability,
-    <<0x00, 0x55>> => AutoApi.WeatherConditionsCapability
+    <<0x00, 0x55>> => AutoApi.WeatherConditionsCapability,
+    <<0x00, 0x22>> => AutoApi.WakeUpCapability
   }
 
   @doc """
