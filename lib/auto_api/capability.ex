@@ -239,7 +239,8 @@ defmodule AutoApi.Capability do
     <<0x00, 0x22>> => AutoApi.WakeUpCapability,
     <<0x00, 0x43>> => AutoApi.VideoHandoverCapability,
     <<0x00, 0x50>> => AutoApi.VehicleTimeCapability,
-    <<0x00, 0x11>> => AutoApi.VehicleStatusCapability
+    <<0x00, 0x11>> => AutoApi.VehicleStatusCapability,
+    <<0x00, 0x30>> => AutoApi.VehicleLocationCapability
   }
 
   @doc """
