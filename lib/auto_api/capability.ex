@@ -251,7 +251,8 @@ defmodule AutoApi.Capability do
     <<0x00, 0x58>> => AutoApi.ParkingBrakeCapability,
     <<0x00, 0x56>> => AutoApi.SeatsCapability,
     <<0x00, 0x34>> => AutoApi.MaintenanceCapability,
-    <<0x00, 0x49>> => AutoApi.BrowserCapability
+    <<0x00, 0x49>> => AutoApi.BrowserCapability,
+    <<0x00, 0x23>> => AutoApi.ChargingCapability,
   }
 
   @doc """
