@@ -263,7 +263,8 @@ defmodule AutoApi.Capability do
     <<0x00, 0x60>> => AutoApi.HomeChargerCapability,
     <<0x00, 0x48>> => AutoApi.KeyfobPositionCapability,
     <<0x00, 0x36>> => AutoApi.LightsCapability,
-    <<0x00, 0x54>> => AutoApi.LightConditionsCapability
+    <<0x00, 0x54>> => AutoApi.LightConditionsCapability,
+    <<0x00, 0x37>> => AutoApi.MessagingCapability
   }
 
   @doc """
