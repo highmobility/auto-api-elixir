@@ -46,4 +46,3 @@ defmodule AutoApi.HonkHornFlashLightsCapability do
   @state_module AutoApi.NotImplemented
   use AutoApi.Capability
 end
-
