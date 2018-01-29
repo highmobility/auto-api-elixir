@@ -257,7 +257,8 @@ defmodule AutoApi.Capability do
     <<0x00, 0x24>> => AutoApi.ClimateCapability,
     <<0x00, 0x41>> => AutoApi.DriverFatigueCapability,
     <<0x00, 0x35>> => AutoApi.EngineCapability,
-    <<0x00, 0x40>> => AutoApi.FuelingCapability
+    <<0x00, 0x40>> => AutoApi.FuelingCapability,
+    <<0x00, 0x52>> => AutoApi.GraphicsCapability
   }
 
   @doc """
