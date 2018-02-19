@@ -229,6 +229,7 @@ defmodule AutoApi.Capability do
   end
 
   @capabilities %{
+    <<0x00, 0x03>> => AutoApi.FirmwareVersionCapability,
     <<0x00, 0x10>> => AutoApi.CapabilitiesCapability,
     <<0x00, 0x33>> => AutoApi.DiagnosticsCapability,
     <<0x00, 0x20>> => AutoApi.DoorLocksCapability,

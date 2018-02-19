@@ -38,12 +38,14 @@
             ],
             "size": 3,
             "id": 1,
+            "title_case_name": "carSDKVersion",
             "name": "car_sdk_version"
         },
         {
+            "name": "car_sdk_build_name",
             "type": "string",
             "description": "Car SDK version build name bytes formatted in UTF-8",
-            "name": "car_sdk_build_name",
+            "title_case_name": "carSDKBuildName",
             "id": 2
         },
         {
