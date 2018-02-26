@@ -33,32 +33,17 @@ defmodule AutoApi.MaintenanceCapability do
       :get_maintenance_state
       iex> M.command_name(0x01)
       :maintenance_state
-      iex> M.to_map(<<0x1, 0x0>>)
-      [%{bin: <<0x00>>, name: "Unavailable", atom: :unavailable, title: ""}]
-      iex> M.to_map(<<0x1, 0x1>>)
-      [%{atom: :available, bin: <<0x1>>, name: "Available", title: ""}]
+      iex> length(M.properties)
+      2
+      iex> M.properties
+      [{0x01, :days_to_next_service}, {0x02, :kilometers_to_next_service}]
   """
 
-  @identifier <<0x00, 0x34>>
-  @name :maintenance
-  @desc "Maintenance"
-  @commands %{
-    0x00 => :get_maintenance_state,
-    0x01 => :maintenance_state,
-  }
+  @spec_file "specs/maintenance.json"
   @type command_type :: :get_maintenance_state | :maintenance_state
-  @capability_size 1
-  @sub_capabilities [
-    %{
-      options: %{
-        :unavailable => %{name: "Unavailable", bin: <<0x00>>},
-        :available => %{name: "Available", bin: <<0x01>>},
-      }
-    }
-  ]
 
-  @command_module AutoApi.MaintenanceCommand
-  @state_module AutoApi.MaintenanceState
+  @command_module AutoApi.NotImplemented
+  @state_module AutoApi.NotImplemented
 
   use AutoApi.Capability
 end

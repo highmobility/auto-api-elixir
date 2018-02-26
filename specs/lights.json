@@ -1,0 +1,101 @@
+{
+    "category": "chassis",
+    "id_lsb": 54,
+    "name": "lights",
+    "api_intro": 3,
+    "message_types": [
+        {
+            "id": 0,
+            "name": "get_lights_state"
+        },
+        {
+            "id": 1,
+            "name": "lights_state"
+        },
+        {
+            "id": 2,
+            "name": "control_lights"
+        }
+    ],
+    "id_msb": 0,
+    "properties": [
+        {
+            "type": "enum",
+            "size": 1,
+            "values": [
+                {
+                    "name": "inactive",
+                    "id": 0
+                },
+                {
+                    "name": "active",
+                    "id": 1
+                },
+                {
+                    "name": "active_with_full_beam",
+                    "id": 2
+                }
+            ],
+            "id": 1,
+            "name": "front_exterior_light"
+        },
+        {
+            "type": "enum",
+            "size": 1,
+            "values": [
+                {
+                    "name": "inactive",
+                    "id": 0
+                },
+                {
+                    "name": "active",
+                    "id": 1
+                }
+            ],
+            "id": 2,
+            "name": "rear_exterior_light"
+        },
+        {
+            "type": "enum",
+            "size": 1,
+            "values": [
+                {
+                    "name": "inactive",
+                    "id": 0
+                },
+                {
+                    "name": "active",
+                    "id": 1
+                }
+            ],
+            "id": 3,
+            "name": "interior_light"
+        },
+        {
+            "items": [
+                {
+                    "size": 1,
+                    "type": "integer",
+                    "description": "The red colour of RGB in hex",
+                    "name": "rgb_red"
+                },
+                {
+                    "size": 1,
+                    "type": "integer",
+                    "description": "The green colour of RGB in hex",
+                    "name": "rgb_green"
+                },
+                {
+                    "size": 1,
+                    "type": "integer",
+                    "description": "The blue colour of RGB in hex",
+                    "name": "rgb_red"
+                }
+            ],
+            "size": 3,
+            "id": 4,
+            "name": "ambient_light"
+        }
+    ],
+    "api_update": 5
+}

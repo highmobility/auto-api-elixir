@@ -18,13 +18,11 @@
 # licensing@high-mobility.com
 defmodule AutoApi.EngineCapability do
   @moduledoc """
-  Basic settings for Maintenance Capability
+  Basic settings for Engine Capability
 
       iex> alias AutoApi.EngineCapability, as: E
       iex> E.identifier
       <<0x00, 0x35>>
-      iex> E.capability_size
-      1
       iex> E.name
       :engine
       iex> E.description
@@ -35,38 +33,15 @@ defmodule AutoApi.EngineCapability do
       :ignition_state
       iex> E.command_name(0x02)
       :turn_engine_on_off
-      iex> E.to_map(<<0x1, 0x0>>)
-      [%{bin: <<0x00>>, name: "Unavailable", atom: :unavailable, title: ""}]
-      iex> E.to_map(<<0x1, 0x1>>)
-      [%{atom: :available, bin: <<0x1>>, name: "Available", title: ""}]
-      iex> E.to_map(<<0x1, 0x2>>)
-      [%{atom: :state, bin: <<0x2>>, name: "Get State", title: ""}]
-
+      iex> List.last(E.properties)
+      {0x01, :ignition}
   """
 
-  @identifier <<0x00, 0x35>>
-  @name :engine
-  @desc "Engine"
-  @commands %{
-    0x00 => :get_ignition_state,
-    0x01 => :ignition_state,
-    0x02 => :turn_engine_on_off,
-  }
-  @type command_type :: :get_ignition_state | :ignition_state | :turn_engine_on_off
-  @capability_size 1
-  @sub_capabilities [
-    %{
-      options: %{
-        :unavailable => %{name: "Unavailable", bin: <<0x00>>},
-        :available => %{name: "Available", bin: <<0x01>>},
-        :state => %{name: "Get State", bin: <<0x02>>},
-      }
-    }
-  ]
+  @spec_file "specs/engine.json"
+  @type command_type :: :engine_state | :get_ignition_state | :turn_engine_on_off
 
-
-  @command_module AutoApi.EngineCommand
-  @state_module AutoApi.EngineState
+  @command_module AutoApi.NotImplemented
+  @state_module AutoApi.NotImplemented
 
   use AutoApi.Capability
 end

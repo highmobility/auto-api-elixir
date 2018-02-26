@@ -32,11 +32,13 @@ defmodule AutoApi.CommonDataStateTest do
   test "random set of float data" do
     for _ <- 1..:rand.uniform(100) do
       num =
-        :rand.uniform
-        |> Kernel."*"(:rand.uniform(100))
+        :rand.uniform()
+        |> Kernel.*(:rand.uniform(100))
         |> Float.ceil(3)
         |> Float.round(2)
-      assert CommonData.bin_to_ieee_754_float(<<num::float-32>>) == num, "#{num} is not equal to itself after conversion"
+
+      assert CommonData.bin_to_ieee_754_float(<<num::float-32>>) == num,
+             "#{num} is not equal to itself after conversion"
     end
   end
 end

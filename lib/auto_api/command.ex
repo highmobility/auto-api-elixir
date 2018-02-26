@@ -20,36 +20,45 @@ defmodule AutoApi.Command do
   @type execute_return_atom :: :state | :state_changed
   @callback execute(struct, binary) :: {execute_return_atom, struct}
   @callback state(struct) :: binary
-  @callback vehicle_state(struct) :: binary
 
-  @type capability_name :: :door_locks | :charging | :diagnostics | :engine | :maintenance | :rooftop | :trunk_access | :vehicle_location
+  @type capability_name ::
+          :door_locks
+          | :charging
+          | :diagnostics
+          | :engine
+          | :maintenance
+          | :rooftop
+          | :trunk_access
+          | :vehicle_location
 
   @doc """
   Extracts commands meta data  including the capability that
   the command is using and exact command that is issued
 
-      iex> AutoApi.Command.meta_data(<<0, 0x20, 0x00, 0x90>>)
-      %{message_id: :door_locks, message_type: :get_lock_state, module: AutoApi.DoorLocksCapability}
+      iex> AutoApi.Command.meta_data(<<0, 0x33, 0x00>>)
+      %{message_id: :diagnostics, message_type: :get_diagnostics_state, module: AutoApi.DiagnosticsCapability}
 
-      iex> binary_command = <<0x00, 0x20, 0x1, 0x01, 0x00, 0x00, 0x00>>
-      iex> %{module: cap} = AutoApi.Command.meta_data(binary_command)
-      iex> base_state = cap.state.base
-      %AutoApi.DoorLocksState{doors: []}
-      iex> AutoApi.Command.execute(base_state, cap.command, binary_command)
-      {:state_changed, %AutoApi.DoorLocksState{doors: [%AutoApi.DoorLockState{location: :front_left,lock: :unlocked, position: :closed}]}}
-      iex> AutoApi.Command.to_bin(:door_locks, :get_lock_state, [])
+      ie> binary_command = <<0x00, 0x20, 0x1, 0x01, 0x00, 0x00, 0x00>>
+      ie> %{module: cap} = AutoApi.Command.meta_data(binary_command)
+      ie> base_state = cap.state.base
+      %AutoApi.DoorLocksState{}
+      ie> AutoApi.Command.execute(base_state, cap.command, binary_command)
+      {:state_changed, %AutoApi.DoorLocksState{}}
+      ie> AutoApi.Command.to_bin(:door_locks, :get_lock_state, [])
       <<0x0, 0x20, 0x0>>
-      iex> AutoApi.Command.to_bin(:door_locks, :lock_unlock_doors, [:lock])
+      ie> AutoApi.Command.to_bin(:door_locks, :lock_unlock_doors, [:lock])
       <<0x0, 0x20, 0x02, 0x01>>
 
 
   """
-  def meta_data(<<id::binary-size(2), type, _data::binary >>) do
-    capabilities = AutoApi.Capability.list_capabilities
-    with {:capability, capability_module} when not is_nil(capability_module) <- {:capability, capabilities[id]},
+  def meta_data(<<id::binary-size(2), type, _data::binary>>) do
+    capabilities = AutoApi.Capability.list_capabilities()
+
+    with {:capability, capability_module} when not is_nil(capability_module) <-
+           {:capability, capabilities[id]},
          capability_name <- apply(capability_module, :name, []),
          command_name <- apply(capability_module, :command_name, [type]) do
-           %{message_id: capability_name, message_type: command_name, module: capability_module}
+      %{message_id: capability_name, message_type: command_name, module: capability_module}
     else
       {:capability, nil} ->
         %{}
@@ -66,6 +75,7 @@ defmodule AutoApi.Command do
   def to_bin(capability_name, action) do
     to_bin(capability_name, action, [])
   end
+
   def to_bin(capability_name, action, args) do
     with {:ok, capability} <- export_cap(capability_name) do
       command_bin = capability.command.to_bin(action, args)
@@ -77,7 +87,7 @@ defmodule AutoApi.Command do
 
   defp export_cap(capability_name) do
     cap =
-      AutoApi.Capability.list_capabilities
+      AutoApi.Capability.list_capabilities()
       |> Enum.filter(fn {_, c} -> apply(c, :name, []) == capability_name end)
       |> Enum.map(fn {_, c} -> c end)
 

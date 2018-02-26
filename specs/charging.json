@@ -1,0 +1,237 @@
+{
+    "category": "chassis",
+    "id_lsb": 35,
+    "name": "charging",
+    "api_intro": 2,
+    "message_types": [
+        {
+            "id": 0,
+            "name": "get_charge_state"
+        },
+        {
+            "id": 1,
+            "name": "charge_state"
+        },
+        {
+            "id": 2,
+            "name": "start_stop_charging"
+        },
+        {
+            "id": 3,
+            "name": "set_charge_limit"
+        },
+        {
+            "id": 4,
+            "name": "open_close_charge_port"
+        },
+        {
+            "id": 5,
+            "name": "set_charge_mode"
+        },
+        {
+            "id": 6,
+            "name": "set_charge_timer"
+        }
+    ],
+    "id_msb": 0,
+    "properties": [
+        {
+            "type": "enum",
+            "size": 1,
+            "values": [
+                {
+                    "name": "disconnected",
+                    "id": 0
+                },
+                {
+                    "name": "plugged_in",
+                    "id": 1
+                },
+                {
+                    "name": "charging",
+                    "id": 2
+                },
+                {
+                    "name": "charging_complete",
+                    "id": 3
+                }
+            ],
+            "id": 1,
+            "name": "charging"
+        },
+        {
+            "size": 2,
+            "type": "integer",
+            "description": "Estimated range in km",
+            "name": "estimated_range",
+            "id": 2
+        },
+        {
+            "size": 1,
+            "type": "integer",
+            "description": "Battery level percentage between 0-100",
+            "name": "battery_level",
+            "id": 3
+        },
+        {
+            "pretty_name": "Battery current (AC)",
+            "description": "Battery current in 4-bytes per IEEE 754",
+            "name": "battery_current_ac",
+            "type": "float",
+            "id": 4,
+            "size": 4
+        },
+        {
+            "pretty_name": "Battery current (DC)",
+            "description": "Battery current in 4-bytes per IEEE 754",
+            "name": "battery_current_dc",
+            "type": "float",
+            "id": 5,
+            "size": 4
+        },
+        {
+            "pretty_name": "Charger voltage (AC)",
+            "description": "Charger voltage in 4-bytes per IEEE 754",
+            "name": "charger_voltage_ac",
+            "type": "float",
+            "id": 6,
+            "size": 4
+        },
+        {
+            "pretty_name": "Charger voltage (DC)",
+            "description": "Charger voltage in 4-bytes per IEEE 754",
+            "name": "charger_voltage_dc",
+            "type": "float",
+            "id": 7,
+            "size": 4
+        },
+        {
+            "size": 1,
+            "type": "integer",
+            "description": "Charge limit percentage between 0-100",
+            "name": "charge_limit",
+            "id": 8
+        },
+        {
+            "size": 2,
+            "type": "integer",
+            "description": "Time until charging completed in minutes",
+            "name": "time_to_complete_charge",
+            "id": 9
+        },
+        {
+            "pretty_name": "Charging rate (kW)",
+            "description": "Charge rate in kW represented as 4-bytes per IEEE 754, when charging",
+            "name": "charging_rate_kw",
+            "type": "float",
+            "id": 10,
+            "size": 4
+        },
+        {
+            "type": "enum",
+            "size": 1,
+            "values": [
+                {
+                    "name": "closed",
+                    "id": 0
+                },
+                {
+                    "name": "open",
+                    "id": 1
+                }
+            ],
+            "id": 11,
+            "name": "charge_port_state"
+        },
+        {
+            "type": "enum",
+            "size": 1,
+            "values": [
+                {
+                    "name": "immediate",
+                    "id": 0
+                },
+                {
+                    "name": "timer_based",
+                    "id": 1
+                },
+                {
+                    "name": "inductive",
+                    "id": 2
+                }
+            ],
+            "id": 12,
+            "name": "charge_mode"
+        },
+        {
+            "items": [
+                {
+                    "type": "enum",
+                    "values": [
+                        {
+                            "name": "preferred_start_time",
+                            "id": 0
+                        },
+                        {
+                            "name": "preferred_end_time",
+                            "id": 1
+                        },
+                        {
+                            "name": "departure_time",
+                            "id": 2
+                        }
+                    ],
+                    "name": "timer_type",
+                    "size": 1
+                },
+                {
+                    "size": 1,
+                    "type": "integer",
+                    "description": "Value between 0 and 99, which corresponds to 2000-2099",
+                    "name": "year"
+                },
+                {
+                    "size": 1,
+                    "type": "integer",
+                    "description": "Value between 1 and 12",
+                    "name": "month"
+                },
+                {
+                    "size": 1,
+                    "type": "integer",
+                    "description": "Value between 1 and 31",
+                    "name": "day"
+                },
+                {
+                    "size": 1,
+                    "type": "integer",
+                    "description": "Value between 0 and 23",
+                    "name": "hour"
+                },
+                {
+                    "size": 1,
+                    "type": "integer",
+                    "description": "Value between 0 and 59",
+                    "name": "minute"
+                },
+                {
+                    "size": 1,
+                    "type": "integer",
+                    "description": "Value between 0 and 59",
+                    "name": "second"
+                },
+                {
+                    "size": 2,
+                    "type": "integer",
+                    "description": "UTC time offset in minutes, which can be negative",
+                    "name": "utc_time_offset"
+                }
+            ],
+            "size": 9,
+            "type": "enum",
+            "id": 13,
+            "name": "charge_timer"
+        }
+    ],
+    "api_update": 6
+}

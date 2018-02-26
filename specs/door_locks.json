@@ -1,0 +1,84 @@
+{
+    "category": "digital_key",
+    "id_lsb": 32,
+    "name": "door_locks",
+    "api_intro": 1,
+    "message_types": [
+        {
+            "id": 0,
+            "name": "get_lock_state"
+        },
+        {
+            "id": 1,
+            "name": "lock_state"
+        },
+        {
+            "id": 2,
+            "name": "lock_unlock_doors"
+        }
+    ],
+    "id_msb": 0,
+    "properties": [
+        {
+            "items": [
+                {
+                    "type": "enum",
+                    "values": [
+                        {
+                            "name": "front_left",
+                            "id": 0
+                        },
+                        {
+                            "name": "front_right",
+                            "id": 1
+                        },
+                        {
+                            "name": "rear_right",
+                            "id": 2
+                        },
+                        {
+                            "name": "rear_left",
+                            "id": 3
+                        }
+                    ],
+                    "name": "door_location",
+                    "size": 1
+                },
+                {
+                    "type": "enum",
+                    "values": [
+                        {
+                            "name": "closed",
+                            "id": 0
+                        },
+                        {
+                            "name": "open",
+                            "id": 1
+                        }
+                    ],
+                    "name": "door_position",
+                    "size": 1
+                },
+                {
+                    "type": "enum",
+                    "values": [
+                        {
+                            "name": "unlocked",
+                            "id": 0
+                        },
+                        {
+                            "name": "locked",
+                            "id": 1
+                        }
+                    ],
+                    "name": "door_lock",
+                    "size": 1
+                }
+            ],
+            "size": 3,
+            "id": 1,
+            "name": "door"
+        }
+    ],
+    "api_update": 5
+}

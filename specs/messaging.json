@@ -1,0 +1,18 @@
+{
+    "category": "headunit",
+    "id_msb": 0,
+    "id_lsb": 55,
+    "name": "messaging",
+    "api_update": 5,
+    "api_intro": 4,
+    "message_types": [
+        {
+            "id": 0,
+            "name": "message_received"
+        },
+        {
+            "id": 1,
+            "name": "send_message"
+        }
+    ]
+}

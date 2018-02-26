@@ -16,72 +16,36 @@
 #
 # Please inquire about commercial licensing options at
 # licensing@high-mobility.com
-defmodule AutoApi.DoorLockState do
-  defstruct location: nil, position: nil, lock: nil
-
-  alias AutoApi.CommonData
-
-  @type t :: %AutoApi.DoorLockState{location: CommonData.location, position: CommonData.position, lock: CommonData.lock}
-end
-
 defmodule AutoApi.DoorLocksState do
   @moduledoc """
   Door position possible values: :closed, :open
   Door lock possible values: :unlocked, :locked
   """
-  defstruct doors: []
 
-  use AutoApi.State
+  defstruct door: []
 
-  alias AutoApi.CommonData
+  use AutoApi.State, spec_file: "specs/door_locks.json"
 
-  @doors_unlock_cmd 0x00
-  @doors_lock_cmd 0x01
+  @type t :: %__MODULE__{door: list(any)}
 
-  @type position :: :closed | :open
-  @type lock :: :unlocked | :locked
+  @doc """
+  Build state based on binary value
 
-  @type t :: %AutoApi.DoorLocksState{doors: list(AutoApi.DoorLockState.t)}
-
-  @spec from_bin(binary) :: AutoApi.DoorLocksState.t
-  def from_bin(<<doors::binary>>) do
-    door_list =
-      doors
-      |> :binary.bin_to_list
-      |> Enum.chunk_every(3)
-      |> Enum.map(fn [loc, pos, lock] ->
-        %AutoApi.DoorLockState{location: CommonData.bin_location_to_atom(loc), position: CommonData.bin_position_to_atom(pos), lock: CommonData.bin_lock_to_atom(lock)}
-      end)
-
-    %__MODULE__{doors: door_list}
+    iex> AutoApi.DoorLocksState.from_bin(<<0x01, 3::integer-16, 0x00, 0x01, 0x00>>)
+    %AutoApi.DoorLocksState{door: [%{door_location: :front_left, door_lock: :unlocked, door_position: :open}]}
+  """
+  @spec from_bin(binary) :: __MODULE__.t()
+  def from_bin(bin) do
+    parse_bin_properties(bin, %__MODULE__{})
   end
 
-  @spec to_bin(AutoApi.DoorLocksState.t) :: binary
+  @doc """
+  Parse state to bin
+    iex> AutoApi.DoorLocksState.to_bin(%AutoApi.DoorLocksState{door: [%{door_location: :front_left, door_lock: :unlocked, door_position: :open}]})
+    <<0x01, 3::integer-16, 0x00, 0x01, 0x00>>
+  """
+  @spec to_bin(__MODULE__.t()) :: binary
   def to_bin(%__MODULE__{} = state) do
-    resp =
-      state.doors
-      |> Enum.map(fn %{location: location, lock: lock, position: position} ->
-        loc = CommonData.atom_location_to_bin(location)
-        pos = CommonData.atom_position_to_bin(position)
-        lock = CommonData.atom_lock_to_bin(lock)
-        <<loc, pos, lock>>
-      end)
-
-    <<length(resp)>> <> Enum.reduce(resp, <<>>, fn x , acc -> x <> acc end)
-  end
-
-  @spec change_locks_status(AutoApi.DoorLocksState.t, integer) :: AutoApi.DoorLocksState.t
-  def change_locks_status(%__MODULE__{} = state, @doors_unlock_cmd) do
-    doors =
-      state.doors
-      |> Enum.map(fn d -> %{d | lock: :unlocked} end)
-    %{state | doors: doors}
-  end
-
-  def change_locks_status(%__MODULE__{} = state, @doors_lock_cmd) do
-    doors =
-      state.doors
-      |> Enum.map(fn d -> %{d | lock: :locked} end)
-    %{state | doors: doors}
+    parse_state_properties(state)
   end
 end

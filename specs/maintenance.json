@@ -1,0 +1,34 @@
+{
+    "category": "diagnostics",
+    "id_lsb": 52,
+    "name": "maintenance",
+    "api_intro": 3,
+    "message_types": [
+        {
+            "id": 0,
+            "name": "get_maintenance_state"
+        },
+        {
+            "id": 1,
+            "name": "maintenance_state"
+        }
+    ],
+    "id_msb": 0,
+    "properties": [
+        {
+            "size": 2,
+            "type": "integer",
+            "description": "Number of days until next servicing of the car, whereas negative is overdue",
+            "name": "days_to_next_service",
+            "id": 1
+        },
+        {
+            "size": 3,
+            "type": "integer",
+            "description": "The amount of kilometers until next servicing of the car",
+            "name": "kilometers_to_next_service",
+            "id": 2
+        }
+    ],
+    "api_update": 5
+}

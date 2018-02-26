@@ -1,0 +1,33 @@
+{
+    "category": "environment",
+    "id_msb": 0,
+    "id_lsb": 84,
+    "name": "light_conditions",
+    "api_intro": 5,
+    "properties": [
+        {
+            "size": 4,
+            "type": "float",
+            "description": "Measured outside illuminance in lux, formatted as IEEE 754 decimal",
+            "name": "outside_light",
+            "id": 1
+        },
+        {
+            "size": 4,
+            "type": "float",
+            "description": "Measured inside illuminance in lux, formatted as IEEE 754 decimal",
+            "name": "inside_light",
+            "id": 2
+        }
+    ],
+    "message_types": [
+        {
+            "id": 0,
+            "name": "get_light_conditions"
+        },
+        {
+            "id": 1,
+            "name": "light_conditions"
+        }
+    ]
+}

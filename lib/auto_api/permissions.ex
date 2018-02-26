@@ -19,70 +19,243 @@
 defmodule AutoApi.Permissions do
   use Bitwise
 
-  @permissions %{
-    "certificates.read"            => {0x10010000000000, "read list of stored certificates (trusted devices)"},
-    "certificates.write"           => {0x10020000000000, "revoke access certificates"},
-    "reset.write"                  => {0x10040000000000, "reset the Car SDK"},
+  @auto_api_id 0x10
 
-    "capabilities.read"            => {0x10000100000000, "get car capabilities"},
-    "vehicle-status.read"          => {0x10000200000000, "get vehicle status"},
-    "diagnostics.read"             => {0x10000400000000, "get diagnostics and maintenance state"},
-    "door-locks.read"              => {0x10000800000000, "get the lock state"},
-    "door-locks.write"             => {0x10001000000000, "lock or unlock the car"},
-    "engine.read"                  => {0x10002000000000, "get the ignition state"},
-    "engine.write"                 => {0x10004000000000, "turn on/off the engine"},
-    "trunk-access.read"            => {0x10008000000000, "get the trunk state"},
+  @byte_1_pad :binary.list_to_bin(:lists.duplicate(14, 0))
 
-    "trunk-access.write"           => {0x10000001000000, "open/close or lock/unlock the trunk"},
-    "trunk-access.limited"         => {0x10000002000000, "trunk access limited to one time"},
-    "wake-up.write"                => {0x10000004000000, "wake up the car"},
-    "charge.read"                  => {0x10000008000000, "get the charge state"},
-    "charge.write"                 => {0x10000010000000, "start/stop charging or set the charge limit"},
-    "climate.read"                 => {0x10000020000000, "get the climate state"},
-    "climate.write"                => {0x10000040000000, "set climate profile and start/stop HVAC"},
-    "lights.read"                  => {0x10000080000000, "get the lights state"},
+  @byte_2_prefix :binary.list_to_bin(:lists.duplicate(1, 0))
+  @byte_2_pad :binary.list_to_bin(:lists.duplicate(13, 0))
 
-    "lights.write"                 => {0x10000000010000, "control lights"},
-    "windows.write"                => {0x10000000020000, "open/close windows"},
-    "rooftop-control.read"         => {0x10000000040000, "get the rooftop state"},
-    "rooftop-control.write"        => {0x10000000080000, "control the rooftop"},
-    "windscreen.read"              => {0x10000000100000, "get the windscreen state"},
-    "windscreen.write"             => {0x10000000200000, "set the windscreen damage"},
-    "honk-horn-flash-lights.write" => {0x10000000400000, "honk the horn and flash lights and activate emergency flasher"},
-    "headunit.write"               => {0x10000000800000, "send notifications, messages, videos and text input to the headunit"},
+  @byte_3_prefix :binary.list_to_bin(:lists.duplicate(2, 0))
+  @byte_3_pad :binary.list_to_bin(:lists.duplicate(12, 0))
 
-    "remote-control.read"          => {0x10000000000100, "get the control mode"},
-    "remote-control.write"         => {0x10000000000200, "remote control the car"},
-    "valet-mode.read"              => {0x10000000000400, "get the valet mode"},
-    "valet-mode.write"             => {0x10000000000800, "set the valet mode"},
-    "valet-mode.active"            => {0x10000000001000, "use the car in valet mode only"},
-    "fueling.write"                => {0x10000000002000, "open the car gas flap"},
-    "heart-rate.write"             => {0x10000000004000, "send the heart rate"},
-    "driver-fatigue.read"          => {0x10000000008000, "get driver fatigue warnings"},
+  @byte_4_prefix :binary.list_to_bin(:lists.duplicate(3, 0))
+  @byte_4_pad :binary.list_to_bin(:lists.duplicate(11, 0))
 
-    "vehicle-location.read"        => {0x10000000000001, "get the vehicle location"},
-    "navi-destination.write"       => {0x10000000000002, "set the navigation destination"},
-    "theft-alarm.read"             => {0x10000000000004, "get the theft alarm state"},
-    "theft-alarm.write"            => {0x10000000000008, "set the theft alarm"},
-    "parking-ticket.read"          => {0x10000000000010, "get the parking ticket"},
-    "parking-ticket.write"         => {0x10000000000020, "start/end parking"},
-    "keyfob-position.read"         => {0x10000000000040, "get the keyfob position"},
-    "headunit.read"                => {0x10000000800080, "allow to receive notifications and messages from the headunit"},
+  @byte_5_prefix :binary.list_to_bin(:lists.duplicate(4, 0))
+  @byte_5_pad :binary.list_to_bin(:lists.duplicate(10, 0))
 
-    #"vehicle-time.read"            => {0x10000000000000, "get the vehicle local time"},
-  }
+  @byte_6_prefix :binary.list_to_bin(:lists.duplicate(5, 0))
+  @byte_6_pad :binary.list_to_bin(:lists.duplicate(9, 0))
 
-  @full_permissions          "car.full_control"
+  @byte_7_prefix :binary.list_to_bin(:lists.duplicate(6, 0))
+  @byte_7_pad :binary.list_to_bin(:lists.duplicate(8, 0))
+
+  @byte_8_prefix :binary.list_to_bin(:lists.duplicate(7, 0))
+  @byte_8_pad :binary.list_to_bin(:lists.duplicate(7, 0))
+
+  @byte_9_prefix :binary.list_to_bin(:lists.duplicate(8, 0))
+  @byte_9_pad :binary.list_to_bin(:lists.duplicate(6, 0))
+
+  @permissions_list [
+    # byte 1
+    {"certificates.read",
+     {<<@auto_api_id, 0x01, @byte_1_pad::binary>>,
+      "Allowed to read list of stored certificates (trusted devices)"}},
+    {"certificates.write",
+     {<<@auto_api_id, 0x02, @byte_1_pad::binary>>, "Allowed to revoke access certificates"}},
+    {"reset.write", {<<@auto_api_id, 0x04, @byte_1_pad::binary>>, "Allowed to reset the Car SDK"}},
+    # byte 2
+    {"capabilities.read",
+     {<<@auto_api_id, @byte_2_prefix::binary, 0x01, @byte_2_pad::binary>>,
+      "Allowed to get car capabilities"}},
+    {"vehicle-status.read",
+     {<<@auto_api_id, @byte_2_prefix::binary, 0x02, @byte_2_pad::binary>>,
+      "Allowed to get vehicle status"}},
+    {"diagnostics.read",
+     {<<@auto_api_id, @byte_2_prefix::binary, 0x04, @byte_2_pad::binary>>,
+      "Allowed to get diagnostics and maintenance state"}},
+    {"door-locks.read",
+     {<<@auto_api_id, @byte_2_prefix::binary, 0x08, @byte_2_pad::binary>>,
+      "Allowed to get the lock state"}},
+    {"door-locks.write",
+     {<<@auto_api_id, @byte_2_prefix::binary, 0x10, @byte_2_pad::binary>>,
+      "Allowed to lock or unlock the car"}},
+    {"engine.read",
+     {<<@auto_api_id, @byte_2_prefix::binary, 0x20, @byte_2_pad::binary>>,
+      "Allowed to get the ignition state"}},
+    {"engine.write",
+     {<<@auto_api_id, @byte_2_prefix::binary, 0x40, @byte_2_pad::binary>>,
+      "Allowed to turn on/off the engine"}},
+    {"trunk-access.read",
+     {<<@auto_api_id, @byte_2_prefix::binary, 0x80, @byte_2_pad::binary>>,
+      "Allowed to get the trunk state"}},
+    # byte 3
+    {"trunk-access.write",
+     {<<@auto_api_id, @byte_3_prefix::binary, 0x01, @byte_3_pad::binary>>,
+      "Allowed to open/close or lock/unlock the trunk"}},
+    {"trunk-access.limited",
+     {<<@auto_api_id, @byte_3_prefix::binary, 0x02, @byte_3_pad::binary>>,
+      "If the access to the trunk is limited to one time, whereas a 0 means unlimited"}},
+    {"trunk-access.limited",
+     {<<@auto_api_id, @byte_3_prefix::binary, 0x02, @byte_3_pad::binary>>,
+      "If the access to the trunk is limited to one time, whereas a 0 means unlimited"}},
+    {"wake-up.write",
+     {<<@auto_api_id, @byte_3_prefix::binary, 0x04, @byte_3_pad::binary>>,
+      "Allowed to wake up the car"}},
+    {"charge.read",
+     {<<@auto_api_id, @byte_3_prefix::binary, 0x08, @byte_3_pad::binary>>,
+      "Allowed to get the charge state"}},
+    {"charge.write",
+     {<<@auto_api_id, @byte_3_prefix::binary, 0x10, @byte_3_pad::binary>>,
+      "Allowed to start/stop charging, set the charge limit, open/close charge port"}},
+    {"climate.read",
+     {<<@auto_api_id, @byte_3_prefix::binary, 0x20, @byte_3_pad::binary>>,
+      "Allowed to get the climate state"}},
+    {"climate.write",
+     {<<@auto_api_id, @byte_3_prefix::binary, 0x40, @byte_3_pad::binary>>,
+      "Allowed to set climate profile and start/stop HVAC"}},
+    {"lights.read",
+     {<<@auto_api_id, @byte_3_prefix::binary, 0x80, @byte_3_pad::binary>>,
+      "Allowed to get the lights state"}},
+    # byte 4
+    {"lights.write",
+     {<<@auto_api_id, @byte_4_prefix::binary, 0x01, @byte_4_pad::binary>>,
+      "Allowed to control lights"}},
+    {"windows.write",
+     {<<@auto_api_id, @byte_4_prefix::binary, 0x02, @byte_4_pad::binary>>,
+      "Allowed to open/close windows"}},
+    {"rooftop-control.read",
+     {<<@auto_api_id, @byte_4_prefix::binary, 0x04, @byte_4_pad::binary>>,
+      "Allowed to get the rooftop state"}},
+    {"rooftop-control.write",
+     {<<@auto_api_id, @byte_4_prefix::binary, 0x08, @byte_4_pad::binary>>,
+      "Allowed to control the rooftop"}},
+    {"windscreen.read",
+     {<<@auto_api_id, @byte_4_prefix::binary, 0x10, @byte_4_pad::binary>>,
+      "Allowed to get the windscreen state"}},
+    {"windscreen.write",
+     {<<@auto_api_id, @byte_4_prefix::binary, 0x20, @byte_4_pad::binary>>,
+      "Allowed to set the windscreen damage"}},
+    {"honk-horn-flash-lights.write",
+     {<<@auto_api_id, @byte_4_prefix::binary, 0x40, @byte_4_pad::binary>>,
+      "Allowed to honk the horn and flash lights and activate emergency flasher"}},
+    {"headunit.write",
+     {<<@auto_api_id, @byte_4_prefix::binary, 0x80, @byte_4_pad::binary>>,
+      "Allowed to send notifications, messages, videos, URLs, images and text input to the headunit"}},
+    # byte 5
+    {"remote-control.read",
+     {<<@auto_api_id, @byte_5_prefix::binary, 0x01, @byte_5_pad::binary>>,
+      "Allowed to get the control mode"}},
+    {"remote-control.write",
+     {<<@auto_api_id, @byte_5_prefix::binary, 0x02, @byte_5_pad::binary>>,
+      "Allowed to remote control the car"}},
+    {"valet-mode.read",
+     {<<@auto_api_id, @byte_5_prefix::binary, 0x04, @byte_5_pad::binary>>,
+      "Allowed to get the valet mode"}},
+    {"valet-mode.write",
+     {<<@auto_api_id, @byte_5_prefix::binary, 0x08, @byte_5_pad::binary>>,
+      "Allowed to set the valet mode"}},
+    {"valet-mode.active",
+     {<<@auto_api_id, @byte_5_prefix::binary, 0x10, @byte_5_pad::binary>>,
+      "Only allowed to use the car in valet mode"}},
+    {"fueling.write",
+     {<<@auto_api_id, @byte_5_prefix::binary, 0x20, @byte_5_pad::binary>>,
+      "Allowed to open the car gas flap"}},
+    {"heart-rate.write",
+     {<<@auto_api_id, @byte_5_prefix::binary, 0x40, @byte_5_pad::binary>>,
+      "Allowed to send the heart rate to the car"}},
+    {"driver-fatigue.read",
+     {<<@auto_api_id, @byte_5_prefix::binary, 0x80, @byte_5_pad::binary>>,
+      "Allowed to send the heart rate to the car"}},
+    # byte 6
+    {"vehicle-location.read",
+     {<<@auto_api_id, @byte_6_prefix::binary, 0x01, @byte_6_pad::binary>>,
+      "Allowed to get the vehicle location"}},
+    {"navi-destination.write",
+     {<<@auto_api_id, @byte_6_prefix::binary, 0x02, @byte_6_pad::binary>>,
+      "Allowed to set the navigation destination"}},
+    {"theft-alarm.read",
+     {<<@auto_api_id, @byte_6_prefix::binary, 0x04, @byte_6_pad::binary>>,
+      "Allowed to get the theft alarm state"}},
+    {"theft-alarm.write",
+     {<<@auto_api_id, @byte_6_prefix::binary, 0x08, @byte_6_pad::binary>>,
+      "Allowed to set the theft alarm state"}},
+    {"parking-ticket.read",
+     {<<@auto_api_id, @byte_6_prefix::binary, 0x10, @byte_6_pad::binary>>,
+      "Allowed to get the parking ticket"}},
+    {"parking-ticket.write",
+     {<<@auto_api_id, @byte_6_prefix::binary, 0x20, @byte_6_pad::binary>>,
+      "Allowed to start/end parking"}},
+    {"keyfob-position.read",
+     {<<@auto_api_id, @byte_6_prefix::binary, 0x40, @byte_6_pad::binary>>,
+      "Allowed to get the keyfob position"}},
+    {"headunit.read",
+     {<<@auto_api_id, @byte_6_prefix::binary, 0x80, @byte_6_pad::binary>>,
+      "Allowed to receive notifications and messages from the headunit"}},
+    # byte 7
+    {"vehicle-time.read",
+     {<<@auto_api_id, @byte_7_prefix::binary, 0x01, @byte_7_pad::binary>>,
+      "Allowed to get the vehicle local time"}},
+    {"windows.read",
+     {<<@auto_api_id, @byte_7_prefix::binary, 0x02, @byte_7_pad::binary>>,
+      "Allowed to get the windows state"}},
+    {"honk-horn-flash-lights.read",
+     {<<@auto_api_id, @byte_7_prefix::binary, 0x04, @byte_7_pad::binary>>,
+      "Allowed to get the flasher state"}},
+    {"navi-destination.read",
+     {<<@auto_api_id, @byte_7_prefix::binary, 0x08, @byte_7_pad::binary>>,
+      "Allowed to get the navigation destination"}},
+    {"race.read",
+     {<<@auto_api_id, @byte_7_prefix::binary, 0x10, @byte_7_pad::binary>>,
+      "Allowed to get the navigation destination"}},
+    {"offroad.read",
+     {<<@auto_api_id, @byte_7_prefix::binary, 0x20, @byte_7_pad::binary>>,
+      "Allowed to get the offroad state"}},
+    {"chassis-settings.read",
+     {<<@auto_api_id, @byte_7_prefix::binary, 0x40, @byte_7_pad::binary>>,
+      "Allowed to get the chassis settings"}},
+    {"chassis-settings.write",
+     {<<@auto_api_id, @byte_7_prefix::binary, 0x80, @byte_7_pad::binary>>,
+      "Allowed to set the chassis settings"}},
+    # byte 8
+    {"seats.read",
+     {<<@auto_api_id, @byte_8_prefix::binary, 0x01, @byte_8_pad::binary>>,
+      "Allowed to get the seats state"}},
+    {"seats.write",
+     {<<@auto_api_id, @byte_8_prefix::binary, 0x02, @byte_8_pad::binary>>,
+      "Allowed to get the seats state"}},
+    {"parking-brake.read",
+     {<<@auto_api_id, @byte_8_prefix::binary, 0x04, @byte_8_pad::binary>>,
+      "Allowed to get the parking brake state"}},
+    {"parking-brake.write",
+     {<<@auto_api_id, @byte_8_prefix::binary, 0x08, @byte_8_pad::binary>>,
+      "Allowed to set the parking brake"}},
+    {"environment.read",
+     {<<@auto_api_id, @byte_8_prefix::binary, 0x10, @byte_8_pad::binary>>,
+      "Allowed to get light and weather conditions"}},
+    {"fueling.read",
+     {<<@auto_api_id, @byte_8_prefix::binary, 0x20, @byte_8_pad::binary>>,
+      "Allowed to get the gas flap state"}},
+    {"wi-fi.read",
+     {<<@auto_api_id, @byte_8_prefix::binary, 0x40, @byte_8_pad::binary>>,
+      "Allowed to get the Wi-Fi state"}},
+    {"wi-fi.write",
+     {<<@auto_api_id, @byte_8_prefix::binary, 0x80, @byte_8_pad::binary>>,
+      "Allowed to enable/disable Wi-Fi and manage networks"}},
+    # byte 9
+    {"home-charger.read",
+     {<<@auto_api_id, @byte_9_prefix::binary, 0x01, @byte_9_pad::binary>>,
+      "Allowed to get the home charger state"}},
+    {"home-charger.write",
+     {<<@auto_api_id, @byte_9_prefix::binary, 0x02, @byte_9_pad::binary>>,
+      "Allowed to control the home charger"}}
+  ]
+
+  @permissions Enum.into(@permissions_list, %{})
+
+  @full_permissions "car.full_control"
   @full_permissions_excluded ["trunk-access.limited", "valet-mode.active"]
 
-  @emulator_permissions          "emulator.full_control"
-  @emulator_permissions_excluded @full_permissions_excluded ++ ["certificates.read", "certificates.write", "reset.write"]
+  @emulator_permissions "emulator.full_control"
+  @emulator_permissions_excluded @full_permissions_excluded ++
+                                   ["certificates.read", "certificates.write", "reset.write"]
 
   @doc """
   Returns available permissions
   """
   def permissions_list do
-    @permissions
+    @permissions_list
   end
 
   @doc """
@@ -95,10 +268,11 @@ defmodule AutoApi.Permissions do
 
     iex> AutoApi.Permissions.parse("charge.read,lights.read,climate.write")
     ...> |> AutoApi.Permissions.format
-    ["get the charge state", "get the lights state", "set climate profile and start/stop HVAC"]
+    ["Allowed to get the charge state", "Allowed to get the lights state", "Allowed to set climate profile and start/stop HVAC"]
 
   """
   def format(["car.full_control"]), do: ["full control of the car"]
+
   def format(perms) do
     Enum.map(perms, &(@permissions[&1] |> elem(1)))
   end
@@ -113,6 +287,7 @@ defmodule AutoApi.Permissions do
 
   """
   def parse(nil), do: []
+
   def parse(scopes) do
     String.split(scopes, ",")
   end
@@ -123,32 +298,37 @@ defmodule AutoApi.Permissions do
   ## Examples
 
     iex> AutoApi.Permissions.to_binary ["charge.read", "lights.read", "climate.write"]
-    0x100000C8000000
+    0x100000C8000000000000000000000000
 
     iex> AutoApi.Permissions.to_binary ["car.full_control"]
-    0x1007FFFDFFEFFF
+    0x1007FFFDFFEFFFFFFF03000000000000
 
     iex> AutoApi.Permissions.parse("charge.read,lights.read,climate.write")
     ...> |> AutoApi.Permissions.to_binary
-    0x100000C8000000
+    0x100000C8000000000000000000000000
 
   """
   def to_binary([@full_permissions]) do
     @permissions
     |> Map.keys()
-    |> Enum.filter(&(not &1 in @full_permissions_excluded))
+    |> Enum.filter(&(&1 not in @full_permissions_excluded))
     |> to_binary
   end
 
   def to_binary([@emulator_permissions]) do
     @permissions
     |> Map.keys()
-    |> Enum.filter(&(not &1 in @emulator_permissions_excluded))
+    |> Enum.filter(&(&1 not in @emulator_permissions_excluded))
     |> to_binary
   end
 
   def to_binary(perms) do
-    Enum.reduce(perms, 0, fn(p, acc) -> elem(@permissions[p], 0) |> bor(acc) end)
+    Enum.reduce(perms, 0, fn p, acc -> conver_bin_to_int(p) |> bor(acc) end)
+  end
+
+  defp conver_bin_to_int(key) do
+    <<i::integer-128>> = elem(@permissions[key], 0)
+    i
   end
 
   @doc """
@@ -167,4 +347,3 @@ defmodule AutoApi.Permissions do
     Enum.all?(perms, &Map.has_key?(@permissions, &1))
   end
 end
-

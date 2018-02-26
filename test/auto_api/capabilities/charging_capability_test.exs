@@ -16,7 +16,7 @@
 #
 # Please inquire about commercial licensing options at
 # licensing@high-mobility.com
-defmodule AutoApi.ChargeCapabilityTest do
+defmodule AutoApi.ChargingCapabilityTest do
   use ExUnit.Case
-  doctest AutoApi.ChargeCapability
+  doctest AutoApi.ChargingCapability
 end

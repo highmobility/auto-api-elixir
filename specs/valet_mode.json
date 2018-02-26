@@ -1,0 +1,40 @@
+{
+    "category": "parking",
+    "id_lsb": 40,
+    "name": "valet_mode",
+    "api_intro": 3,
+    "message_types": [
+        {
+            "id": 0,
+            "name": "get_valet_mode"
+        },
+        {
+            "id": 1,
+            "name": "valet_mode"
+        },
+        {
+            "id": 2,
+            "name": "activate_deactivate_valet_mode"
+        }
+    ],
+    "id_msb": 0,
+    "properties": [
+        {
+            "type": "enum",
+            "size": 1,
+            "values": [
+                {
+                    "name": "deactivated",
+                    "id": 0
+                },
+                {
+                    "name": "activated",
+                    "id": 1
+                }
+            ],
+            "id": 1,
+            "name": "valet_mode"
+        }
+    ],
+    "api_update": 5
+}

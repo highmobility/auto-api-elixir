@@ -1,0 +1,41 @@
+{
+    "category": "api_structure",
+    "id_lsb": 16,
+    "name": "capabilities",
+    "api_intro": 2,
+    "message_types": [
+        {
+            "id": 0,
+            "name": "get_capabilities"
+        },
+        {
+            "id": 1,
+            "name": "capabilities"
+        },
+        {
+            "id": 2,
+            "name": "get_capability"
+        }
+    ],
+    "id_msb": 0,
+    "properties": [
+        {
+            "items": [
+                {
+                    "size": 2,
+                    "type": "integer",
+                    "description": "The identifier of the supported capability",
+                    "name": "capability_identifier"
+                },
+                {
+                    "type": "byte_array",
+                    "name": "supported_message_types",
+                    "description": "Array of message type identifiers"
+                }
+            ],
+            "id": 1,
+            "name": "capability"
+        }
+    ],
+    "api_update": 5
+}

@@ -16,59 +16,42 @@
 #
 # Please inquire about commercial licensing options at
 # licensing@high-mobility.com
-defmodule AutoApi.ChargeCapability do
+defmodule AutoApi.ChargingCapability do
   @moduledoc """
-  Basic settings for Maintenance Capability
+  Basic settings for Charging Capability
 
-      iex> alias AutoApi.ChargeCapability, as: E
-      iex> E.identifier
+      iex> alias AutoApi.ChargingCapability, as: C
+      iex> C.identifier
       <<0x00, 0x23>>
-      iex> E.capability_size
-      1
-      iex> E.name
+      iex> C.name
       :charging
-      iex> E.description
+      iex> C.description
       "Charging"
-      iex> E.command_name(0x00)
+      iex> C.command_name(0x00)
       :get_charge_state
-      iex> E.command_name(0x01)
+      iex> C.command_name(0x01)
       :charge_state
-      iex> E.command_name(0x02)
+      iex> C.command_name(0x02)
       :start_stop_charging
-      iex> E.command_name(0x03)
+      iex> C.command_name(0x03)
       :set_charge_limit
-      iex> E.to_map(<<0x1, 0x0>>)
-      [%{bin: <<0x00>>, name: "Unavailable", atom: :unavailable, title: ""}]
-      iex> E.to_map(<<0x1, 0x1>>)
-      [%{atom: :available, bin: <<0x1>>, name: "Available", title: ""}]
-      iex> E.to_map(<<0x1, 0x2>>)
-      [%{atom: :state, bin: <<0x2>>, name: "Get State", title: ""}]
-
+      iex> C.command_name(0x04)
+      :open_close_charge_port
+      iex> C.command_name(0x05)
+      :set_charge_mode
+      iex> C.command_name(0x06)
+      :set_charge_timer
+      iex> length(C.properties)
+      13
+      iex> List.last(C.properties)
+      {0x0d, :charge_timer}
   """
 
-  @identifier <<0x00, 0x23>>
-  @name :charging
-  @desc "Charging"
-  @commands %{
-    0x00 => :get_charge_state,
-    0x01 => :charge_state,
-    0x02 => :start_stop_charging,
-    0x03 => :set_charge_limit,
-  }
-  @type command_type :: :get_charge_state | :charge_state | :start_stop_charging | :set_charge_limit
-  @capability_size 1
-  @sub_capabilities [
-    %{
-      options: %{
-        :unavailable => %{name: "Unavailable", bin: <<0x00>>},
-        :available => %{name: "Available", bin: <<0x01>>},
-        :state => %{name: "Get State", bin: <<0x02>>},
-      }
-    }
-  ]
+  @spec_file "specs/charging.json"
+  @type command_type :: :get_charge_state | :charge_state | :start_stop_charging | :set_charge_limit | :open_close_charge_port | :set_charge_mode | :set_charge_timer
 
-  @command_module AutoApi.ChargeCommand
-  @state_module AutoApi.ChargeState
+  @command_module AutoApi.NotImplemented
+  @state_module AutoApi.NotImplemented
 
   use AutoApi.Capability
 end

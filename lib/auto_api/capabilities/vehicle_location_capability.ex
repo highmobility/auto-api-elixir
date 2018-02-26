@@ -18,13 +18,11 @@
 # licensing@high-mobility.com
 defmodule AutoApi.VehicleLocationCapability do
   @moduledoc """
-  Basic settings for VehicleLocation Capability
+  Basic settings for Vehicle Location Capability
 
       iex> alias AutoApi.VehicleLocationCapability, as: VL
       iex> VL.identifier
       <<0x00, 0x30>>
-      iex> VL.capability_size
-      1
       iex> VL.name
       :vehicle_location
       iex> VL.description
@@ -33,33 +31,17 @@ defmodule AutoApi.VehicleLocationCapability do
       :get_vehicle_location
       iex> VL.command_name(0x01)
       :vehicle_location
-      iex> VL.to_map(<<0x1, 0x0>>)
-      [%{bin: <<0x00>>, name: "Unavailable", atom: :unavailable, title: ""}]
-      iex> VL.to_map(<<0x1, 0x1>>)
-      [%{atom: :available, bin: <<0x1>>, name: "Available", title: ""}]
+      iex> length(VL.properties)
+      2
+      iex> VL.properties
+      [{1, :coordinates}, {2, :heading}]
   """
 
-  @identifier <<0x00, 0x30>>
-  @name :vehicle_location
-  @desc "Vehicle Location"
-  @commands %{
-    0x00 => :get_vehicle_location,
-    0x01 => :vehicle_location,
-  }
-  @type command_type :: :get_vehicle_location | :vehicle_location
-  @capability_size 1
-  @sub_capabilities [
-    %{
-      options: %{
-        :unavailable => %{name: "Unavailable", bin: <<0x00>>},
-        :available => %{name: "Available", bin: <<0x01>>},
-      }
-    }
-  ]
+  @spec_file "specs/vehicle_location.json"
+  @type command_type :: :vehicle_location | :get_vehicle_location
 
-
-  @command_module AutoApi.VehicleLocationCommand
-  @state_module AutoApi.VehicleLocationState
+  @command_module AutoApi.NotImplemented
+  @state_module AutoApi.NotImplemented
 
   use AutoApi.Capability
 end

@@ -1,0 +1,83 @@
+{
+    "category": "chassis",
+    "id_msb": 0,
+    "id_lsb": 86,
+    "name": "seats",
+    "api_intro": 5,
+    "properties": [
+        {
+            "items": [
+                {
+                    "type": "enum",
+                    "values": [
+                        {
+                            "name": "front_left",
+                            "id": 0
+                        },
+                        {
+                            "name": "front_right",
+                            "id": 1
+                        },
+                        {
+                            "name": "rear_right",
+                            "id": 2
+                        },
+                        {
+                            "name": "rear_left",
+                            "id": 3
+                        },
+                        {
+                            "name": "rear_center",
+                            "id": 4
+                        }
+                    ],
+                    "name": "seat_position",
+                    "size": 1
+                },
+                {
+                    "type": "enum",
+                    "values": [
+                        {
+                            "name": "not_detected",
+                            "id": 0
+                        },
+                        {
+                            "name": "detected",
+                            "id": 1
+                        }
+                    ],
+                    "name": "person_detected",
+                    "size": 1
+                },
+                {
+                    "type": "enum",
+                    "values": [
+                        {
+                            "name": "not_fastened",
+                            "id": 0
+                        },
+                        {
+                            "name": "fastened",
+                            "id": 1
+                        }
+                    ],
+                    "name": "seatbelt_fastened",
+                    "size": 1
+                }
+            ],
+            "size": 3,
+            "id": 1,
+            "name": "seat"
+        }
+    ],
+    "message_types": [
+        {
+            "id": 0,
+            "name": "get_seats_state"
+        },
+        {
+            "id": 1,
+            "name": "seats_state"
+        }
+    ]
+}
