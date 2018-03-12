@@ -1,14 +1,20 @@
 defmodule AutoApi.Mixfile do
   use Mix.Project
 
+  @version "0.1.0"
+
   def project do
     [
       app: :auto_api,
-      version: "0.1.0",
+      version: @version,
       elixir: "~> 1.4",
       build_embedded: Mix.env() == :prod,
       start_permanent: Mix.env() == :prod,
-      deps: deps()
+      deps: deps(),
+      docs: [source_ref: "#{@version}", main: "AutoApi"],
+      source_url: "https://github.com/highmobility/hm-auto-api-elixir",
+      description: description(),
+      package: package()
     ]
   end
 
@@ -29,5 +35,18 @@ defmodule AutoApi.Mixfile do
       {:ex_doc, "~> 0.18.1", only: :dev},
       {:earmark, "~> 1.2", only: :dev}
     ]
+  end
+
+  defp package do
+    [ files: ["lib", "mix.exs", "README.md", "LICENSE"],
+      maintainers: ["Milad Rastian"],
+      licenses: ["MIT"],
+      links: %{"GitHub": "https://github.com/slashmili/ex_syslogger"} ]
+  end
+
+  defp description do
+    """
+    AutoApi is able to parse and execute Auto API binary data
+    """
   end
 end
