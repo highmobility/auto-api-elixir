@@ -40,8 +40,8 @@ defmodule AutoApi.Mixfile do
   defp package do
     [ files: ["lib", "mix.exs", "README.md", "LICENSE", "specs"],
       maintainers: ["Milad Rastian"],
-      licenses: ["MIT"],
-      links: %{"GitHub": "https://github.com/slashmili/ex_syslogger"} ]
+      licenses: ["GPL 3.0"],
+      links: %{"GitHub": "https://github.com/highmobility/hm-auto-api-elixir"} ]
   end
 
   defp description do
