@@ -38,7 +38,7 @@ defmodule AutoApi.Mixfile do
   end
 
   defp package do
-    [ files: ["lib", "mix.exs", "README.md", "LICENSE"],
+    [ files: ["lib", "mix.exs", "README.md", "LICENSE", "specs"],
       maintainers: ["Milad Rastian"],
       licenses: ["MIT"],
       links: %{"GitHub": "https://github.com/slashmili/ex_syslogger"} ]
