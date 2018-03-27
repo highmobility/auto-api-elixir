@@ -17,8 +17,7 @@
 # Please inquire about commercial licensing options at
 # licensing@high-mobility.com
 defmodule AutoApi.Command do
-  @type execute_return_atom :: :state | :state_changed
-  @callback execute(struct, binary) :: {execute_return_atom, struct}
+  @callback execute(struct, binary) :: {atom, struct}
   @callback state(struct) :: binary
 
   @type capability_name ::

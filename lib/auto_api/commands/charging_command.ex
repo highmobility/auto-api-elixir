@@ -50,7 +50,8 @@ defmodule AutoApi.ChargingCommand do
         {:state_changed, %AutoApi.ChargingState{charge_limit: 90}}
 
   """
-  @spec execute(ChargingState.t(), binary) :: {:state | :state_changed, ChargingState.t()}
+  @type execute_type :: :state | :state_changed | :start_charging | :stop_charging
+  @spec execute(ChargingState.t(), binary) :: {execute_type, ChargingState.t()}
   def execute(%ChargingState{} = state, <<0x00>>) do
     {:state, state}
   end
@@ -65,8 +66,6 @@ defmodule AutoApi.ChargingCommand do
     end
   end
 
-  @spec execute(ChargingState.t(), binary) ::
-          {:start_charging | :stop_charging, ChargingState.t()}
   def execute(%ChargingState{} = state, <<0x02, charging_cmd>>) do
     if charging_cmd == 0x00 do
       {:start_charging, state}
@@ -75,7 +74,6 @@ defmodule AutoApi.ChargingCommand do
     end
   end
 
-  @spec execute(ChargingState.t(), binary) :: {:state | :state_changed, ChargingState.t()}
   def execute(%ChargingState{} = state, <<0x03, charge_limit>>) do
     new_state = %{state | charge_limit: charge_limit}
 
