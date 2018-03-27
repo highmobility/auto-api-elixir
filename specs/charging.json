@@ -228,7 +228,6 @@
                 }
             ],
             "size": 9,
-            "type": "enum",
             "id": 13,
             "name": "charge_timer"
         }

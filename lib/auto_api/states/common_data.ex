@@ -61,6 +61,7 @@ defmodule AutoApi.CommonData do
     |> Float.round(2)
   end
 
+  def convert_bin_to_integer(<<i_value::integer-8>>), do: i_value
   def convert_bin_to_integer(<<i_value::integer-16>>), do: i_value
   def convert_bin_to_integer(<<i_value::integer-32>>), do: i_value
 
