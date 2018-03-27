@@ -35,6 +35,20 @@ defmodule AutoApi.ChargingCommand do
         iex> AutoApi.ChargingCommand.execute(%AutoApi.ChargingState{}, command)
         {:state_changed, %AutoApi.ChargingState{charging: :charging_complete}}
 
+  Start/Stop Charging
+
+        iex> AutoApi.ChargingCommand.execute(%AutoApi.ChargingState{}, <<0x02, 0x00>>)
+        {:start_charging, %AutoApi.ChargingState{}}
+        iex> AutoApi.ChargingCommand.execute(%AutoApi.ChargingState{}, <<0x02, 0x01>>)
+        {:stop_charging, %AutoApi.ChargingState{}}
+
+  Set Charging Limit
+
+        iex> AutoApi.ChargingCommand.execute(%AutoApi.ChargingState{}, <<0x03, 0x00>>)
+        {:state, %AutoApi.ChargingState{}}
+        iex> AutoApi.ChargingCommand.execute(%AutoApi.ChargingState{}, <<0x03, 0x5A>>)
+        {:state_changed, %AutoApi.ChargingState{charge_limit: 90}}
+
   """
   @spec execute(ChargingState.t(), binary) :: {:state | :state_changed, ChargingState.t()}
   def execute(%ChargingState{} = state, <<0x00>>) do
@@ -43,6 +57,27 @@ defmodule AutoApi.ChargingCommand do
 
   def execute(%ChargingState{} = state, <<0x01, ds::binary>>) do
     new_state = ChargingState.from_bin(ds)
+
+    if new_state == state do
+      {:state, state}
+    else
+      {:state_changed, new_state}
+    end
+  end
+
+  @spec execute(ChargingState.t(), binary) ::
+          {:start_charging | :stop_charging, ChargingState.t()}
+  def execute(%ChargingState{} = state, <<0x02, charging_cmd>>) do
+    if charging_cmd == 0x00 do
+      {:start_charging, state}
+    else
+      {:stop_charging, state}
+    end
+  end
+
+  @spec execute(ChargingState.t(), binary) :: {:state | :state_changed, ChargingState.t()}
+  def execute(%ChargingState{} = state, <<0x03, charge_limit>>) do
+    new_state = %{state | charge_limit: charge_limit}
 
     if new_state == state do
       {:state, state}
