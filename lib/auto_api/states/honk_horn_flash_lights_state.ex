@@ -21,16 +21,18 @@ defmodule AutoApi.HonkHornFlashLightsState do
   Keeps HonkHornFlashLights state
   """
 
-  @type flashers :: :inactive | :emergency_flasher_active | :left_flasher_active | :right_flasher_active
+  @type flashers ::
+          :inactive | :emergency_flasher_active | :left_flasher_active | :right_flasher_active
   @doc """
   HonkHornFlashLights state
   """
-  defstruct flashers: :inactive
+  defstruct flashers: :inactive, properties: []
 
   use AutoApi.State, spec_file: "specs/honk_horn_flash_lights.json"
 
   @type t :: %__MODULE__{
           flashers: flashers,
+          properties: list(atom)
         }
 
   @doc """
@@ -54,14 +56,13 @@ defmodule AutoApi.HonkHornFlashLightsState do
   @doc """
   Parse state to bin
 
-    iex> AutoApi.HonkHornFlashLightsState.to_bin(%AutoApi.HonkHornFlashLightsState{flashers: :right_flasher_active})
+    iex> AutoApi.HonkHornFlashLightsState.to_bin(%AutoApi.HonkHornFlashLightsState{flashers: :right_flasher_active, properties: [:flashers]})
     <<1, 0, 1, 3>>
 
-    iex> AutoApi.HonkHornFlashLightsState.to_bin(%AutoApi.HonkHornFlashLightsState{flashers: :left_flasher_active})
+    iex> AutoApi.HonkHornFlashLightsState.to_bin(%AutoApi.HonkHornFlashLightsState{flashers: :left_flasher_active, properties: [:flashers]})
     <<1, 0, 1, 2>>
   """
   def to_bin(%__MODULE__{} = state) do
     parse_state_properties(state)
   end
 end
-

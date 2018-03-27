@@ -22,11 +22,11 @@ defmodule AutoApi.DoorLocksState do
   Door lock possible values: :unlocked, :locked
   """
 
-  defstruct door: []
+  defstruct door: [], properties: []
 
   use AutoApi.State, spec_file: "specs/door_locks.json"
 
-  @type t :: %__MODULE__{door: list(any)}
+  @type t :: %__MODULE__{door: list(any), properties: list(atom)}
 
   @doc """
   Build state based on binary value
@@ -41,7 +41,7 @@ defmodule AutoApi.DoorLocksState do
 
   @doc """
   Parse state to bin
-    iex> AutoApi.DoorLocksState.to_bin(%AutoApi.DoorLocksState{door: [%{door_location: :front_left, door_lock: :unlocked, door_position: :open}]})
+    iex> AutoApi.DoorLocksState.to_bin(%AutoApi.DoorLocksState{door: [%{door_location: :front_left, door_lock: :unlocked, door_position: :open}], properties: [:door]})
     <<0x01, 3::integer-16, 0x00, 0x01, 0x00>>
   """
   @spec to_bin(__MODULE__.t()) :: binary
