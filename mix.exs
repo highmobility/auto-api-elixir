@@ -23,7 +23,7 @@ defmodule AutoApi.Mixfile do
   # Type "mix help compile.app" for more information
   def application do
     # Specify extra applications you'll use from Erlang/Elixir
-    [extra_applications: [:logger, :public_key]]
+    [extra_applications: [:logger, :public_key, :poison]]
   end
 
   defp deps do
@@ -38,10 +38,12 @@ defmodule AutoApi.Mixfile do
   end
 
   defp package do
-    [ files: ["lib", "mix.exs", "README.md", "LICENSE", "specs"],
+    [
+      files: ["lib", "mix.exs", "README.md", "LICENSE", "specs"],
       maintainers: ["Milad Rastian"],
       licenses: ["GPL 3.0"],
-      links: %{"GitHub": "https://github.com/highmobility/hm-auto-api-elixir"} ]
+      links: %{GitHub: "https://github.com/highmobility/hm-auto-api-elixir"}
+    ]
   end
 
   defp description do
