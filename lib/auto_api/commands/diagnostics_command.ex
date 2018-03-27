@@ -52,14 +52,14 @@ defmodule AutoApi.DiagnosticsCommand do
   end
 
   @doc """
-  Converts VehicleLocation state to capability's state in binary
+  Converts DiagnosticsCommand state to capability's state in binary
 
-        iex> AutoApi.DiagnosticsCommand.state(%AutoApi.DiagnosticsState{engine_oil_temperature: 20,engine_rpm: 70, fuel_level: 99, mileage: 2000, speed: 100, washer_fluid_level: :low, tire: []})
-        <<1, 12, 0, 4, 0, 0, 0, 0, 8, 0, 4, 0, 0, 0, 0, 11, 0, 4, 0, 0, 0, 0, 7, 0, 4, 0, \
-        0, 0, 0, 13, 0, 2, 0, 0, 14, 0, 2, 0, 0, 2, 0, 2, 0, 20, 4, 0, 2, 0, 70, 6, 0, \
-        2, 0, 0, 5, 0, 1, 99, 1, 0, 2, 7, 208, 3, 0, 2, 0, 100, 9, 0, 1, 0>>
+        iex> properties = [:fuel_level, :mileage, :washer_fluid_level]
+        iex> AutoApi.DiagnosticsCommand.state(%AutoApi.DiagnosticsState{engine_oil_temperature: 20,engine_rpm: 70, fuel_level: 99, mileage: 2000, speed: 100, washer_fluid_level: :low, tire: [], properties: properties})
+        <<1, 5, 0, 1, 99, 1, 0, 2, 7, 208, 9, 0, 1, 0>>
 
-        iex> AutoApi.DiagnosticsCommand.state(%AutoApi.DiagnosticsState{engine_oil_temperature: 20,engine_rpm: 70, fuel_level: 99, mileage: 2000, speed: 100,washer_fluid_level: :low, tire: [%{tire_position: :front_left, tire_pressure: 1.0}]})
+        iex> properties = AutoApi.DiagnosticsCapability.properties |> Enum.into(%{}) |> Map.values()
+        iex> AutoApi.DiagnosticsCommand.state(%AutoApi.DiagnosticsState{engine_oil_temperature: 20,engine_rpm: 70, fuel_level: 99, mileage: 2000, speed: 100,washer_fluid_level: :low, tire: [%{tire_position: :front_left, tire_pressure: 1.0}], properties: properties})
         <<1, 12, 0, 4, 0, 0, 0, 0, 8, 0, 4, 0, 0, 0, 0, 11, 0, 4, 0, 0, 0, 0, 7, 0, 4, 0, \
         0, 0, 0, 13, 0, 2, 0, 0, 14, 0, 2, 0, 0, 2, 0, 2, 0, 20, 4, 0, 2, 0, 70, 6, 0, \
         2, 0, 0, 5, 0, 1, 99, 1, 0, 2, 7, 208, 3, 0, 2, 0, 100, 10, 0, 13, 0, 63, 128, \

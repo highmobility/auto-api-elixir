@@ -69,6 +69,7 @@ defmodule AutoApi.State do
         def parse_state_properties(state) do
           state
           |> Map.from_struct()
+          |> Map.take(state.properties)
           |> Enum.map(&do_parse_state_properties/1)
           |> :binary.list_to_bin()
         end
@@ -126,6 +127,10 @@ defmodule AutoApi.State do
 
             nil ->
               # list type
+              def parse_state_property(:properties, []) do
+                <<>>
+              end
+
               def parse_state_property(unquote(prop_name), []) do
                 <<>>
               end
