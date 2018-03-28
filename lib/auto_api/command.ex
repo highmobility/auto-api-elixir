@@ -17,7 +17,8 @@
 # Please inquire about commercial licensing options at
 # licensing@high-mobility.com
 defmodule AutoApi.Command do
-  @callback execute(struct, binary) :: {atom, struct}
+  @type execute_return_atom :: :state | :state_changed
+  @callback execute(struct, binary) :: {execute_return_atom, struct}
   @callback state(struct) :: binary
 
   @type capability_name ::
@@ -43,7 +44,7 @@ defmodule AutoApi.Command do
       iex> base_state = cap.state.base
       %AutoApi.ChargingState{}
       iex> AutoApi.Command.execute(base_state, cap.command, binary_command)
-      {:stop_charging, %AutoApi.ChargingState{}}
+      {:state_changed, %AutoApi.ChargingState{charging: :charging}}
 
       ie> binary_command = <<0x00, 0x20, 0x1, 0x01, 0x00, 0x00, 0x00>>
       ie> %{module: cap} = AutoApi.Command.meta_data(binary_command)
