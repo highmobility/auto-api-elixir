@@ -40,8 +40,8 @@ defmodule AutoApi.VehicleLocationCapability do
   @spec_file "specs/vehicle_location.json"
   @type command_type :: :vehicle_location | :get_vehicle_location
 
-  @command_module AutoApi.NotImplemented
-  @state_module AutoApi.NotImplemented
+  @command_module AutoApi.VehicleLocationCommand
+  @state_module AutoApi.VehicleLocationState
 
   use AutoApi.Capability
 end
