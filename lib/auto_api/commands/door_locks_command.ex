@@ -23,7 +23,7 @@ defmodule AutoApi.DoorLocksCommand do
   @behaviour AutoApi.Command
 
   alias AutoApi.DoorLocksState
-  alias AutoApi.ChargingCapability
+  alias AutoApi.DoorLocksCapability
 
   @doc """
   Parses the binary command and makes changes or returns the state
@@ -82,14 +82,23 @@ defmodule AutoApi.DoorLocksCommand do
   end
 
   @doc """
-  Converts command to binary format
-
-      ix> AutoApi.DoorLocksCommand.to_bin(:get_charge_state, [])
+  Returns binary command
+      iex> AutoApi.DoorLocksCommand.to_bin(:get_lock_state, [])
       <<0x00>>
+      iex> AutoApi.DoorLocksCommand.to_bin(:lock_unlock_doors, [:unlock])
+      <<0x02, 0x00>>
+      iex> AutoApi.DoorLocksCommand.to_bin(:lock_unlock_doors, [:lock])
+      <<0x02, 0x01>>
   """
-  @spec to_bin(DoorLocksCapability.command_type(), list(any())) :: binary
-  def to_bin(:get_charge_state, []) do
-    cmd_id = ChargingCapability.command_id(:get_charge_state)
+  @spec to_bin(DoorLocksCapability.command_type(), list(any)) :: binary
+  def to_bin(:get_lock_state, _args) do
+    cmd_id = DoorLocksCapability.command_id(:get_lock_state)
     <<cmd_id>>
+  end
+
+  def to_bin(:lock_unlock_doors, [new_lock_state]) when new_lock_state in [:lock, :unlock] do
+    cmd_id = DoorLocksCapability.command_id(:lock_unlock_doors)
+    lock_bin = if(new_lock_state == :unlock, do: 0x00, else: 0x01)
+    <<cmd_id, lock_bin>>
   end
 end
