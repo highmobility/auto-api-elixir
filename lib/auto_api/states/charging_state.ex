@@ -79,7 +79,7 @@ defmodule AutoApi.ChargingState do
     %AutoApi.ChargingState{charging: :plugged_in}
 
     iex> AutoApi.ChargingState.from_bin(<<0x01, 1::integer-16, 0x03, 0x0A, 4::integer-16, 99.1::float-32>>)
-    %AutoApi.ChargingState{charging: :charging_complete, charging_rate_kw: 99.1}
+    %AutoApi.ChargingState{charging: :charging_complete, charging_rate_kw: 99.099998}
 
     iex> AutoApi.ChargingState.from_bin(<<0x0D, 9::integer-16, 0x02, 0x12, 0x01, 0x0A, 0x10, 0x20, 0x05, 0x00, 0x00>>)
     %AutoApi.ChargingState{charge_timer: [%{day: 10, hour: 16, minute: 32, month: 1, second: 5, timer_type: :departure_time, utc_time_offset: 0, year: 18}]}

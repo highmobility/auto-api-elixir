@@ -71,8 +71,8 @@ defmodule AutoApi.CommonData do
 
   def convert_bin_to_float(<<f_value::float-32>>) do
     f_value
-    |> Float.ceil(3)
-    |> Float.round(2)
+    |> Float.ceil(7)
+    |> Float.round(6)
   end
 
   def convert_state_to_bin_integer(value, size) do
