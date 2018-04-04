@@ -31,7 +31,7 @@ defmodule AutoApi.DiagnosticsCommand do
         iex> AutoApi.DiagnosticsCommand.execute(%AutoApi.DiagnosticsState{}, <<0x00>>)
         {:state, %AutoApi.DiagnosticsState{}}
 
-        iex> command = <<0x01>> <> <<0x01, 2::integer-16, 100::integer-16>> <> <<0x03, 2::integer-16, 50::integer-16>>
+        iex> command = <<0x01>> <> <<0x01, 3::integer-16, 100::integer-24>> <> <<0x03, 2::integer-16, 50::integer-16>>
         iex> AutoApi.DiagnosticsCommand.execute(%AutoApi.DiagnosticsState{}, command)
         {:state_changed, %AutoApi.DiagnosticsState{mileage: 100, speed: 50}}
 
