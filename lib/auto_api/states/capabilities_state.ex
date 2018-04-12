@@ -23,15 +23,17 @@ defmodule AutoApi.CapabilitiesState do
   """
 
   defstruct diagnostics: [],
-            door_locks: []
+            door_locks: [],
+            dashboard_lights: []
 
   @behaviour AutoApi.State
 
-  #use AutoApi.State, spec_file: "specs/capabilities.json"
+  # use AutoApi.State, spec_file: "specs/capabilities.json"
 
   @type t :: %__MODULE__{
-          diagnostics: list(atom),
-          door_locks: list(atom),
+          diagnostics: list(AutoApi.DiagnosticsCapability.command_type()),
+          door_locks: list(AutoApi.DoorLocksCapability.command_type()),
+          dashboard_lights: list(AutoApi.DashboardLightsCapability.command_type())
         }
 
   @spec base :: t
@@ -44,7 +46,10 @@ defmodule AutoApi.CapabilitiesState do
   %AutoApi.CapabilitiesState{diagnostics: [:get_diagnostics_state, :diagnostics_state], door_locks: []}
   """
   @spec from_bin(binary) :: __MODULE__.t()
-  def from_bin(<<0x01, size :: integer-16, _cap :: binary-size(2), _commands :: binary-size(size), _rest :: binary>>) do
+  def from_bin(
+        <<0x01, size::integer-16, _cap::binary-size(2), _commands::binary-size(size),
+          _rest::binary>>
+      ) do
     raise "Not implemented!"
   end
 
@@ -61,8 +66,8 @@ defmodule AutoApi.CapabilitiesState do
     capabilities = load_capabilities()
 
     state
-    |> Map.from_struct
-    |> Enum.reduce(<<>>, fn(cap, acc) -> encode_capability(capabilities, cap, acc) end)
+    |> Map.from_struct()
+    |> Enum.reduce(<<>>, fn cap, acc -> encode_capability(capabilities, cap, acc) end)
   end
 
   defp encode_capability(_capabilities, {_cap_name, []}, encoded_binary), do: encoded_binary
@@ -73,18 +78,17 @@ defmodule AutoApi.CapabilitiesState do
     encoded_commands = Enum.reduce(commands, <<>>, &encode_command(cap_module, &1, &2))
     len = 2 + byte_size(encoded_commands)
 
-    encoded_binary <> <<0x01>> <> << len :: integer-16 >> <> cap_id <> encoded_commands
+    encoded_binary <> <<0x01>> <> <<len::integer-16>> <> cap_id <> encoded_commands
   end
 
   defp encode_command(cap_module, command_name, encoded_commands) do
     command_id = apply(cap_module, :command_id, [command_name])
 
-    encoded_commands <> << command_id :: 8 >>
+    encoded_commands <> <<command_id::8>>
   end
 
   defp load_capabilities() do
-    AutoApi.Capability.list_capabilities
-    |> Enum.map(fn ({_k, cap_module}) -> {apply(cap_module, :name, []), cap_module} end)
+    AutoApi.Capability.list_capabilities()
+    |> Enum.map(fn {_k, cap_module} -> {apply(cap_module, :name, []), cap_module} end)
   end
 end
-
