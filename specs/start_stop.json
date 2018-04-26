@@ -1,0 +1,41 @@
+{
+    "category": "digital_key", 
+    "id_lsb": 99, 
+    "name": "start_stop", 
+    "api_intro": 7, 
+    "message_types": [
+        {
+            "id": 0, 
+            "name": "get_start_stop_state"
+        }, 
+        {
+            "id": 1, 
+            "name": "start_stop_state"
+        }, 
+        {
+            "id": 2, 
+            "name": "activate_deactivate_start_stop"
+        }
+    ], 
+    "id_msb": 0, 
+    "pretty_state_name": "Start-Stop", 
+    "properties": [
+        {
+            "pretty_name": "Start-Stop", 
+            "values": [
+                {
+                    "name": "inactive", 
+                    "id": 0
+                }, 
+                {
+                    "name": "active", 
+                    "id": 1
+                }
+            ], 
+            "name": "start_stop", 
+            "type": "enum", 
+            "id": 1, 
+            "size": 1
+        }
+    ]
+}

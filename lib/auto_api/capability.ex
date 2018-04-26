@@ -38,7 +38,9 @@ defmodule AutoApi.Capability do
       if @raw_spec["pretty_name"] do
         @desc @raw_spec["pretty_name"]
       else
-        @desc @raw_spec["name"] |> String.split("_") |> Enum.map(&String.capitalize/1)
+        @desc @raw_spec["name"]
+              |> String.split("_")
+              |> Enum.map(&String.capitalize/1)
               |> Enum.join(" ")
       end
 
@@ -271,6 +273,7 @@ defmodule AutoApi.Capability do
     <<0x00, 0x38>> => AutoApi.NotificationsCapability,
     <<0x00, 0x52>> => AutoApi.OffroadCapability,
     <<0x00, 0x26>> => AutoApi.HonkHornFlashLightsCapability,
+    <<0x00, 0x63>> => AutoApi.StartStopCapability
   }
 
   @doc """
