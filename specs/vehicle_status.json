@@ -115,6 +115,40 @@
             "id": 11
         },
         {
+            "size": 4,
+            "type": "float",
+            "description": "The engine volume displacement in liters per IEEE 754 formatting",
+            "name": "engine_volume",
+            "id": 12
+        },
+        {
+            "size": 2,
+            "type": "integer",
+            "description": "The maximum engine torque in Nm",
+            "name": "engine_max_torque",
+            "id": 13
+        },
+        {
+            "type": "enum",
+            "size": 1,
+            "values": [
+                {
+                    "name": "manual",
+                    "id": 0
+                },
+                {
+                    "name": "automatic",
+                    "id": 1
+                },
+                {
+                    "name": "semi_automatic",
+                    "id": 2
+                }
+            ],
+            "id": 14,
+            "name": "gearbox"
+        },
+        {
             "type": "capability_state",
             "id": 153,
             "name": "state"
