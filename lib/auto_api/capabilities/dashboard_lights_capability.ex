@@ -36,7 +36,7 @@ defmodule AutoApi.DashboardLightsCapability do
   """
 
   @spec_file "specs/dashboard_lights.json"
-  @type command_type :: :get_firmware_version | :firmware_version
+  @type command_type :: :get_dashboard_lights | :dashboard_lights
 
   @command_module AutoApi.DashboardLightsCommand
   @state_module AutoApi.DashboardLightsState
