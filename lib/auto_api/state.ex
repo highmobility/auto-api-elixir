@@ -77,6 +77,11 @@ defmodule AutoApi.State do
         defp do_parse_state_properties({name, value}) do
           parse_state_property(name, value)
         end
+
+        # properties is especial item in state
+        def parse_state_property(:properties, []) do
+          <<>>
+        end
       end
 
     spec = Poison.decode!(File.read!(opts[:spec_file]))
@@ -127,10 +132,6 @@ defmodule AutoApi.State do
 
             nil ->
               # list type
-              def parse_state_property(:properties, []) do
-                <<>>
-              end
-
               def parse_state_property(unquote(prop_name), []) do
                 <<>>
               end

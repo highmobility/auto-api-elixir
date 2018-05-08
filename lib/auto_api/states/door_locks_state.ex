@@ -22,11 +22,33 @@ defmodule AutoApi.DoorLocksState do
   Door lock possible values: :unlocked, :locked
   """
 
-  defstruct door: [], properties: []
+  alias AutoApi.CommonData
+  defstruct door: [], inside_door_lock: [], outside_door_lock: [], properties: []
 
   use AutoApi.State, spec_file: "specs/door_locks.json"
 
-  @type t :: %__MODULE__{door: list(any), properties: list(atom)}
+  @type door :: %{
+          door_location: CommonData.location(),
+          door_position: CommonData.position(),
+          door_lock: CommonData.lock()
+        }
+
+  @type inside_door_lock :: %{
+          door_location: CommonData.location(),
+          inside_lock: CommonData.lock()
+        }
+
+  @type outside_lock :: %{
+          door_location: CommonData.location(),
+          outside_lock: CommonData.lock()
+        }
+
+  @type t :: %__MODULE__{
+          door: list(door),
+          inside_door_lock: list(inside_door_lock),
+          outside_door_lock: list(outside_lock),
+          properties: list(atom)
+        }
 
   @doc """
   Build state based on binary value

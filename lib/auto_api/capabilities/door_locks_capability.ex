@@ -35,8 +35,10 @@ defmodule AutoApi.DoorLocksCapability do
       :lock_state
       iex> D.command_name(0x02)
       :lock_unlock_doors
+      iex> length(D.properties)
+      3
       iex> List.last(D.properties)
-      {0x01, :door}
+      {0x03, :outside_door_lock}
   """
 
   @spec_file "specs/door_locks.json"

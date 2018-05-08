@@ -33,6 +33,7 @@ defmodule AutoApi.Capability do
       @sub_capabilities []
 
       @raw_spec Poison.decode!(File.read!(@spec_file))
+      @external_resource @spec_file
       @identifier <<@raw_spec["id_msb"], @raw_spec["id_lsb"]>>
       @name String.to_atom(@raw_spec["name"])
       if @raw_spec["pretty_name"] do
