@@ -34,9 +34,9 @@ defmodule AutoApi.DiagnosticsCapability do
       iex> D.command_name(0x01)
       :diagnostics_state
       iex> length(D.properties)
-      14
+      23
       iex> List.last(D.properties)
-      {0x0e, :distance_since_start}
+      {23, :wheel_based_speed}
   """
 
   @spec_file "specs/diagnostics.json"

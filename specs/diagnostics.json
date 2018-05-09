@@ -16,7 +16,7 @@
     "id_msb": 0,
     "properties": [
         {
-            "size": 2,
+            "size": 3,
             "type": "integer",
             "description": "The car mileage (odometer) in km",
             "name": "mileage",
@@ -32,17 +32,18 @@
         {
             "size": 2,
             "type": "integer",
-            "description": "The car speed on km/h, whereas can be negative",
+            "description": "The vehicle speed in km/h, whereas can be negative",
             "name": "speed",
             "id": 3
         },
         {
             "pretty_name": "Engine RPM",
-            "description": "Engine RPM (revolutions per minute)",
             "name": "engine_rpm",
+            "title_case_name": "engineRPM",
+            "size": 2,
             "type": "integer",
             "id": 4,
-            "size": 2
+            "description": "Engine RPM (revolutions per minute)"
         },
         {
             "size": 1,
@@ -117,7 +118,7 @@
                 {
                     "size": 4,
                     "type": "float",
-                    "description": "Tire pressure in celsius formatted in 4-bytes per IEEE 754",
+                    "description": "Tire pressure in BAR formatted in 4-bytes per IEEE 754",
                     "name": "tire_pressure"
                 },
                 {
@@ -127,15 +128,17 @@
                     "name": "tire_temperature"
                 },
                 {
-                    "size": 4,
+                    "size": 2,
                     "type": "integer",
                     "description": "The RPM measured at this wheel",
+                    "title_case_name": "wheelRPM",
                     "name": "wheel_rpm"
                 }
             ],
+            "multiple": true,
             "id": 10,
             "name": "tire",
-            "size": 13
+            "size": 11
         },
         {
             "size": 4,
@@ -164,7 +167,89 @@
             "description": "The distance driven in km since trip start",
             "name": "distance_since_start",
             "id": 14
+        },
+        {
+            "size": 4,
+            "type": "float",
+            "description": "The fuel volume measured in liters",
+            "name": "fuel_volume",
+            "id": 15
+        },
+        {
+            "pretty_name": "Anti-lock braking system (ABS)",
+            "values": [
+                {
+                    "name": "inactive",
+                    "id": 0
+                },
+                {
+                    "name": "active",
+                    "id": 1
+                }
+            ],
+            "name": "anti_lock_braking",
+            "type": "enum",
+            "id": 16,
+            "size": 1
+        },
+        {
+            "size": 2,
+            "type": "integer",
+            "description": "Engine coolant temperature in Celsius, whereas can be negative",
+            "name": "engine_coolant_temperature",
+            "id": 17
+        },
+        {
+            "size": 4,
+            "type": "float",
+            "description": "The accumulated time of engine operation per IEEE 754 formatting",
+            "name": "engine_total_operating_hours",
+            "id": 18
+        },
+        {
+            "size": 4,
+            "type": "float",
+            "description": "The accumulated lifespan fuel consumption in liters per IEEE 754 formatting",
+            "name": "engine_total_fuel_consumption",
+            "id": 19
+        },
+        {
+            "type": "enum",
+            "size": 1,
+            "values": [
+                {
+                    "name": "low",
+                    "id": 0
+                },
+                {
+                    "name": "filled",
+                    "id": 1
+                }
+            ],
+            "id": 20,
+            "name": "brake_fluid_level"
+        },
+        {
+            "size": 1,
+            "type": "integer",
+            "description": "Current engine torque percentage between 0-100",
+            "name": "engine_torque",
+            "id": 21
+        },
+        {
+            "size": 1,
+            "type": "integer",
+            "description": "Current engine load percentage between 0-100",
+            "name": "engine_load",
+            "id": 22
+        },
+        {
+            "size": 2,
+            "type": "integer",
+            "description": "The vehicle speed in km/h measured at the wheel base, whereas can be negative",
+            "name": "wheel_based_speed",
+            "id": 23
         }
     ],
-    "api_update": 5
+    "api_update": 7
 }
