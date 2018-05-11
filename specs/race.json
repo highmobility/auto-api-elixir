@@ -1,9 +1,19 @@
 {
     "category": "diagnostics",
-    "id_msb": 0,
     "id_lsb": 87,
     "name": "race",
     "api_intro": 5,
+    "message_types": [
+        {
+            "id": 0,
+            "name": "get_race_state"
+        },
+        {
+            "id": 1,
+            "name": "race_state"
+        }
+    ],
+    "id_msb": 0,
     "properties": [
         {
             "items": [
@@ -38,6 +48,7 @@
                 }
             ],
             "size": 5,
+            "multiple": true,
             "id": 1,
             "name": "acceleration"
         },
@@ -91,6 +102,7 @@
             "id": 8
         },
         {
+            "pretty_name": "ESP (Electronic Stability Program) intervention",
             "values": [
                 {
                     "name": "inactive",
@@ -101,7 +113,6 @@
                     "id": 1
                 }
             ],
-            "description": "ESP (Electronic Stability Program) intervention",
             "name": "electronic_stability_program",
             "type": "enum",
             "id": 9,
@@ -193,16 +204,71 @@
             "description": "The brake pedal position between 0-100%, wheras 100% is full brakes",
             "name": "brake_pedal_position",
             "id": 13
-        }
-    ],
-    "message_types": [
-        {
-            "id": 0,
-            "name": "get_race_state"
         },
         {
-            "id": 1,
-            "name": "race_state"
+            "type": "enum",
+            "size": 1,
+            "values": [
+                {
+                    "name": "inactive",
+                    "id": 0
+                },
+                {
+                    "name": "active",
+                    "id": 1
+                }
+            ],
+            "id": 14,
+            "name": "brake_pedal_switch"
+        },
+        {
+            "type": "enum",
+            "size": 1,
+            "values": [
+                {
+                    "name": "inactive",
+                    "id": 0
+                },
+                {
+                    "name": "active",
+                    "id": 1
+                }
+            ],
+            "id": 15,
+            "name": "clutch_pedal_switch"
+        },
+        {
+            "type": "enum",
+            "size": 1,
+            "values": [
+                {
+                    "name": "inactive",
+                    "id": 0
+                },
+                {
+                    "name": "active",
+                    "id": 1
+                }
+            ],
+            "id": 16,
+            "name": "accelerator_pedal_idle_switch"
+        },
+        {
+            "type": "enum",
+            "size": 1,
+            "values": [
+                {
+                    "name": "inactive",
+                    "id": 0
+                },
+                {
+                    "name": "active",
+                    "id": 1
+                }
+            ],
+            "id": 17,
+            "name": "accelerator_pedal_kickdown_switch"
         }
-    ]
+    ],
+    "api_update": 7
 }

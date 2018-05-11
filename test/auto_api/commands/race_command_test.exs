@@ -16,32 +16,7 @@
 #
 # Please inquire about commercial licensing options at
 # licensing@high-mobility.com
-defmodule AutoApi.RaceCapability do
-  @moduledoc """
-  Basic settings for Race Capability
-
-      iex> alias AutoApi.RaceCapability, as: R
-      iex> R.identifier
-      <<0x00, 0x57>>
-      iex> R.name
-      :race
-      iex> R.description
-      "Race"
-      iex> R.command_name(0x00)
-      :get_race_state
-      iex> R.command_name(0x01)
-      :race_state
-      iex> length(R.properties)
-      17
-      iex> List.last(R.properties)
-      {17, :accelerator_pedal_kickdown_switch}
-  """
-
-  @spec_file "specs/race.json"
-  @type command_type :: :get_race_state | :race_state
-
-  @command_module AutoApi.RaceCommand
-  @state_module AutoApi.RaceState
-
-  use AutoApi.Capability
+defmodule AutoApi.RaceCommandTest do
+  use ExUnit.Case
+  doctest AutoApi.RaceCommand
 end
