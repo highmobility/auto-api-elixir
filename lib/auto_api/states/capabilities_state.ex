@@ -24,7 +24,8 @@ defmodule AutoApi.CapabilitiesState do
 
   defstruct diagnostics: [],
             door_locks: [],
-            dashboard_lights: []
+            dashboard_lights: [],
+            race: []
 
   @behaviour AutoApi.State
 
@@ -33,7 +34,8 @@ defmodule AutoApi.CapabilitiesState do
   @type t :: %__MODULE__{
           diagnostics: list(AutoApi.DiagnosticsCapability.command_type()),
           door_locks: list(AutoApi.DoorLocksCapability.command_type()),
-          dashboard_lights: list(AutoApi.DashboardLightsCapability.command_type())
+          dashboard_lights: list(AutoApi.DashboardLightsCapability.command_type()),
+          race: list(AutoApi.RaceCapability.command_type())
         }
 
   @spec base :: t
