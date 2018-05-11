@@ -1,0 +1,195 @@
+{
+    "category": "heavy_duty",
+    "id_msb": 0,
+    "id_lsb": 100,
+    "name": "tachograph",
+    "api_intro": 7,
+    "properties": [
+        {
+            "items": [
+                {
+                    "size": 1,
+                    "type": "integer",
+                    "description": "The driver number",
+                    "name": "driver_number"
+                },
+                {
+                    "type": "enum",
+                    "values": [
+                        {
+                            "name": "resting",
+                            "id": 0
+                        },
+                        {
+                            "name": "driver_available",
+                            "id": 1
+                        },
+                        {
+                            "name": "working",
+                            "id": 2
+                        },
+                        {
+                            "name": "driving",
+                            "id": 3
+                        }
+                    ],
+                    "name": "working_state",
+                    "size": 1
+                }
+            ],
+            "size": 2,
+            "multiple": true,
+            "id": 1,
+            "name": "driver_working_state"
+        },
+        {
+            "items": [
+                {
+                    "size": 1,
+                    "type": "integer",
+                    "description": "The driver number",
+                    "name": "driver_number"
+                },
+                {
+                    "type": "enum",
+                    "values": [
+                        {
+                            "name": "normal",
+                            "id": 0
+                        },
+                        {
+                            "pretty_name": "15 minutes before 4\u00bd hours",
+                            "name": "15_min_before_4",
+                            "id": 1
+                        },
+                        {
+                            "pretty_name": "4\u00bd hours reached",
+                            "name": "4_reached",
+                            "id": 2
+                        },
+                        {
+                            "pretty_name": "15 minutes before 9 hours",
+                            "name": "15_min_before_9",
+                            "id": 3
+                        },
+                        {
+                            "pretty_name": "9 hours reached",
+                            "name": "9_reached",
+                            "id": 4
+                        },
+                        {
+                            "pretty_name": "15 minutes before 16 hours",
+                            "name": "15_min_before_16",
+                            "id": 5
+                        },
+                        {
+                            "pretty_name": "16 hours reached",
+                            "name": "16_reached",
+                            "id": 6
+                        }
+                    ],
+                    "name": "time_state",
+                    "size": 1
+                }
+            ],
+            "size": 2,
+            "multiple": true,
+            "id": 2,
+            "name": "driver_time_state"
+        },
+        {
+            "items": [
+                {
+                    "size": 1,
+                    "type": "integer",
+                    "description": "The driver number",
+                    "name": "driver_number"
+                },
+                {
+                    "type": "enum",
+                    "values": [
+                        {
+                            "name": "not_present",
+                            "id": 0
+                        },
+                        {
+                            "name": "present",
+                            "id": 1
+                        }
+                    ],
+                    "name": "card",
+                    "size": 1
+                }
+            ],
+            "size": 2,
+            "multiple": true,
+            "id": 3,
+            "name": "driver_card"
+        },
+        {
+            "type": "enum",
+            "size": 1,
+            "values": [
+                {
+                    "name": "not_detected",
+                    "id": 0
+                },
+                {
+                    "name": "detected",
+                    "id": 1
+                }
+            ],
+            "id": 4,
+            "name": "vehicle_motion"
+        },
+        {
+            "type": "enum",
+            "size": 1,
+            "values": [
+                {
+                    "name": "no_overspeed",
+                    "id": 0
+                },
+                {
+                    "name": "overspeed",
+                    "id": 1
+                }
+            ],
+            "id": 5,
+            "name": "vehicle_overspeed"
+        },
+        {
+            "type": "enum",
+            "size": 1,
+            "values": [
+                {
+                    "name": "forward",
+                    "id": 0
+                },
+                {
+                    "name": "reverse",
+                    "id": 1
+                }
+            ],
+            "id": 6,
+            "name": "vehicle_direction"
+        },
+        {
+            "size": 2,
+            "type": "integer",
+            "description": "The tachograph vehicle speed in km/h",
+            "name": "vehicle_speed",
+            "id": 7
+        }
+    ],
+    "message_types": [
+        {
+            "id": 0,
+            "name": "get_tachograph_state"
+        },
+        {
+            "id": 1,
+            "name": "tachograph_state"
+        }
+    ]
+}
