@@ -16,34 +16,7 @@
 #
 # Please inquire about commercial licensing options at
 # licensing@high-mobility.com
-defmodule AutoApi.FuelingCapability do
-  @moduledoc """
-  Basic settings for Fueling Capability
-
-      iex> alias AutoApi.FuelingCapability, as: F
-      iex> F.identifier
-      <<0x00, 0x40>>
-      iex> F.name
-      :fueling
-      iex> F.description
-      "Fueling"
-      iex> F.command_name(0x00)
-      :get_gas_flap_state
-      iex> F.command_name(0x01)
-      :gas_flap_state
-      iex> F.command_name(0x02)
-      :open_gas_flap
-      iex> length(F.properties)
-      1
-      iex> F.properties
-      [{1, :gas_flap}]
-  """
-
-  @spec_file "specs/fueling.json"
-  @type command_type :: :get_gas_flap_state | :gas_flap_state | :open_gas_flap
-
-  @command_module AutoApi.FuelingCommand
-  @state_module AutoApi.FuelingState
-
-  use AutoApi.Capability
+defmodule AutoApi.FuelingStateTest do
+  use ExUnit.Case
+  doctest AutoApi.FuelingState
 end
