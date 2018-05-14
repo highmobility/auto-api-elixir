@@ -16,34 +16,8 @@
 #
 # Please inquire about commercial licensing options at
 # licensing@high-mobility.com
-defmodule AutoApi.TrunkCapability do
-  @moduledoc """
-  Basic settings for Trunk Capability
-
-      iex> alias AutoApi.TrunkCapability, as: T
-      iex> T.identifier
-      <<0x00, 0x21>>
-      iex> T.name
-      :trunk
-      iex> T.description
-      "Trunk"
-      iex> T.command_name(0x00)
-      :get_trunk_state
-      iex> T.command_name(0x01)
-      :trunk_state
-      iex> T.command_name(0x02)
-      :open_close_trunk
-      iex> length(T.properties)
-      2
-      iex> T.properties
-      [{1, :trunk_lock}, {2, :trunk_position}]
-  """
-
-  @spec_file "specs/trunk.json"
-  @type command_type :: :get_trunk_state | :trunk_state | :open_close_trunk
-
-  @command_module AutoApi.TrunkCommand
-  @state_module AutoApi.TrunkState
-
-  use AutoApi.Capability
+defmodule AutoApi.TrunkStateTest do
+  use ExUnit.Case
+  alias AutoApi.TrunkState
+  doctest TrunkState
 end
