@@ -26,7 +26,8 @@ defmodule AutoApi.CapabilitiesState do
             door_locks: [],
             dashboard_lights: [],
             race: [],
-            tachograph: []
+            tachograph: [],
+            trunk: []
 
   @behaviour AutoApi.State
 
@@ -37,7 +38,8 @@ defmodule AutoApi.CapabilitiesState do
           door_locks: list(AutoApi.DoorLocksCapability.command_type()),
           dashboard_lights: list(AutoApi.DashboardLightsCapability.command_type()),
           race: list(AutoApi.RaceCapability.command_type()),
-          tachograph: list(AutoApi.TachographCapability.command_type())
+          tachograph: list(AutoApi.TachographCapability.command_type()),
+          trunk: list(AutoApi.TrunkCapability.command_type())
         }
 
   @spec base :: t
