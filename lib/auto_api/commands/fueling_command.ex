@@ -33,7 +33,7 @@ defmodule AutoApi.FuelingCommand do
 
         iex> command = <<0x01>> <> <<0x01, 1::integer-16, 0x01>>
         iex> AutoApi.FuelingCommand.execute(%AutoApi.FuelingState{}, command)
-        {:state_changed, %AutoApi.FuelingState{gas_flap: :opened}}
+        {:state_changed, %AutoApi.FuelingState{gas_flap: :open}}
 
         iex> AutoApi.FuelingCommand.execute(%AutoApi.FuelingState{}, <<0x02>>)
         {:state_changed, %AutoApi.FuelingState{gas_flap: :open}}

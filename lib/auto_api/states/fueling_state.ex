@@ -38,7 +38,7 @@ defmodule AutoApi.FuelingState do
     %AutoApi.FuelingState{}
 
     iex> AutoApi.FuelingState.from_bin(<<0x01, 1::integer-16, 0x01>>)
-    %AutoApi.FuelingState{gas_flap: :opened}
+    %AutoApi.FuelingState{gas_flap: :open}
 
   """
   @spec from_bin(binary) :: __MODULE__.t()
@@ -51,7 +51,7 @@ defmodule AutoApi.FuelingState do
     iex> AutoApi.FuelingState.to_bin(%AutoApi.FuelingState{properties: [:gas_flap]})
     <<1, 1::integer-16, 0>>
 
-    iex> AutoApi.FuelingState.to_bin(%AutoApi.FuelingState{gas_flap: :opened, properties: [:gas_flap]})
+    iex> AutoApi.FuelingState.to_bin(%AutoApi.FuelingState{gas_flap: :open, properties: [:gas_flap]})
     <<1, 1::integer-16, 1>>
   """
   @spec to_bin(__MODULE__.t()) :: binary
