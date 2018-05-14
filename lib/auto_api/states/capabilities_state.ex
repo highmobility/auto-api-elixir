@@ -28,7 +28,8 @@ defmodule AutoApi.CapabilitiesState do
             race: [],
             tachograph: [],
             trunk: [],
-            fueling: []
+            fueling: [],
+            start_stop: []
 
   @behaviour AutoApi.State
 
@@ -41,7 +42,8 @@ defmodule AutoApi.CapabilitiesState do
           race: list(AutoApi.RaceCapability.command_type()),
           tachograph: list(AutoApi.TachographCapability.command_type()),
           trunk: list(AutoApi.TrunkCapability.command_type()),
-          fueling: list(AutoApi.FuelingCapability.command_type())
+          fueling: list(AutoApi.FuelingCapability.command_type()),
+          start_stop: list(AutoApi.StartStopCapability.command_type())
         }
 
   @spec base :: t

@@ -42,7 +42,7 @@ defmodule AutoApi.StartStopCapability do
           :get_start_stop_state | :start_stop_state | :activate_deactivate_start_stop
 
   @command_module AutoApi.NotImplemented
-  @state_module AutoApi.NotImplemented
+  @state_module AutoApi.StartStopState
 
   use AutoApi.Capability
 end
