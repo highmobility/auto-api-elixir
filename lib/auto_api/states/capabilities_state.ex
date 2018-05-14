@@ -27,7 +27,8 @@ defmodule AutoApi.CapabilitiesState do
             dashboard_lights: [],
             race: [],
             tachograph: [],
-            trunk: []
+            trunk: [],
+            fueling: []
 
   @behaviour AutoApi.State
 
@@ -39,7 +40,8 @@ defmodule AutoApi.CapabilitiesState do
           dashboard_lights: list(AutoApi.DashboardLightsCapability.command_type()),
           race: list(AutoApi.RaceCapability.command_type()),
           tachograph: list(AutoApi.TachographCapability.command_type()),
-          trunk: list(AutoApi.TrunkCapability.command_type())
+          trunk: list(AutoApi.TrunkCapability.command_type()),
+          fueling: list(AutoApi.FuelingCapability.command_type())
         }
 
   @spec base :: t
