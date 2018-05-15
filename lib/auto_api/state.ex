@@ -250,8 +250,7 @@ defmodule AutoApi.State do
 
             "capability_state" ->
               def parse_bin_property(unquote(prop["id"]), _data) do
-                Logger.error("parse_bin_property not implemented for capability_state")
-                {String.to_atom(unquote(prop["name"])), []}
+                throw :not_implement
               end
 
               def parse_state_property(unquote(prop_name), states) do
