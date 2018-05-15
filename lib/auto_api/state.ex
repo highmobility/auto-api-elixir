@@ -258,7 +258,7 @@ defmodule AutoApi.State do
                 |> Enum.map(fn state ->
                   mod = state.__struct__
 
-                  body = mod.identifier <> <<0>> <> mod.to_bin(state)
+                  body = mod.identifier <> <<1>> <> mod.to_bin(state)
 
                   <<unquote(prop_id), byte_size(body)::integer-16>> <> body
                 end)
