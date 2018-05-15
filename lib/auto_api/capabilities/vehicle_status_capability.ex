@@ -40,7 +40,7 @@ defmodule AutoApi.VehicleStatusCapability do
   @spec_file "specs/vehicle_status.json"
   @type command_type :: :get_vehicle_status | :vehicle_status
 
-  @command_module AutoApi.NotImplemented
+  @command_module AutoApi.VehicleStatusCommand
   @state_module AutoApi.VehicleStatusState
 
   use AutoApi.Capability
