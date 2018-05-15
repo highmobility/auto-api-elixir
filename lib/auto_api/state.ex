@@ -36,8 +36,15 @@ defmodule AutoApi.State do
         alias AutoApi.CommonData
         @behaviour AutoApi.State
         @spec base :: t
+        @identifier __MODULE__
+                    |> Atom.to_string()
+                    |> String.replace("State", "Capability")
+                    |> String.to_atom()
+                    |> apply(:identifier, [])
         def base, do: %__MODULE__{}
         require Logger
+
+        def identifier, do: @identifier
 
         def parse_bin_properties(<<id, size::integer-16, data::binary-size(size)>>, state) do
           do_parse_bin_properties(id, data, state)
@@ -227,6 +234,34 @@ defmodule AutoApi.State do
                   end)
 
                 {unquote(prop_name), Enum.into(result, %{})}
+              end
+
+            "string" ->
+              def parse_bin_property(unquote(prop["id"]), data) do
+                value = data
+
+                {String.to_atom(unquote(prop["name"])), value}
+              end
+
+              def parse_state_property(unquote(prop_name), data) do
+                head = <<unquote(prop_id), byte_size(data)::integer-16>>
+                head <> data
+              end
+
+            "capability_state" ->
+              def parse_bin_property(unquote(prop["id"]), _data) do
+                throw :not_implement
+              end
+
+              def parse_state_property(unquote(prop_name), states) do
+                states
+                |> Enum.map(fn state ->
+                  mod = state.__struct__
+
+                  body = mod.identifier <> mod.to_bin(state)
+
+                  <<unquote(prop_id), byte_size(body)::integer-16>> <> body
+                end)
               end
 
             _ ->

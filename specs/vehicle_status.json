@@ -150,9 +150,10 @@
         },
         {
             "type": "capability_state",
+            "multiple": true,
             "id": 153,
             "name": "state"
         }
     ],
-    "api_update": 5
+    "api_update": 7
 }

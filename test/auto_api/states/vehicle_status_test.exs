@@ -16,32 +16,7 @@
 #
 # Please inquire about commercial licensing options at
 # licensing@high-mobility.com
-defmodule AutoApi.VehicleStatusCapability do
-  @moduledoc """
-  Basic settings for Vehicle Status Capability
-
-      iex> alias AutoApi.VehicleStatusCapability, as: VS
-      iex> VS.identifier
-      <<0x00, 0x11>>
-      iex> VS.name
-      :vehicle_status
-      iex> VS.description
-      "Vehicle Status"
-      iex> VS.command_name(0x00)
-      :get_vehicle_status
-      iex> VS.command_name(0x01)
-      :vehicle_status
-      iex> length(VS.properties)
-      15
-      iex> List.last(VS.properties)
-      {153, :state}
-  """
-
-  @spec_file "specs/vehicle_status.json"
-  @type command_type :: :get_vehicle_status | :vehicle_status
-
-  @command_module AutoApi.NotImplemented
-  @state_module AutoApi.VehicleStatusState
-
-  use AutoApi.Capability
+defmodule AutoApi.VehicleStatusStateTest do
+  use ExUnit.Case
+  doctest AutoApi.VehicleStatusState
 end
