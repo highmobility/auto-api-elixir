@@ -30,7 +30,8 @@ defmodule AutoApi.CapabilitiesState do
             trunk: [],
             fueling: [],
             start_stop: [],
-            vehicle_status: []
+            vehicle_status: [],
+            vehicle_time: []
 
   @behaviour AutoApi.State
 
@@ -45,7 +46,8 @@ defmodule AutoApi.CapabilitiesState do
           trunk: list(AutoApi.TrunkCapability.command_type()),
           fueling: list(AutoApi.FuelingCapability.command_type()),
           start_stop: list(AutoApi.StartStopCapability.command_type()),
-          vehicle_status: list(AutoApi.VehicleStatusState.command_type())
+          vehicle_status: list(AutoApi.VehicleStatusState.command_type()),
+          vehicle_time: list(AutoApi.VehicleTimeCapability.command_type())
         }
 
   @spec base :: t

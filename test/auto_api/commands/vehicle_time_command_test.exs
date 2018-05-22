@@ -16,30 +16,7 @@
 #
 # Please inquire about commercial licensing options at
 # licensing@high-mobility.com
-defmodule AutoApi.VehicleTimeCapability do
-  @moduledoc """
-  Basic settings for Vehicle Time Capability
-
-      iex> alias AutoApi.VehicleTimeCapability, as: VT
-      iex> VT.identifier
-      <<0x00, 0x50>>
-      iex> VT.name
-      :vehicle_time
-      iex> VT.description
-      "Vehicle Time"
-      iex> VT.command_name(0x00)
-      :get_vehicle_time
-      iex> VT.command_name(0x01)
-      :vehicle_time
-      iex> length(VT.properties)
-      1
-  """
-
-  @spec_file "specs/vehicle_time.json"
-  @type command_type :: :vehicle_time | :get_vehicle_time
-
-  @command_module AutoApi.VehicleTimeCommand
-  @state_module AutoApi.VehicleTimeState
-
-  use AutoApi.Capability
+defmodule AutoApi.VehicleTimeCommandTest do
+  use ExUnit.Case
+  doctest AutoApi.VehicleTimeCommand
 end

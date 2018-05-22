@@ -47,6 +47,9 @@ defmodule AutoApi.VehicleTimeState do
     iex> AutoApi.VehicleTimeState.from_bin(<<0x01, 8::integer-16, 94, 12, 1, 12, 0, 59, -30::integer-signed-16>>)
     %AutoApi.VehicleTimeState{vehicle_time: %{year: 94, month: 12, day: 1, hour: 12, minute: 0, second: 59, utc_time_offset: 65506}}
 
+    iex> AutoApi.VehicleTimeState.from_bin(<<0x01, 8::integer-16, 94, 12, 1, 12, 0, 59, 30::integer-16>>)
+    %AutoApi.VehicleTimeState{vehicle_time: %{year: 94, month: 12, day: 1, hour: 12, minute: 0, second: 59, utc_time_offset: 30}}
+
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
