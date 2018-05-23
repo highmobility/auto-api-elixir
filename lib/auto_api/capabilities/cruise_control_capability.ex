@@ -41,7 +41,7 @@ defmodule AutoApi.CruiseControlCapability do
   @type command_type ::
           :get_cruise_control_state | :cruise_control_state | :activate_deactivate_cruise_control
 
-  @command_module AutoApi.NotImplemented
+  @command_module AutoApi.CruiseControlCommand
   @state_module AutoApi.CruiseControlState
 
   use AutoApi.Capability
