@@ -85,6 +85,11 @@ defmodule AutoApi.State do
           parse_state_property(name, value)
         end
 
+        # don't convert data to binary data if it's nil
+        def parse_state_property(name, nil) do
+          <<>>
+        end
+
         # properties is especial item in state
         def parse_state_property(:properties, []) do
           <<>>

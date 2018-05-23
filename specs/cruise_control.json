@@ -1,0 +1,95 @@
+{
+    "category": "chassis",
+    "id_msb": 0,
+    "id_lsb": 98,
+    "name": "cruise_control",
+    "api_intro": 7,
+    "properties": [
+        {
+            "type": "enum",
+            "size": 1,
+            "values": [
+                {
+                    "name": "inactive",
+                    "id": 0
+                },
+                {
+                    "name": "active",
+                    "id": 1
+                }
+            ],
+            "id": 1,
+            "name": "cruise_control"
+        },
+        {
+            "type": "enum",
+            "size": 1,
+            "values": [
+                {
+                    "name": "not_set",
+                    "id": 0
+                },
+                {
+                    "name": "higher_speed_requested",
+                    "id": 1
+                },
+                {
+                    "name": "lower_speed_requested",
+                    "id": 2
+                },
+                {
+                    "name": "speed_fixed",
+                    "id": 3
+                }
+            ],
+            "id": 2,
+            "name": "limiter"
+        },
+        {
+            "size": 2,
+            "type": "integer",
+            "description": "The target speed in km/h",
+            "name": "target_speed",
+            "id": 3
+        },
+        {
+            "pretty_name": "Adaptive Cruise Control",
+            "values": [
+                {
+                    "name": "inactive",
+                    "id": 0
+                },
+                {
+                    "name": "active",
+                    "id": 1
+                }
+            ],
+            "name": "acc",
+            "type": "enum",
+            "id": 4,
+            "size": 1
+        },
+        {
+            "pretty_name": "Adaptive Cruise Control target speed",
+            "description": "The target speed in km/h of the Adaptive Cruise Control",
+            "name": "acc_target_speed",
+            "type": "integer",
+            "id": 5,
+            "size": 2
+        }
+    ],
+    "message_types": [
+        {
+            "id": 0,
+            "name": "get_cruise_control_state"
+        },
+        {
+            "id": 1,
+            "name": "cruise_control_state"
+        },
+        {
+            "id": 2,
+            "name": "activate_deactivate_cruise_control"
+        }
+    ]
+}
