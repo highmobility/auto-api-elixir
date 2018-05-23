@@ -66,7 +66,7 @@ defmodule AutoApi.FuelingCommand do
   @doc """
   Converts DoorLocksCommand state to capability's state in binary
 
-        iex> AutoApi.FuelingCommand.state(%AutoApi.FuelingState{properties: [:gas_flap]})
+        iex> AutoApi.FuelingCommand.state(%AutoApi.FuelingState{gas_flap: :closed, properties: [:gas_flap]})
         <<1, 1, 0, 1, 0>>
   """
   @spec state(FuelingState.t()) :: binary

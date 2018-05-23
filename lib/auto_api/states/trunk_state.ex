@@ -22,13 +22,13 @@ defmodule AutoApi.TrunkState do
   """
 
   alias AutoApi.CommonData
-  defstruct trunk_lock: :locked, trunk_position: :closed, properties: []
+  defstruct trunk_lock: nil, trunk_position: nil, properties: []
 
   use AutoApi.State, spec_file: "specs/trunk.json"
 
   @type t :: %__MODULE__{
-          trunk_lock: CommonData.lock(),
-          trunk_position: CommonData.position(),
+          trunk_lock: CommonData.lock() | nil,
+          trunk_position: CommonData.position() | nil,
           properties: list(atom)
         }
 
@@ -45,7 +45,7 @@ defmodule AutoApi.TrunkState do
 
   @doc """
   Parse state to bin
-    iex> AutoApi.TrunkState.to_bin(%AutoApi.TrunkState{properties: [:trunk_lock, :trunk_position]})
+    iex> AutoApi.TrunkState.to_bin(%AutoApi.TrunkState{trunk_lock: :locked, trunk_position: :closed, properties: [:trunk_lock, :trunk_position]})
     <<1, 1::integer-16, 1, 2, 1::integer-16, 0>>
   """
   @spec to_bin(__MODULE__.t()) :: binary

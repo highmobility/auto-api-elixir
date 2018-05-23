@@ -43,7 +43,7 @@ defmodule AutoApi.ChargingCommand do
 
   Set Charging Limit
         iex> AutoApi.ChargingCommand.execute(%AutoApi.ChargingState{}, <<0x03, 0x00>>)
-        {:state, %AutoApi.ChargingState{}}
+        {:state_changed, %AutoApi.ChargingState{charge_limit: 0}}
         iex> AutoApi.ChargingCommand.execute(%AutoApi.ChargingState{}, <<0x03, 0x5A>>)
         {:state_changed, %AutoApi.ChargingState{charge_limit: 90}}
 
@@ -142,10 +142,7 @@ defmodule AutoApi.ChargingCommand do
         <<1, 3, 0, 1, 1>>
         iex> properties = AutoApi.ChargingCapability.properties |> Enum.into(%{}) |> Map.values()
         iex> AutoApi.ChargingCommand.state(%AutoApi.ChargingState{charge_timer: [%{timer_type: :departure_time, year: 99, month: 10, day: 1, hour: 10, minute: 55, second: 59, utc_time_offset: 30}], properties: properties})
-        <<1, 4, 0, 4, 0, 0, 0, 0, 5, 0, 4, 0, 0, 0, 0, 3, 0, 1, 0, 8, 0, 1, 0, 12, 0, 1,\
-          1, 11, 0, 1, 0, 13, 0, 9, 2, 99, 10, 1, 10, 55, 59, 0, 30, 6, 0, 4, 0, 0, 0,\
-          0, 7, 0, 4, 0, 0, 0, 0, 1, 0, 1, 0, 10, 0, 4, 0, 0, 0, 0, 2, 0, 2, 0, 0, 9, 0,\
-          2, 0, 0>>
+        <<1, 13, 0, 9, 2, 99, 10, 1, 10, 55, 59, 0, 30>>
   """
   @spec state(ChargingState.t()) :: binary
   def state(%ChargingState{} = state) do

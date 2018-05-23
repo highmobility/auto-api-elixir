@@ -28,15 +28,21 @@ defmodule AutoApi.TachographState do
   defstruct driver_working_state: [],
             driver_time_state: [],
             driver_card: [],
-            vehicle_motion: :not_detected,
-            vehicle_overspeed: :no_overspeed,
-            vehicle_direction: :forward,
-            vehicle_speed: 0,
+            vehicle_motion: nil,
+            vehicle_overspeed: nil,
+            vehicle_direction: nil,
+            vehicle_speed: nil,
             properties: []
 
   use AutoApi.State, spec_file: "specs/tachograph.json"
 
   @type t :: %__MODULE__{
+          driver_working_state: list(any),
+          driver_time_state: list(any),
+          driver_card: list(any),
+          vehicle_motion: :not_detected | :detected | nil,
+          vehicle_overspeed: :no_overspeed | :overspeed | nil,
+          vehicle_direction: :forward | :reverse | nil,
           properties: list(atom)
         }
 
@@ -64,8 +70,8 @@ defmodule AutoApi.TachographState do
     <<6, 0, 1, 0, 7, 0, 2, 0, 123>>
 
     iex> properties = AutoApi.TachographCapability.properties |> Enum.into(%{}) |> Map.values()
-    iex> AutoApi.TachographState.to_bin(%AutoApi.TachographState{properties: properties})
-    <<0x6, 0x0, 0x1, 0x0, 0x4, 0x0, 0x1, 0x0, 0x5, 0x0, 0x1, 0x0, 0x7, 0x0, 0x2, 0x0, 0x0>>
+    iex> AutoApi.TachographState.to_bin(%AutoApi.TachographState{vehicle_motion: :detected, properties: properties})
+    <<4, 0, 1, 1>>
 
     iex> properties = [:driver_time_state]
     iex> AutoApi.TachographState.to_bin(%AutoApi.TachographState{driver_time_state: [%{driver_number: 9, time_state: :"9_reached"}], properties: properties})

@@ -56,11 +56,11 @@ defmodule AutoApi.TachographCommand do
 
         iex> properties = [:vehicle_speed, :vehicle_direction, :vehicle_overspeed, :vehicle_motion]
         iex> AutoApi.TachographCommand.state(%AutoApi.TachographState{vehicle_speed: 1, vehicle_direction: :reverse, properties: properties})
-        <<1, 6, 0, 1, 1, 4, 0, 1, 0, 5, 0, 1, 0, 7, 0, 2, 0, 1>>
+        <<1, 6, 0, 1, 1, 7, 0, 2, 0, 1>>
 
         iex> properties = AutoApi.TachographCapability.properties |> Enum.into(%{}) |> Map.values()
-        iex> AutoApi.TachographCommand.state(%AutoApi.TachographState{properties: properties})
-        <<0x1, 0x6, 0x0, 0x1, 0x0, 0x4, 0x0, 0x1, 0x0, 0x5, 0x0, 0x1, 0x0, 0x7, 0x0, 0x2, 0x0, 0x0>>
+        iex> AutoApi.TachographCommand.state(%AutoApi.TachographState{vehicle_overspeed: :overspeed, properties: properties})
+        <<1, 5, 0, 1, 1>>
   """
   @spec state(TachographState.t()) :: binary
   def state(%TachographState{} = state) do

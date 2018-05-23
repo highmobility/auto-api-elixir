@@ -22,12 +22,12 @@ defmodule AutoApi.FuelingState do
   """
 
   alias AutoApi.CommonData
-  defstruct gas_flap: :closed, properties: []
+  defstruct gas_flap: nil, properties: []
 
   use AutoApi.State, spec_file: "specs/fueling.json"
 
   @type t :: %__MODULE__{
-          gas_flap: CommonData.position(),
+          gas_flap: CommonData.position() | nil,
           properties: list(atom)
         }
 
@@ -35,7 +35,7 @@ defmodule AutoApi.FuelingState do
   Build state based on binary value
 
     iex> AutoApi.FuelingState.from_bin(<<0x01, 1::integer-16, 0x00>>)
-    %AutoApi.FuelingState{}
+    %AutoApi.FuelingState{gas_flap: :closed}
 
     iex> AutoApi.FuelingState.from_bin(<<0x01, 1::integer-16, 0x01>>)
     %AutoApi.FuelingState{gas_flap: :open}
@@ -49,6 +49,9 @@ defmodule AutoApi.FuelingState do
   @doc """
   Parse state to bin
     iex> AutoApi.FuelingState.to_bin(%AutoApi.FuelingState{properties: [:gas_flap]})
+    <<>>
+
+    iex> AutoApi.FuelingState.to_bin(%AutoApi.FuelingState{gas_flap: :closed, properties: [:gas_flap]})
     <<1, 1::integer-16, 0>>
 
     iex> AutoApi.FuelingState.to_bin(%AutoApi.FuelingState{gas_flap: :open, properties: [:gas_flap]})

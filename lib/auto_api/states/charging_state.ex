@@ -38,18 +38,18 @@ defmodule AutoApi.ChargingState do
   @doc """
   Charging state
   """
-  defstruct charging: :disconnected,
-            estimated_range: 0,
-            battery_level: 0,
-            battery_current_ac: 0.0,
-            battery_current_dc: 0.0,
-            charger_voltage_ac: 0.0,
-            charger_voltage_dc: 0.0,
-            charge_limit: 0,
-            time_to_complete_charge: 0,
-            charging_rate_kw: 0.0,
-            charge_port_state: :closed,
-            charge_mode: :timer_based,
+  defstruct charging: nil,
+            estimated_range: nil,
+            battery_level: nil,
+            battery_current_ac: nil,
+            battery_current_dc: nil,
+            charger_voltage_ac: nil,
+            charger_voltage_dc: nil,
+            charge_limit: nil,
+            time_to_complete_charge: nil,
+            charging_rate_kw: nil,
+            charge_port_state: nil,
+            charge_mode: nil,
             charge_timer: [],
             properties: []
 
@@ -58,16 +58,16 @@ defmodule AutoApi.ChargingState do
   @type t :: %__MODULE__{
           charging: charging,
           estimated_range: integer,
-          battery_level: integer,
-          battery_current_ac: float,
-          battery_current_dc: float,
-          charger_voltage_ac: float,
-          charger_voltage_dc: float,
-          charge_limit: integer,
-          time_to_complete_charge: integer,
-          charging_rate_kw: float,
-          charge_port_state: charge_port_state,
-          charge_mode: charge_mode,
+          battery_level: integer | nil,
+          battery_current_ac: float | nil,
+          battery_current_dc: float | nil,
+          charger_voltage_ac: float | nil,
+          charger_voltage_dc: float | nil,
+          charge_limit: integer | nil,
+          time_to_complete_charge: integer | nil,
+          charging_rate_kw: float | nil,
+          charge_port_state: charge_port_state | nil,
+          charge_mode: charge_mode | nil,
           charge_timer: list(charge_timer),
           properties: list(atom)
         }
@@ -97,12 +97,6 @@ defmodule AutoApi.ChargingState do
     iex> properties = [:charging, :charging_rate_kw]
     iex> AutoApi.ChargingState.to_bin(%AutoApi.ChargingState{charging: :charging_complete, charging_rate_kw: 99.1, properties: properties})
     <<0x01, 1::integer-16, 0x03, 0x0A, 4::integer-16, 99.1::float-32>>
-
-    iex> properties = AutoApi.ChargingCapability.properties |> Enum.into(%{}) |> Map.values()
-    iex> AutoApi.ChargingState.to_bin(%AutoApi.ChargingState{properties: properties})
-    <<4, 0, 4, 0, 0, 0, 0, 5, 0, 4, 0, 0, 0, 0, 3, 0, 1, 0, 8, 0, 1, 0, 12, 0, 1, 1,\
-      11, 0, 1, 0, 6, 0, 4, 0, 0, 0, 0, 7, 0, 4, 0, 0, 0, 0, 1, 0, 1, 0, 10, 0, 4, \
-      0, 0, 0, 0, 2, 0, 2, 0, 0, 9, 0, 2, 0, 0>>
 
     iex> charge_timer = [%{day: 10, hour: 16, minute: 32, month: 1, second: 5, timer_type: :departure_time, utc_time_offset: 0, year: 18}]
     iex> AutoApi.ChargingState.to_bin(%AutoApi.ChargingState{charge_timer: charge_timer, properties: [:charge_timer]})

@@ -86,7 +86,19 @@ defmodule AutoApi.State do
         end
 
         # don't convert data to binary data if it's nil
-        def parse_state_property(name, nil) do
+        def parse_state_property(_, []) do
+          <<>>
+        end
+
+        def parse_state_property(_, [empty_map]) when empty_map == %{} do
+          <<>>
+        end
+
+        def parse_state_property(_, empty_map) when empty_map == %{} do
+          <<>>
+        end
+
+        def parse_state_property(_, nil) do
           <<>>
         end
 

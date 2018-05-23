@@ -22,14 +22,14 @@ defmodule AutoApi.StartStopState do
   """
 
   alias AutoApi.CommonData
-  defstruct start_stop: :inactive, properties: []
+  defstruct start_stop: nil, properties: []
 
   use AutoApi.State, spec_file: "specs/start_stop.json"
 
-  @type active :: :inactive | :active
+  @type activity :: :inactive | :active
 
   @type t :: %__MODULE__{
-          start_stop: active,
+          start_stop: activity | nil,
           properties: list(atom)
         }
 
@@ -37,7 +37,7 @@ defmodule AutoApi.StartStopState do
   Build state based on binary value
 
     iex> AutoApi.StartStopState.from_bin(<<0x01, 1::integer-16, 0x00>>)
-    %AutoApi.StartStopState{}
+    %AutoApi.StartStopState{start_stop: :inactive}
 
     iex> AutoApi.StartStopState.from_bin(<<0x01, 1::integer-16, 0x01>>)
     %AutoApi.StartStopState{start_stop: :active}
@@ -50,7 +50,7 @@ defmodule AutoApi.StartStopState do
 
   @doc """
   Parse state to bin
-    iex> AutoApi.StartStopState.to_bin(%AutoApi.StartStopState{properties: [:start_stop]})
+    iex> AutoApi.StartStopState.to_bin(%AutoApi.StartStopState{start_stop: :inactive, properties: [:start_stop]})
     <<1, 1::integer-16, 0>>
 
     iex> AutoApi.StartStopState.to_bin(%AutoApi.StartStopState{start_stop: :active, properties: [:start_stop]})

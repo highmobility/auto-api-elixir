@@ -81,7 +81,7 @@ defmodule AutoApi.TrunkCommand do
   @doc """
   Converts DoorLocksCommand state to capability's state in binary
 
-        iex> AutoApi.TrunkCommand.state(%AutoApi.TrunkState{properties: [:trunk_lock, :trunk_position]})
+        iex> AutoApi.TrunkCommand.state(%AutoApi.TrunkState{trunk_lock: :locked, trunk_position: :closed, properties: [:trunk_lock, :trunk_position]})
         <<1, 1, 0, 1, 1, 2, 0, 1, 0>>
   """
   @spec state(TrunkState.t()) :: binary

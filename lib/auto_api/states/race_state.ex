@@ -35,40 +35,40 @@ defmodule AutoApi.RaceState do
   Race state
   """
   defstruct acceleration: [],
-            understeering: 0,
-            oversteering: 0,
-            gas_pedal_position: 0,
-            steering_angle: 0,
-            brake_pressure: 0.0,
-            yaw_rate: 0.0,
-            rear_suspension_steering: 0,
-            electronic_stability_program: :inactive,
+            understeering: nil,
+            oversteering: nil,
+            gas_pedal_position: nil,
+            steering_angle: nil,
+            brake_pressure: nil,
+            yaw_rate: nil,
+            rear_suspension_steering: nil,
+            electronic_stability_program: nil,
             brake_torque_vectoring: [],
-            gear_mode: :manual,
-            selected_gear: 0,
-            clutch_pedal_switch: :inactive,
-            accelerator_pedal_idle_switch: :inactive,
-            accelerator_pedal_kickdown_switch: :inactive,
+            gear_mode: nil,
+            selected_gear: nil,
+            clutch_pedal_switch: nil,
+            accelerator_pedal_idle_switch: nil,
+            accelerator_pedal_kickdown_switch: nil,
             properties: []
 
   use AutoApi.State, spec_file: "specs/race.json"
 
   @type t :: %__MODULE__{
           acceleration: list(acceleration),
-          understeering: integer,
-          oversteering: integer,
-          gas_pedal_position: integer,
-          steering_angle: integer,
-          brake_pressure: float,
-          yaw_rate: float,
-          rear_suspension_steering: integer,
-          electronic_stability_program: active_inactive,
+          understeering: integer | nil,
+          oversteering: integer | nil,
+          gas_pedal_position: integer | nil,
+          steering_angle: integer | nil,
+          brake_pressure: float | nil,
+          yaw_rate: float | nil,
+          rear_suspension_steering: integer | nil,
+          electronic_stability_program: active_inactive | nil,
           brake_torque_vectoring: list(any),
-          gear_mode: gear_mode,
-          selected_gear: integer,
-          clutch_pedal_switch: active_inactive,
-          accelerator_pedal_idle_switch: active_inactive,
-          accelerator_pedal_kickdown_switch: active_inactive,
+          gear_mode: gear_mode | nil,
+          selected_gear: integer | nil,
+          clutch_pedal_switch: active_inactive | nil,
+          accelerator_pedal_idle_switch: active_inactive | nil,
+          accelerator_pedal_kickdown_switch: active_inactive | nil,
           properties: list(atom)
         }
 
@@ -97,10 +97,9 @@ defmodule AutoApi.RaceState do
 
     iex> properties = AutoApi.RaceCapability.properties |> Enum.into(%{}) |> Map.values()
     iex> AutoApi.RaceState.to_bin(%AutoApi.RaceState{properties: properties})
-    <<0x10, 0x0, 0x1, 0x0, 0x11, 0x0, 0x1, 0x0, 0x6, 0x0, 0x4, 0x0, 0x0, 0x0, 0x0, \
-      0xF, 0x0, 0x1, 0x0, 0x9, 0x0, 0x1, 0x0, 0x4, 0x0, 0x1, 0x0, 0xB, 0x0, 0x1, \
-      0x0, 0x3, 0x0, 0x1, 0x0, 0x8, 0x0, 0x1, 0x0, 0xC, 0x0, 0x1, 0x0, 0x5, 0x0, \
-      0x1, 0x0, 0x2, 0x0, 0x1, 0x0, 0x7, 0x0, 0x4, 0x0, 0x0, 0x0, 0x0>>
+    <<>>
+    iex> AutoApi.RaceState.to_bin(%AutoApi.RaceState{gas_pedal_position: 10, properties: properties})
+    <<4, 0, 1, 10>>
   """
   def to_bin(%__MODULE__{} = state) do
     parse_state_properties(state)

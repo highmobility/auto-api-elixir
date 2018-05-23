@@ -71,7 +71,7 @@ defmodule AutoApi.StartStopCommand do
   @doc """
   Converts DoorLocksCommand state to capability's state in binary
 
-        iex> AutoApi.StartStopCommand.state(%AutoApi.StartStopState{properties: [:start_stop]})
+        iex> AutoApi.StartStopCommand.state(%AutoApi.StartStopState{start_stop: :inactive, properties: [:start_stop]})
         <<1, 1, 0, 1, 0>>
   """
   @spec state(StartStopState.t()) :: binary

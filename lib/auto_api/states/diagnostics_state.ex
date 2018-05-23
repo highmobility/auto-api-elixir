@@ -29,57 +29,57 @@ defmodule AutoApi.DiagnosticsState do
   @doc """
   Diagnostics state
   """
-  defstruct mileage: 0,
-            engine_oil_temperature: 0,
-            speed: 0,
-            engine_rpm: 0,
-            fuel_level: 0,
-            estimated_range: 0,
-            current_fuel_consumption: 0.0,
-            average_fuel_consumption: 0.0,
-            washer_fluid_level: :low,
-            battery_voltage: 0.0,
-            adblue_level: 0.0,
-            distance_since_reset: 0,
-            distance_since_start: 0,
+  defstruct mileage: nil,
+            engine_oil_temperature: nil,
+            speed: nil,
+            engine_rpm: nil,
+            fuel_level: nil,
+            estimated_range: nil,
+            current_fuel_consumption: nil,
+            average_fuel_consumption: nil,
+            washer_fluid_level: nil,
+            battery_voltage: nil,
+            adblue_level: nil,
+            distance_since_reset: nil,
+            distance_since_start: nil,
             tire: [],
-            fuel_volume: 0.0,
-            anti_lock_braking: :inactive,
-            engine_coolant_temperature: 0,
-            engine_total_operating_hours: 0.0,
-            engine_total_fuel_consumption: 0.0,
-            brake_fluid_level: :filled,
-            engine_torque: 0,
-            engine_load: 0,
-            wheel_based_speed: 0,
+            fuel_volume: nil,
+            anti_lock_braking: nil,
+            engine_coolant_temperature: nil,
+            engine_total_operating_hours: nil,
+            engine_total_fuel_consumption: nil,
+            brake_fluid_level: nil,
+            engine_torque: nil,
+            engine_load: nil,
+            wheel_based_speed: nil,
             properties: []
 
   use AutoApi.State, spec_file: "specs/diagnostics.json"
 
   @type t :: %__MODULE__{
-          mileage: integer,
-          engine_oil_temperature: integer,
-          speed: integer,
-          engine_rpm: integer,
-          fuel_level: integer,
-          estimated_range: integer,
-          current_fuel_consumption: float,
-          average_fuel_consumption: float,
-          washer_fluid_level: fluid_level,
-          battery_voltage: float,
-          adblue_level: float,
-          distance_since_reset: integer,
-          distance_since_start: integer,
+          mileage: integer | nil,
+          engine_oil_temperature: integer | nil,
+          speed: integer | nil,
+          engine_rpm: integer | nil,
+          fuel_level: integer | nil,
+          estimated_range: integer | nil,
+          current_fuel_consumption: float | nil,
+          average_fuel_consumption: float | nil,
+          washer_fluid_level: fluid_level | nil,
+          battery_voltage: float | nil,
+          adblue_level: float | nil,
+          distance_since_reset: integer | nil,
+          distance_since_start: integer | nil,
           tire: list(tire_data),
-          fuel_volume: float,
-          anti_lock_braking: :inactive | :active,
-          engine_coolant_temperature: integer,
-          engine_total_operating_hours: float,
-          engine_total_fuel_consumption: float,
-          brake_fluid_level: :low | :filled,
-          engine_torque: integer,
-          engine_load: integer,
-          wheel_based_speed: integer,
+          fuel_volume: float | nil,
+          anti_lock_braking: :inactive | :active | nil,
+          engine_coolant_temperature: integer | nil,
+          engine_total_operating_hours: float | nil,
+          engine_total_fuel_consumption: float | nil,
+          brake_fluid_level: :low | :filled | nil,
+          engine_torque: integer | nil,
+          engine_load: integer | nil,
+          wheel_based_speed: integer | nil,
           properties: list(atom)
         }
 
@@ -109,14 +109,7 @@ defmodule AutoApi.DiagnosticsState do
 
     iex> properties = AutoApi.DiagnosticsCapability.properties |> Enum.into(%{}) |> Map.values()
     iex> AutoApi.DiagnosticsState.to_bin(%AutoApi.DiagnosticsState{engine_oil_temperature: 20,engine_rpm: 70, fuel_level: 99, mileage: 2000, speed: 100, washer_fluid_level: :low, tire: [], properties: properties})
-    <<0xC, 0x0, 0x4, 0x0, 0x0, 0x0, 0x0, 0x10, 0x0, 0x1, 0x0, 0x8, 0x0, 0x4, 0x0, \
-      0x0, 0x0, 0x0, 0xB, 0x0, 0x4, 0x0, 0x0, 0x0, 0x0, 0x14, 0x0, 0x1, 0x1, 0x7, \
-      0x0, 0x4, 0x0, 0x0, 0x0, 0x0, 0xD, 0x0, 0x2, 0x0, 0x0, 0xE, 0x0, 0x2, 0x0, \
-      0x0, 0x11, 0x0, 0x2, 0x0, 0x0, 0x16, 0x0, 0x1, 0x0, 0x2, 0x0, 0x2, 0x0, 0x14, \
-      0x4, 0x0, 0x2, 0x0, 0x46, 0x15, 0x0, 0x1, 0x0, 0x13, 0x0, 0x4, 0x0, 0x0, 0x0, \
-      0x0, 0x12, 0x0, 0x4, 0x0, 0x0, 0x0, 0x0, 0x6, 0x0, 0x2, 0x0, 0x0, 0x5, 0x0, \
-      0x1, 0x63, 0xF, 0x0, 0x4, 0x0, 0x0, 0x0, 0x0, 0x1, 0x0, 0x3, 0x0, 0x7, 0xD0, \
-      0x3, 0x0, 0x2, 0x0, 0x64, 0x9, 0x0, 0x1, 0x0, 0x17, 0x0, 0x2, 0x0, 0x0>>
+    <<2, 0, 2, 0, 20, 4, 0, 2, 0, 70, 5, 0, 1, 99, 1, 0, 3, 0, 7, 208, 3, 0, 2, 0, 100, 9, 0, 1, 0>>
 
     iex> tiers = [%{tire_position: :front_left, tire_pressure: 250.00, tire_temperature: 20.00, wheel_rpm: 2900}]
     iex> AutoApi.DiagnosticsState.to_bin(%AutoApi.DiagnosticsState{tire: tiers, properties: [:tire]})

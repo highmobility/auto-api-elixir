@@ -26,12 +26,12 @@ defmodule AutoApi.HonkHornFlashLightsState do
   @doc """
   HonkHornFlashLights state
   """
-  defstruct flashers: :inactive, properties: []
+  defstruct flashers: nil, properties: []
 
   use AutoApi.State, spec_file: "specs/honk_horn_flash_lights.json"
 
   @type t :: %__MODULE__{
-          flashers: flashers,
+          flashers: flashers | nil,
           properties: list(atom)
         }
 
