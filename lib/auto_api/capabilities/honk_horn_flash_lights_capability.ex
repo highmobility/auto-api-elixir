@@ -46,7 +46,7 @@ defmodule AutoApi.HonkHornFlashLightsCapability do
           | :honk_flash
           | :activate_deactivate_emergency_flashers
 
-  @command_module AutoApi.HonkHornFlashLightsState
-  @state_module AutoApi.HonkHornFlashLightsCommand
+  @command_module AutoApi.HonkHornFlashLightsCommand
+  @state_module AutoApi.HonkHornFlashLightsState
   use AutoApi.Capability
 end
