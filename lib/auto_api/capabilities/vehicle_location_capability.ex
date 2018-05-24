@@ -32,9 +32,9 @@ defmodule AutoApi.VehicleLocationCapability do
       iex> VL.command_name(0x01)
       :vehicle_location
       iex> length(VL.properties)
-      2
+      3
       iex> VL.properties
-      [{1, :coordinates}, {2, :heading}]
+      [{1, :coordinates}, {2, :heading}, {3, :altitude}]
   """
 
   @spec_file "specs/vehicle_location.json"

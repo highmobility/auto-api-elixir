@@ -21,13 +21,14 @@ defmodule AutoApi.VehicleLocationState do
   Vehicle Location state
   """
 
-  defstruct coordinates: %{}, heading: nil, properties: []
+  defstruct coordinates: %{}, heading: nil, altitude: nil, properties: []
 
   use AutoApi.State, spec_file: "specs/vehicle_location.json"
 
   @type t :: %__MODULE__{
           coordinates: list | map,
-          heading: float,
+          heading: float | nil,
+          altitude: float | nil,
           properties: list(atom)
         }
 
@@ -46,17 +47,18 @@ defmodule AutoApi.VehicleLocationState do
 
   @doc """
   Parse state to bin
-    iex> AutoApi.VehicleLocationState.to_bin(%AutoApi.VehicleLocationState{coordinates: %{latitude: 12.000001, longitude: 13.000002}, heading: 12.00009, properties: [:coordinates, :heading]})
+    ie> AutoApi.VehicleLocationState.to_bin(%AutoApi.VehicleLocationState{coordinates: %{latitude: 12.000001, longitude: 13.000002}, heading: 12.00009, properties: [:coordinates, :heading]})
     <<0x01, 8::integer-16, 12.000001::float-32, 13.000002::float-32, 0x02, 4::integer-16, 12.00009::float-32>>
 
-    iex> AutoApi.VehicleLocationState.to_bin(%AutoApi.VehicleLocationState{heading: 12.00009, properties: [:coordinates, :heading]})
-    <<0x02, 4::integer-16, 12.00009::float-32>>
+    iex> AutoApi.VehicleLocationState.to_bin(%AutoApi.VehicleLocationState{heading: 12.00009, altitude: 19.0923939, properties: [:coordinates, :heading, :altitude]})
+    <<0x03, 4::integer-16, 19.0923939::float-32, 0x02, 4::integer-16, 12.00009::float-32>>
   """
   @spec to_bin(__MODULE__.t()) :: binary
   def to_bin(%__MODULE__{} = state) do
     state_copy = %__MODULE__{
       coordinates: [state.coordinates],
       heading: state.heading,
+      altitude: state.altitude,
       properties: state.properties
     }
 
