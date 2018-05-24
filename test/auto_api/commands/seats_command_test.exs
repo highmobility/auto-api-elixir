@@ -16,32 +16,7 @@
 #
 # Please inquire about commercial licensing options at
 # licensing@high-mobility.com
-defmodule AutoApi.SeatsCapability do
-  @moduledoc """
-  Basic settings for Seats Capability
-
-      iex> alias AutoApi.SeatsCapability, as: S
-      iex> S.identifier
-      <<0x00, 0x56>>
-      iex> S.name
-      :seats
-      iex> S.description
-      "Seats"
-      iex> S.command_name(0x00)
-      :get_seats_state
-      iex> S.command_name(0x01)
-      :seats_state
-      iex> length(S.properties)
-      1
-      iex> List.last(S.properties)
-      {0x01, :seat}
-  """
-
-  @spec_file "specs/seats.json"
-  @type command_type :: :get_seats_state | :seats_state
-
-  @command_module AutoApi.SeatsCommand
-  @state_module AutoApi.SeatsState
-
-  use AutoApi.Capability
+defmodule AutoApi.SeatsCommandTest do
+  use ExUnit.Case
+  doctest AutoApi.SeatsCommand
 end

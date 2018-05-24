@@ -34,7 +34,8 @@ defmodule AutoApi.CapabilitiesState do
             vehicle_time: [],
             cruise_control: [],
             lights: [],
-            honk_horn_flash_lights: []
+            honk_horn_flash_lights: [],
+            seats: []
 
   @behaviour AutoApi.State
 
@@ -53,7 +54,8 @@ defmodule AutoApi.CapabilitiesState do
           vehicle_time: list(AutoApi.VehicleTimeCapability.command_type()),
           cruise_control: list(AutoApi.CruiseControlCapability.command_type()),
           lights: list(AutoApi.LightsCapability.command_type()),
-          honk_horn_flash_lights: list(AutoApi.HonkHornFlashLightsCapability.command_type())
+          honk_horn_flash_lights: list(AutoApi.HonkHornFlashLightsCapability.command_type()),
+          seats: list(AutoApi.SeatsCapability.command_type())
         }
 
   @spec base :: t
