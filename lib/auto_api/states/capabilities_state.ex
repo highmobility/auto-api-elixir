@@ -33,7 +33,8 @@ defmodule AutoApi.CapabilitiesState do
             vehicle_status: [],
             vehicle_time: [],
             cruise_control: [],
-            lights: []
+            lights: [],
+            honk_horn_flash_lights: []
 
   @behaviour AutoApi.State
 
@@ -51,7 +52,8 @@ defmodule AutoApi.CapabilitiesState do
           vehicle_status: list(AutoApi.VehicleStatusState.command_type()),
           vehicle_time: list(AutoApi.VehicleTimeCapability.command_type()),
           cruise_control: list(AutoApi.CruiseControlCapability.command_type()),
-          lights: list(AutoApi.LightsCapability.command_type())
+          lights: list(AutoApi.LightsCapability.command_type()),
+          honk_horn_flash_lights: list(AutoApi.HonkHornFlashLightsCapability.command_type())
         }
 
   @spec base :: t
