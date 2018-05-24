@@ -1,0 +1,58 @@
+{
+    "category": "heavy_duty",
+    "id_lsb": 101,
+    "name": "power_takeoff",
+    "api_intro": 7,
+    "message_types": [
+        {
+            "id": 0,
+            "name": "get_power_takeoff_state"
+        },
+        {
+            "id": 1,
+            "name": "power_takeoff_state"
+        },
+        {
+            "id": 2,
+            "name": "activate_deactivate_power_takeoff"
+        }
+    ],
+    "id_msb": 0,
+    "pretty_state_name": "Power Take-Off",
+    "properties": [
+        {
+            "pretty_name": "Power Take-Off",
+            "values": [
+                {
+                    "name": "inactive",
+                    "id": 0
+                },
+                {
+                    "name": "active",
+                    "id": 1
+                }
+            ],
+            "name": "power_takeoff",
+            "type": "enum",
+            "id": 1,
+            "size": 1
+        },
+        {
+            "pretty_name": "Power Take-Off engaged",
+            "values": [
+                {
+                    "name": "not_engaged",
+                    "id": 0
+                },
+                {
+                    "name": "engaged",
+                    "id": 1
+                }
+            ],
+            "name": "power_takeoff_engaged",
+            "type": "enum",
+            "id": 2,
+            "size": 1
+        }
+    ]
+}
