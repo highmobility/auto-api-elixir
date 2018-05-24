@@ -32,7 +32,8 @@ defmodule AutoApi.CapabilitiesState do
             start_stop: [],
             vehicle_status: [],
             vehicle_time: [],
-            cruise_control: []
+            cruise_control: [],
+            lights: []
 
   @behaviour AutoApi.State
 
@@ -49,7 +50,8 @@ defmodule AutoApi.CapabilitiesState do
           start_stop: list(AutoApi.StartStopCapability.command_type()),
           vehicle_status: list(AutoApi.VehicleStatusState.command_type()),
           vehicle_time: list(AutoApi.VehicleTimeCapability.command_type()),
-          cruise_control: list(AutoApi.CruiseControlCapability.command_type())
+          cruise_control: list(AutoApi.CruiseControlCapability.command_type()),
+          lights: list(AutoApi.LightsCapability.command_type())
         }
 
   @spec base :: t

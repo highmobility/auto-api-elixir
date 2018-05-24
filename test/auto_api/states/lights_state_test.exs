@@ -16,34 +16,7 @@
 #
 # Please inquire about commercial licensing options at
 # licensing@high-mobility.com
-defmodule AutoApi.LightsCapability do
-  @moduledoc """
-  Basic settings for Lights Capability
-
-      iex> alias AutoApi.LightsCapability, as: L
-      iex> L.identifier
-      <<0x00, 0x36>>
-      iex> L.name
-      :lights
-      iex> L.description
-      "Lights"
-      iex> L.command_name(0x00)
-      :get_lights_state
-      iex> L.command_name(0x01)
-      :lights_state
-      iex> L.command_name(0x02)
-      :control_lights
-      iex> length(L.properties)
-      6
-      iex> List.last(L.properties)
-      {6, :emergency_brake_light}
-  """
-
-  @spec_file "specs/lights.json"
-  @type command_type :: :get_lights_state | :lights_state | :control_lights
-
-  @command_module AutoApi.NotImplemented
-  @state_module AutoApi.Lights
-
-  use AutoApi.Capability
+defmodule AutoApi.LightsStateTest do
+  use ExUnit.Case
+  doctest AutoApi.LightsState
 end
