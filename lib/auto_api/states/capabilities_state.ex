@@ -38,7 +38,8 @@ defmodule AutoApi.CapabilitiesState do
             seats: [],
             vehicle_location: [],
             windows: [],
-            engine: []
+            engine: [],
+            climate: []
 
   @behaviour AutoApi.State
 
@@ -61,7 +62,8 @@ defmodule AutoApi.CapabilitiesState do
           seats: list(AutoApi.SeatsCapability.command_type()),
           vehicle_location: list(AutoApi.VehicleLocation.command_type()),
           windows: list(AutoApi.WindowsCapability.command_type()),
-          engine: list(AutoApi.EngineCapability.command_type())
+          engine: list(AutoApi.EngineCapability.command_type()),
+          climate: list(AutoApi.ClimateState.command_type())
         }
 
   @spec base :: t

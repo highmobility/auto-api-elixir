@@ -48,10 +48,17 @@ defmodule AutoApi.ClimateCapability do
   """
 
   @spec_file "specs/climate.json"
-  @type command_type :: :get_climate_state | :climate_state | :set_climate_profile | :start_stop_hvac | :start_stop_defogging | :start_stop_defrosting | :start_stop_ionising
+  @type command_type ::
+          :get_climate_state
+          | :climate_state
+          | :set_climate_profile
+          | :start_stop_hvac
+          | :start_stop_defogging
+          | :start_stop_defrosting
+          | :start_stop_ionising
 
-  @command_module AutoApi.NotImplemented
-  @state_module AutoApi.NotImplemented
+  @command_module AutoApi.ClimateCommand
+  @state_module AutoApi.ClimateState
 
   use AutoApi.Capability
 end
