@@ -39,7 +39,8 @@ defmodule AutoApi.CapabilitiesState do
             vehicle_location: [],
             windows: [],
             engine: [],
-            climate: []
+            climate: [],
+            parking_brake: []
 
   @behaviour AutoApi.State
 
@@ -63,7 +64,8 @@ defmodule AutoApi.CapabilitiesState do
           vehicle_location: list(AutoApi.VehicleLocation.command_type()),
           windows: list(AutoApi.WindowsCapability.command_type()),
           engine: list(AutoApi.EngineCapability.command_type()),
-          climate: list(AutoApi.ClimateState.command_type())
+          climate: list(AutoApi.ClimateState.command_type()),
+          parking_brake: list(AutoApi.ParkingBrakeCapability.command_type())
         }
 
   @spec base :: t
