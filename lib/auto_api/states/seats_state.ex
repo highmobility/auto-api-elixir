@@ -61,6 +61,10 @@ defmodule AutoApi.SeatsState do
 
     iex> AutoApi.SeatsState.to_bin(%AutoApi.SeatsState{seat: [], properties: [:seat]})
     <<>>
+
+    iex> seats = %AutoApi.SeatsState{properties: [:seat], seat: [%{person_detected: :not_detected, seat_position: :front_right, seatbelt_fastened: :fastened}, %{person_detected: :not_detected, seat_position: :front_left, seatbelt_fastened: :not_fastened}]}
+    iex> AutoApi.SeatsState.to_bin(seats)
+    <<1, 3::integer-16, 1, 0, 1, 1, 3::integer-16, 0, 0, 0>>
   """
   @spec to_bin(__MODULE__.t()) :: binary
   def to_bin(%__MODULE__{} = state) do
