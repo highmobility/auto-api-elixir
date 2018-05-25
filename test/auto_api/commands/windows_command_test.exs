@@ -16,34 +16,7 @@
 #
 # Please inquire about commercial licensing options at
 # licensing@high-mobility.com
-defmodule AutoApi.WindowsCapability do
-  @moduledoc """
-  Basic settings for Windows Capability
-
-      iex> alias AutoApi.WindowsCapability, as: W
-      iex> W.identifier
-      <<0x00, 0x45>>
-      iex> W.name
-      :windows
-      iex> W.description
-      "Windows"
-      iex> W.command_name(0x00)
-      :get_windows_state
-      iex> W.command_name(0x01)
-      :windows_state
-      iex> W.command_name(0x02)
-      :open_close_windows
-      iex> length(W.properties)
-      1
-      iex> W.properties
-      [{0x01, :window}]
-  """
-
-  @spec_file "specs/windows.json"
-  @type command_type :: :get_windows_state | :windows_state | :open_close_windows
-
-  @command_module AutoApi.WindowsCommand
-  @state_module AutoApi.WindowsState
-
-  use AutoApi.Capability
+defmodule AutoApi.WindowsCommandTest do
+  use ExUnit.Case
+  doctest AutoApi.WindowsCommand
 end
