@@ -37,7 +37,8 @@ defmodule AutoApi.CapabilitiesState do
             honk_horn_flash_lights: [],
             seats: [],
             vehicle_location: [],
-            windows: []
+            windows: [],
+            engine: []
 
   @behaviour AutoApi.State
 
@@ -59,7 +60,8 @@ defmodule AutoApi.CapabilitiesState do
           honk_horn_flash_lights: list(AutoApi.HonkHornFlashLightsCapability.command_type()),
           seats: list(AutoApi.SeatsCapability.command_type()),
           vehicle_location: list(AutoApi.VehicleLocation.command_type()),
-          windows: list(AutoApi.WindowsCapability.command_type())
+          windows: list(AutoApi.WindowsCapability.command_type()),
+          engine: list(AutoApi.EngineCapability.command_type())
         }
 
   @spec base :: t
