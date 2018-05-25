@@ -1,53 +1,53 @@
 {
-    "category": "poi", 
-    "id_lsb": 48, 
-    "name": "vehicle_location", 
-    "api_intro": 2, 
+    "category": "poi",
+    "id_lsb": 48,
+    "name": "vehicle_location",
+    "api_intro": 2,
     "message_types": [
         {
-            "id": 0, 
+            "id": 0,
             "name": "get_vehicle_location"
-        }, 
+        },
         {
-            "id": 1, 
+            "id": 1,
             "name": "vehicle_location"
         }
-    ], 
-    "id_msb": 0, 
+    ],
+    "id_msb": 0,
     "properties": [
         {
             "items": [
                 {
-                    "size": 4, 
-                    "type": "float", 
-                    "description": "Latitude in 4-bytes per IEEE 754", 
+                    "size": 4,
+                    "type": "float",
+                    "description": "Latitude in 4-bytes per IEEE 754",
                     "name": "latitude"
-                }, 
+                },
                 {
-                    "size": 4, 
-                    "type": "float", 
-                    "description": "Longitude in 4-bytes per IEEE 754", 
+                    "size": 4,
+                    "type": "float",
+                    "description": "Longitude in 4-bytes per IEEE 754",
                     "name": "longitude"
                 }
-            ], 
-            "size": 8, 
-            "id": 1, 
+            ],
+            "size": 8,
+            "id": 1,
             "name": "coordinates"
-        }, 
+        },
         {
-            "size": 4, 
-            "type": "float", 
-            "description": "Heading in 4-bytes per IEEE 754", 
-            "name": "heading", 
+            "size": 4,
+            "type": "float",
+            "description": "Heading in 4-bytes per IEEE 754",
+            "name": "heading",
             "id": 2
-        }, 
+        },
         {
-            "size": 4, 
-            "type": "float", 
-            "description": "Altitude in meters above the WGS 84 reference ellipsoid per IEEE 754 formatting", 
-            "name": "altitude", 
+            "size": 4,
+            "type": "float",
+            "description": "Altitude in meters above the WGS 84 reference ellipsoid per IEEE 754 formatting",
+            "name": "altitude",
             "id": 3
         }
-    ], 
+    ],
     "api_update": 7
 }
