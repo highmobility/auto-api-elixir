@@ -40,7 +40,8 @@ defmodule AutoApi.CapabilitiesState do
             windows: [],
             engine: [],
             climate: [],
-            parking_brake: []
+            parking_brake: [],
+            power_takeoff: []
 
   @behaviour AutoApi.State
 
@@ -65,7 +66,8 @@ defmodule AutoApi.CapabilitiesState do
           windows: list(AutoApi.WindowsCapability.command_type()),
           engine: list(AutoApi.EngineCapability.command_type()),
           climate: list(AutoApi.ClimateState.command_type()),
-          parking_brake: list(AutoApi.ParkingBrakeCapability.command_type())
+          parking_brake: list(AutoApi.ParkingBrakeCapability.command_type()),
+          power_takeoff: list(AutoApi.PowerTakeoffCapability.command_type())
         }
 
   @spec base :: t
