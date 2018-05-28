@@ -41,8 +41,8 @@ defmodule AutoApi.PowerTakeoffCapability do
   @type command_type ::
           :get_power_takeoff_state | :power_takeoff_state | :activate_deactivate_power_takeoff
 
-  @command_module AutoApi.NotImplemented
-  @state_module AutoApi.NotImplemented
+  @command_module AutoApi.PowerTakeoffCommand
+  @state_module AutoApi.PowerTakeoffState
 
   use AutoApi.Capability
 end
