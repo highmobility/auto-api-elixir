@@ -35,7 +35,7 @@ defmodule AutoApi.HonkHornFlashLightsCommand do
         iex> AutoApi.HonkHornFlashLightsCommand.execute(%AutoApi.HonkHornFlashLightsState{}, command)
         {:state_changed, %AutoApi.HonkHornFlashLightsState{flashers: :emergency_flasher_active}}
 
-        iex> AutoApi.HonkHornFlashLightsCommand.execute(%AutoApi.HonkHornFlashLightsState{}, <<0x02>>)
+        iex> AutoApi.HonkHornFlashLightsCommand.execute(%AutoApi.HonkHornFlashLightsState{}, <<0x02, 0x01, 0x00>>)
         {:state_changed, %AutoApi.HonkHornFlashLightsState{}}
   """
   @spec execute(HonkHornFlashLightsState.t(), binary) ::
@@ -54,7 +54,8 @@ defmodule AutoApi.HonkHornFlashLightsCommand do
     end
   end
 
-  def execute(%HonkHornFlashLightsState{} = state, <<0x02>>) do
+  def execute(%HonkHornFlashLightsState{} = state, <<0x02, 0x01, _ds::binary>>) do
+    # TODO: to handle detail of honk
     {:state_changed, state}
   end
 
