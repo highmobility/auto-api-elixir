@@ -47,6 +47,9 @@ defmodule AutoApi.Permissions do
   @byte_9_prefix :binary.list_to_bin(:lists.duplicate(8, 0))
   @byte_9_pad :binary.list_to_bin(:lists.duplicate(6, 0))
 
+  @byte_10_prefix :binary.list_to_bin(:lists.duplicate(9, 0))
+  @byte_10_pad :binary.list_to_bin(:lists.duplicate(5, 0))
+
   @permissions_list [
     # byte 1
     {"certificates.read",
@@ -54,7 +57,8 @@ defmodule AutoApi.Permissions do
       "Allowed to read list of stored certificates (trusted devices)"}},
     {"certificates.write",
      {<<@auto_api_id, 0x02, @byte_1_pad::binary>>, "Allowed to revoke access certificates"}},
-    {"reset.write", {<<@auto_api_id, 0x04, @byte_1_pad::binary>>, "Allowed to reset the Car SDK"}},
+    {"reset.write",
+     {<<@auto_api_id, 0x04, @byte_1_pad::binary>>, "Allowed to reset the Car SDK"}},
     # byte 2
     {"capabilities.read",
      {<<@auto_api_id, @byte_2_prefix::binary, 0x01, @byte_2_pad::binary>>,
@@ -239,7 +243,33 @@ defmodule AutoApi.Permissions do
       "Allowed to get the home charger state"}},
     {"home-charger.write",
      {<<@auto_api_id, @byte_9_prefix::binary, 0x02, @byte_9_pad::binary>>,
-      "Allowed to control the home charger"}}
+      "Allowed to control the home charger"}},
+    {"dashboard-lights.read",
+     {<<@auto_api_id, @byte_9_prefix::binary, 0x04, @byte_9_pad::binary>>,
+      "Allowed to get the dashboard lights"}},
+    {"cruise-control.read",
+     {<<@auto_api_id, @byte_9_prefix::binary, 0x08, @byte_9_pad::binary>>,
+      "Allowed to get the cruise control state"}},
+    {"cruise-control.write",
+     {<<@auto_api_id, @byte_9_prefix::binary, 0x10, @byte_9_pad::binary>>,
+      "Allowed to set the cruise control"}},
+    {"start-stop.read",
+     {<<@auto_api_id, @byte_9_prefix::binary, 0x20, @byte_9_pad::binary>>,
+      "Allowed to get the start-stop state"}},
+    {"start-stop.write",
+     {<<@auto_api_id, @byte_9_prefix::binary, 0x40, @byte_9_pad::binary>>,
+      "Allowed to set the start-stop state"}},
+    {"tachograph.read",
+     {<<@auto_api_id, @byte_9_prefix::binary, 0x80, @byte_9_pad::binary>>,
+      "Allowed to get the tachograph state"}},
+
+    # byte 10
+    {"power-takeoff.read",
+     {<<@auto_api_id, @byte_10_prefix::binary, 0x01, @byte_10_pad::binary>>,
+      "Allowed to get the power take-off state"}},
+    {"power-takeoff.write",
+     {<<@auto_api_id, @byte_10_prefix::binary, 0x02, @byte_10_pad::binary>>,
+      "Allowed to get the power take-off state"}}
   ]
 
   @permissions Enum.into(@permissions_list, %{})
@@ -301,11 +331,16 @@ defmodule AutoApi.Permissions do
     0x100000C8000000000000000000000000
 
     iex> AutoApi.Permissions.to_binary ["car.full_control"]
-    0x1007FFFDFFEFFFFFFF03000000000000
+    0x1007FFFDFFEFFFFFFFFF030000000000
 
     iex> AutoApi.Permissions.parse("charge.read,lights.read,climate.write")
     ...> |> AutoApi.Permissions.to_binary
     0x100000C8000000000000000000000000
+
+    iex> AutoApi.Permissions.parse("power-takeoff.read,tachograph.read")
+    ...> |> AutoApi.Permissions.to_binary
+    0x10000000000000000080010000000000
+
 
   """
   def to_binary([@full_permissions]) do
