@@ -21,7 +21,7 @@ defmodule AutoApi.VehicleLocationState do
   Vehicle Location state
   """
 
-  defstruct coordinates: %{}, heading: nil, altitude: nil, properties: []
+  defstruct coordinates: %{}, heading: nil, altitude: nil, timestamp: nil, properties: []
 
   use AutoApi.State, spec_file: "specs/vehicle_location.json"
 
@@ -29,6 +29,7 @@ defmodule AutoApi.VehicleLocationState do
           coordinates: list | map,
           heading: float | nil,
           altitude: float | nil,
+          timestamp: DateTime.t(),
           properties: list(atom)
         }
 

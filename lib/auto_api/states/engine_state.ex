@@ -22,7 +22,7 @@ defmodule AutoApi.EngineState do
   """
 
   alias AutoApi.CommonData
-  defstruct ignition: nil, accessories_ignition: nil, properties: []
+  defstruct ignition: nil, accessories_ignition: nil, timestamp: nil, properties: []
 
   use AutoApi.State, spec_file: "specs/engine.json"
 
@@ -32,6 +32,7 @@ defmodule AutoApi.EngineState do
   @type t :: %__MODULE__{
           ignition: ignition | nil,
           accessories_ignition: accessories_ignition | nil,
+          timestamp: DateTime.t(),
           properties: list(atom)
         }
 

@@ -28,6 +28,7 @@ defmodule AutoApi.CruiseControlState do
             target_speed: nil,
             acc: nil,
             acc_target_speed: nil,
+            timestamp: nil,
             properties: []
 
   use AutoApi.State, spec_file: "specs/cruise_control.json"
@@ -43,6 +44,7 @@ defmodule AutoApi.CruiseControlState do
           target_speed: integer | nil,
           acc: acc,
           acc_target_speed: integer | nil,
+          timestamp: DateTime.t(),
           properties: list(atom)
         }
 

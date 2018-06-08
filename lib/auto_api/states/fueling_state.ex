@@ -22,12 +22,13 @@ defmodule AutoApi.FuelingState do
   """
 
   alias AutoApi.CommonData
-  defstruct gas_flap: nil, properties: []
+  defstruct gas_flap: nil, timestamp: nil, properties: []
 
   use AutoApi.State, spec_file: "specs/fueling.json"
 
   @type t :: %__MODULE__{
           gas_flap: CommonData.position() | nil,
+          timestamp: DateTime.t(),
           properties: list(atom)
         }
 

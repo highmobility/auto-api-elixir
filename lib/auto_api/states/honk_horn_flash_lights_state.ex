@@ -26,12 +26,13 @@ defmodule AutoApi.HonkHornFlashLightsState do
   @doc """
   HonkHornFlashLights state
   """
-  defstruct flashers: nil, properties: []
+  defstruct flashers: nil, timestamp: nil, properties: []
 
   use AutoApi.State, spec_file: "specs/honk_horn_flash_lights.json"
 
   @type t :: %__MODULE__{
           flashers: flashers | nil,
+          timestamp: DateTime.t(),
           properties: list(atom)
         }
 

@@ -22,7 +22,7 @@ defmodule AutoApi.WindowsState do
   """
 
   alias AutoApi.CommonData
-  defstruct window: [], properties: []
+  defstruct window: [], timestamp: nil, properties: []
 
   use AutoApi.State, spec_file: "specs/windows.json"
 
@@ -32,6 +32,7 @@ defmodule AutoApi.WindowsState do
 
   @type t :: %__MODULE__{
           window: list(window),
+          timestamp: DateTime.t(),
           properties: list(atom)
         }
 

@@ -23,7 +23,7 @@ defmodule AutoApi.VehicleTimeState do
 
   alias AutoApi.CommonData
 
-  defstruct vehicle_time: %{}, properties: []
+  defstruct vehicle_time: %{}, timestamp: nil, properties: []
 
   use AutoApi.State, spec_file: "specs/vehicle_time.json"
 
@@ -38,7 +38,9 @@ defmodule AutoApi.VehicleTimeState do
         }
 
   @type t :: %__MODULE__{
-          vehicle_time: list(vehicle_time) | vehicle_time
+          vehicle_time: list(vehicle_time) | vehicle_time,
+          timestamp: DateTime.t(),
+          properties: list(atom)
         }
 
   @doc """

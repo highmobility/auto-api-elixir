@@ -32,6 +32,7 @@ defmodule AutoApi.TachographState do
             vehicle_overspeed: nil,
             vehicle_direction: nil,
             vehicle_speed: nil,
+            timestamp: nil,
             properties: []
 
   use AutoApi.State, spec_file: "specs/tachograph.json"
@@ -43,6 +44,7 @@ defmodule AutoApi.TachographState do
           vehicle_motion: :not_detected | :detected | nil,
           vehicle_overspeed: :no_overspeed | :overspeed | nil,
           vehicle_direction: :forward | :reverse | nil,
+          timestamp: DateTime.t(),
           properties: list(atom)
         }
 

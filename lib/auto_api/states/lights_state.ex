@@ -29,6 +29,7 @@ defmodule AutoApi.LightsState do
             ambient_light: %{},
             reverse_light: nil,
             emergency_brake_light: nil,
+            timestamp: nil,
             properties: []
 
   use AutoApi.State, spec_file: "specs/lights.json"
@@ -44,6 +45,7 @@ defmodule AutoApi.LightsState do
           ambient_light: ambient_light,
           reverse_light: activity | nil,
           emergency_brake_light: nil,
+          timestamp: DateTime.t(),
           properties: list(atom)
         }
 

@@ -22,13 +22,14 @@ defmodule AutoApi.TrunkState do
   """
 
   alias AutoApi.CommonData
-  defstruct trunk_lock: nil, trunk_position: nil, properties: []
+  defstruct trunk_lock: nil, trunk_position: nil, timestamp: nil, properties: []
 
   use AutoApi.State, spec_file: "specs/trunk.json"
 
   @type t :: %__MODULE__{
           trunk_lock: CommonData.lock() | nil,
           trunk_position: CommonData.position() | nil,
+          timestamp: DateTime.t(),
           properties: list(atom)
         }
 

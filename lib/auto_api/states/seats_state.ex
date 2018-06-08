@@ -22,7 +22,7 @@ defmodule AutoApi.SeatsState do
   """
 
   alias AutoApi.CommonData
-  defstruct seat: [], properties: []
+  defstruct seat: [], timestamp: nil, properties: []
 
   use AutoApi.State, spec_file: "specs/seats.json"
 
@@ -38,6 +38,7 @@ defmodule AutoApi.SeatsState do
 
   @type t :: %__MODULE__{
           seat: list(seat),
+          timestamp: DateTime.t(),
           properties: list(atom)
         }
 

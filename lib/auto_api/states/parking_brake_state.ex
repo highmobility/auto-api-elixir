@@ -22,7 +22,7 @@ defmodule AutoApi.ParkingBrakeState do
   """
 
   alias AutoApi.CommonData
-  defstruct parking_brake: nil, properties: []
+  defstruct parking_brake: nil, timestamp: nil, properties: []
 
   use AutoApi.State, spec_file: "specs/parking_brake.json"
 
@@ -30,6 +30,7 @@ defmodule AutoApi.ParkingBrakeState do
 
   @type t :: %__MODULE__{
           parking_brake: activity | nil,
+          timestamp: DateTime.t(),
           properties: list(atom)
         }
 

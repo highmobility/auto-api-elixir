@@ -22,7 +22,7 @@ defmodule AutoApi.PowerTakeoffState do
   """
 
   alias AutoApi.CommonData
-  defstruct power_takeoff: nil, power_takeoff_engaged: nil, properties: []
+  defstruct power_takeoff: nil, power_takeoff_engaged: nil, timestamp: nil, properties: []
 
   use AutoApi.State, spec_file: "specs/power_takeoff.json"
 
@@ -32,6 +32,7 @@ defmodule AutoApi.PowerTakeoffState do
   @type t :: %__MODULE__{
           power_takeoff: power_takeoff | nil,
           power_takeoff_engaged: power_takeoff_engaged | nil,
+          timestamp: DateTime.t(),
           properties: list(atom)
         }
 

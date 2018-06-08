@@ -65,12 +65,20 @@ defmodule AutoApi.State do
         def do_parse_bin_properties(id, data, state) do
           {prop, value} = parse_bin_property(id, data)
 
-          if is_map(value) do
-            current_value = Map.get(state, prop)
-            %{state | prop => [value | current_value]}
-          else
-            %{state | prop => value}
-          end
+          to_properties(state, prop, value)
+        end
+
+        defp to_properties(state, prop, %DateTime{} = value) do
+          %{state | prop => value}
+        end
+
+        defp to_properties(state, prop, value) when is_map(value) do
+          current_value = Map.get(state, prop)
+          %{state | prop => [value | current_value]}
+        end
+
+        defp to_properties(state, prop, value) do
+          %{state | prop => value}
         end
 
         def parse_state_properties(state) do
@@ -109,6 +117,29 @@ defmodule AutoApi.State do
       end
 
     spec = Poison.decode!(File.read!(opts[:spec_file]))
+
+    timestamp =
+      quote do
+        def parse_bin_property(
+              0xA2,
+              <<year, month, day, hour, minute, second, offset::signed-integer-16>>
+            ) do
+          date = %DateTime{
+            year: year + 2000,
+            month: month,
+            day: day,
+            hour: hour,
+            minute: minute,
+            second: second,
+            utc_offset: offset,
+            time_zone: "",
+            zone_abbr: "",
+            std_offset: 0
+          }
+
+          {:timestamp, date}
+        end
+      end
 
     prop_funs =
       for prop <- spec["properties"] do
@@ -304,6 +335,6 @@ defmodule AutoApi.State do
         end
       end
 
-    [base | prop_funs]
+    [timestamp | [base | prop_funs]]
   end
 end

@@ -22,7 +22,7 @@ defmodule AutoApi.StartStopState do
   """
 
   alias AutoApi.CommonData
-  defstruct start_stop: nil, properties: []
+  defstruct start_stop: nil, timestamp: nil, properties: []
 
   use AutoApi.State, spec_file: "specs/start_stop.json"
 
@@ -30,6 +30,7 @@ defmodule AutoApi.StartStopState do
 
   @type t :: %__MODULE__{
           start_stop: activity | nil,
+          timestamp: DateTime.t(),
           properties: list(atom)
         }
 

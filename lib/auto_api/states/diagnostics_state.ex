@@ -52,6 +52,7 @@ defmodule AutoApi.DiagnosticsState do
             engine_torque: nil,
             engine_load: nil,
             wheel_based_speed: nil,
+            timestamp: nil,
             properties: []
 
   use AutoApi.State, spec_file: "specs/diagnostics.json"
@@ -80,6 +81,7 @@ defmodule AutoApi.DiagnosticsState do
           engine_torque: integer | nil,
           engine_load: integer | nil,
           wheel_based_speed: integer | nil,
+          timestamp: DateTime.t(),
           properties: list(atom)
         }
 

@@ -23,7 +23,7 @@ defmodule AutoApi.DoorLocksState do
   """
 
   alias AutoApi.CommonData
-  defstruct door: [], inside_door_lock: [], outside_door_lock: [], properties: []
+  defstruct door: [], inside_door_lock: [], outside_door_lock: [], timestamp: nil, properties: []
 
   use AutoApi.State, spec_file: "specs/door_locks.json"
 
@@ -47,6 +47,7 @@ defmodule AutoApi.DoorLocksState do
           door: list(door),
           inside_door_lock: list(inside_door_lock),
           outside_door_lock: list(outside_lock),
+          timestamp: DateTime.t(),
           properties: list(atom)
         }
 

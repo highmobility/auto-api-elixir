@@ -36,6 +36,7 @@ defmodule AutoApi.VehicleStatusState do
             engine_max_torque: 0,
             gearbox: :manual,
             state: [],
+            timestamp: nil,
             properties: []
 
   use AutoApi.State, spec_file: "specs/vehicle_status.json"
@@ -61,6 +62,7 @@ defmodule AutoApi.VehicleStatusState do
           engine_max_torque: integer,
           gearbox: gearbox,
           state: list(any),
+          timestamp: DateTime.t(),
           properties: list(atom)
         }
 
