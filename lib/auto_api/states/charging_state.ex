@@ -51,6 +51,7 @@ defmodule AutoApi.ChargingState do
             charge_port_state: nil,
             charge_mode: nil,
             charge_timer: [],
+            timestamp: nil,
             properties: []
 
   use AutoApi.State, spec_file: "specs/charging.json"
@@ -69,6 +70,7 @@ defmodule AutoApi.ChargingState do
           charge_port_state: charge_port_state | nil,
           charge_mode: charge_mode | nil,
           charge_timer: list(charge_timer),
+          timestamp: DateTime.t(),
           properties: list(atom)
         }
 

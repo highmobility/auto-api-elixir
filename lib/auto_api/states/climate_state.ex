@@ -33,6 +33,7 @@ defmodule AutoApi.ClimateState do
             ionising_state: nil,
             defrosting_temperature: nil,
             auto_hvac_profile: [],
+            timestamp: nil,
             properties: []
 
   use AutoApi.State, spec_file: "specs/climate.json"
@@ -41,6 +42,7 @@ defmodule AutoApi.ClimateState do
 
   @type t :: %__MODULE__{
           inside_temperature: float | nil,
+          timestamp: DateTime.t(),
           properties: list(atom)
         }
 
