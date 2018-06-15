@@ -1,4 +1,3 @@
-
 # AutoAPI
 # Copyright (C) 2018 High-Mobility GmbH
 #
@@ -53,10 +52,11 @@ defmodule AutoApi.CapabilitiesCommand do
     end
   end
 
-  def execute(%CapabilitiesState{} = state, <<0x02, capability_id :: binary-size(2)>>) do
-    capability_name = list_capabilities()
-                      |> Map.get(capability_id)
-                      |> apply(:name, [])
+  def execute(%CapabilitiesState{} = state, <<0x02, capability_id::binary-size(2)>>) do
+    capability_name =
+      list_capabilities()
+      |> Map.get(capability_id)
+      |> apply(:name, [])
 
     new_state = struct(%CapabilitiesState{}, [{capability_name, Map.get(state, capability_name)}])
 

@@ -49,4 +49,3 @@ defmodule AutoApi.CapabilitiesCapability do
 
   use AutoApi.Capability
 end
-

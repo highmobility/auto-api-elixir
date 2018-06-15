@@ -19,9 +19,9 @@
 defmodule AutoApi.NotImplemented do
   @behaviour AutoApi.Command
   @behaviour AutoApi.State
-  def execute(_, _), do: throw :not_implemented
-  def state(_), do: throw :not_implemented
-  def base, do: throw :not_implemented
-  def from_bin(_), do: throw :not_implemented
-  def to_bin(_), do: throw :not_implemented
+  def execute(_, _), do: throw(:not_implemented)
+  def state(_), do: throw(:not_implemented)
+  def base, do: throw(:not_implemented)
+  def from_bin(_), do: throw(:not_implemented)
+  def to_bin(_), do: throw(:not_implemented)
 end

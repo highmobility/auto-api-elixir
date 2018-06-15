@@ -46,7 +46,13 @@ defmodule AutoApi.HomeChargerCapability do
   """
 
   @spec_file "specs/home_charger.json"
-  @type command_type :: :get_home_charger_state | :home_charger_state | :set_charge_current | :set_price_tariffs | :activate_deactivate_solar_charging | :enable_disable_wi_fi_hotspot
+  @type command_type ::
+          :get_home_charger_state
+          | :home_charger_state
+          | :set_charge_current
+          | :set_price_tariffs
+          | :activate_deactivate_solar_charging
+          | :enable_disable_wi_fi_hotspot
 
   @command_module AutoApi.NotImplemented
   @state_module AutoApi.NotImplemented
