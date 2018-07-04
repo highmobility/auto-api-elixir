@@ -42,7 +42,8 @@ defmodule AutoApi.CapabilitiesState do
             climate: [],
             parking_brake: [],
             power_takeoff: [],
-            charging: []
+            charging: [],
+            maintenance: []
 
   @behaviour AutoApi.State
 
@@ -69,7 +70,8 @@ defmodule AutoApi.CapabilitiesState do
           climate: list(AutoApi.ClimateState.command_type()),
           parking_brake: list(AutoApi.ParkingBrakeCapability.command_type()),
           power_takeoff: list(AutoApi.PowerTakeoffCapability.command_type()),
-          charging: list(AutoApi.ChargingCapability.command_type())
+          charging: list(AutoApi.ChargingCapability.command_type()),
+          maintenance: list(AutoApi.MaintenanceCapability.command_type())
         }
 
   @spec base :: t
