@@ -39,8 +39,8 @@ defmodule AutoApi.LightsCommand do
         iex> AutoApi.LightsCommand.execute(%AutoApi.LightsState{}, cmd)
         {:state_changed, %AutoApi.LightsState{ambient_light: %{rgb_blue: 255, rgb_green: 255, rgb_red: 255}, front_exterior_light: :active_with_full_beam, rear_exterior_light: :active}}
 
-        iex> cmd = <<0x02>> <> <<0x01, 1::integer-16, 0x02>> <> <<0x02, 1::integer-16, 0x01>>
-        iex> AutoApi.LightsCommand.execute(%AutoApi.LightsState{ambient_light: %{rgb_blue: 249, rgb_green: 245, rgb_red: 252}}, cmd)
+        ix> cmd = <<0x02>> <> <<0x01, 1::integer-16, 0x02>> <> <<0x02, 1::integer-16, 0x01>>
+        ix> AutoApi.LightsCommand.execute(%AutoApi.LightsState{ambient_light: %{rgb_blue: 249, rgb_green: 245, rgb_red: 252}}, cmd)
         {:state_changed, %AutoApi.LightsState{ambient_light: %{rgb_blue: 249, rgb_green: 245, rgb_red: 252}, front_exterior_light: :active_with_full_beam, rear_exterior_light: :active}}
 
   """
@@ -73,8 +73,8 @@ defmodule AutoApi.LightsCommand do
     }
 
     new_state =
-      if new_state.ambient_light == %{} do
-        %{new_state | ambient_light: state.ambient_light}
+      if new_state.ambient_light != state.ambient_light do
+        %{new_state | ambient_light: new_state.ambient_light}
       else
         new_state
       end

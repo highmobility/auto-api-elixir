@@ -40,7 +40,7 @@ defmodule AutoApi.FirmwareVersionState do
   use AutoApi.State, spec_file: "specs/firmware_version.json"
 
   @type t :: %__MODULE__{
-          car_sdk_version: list(car_sdk_version) | car_sdk_version,
+          car_sdk_version: list(car_sdk_version) | car_sdk_version | %{},
           car_sdk_build_name: String.t() | nil,
           application_version: String.t() | nil,
           timestamp: DateTime.t() | nil,

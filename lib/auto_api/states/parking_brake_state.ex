@@ -30,7 +30,7 @@ defmodule AutoApi.ParkingBrakeState do
 
   @type t :: %__MODULE__{
           parking_brake: activity | nil,
-          timestamp: DateTime.t(),
+          timestamp: DateTime.t() | nil,
           properties: list(atom)
         }
 

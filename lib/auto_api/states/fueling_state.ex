@@ -28,7 +28,7 @@ defmodule AutoApi.FuelingState do
 
   @type t :: %__MODULE__{
           gas_flap: CommonData.position() | nil,
-          timestamp: DateTime.t(),
+          timestamp: DateTime.t() | nil,
           properties: list(atom)
         }
 

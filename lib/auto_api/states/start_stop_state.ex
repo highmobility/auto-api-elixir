@@ -30,7 +30,7 @@ defmodule AutoApi.StartStopState do
 
   @type t :: %__MODULE__{
           start_stop: activity | nil,
-          timestamp: DateTime.t(),
+          timestamp: DateTime.t() | nil,
           properties: list(atom)
         }
 

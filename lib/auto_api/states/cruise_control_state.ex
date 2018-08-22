@@ -39,12 +39,12 @@ defmodule AutoApi.CruiseControlState do
   @type acc :: :inactive | :active | nil
 
   @type t :: %__MODULE__{
-          cruise_control: cruise_control,
-          limiter: limiter,
+          cruise_control: cruise_control | nil,
+          limiter: limiter | nil,
           target_speed: integer | nil,
-          acc: acc,
+          acc: acc | nil,
           acc_target_speed: integer | nil,
-          timestamp: DateTime.t(),
+          timestamp: DateTime.t() | nil,
           properties: list(atom)
         }
 

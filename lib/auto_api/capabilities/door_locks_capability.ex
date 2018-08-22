@@ -42,7 +42,7 @@ defmodule AutoApi.DoorLocksCapability do
   """
 
   @spec_file "specs/door_locks.json"
-  @type command_type :: :door_locks | :get_lock_state | :lock_state
+  @type command_type :: :door_locks | :get_lock_state | :lock_state | :lock_unlock_doors
   @capability_size 1
   @sub_capabilities []
 

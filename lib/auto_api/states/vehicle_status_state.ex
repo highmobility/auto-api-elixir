@@ -62,7 +62,7 @@ defmodule AutoApi.VehicleStatusState do
           engine_max_torque: integer,
           gearbox: gearbox,
           state: list(any),
-          timestamp: DateTime.t(),
+          timestamp: DateTime.t() | nil,
           properties: list(atom)
         }
 

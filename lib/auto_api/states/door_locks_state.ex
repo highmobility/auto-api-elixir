@@ -47,7 +47,7 @@ defmodule AutoApi.DoorLocksState do
           door: list(door),
           inside_door_lock: list(inside_door_lock),
           outside_door_lock: list(outside_lock),
-          timestamp: DateTime.t(),
+          timestamp: DateTime.t() | nil,
           properties: list(atom)
         }
 

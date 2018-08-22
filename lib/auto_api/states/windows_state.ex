@@ -32,7 +32,7 @@ defmodule AutoApi.WindowsState do
 
   @type t :: %__MODULE__{
           window: list(window),
-          timestamp: DateTime.t(),
+          timestamp: DateTime.t() | nil,
           properties: list(atom)
         }
 

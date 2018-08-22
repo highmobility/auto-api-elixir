@@ -57,8 +57,8 @@ defmodule AutoApi.ChargingState do
   use AutoApi.State, spec_file: "specs/charging.json"
 
   @type t :: %__MODULE__{
-          charging: charging,
-          estimated_range: integer,
+          charging: charging | nil,
+          estimated_range: integer | nil,
           battery_level: integer | nil,
           battery_current_ac: float | nil,
           battery_current_dc: float | nil,
@@ -70,7 +70,7 @@ defmodule AutoApi.ChargingState do
           charge_port_state: charge_port_state | nil,
           charge_mode: charge_mode | nil,
           charge_timer: list(charge_timer),
-          timestamp: DateTime.t(),
+          timestamp: DateTime.t() | nil,
           properties: list(atom)
         }
 

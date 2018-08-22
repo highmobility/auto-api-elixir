@@ -38,7 +38,7 @@ defmodule AutoApi.SeatsState do
 
   @type t :: %__MODULE__{
           seat: list(seat),
-          timestamp: DateTime.t(),
+          timestamp: DateTime.t() | nil,
           properties: list(atom)
         }
 

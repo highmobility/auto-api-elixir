@@ -35,7 +35,7 @@ defmodule AutoApi.MaintenanceState do
   @type t :: %__MODULE__{
           days_to_next_service: integer | nil,
           kilometers_to_next_service: integer | nil,
-          timestamp: DateTime.t(),
+          timestamp: DateTime.t() | nil,
           properties: list(atom)
         }
 

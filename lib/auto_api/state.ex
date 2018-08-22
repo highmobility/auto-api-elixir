@@ -163,7 +163,7 @@ defmodule AutoApi.State do
               def parse_bin_property(unquote(prop_id), <<value>>) do
                 case parse_enum(unquote(prop_id), "id", value) do
                   nil ->
-                    {:error, {:can_not_parse, value}}
+                    throw({:error, {:can_not_parse_enum, value}})
 
                   matched_value ->
                     {unquote(prop_name), String.to_atom(matched_value["name"])}
@@ -335,6 +335,7 @@ defmodule AutoApi.State do
         end
       end
 
-    [timestamp | [base | prop_funs]]
+    # [timestamp | [base | prop_funs]]
+    [timestamp] ++ [base] ++ [prop_funs]
   end
 end
