@@ -70,7 +70,7 @@ defmodule AutoApi.DashboardLightsCommand do
         iex> AutoApi.DashboardLightsCommand.to_bin(:get_dashboard_lights, [])
         <<0x00>>
   """
-  @spec to_bin(DiagnosticsCapability.command_type(), list(any())) :: binary
+  @spec to_bin(DashboardLightsCapability.command_type(), list(any())) :: binary
   def to_bin(:get_dashboard_lights, []) do
     cmd_id = DashboardLightsCapability.command_id(:get_dashboard_lights)
     <<cmd_id>>

@@ -47,7 +47,7 @@ defmodule AutoApi.VehicleStatusState do
   @type gearbox :: :manual | :automatic | :semi_automatic
 
   @type t :: %__MODULE__{
-          vin: Sting.t(),
+          vin: String.t(),
           powertrain: powertrain,
           model_name: String.t(),
           name: String.t(),
