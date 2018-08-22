@@ -11,4 +11,4 @@ cache:
     - deps
 script:
   - mix test
-  - MIX_ENV=test mix dialyzer
+  - MIX_ENV=test mix dialyzer --halt-exit-status
