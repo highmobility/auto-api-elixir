@@ -36,6 +36,7 @@ defmodule AutoApi.State do
         alias AutoApi.CommonData
         @behaviour AutoApi.State
         @spec base :: t
+        @dialyzer {:nowarn_function, to_properties: 3}
         @identifier __MODULE__
                     |> Atom.to_string()
                     |> String.replace("State", "Capability")
