@@ -68,8 +68,8 @@ defmodule AutoApi.State do
           to_properties(state, prop, value)
         end
 
-        defp to_properties(state, prop, %DateTime{} = value) do
-          %{state | prop => value}
+        defp to_properties(state, :timestamp, %DateTime{} = value) do
+          %{state | :timestamp => value}
         end
 
         defp to_properties(state, prop, value) when is_map(value) do
@@ -335,7 +335,6 @@ defmodule AutoApi.State do
         end
       end
 
-    # [timestamp | [base | prop_funs]]
     [timestamp] ++ [base] ++ [prop_funs]
   end
 end
