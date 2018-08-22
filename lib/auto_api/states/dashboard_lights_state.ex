@@ -71,7 +71,7 @@ defmodule AutoApi.DashboardLightsState do
   @type dashboard_light :: %{light_name: light_name, state: state}
   @type t :: %__MODULE__{
           dashboard_light: list(dashboard_light),
-          timestamp: DateTime.t(),
+          timestamp: DateTime.t() | nil,
           properties: list(atom)
         }
 

@@ -29,7 +29,7 @@ defmodule AutoApi.VehicleLocationState do
           coordinates: list | map,
           heading: float | nil,
           altitude: float | nil,
-          timestamp: DateTime.t(),
+          timestamp: DateTime.t() | nil,
           properties: list(atom)
         }
 

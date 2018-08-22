@@ -32,7 +32,7 @@ defmodule AutoApi.HonkHornFlashLightsState do
 
   @type t :: %__MODULE__{
           flashers: flashers | nil,
-          timestamp: DateTime.t(),
+          timestamp: DateTime.t() | nil,
           properties: list(atom)
         }
 

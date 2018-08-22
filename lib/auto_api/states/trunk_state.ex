@@ -29,7 +29,7 @@ defmodule AutoApi.TrunkState do
   @type t :: %__MODULE__{
           trunk_lock: CommonData.lock() | nil,
           trunk_position: CommonData.position() | nil,
-          timestamp: DateTime.t(),
+          timestamp: DateTime.t() | nil,
           properties: list(atom)
         }
 

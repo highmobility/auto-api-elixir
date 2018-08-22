@@ -42,10 +42,10 @@ defmodule AutoApi.LightsState do
           front_exterior_light: front_exterior_light | nil,
           rear_exterior_light: activity | nil,
           interior_light: activity | nil,
-          ambient_light: ambient_light,
+          ambient_light: ambient_light | %{},
           reverse_light: activity | nil,
           emergency_brake_light: nil,
-          timestamp: DateTime.t(),
+          timestamp: DateTime.t() | nil,
           properties: list(atom)
         }
 

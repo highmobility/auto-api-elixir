@@ -32,7 +32,7 @@ defmodule AutoApi.PowerTakeoffState do
   @type t :: %__MODULE__{
           power_takeoff: power_takeoff | nil,
           power_takeoff_engaged: power_takeoff_engaged | nil,
-          timestamp: DateTime.t(),
+          timestamp: DateTime.t() | nil,
           properties: list(atom)
         }
 

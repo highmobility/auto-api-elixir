@@ -47,7 +47,7 @@ defmodule AutoApi.VehicleStatusState do
   @type gearbox :: :manual | :automatic | :semi_automatic
 
   @type t :: %__MODULE__{
-          vin: Sting.t(),
+          vin: String.t(),
           powertrain: powertrain,
           model_name: String.t(),
           name: String.t(),
@@ -62,7 +62,7 @@ defmodule AutoApi.VehicleStatusState do
           engine_max_torque: integer,
           gearbox: gearbox,
           state: list(any),
-          timestamp: DateTime.t(),
+          timestamp: DateTime.t() | nil,
           properties: list(atom)
         }
 

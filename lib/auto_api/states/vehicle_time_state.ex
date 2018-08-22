@@ -38,8 +38,8 @@ defmodule AutoApi.VehicleTimeState do
         }
 
   @type t :: %__MODULE__{
-          vehicle_time: list(vehicle_time) | vehicle_time,
-          timestamp: DateTime.t(),
+          vehicle_time: list(vehicle_time) | vehicle_time | %{},
+          timestamp: DateTime.t() | nil,
           properties: list(atom)
         }
 

@@ -32,7 +32,7 @@ defmodule AutoApi.EngineState do
   @type t :: %__MODULE__{
           ignition: ignition | nil,
           accessories_ignition: accessories_ignition | nil,
-          timestamp: DateTime.t(),
+          timestamp: DateTime.t() | nil,
           properties: list(atom)
         }
 

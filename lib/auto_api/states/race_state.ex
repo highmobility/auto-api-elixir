@@ -70,7 +70,7 @@ defmodule AutoApi.RaceState do
           clutch_pedal_switch: active_inactive | nil,
           accelerator_pedal_idle_switch: active_inactive | nil,
           accelerator_pedal_kickdown_switch: active_inactive | nil,
-          timestamp: DateTime.t(),
+          timestamp: DateTime.t() | nil,
           properties: list(atom)
         }
 

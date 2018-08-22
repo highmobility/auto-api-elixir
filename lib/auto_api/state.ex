@@ -36,6 +36,7 @@ defmodule AutoApi.State do
         alias AutoApi.CommonData
         @behaviour AutoApi.State
         @spec base :: t
+        @dialyzer {:nowarn_function, to_properties: 3}
         @identifier __MODULE__
                     |> Atom.to_string()
                     |> String.replace("State", "Capability")
@@ -68,8 +69,8 @@ defmodule AutoApi.State do
           to_properties(state, prop, value)
         end
 
-        defp to_properties(state, prop, %DateTime{} = value) do
-          %{state | prop => value}
+        defp to_properties(state, :timestamp, %DateTime{} = value) do
+          %{state | :timestamp => value}
         end
 
         defp to_properties(state, prop, value) when is_map(value) do
@@ -163,7 +164,7 @@ defmodule AutoApi.State do
               def parse_bin_property(unquote(prop_id), <<value>>) do
                 case parse_enum(unquote(prop_id), "id", value) do
                   nil ->
-                    {:error, {:can_not_parse, value}}
+                    throw({:error, {:can_not_parse_enum, value}})
 
                   matched_value ->
                     {unquote(prop_name), String.to_atom(matched_value["name"])}
@@ -335,6 +336,6 @@ defmodule AutoApi.State do
         end
       end
 
-    [timestamp | [base | prop_funs]]
+    [timestamp] ++ [base] ++ [prop_funs]
   end
 end

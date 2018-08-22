@@ -42,7 +42,7 @@ defmodule AutoApi.ClimateState do
 
   @type t :: %__MODULE__{
           inside_temperature: float | nil,
-          timestamp: DateTime.t(),
+          timestamp: DateTime.t() | nil,
           properties: list(atom)
         }
 

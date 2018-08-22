@@ -81,7 +81,7 @@ defmodule AutoApi.DiagnosticsState do
           engine_torque: integer | nil,
           engine_load: integer | nil,
           wheel_based_speed: integer | nil,
-          timestamp: DateTime.t(),
+          timestamp: DateTime.t() | nil,
           properties: list(atom)
         }
 
