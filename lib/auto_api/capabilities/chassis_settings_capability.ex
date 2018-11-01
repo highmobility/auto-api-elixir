@@ -31,18 +31,18 @@ defmodule AutoApi.ChassisSettingsCapability do
       :get_chassis_settings
       iex> C.command_name(0x01)
       :chassis_settings
-      iex> C.command_name(0x02)
+      iex> C.command_name(0x12)
       :set_driving_mode
-      iex> C.command_name(0x03)
-      :start_stop_sport_chrono
-      iex> C.command_name(0x04)
-      :set_spring_rate
-      iex> C.command_name(0x05)
+      iex> C.command_name(0x13)
+      :start_stop_sports_chrono
+      iex> C.command_name(0x14)
+      :set_spring_rates
+      iex> C.command_name(0x15)
       :set_chassis_position
       iex> length(C.properties)
-      4
+      8
       iex> List.last(C.properties)
-      {0x04, :chassis_position}
+      {0x0A, :minimum_chassis_position}
   """
 
   @spec_file "specs/chassis_settings.json"
