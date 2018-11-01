@@ -19,4 +19,16 @@
 defmodule AutoApi.ChargingStateTest do
   use ExUnit.Case
   doctest AutoApi.ChargingState
+
+  describe "from_bin/1" do
+    test "with a list properties" do
+      state = AutoApi.ChargingState.from_bin(<<0x11, 3::integer-16, 0x01, 0x12, 0x01>>)
+
+      expected_state = %AutoApi.ChargingState{
+        departure_times: [%{active_state: :active, hour: 18, minute: 1}]
+      }
+
+      assert state == expected_state
+    end
+  end
 end

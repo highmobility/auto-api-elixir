@@ -31,20 +31,22 @@ defmodule AutoApi.ChargingCapability do
       :get_charge_state
       iex> C.command_name(0x01)
       :charge_state
-      iex> C.command_name(0x02)
+      iex> C.command_name(0x12)
       :start_stop_charging
-      iex> C.command_name(0x03)
+      iex> C.command_name(0x13)
       :set_charge_limit
-      iex> C.command_name(0x04)
-      :open_close_charge_port
-      iex> C.command_name(0x05)
+      iex> C.command_name(0x14)
+      :open_close_charging_port
+      iex> C.command_name(0x15)
       :set_charge_mode
-      iex> C.command_name(0x06)
-      :set_charge_timer
+      iex> C.command_name(0x16)
+      :set_charging_timers
+      iex> C.command_name(0x17)
+      :set_reduction_of_charging_current_times
       iex> length(C.properties)
-      13
+      20
       iex> List.last(C.properties)
-      {0x0d, :charge_timer}
+      {23, :charging_state}
   """
 
   @spec_file "specs/charging.json"

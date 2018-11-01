@@ -31,37 +31,9 @@ defmodule AutoApi.ChargingCommand do
         iex> AutoApi.ChargingCommand.execute(%AutoApi.ChargingState{}, <<0x00>>)
         {:state, %AutoApi.ChargingState{}}
 
-        iex> command = <<0x01>> <> <<0x01, 1::integer-16, 0x03>>
+        iex> command = <<0x01>> <> <<0x02, 2::integer-16, 0, 0x03>>
         iex> AutoApi.ChargingCommand.execute(%AutoApi.ChargingState{}, command)
-        {:state_changed, %AutoApi.ChargingState{charging: :charging_complete}}
-
-  Start/Stop Charging
-        iex> AutoApi.ChargingCommand.execute(%AutoApi.ChargingState{}, <<0x02, 0x00>>)
-        {:state_changed, %AutoApi.ChargingState{charging: :plugged_in}}
-        iex> AutoApi.ChargingCommand.execute(%AutoApi.ChargingState{}, <<0x02, 0x01>>)
-        {:state_changed, %AutoApi.ChargingState{charging: :charging}}
-
-  Set Charging Limit
-        iex> AutoApi.ChargingCommand.execute(%AutoApi.ChargingState{}, <<0x03, 0x00>>)
-        {:state_changed, %AutoApi.ChargingState{charge_limit: 0}}
-        iex> AutoApi.ChargingCommand.execute(%AutoApi.ChargingState{}, <<0x03, 0x5A>>)
-        {:state_changed, %AutoApi.ChargingState{charge_limit: 90}}
-
-  Open/Close Charge Port
-        iex> AutoApi.ChargingCommand.execute(%AutoApi.ChargingState{charge_port_state: :open}, <<0x04, 0x00>>)
-        {:state_changed, %AutoApi.ChargingState{charge_port_state: :closed}}
-        iex> AutoApi.ChargingCommand.execute(%AutoApi.ChargingState{charge_port_state: :closed}, <<0x04, 0x01>>)
-        {:state_changed, %AutoApi.ChargingState{charge_port_state: :open}}
-
-  Set Charge Mode
-        iex> AutoApi.ChargingCommand.execute(%AutoApi.ChargingState{charge_mode: :timer_based}, <<0x05, 0x00>>)
-        {:state_changed, %AutoApi.ChargingState{charge_mode: :immediate}}
-        iex> AutoApi.ChargingCommand.execute(%AutoApi.ChargingState{charge_mode: :inductive}, <<0x05, 0x01>>)
-        {:state_changed, %AutoApi.ChargingState{charge_mode: :timer_based}}
-
-  Set Charge Timer
-        iex> AutoApi.ChargingCommand.execute(%AutoApi.ChargingState{}, <<0x06, 0x0D, 9::integer-16, 0x01, 99, 12, 31, 23, 59, 59, 0, 0>>)
-        {:state_changed, %AutoApi.ChargingState{charge_timer: [%{timer_type: :preferred_end_time, year: 99, month: 12, day: 31, hour: 23, minute: 59, second: 59, utc_time_offset: 0}]}}
+        {:state_changed, %AutoApi.ChargingState{estimated_range: 3}}
 
   """
   @spec execute(ChargingState.t(), binary) :: {:state | :state_changed, ChargingState.t()}
@@ -79,70 +51,12 @@ defmodule AutoApi.ChargingCommand do
     end
   end
 
-  def execute(%ChargingState{} = state, <<0x02, charging_cmd>>) do
-    charging = if(charging_cmd == 0x00, do: :plugged_in, else: :charging)
-    new_state = %{state | charging: charging}
-
-    if new_state == state do
-      {:state, state}
-    else
-      {:state_changed, new_state}
-    end
-  end
-
-  def execute(%ChargingState{} = state, <<0x03, charge_limit_cmd>>) do
-    new_state = ChargingState.from_bin(<<0x08, 1::integer-16, charge_limit_cmd>>)
-    new_state = %{state | charge_limit: new_state.charge_limit}
-
-    if new_state == state do
-      {:state, state}
-    else
-      {:state_changed, new_state}
-    end
-  end
-
-  def execute(%ChargingState{} = state, <<0x04, charge_port_cmd>>) do
-    new_state = ChargingState.from_bin(<<0x0B, 1::integer-16, charge_port_cmd>>)
-    new_state = %{state | charge_port_state: new_state.charge_port_state}
-
-    if new_state == state do
-      {:state, state}
-    else
-      {:state_changed, new_state}
-    end
-  end
-
-  def execute(%ChargingState{} = state, <<0x05, charge_mode_cmd>>) do
-    new_state = ChargingState.from_bin(<<0x0C, 1::integer-16, charge_mode_cmd>>)
-    new_state = %{state | charge_mode: new_state.charge_mode}
-
-    if new_state == state do
-      {:state, state}
-    else
-      {:state_changed, new_state}
-    end
-  end
-
-  def execute(%ChargingState{} = state, <<0x06, charge_timers::binary>>) do
-    new_state = ChargingState.from_bin(charge_timers)
-    new_state = %{state | charge_timer: new_state.charge_timer}
-
-    if new_state == state do
-      {:state, state}
-    else
-      {:state_changed, new_state}
-    end
-  end
-
   @doc """
   Converts ChargingCommand state to capability's state in binary
 
-        iex> properties = [:battery_level]
+        iex> properties = [:battery_level, :time_to_complete_charge]
         iex> AutoApi.ChargingCommand.state(%AutoApi.ChargingState{battery_level: 01, properties: properties})
         <<1, 3, 0, 1, 1>>
-        iex> properties = AutoApi.ChargingCapability.properties |> Enum.into(%{}) |> Map.values()
-        iex> AutoApi.ChargingCommand.state(%AutoApi.ChargingState{charge_timer: [%{timer_type: :departure_time, year: 99, month: 10, day: 1, hour: 10, minute: 55, second: 59, utc_time_offset: 30}], properties: properties})
-        <<1, 13, 0, 9, 2, 99, 10, 1, 10, 55, 59, 0, 30>>
   """
   @spec state(ChargingState.t()) :: binary
   def state(%ChargingState{} = state) do

@@ -13,52 +13,210 @@
             "name": "charge_state"
         },
         {
-            "id": 2,
-            "name": "start_stop_charging"
+            "properties": [
+                {
+                    "mandatory": true,
+                    "name": "active_state",
+                    "values": [
+                        {
+                            "name": "stop_charging",
+                            "id": 0
+                        },
+                        {
+                            "name": "start_charging",
+                            "id": 1
+                        }
+                    ],
+                    "type": "enum",
+                    "id": 1,
+                    "size": 1
+                }
+            ],
+            "name": "start_stop_charging",
+            "id": 18
         },
         {
-            "id": 3,
-            "name": "set_charge_limit"
+            "properties": [
+                {
+                    "mandatory": true,
+                    "description": "Charge limit percentage between 0-100",
+                    "size": 1,
+                    "type": "integer",
+                    "id": 1,
+                    "name": "charge_limit"
+                }
+            ],
+            "name": "set_charge_limit",
+            "id": 19
         },
         {
-            "id": 4,
-            "name": "open_close_charge_port"
+            "properties": [
+                {
+                    "mandatory": true,
+                    "name": "charge_port_state",
+                    "values": [
+                        {
+                            "name": "closed",
+                            "id": 0
+                        },
+                        {
+                            "name": "open",
+                            "id": 1
+                        }
+                    ],
+                    "type": "enum",
+                    "id": 1,
+                    "size": 1
+                }
+            ],
+            "name": "open_close_charging_port",
+            "id": 20
         },
         {
-            "id": 5,
-            "name": "set_charge_mode"
+            "properties": [
+                {
+                    "mandatory": true,
+                    "name": "charge_mode",
+                    "values": [
+                        {
+                            "name": "timer_based",
+                            "id": 1
+                        },
+                        {
+                            "name": "inductive",
+                            "id": 2
+                        }
+                    ],
+                    "type": "enum",
+                    "id": 1,
+                    "size": 1
+                }
+            ],
+            "name": "set_charge_mode",
+            "id": 21
         },
         {
-            "id": 6,
-            "name": "set_charge_timer"
+            "properties": [
+                {
+                    "mandatory": true,
+                    "name": "timers",
+                    "items": [
+                        {
+                            "type": "enum",
+                            "values": [
+                                {
+                                    "name": "preferred_start_time",
+                                    "id": 0
+                                },
+                                {
+                                    "name": "preferred_end_time",
+                                    "id": 1
+                                },
+                                {
+                                    "name": "departure_date",
+                                    "id": 2
+                                }
+                            ],
+                            "name": "timer_type",
+                            "size": 1
+                        },
+                        {
+                            "size": 1,
+                            "type": "integer",
+                            "description": "Value between 0 and 99, which corresponds to 2000-2099",
+                            "name": "year"
+                        },
+                        {
+                            "size": 1,
+                            "type": "integer",
+                            "description": "Value between 1 and 12",
+                            "name": "month"
+                        },
+                        {
+                            "size": 1,
+                            "type": "integer",
+                            "description": "Value between 1 and 31",
+                            "name": "day"
+                        },
+                        {
+                            "size": 1,
+                            "type": "integer",
+                            "description": "Value between 0 and 23",
+                            "name": "hour"
+                        },
+                        {
+                            "size": 1,
+                            "type": "integer",
+                            "description": "Value between 0 and 59",
+                            "name": "minute"
+                        },
+                        {
+                            "size": 1,
+                            "type": "integer",
+                            "description": "Value between 0 and 59",
+                            "name": "second"
+                        },
+                        {
+                            "size": 2,
+                            "type": "integer",
+                            "description": "UTC time offset in minutes, which can be negative",
+                            "name": "utc_time_offset"
+                        }
+                    ],
+                    "multiple": true,
+                    "id": 13,
+                    "size": 9
+                }
+            ],
+            "name": "set_charging_timers",
+            "id": 22
+        },
+        {
+            "properties": [
+                {
+                    "pretty_name": "Reduction of charging-current times",
+                    "mandatory": true,
+                    "name": "reduction_times",
+                    "items": [
+                        {
+                            "type": "enum",
+                            "values": [
+                                {
+                                    "name": "start",
+                                    "id": 0
+                                },
+                                {
+                                    "name": "stop",
+                                    "id": 1
+                                }
+                            ],
+                            "name": "start_stop",
+                            "size": 1
+                        },
+                        {
+                            "size": 1,
+                            "type": "integer",
+                            "description": "Value between 0 and 23",
+                            "name": "hour"
+                        },
+                        {
+                            "size": 1,
+                            "type": "integer",
+                            "description": "Value between 0 and 59",
+                            "name": "minute"
+                        }
+                    ],
+                    "multiple": true,
+                    "id": 1,
+                    "size": 3
+                }
+            ],
+            "name": "set_reduction_of_charging_current_times",
+            "id": 23
         }
     ],
     "id_msb": 0,
     "properties": [
-        {
-            "type": "enum",
-            "size": 1,
-            "values": [
-                {
-                    "name": "disconnected",
-                    "id": 0
-                },
-                {
-                    "name": "plugged_in",
-                    "id": 1
-                },
-                {
-                    "name": "charging",
-                    "id": 2
-                },
-                {
-                    "name": "charging_complete",
-                    "id": 3
-                }
-            ],
-            "id": 1,
-            "name": "charging"
-        },
         {
             "size": 2,
             "type": "integer",
@@ -75,35 +233,39 @@
         },
         {
             "pretty_name": "Battery current (AC)",
-            "description": "Battery current in 4-bytes per IEEE 754",
             "name": "battery_current_ac",
+            "title_case_name": "batteryCurrentAC",
+            "size": 4,
             "type": "float",
             "id": 4,
-            "size": 4
+            "description": "Battery current in 4-bytes per IEEE 754"
         },
         {
             "pretty_name": "Battery current (DC)",
-            "description": "Battery current in 4-bytes per IEEE 754",
             "name": "battery_current_dc",
+            "title_case_name": "batteryCurrentDC",
+            "size": 4,
             "type": "float",
             "id": 5,
-            "size": 4
+            "description": "Battery current in 4-bytes per IEEE 754"
         },
         {
             "pretty_name": "Charger voltage (AC)",
-            "description": "Charger voltage in 4-bytes per IEEE 754",
             "name": "charger_voltage_ac",
+            "title_case_name": "batteryVoltageAC",
+            "size": 4,
             "type": "float",
             "id": 6,
-            "size": 4
+            "description": "Charger voltage in 4-bytes per IEEE 754"
         },
         {
             "pretty_name": "Charger voltage (DC)",
-            "description": "Charger voltage in 4-bytes per IEEE 754",
             "name": "charger_voltage_dc",
+            "title_case_name": "batteryVoltageDC",
+            "size": 4,
             "type": "float",
             "id": 7,
-            "size": 4
+            "description": "Charger voltage in 4-bytes per IEEE 754"
         },
         {
             "size": 1,
@@ -113,7 +275,7 @@
             "id": 8
         },
         {
-            "size": 2,
+            "size": 1,
             "type": "integer",
             "description": "Time until charging completed in minutes",
             "name": "time_to_complete_charge",
@@ -121,11 +283,12 @@
         },
         {
             "pretty_name": "Charging rate (kW)",
-            "description": "Charge rate in kW represented as 4-bytes per IEEE 754, when charging",
             "name": "charging_rate_kw",
+            "title_case_name": "chargingRateKW",
+            "size": 4,
             "type": "float",
             "id": 10,
-            "size": 4
+            "description": "Charge rate in kW represented as 4-bytes per IEEE 754, when charging"
         },
         {
             "type": "enum",
@@ -164,6 +327,134 @@
             "name": "charge_mode"
         },
         {
+            "pretty_name": "Maximum charging current",
+            "description": "Maximum charging current in 4-bytes per IEEE 754",
+            "name": "max_charging_current",
+            "type": "float",
+            "id": 14,
+            "size": 4
+        },
+        {
+            "type": "enum",
+            "size": 1,
+            "values": [
+                {
+                    "name": "type_1",
+                    "id": 0
+                },
+                {
+                    "name": "type_2",
+                    "id": 1
+                },
+                {
+                    "pretty_name": "Combined Charging System (CCS)",
+                    "name": "ccs",
+                    "id": 2
+                },
+                {
+                    "pretty_name": "CHAdeMO",
+                    "name": "chademo",
+                    "id": 3
+                }
+            ],
+            "id": 15,
+            "name": "plug_type"
+        },
+        {
+            "type": "enum",
+            "size": 1,
+            "values": [
+                {
+                    "name": "not_chosen",
+                    "id": 0
+                },
+                {
+                    "name": "chosen",
+                    "id": 1
+                }
+            ],
+            "id": 16,
+            "name": "charging_window_chosen"
+        },
+        {
+            "items": [
+                {
+                    "type": "enum",
+                    "values": [
+                        {
+                            "name": "inactive",
+                            "id": 0
+                        },
+                        {
+                            "name": "active",
+                            "id": 1
+                        }
+                    ],
+                    "name": "active_state",
+                    "size": 1
+                },
+                {
+                    "size": 1,
+                    "type": "integer",
+                    "description": "Value between 0 and 23",
+                    "name": "hour"
+                },
+                {
+                    "size": 1,
+                    "type": "integer",
+                    "description": "Value between 0 and 59",
+                    "name": "minute"
+                }
+            ],
+            "size": 3,
+            "multiple": true,
+            "id": 17,
+            "name": "departure_times"
+        },
+        {
+            "pretty_name": "Reduction of charging-current times",
+            "multiple": true,
+            "name": "reduction_times",
+            "items": [
+                {
+                    "type": "enum",
+                    "values": [
+                        {
+                            "name": "start",
+                            "id": 0
+                        },
+                        {
+                            "name": "stop",
+                            "id": 1
+                        }
+                    ],
+                    "name": "start_stop",
+                    "size": 1
+                },
+                {
+                    "size": 1,
+                    "type": "integer",
+                    "description": "Value between 0 and 23",
+                    "name": "hour"
+                },
+                {
+                    "size": 1,
+                    "type": "integer",
+                    "description": "Value between 0 and 59",
+                    "name": "minute"
+                }
+            ],
+            "id": 19,
+            "size": 3
+        },
+        {
+            "size": 4,
+            "type": "float",
+            "description": "Battery temperature in Celsius in 4-bytes per IEEE 754",
+            "name": "battery_temperature",
+            "id": 20
+        },
+        {
             "items": [
                 {
                     "type": "enum",
@@ -177,7 +468,7 @@
                             "id": 1
                         },
                         {
-                            "name": "departure_time",
+                            "name": "departure_date",
                             "id": 2
                         }
                     ],
@@ -228,9 +519,58 @@
                 }
             ],
             "size": 9,
-            "id": 13,
-            "name": "charge_timer"
+            "multiple": true,
+            "id": 21,
+            "name": "timers"
+        },
+        {
+            "type": "enum",
+            "size": 1,
+            "values": [
+                {
+                    "name": "disconnected",
+                    "id": 0
+                },
+                {
+                    "name": "plugged_in",
+                    "id": 1
+                }
+            ],
+            "id": 22,
+            "name": "plugged_in"
+        },
+        {
+            "type": "enum",
+            "size": 1,
+            "values": [
+                {
+                    "name": "not_charging",
+                    "id": 0
+                },
+                {
+                    "name": "charging",
+                    "id": 1
+                },
+                {
+                    "name": "charging_complete",
+                    "id": 2
+                },
+                {
+                    "name": "initialising",
+                    "id": 3
+                },
+                {
+                    "name": "charging_paused",
+                    "id": 4
+                },
+                {
+                    "name": "charging_error",
+                    "id": 5
+                }
+            ],
+            "id": 23,
+            "name": "charging_state"
         }
     ],
-    "api_update": 6
+    "api_update": 8
 }
