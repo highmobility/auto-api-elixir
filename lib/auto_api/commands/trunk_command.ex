@@ -43,9 +43,6 @@ defmodule AutoApi.TrunkCommand do
 
         iex> AutoApi.TrunkCommand.execute(%AutoApi.TrunkState{}, <<0x02, 0x02, 1::integer-16, 0x01, 0x01, 1::integer-16, 0x00>>)
         {:state_changed, %AutoApi.TrunkState{trunk_position: :open, trunk_lock: :unlocked}}
-
-        iex> AutoApi.DoorLocksCommand.execute(%AutoApi.DoorLocksState{door: [%{door_location: :front_left, door_lock: :unlocked, door_position: :closed}]}, <<0x02, 0x01>>)
-        {:state_changed, %AutoApi.DoorLocksState{door: [%{door_location: :front_left, door_lock: :locked, door_position: :closed}]}}
   """
   @spec execute(TrunkState.t(), binary) :: {:state | :state_changed, TrunkState.t()}
   def execute(%TrunkState{} = state, <<0x00>>) do
