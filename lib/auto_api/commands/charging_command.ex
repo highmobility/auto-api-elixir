@@ -51,6 +51,10 @@ defmodule AutoApi.ChargingCommand do
     end
   end
 
+  def execute(%ChargingState{} = state, <<0x12, 0x01, _charging_status>>) do
+    {:state_changed, state}
+  end
+
   @doc """
   Converts ChargingCommand state to capability's state in binary
 

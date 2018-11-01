@@ -38,13 +38,13 @@ defmodule AutoApi.Command do
       iex> AutoApi.Command.meta_data(<<0, 0x33, 0x00>>)
       %{message_id: :diagnostics, message_type: :get_diagnostics_state, module: AutoApi.DiagnosticsCapability}
 
-      iex> binary_command = <<0x00, 0x23, 0x2, 0x01>>
+      iex> binary_command = <<0x00, 0x23, 0x12, 0x01, 0x00>>
       iex> %{module: cap} = AutoApi.Command.meta_data(binary_command)
       %{message_id: :charging, message_type: :start_stop_charging, module: AutoApi.ChargingCapability}
       iex> base_state = cap.state.base
       %AutoApi.ChargingState{}
       iex> AutoApi.Command.execute(base_state, cap.command, binary_command)
-      {:state_changed, %AutoApi.ChargingState{charging: :charging}}
+      {:state_changed, %AutoApi.ChargingState{}}
 
       ie> binary_command = <<0x00, 0x20, 0x1, 0x01, 0x00, 0x00, 0x00>>
       ie> %{module: cap} = AutoApi.Command.meta_data(binary_command)
