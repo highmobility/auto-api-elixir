@@ -34,15 +34,6 @@ defmodule AutoApi.CruiseControlCommand do
         iex> command = <<0x01>> <> <<0x03, 2::integer-16, 0x01, 0x99>>
         iex> AutoApi.CruiseControlCommand.execute(%AutoApi.CruiseControlState{}, command)
         {:state_changed, %AutoApi.CruiseControlState{target_speed: 409}}
-
-        iex> AutoApi.CruiseControlCommand.execute(%AutoApi.CruiseControlState{}, <<0x02>>)
-        {:state_changed, %AutoApi.CruiseControlState{cruise_control: :active}}
-
-        iex> AutoApi.CruiseControlCommand.execute(%AutoApi.CruiseControlState{cruise_control: :inactive}, <<0x02>>)
-        {:state_changed, %AutoApi.CruiseControlState{cruise_control: :active}}
-
-        iex> AutoApi.CruiseControlCommand.execute(%AutoApi.CruiseControlState{cruise_control: :active}, <<0x02>>)
-        {:state_changed, %AutoApi.CruiseControlState{cruise_control: :inactive}}
   """
   @spec execute(CruiseControlState.t(), binary) ::
           {:state | :state_changed, CruiseControlState.t()}
@@ -52,18 +43,6 @@ defmodule AutoApi.CruiseControlCommand do
 
   def execute(%CruiseControlState{} = state, <<0x01, ds::binary>>) do
     new_state = CruiseControlState.from_bin(ds)
-
-    if new_state == state do
-      {:state, state}
-    else
-      {:state_changed, new_state}
-    end
-  end
-
-  def execute(%CruiseControlState{} = state, <<0x02>>) do
-    current_value = state.cruise_control || :inactive
-    new_value = if(current_value == :inactive, do: :active, else: :inactive)
-    new_state = %{state | cruise_control: new_value}
 
     if new_state == state do
       {:state, state}
@@ -92,7 +71,7 @@ defmodule AutoApi.CruiseControlCommand do
       <<0x00>>
 
       iex> AutoApi.CruiseControlCommand.to_bin(:activate_deactivate_cruise_control, [])
-      <<2>>
+      <<0x12>>
   """
   @spec to_bin(CruiseControlCapability.command_type(), list(any)) :: binary
   def to_bin(:get_cruise_control_state = msg, _args) do

@@ -1,9 +1,48 @@
 {
     "category": "chassis",
-    "id_msb": 0,
     "id_lsb": 98,
     "name": "cruise_control",
     "api_intro": 7,
+    "message_types": [
+        {
+            "id": 0,
+            "name": "get_cruise_control_state"
+        },
+        {
+            "id": 1,
+            "name": "cruise_control_state"
+        },
+        {
+            "properties": [
+                {
+                    "mandatory": true,
+                    "name": "active_state",
+                    "values": [
+                        {
+                            "name": "deactivate",
+                            "id": 0
+                        },
+                        {
+                            "name": "activate",
+                            "id": 1
+                        }
+                    ],
+                    "type": "enum",
+                    "id": 1,
+                    "size": 1
+                },
+                {
+                    "type": "integer",
+                    "id": 2,
+                    "name": "target_speed",
+                    "size": 2
+                }
+            ],
+            "name": "activate_deactivate_cruise_control",
+            "id": 18
+        }
+    ],
+    "id_msb": 0,
     "properties": [
         {
             "type": "enum",
@@ -78,18 +117,5 @@
             "size": 2
         }
     ],
-    "message_types": [
-        {
-            "id": 0,
-            "name": "get_cruise_control_state"
-        },
-        {
-            "id": 1,
-            "name": "cruise_control_state"
-        },
-        {
-            "id": 2,
-            "name": "activate_deactivate_cruise_control"
-        }
-    ]
+    "api_update": 8
 }
