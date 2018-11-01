@@ -1,5 +1,6 @@
 {
     "category": "chassis",
+    "id_msb": 0,
     "id_lsb": 36,
     "name": "climate",
     "api_intro": 2,
@@ -13,27 +14,196 @@
             "name": "climate_state"
         },
         {
-            "id": 2,
-            "name": "set_climate_profile"
+            "properties": [
+                {
+                    "mandatory": true,
+                    "name": "weekdays_starting_times",
+                    "items": [
+                        {
+                            "type": "enum",
+                            "values": [
+                                {
+                                    "name": "monday",
+                                    "id": 0
+                                },
+                                {
+                                    "name": "tuesday",
+                                    "id": 1
+                                },
+                                {
+                                    "name": "wednesday",
+                                    "id": 2
+                                },
+                                {
+                                    "name": "thursday",
+                                    "id": 3
+                                },
+                                {
+                                    "name": "friday",
+                                    "id": 4
+                                },
+                                {
+                                    "name": "saturday",
+                                    "id": 5
+                                },
+                                {
+                                    "name": "sunday",
+                                    "id": 6
+                                },
+                                {
+                                    "name": "automatic",
+                                    "id": 7
+                                }
+                            ],
+                            "name": "weekday",
+                            "size": 1
+                        },
+                        {
+                            "items": [
+                                {
+                                    "type": "integer",
+                                    "name": "hours",
+                                    "size": 1
+                                },
+                                {
+                                    "type": "integer",
+                                    "name": "minutes",
+                                    "size": 1
+                                }
+                            ],
+                            "size": 2,
+                            "description": "Time of day. Use 0xFF to remove the set time.",
+                            "name": "time"
+                        }
+                    ],
+                    "multiple": true,
+                    "id": 1,
+                    "size": 3
+                }
+            ],
+            "name": "change_starting_times",
+            "id": 18
         },
         {
-            "id": 3,
-            "name": "start_stop_hvac"
+            "properties": [
+                {
+                    "mandatory": true,
+                    "name": "active_state",
+                    "values": [
+                        {
+                            "name": "stop_hvac",
+                            "id": 0
+                        },
+                        {
+                            "name": "start_hvac",
+                            "id": 1
+                        }
+                    ],
+                    "type": "enum",
+                    "id": 1,
+                    "size": 1
+                }
+            ],
+            "name": "start_stop_hvac",
+            "id": 19
         },
         {
-            "id": 4,
-            "name": "start_stop_defogging"
+            "properties": [
+                {
+                    "mandatory": true,
+                    "name": "active_state",
+                    "values": [
+                        {
+                            "name": "stop_defogging",
+                            "id": 0
+                        },
+                        {
+                            "name": "start_defogging",
+                            "id": 1
+                        }
+                    ],
+                    "type": "enum",
+                    "id": 1,
+                    "size": 1
+                }
+            ],
+            "name": "start_stop_defogging",
+            "id": 20
         },
         {
-            "id": 5,
-            "name": "start_stop_defrosting"
+            "properties": [
+                {
+                    "mandatory": true,
+                    "name": "active_state",
+                    "values": [
+                        {
+                            "name": "stop_defrosting",
+                            "id": 0
+                        },
+                        {
+                            "name": "start_defrosting",
+                            "id": 1
+                        }
+                    ],
+                    "type": "enum",
+                    "id": 1,
+                    "size": 1
+                }
+            ],
+            "name": "start_stop_defrosting",
+            "id": 21
         },
         {
-            "id": 6,
-            "name": "start_stop_ionising"
+            "properties": [
+                {
+                    "mandatory": true,
+                    "name": "active_state",
+                    "values": [
+                        {
+                            "name": "stop_ionising",
+                            "id": 0
+                        },
+                        {
+                            "name": "start_ionising",
+                            "id": 1
+                        }
+                    ],
+                    "type": "enum",
+                    "id": 1,
+                    "size": 1
+                }
+            ],
+            "name": "start_stop_ionising",
+            "id": 22
+        },
+        {
+            "properties": [
+                {
+                    "id": 1,
+                    "type": "float",
+                    "description": "Driver temperature in Celsius",
+                    "name": "driver",
+                    "size": 4
+                },
+                {
+                    "id": 2,
+                    "type": "float",
+                    "description": "Passenger temperature in Celsius",
+                    "name": "passenger",
+                    "size": 4
+                },
+                {
+                    "id": 3,
+                    "type": "float",
+                    "description": "Rear temperature in Celsius",
+                    "name": "rear",
+                    "size": 4
+                }
+            ],
+            "name": "set_temperature_settings",
+            "id": 23
         }
     ],
-    "id_msb": 0,
     "properties": [
         {
             "size": 4,
@@ -135,136 +305,72 @@
             "id": 9
         },
         {
+            "pretty_name": "HVAC weekday starting times",
+            "multiple": true,
+            "name": "hvac_weekday_starting_times",
             "items": [
                 {
                     "type": "enum",
                     "values": [
                         {
-                            "name": "mondays",
-                            "id": "Bit 0"
+                            "name": "monday",
+                            "id": 0
                         },
                         {
-                            "name": "tuesdays",
-                            "id": "Bit 1"
+                            "name": "tuesday",
+                            "id": 1
                         },
                         {
-                            "name": "wednesdays",
-                            "id": "Bit 2"
+                            "name": "wednesday",
+                            "id": 2
                         },
                         {
                             "name": "thursday",
-                            "id": "Bit 3"
+                            "id": 3
                         },
                         {
-                            "name": "fridays",
-                            "id": "Bit 4"
+                            "name": "friday",
+                            "id": 4
                         },
                         {
-                            "name": "saturdays",
-                            "id": "Bit 5"
+                            "name": "saturday",
+                            "id": 5
                         },
                         {
-                            "name": "sundays",
-                            "id": "Bit 6"
+                            "name": "sunday",
+                            "id": 6
                         },
                         {
-                            "name": "constant",
-                            "id": "Bit 0"
+                            "name": "automatic",
+                            "id": 7
                         }
                     ],
-                    "name": "auto_hvac_activated",
+                    "name": "weekday",
                     "size": 1
                 },
                 {
                     "size": 1,
                     "type": "integer",
                     "description": "Value between 0 and 23",
-                    "name": "monday_starting_hour"
+                    "name": "hour"
                 },
                 {
                     "size": 1,
                     "type": "integer",
                     "description": "Value between 0 and 59",
-                    "name": "monday_starting_minute"
-                },
-                {
-                    "size": 1,
-                    "type": "integer",
-                    "description": "Value between 0 and 23",
-                    "name": "tuesday_starting_hour"
-                },
-                {
-                    "size": 1,
-                    "type": "integer",
-                    "description": "Value between 0 and 59",
-                    "name": "tuesday_starting_minute"
-                },
-                {
-                    "size": 1,
-                    "type": "integer",
-                    "description": "Value between 0 and 23",
-                    "name": "wednesday_starting_hour"
-                },
-                {
-                    "size": 1,
-                    "type": "integer",
-                    "description": "Value between 0 and 59",
-                    "name": "wednesday_starting_minute"
-                },
-                {
-                    "size": 1,
-                    "type": "integer",
-                    "description": "Value between 0 and 23",
-                    "name": "thursday_starting_hour"
-                },
-                {
-                    "size": 1,
-                    "type": "integer",
-                    "description": "Value between 0 and 59",
-                    "name": "thursday_starting_minute"
-                },
-                {
-                    "size": 1,
-                    "type": "integer",
-                    "description": "Value between 0 and 23",
-                    "name": "friday_starting_hour"
-                },
-                {
-                    "size": 1,
-                    "type": "integer",
-                    "description": "Value between 0 and 59",
-                    "name": "friday_starting_minute"
-                },
-                {
-                    "size": 1,
-                    "type": "integer",
-                    "description": "Value between 0 and 23",
-                    "name": "saturday_starting_hour"
-                },
-                {
-                    "size": 1,
-                    "type": "integer",
-                    "description": "Value between 0 and 59",
-                    "name": "saturday_starting_minute"
-                },
-                {
-                    "size": 1,
-                    "type": "integer",
-                    "description": "Value between 0 and 23",
-                    "name": "sunday_starting_hour"
-                },
-                {
-                    "size": 1,
-                    "type": "integer",
-                    "description": "Value between 0 and 59",
-                    "name": "sunday_starting_minute"
+                    "name": "minute"
                 }
             ],
-            "size": 15,
-            "type": "integer",
-            "id": 10,
-            "name": "auto_hvac_profile"
+            "id": 11,
+            "size": 3
+        },
+        {
+            "size": 4,
+            "type": "float",
+            "description": "The rear temperature in celsius per IEEE 754 formatting",
+            "name": "rear_temperature_setting",
+            "id": 12
         }
     ],
-    "api_update": 5
+    "api_update": 8
 }

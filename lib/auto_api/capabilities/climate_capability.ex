@@ -31,31 +31,34 @@ defmodule AutoApi.ClimateCapability do
       :get_climate_state
       iex> C.command_name(0x01)
       :climate_state
-      iex> C.command_name(0x02)
-      :set_climate_profile
-      iex> C.command_name(0x03)
+      iex> C.command_name(0x12)
+      :change_starting_times
+      iex> C.command_name(0x13)
       :start_stop_hvac
-      iex> C.command_name(0x04)
+      iex> C.command_name(0x14)
       :start_stop_defogging
-      iex> C.command_name(0x05)
+      iex> C.command_name(0x15)
       :start_stop_defrosting
-      iex> C.command_name(0x06)
+      iex> C.command_name(0x16)
       :start_stop_ionising
+      iex> C.command_name(0x17)
+      :set_temperature_settings
       iex> length(C.properties)
-      10
+      11
       iex> List.last(C.properties)
-      {0x0A, :auto_hvac_profile}
+      {0x0C, :rear_temperature_setting}
   """
 
   @spec_file "specs/climate.json"
   @type command_type ::
           :get_climate_state
           | :climate_state
-          | :set_climate_profile
+          | :change_starting_times
           | :start_stop_hvac
           | :start_stop_defogging
           | :start_stop_defrosting
           | :start_stop_ionising
+          | :set_temperature_settings
 
   @command_module AutoApi.ClimateCommand
   @state_module AutoApi.ClimateState

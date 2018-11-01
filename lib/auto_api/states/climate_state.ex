@@ -32,16 +32,25 @@ defmodule AutoApi.ClimateState do
             defrosting_state: nil,
             ionising_state: nil,
             defrosting_temperature: nil,
-            auto_hvac_profile: [],
+            hvac_weekday_starting_times: [],
+            rear_temperature_setting: nil,
             timestamp: nil,
             properties: []
 
   use AutoApi.State, spec_file: "specs/climate.json"
 
   @type activity :: :inactive | :active
+  @type weekday :: :monday | :tuesday | :wednesday | :thursday | :friday | :saturday | :sunday
+  @type hvac_weekday_starting_time :: %{
+          weekday: weekday | :automatic,
+          hour: integer,
+          minute: integer
+        }
 
   @type t :: %__MODULE__{
           inside_temperature: float | nil,
+          rear_temperature_setting: list(hvac_weekday_starting_time),
+          rear_temperature_setting: float | nil,
           timestamp: DateTime.t() | nil,
           properties: list(atom)
         }
