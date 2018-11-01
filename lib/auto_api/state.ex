@@ -222,6 +222,9 @@ defmodule AutoApi.State do
                             <<matched_value["id"]>>
                         end
 
+                      "string" ->
+                        <<byte_size(value)::integer-16>> <> value
+
                       type ->
                         apply(AutoApi.CommonData, :"convert_state_to_bin_#{type}", [
                           value,
@@ -232,16 +235,20 @@ defmodule AutoApi.State do
                   acc <> bin
                 end
 
-                enum_values
-                |> Enum.map(fn sub_prop ->
-                  key = String.to_atom(sub_prop["name"])
-                  value = Map.get(data, key, 0)
-                  {sub_prop, value}
-                end)
-                |> Enum.reduce(
-                  <<unquote(prop_id), unquote(prop_size)::integer-16>>,
-                  &reduce_func.(&1, &2)
-                )
+                binary_object =
+                  enum_values
+                  |> Enum.reject(&Map.get(&1, "size_reference", nil))
+                  |> Enum.map(fn sub_prop ->
+                    key = String.to_atom(sub_prop["name"])
+                    value = Map.get(data, key, 0)
+                    {sub_prop, value}
+                  end)
+                  |> Enum.reduce(
+                    <<>>,
+                    &reduce_func.(&1, &2)
+                  )
+
+                <<unquote(prop_id), byte_size(binary_object)::integer-16>> <> binary_object
               end
 
               def parse_bin_property(unquote(prop["id"]), data) do
@@ -250,7 +257,11 @@ defmodule AutoApi.State do
                 {_, result} =
                   unquote(Macro.escape(prop["items"]))
                   |> Enum.reduce({0, []}, fn x, {counter, acc} ->
-                    data_slice = :binary.list_to_bin(Enum.slice(data_list, counter, x["size"]))
+                    size = x["size"] || Keyword.get(acc, String.to_atom("#{x["name"]}_size"))
+
+                    unless size, do: raise("couldn't find size for #{inspect x}")
+
+                    data_slice = :binary.list_to_bin(Enum.slice(data_list, counter, size))
 
                     data_value =
                       case x["type"] do
@@ -274,12 +285,15 @@ defmodule AutoApi.State do
                               String.to_atom(matched_value["name"])
                           end
 
+                        "string" ->
+                          data_slice
+
                         type ->
                           apply(AutoApi.CommonData, :"convert_bin_to_#{type}", [data_slice])
                       end
 
                     # TODO: convert binary slices to their types
-                    {counter + x["size"], [{String.to_atom(x["name"]), data_value} | acc]}
+                    {counter + size, [{String.to_atom(x["name"]), data_value} | acc]}
                   end)
 
                 {unquote(prop_name), Enum.into(result, %{})}

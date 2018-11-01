@@ -3,6 +3,7 @@
     "id_lsb": 51,
     "name": "diagnostics",
     "api_intro": 3,
+    "id_msb": 0,
     "message_types": [
         {
             "id": 0,
@@ -13,7 +14,6 @@
             "name": "diagnostics_state"
         }
     ],
-    "id_msb": 0,
     "properties": [
         {
             "size": 3,
@@ -60,21 +60,6 @@
             "id": 6
         },
         {
-            "size": 4,
-            "type": "float",
-            "description": "Current fuel consumption in liters/100km per IEEE 754 formatting",
-            "name": "current_fuel_consumption",
-            "id": 7
-        },
-        {
-            "pretty_name": "Average fuel consumption for current trip",
-            "description": "Average fuel consumption in liters/100km per IEEE 754 formatting",
-            "name": "average_fuel_consumption",
-            "type": "float",
-            "id": 8,
-            "size": 4
-        },
-        {
             "type": "enum",
             "size": 1,
             "values": [
@@ -89,56 +74,6 @@
             ],
             "id": 9,
             "name": "washer_fluid_level"
-        },
-        {
-            "items": [
-                {
-                    "type": "enum",
-                    "values": [
-                        {
-                            "name": "front_left",
-                            "id": 0
-                        },
-                        {
-                            "name": "front_right",
-                            "id": 1
-                        },
-                        {
-                            "name": "rear_right",
-                            "id": 2
-                        },
-                        {
-                            "name": "rear_left",
-                            "id": 3
-                        }
-                    ],
-                    "name": "tire_position",
-                    "size": 1
-                },
-                {
-                    "size": 4,
-                    "type": "float",
-                    "description": "Tire pressure in BAR formatted in 4-bytes per IEEE 754",
-                    "name": "tire_pressure"
-                },
-                {
-                    "size": 4,
-                    "type": "float",
-                    "description": "Tire temperature in celsius formatted in 4-bytes per IEEE 754",
-                    "name": "tire_temperature"
-                },
-                {
-                    "size": 2,
-                    "type": "integer",
-                    "description": "The RPM measured at this wheel",
-                    "title_case_name": "wheelRPM",
-                    "name": "wheel_rpm"
-                }
-            ],
-            "multiple": true,
-            "id": 10,
-            "name": "tire",
-            "size": 11
         },
         {
             "size": 4,
@@ -171,7 +106,7 @@
         {
             "size": 4,
             "type": "float",
-            "description": "The fuel volume measured in liters",
+            "description": "The fuel volume measured in liters formatted in 4-bytes per IEEE 754 formatting",
             "name": "fuel_volume",
             "id": 15
         },
@@ -249,7 +184,219 @@
             "description": "The vehicle speed in km/h measured at the wheel base, whereas can be negative",
             "name": "wheel_based_speed",
             "id": 23
+        },
+        {
+            "size": 1,
+            "type": "integer",
+            "description": "Battery level in %, value between 0 and 100",
+            "name": "battery_level",
+            "id": 24
+        },
+        {
+            "items": [
+                {
+                    "size": 2,
+                    "type": "integer",
+                    "description": "Check Control Message identifier",
+                    "name": "id"
+                },
+                {
+                    "size": 4,
+                    "type": "integer",
+                    "description": "Remaining time of the message in minutes",
+                    "name": "remaining_minutes"
+                },
+                {
+                    "size": 2,
+                    "type": "integer",
+                    "description": "Size of the text",
+                    "name": "text_size",
+                    "size_reference": "text"
+                },
+                {
+                    "type": "string",
+                    "name": "text",
+                    "description": "CCM text bytes formatted in UTF-8"
+                },
+                {
+                    "size": 2,
+                    "type": "integer",
+                    "description": "Size of the status",
+                    "name": "status_size",
+                    "size_reference": "status"
+                },
+                {
+                    "type": "string",
+                    "name": "status",
+                    "description": "CCM status bytes formatted in UTF-8"
+                }
+            ],
+            "multiple": true,
+            "id": 25,
+            "name": "check_control_messages"
+        },
+        {
+            "items": [
+                {
+                    "type": "enum",
+                    "values": [
+                        {
+                            "name": "front_left",
+                            "id": 0
+                        },
+                        {
+                            "name": "front_right",
+                            "id": 1
+                        },
+                        {
+                            "name": "rear_right",
+                            "id": 2
+                        },
+                        {
+                            "name": "rear_left",
+                            "id": 3
+                        }
+                    ],
+                    "name": "location",
+                    "size": 1
+                },
+                {
+                    "size": 4,
+                    "type": "float",
+                    "description": "Tire pressure in BAR formatted in 4-bytes per IEEE 754",
+                    "name": "pressure"
+                }
+            ],
+            "multiple": true,
+            "id": 26,
+            "name": "tire_pressures",
+            "size": 5
+        },
+        {
+            "items": [
+                {
+                    "type": "enum",
+                    "values": [
+                        {
+                            "name": "front_left",
+                            "id": 0
+                        },
+                        {
+                            "name": "front_right",
+                            "id": 1
+                        },
+                        {
+                            "name": "rear_right",
+                            "id": 2
+                        },
+                        {
+                            "name": "rear_left",
+                            "id": 3
+                        }
+                    ],
+                    "name": "location",
+                    "size": 1
+                },
+                {
+                    "size": 4,
+                    "type": "float",
+                    "description": "Tire temperature in BAR formatted in 4-bytes per IEEE 754",
+                    "name": "temperature"
+                }
+            ],
+            "multiple": true,
+            "id": 27,
+            "name": "tire_temperatures",
+            "size": 5
+        },
+        {
+            "pretty_name": "Wheel RPMs",
+            "multiple": true,
+            "name": "wheel_rpms",
+            "items": [
+                {
+                    "type": "enum",
+                    "values": [
+                        {
+                            "name": "front_left",
+                            "id": 0
+                        },
+                        {
+                            "name": "front_right",
+                            "id": 1
+                        },
+                        {
+                            "name": "rear_right",
+                            "id": 2
+                        },
+                        {
+                            "name": "rear_left",
+                            "id": 3
+                        }
+                    ],
+                    "name": "location",
+                    "size": 1
+                },
+                {
+                    "pretty_name": "RPM",
+                    "size": 2,
+                    "type": "integer",
+                    "description": "The RPM measured at this wheel",
+                    "name": "rpm"
+                }
+            ],
+            "id": 28,
+            "size": 3
+        },
+        {
+            "items": [
+                {
+                    "size": 1,
+                    "type": "integer",
+                    "description": "Number of occurences",
+                    "name": "occurences"
+                },
+                {
+                    "size": 1,
+                    "type": "integer",
+                    "description": "Size of the ID string",
+                    "name": "id_size",
+                    "size_reference": "id"
+                },
+                {
+                    "type": "string",
+                    "name": "id",
+                    "description": "ID bytes formatted in UTF-8"
+                },
+                {
+                    "size": 1,
+                    "type": "integer",
+                    "description": "Size of the ECU ID string",
+                    "name": "ecu_id_size",
+                    "size_reference": "ecu_id"
+                },
+                {
+                    "type": "string",
+                    "name": "ecu_id",
+                    "description": "ECU ID bytes formatted in UTF-8"
+                },
+                {
+                    "size": 2,
+                    "type": "integer",
+                    "description": "Size of the ECU ID string",
+                    "name": "status_size",
+                    "size_reference": "status_size"
+                },
+                {
+                    "type": "string",
+                    "name": "status",
+                    "description": "Status bytes formatted in UTF-8"
+                }
+            ],
+            "multiple": true,
+            "id": 29,
+            "name": "trouble_codes"
         }
     ],
-    "api_update": 7
+    "api_update": 8
 }
