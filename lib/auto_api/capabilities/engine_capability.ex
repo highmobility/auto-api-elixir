@@ -31,8 +31,8 @@ defmodule AutoApi.EngineCapability do
       :get_ignition_state
       iex> E.command_name(0x01)
       :ignition_state
-      iex> E.command_name(0x02)
-      :turn_engine_on_off
+      iex> E.command_name(0x12)
+      :turn_ignition_on_off
       iex> List.last(E.properties)
       {2, :accessories_ignition}
   """
@@ -41,7 +41,7 @@ defmodule AutoApi.EngineCapability do
   @type command_type :: :engine_state | :get_ignition_state | :turn_engine_on_off
 
   @command_module AutoApi.NotImplemented
-  @state_module AutoApi.EngineState
+  @state_module AutoApi.NotImplemented
 
   use AutoApi.Capability
 end
