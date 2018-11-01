@@ -96,7 +96,7 @@ defmodule AutoApi.CapabilitiesState do
   Parse state to bin
 
     iex> AutoApi.CapabilitiesState.to_bin(%AutoApi.CapabilitiesState{diagnostics: [:get_diagnostics_state, :diagnostics_state], door_locks: [:get_lock_state, :lock_state, :lock_unlock_doors]})
-    <<1, 0, 4, 0, 0x33, 0, 1, 1, 0, 5, 0, 0x20, 0, 1, 2>>
+    <<1, 0, 4, 0, 0x33, 0, 1, 1, 0, 5, 0, 0x20, 0, 1, 18>>
     iex> AutoApi.CapabilitiesState.to_bin(%AutoApi.CapabilitiesState{diagnostics: [:get_diagnostics_state, :diagnostics_state], door_locks: []})
     <<1, 0, 4, 0, 0x33, 0, 1>>
   """

@@ -71,7 +71,7 @@ defmodule AutoApi.CapabilitiesCommand do
   Converts VehicleLocation state to capability's state in binary
 
       iex> AutoApi.CapabilitiesState.to_bin(%AutoApi.CapabilitiesState{diagnostics: [:get_diagnostics_state, :diagnostics_state], door_locks: [:get_lock_state, :lock_state, :lock_unlock_doors]})
-      <<1, 0, 4, 0, 0x33, 0, 1, 1, 0, 5, 0, 0x20, 0, 1, 2>>
+      <<1, 0, 4, 0, 0x33, 0, 1, 1, 0, 5, 0, 0x20, 0, 1, 18>>
       iex> AutoApi.CapabilitiesState.to_bin(%AutoApi.CapabilitiesState{diagnostics: [:get_diagnostics_state, :diagnostics_state], door_locks: []})
       <<1, 0, 4, 0, 0x33, 0, 1>>
   """
@@ -85,9 +85,10 @@ defmodule AutoApi.CapabilitiesCommand do
 
       iex> AutoApi.CapabilitiesCommand.to_bin(:get_capabilities, [])
       <<0x00>>
+
       iex> caps = %AutoApi.CapabilitiesState{diagnostics: [:get_diagnostics_state, :diagnostics_state], door_locks: [:lock_unlock_doors]}
       iex> AutoApi.CapabilitiesCommand.to_bin(:capabilities, [caps])
-      <<1, 1, 0, 4, 0, 51, 0, 1, 1, 0, 3, 0, 32, 2>>
+      <<1, 1, 0, 4, 0, 51, 0, 1, 1, 0, 3, 0, 32, 18>>
   """
   @spec to_bin(CapabilitiesCapability.command_type(), list(any())) :: binary
   def to_bin(:get_capabilities, []) do

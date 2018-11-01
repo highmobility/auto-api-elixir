@@ -1,5 +1,6 @@
 {
     "category": "digital_key",
+    "id_msb": 0,
     "id_lsb": 32,
     "name": "door_locks",
     "api_intro": 1,
@@ -13,11 +14,29 @@
             "name": "lock_state"
         },
         {
-            "id": 2,
-            "name": "lock_unlock_doors"
+            "properties": [
+                {
+                    "mandatory": true,
+                    "name": "lock_state",
+                    "values": [
+                        {
+                            "name": "unlock",
+                            "id": 0
+                        },
+                        {
+                            "name": "lock",
+                            "id": 1
+                        }
+                    ],
+                    "type": "enum",
+                    "id": 1,
+                    "size": 1
+                }
+            ],
+            "name": "lock_unlock_doors",
+            "id": 18
         }
     ],
-    "id_msb": 0,
     "properties": [
         {
             "items": [
@@ -39,6 +58,110 @@
                         {
                             "name": "rear_left",
                             "id": 3
+                        },
+                        {
+                            "name": "hatch",
+                            "id": 4
+                        }
+                    ],
+                    "name": "door_location",
+                    "size": 1
+                },
+                {
+                    "type": "enum",
+                    "values": [
+                        {
+                            "name": "unlocked",
+                            "id": 0
+                        },
+                        {
+                            "name": "locked",
+                            "id": 1
+                        }
+                    ],
+                    "name": "lock_state",
+                    "size": 1
+                }
+            ],
+            "size": 2,
+            "multiple": true,
+            "id": 2,
+            "name": "inside_locks"
+        },
+        {
+            "items": [
+                {
+                    "type": "enum",
+                    "values": [
+                        {
+                            "name": "front_left",
+                            "id": 0
+                        },
+                        {
+                            "name": "front_right",
+                            "id": 1
+                        },
+                        {
+                            "name": "rear_right",
+                            "id": 2
+                        },
+                        {
+                            "name": "rear_left",
+                            "id": 3
+                        },
+                        {
+                            "name": "hatch",
+                            "id": 4
+                        }
+                    ],
+                    "name": "door_location",
+                    "size": 1
+                },
+                {
+                    "type": "enum",
+                    "values": [
+                        {
+                            "name": "unlocked",
+                            "id": 0
+                        },
+                        {
+                            "name": "locked",
+                            "id": 1
+                        }
+                    ],
+                    "name": "lock_state",
+                    "size": 1
+                }
+            ],
+            "size": 2,
+            "multiple": true,
+            "id": 3,
+            "name": "locks"
+        },
+        {
+            "items": [
+                {
+                    "type": "enum",
+                    "values": [
+                        {
+                            "name": "front_left",
+                            "id": 0
+                        },
+                        {
+                            "name": "front_right",
+                            "id": 1
+                        },
+                        {
+                            "name": "rear_right",
+                            "id": 2
+                        },
+                        {
+                            "name": "rear_left",
+                            "id": 3
+                        },
+                        {
+                            "name": "hatch",
+                            "id": 4
                         }
                     ],
                     "name": "door_location",
@@ -56,122 +179,15 @@
                             "id": 1
                         }
                     ],
-                    "name": "door_position",
-                    "size": 1
-                },
-                {
-                    "type": "enum",
-                    "values": [
-                        {
-                            "name": "unlocked",
-                            "id": 0
-                        },
-                        {
-                            "name": "locked",
-                            "id": 1
-                        }
-                    ],
-                    "name": "door_lock",
-                    "size": 1
-                }
-            ],
-            "size": 3,
-            "multiple": true,
-            "id": 1,
-            "name": "door"
-        },
-        {
-            "items": [
-                {
-                    "type": "enum",
-                    "values": [
-                        {
-                            "name": "front_left",
-                            "id": 0
-                        },
-                        {
-                            "name": "front_right",
-                            "id": 1
-                        },
-                        {
-                            "name": "rear_right",
-                            "id": 2
-                        },
-                        {
-                            "name": "rear_left",
-                            "id": 3
-                        }
-                    ],
-                    "name": "door_location",
-                    "size": 1
-                },
-                {
-                    "type": "enum",
-                    "values": [
-                        {
-                            "name": "unlocked",
-                            "id": 0
-                        },
-                        {
-                            "name": "locked",
-                            "id": 1
-                        }
-                    ],
-                    "name": "inside_lock",
+                    "name": "position",
                     "size": 1
                 }
             ],
             "size": 2,
             "multiple": true,
-            "id": 2,
-            "name": "inside_door_lock"
-        },
-        {
-            "items": [
-                {
-                    "type": "enum",
-                    "values": [
-                        {
-                            "name": "front_left",
-                            "id": 0
-                        },
-                        {
-                            "name": "front_right",
-                            "id": 1
-                        },
-                        {
-                            "name": "rear_right",
-                            "id": 2
-                        },
-                        {
-                            "name": "rear_left",
-                            "id": 3
-                        }
-                    ],
-                    "name": "door_location",
-                    "size": 1
-                },
-                {
-                    "type": "enum",
-                    "values": [
-                        {
-                            "name": "unlocked",
-                            "id": 0
-                        },
-                        {
-                            "name": "locked",
-                            "id": 1
-                        }
-                    ],
-                    "name": "outside_lock",
-                    "size": 1
-                }
-            ],
-            "size": 2,
-            "multiple": true,
-            "id": 3,
-            "name": "outside_door_lock"
+            "id": 4,
+            "name": "positions"
         }
     ],
-    "api_update": 7
+    "api_update": 8
 }
