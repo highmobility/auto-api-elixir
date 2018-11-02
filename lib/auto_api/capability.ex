@@ -280,7 +280,8 @@ defmodule AutoApi.Capability do
     <<0x00, 0x63>> => AutoApi.StartStopCapability,
     <<0x00, 0x64>> => AutoApi.TachographCapability,
     <<0x00, 0x62>> => AutoApi.CruiseControlCapability,
-    <<0x00, 0x66>> => AutoApi.MobileCapability
+    <<0x00, 0x66>> => AutoApi.MobileCapability,
+    <<0x00, 0x68>> => AutoApi.UsageCapability
   }
 
   @doc """

@@ -45,7 +45,8 @@ defmodule AutoApi.CapabilitiesState do
             charging: [],
             maintenance: [],
             hood: [],
-            mobile: []
+            mobile: [],
+            usage: []
 
   @behaviour AutoApi.State
 
@@ -75,7 +76,8 @@ defmodule AutoApi.CapabilitiesState do
           charging: list(AutoApi.ChargingCapability.command_type()),
           maintenance: list(AutoApi.MaintenanceCapability.command_type()),
           hood: list(AutoApi.HoodCapability.command_type()),
-          mobile: list(AutoApi.MobileCapability.command_type())
+          mobile: list(AutoApi.MobileCapability.command_type()),
+          usage: list(AutoApi.UsageCapability.command_type())
         }
 
   @spec base :: t
