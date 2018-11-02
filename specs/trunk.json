@@ -13,8 +13,42 @@
             "name": "trunk_state"
         },
         {
-            "id": 2,
-            "name": "open_close_trunk"
+            "properties": [
+                {
+                    "type": "enum",
+                    "values": [
+                        {
+                            "name": "unlocked",
+                            "id": 0
+                        },
+                        {
+                            "name": "locked",
+                            "id": 1
+                        }
+                    ],
+                    "id": 1,
+                    "name": "trunk_lock",
+                    "size": 1
+                },
+                {
+                    "type": "enum",
+                    "values": [
+                        {
+                            "name": "closed",
+                            "id": 0
+                        },
+                        {
+                            "name": "open",
+                            "id": 1
+                        }
+                    ],
+                    "id": 2,
+                    "name": "trunk_position",
+                    "size": 1
+                }
+            ],
+            "name": "control_trunk",
+            "id": 18
         }
     ],
     "id_msb": 0,
@@ -52,5 +86,5 @@
             "name": "trunk_position"
         }
     ],
-    "api_update": 5
+    "api_update": 8
 }

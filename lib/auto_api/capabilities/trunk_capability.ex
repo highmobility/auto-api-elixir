@@ -31,8 +31,8 @@ defmodule AutoApi.TrunkCapability do
       :get_trunk_state
       iex> T.command_name(0x01)
       :trunk_state
-      iex> T.command_name(0x02)
-      :open_close_trunk
+      iex> T.command_name(0x12)
+      :control_trunk
       iex> length(T.properties)
       2
       iex> T.properties
@@ -42,7 +42,7 @@ defmodule AutoApi.TrunkCapability do
   @spec_file "specs/trunk.json"
   @type command_type :: :get_trunk_state | :trunk_state | :open_close_trunk
 
-  @command_module AutoApi.TrunkCommand
+  @command_module AutoApi.NotImplemented
   @state_module AutoApi.TrunkState
 
   use AutoApi.Capability
