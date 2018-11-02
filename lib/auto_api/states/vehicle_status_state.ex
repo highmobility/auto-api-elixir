@@ -36,6 +36,9 @@ defmodule AutoApi.VehicleStatusState do
             engine_max_torque: 0,
             gearbox: :manual,
             state: [],
+            display_unit: nil,
+            driver_seat_location: nil,
+            equipments: [],
             timestamp: nil,
             properties: []
 
@@ -61,6 +64,9 @@ defmodule AutoApi.VehicleStatusState do
           engine_volume: float,
           engine_max_torque: integer,
           gearbox: gearbox,
+          display_unit: :km | :miles | nil,
+          driver_seat_location: :left | :right | :center,
+          equipments: list(String.t()),
           state: list(any),
           timestamp: DateTime.t() | nil,
           properties: list(atom)

@@ -149,11 +149,54 @@
             "name": "gearbox"
         },
         {
+            "type": "enum",
+            "size": 1,
+            "values": [
+                {
+                    "name": "km",
+                    "id": 0
+                },
+                {
+                    "name": "miles",
+                    "id": 1
+                }
+            ],
+            "id": 15,
+            "name": "display_unit"
+        },
+        {
+            "type": "enum",
+            "size": 1,
+            "values": [
+                {
+                    "name": "left",
+                    "id": 0
+                },
+                {
+                    "name": "right",
+                    "id": 1
+                },
+                {
+                    "name": "center",
+                    "id": 2
+                }
+            ],
+            "id": 16,
+            "name": "driver_seat_location"
+        },
+        {
+            "type": "string",
+            "multiple": true,
+            "description": "Equipment that the vehicle is equipped with",
+            "name": "equipments",
+            "id": 17
+        },
+        {
             "type": "capability_state",
             "multiple": true,
             "id": 153,
             "name": "state"
         }
     ],
-    "api_update": 7
+    "api_update": 8
 }
