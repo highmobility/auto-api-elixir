@@ -40,7 +40,7 @@ defmodule AutoApi.FuelingCapability do
   """
 
   @spec_file "specs/fueling.json"
-  @type command_type :: :get_gas_flap_state | :gas_flap_state | :open_gas_flap
+  @type command_type :: :get_gas_flap_state | :gas_flap_state | :open_close_gas_flap
 
   @command_module AutoApi.FuelingCommand
   @state_module AutoApi.FuelingState
