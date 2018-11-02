@@ -3,12 +3,21 @@
     "id_msb": 0,
     "id_lsb": 41,
     "name": "heart_rate",
-    "api_update": 5,
+    "api_update": 8,
     "api_intro": 4,
     "message_types": [
         {
-            "id": 2,
-            "name": "send_heart_rate"
+            "properties": [
+                {
+                    "type": "integer",
+                    "mandatory": true,
+                    "id": 1,
+                    "name": "heart_rate",
+                    "size": 1
+                }
+            ],
+            "name": "send_heart_rate",
+            "id": 18
         }
     ]
 }

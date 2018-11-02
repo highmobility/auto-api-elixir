@@ -27,7 +27,7 @@ defmodule AutoApi.HeartRateCapability do
       :heart_rate
       iex> H.description
       "Heart Rate"
-      iex> H.command_name(0x02)
+      iex> H.command_name(0x12)
       :send_heart_rate
       iex> length(H.properties)
       0
