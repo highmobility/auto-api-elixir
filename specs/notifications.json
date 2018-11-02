@@ -3,7 +3,6 @@
     "id_msb": 0,
     "id_lsb": 56,
     "name": "notifications",
-    "api_update": 5,
     "api_intro": 4,
     "message_types": [
         {
@@ -11,12 +10,53 @@
             "name": "notification"
         },
         {
-            "id": 1,
-            "name": "notification_action"
-        },
-        {
             "id": 2,
             "name": "clear_notification"
+        },
+        {
+            "properties": [
+                {
+                    "type": "integer",
+                    "mandatory": true,
+                    "id": 1,
+                    "name": "action_id",
+                    "size": 1
+                }
+            ],
+            "name": "notification_action",
+            "id": 17
         }
-    ]
+    ],
+    "properties": [
+        {
+            "type": "string",
+            "description": "Text for the notification, bytes in UTF8.",
+            "name": "text",
+            "id": 1
+        },
+        {
+            "items": [
+                {
+                    "type": "integer",
+                    "name": "identifier",
+                    "size": 1
+                },
+                {
+                    "type": "string",
+                    "name": "name",
+                    "description": "Name of the action, bytes in UTF8."
+                }
+            ],
+            "multiple": true,
+            "id": 2,
+            "name": "action_items"
+        },
+        {
+            "size": 1,
+            "type": "integer",
+            "id": 16,
+            "name": "received_action"
+        }
+    ],
+    "api_update": 8
 }
