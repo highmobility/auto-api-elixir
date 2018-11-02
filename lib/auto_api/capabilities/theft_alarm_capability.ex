@@ -31,7 +31,7 @@ defmodule AutoApi.TheftAlarmCapability do
       :get_theft_alarm_state
       iex> T.command_name(0x01)
       :theft_alarm_state
-      iex> T.command_name(0x02)
+      iex> T.command_name(0x12)
       :set_theft_alarm_state
       iex> length(T.properties)
       1

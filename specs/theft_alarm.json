@@ -1,44 +1,67 @@
 {
-    "category": "parking",
-    "id_lsb": 70,
-    "name": "theft_alarm",
-    "api_intro": 4,
+    "category": "parking", 
+    "id_lsb": 70, 
+    "name": "theft_alarm", 
+    "api_intro": 4, 
     "message_types": [
         {
-            "id": 0,
+            "id": 0, 
             "name": "get_theft_alarm_state"
-        },
+        }, 
         {
-            "id": 1,
+            "id": 1, 
             "name": "theft_alarm_state"
-        },
+        }, 
         {
-            "id": 2,
-            "name": "set_theft_alarm_state"
+            "properties": [
+                {
+                    "mandatory": true, 
+                    "name": "theft_alarm", 
+                    "values": [
+                        {
+                            "name": "unarm", 
+                            "id": 0
+                        }, 
+                        {
+                            "name": "arm", 
+                            "id": 1
+                        }, 
+                        {
+                            "name": "trigger", 
+                            "id": 2
+                        }
+                    ], 
+                    "type": "enum", 
+                    "id": 1, 
+                    "size": 1
+                }
+            ], 
+            "name": "set_theft_alarm_state", 
+            "id": 18
         }
-    ],
-    "id_msb": 0,
+    ], 
+    "id_msb": 0, 
     "properties": [
         {
-            "type": "enum",
-            "size": 1,
+            "type": "enum", 
+            "size": 1, 
             "values": [
                 {
-                    "name": "not_armed",
+                    "name": "not_armed", 
                     "id": 0
-                },
+                }, 
                 {
-                    "name": "armed",
+                    "name": "armed", 
                     "id": 1
-                },
+                }, 
                 {
-                    "name": "triggered",
+                    "name": "triggered", 
                     "id": 2
                 }
-            ],
-            "id": 1,
+            ], 
+            "id": 1, 
             "name": "theft_alarm"
         }
-    ],
-    "api_update": 5
+    ], 
+    "api_update": 8
 }
