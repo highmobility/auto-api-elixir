@@ -13,16 +13,47 @@
             "name": "control_mode"
         },
         {
-            "id": 2,
-            "name": "start_control_mode"
+            "properties": [
+                {
+                    "id": 1,
+                    "type": "integer",
+                    "description": "Speed in km/h",
+                    "name": "speed",
+                    "size": 1
+                },
+                {
+                    "id": 2,
+                    "type": "integer",
+                    "description": "Angle of the steering",
+                    "name": "angle",
+                    "size": 2
+                }
+            ],
+            "name": "control_command",
+            "id": 4
         },
         {
-            "id": 3,
-            "name": "stop_control_mode"
-        },
-        {
-            "id": 4,
-            "name": "control_command"
+            "properties": [
+                {
+                    "mandatory": true,
+                    "name": "start_stop",
+                    "values": [
+                        {
+                            "name": "start",
+                            "id": 0
+                        },
+                        {
+                            "name": "stop",
+                            "id": 1
+                        }
+                    ],
+                    "type": "enum",
+                    "id": 1,
+                    "size": 1
+                }
+            ],
+            "name": "start_stop_control",
+            "id": 18
         }
     ],
     "id_msb": 0,
@@ -67,5 +98,5 @@
             "id": 2
         }
     ],
-    "api_update": 5
+    "api_update": 8
 }

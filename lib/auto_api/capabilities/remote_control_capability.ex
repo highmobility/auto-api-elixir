@@ -31,12 +31,8 @@ defmodule AutoApi.RemoteControlCapability do
       :get_control_mode
       iex> R.command_name(0x01)
       :control_mode
-      iex> R.command_name(0x02)
-      :start_control_mode
-      iex> R.command_name(0x03)
-      :stop_control_mode
-      iex> R.command_name(0x04)
-      :control_command
+      iex> R.command_name(0x12)
+      :start_stop_control
       iex> length(R.properties)
       2
       iex> R.properties
@@ -47,9 +43,7 @@ defmodule AutoApi.RemoteControlCapability do
   @type command_type ::
           :get_control_mode
           | :control_mode
-          | :start_control_mode
-          | :stop_control_mode
-          | :control_command
+          | :start_stop_control
 
   @command_module AutoApi.NotImplemented
   @state_module AutoApi.NotImplemented
