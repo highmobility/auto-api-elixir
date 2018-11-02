@@ -7,8 +7,17 @@
     "api_intro": 4,
     "message_types": [
         {
-            "id": 0,
-            "name": "load_url"
+            "properties": [
+                {
+                    "type": "string",
+                    "mandatory": true,
+                    "description": "The UTF8 bytes of the URL string",
+                    "name": "url",
+                    "id": 1
+                }
+            ],
+            "name": "load_url",
+            "id": 0
         }
     ]
 }
