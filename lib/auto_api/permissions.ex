@@ -269,7 +269,16 @@ defmodule AutoApi.Permissions do
       "Allowed to get the power take-off state"}},
     {"power-takeoff.write",
      {<<@auto_api_id, @byte_10_prefix::binary, 0x02, @byte_10_pad::binary>>,
-      "Allowed to get the power take-off state"}}
+      "Allowed to get the power take-off state"}},
+    {"usage.read",
+     {<<@auto_api_id, @byte_10_prefix::binary, 0x03, @byte_10_pad::binary>>,
+      "Allowed to get the usage state"}},
+    {"mobile.read",
+     {<<@auto_api_id, @byte_10_prefix::binary, 0x04, @byte_10_pad::binary>>,
+      "Allowed to get the mobile state"}},
+    {"hood.read",
+     {<<@auto_api_id, @byte_10_prefix::binary, 0x05, @byte_10_pad::binary>>,
+      "Allowed to get the hood state"}}
   ]
 
   @permissions Enum.into(@permissions_list, %{})
@@ -331,7 +340,7 @@ defmodule AutoApi.Permissions do
     0x100000C8000000000000000000000000
 
     iex> AutoApi.Permissions.to_binary ["car.full_control"]
-    0x1007FFFDFFEFFFFFFFFF030000000000
+    0x1007FFFDFFEFFFFFFFFF070000000000
 
     iex> AutoApi.Permissions.parse("charge.read,lights.read,climate.write")
     ...> |> AutoApi.Permissions.to_binary
