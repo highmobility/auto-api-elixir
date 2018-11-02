@@ -35,7 +35,7 @@ defmodule AutoApi.FuelingCommand do
         iex> AutoApi.FuelingCommand.execute(%AutoApi.FuelingState{}, command)
         {:state_changed, %AutoApi.FuelingState{gas_flap: :open}}
 
-        iex> AutoApi.FuelingCommand.execute(%AutoApi.FuelingState{}, <<0x02>>)
+        iex> AutoApi.FuelingCommand.execute(%AutoApi.FuelingState{}, <<0x12, 0x01, 0x01>>)
         {:state_changed, %AutoApi.FuelingState{gas_flap: :open}}
   """
   @spec execute(FuelingState.t(), binary) :: {:state | :state_changed, FuelingState.t()}
@@ -53,8 +53,9 @@ defmodule AutoApi.FuelingCommand do
     end
   end
 
-  def execute(%FuelingState{} = state, <<0x02>>) do
-    new_state = %{state | gas_flap: :open}
+  def execute(%FuelingState{} = state, <<0x12, _, open_close>>) do
+    gas_flap_state = if open_close == 0x00, do: :close, else: :open
+    new_state = %{state | gas_flap: gas_flap_state}
 
     if new_state == state do
       {:state, state}
@@ -79,8 +80,8 @@ defmodule AutoApi.FuelingCommand do
       iex> AutoApi.FuelingCommand.to_bin(:get_gas_flap_state, [])
       <<0x00>>
 
-      iex> AutoApi.FuelingCommand.to_bin(:open_gas_flap, [])
-      <<2>>
+      iex> AutoApi.FuelingCommand.to_bin(:open_close_gas_flap, [gas_flap: :close])
+      <<0x12, 0x01, 0x00>>
   """
   @spec to_bin(FuelingCapability.command_type(), list(any)) :: binary
   def to_bin(:get_gas_flap_state, _args) do
@@ -88,8 +89,9 @@ defmodule AutoApi.FuelingCommand do
     <<cmd_id>>
   end
 
-  def to_bin(:open_gas_flap, []) do
-    cmd_id = FuelingCapability.command_id(:open_gas_flap)
-    <<cmd_id>>
+  def to_bin(:open_close_gas_flap = cmd, gas_flap: state) do
+    cmd_id = FuelingCapability.command_id(cmd)
+    gas_flap_value = if state == :close, do: 0x00, else: 0x01
+    <<cmd_id, 0x01, gas_flap_value>>
   end
 end

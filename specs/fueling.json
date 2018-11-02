@@ -1,5 +1,6 @@
 {
     "category": "parking",
+    "id_msb": 0,
     "id_lsb": 64,
     "name": "fueling",
     "api_intro": 4,
@@ -13,11 +14,29 @@
             "name": "gas_flap_state"
         },
         {
-            "id": 2,
-            "name": "open_gas_flap"
+            "properties": [
+                {
+                    "mandatory": true,
+                    "name": "gas_flap",
+                    "values": [
+                        {
+                            "name": "close",
+                            "id": 0
+                        },
+                        {
+                            "name": "open",
+                            "id": 1
+                        }
+                    ],
+                    "type": "enum",
+                    "id": 1,
+                    "size": 1
+                }
+            ],
+            "name": "open_close_gas_flap",
+            "id": 18
         }
     ],
-    "id_msb": 0,
     "properties": [
         {
             "type": "enum",
@@ -36,5 +55,5 @@
             "name": "gas_flap"
         }
     ],
-    "api_update": 5
+    "api_update": 8
 }
