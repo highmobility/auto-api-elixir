@@ -30,13 +30,16 @@ defmodule AutoApi.State do
   @callback from_bin(binary) :: struct
   @callback to_bin(struct) :: binary
   @callback base() :: struct
+
+  require Logger
+
   defmacro __using__(opts) do
     base =
       quote do
         alias AutoApi.CommonData
         @behaviour AutoApi.State
         @spec base :: t
-        @dialyzer {:nowarn_function, to_properties: 3}
+        @dialyzer {:nowarn_function, to_properties: 4}
         @identifier __MODULE__
                     |> Atom.to_string()
                     |> String.replace("State", "Capability")
@@ -64,21 +67,25 @@ defmodule AutoApi.State do
         end
 
         def do_parse_bin_properties(id, data, state) do
-          {prop, value} = parse_bin_property(id, data)
+          {prop, multiple, value} = parse_bin_property(id, data)
 
-          to_properties(state, prop, value)
+          to_properties(state, prop, value, multiple)
         end
 
-        defp to_properties(state, :timestamp, %DateTime{} = value) do
+        defp to_properties(state, :timestamp, %DateTime{} = value, _) do
           %{state | :timestamp => value}
         end
 
-        defp to_properties(state, prop, value) when is_map(value) do
+        defp to_properties(state, prop, value, true) when is_map(value) do
           current_value = Map.get(state, prop)
           %{state | prop => [value | current_value]}
         end
 
-        defp to_properties(state, prop, value) do
+        defp to_properties(state, prop, value, false) when is_map(value) do
+          %{state | prop => value}
+        end
+
+        defp to_properties(state, prop, value, _) do
           %{state | prop => value}
         end
 
@@ -123,22 +130,9 @@ defmodule AutoApi.State do
       quote do
         def parse_bin_property(
               0xA2,
-              <<year, month, day, hour, minute, second, offset::signed-integer-16>>
+              value
             ) do
-          date = %DateTime{
-            year: year + 2000,
-            month: month,
-            day: day,
-            hour: hour,
-            minute: minute,
-            second: second,
-            utc_offset: offset,
-            time_zone: "",
-            zone_abbr: "",
-            std_offset: 0
-          }
-
-          {:timestamp, date}
+          {:timestamp, AutoApi.State.parse_bin_property_to_date_helper(value)}
         end
       end
 
@@ -148,6 +142,7 @@ defmodule AutoApi.State do
         prop_id = prop["id"]
         prop_type = prop["type"]
         prop_size = prop["size"]
+        multiple = prop["multiple"] || false
 
         quote do
           case unquote(prop["type"]) do
@@ -167,7 +162,7 @@ defmodule AutoApi.State do
                     throw({:error, {:can_not_parse_enum, value}})
 
                   matched_value ->
-                    {unquote(prop_name), String.to_atom(matched_value["name"])}
+                    {unquote(prop_name), false, String.to_atom(matched_value["name"])}
                 end
               end
 
@@ -196,114 +191,43 @@ defmodule AutoApi.State do
                 # TODO: should go through the items in order!
                 enum_values = unquote(Macro.escape(prop["items"]))
 
-                data
-                |> Enum.map(fn item ->
-                  parse_state_property_list(enum_values, unquote(prop_name), item)
-                end)
-                |> :binary.list_to_bin()
+                case unquote(multiple) do
+                  true ->
+                    data
+                    |> Enum.map(fn item ->
+                      parse_state_property_list(enum_values, unquote(prop_name), item)
+                    end)
+                    |> :binary.list_to_bin()
+
+                  false ->
+                    parse_state_property_list(enum_values, unquote(prop_name), data)
+                end
               end
 
               def parse_state_property_list(enum_values, unquote(prop_name), data) do
-                find_type_fun = fn enum_values, key_name, value ->
-                  enum_values
-                  |> Enum.filter(fn v -> v[key_name] == value end)
-                  |> List.first()
-                end
-
-                reduce_func = fn {sub_prop, value}, acc ->
-                  bin =
-                    case sub_prop["type"] do
-                      "enum" ->
-                        case find_type_fun.(sub_prop["values"], "name", Atom.to_string(value)) do
-                          nil ->
-                            throw({:error, {:can_not_parse_enum, value}})
-
-                          matched_value ->
-                            <<matched_value["id"]>>
-                        end
-
-                      "string" ->
-                        <<byte_size(value)::integer-16>> <> value
-
-                      type ->
-                        apply(AutoApi.CommonData, :"convert_state_to_bin_#{type}", [
-                          value,
-                          sub_prop["size"]
-                        ])
-                    end
-
-                  acc <> bin
-                end
-
-                binary_object =
-                  enum_values
-                  |> Enum.reject(&Map.get(&1, "size_reference", nil))
-                  |> Enum.map(fn sub_prop ->
-                    key = String.to_atom(sub_prop["name"])
-                    value = Map.get(data, key, 0)
-                    {sub_prop, value}
-                  end)
-                  |> Enum.reduce(
-                    <<>>,
-                    &reduce_func.(&1, &2)
-                  )
-
-                <<unquote(prop_id), byte_size(binary_object)::integer-16>> <> binary_object
+                AutoApi.State.parse_state_property_list_helper(
+                  unquote(prop_id),
+                  enum_values,
+                  data
+                )
               end
 
               def parse_bin_property(unquote(prop["id"]), data) do
                 data_list = :binary.bin_to_list(data)
 
-                {_, result} =
-                  unquote(Macro.escape(prop["items"]))
-                  |> Enum.reduce({0, []}, fn x, {counter, acc} ->
-                    size = x["size"] || Keyword.get(acc, String.to_atom("#{x["name"]}_size"))
-
-                    unless size, do: raise("couldn't find size for #{inspect x}")
-
-                    data_slice = :binary.list_to_bin(Enum.slice(data_list, counter, size))
-
-                    data_value =
-                      case x["type"] do
-                        "enum" ->
-                          <<enum_value>> = data_slice
-
-                          x["values"]
-                          |> Enum.filter(&(&1["id"] == enum_value))
-                          |> List.first()
-                          |> case do
-                            nil ->
-                              Logger.error(
-                                "Can not parse #{inspect enum_value} for #{unquote(prop_name)} in #{
-                                  __MODULE__
-                                }"
-                              )
-
-                              0x00
-
-                            matched_value ->
-                              String.to_atom(matched_value["name"])
-                          end
-
-                        "string" ->
-                          data_slice
-
-                        type ->
-                          apply(AutoApi.CommonData, :"convert_bin_to_#{type}", [data_slice])
-                      end
-
-                    # TODO: convert binary slices to their types
-                    {counter + size, [{String.to_atom(x["name"]), data_value} | acc]}
-                  end)
-
-                {unquote(prop_name), Enum.into(result, %{})}
+                AutoApi.State.parse_bin_property_to_list_helper(
+                  unquote(prop_name),
+                  unquote(Macro.escape(prop["items"])),
+                  data_list,
+                  unquote(multiple)
+                )
               end
 
             "string" ->
               def parse_bin_property(unquote(prop["id"]), data) do
                 value = data
 
-                {String.to_atom(unquote(prop["name"])), value}
+                {String.to_atom(unquote(prop["name"])), unquote(multiple), value}
               end
 
               def parse_state_property(unquote(prop_name), data) do
@@ -344,12 +268,121 @@ defmodule AutoApi.State do
                 value =
                   apply(AutoApi.CommonData, :"convert_bin_to_#{unquote(prop["type"])}", [data])
 
-                {String.to_atom(unquote(prop["name"])), value}
+                {String.to_atom(unquote(prop["name"])), unquote(multiple), value}
               end
           end
         end
       end
 
     [timestamp] ++ [base] ++ [prop_funs]
+  end
+
+  def parse_state_property_list_helper(prop_id, enum_values, data) do
+    find_type_fun = fn enum_values, key_name, value ->
+      enum_values
+      |> Enum.filter(fn v -> v[key_name] == value end)
+      |> List.first()
+    end
+
+    reduce_func = fn {sub_prop, value}, acc ->
+      bin =
+        case sub_prop["type"] do
+          "enum" ->
+            case find_type_fun.(sub_prop["values"], "name", Atom.to_string(value)) do
+              nil ->
+                throw({:error, {:can_not_parse_enum, value}})
+
+              matched_value ->
+                <<matched_value["id"]>>
+            end
+
+          "string" ->
+            <<byte_size(value)::integer-16>> <> value
+
+          type ->
+            apply(AutoApi.CommonData, :"convert_state_to_bin_#{type}", [
+              value,
+              sub_prop["size"]
+            ])
+        end
+
+      acc <> bin
+    end
+
+    binary_object =
+      enum_values
+      |> Enum.reject(&Map.get(&1, "size_reference", nil))
+      |> Enum.map(fn sub_prop ->
+        key = String.to_atom(sub_prop["name"])
+        value = Map.get(data, key, 0)
+        {sub_prop, value}
+      end)
+      |> Enum.reduce(
+        <<>>,
+        &reduce_func.(&1, &2)
+      )
+
+    <<prop_id, byte_size(binary_object)::integer-16>> <> binary_object
+  end
+
+  def parse_bin_property_to_list_helper(prop_name, items, data_list, multiple) do
+    {_, result} =
+      items
+      |> Enum.reduce({0, []}, fn x, {counter, acc} ->
+        size = x["size"] || Keyword.get(acc, String.to_atom("#{x["name"]}_size"))
+
+        unless size, do: raise("couldn't find size for #{inspect(x)}")
+
+        data_slice = :binary.list_to_bin(Enum.slice(data_list, counter, size))
+
+        data_value =
+          case x["type"] do
+            "enum" ->
+              <<enum_value>> = data_slice
+
+              x["values"]
+              |> Enum.filter(&(&1["id"] == enum_value))
+              |> List.first()
+              |> case do
+                nil ->
+                  Logger.error(
+                    "Can not parse #{inspect enum_value} for #{prop_name} in #{__MODULE__}"
+                  )
+
+                  0x00
+
+                matched_value ->
+                  String.to_atom(matched_value["name"])
+              end
+
+            "string" ->
+              data_slice
+
+            type ->
+              apply(AutoApi.CommonData, :"convert_bin_to_#{type}", [data_slice])
+          end
+
+        # TODO: convert binary slices to their types
+        {counter + size, [{String.to_atom(x["name"]), data_value} | acc]}
+      end)
+
+    {prop_name, multiple, Enum.into(result, %{})}
+  end
+
+  def parse_bin_property_to_date_helper(
+        <<year, month, day, hour, minute, second, offset::signed-integer-16>>
+      ) do
+    %DateTime{
+      year: year + 2000,
+      month: month,
+      day: day,
+      hour: hour,
+      minute: minute,
+      second: second,
+      utc_offset: offset,
+      time_zone: "",
+      zone_abbr: "",
+      std_offset: 0
+    }
   end
 end

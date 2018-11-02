@@ -84,4 +84,12 @@ defmodule AutoApi.CommonData do
   def convert_state_to_bin_float(value, 4) do
     <<value::float-32>>
   end
+
+  def convert_bin_to_double(<<f_value::float-64>>) do
+    f_value
+  end
+
+  def convert_state_to_bin_double(value, 8) do
+    <<value::float-64>>
+  end
 end
