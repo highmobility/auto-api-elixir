@@ -32,9 +32,9 @@ defmodule AutoApi.RaceCapability do
       iex> R.command_name(0x01)
       :race_state
       iex> length(R.properties)
-      17
+      18
       iex> List.last(R.properties)
-      {17, :accelerator_pedal_kickdown_switch}
+      {18, :vehicle_moving}
   """
 
   @spec_file "specs/race.json"

@@ -1,5 +1,6 @@
 {
     "category": "diagnostics",
+    "id_msb": 0,
     "id_lsb": 87,
     "name": "race",
     "api_intro": 5,
@@ -13,7 +14,6 @@
             "name": "race_state"
         }
     ],
-    "id_msb": 0,
     "properties": [
         {
             "items": [
@@ -50,7 +50,7 @@
             "size": 5,
             "multiple": true,
             "id": 1,
-            "name": "acceleration"
+            "name": "accelerations"
         },
         {
             "size": 1,
@@ -76,7 +76,7 @@
         {
             "size": 1,
             "type": "integer",
-            "description": "The steering angle in degrees, whereas 0 degrees is straight ahead, positive number to the left and negative number to the right",
+            "description": "The steering angle in degrees, whereas 0 degrees is straight ahead, positive number to the right and negative number to the left",
             "name": "steering_angle",
             "id": 5
         },
@@ -152,8 +152,9 @@
                 }
             ],
             "size": 2,
+            "multiple": true,
             "id": 10,
-            "name": "brake_torque_vectoring"
+            "name": "brake_torque_vectorings"
         },
         {
             "type": "enum",
@@ -268,7 +269,23 @@
             ],
             "id": 17,
             "name": "accelerator_pedal_kickdown_switch"
+        },
+        {
+            "type": "enum",
+            "size": 1,
+            "values": [
+                {
+                    "name": "not_moving",
+                    "id": 0
+                },
+                {
+                    "name": "moving",
+                    "id": 1
+                }
+            ],
+            "id": 18,
+            "name": "vehicle_moving"
         }
     ],
-    "api_update": 7
+    "api_update": 8
 }

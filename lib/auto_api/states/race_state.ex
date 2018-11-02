@@ -34,7 +34,7 @@ defmodule AutoApi.RaceState do
   @doc """
   Race state
   """
-  defstruct acceleration: [],
+  defstruct accelerations: [],
             understeering: nil,
             oversteering: nil,
             gas_pedal_position: nil,
@@ -55,7 +55,7 @@ defmodule AutoApi.RaceState do
   use AutoApi.State, spec_file: "specs/race.json"
 
   @type t :: %__MODULE__{
-          acceleration: list(acceleration),
+          accelerations: list(acceleration),
           understeering: integer | nil,
           oversteering: integer | nil,
           gas_pedal_position: integer | nil,
@@ -81,7 +81,7 @@ defmodule AutoApi.RaceState do
     %AutoApi.RaceState{understeering: 100}
 
     iex> AutoApi.RaceState.from_bin(<<0x01, 5::integer-16, 0x03,  9.9::float-32>>)
-    %AutoApi.RaceState{acceleration: [%{g_force: 9.9, type: :rear_lateral_acceleration}]}
+    %AutoApi.RaceState{accelerations: [%{g_force: 9.9, type: :rear_lateral_acceleration}]}
 
   """
   @spec from_bin(binary) :: __MODULE__.t()

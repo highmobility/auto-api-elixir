@@ -33,7 +33,7 @@ defmodule AutoApi.RaceCommand do
 
         iex> command = <<0x01>> <> <<0x01, 5::integer-16, 0x03, 9.9::float-32>>
         iex> AutoApi.RaceCommand.execute(%AutoApi.RaceState{}, command)
-        {:state_changed, %AutoApi.RaceState{acceleration: [%{g_force: 9.9, type: :rear_lateral_acceleration}]}}
+        {:state_changed, %AutoApi.RaceState{accelerations: [%{g_force: 9.9, type: :rear_lateral_acceleration}]}}
 
   """
   @spec execute(RaceState.t(), binary) :: {:state | :state_changed, RaceState.t()}
@@ -59,7 +59,7 @@ defmodule AutoApi.RaceCommand do
         <<1, 0x11, 0, 1, 1, 6, 0, 4, 66, 160, 42, 127>>
 
         iex> properties = AutoApi.RaceCapability.properties |> Enum.into(%{}) |> Map.values()
-        iex> AutoApi.RaceCommand.state(%AutoApi.RaceState{acceleration: [%{g_force: 90.19, type: :lateral_acceleration}], properties: properties})
+        iex> AutoApi.RaceCommand.state(%AutoApi.RaceState{accelerations: [%{g_force: 90.19, type: :lateral_acceleration}], properties: properties})
         <<1, 1, 0, 5, 1, 66, 180, 97, 72>>
   """
   @spec state(RaceState.t()) :: binary
