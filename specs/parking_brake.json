@@ -4,6 +4,39 @@
     "id_lsb": 88,
     "name": "parking_brake",
     "api_intro": 5,
+    "message_types": [
+        {
+            "id": 0,
+            "name": "get_parking_brake_state"
+        },
+        {
+            "id": 1,
+            "name": "parking_brake_state"
+        },
+        {
+            "properties": [
+                {
+                    "mandatory": true,
+                    "name": "parking_brake",
+                    "values": [
+                        {
+                            "name": "inactive",
+                            "id": 0
+                        },
+                        {
+                            "name": "active",
+                            "id": 1
+                        }
+                    ],
+                    "type": "enum",
+                    "id": 1,
+                    "size": 1
+                }
+            ],
+            "name": "set_parking_brake",
+            "id": 18
+        }
+    ],
     "properties": [
         {
             "type": "enum",
@@ -22,18 +55,5 @@
             "name": "parking_brake"
         }
     ],
-    "message_types": [
-        {
-            "id": 0,
-            "name": "get_parking_brake_state"
-        },
-        {
-            "id": 1,
-            "name": "parking_brake_state"
-        },
-        {
-            "id": 2,
-            "name": "set_parking_brake"
-        }
-    ]
+    "api_update": 8
 }

@@ -31,7 +31,7 @@ defmodule AutoApi.ParkingBrakeCapability do
       :get_parking_brake_state
       iex> P.command_name(0x01)
       :parking_brake_state
-      iex> P.command_name(0x02)
+      iex> P.command_name(0x12)
       :set_parking_brake
       iex> length(P.properties)
       1
@@ -42,7 +42,7 @@ defmodule AutoApi.ParkingBrakeCapability do
   @spec_file "specs/parking_brake.json"
   @type command_type :: :get_parking_brake_state | :parking_brake_state | :set_parking_brake
 
-  @command_module AutoApi.ParkingBrakeCommand
+  @command_module AutoApi.NotImplemented
   @state_module AutoApi.ParkingBrakeState
 
   use AutoApi.Capability
