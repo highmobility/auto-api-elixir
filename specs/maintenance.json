@@ -1,5 +1,6 @@
 {
     "category": "diagnostics",
+    "id_msb": 0,
     "id_lsb": 52,
     "name": "maintenance",
     "api_intro": 3,
@@ -13,7 +14,6 @@
             "name": "maintenance_state"
         }
     ],
-    "id_msb": 0,
     "properties": [
         {
             "size": 2,
@@ -28,7 +28,310 @@
             "description": "The amount of kilometers until next servicing of the car",
             "name": "kilometers_to_next_service",
             "id": 2
+        },
+        {
+            "size": 1,
+            "type": "integer",
+            "description": "The number of CBS reports",
+            "name": "cbs_reports_count",
+            "id": 3
+        },
+        {
+            "size": 1,
+            "type": "integer",
+            "description": "Number of months until exhaust inspection",
+            "name": "months_to_exhaust_inpection",
+            "id": 4
+        },
+        {
+            "type": "enum",
+            "size": 1,
+            "values": [
+                {
+                    "name": "pending",
+                    "id": 0
+                },
+                {
+                    "name": "idle",
+                    "id": 1
+                },
+                {
+                    "name": "succesful",
+                    "id": 2
+                },
+                {
+                    "name": "error",
+                    "id": 3
+                }
+            ],
+            "id": 5,
+            "name": "teleservice_availability"
+        },
+        {
+            "size": 2,
+            "type": "integer",
+            "description": "Distance threshold for Service",
+            "name": "service_distance_threshold",
+            "id": 6
+        },
+        {
+            "size": 1,
+            "type": "integer",
+            "description": "Time threshold, in weeks, for Service",
+            "name": "service_time_threshold",
+            "id": 7
+        },
+        {
+            "items": [
+                {
+                    "size": 1,
+                    "type": "integer",
+                    "description": "Value between 0 and 99, which corresponds to 2000-2099",
+                    "name": "year"
+                },
+                {
+                    "size": 1,
+                    "type": "integer",
+                    "description": "Value between 1 and 12",
+                    "name": "month"
+                },
+                {
+                    "size": 1,
+                    "type": "integer",
+                    "description": "Value between 1 and 31",
+                    "name": "day"
+                },
+                {
+                    "size": 1,
+                    "type": "integer",
+                    "description": "Value between 0 and 23",
+                    "name": "hour"
+                },
+                {
+                    "size": 1,
+                    "type": "integer",
+                    "description": "Value between 0 and 59",
+                    "name": "minute"
+                },
+                {
+                    "size": 1,
+                    "type": "integer",
+                    "description": "Value between 0 and 59",
+                    "name": "second"
+                },
+                {
+                    "size": 2,
+                    "type": "integer",
+                    "description": "UTC time offset in minutes, which can be negative",
+                    "name": "utc_time_offset"
+                }
+            ],
+            "size": 8,
+            "id": 8,
+            "name": "automatic_teleservice_call_date"
+        },
+        {
+            "items": [
+                {
+                    "size": 1,
+                    "type": "integer",
+                    "description": "Value between 0 and 99, which corresponds to 2000-2099",
+                    "name": "year"
+                },
+                {
+                    "size": 1,
+                    "type": "integer",
+                    "description": "Value between 1 and 12",
+                    "name": "month"
+                },
+                {
+                    "size": 1,
+                    "type": "integer",
+                    "description": "Value between 1 and 31",
+                    "name": "day"
+                },
+                {
+                    "size": 1,
+                    "type": "integer",
+                    "description": "Value between 0 and 23",
+                    "name": "hour"
+                },
+                {
+                    "size": 1,
+                    "type": "integer",
+                    "description": "Value between 0 and 59",
+                    "name": "minute"
+                },
+                {
+                    "size": 1,
+                    "type": "integer",
+                    "description": "Value between 0 and 59",
+                    "name": "second"
+                },
+                {
+                    "size": 2,
+                    "type": "integer",
+                    "description": "UTC time offset in minutes, which can be negative",
+                    "name": "utc_time_offset"
+                }
+            ],
+            "size": 8,
+            "id": 9,
+            "name": "teleservice_battery_call_date"
+        },
+        {
+            "items": [
+                {
+                    "size": 1,
+                    "type": "integer",
+                    "description": "Value between 0 and 99, which corresponds to 2000-2099",
+                    "name": "year"
+                },
+                {
+                    "size": 1,
+                    "type": "integer",
+                    "description": "Value between 1 and 12",
+                    "name": "month"
+                },
+                {
+                    "size": 1,
+                    "type": "integer",
+                    "description": "Value between 1 and 31",
+                    "name": "day"
+                },
+                {
+                    "size": 1,
+                    "type": "integer",
+                    "description": "Value between 0 and 23",
+                    "name": "hour"
+                },
+                {
+                    "size": 1,
+                    "type": "integer",
+                    "description": "Value between 0 and 59",
+                    "name": "minute"
+                },
+                {
+                    "size": 1,
+                    "type": "integer",
+                    "description": "Value between 0 and 59",
+                    "name": "second"
+                },
+                {
+                    "size": 2,
+                    "type": "integer",
+                    "description": "UTC time offset in minutes, which can be negative",
+                    "name": "utc_time_offset"
+                }
+            ],
+            "size": 8,
+            "id": 10,
+            "name": "next_inspection_date"
+        },
+        {
+            "items": [
+                {
+                    "size": 1,
+                    "type": "integer",
+                    "description": "Value between 0 and 99, which corresponds to 2000-2099",
+                    "name": "year"
+                },
+                {
+                    "size": 1,
+                    "type": "integer",
+                    "description": "Value between 1 and 12",
+                    "name": "month"
+                },
+                {
+                    "size": 2,
+                    "type": "integer",
+                    "description": "CBS identifier",
+                    "name": "identifier"
+                },
+                {
+                    "type": "enum",
+                    "values": [
+                        {
+                            "name": "ok",
+                            "id": 0
+                        },
+                        {
+                            "name": "pending",
+                            "id": 1
+                        },
+                        {
+                            "name": "overdue",
+                            "id": 2
+                        }
+                    ],
+                    "name": "due_status",
+                    "size": 1
+                },
+                {
+                    "size": 2,
+                    "type": "integer",
+                    "description": "Size of the CBS text",
+                    "name": "text_size"
+                },
+                {
+                    "type": "string",
+                    "name": "text",
+                    "description": "CBS text bytes formatted in UTF-8"
+                }
+            ],
+            "multiple": true,
+            "id": 11,
+            "name": "condition_based_services"
+        },
+        {
+            "items": [
+                {
+                    "size": 1,
+                    "type": "integer",
+                    "description": "Value between 0 and 99, which corresponds to 2000-2099",
+                    "name": "year"
+                },
+                {
+                    "size": 1,
+                    "type": "integer",
+                    "description": "Value between 1 and 12",
+                    "name": "month"
+                },
+                {
+                    "size": 1,
+                    "type": "integer",
+                    "description": "Value between 1 and 31",
+                    "name": "day"
+                },
+                {
+                    "size": 1,
+                    "type": "integer",
+                    "description": "Value between 0 and 23",
+                    "name": "hour"
+                },
+                {
+                    "size": 1,
+                    "type": "integer",
+                    "description": "Value between 0 and 59",
+                    "name": "minute"
+                },
+                {
+                    "size": 1,
+                    "type": "integer",
+                    "description": "Value between 0 and 59",
+                    "name": "second"
+                },
+                {
+                    "size": 2,
+                    "type": "integer",
+                    "description": "UTC time offset in minutes, which can be negative",
+                    "name": "utc_time_offset"
+                }
+            ],
+            "size": 8,
+            "id": 12,
+            "name": "brake_fluid_change_date"
         }
     ],
-    "api_update": 5
+    "api_update": 8
 }

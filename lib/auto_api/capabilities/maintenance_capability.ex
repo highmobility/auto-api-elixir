@@ -34,16 +34,14 @@ defmodule AutoApi.MaintenanceCapability do
       iex> M.command_name(0x01)
       :maintenance_state
       iex> length(M.properties)
-      2
-      iex> M.properties
-      [{0x01, :days_to_next_service}, {0x02, :kilometers_to_next_service}]
+      12
   """
 
   @spec_file "specs/maintenance.json"
   @type command_type :: :get_maintenance_state | :maintenance_state
 
   @command_module AutoApi.MaintenanceCommand
-  @state_module AutoApi.MaintenanceState
+  @state_module AutoApi.NotImplemented
 
   use AutoApi.Capability
 end
