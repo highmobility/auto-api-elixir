@@ -1,41 +1,62 @@
 {
-    "category": "digital_key",
-    "id_lsb": 99,
-    "name": "start_stop",
-    "api_intro": 7,
+    "category": "digital_key", 
+    "id_lsb": 99, 
+    "name": "start_stop", 
+    "api_intro": 7, 
     "message_types": [
         {
-            "id": 0,
+            "id": 0, 
             "name": "get_start_stop_state"
-        },
+        }, 
         {
-            "id": 1,
+            "id": 1, 
             "name": "start_stop_state"
-        },
+        }, 
         {
-            "id": 2,
-            "name": "activate_deactivate_start_stop"
+            "properties": [
+                {
+                    "pretty_name": "Start-Stop", 
+                    "mandatory": true, 
+                    "name": "start_stop", 
+                    "values": [
+                        {
+                            "name": "inactive", 
+                            "id": 0
+                        }, 
+                        {
+                            "name": "active", 
+                            "id": 1
+                        }
+                    ], 
+                    "type": "enum", 
+                    "id": 1, 
+                    "size": 1
+                }
+            ], 
+            "name": "activate_deactivate_start_stop", 
+            "id": 18
         }
-    ],
-    "id_msb": 0,
-    "pretty_state_name": "Start-Stop",
+    ], 
+    "id_msb": 0, 
+    "pretty_state_name": "Start-Stop", 
     "properties": [
         {
-            "pretty_name": "Start-Stop",
+            "pretty_name": "Start-Stop", 
             "values": [
                 {
-                    "name": "inactive",
+                    "name": "inactive", 
                     "id": 0
-                },
+                }, 
                 {
-                    "name": "active",
+                    "name": "active", 
                     "id": 1
                 }
-            ],
-            "name": "start_stop",
-            "type": "enum",
-            "id": 1,
+            ], 
+            "name": "start_stop", 
+            "type": "enum", 
+            "id": 1, 
             "size": 1
         }
-    ]
+    ], 
+    "api_update": 8
 }

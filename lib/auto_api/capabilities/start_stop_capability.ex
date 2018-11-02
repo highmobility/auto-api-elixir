@@ -31,7 +31,7 @@ defmodule AutoApi.StartStopCapability do
       :get_start_stop_state
       iex> SS.command_name(0x01)
       :start_stop_state
-      iex> SS.command_name(0x02)
+      iex> SS.command_name(0x12)
       :activate_deactivate_start_stop
       iex> SS.properties
       [{1, :start_stop}]
@@ -41,8 +41,8 @@ defmodule AutoApi.StartStopCapability do
   @type command_type ::
           :get_start_stop_state | :start_stop_state | :activate_deactivate_start_stop
 
-  @command_module AutoApi.StartStopCommand
-  @state_module AutoApi.StartStopState
+  @command_module AutoApi.NotImplemented
+  @state_module AutoApi.NotImplemented
 
   use AutoApi.Capability
 end

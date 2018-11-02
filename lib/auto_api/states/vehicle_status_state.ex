@@ -88,13 +88,6 @@ defmodule AutoApi.VehicleStatusState do
     iex> AutoApi.VehicleStatusState.to_bin(%AutoApi.VehicleStatusState{vin: "vin", model_name: "model_name", properties: [:model_name, :vin]})
     <<0x03, 10::integer-16>> <> "model_name" <> <<0x01, 3::integer-16>> <> "vin"
 
-    iex> AutoApi.VehicleStatusState.to_bin(%AutoApi.VehicleStatusState{state: [%AutoApi.StartStopState{start_stop: :inactive, properties: [:start_stop]}], properties: [:state]})
-    <<0x99, 7::integer-16, 0, 0x63, 1, 1, 0, 1, 0>>
-
-    iex> states = [%AutoApi.StartStopState{start_stop: :inactive, properties: [:start_stop]}, %AutoApi.RaceState{gas_pedal_position: 10, electronic_stability_program: :active, properties: [:electronic_stability_program, :gas_pedal_position]}]
-    iex> AutoApi.VehicleStatusState.to_bin(%AutoApi.VehicleStatusState{state: states, properties: [:state]})
-    <<0x99, 7::integer-16, 0, 0x63, 1, 1, 0, 1, 0>> <> <<0x99, 11::integer-16, 0, 0x57, 1, 0x9, 1::integer-16, 1, 0x4, 1::integer-16, 10>>
-
   """
   @spec to_bin(__MODULE__.t()) :: binary
   def to_bin(%__MODULE__{} = state) do
