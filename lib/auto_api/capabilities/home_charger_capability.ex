@@ -31,18 +31,20 @@ defmodule AutoApi.HomeChargerCapability do
       :get_home_charger_state
       iex> H.command_name(0x01)
       :home_charger_state
-      iex> H.command_name(0x02)
+      iex> H.command_name(0x12)
       :set_charge_current
-      iex> H.command_name(0x03)
+      iex> H.command_name(0x13)
       :set_price_tariffs
-      iex> H.command_name(0x04)
+      iex> H.command_name(0x14)
       :activate_deactivate_solar_charging
-      iex> H.command_name(0x05)
+      iex> H.command_name(0x15)
       :enable_disable_wi_fi_hotspot
+      iex> H.command_name(0x16)
+      :authenticate_expire
       iex> length(H.properties)
-      12
+      15
       iex> List.last(H.properties)
-      {0x0c, :price_tariff}
+      {0x12, :price_tariffs}
   """
 
   @spec_file "specs/home_charger.json"
@@ -53,6 +55,7 @@ defmodule AutoApi.HomeChargerCapability do
           | :set_price_tariffs
           | :activate_deactivate_solar_charging
           | :enable_disable_wi_fi_hotspot
+          | :authenticate_expire
 
   @command_module AutoApi.NotImplemented
   @state_module AutoApi.NotImplemented
