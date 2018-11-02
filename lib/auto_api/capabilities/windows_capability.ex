@@ -31,19 +31,19 @@ defmodule AutoApi.WindowsCapability do
       :get_windows_state
       iex> W.command_name(0x01)
       :windows_state
-      iex> W.command_name(0x02)
-      :open_close_windows
+      iex> W.command_name(0x12)
+      :control_windows
       iex> length(W.properties)
-      1
+      2
       iex> W.properties
-      [{0x01, :window}]
+      [{2, :windows_open_percentages}, {3, :windows_positions}]
   """
 
   @spec_file "specs/windows.json"
-  @type command_type :: :get_windows_state | :windows_state | :open_close_windows
+  @type command_type :: :get_windows_state | :windows_state | :control_windows
 
-  @command_module AutoApi.WindowsCommand
-  @state_module AutoApi.WindowsState
+  @command_module AutoApi.NotImplemented
+  @state_module AutoApi.NotImplemented
 
   use AutoApi.Capability
 end
