@@ -1,52 +1,87 @@
 {
-  "name": "honk_horn_flash_lights",
-  "category": "chassis",
-  "id_msb": 0,
-  "id_lsb": 38,
-  "api_intro": 2,
-  "api_update": 5,
-  "message_types": [
-    {
-      "id": 0,
-      "name": "get_flashers_state"
-    },
-    {
-      "id": 1,
-      "name": "flashers_state"
-    },
-    {
-      "id": 2,
-      "name": "honk_flash"
-    },
-    {
-      "id": 3,
-      "name": "activate_deactivate_emergency_flashers"
-    }
-  ],
-  "properties": [
-    {
-      "id": 1,
-      "type": "enum",
-      "size": 1,
-      "name": "flashers",
-      "values": [
+    "category": "chassis",
+    "id_msb": 0,
+    "id_lsb": 38,
+    "name": "honk_horn_flash_lights",
+    "api_intro": 2,
+    "message_types": [
         {
-          "name": "inactive",
-          "id": 0
+            "id": 0,
+            "name": "get_flashers_state"
         },
         {
-          "name": "emergency_flasher_active",
-          "id": 1
+            "id": 1,
+            "name": "flashers_state"
         },
         {
-          "name": "left_flasher_active",
-          "id": 2
+            "properties": [
+                {
+                    "id": 1,
+                    "type": "integer",
+                    "description": "Number of seconds to honk the horn",
+                    "name": "seconds",
+                    "size": 1
+                },
+                {
+                    "id": 2,
+                    "type": "integer",
+                    "description": "Number of times to flash the lights",
+                    "name": "flash",
+                    "size": 1
+                }
+            ],
+            "name": "honk_flash",
+            "id": 18
         },
         {
-          "name": "right_flasher_active",
-          "id": 3
+            "properties": [
+                {
+                    "mandatory": true,
+                    "name": "active_state",
+                    "values": [
+                        {
+                            "name": "deactivate",
+                            "id": 0
+                        },
+                        {
+                            "name": "activate",
+                            "id": 1
+                        }
+                    ],
+                    "type": "enum",
+                    "id": 1,
+                    "size": 1
+                }
+            ],
+            "name": "activate_deactivate_emergency_flashers",
+            "id": 19
         }
-      ]
-    }
-  ]
+    ],
+    "properties": [
+        {
+            "type": "enum",
+            "size": 1,
+            "values": [
+                {
+                    "name": "inactive",
+                    "id": 0
+                },
+                {
+                    "name": "emergency_flasher_active",
+                    "id": 1
+                },
+                {
+                    "name": "left_flasher_active",
+                    "id": 2
+                },
+                {
+                    "name": "right_flasher_active",
+                    "id": 3
+                }
+            ],
+            "id": 1,
+            "name": "flashers"
+        }
+    ],
+    "api_update": 8
 }

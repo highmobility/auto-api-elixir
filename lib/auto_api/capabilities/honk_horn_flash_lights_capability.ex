@@ -33,6 +33,8 @@ defmodule AutoApi.HonkHornFlashLightsCapability do
       :get_flashers_state
       iex> H.command_name(0x01)
       :flashers_state
+      iex> H.command_name(0x13)
+      :activate_deactivate_emergency_flashers
       iex> length(H.properties)
       1
       iex> List.last(H.properties)
@@ -46,7 +48,7 @@ defmodule AutoApi.HonkHornFlashLightsCapability do
           | :honk_flash
           | :activate_deactivate_emergency_flashers
 
-  @command_module AutoApi.HonkHornFlashLightsCommand
+  @command_module AutoApi.NotImplemented
   @state_module AutoApi.HonkHornFlashLightsState
   use AutoApi.Capability
 end
