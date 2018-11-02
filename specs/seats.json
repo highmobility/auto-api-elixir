@@ -1,9 +1,19 @@
 {
     "category": "chassis",
-    "id_msb": 0,
     "id_lsb": 86,
     "name": "seats",
     "api_intro": 5,
+    "message_types": [
+        {
+            "id": 0,
+            "name": "get_seats_state"
+        },
+        {
+            "id": 1,
+            "name": "seats_state"
+        }
+    ],
+    "id_msb": 0,
     "properties": [
         {
             "items": [
@@ -31,7 +41,7 @@
                             "id": 4
                         }
                     ],
-                    "name": "seat_position",
+                    "name": "seat_location",
                     "size": 1
                 },
                 {
@@ -47,6 +57,41 @@
                         }
                     ],
                     "name": "person_detected",
+                    "size": 1
+                }
+            ],
+            "size": 2,
+            "multiple": true,
+            "id": 2,
+            "name": "persons_detected"
+        },
+        {
+            "items": [
+                {
+                    "type": "enum",
+                    "values": [
+                        {
+                            "name": "front_left",
+                            "id": 0
+                        },
+                        {
+                            "name": "front_right",
+                            "id": 1
+                        },
+                        {
+                            "name": "rear_right",
+                            "id": 2
+                        },
+                        {
+                            "name": "rear_left",
+                            "id": 3
+                        },
+                        {
+                            "name": "rear_center",
+                            "id": 4
+                        }
+                    ],
+                    "name": "seat_location",
                     "size": 1
                 },
                 {
@@ -65,19 +110,11 @@
                     "size": 1
                 }
             ],
-            "size": 3,
-            "id": 1,
-            "name": "seat"
+            "size": 2,
+            "multiple": true,
+            "id": 3,
+            "name": "seatbelts_fastened"
         }
     ],
-    "message_types": [
-        {
-            "id": 0,
-            "name": "get_seats_state"
-        },
-        {
-            "id": 1,
-            "name": "seats_state"
-        }
-    ]
+    "api_update": 8
 }

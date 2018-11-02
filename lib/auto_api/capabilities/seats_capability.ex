@@ -32,16 +32,16 @@ defmodule AutoApi.SeatsCapability do
       iex> S.command_name(0x01)
       :seats_state
       iex> length(S.properties)
-      1
+      2
       iex> List.last(S.properties)
-      {0x01, :seat}
+      {0x03, :seatbelts_fastened}
   """
 
   @spec_file "specs/seats.json"
   @type command_type :: :get_seats_state | :seats_state
 
-  @command_module AutoApi.SeatsCommand
-  @state_module AutoApi.SeatsState
+  @command_module AutoApi.NotImplemented
+  @state_module AutoApi.NotImplemented
 
   use AutoApi.Capability
 end
