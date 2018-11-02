@@ -13,8 +13,136 @@
             "name": "windscreen_state"
         },
         {
-            "id": 2,
-            "name": "set_windscreen_damage"
+            "properties": [
+                {
+                    "mandatory": true,
+                    "name": "windscreen_damage",
+                    "values": [
+                        {
+                            "name": "no_impact_detected",
+                            "id": 0
+                        },
+                        {
+                            "name": "impact_but_no_damage_detected",
+                            "id": 1
+                        },
+                        {
+                            "name": "damage_smaller_than_1_inch",
+                            "id": 2
+                        },
+                        {
+                            "name": "damage_larger_than_1_inch",
+                            "id": 3
+                        }
+                    ],
+                    "type": "enum",
+                    "id": 1,
+                    "size": 1
+                },
+                {
+                    "type": "enum",
+                    "size": 1,
+                    "values": [
+                        {
+                            "name": "unknown",
+                            "id": 0
+                        },
+                        {
+                            "pretty_name": "4 bits representing the horizontal position of the zone in a matrix seen from the inside of the car, starting from index 1",
+                            "name": "horizontal_position",
+                            "id": "value & 0xF0"
+                        },
+                        {
+                            "pretty_name": "4 bits representing the vertical position of the zone, starting from index 1",
+                            "name": "vertical_position",
+                            "id": "value & 0x0F"
+                        }
+                    ],
+                    "id": 2,
+                    "name": "windscreen_damage_zone"
+                }
+            ],
+            "name": "set_windscreen_damage",
+            "id": 18
+        },
+        {
+            "properties": [
+                {
+                    "mandatory": true,
+                    "name": "windscreen_needs_replacement",
+                    "values": [
+                        {
+                            "name": "unknown",
+                            "id": 0
+                        },
+                        {
+                            "name": "no_replacement_needed",
+                            "id": 1
+                        },
+                        {
+                            "name": "replacement_needed",
+                            "id": 2
+                        }
+                    ],
+                    "type": "enum",
+                    "id": 1,
+                    "size": 1
+                }
+            ],
+            "name": "set_windscreen_replacement_needed",
+            "id": 19
+        },
+        {
+            "properties": [
+                {
+                    "mandatory": true,
+                    "name": "wipers_state",
+                    "values": [
+                        {
+                            "name": "inactive",
+                            "id": 0
+                        },
+                        {
+                            "name": "active",
+                            "id": 1
+                        },
+                        {
+                            "name": "automatic",
+                            "id": 2
+                        }
+                    ],
+                    "type": "enum",
+                    "id": 1,
+                    "size": 1
+                },
+                {
+                    "type": "enum",
+                    "values": [
+                        {
+                            "pretty_name": "Level 0, inactive",
+                            "name": "level_0",
+                            "id": 0
+                        },
+                        {
+                            "name": "level_1",
+                            "id": 1
+                        },
+                        {
+                            "name": "level_2",
+                            "id": 2
+                        },
+                        {
+                            "name": "level_3",
+                            "id": 3
+                        }
+                    ],
+                    "id": 2,
+                    "name": "wipers_intensity",
+                    "size": 1
+                }
+            ],
+            "name": "control_wipers",
+            "id": 20
         }
     ],
     "id_msb": 0,
@@ -209,5 +337,5 @@
             "name": "windscreen_damage_detection_time"
         }
     ],
-    "api_update": 5
+    "api_update": 8
 }

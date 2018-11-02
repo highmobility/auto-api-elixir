@@ -31,7 +31,7 @@ defmodule AutoApi.WindscreenCapability do
       :get_windscreen_state
       iex> W.command_name(0x01)
       :windscreen_state
-      iex> W.command_name(0x02)
+      iex> W.command_name(0x12)
       :set_windscreen_damage
       iex> length(W.properties)
       8
