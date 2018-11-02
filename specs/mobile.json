@@ -1,0 +1,36 @@
+{
+    "category": "headunit",
+    "id_lsb": 102,
+    "name": "mobile",
+    "api_intro": 8,
+    "message_types": [
+        {
+            "id": 0,
+            "name": "get_mobile_state"
+        },
+        {
+            "id": 1,
+            "name": "mobile_state"
+        }
+    ],
+    "id_msb": 0,
+    "pretty_state_name": "Mobile",
+    "properties": [
+        {
+            "type": "enum",
+            "size": 1,
+            "values": [
+                {
+                    "name": "disconnected",
+                    "id": 0
+                },
+                {
+                    "name": "connected",
+                    "id": 1
+                }
+            ],
+            "id": 1,
+            "name": "connection"
+        }
+    ]
+}

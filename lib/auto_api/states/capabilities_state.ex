@@ -44,7 +44,8 @@ defmodule AutoApi.CapabilitiesState do
             power_takeoff: [],
             charging: [],
             maintenance: [],
-            hood: []
+            hood: [],
+            mobile: []
 
   @behaviour AutoApi.State
 
@@ -73,7 +74,8 @@ defmodule AutoApi.CapabilitiesState do
           power_takeoff: list(AutoApi.PowerTakeoffCapability.command_type()),
           charging: list(AutoApi.ChargingCapability.command_type()),
           maintenance: list(AutoApi.MaintenanceCapability.command_type()),
-          hood: list(AutoApi.HoodCapability.command_type())
+          hood: list(AutoApi.HoodCapability.command_type()),
+          mobile: list(AutoApi.MobileCapability.command_type())
         }
 
   @spec base :: t
