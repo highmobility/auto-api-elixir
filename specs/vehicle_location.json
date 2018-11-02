@@ -18,36 +18,36 @@
         {
             "items": [
                 {
-                    "size": 4,
-                    "type": "float",
-                    "description": "Latitude in 4-bytes per IEEE 754",
+                    "size": 8,
+                    "type": "double",
+                    "description": "Latitude in 8-bytes per IEEE 754",
                     "name": "latitude"
                 },
                 {
-                    "size": 4,
-                    "type": "float",
-                    "description": "Longitude in 4-bytes per IEEE 754",
+                    "size": 8,
+                    "type": "double",
+                    "description": "Longitude in 8-bytes per IEEE 754",
                     "name": "longitude"
                 }
             ],
-            "size": 8,
-            "id": 1,
+            "size": 16,
+            "id": 4,
             "name": "coordinates"
         },
         {
-            "size": 4,
-            "type": "float",
-            "description": "Heading in 4-bytes per IEEE 754",
+            "size": 8,
+            "type": "double",
+            "description": "Heading in 8-bytes per IEEE 754",
             "name": "heading",
-            "id": 2
+            "id": 5
         },
         {
-            "size": 4,
-            "type": "float",
-            "description": "Altitude in meters above the WGS 84 reference ellipsoid per IEEE 754 formatting",
+            "size": 8,
+            "type": "double",
+            "description": "Altitude in meters above the WGS 84 reference ellipsoid per double precision IEEE 754 formatting",
             "name": "altitude",
-            "id": 3
+            "id": 6
         }
     ],
-    "api_update": 7
+    "api_update": 8
 }

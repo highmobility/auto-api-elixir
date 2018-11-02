@@ -34,14 +34,14 @@ defmodule AutoApi.VehicleLocationCapability do
       iex> length(VL.properties)
       3
       iex> VL.properties
-      [{1, :coordinates}, {2, :heading}, {3, :altitude}]
+      [{4, :coordinates}, {5, :heading}, {6, :altitude}]
   """
 
   @spec_file "specs/vehicle_location.json"
   @type command_type :: :vehicle_location | :get_vehicle_location
 
-  @command_module AutoApi.VehicleLocationCommand
-  @state_module AutoApi.VehicleLocationState
+  @command_module AutoApi.NotImplemented
+  @state_module AutoApi.NotImplemented
 
   use AutoApi.Capability
 end
