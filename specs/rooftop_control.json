@@ -13,8 +13,60 @@
             "name": "rooftop_state"
         },
         {
-            "id": 2,
-            "name": "control_rooftop"
+            "properties": [
+                {
+                    "id": 1,
+                    "type": "integer",
+                    "description": "Percentage value between 0-100 whereas 100 is opaque",
+                    "name": "dimming",
+                    "size": 1
+                },
+                {
+                    "id": 2,
+                    "type": "integer",
+                    "description": "Percentage value between 0-100 whereas 100 is fully open",
+                    "name": "position",
+                    "size": 1
+                },
+                {
+                    "type": "enum",
+                    "values": [
+                        {
+                            "name": "close",
+                            "id": 0
+                        },
+                        {
+                            "name": "open",
+                            "id": 1
+                        }
+                    ],
+                    "id": 3,
+                    "name": "convertible_roof_state",
+                    "size": 1
+                },
+                {
+                    "type": "enum",
+                    "size": 1,
+                    "values": [
+                        {
+                            "name": "close",
+                            "id": 0
+                        },
+                        {
+                            "name": "tilt",
+                            "id": 1
+                        },
+                        {
+                            "name": "half_tilt",
+                            "id": 2
+                        }
+                    ],
+                    "id": 4,
+                    "name": "sunroof_tilt_state"
+                }
+            ],
+            "name": "control_rooftop",
+            "id": 18
         }
     ],
     "id_msb": 0,
@@ -32,7 +84,71 @@
             "description": "Percentage value between 0-100 whereas 100 is fully open",
             "name": "position",
             "id": 2
+        },
+        {
+            "type": "enum",
+            "size": 1,
+            "values": [
+                {
+                    "name": "closed",
+                    "id": 0
+                },
+                {
+                    "name": "open",
+                    "id": 1
+                },
+                {
+                    "name": "emergency_locked",
+                    "id": 2
+                },
+                {
+                    "name": "closed_secured",
+                    "id": 3
+                },
+                {
+                    "name": "open_secured",
+                    "id": 4
+                },
+                {
+                    "name": "hard_top_mounted",
+                    "id": 5
+                },
+                {
+                    "name": "intermediate_position",
+                    "id": 6
+                },
+                {
+                    "name": "loading_position",
+                    "id": 7
+                },
+                {
+                    "name": "loading_position_immediate",
+                    "id": 8
+                }
+            ],
+            "id": 3,
+            "name": "convertible_roof_state"
+        },
+        {
+            "type": "enum",
+            "size": 1,
+            "values": [
+                {
+                    "name": "closed",
+                    "id": 0
+                },
+                {
+                    "name": "tilted",
+                    "id": 1
+                },
+                {
+                    "name": "half_tilted",
+                    "id": 2
+                }
+            ],
+            "id": 4,
+            "name": "sunroof_tilt_state"
         }
     ],
-    "api_update": 5
+    "api_update": 8
 }

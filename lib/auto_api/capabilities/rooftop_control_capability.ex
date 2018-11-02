@@ -31,12 +31,10 @@ defmodule AutoApi.RooftopControlCapability do
       :get_rooftop_state
       iex> R.command_name(0x01)
       :rooftop_state
-      iex> R.command_name(0x02)
+      iex> R.command_name(0x12)
       :control_rooftop
       iex> length(R.properties)
-      2
-      iex> R.properties
-      [{1, :dimming}, {2, :position}]
+      4
   """
 
   @spec_file "specs/rooftop_control.json"
