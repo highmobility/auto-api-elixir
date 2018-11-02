@@ -275,6 +275,7 @@ defmodule AutoApi.Capability do
     <<0x00, 0x38>> => AutoApi.NotificationsCapability,
     <<0x00, 0x52>> => AutoApi.OffroadCapability,
     <<0x00, 0x26>> => AutoApi.HonkHornFlashLightsCapability,
+    <<0x00, 0x67>> => AutoApi.HoodCapability,
     <<0x00, 0x61>> => AutoApi.DashboardLightsCapability,
     <<0x00, 0x63>> => AutoApi.StartStopCapability,
     <<0x00, 0x64>> => AutoApi.TachographCapability,
