@@ -20,9 +20,8 @@ defmodule AutoApi.UniversalPropertiesTest do
   use ExUnit.Case
   alias AutoApi.DoorLocksState
 
-  @tag :skip
   test "converts the state properties and the universal properties" do
-    bin_state = <<1, 0, 3, 0, 0, 0, 1, 0, 3, 1, 0, 0, 162, 0, 8, 18, 6, 8, 16, 8, 2, 0, 120>>
+    bin_state = <<0x04, 2::integer-16, 0x00, 0x01, 162, 0, 8, 18, 6, 8, 16, 8, 2, 0, 120>>
 
     state = DoorLocksState.from_bin(bin_state)
 
@@ -39,11 +38,10 @@ defmodule AutoApi.UniversalPropertiesTest do
       std_offset: 0
     }
 
-    doors = [
-      %{door_location: :front_right, door_lock: :unlocked, door_position: :closed},
-      %{door_location: :front_left, door_lock: :unlocked, door_position: :closed}
+    locks = [
+      %{door_location: :front_left, position: :open}
     ]
 
-    assert state == %DoorLocksState{timestamp: datetime}
+    assert state == %DoorLocksState{positions: locks, timestamp: datetime}
   end
 end

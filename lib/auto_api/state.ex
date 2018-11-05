@@ -128,7 +128,7 @@ defmodule AutoApi.State do
               0xA2,
               value
             ) do
-          {:timestamp, AutoApi.State.parse_bin_property_to_date_helper(value)}
+          {:timestamp, false, AutoApi.State.parse_bin_property_to_date_helper(value)}
         end
       end
 
