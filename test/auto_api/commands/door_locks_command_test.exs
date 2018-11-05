@@ -18,5 +18,24 @@
 # licensing@high-mobility.com
 defmodule AutoApi.DoorLocksTest do
   use ExUnit.Case
-  doctest AutoApi.DoorLocksCommand
+  alias AutoApi.{DoorLocksCommand, DoorLocksState}
+  doctest DoorLocksCommand
+
+  describe "execute/2" do
+    test "lock_unlock_doors lock command" do
+      command = <<0x012, 0x01, 0x01>>
+
+      state = %DoorLocksState{locks: [%{door_location: :front_left, lock_state: :unlocked}]}
+      assert {:state_changed, new_state} = DoorLocksCommand.execute(state, command)
+      assert new_state.locks == [%{door_location: :front_left, lock_state: :locked}]
+    end
+
+    test "lock_unlock_doors unlock command" do
+      command = <<0x012, 0x01, 0x00>>
+
+      state = %DoorLocksState{locks: [%{door_location: :front_left, lock_state: :locked}]}
+      assert {:state_changed, new_state} = DoorLocksCommand.execute(state, command)
+      assert new_state.locks == [%{door_location: :front_left, lock_state: :unlocked}]
+    end
+  end
 end
