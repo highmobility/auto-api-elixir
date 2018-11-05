@@ -26,7 +26,7 @@ defmodule AutoApi.LightsState do
   defstruct front_exterior_light: nil,
             rear_exterior_light: nil,
             interior_light: nil,
-            ambient_light: %{},
+            ambient_light: nil,
             reverse_light: nil,
             emergency_brake_light: nil,
             timestamp: nil,
@@ -42,7 +42,7 @@ defmodule AutoApi.LightsState do
           front_exterior_light: front_exterior_light | nil,
           rear_exterior_light: activity | nil,
           interior_light: activity | nil,
-          ambient_light: ambient_light | %{},
+          ambient_light: ambient_light | nil,
           reverse_light: activity | nil,
           emergency_brake_light: nil,
           timestamp: DateTime.t() | nil,
@@ -64,16 +64,7 @@ defmodule AutoApi.LightsState do
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
-    state = parse_bin_properties(bin, %__MODULE__{})
-
-    ambient_light =
-      if is_list(state.ambient_light) do
-        List.first(state.ambient_light)
-      else
-        state.ambient_light
-      end
-
-    %{state | ambient_light: ambient_light}
+    parse_bin_properties(bin, %__MODULE__{})
   end
 
   @doc """
@@ -86,13 +77,6 @@ defmodule AutoApi.LightsState do
   """
   @spec to_bin(__MODULE__.t()) :: binary
   def to_bin(%__MODULE__{} = state) do
-    state_copy =
-      if is_map(state.ambient_light) do
-        %{state | ambient_light: [state.ambient_light]}
-      else
-        state
-      end
-
-    parse_state_properties(state_copy)
+    parse_state_properties(state)
   end
 end

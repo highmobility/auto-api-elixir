@@ -31,7 +31,7 @@ defmodule AutoApi.FirmwareVersionState do
   @doc """
   Firmware Version state
   """
-  defstruct car_sdk_version: %{},
+  defstruct car_sdk_version: nil,
             car_sdk_build_name: nil,
             application_version: nil,
             timestamp: nil,
@@ -40,7 +40,7 @@ defmodule AutoApi.FirmwareVersionState do
   use AutoApi.State, spec_file: "specs/firmware_version.json"
 
   @type t :: %__MODULE__{
-          car_sdk_version: list(car_sdk_version) | car_sdk_version | %{},
+          car_sdk_version: car_sdk_version | nil,
           car_sdk_build_name: String.t() | nil,
           application_version: String.t() | nil,
           timestamp: DateTime.t() | nil,
@@ -59,16 +59,7 @@ defmodule AutoApi.FirmwareVersionState do
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
-    state = parse_bin_properties(bin, %__MODULE__{})
-
-    car_sdk_version =
-      if is_list(state.car_sdk_version) do
-        List.first(state.car_sdk_version)
-      else
-        %{}
-      end
-
-    %{state | car_sdk_version: car_sdk_version}
+    parse_bin_properties(bin, %__MODULE__{})
   end
 
   @spec to_bin(__MODULE__.t()) :: binary
@@ -90,13 +81,6 @@ defmodule AutoApi.FirmwareVersionState do
     <<3, 0, 3>> <> "V10"
   """
   def to_bin(%__MODULE__{} = state) do
-    state_copy = %__MODULE__{
-      car_sdk_version: [state.car_sdk_version],
-      car_sdk_build_name: state.car_sdk_build_name,
-      application_version: state.application_version,
-      properties: state.properties
-    }
-
-    parse_state_properties(state_copy)
+    parse_state_properties(state)
   end
 end

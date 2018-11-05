@@ -23,7 +23,7 @@ defmodule AutoApi.VehicleTimeState do
 
   alias AutoApi.CommonData
 
-  defstruct vehicle_time: %{}, timestamp: nil, properties: []
+  defstruct vehicle_time: nil, timestamp: nil, properties: []
 
   use AutoApi.State, spec_file: "specs/vehicle_time.json"
 
@@ -55,9 +55,7 @@ defmodule AutoApi.VehicleTimeState do
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
-    state = parse_bin_properties(bin, %__MODULE__{})
-    vehicle_time = List.first(state.vehicle_time)
-    %{state | vehicle_time: vehicle_time}
+    parse_bin_properties(bin, %__MODULE__{})
   end
 
   @doc """
@@ -68,11 +66,6 @@ defmodule AutoApi.VehicleTimeState do
   """
   @spec to_bin(__MODULE__.t()) :: binary
   def to_bin(%__MODULE__{} = state) do
-    state_copy = %__MODULE__{
-      vehicle_time: [state.vehicle_time],
-      properties: state.properties
-    }
-
-    parse_state_properties(state_copy)
+    parse_state_properties(state)
   end
 end
