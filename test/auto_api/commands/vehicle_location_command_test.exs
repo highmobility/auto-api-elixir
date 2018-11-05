@@ -18,7 +18,42 @@
 # licensing@high-mobility.com
 defmodule AutoApi.VehicleLocationCommandTest do
   use ExUnit.Case
-  alias AutoApi.VehicleLocationCommand
+  alias AutoApi.{VehicleLocationCommand, VehicleLocationState}
+  doctest VehicleLocationCommand
+
+  describe "execute/2" do
+    test "get_vehicle_location command" do
+      state = %VehicleLocationState{}
+      assert VehicleLocationCommand.execute(%VehicleLocationState{}, <<0x00>>) == {:state, state}
+    end
+
+    test "vehicle_location command" do
+      [lat, long, alt, heading] = [52.516506, 13.381815, 133.5, 84.828]
+
+      vlocation =
+        <<0x04, 16::integer-16, lat::float-64, long::float-64>> <>
+          <<6, 0, 8, alt::float-64>> <> <<5, 0, 8, heading::float-64>>
+
+      command = <<0x01>> <> vlocation
+
+      assert {:state_changed, state} =
+               VehicleLocationCommand.execute(%VehicleLocationState{}, command)
+
+      assert state.altitude == alt
+      assert state.heading == heading
+      assert state.coordinates.latitude == lat
+      assert state.coordinates.longitude == long
+    end
+  end
+
+  describe "state/1" do
+    test "converts state to binary" do
+      state = %VehicleLocationState{heading: 82.828, properties: [:heading]}
+
+      assert VehicleLocationCommand.state(state) ==
+               <<0x01, 0x05, 8::integer-16, 82.828::float-64>>
+    end
+  end
 
   describe "to_bin/2" do
     test "converts get_vehicle_location" do
