@@ -76,16 +76,12 @@ defmodule AutoApi.State do
           %{state | :timestamp => value}
         end
 
-        defp to_properties(state, prop, value, true) when is_map(value) do
+        defp to_properties(state, prop, value, true) do
           current_value = Map.get(state, prop)
           %{state | prop => [value | current_value]}
         end
 
-        defp to_properties(state, prop, value, false) when is_map(value) do
-          %{state | prop => value}
-        end
-
-        defp to_properties(state, prop, value, _) do
+        defp to_properties(state, prop, value, false) do
           %{state | prop => value}
         end
 

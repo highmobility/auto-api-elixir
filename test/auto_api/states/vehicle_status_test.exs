@@ -18,5 +18,16 @@
 # licensing@high-mobility.com
 defmodule AutoApi.VehicleStatusStateTest do
   use ExUnit.Case
-  doctest AutoApi.VehicleStatusState
+  alias AutoApi.VehicleStatusState
+  doctest VehicleStatusState
+
+  describe "from_bin/1" do
+    test "converts multiple equipments to state" do
+      state_bin = <<17, byte_size("Wings")::integer-16>> <> "Wings"
+      state_bin = state_bin <> <<17, byte_size("Nitro")::integer-16>> <> "Nitro"
+
+      assert state = VehicleStatusState.from_bin(state_bin)
+      assert state.equipments == ["Nitro", "Wings"]
+    end
+  end
 end
