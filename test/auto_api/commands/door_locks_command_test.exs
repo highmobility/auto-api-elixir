@@ -23,7 +23,7 @@ defmodule AutoApi.DoorLocksTest do
 
   describe "execute/2" do
     test "lock_unlock_doors lock command" do
-      command = <<0x012, 0x01, 0x01>>
+      command = AutoApi.DoorLocksCommand.to_bin(:lock_unlock_doors, lock_state: :lock)
 
       state = %DoorLocksState{locks: [%{door_location: :front_left, lock_state: :unlocked}]}
       assert {:state_changed, new_state} = DoorLocksCommand.execute(state, command)
@@ -31,7 +31,7 @@ defmodule AutoApi.DoorLocksTest do
     end
 
     test "lock_unlock_doors unlock command" do
-      command = <<0x012, 0x01, 0x00>>
+      command = AutoApi.DoorLocksCommand.to_bin(:lock_unlock_doors, lock_state: :unlock)
 
       state = %DoorLocksState{locks: [%{door_location: :front_left, lock_state: :locked}]}
       assert {:state_changed, new_state} = DoorLocksCommand.execute(state, command)

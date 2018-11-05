@@ -51,7 +51,7 @@ defmodule AutoApi.DoorLocksCommand do
     end
   end
 
-  def execute(%DoorLocksState{} = state, <<0x12, 0x01, lock_command>>) do
+  def execute(%DoorLocksState{} = state, <<0x12, 0x01, _size::binary-size(2), lock_command>>) do
     lock_state = if lock_command == 0x00, do: :unlocked, else: :locked
 
     locks = Enum.map(state.locks, fn door -> %{door | lock_state: lock_state} end)
@@ -82,9 +82,9 @@ defmodule AutoApi.DoorLocksCommand do
       <<0x00>>
 
       iex> AutoApi.DoorLocksCommand.to_bin(:lock_unlock_doors, [lock_state: :unlock])
-      <<0x12, 0x01, 0x00>>
+      <<0x12, 0x01, 1::integer-16, 0x00>>
       iex> AutoApi.DoorLocksCommand.to_bin(:lock_unlock_doors, [lock_state: :lock])
-      <<0x12, 0x01, 0x01>>
+      <<0x12, 0x01, 1::integer-16, 0x01>>
   """
   @spec to_bin(DoorLocksCapability.command_type(), list(any)) :: binary
   def to_bin(:get_lock_state, _args) do
@@ -95,6 +95,6 @@ defmodule AutoApi.DoorLocksCommand do
   def to_bin(:lock_unlock_doors, lock_state: lock_state) when lock_state in [:lock, :unlock] do
     lock_state_bin = if lock_state == :unlock, do: 0x00, else: 0x01
     cmd_id = DoorLocksCapability.command_id(:lock_unlock_doors)
-    <<cmd_id>> <> <<0x01, lock_state_bin>>
+    <<cmd_id>> <> <<0x01, 1::integer-16, lock_state_bin>>
   end
 end
