@@ -1,38 +1,38 @@
 {
-    "category": "digital_key", 
-    "id_msb": 0, 
-    "id_lsb": 103, 
-    "name": "hood", 
-    "api_intro": 8, 
+    "category": "digital_key",
+    "id_msb": 0,
+    "id_lsb": 103,
+    "name": "hood",
+    "api_intro": 8,
     "properties": [
         {
-            "type": "enum", 
-            "size": 1, 
+            "type": "enum",
+            "size": 1,
             "values": [
                 {
-                    "name": "closed", 
+                    "name": "closed",
                     "id": 0
-                }, 
+                },
                 {
-                    "name": "open", 
+                    "name": "open",
                     "id": 1
-                }, 
+                },
                 {
-                    "name": "intermediate", 
+                    "name": "intermediate",
                     "id": 2
                 }
-            ], 
-            "id": 1, 
+            ],
+            "id": 1,
             "name": "position"
         }
-    ], 
+    ],
     "message_types": [
         {
-            "id": 0, 
+            "id": 0,
             "name": "get_hood_state"
-        }, 
+        },
         {
-            "id": 1, 
+            "id": 1,
             "name": "hood_state"
         }
     ]
