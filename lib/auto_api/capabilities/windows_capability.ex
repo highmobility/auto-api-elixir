@@ -42,7 +42,7 @@ defmodule AutoApi.WindowsCapability do
   @spec_file "specs/windows.json"
   @type command_type :: :get_windows_state | :windows_state | :control_windows
 
-  @command_module AutoApi.NotImplemented
+  @command_module AutoApi.WindowsCommand
   @state_module AutoApi.WindowsState
 
   use AutoApi.Capability
