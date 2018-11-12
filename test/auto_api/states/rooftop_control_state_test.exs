@@ -16,32 +16,7 @@
 #
 # Please inquire about commercial licensing options at
 # licensing@high-mobility.com
-defmodule AutoApi.RooftopControlCapability do
-  @moduledoc """
-  Basic settings for RooftopControl Capability
-
-      iex> alias AutoApi.RooftopControlCapability, as: R
-      iex> R.identifier
-      <<0x00, 0x25>>
-      iex> R.name
-      :rooftop_control
-      iex> R.description
-      "Rooftop Control"
-      iex> R.command_name(0x00)
-      :get_rooftop_state
-      iex> R.command_name(0x01)
-      :rooftop_state
-      iex> R.command_name(0x12)
-      :control_rooftop
-      iex> length(R.properties)
-      4
-  """
-
-  @spec_file "specs/rooftop_control.json"
-  @type command_type :: :get_rooftop_state | :rooftop_state | :control_rooftop
-
-  @command_module AutoApi.NotImplemented
-  @state_module AutoApi.RooftopControlState
-
-  use AutoApi.Capability
+defmodule AutoApi.RooftopControlStateTest do
+  use ExUnit.Case
+  doctest AutoApi.RooftopControlState
 end
