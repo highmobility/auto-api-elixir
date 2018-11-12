@@ -24,8 +24,8 @@ defmodule AutoApi.WindowsState do
   @doc """
   Windows state
   """
-  defstruct windows_open_percentages: nil,
-            windows_positions: nil,
+  defstruct windows_open_percentages: [],
+            windows_positions: [],
             timestamp: nil,
             properties: []
 
