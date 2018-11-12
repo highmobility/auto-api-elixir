@@ -30,6 +30,7 @@ defmodule AutoApi.Command do
           | :rooftop
           | :trunk_access
           | :vehicle_location
+          | :hood
 
   @doc """
   Extracts commands meta data  including the capability that
