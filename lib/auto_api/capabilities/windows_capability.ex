@@ -43,7 +43,7 @@ defmodule AutoApi.WindowsCapability do
   @type command_type :: :get_windows_state | :windows_state | :control_windows
 
   @command_module AutoApi.NotImplemented
-  @state_module AutoApi.NotImplemented
+  @state_module AutoApi.WindowsState
 
   use AutoApi.Capability
 end
