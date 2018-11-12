@@ -16,33 +16,7 @@
 #
 # Please inquire about commercial licensing options at
 # licensing@high-mobility.com
-defmodule AutoApi.HoodCapability do
-  @moduledoc """
-  Basic settings for HoodCapability
-
-      iex> alias AutoApi.HoodCapability, as: H
-      iex> H.identifier
-      <<0x00, 0x67>>
-      iex> H.capability_size
-      1
-      iex> H.name
-      :hood
-      iex> H.description
-      "Hood"
-      iex> H.command_name(0x00)
-      :get_hood_state
-      iex> H.command_name(0x01)
-      :hood_state
-      iex> length(H.properties)
-      0
-  """
-
-  @spec_file "specs/hood.json"
-  @type command_type ::
-          :get_hood_state
-          | :hood_state
-
-  @command_module AutoApi.NotImplemented
-  @state_module AutoApi.HoodState
-  use AutoApi.Capability
+defmodule AutoApi.HoodStateTest do
+  use ExUnit.Case
+  doctest AutoApi.HoodState
 end
