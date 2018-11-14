@@ -28,7 +28,14 @@ defmodule AutoApi.WindowsCommand do
   @doc """
   Parses the binary command and makes changes or returns the state
 
-  TODO: examples
+  ## Examples
+
+        iex> AutoApi.WindowsCommand.execute(%AutoApi.WindowsState{}, <<0x00>>)
+        {:state, %AutoApi.WindowsState{}}
+
+        iex> command = <<0x01>> <> <<0x02, 2::integer-16, 4, 0x2A>> <> <<0x03, 2::integer-16, 1, 1>>
+        iex> AutoApi.WindowsCommand.execute(%AutoApi.WindowsState{}, command)
+        {:state_changed, %AutoApi.WindowsState{windows_open_percentages: [%{window_location: :hatch, open_percentage: 42}], windows_positions: [%{window_location: :front_right, window_position: :opened}]}}
   """
   @spec execute(WindowsState.t(), binary) :: {:state | :state_changed, WindowsState.t()}
   def execute(%WindowsState{} = state, <<0x00>>) do
