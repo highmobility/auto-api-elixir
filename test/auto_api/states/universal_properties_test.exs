@@ -18,10 +18,10 @@
 # licensing@high-mobility.com
 defmodule AutoApi.UniversalPropertiesTest do
   use ExUnit.Case
-  alias AutoApi.DoorLocksState
+  alias AutoApi.{DoorLocksState, DiagnosticsState}
 
   test "converts the state properties and the universal properties" do
-    bin_state = <<0x04, 2::integer-16, 0x00, 0x01, 162, 0, 8, 18, 6, 8, 16, 8, 2, 0, 120>>
+    bin_state = <<0x04, 2::integer-16, 0x00, 0x01, 0xA2, 0, 8, 18, 6, 8, 16, 8, 2, 0, 120>>
 
     state = DoorLocksState.from_bin(bin_state)
 
@@ -43,5 +43,29 @@ defmodule AutoApi.UniversalPropertiesTest do
     ]
 
     assert state == %DoorLocksState{positions: locks, timestamp: datetime}
+  end
+
+  describe "property timestamp" do
+    test "converts binary value to state" do
+      bin_state =
+        <<0x01, 3::integer-16, 0, 0, 0x02, 0xA4, 9::integer-16, 18, 6, 8, 16, 8, 2, 0, 120, 0x01>>
+
+      datetime = %DateTime{
+        year: 2018,
+        month: 06,
+        day: 08,
+        hour: 16,
+        minute: 8,
+        second: 2,
+        utc_offset: 120,
+        time_zone: "",
+        zone_abbr: "",
+        std_offset: 0
+      }
+
+      state = DiagnosticsState.from_bin(bin_state)
+      assert length(state.property_timestamps) == 1
+      assert state.property_timestamps[:mileage] == datetime
+    end
   end
 end

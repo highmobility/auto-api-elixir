@@ -132,6 +132,17 @@ defmodule AutoApi.State do
         end
       end
 
+    property_timestamp =
+      quote do
+        def parse_bin_property(
+              0xA4,
+              value
+            ) do
+          {:property_timestamps, true,
+           AutoApi.State.parse_bin_property_to_property_timestamp_helper(__MODULE__, value)}
+        end
+      end
+
     prop_funs =
       for prop <- spec["properties"] do
         prop_name = String.to_atom(prop["name"])
@@ -141,6 +152,8 @@ defmodule AutoApi.State do
         multiple = prop["multiple"] || false
 
         quote do
+          def property_name(unquote(prop_id)), do: unquote(prop_name)
+
           case unquote(prop["type"]) do
             "enum" ->
               defp parse_enum(key, key_name, value)
@@ -270,7 +283,7 @@ defmodule AutoApi.State do
         end
       end
 
-    [timestamp] ++ [base] ++ [prop_funs]
+    [timestamp, property_timestamp] ++ [base] ++ [prop_funs]
   end
 
   def parse_state_property_list_helper(prop_id, enum_values, data) do
@@ -380,5 +393,24 @@ defmodule AutoApi.State do
       zone_abbr: "",
       std_offset: 0
     }
+  end
+
+  def parse_bin_property_to_property_timestamp_helper(
+        state_module,
+        <<year, month, day, hour, minute, second, offset::signed-integer-16, prop_id, _::binary>>
+      ) do
+    {state_module.property_name(prop_id),
+     %DateTime{
+       year: year + 2000,
+       month: month,
+       day: day,
+       hour: hour,
+       minute: minute,
+       second: second,
+       utc_offset: offset,
+       time_zone: "",
+       zone_abbr: "",
+       std_offset: 0
+     }}
   end
 end
