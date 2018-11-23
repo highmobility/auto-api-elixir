@@ -68,4 +68,26 @@ defmodule AutoApi.UniversalPropertiesTest do
       assert state.property_timestamps[:mileage] == datetime
     end
   end
+
+  test "converts state to binary" do
+    now = DateTime.utc_now()
+
+    state = %DiagnosticsState{
+      mileage: 100,
+      property_timestamps: [mileage: now],
+      properties: [:mileage, :property_timestamps]
+    }
+
+    assert <<id, _size::integer-16, mileage::integer-24, timestamp_id, timestamp_size::integer-16,
+             timestamp::binary-size(8), id>> = DiagnosticsState.to_bin(state)
+
+    assert id == DiagnosticsState.property_id(:mileage)
+    assert mileage == 100
+    assert timestamp_id == 0xA4
+    assert timestamp_size == 9
+
+    assert timestamp ==
+             <<now.year - 2000, now.month, now.day, now.hour, now.minute, now.second,
+               now.utc_offset::integer-16>>
+  end
 end

@@ -118,6 +118,19 @@ defmodule AutoApi.State do
         def parse_state_property(:properties, []) do
           <<>>
         end
+
+        # property_timestamps is especial item in state
+        def parse_state_property(:property_timestamps, datetimes) do
+          datetimes
+          |> Enum.map(fn {prop_name, datetime} ->
+            utc_offset = datetime.utc_offset
+
+            <<0xA4, 9::integer-16, datetime.year - 2000, datetime.month, datetime.day,
+              datetime.hour, datetime.minute, datetime.second, utc_offset::integer-16,
+              property_id(prop_name)>>
+          end)
+          |> Enum.join("")
+        end
       end
 
     spec = Poison.decode!(File.read!(opts[:spec_file]))
@@ -153,6 +166,7 @@ defmodule AutoApi.State do
 
         quote do
           def property_name(unquote(prop_id)), do: unquote(prop_name)
+          def property_id(unquote(prop_name)), do: unquote(prop_id)
 
           case unquote(prop["type"]) do
             "enum" ->
