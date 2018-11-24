@@ -90,4 +90,31 @@ defmodule AutoApi.UniversalPropertiesTest do
              <<now.year - 2000, now.month, now.day, now.hour, now.minute, now.second,
                now.utc_offset::integer-16>>
   end
+
+  test "converts state with multiple item to binary" do
+    now = DateTime.utc_now()
+
+    temperature = %{location: :rear_left, temperature: 10.0}
+
+    state = %DiagnosticsState{
+      tire_temperatures: [temperature],
+      property_timestamps: [tire_temperatures: {now, temperature}],
+      properties: [:tire_temperatures, :property_timestamps]
+    }
+
+    assert <<timestamp_id, timestamp_size::integer-16, timestamp::binary-size(8),
+             property_data_in_timestamp::binary-size(5), id, id, 5::integer-16,
+             property_data::binary-size(5)>> = DiagnosticsState.to_bin(state)
+
+    assert id == DiagnosticsState.property_id(:tire_temperatures)
+    assert timestamp_id == 0xA4
+    # timestamp size + tire_temperature size
+    assert timestamp_size == 13
+
+    assert timestamp ==
+             <<now.year - 2000, now.month, now.day, now.hour, now.minute, now.second,
+               now.utc_offset::integer-16>>
+
+    assert property_data == property_data_in_timestamp
+  end
 end

@@ -31,6 +31,7 @@ defmodule AutoApi.State do
   @callback to_bin(struct) :: binary
   @callback base() :: struct
 
+  alias AutoApi.CommonData
   require Logger
 
   defmacro __using__(opts) do
@@ -123,11 +124,7 @@ defmodule AutoApi.State do
         def parse_state_property(:property_timestamps, datetimes) do
           datetimes
           |> Enum.map(fn {prop_name, datetime} ->
-            utc_offset = datetime.utc_offset
-
-            <<0xA4, 9::integer-16, datetime.year - 2000, datetime.month, datetime.day,
-              datetime.hour, datetime.minute, datetime.second, utc_offset::integer-16,
-              property_id(prop_name)>>
+            AutoApi.State.parse_state_property_timestamps_to_bin(__MODULE__, prop_name, datetime)
           end)
           |> Enum.join("")
         end
@@ -392,39 +389,38 @@ defmodule AutoApi.State do
     {prop_name, multiple, Enum.into(result, %{})}
   end
 
-  def parse_bin_property_to_date_helper(
-        <<year, month, day, hour, minute, second, offset::signed-integer-16>>
-      ) do
-    %DateTime{
-      year: year + 2000,
-      month: month,
-      day: day,
-      hour: hour,
-      minute: minute,
-      second: second,
-      utc_offset: offset,
-      time_zone: "",
-      zone_abbr: "",
-      std_offset: 0
-    }
+  def parse_bin_property_to_date_helper(<<timestamp_binary::binary-size(8)>>) do
+    CommonData.convert_bin_to_state_datetime(timestamp_binary)
   end
 
   def parse_bin_property_to_property_timestamp_helper(
         state_module,
-        <<year, month, day, hour, minute, second, offset::signed-integer-16, prop_id, _::binary>>
+        <<timestamp_binary::binary-size(8), prop_id, _::binary>>
       ) do
     {state_module.property_name(prop_id),
-     %DateTime{
-       year: year + 2000,
-       month: month,
-       day: day,
-       hour: hour,
-       minute: minute,
-       second: second,
-       utc_offset: offset,
-       time_zone: "",
-       zone_abbr: "",
-       std_offset: 0
-     }}
+     CommonData.convert_bin_to_state_datetime(timestamp_binary)}
+  end
+
+  def parse_state_property_timestamps_to_bin(state_module, property_name, {datetime, value}) do
+    case state_module.parse_state_property(property_name, [value]) do
+      <<_id, data_size::integer-size(16), data::binary>> ->
+        property_timestamp = CommonData.convert_state_to_bin_datetime(datetime)
+        prop_size = data_size + byte_size(property_timestamp)
+
+        <<0xA4, prop_size::integer-16, property_timestamp::binary, data::binary,
+          state_module.property_id(property_name)>>
+
+      _ ->
+        Logger.error(
+          "AutoApi.State can't parse the data #{inspect([state_module, property_name, value])}"
+        )
+
+        <<>>
+    end
+  end
+
+  def parse_state_property_timestamps_to_bin(state_module, property_name, %DateTime{} = datetime) do
+    <<0xA4, 9::integer-16, CommonData.convert_state_to_bin_datetime(datetime)::binary,
+      state_module.property_id(property_name)>>
   end
 end

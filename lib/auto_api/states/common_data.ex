@@ -92,4 +92,26 @@ defmodule AutoApi.CommonData do
   def convert_state_to_bin_double(value, 8) do
     <<value::float-64>>
   end
+
+  def convert_state_to_bin_datetime(datetime) do
+    <<datetime.year - 2000, datetime.month, datetime.day, datetime.hour, datetime.minute,
+      datetime.second, datetime.utc_offset::integer-16>>
+  end
+
+  def convert_bin_to_state_datetime(
+        <<year, month, day, hour, minute, second, offset::signed-integer-16>>
+      ) do
+    %DateTime{
+      year: year + 2000,
+      month: month,
+      day: day,
+      hour: hour,
+      minute: minute,
+      second: second,
+      utc_offset: offset,
+      time_zone: "",
+      zone_abbr: "",
+      std_offset: 0
+    }
+  end
 end
