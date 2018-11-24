@@ -23,7 +23,13 @@ defmodule AutoApi.DoorLocksState do
   """
 
   alias AutoApi.CommonData
-  defstruct inside_locks: [], locks: [], positions: [], timestamp: nil, properties: []
+
+  defstruct inside_locks: [],
+            locks: [],
+            positions: [],
+            timestamp: nil,
+            properties: [],
+            property_timestamps: []
 
   use AutoApi.State, spec_file: "specs/door_locks.json"
 
