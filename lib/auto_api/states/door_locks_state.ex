@@ -29,7 +29,7 @@ defmodule AutoApi.DoorLocksState do
             positions: [],
             timestamp: nil,
             properties: [],
-            property_timestamps: []
+            property_timestamps: %{}
 
   use AutoApi.State, spec_file: "specs/door_locks.json"
 

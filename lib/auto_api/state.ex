@@ -162,6 +162,7 @@ defmodule AutoApi.State do
         multiple = prop["multiple"] || false
 
         quote do
+          def is_multiple?(unquote(prop_name)), do: unquote(multiple) == true
           def property_name(unquote(prop_id)), do: unquote(prop_name)
           def property_id(unquote(prop_name)), do: unquote(prop_id)
 
@@ -401,6 +402,15 @@ defmodule AutoApi.State do
      CommonData.convert_bin_to_state_datetime(timestamp_binary)}
   end
 
+  def parse_state_property_timestamps_to_bin(state_module, property_name, datetimes)
+      when is_list(datetimes) do
+    datetimes
+    |> Enum.map(fn dt_value ->
+      parse_state_property_timestamps_to_bin(state_module, property_name, dt_value)
+    end)
+    |> Enum.join("")
+  end
+
   def parse_state_property_timestamps_to_bin(state_module, property_name, {datetime, value}) do
     case state_module.parse_state_property(property_name, [value]) do
       <<_id, data_size::integer-size(16), data::binary>> ->
@@ -422,5 +432,40 @@ defmodule AutoApi.State do
   def parse_state_property_timestamps_to_bin(state_module, property_name, %DateTime{} = datetime) do
     <<0xA4, 9::integer-16, CommonData.convert_state_to_bin_datetime(datetime)::binary,
       state_module.property_id(property_name)>>
+  end
+
+  def put_with_timestamp(state, property_name, property_vaule, timestamp) do
+    if state.__struct__.is_multiple?(property_name) do
+      put_with_timestamp_multiple(state, property_name, property_vaule, timestamp)
+    else
+      put_with_timestamp_signle(state, property_name, property_vaule, timestamp)
+    end
+  end
+
+  defp put_with_timestamp_multiple(state, property_name, property_vaule, timestamp) do
+    current_property_timestamps = Map.get(state.property_timestamps, property_name, [])
+    new_property_timestamps = [{timestamp, property_vaule} | current_property_timestamps]
+
+    property_timestamps =
+      Map.put(state.property_timestamps, property_name, new_property_timestamps)
+
+    properties = Enum.uniq([:property_timestamps, property_name] ++ state.properties)
+
+    existing_value = Map.get(state, property_name)
+
+    state
+    |> Map.put(property_name, [property_vaule | existing_value])
+    |> Map.put(:property_timestamps, property_timestamps)
+    |> Map.put(:properties, properties)
+  end
+
+  defp put_with_timestamp_signle(state, property_name, property_vaule, timestamp) do
+    property_timestamps = Map.put(state.property_timestamps, property_name, timestamp)
+    properties = Enum.uniq([:property_timestamps, property_name] ++ state.properties)
+
+    state
+    |> Map.put(property_name, property_vaule)
+    |> Map.put(:property_timestamps, property_timestamps)
+    |> Map.put(:properties, properties)
   end
 end

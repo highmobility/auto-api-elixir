@@ -64,7 +64,6 @@ defmodule AutoApi.UniversalPropertiesTest do
       }
 
       state = DiagnosticsState.from_bin(bin_state)
-      assert length(state.property_timestamps) == 1
       assert state.property_timestamps[:mileage] == datetime
     end
   end
@@ -74,7 +73,7 @@ defmodule AutoApi.UniversalPropertiesTest do
 
     state = %DiagnosticsState{
       mileage: 100,
-      property_timestamps: [mileage: now],
+      property_timestamps: %{mileage: now},
       properties: [:mileage, :property_timestamps]
     }
 
@@ -98,7 +97,7 @@ defmodule AutoApi.UniversalPropertiesTest do
 
     state = %DiagnosticsState{
       tire_temperatures: [temperature],
-      property_timestamps: [tire_temperatures: {now, temperature}],
+      property_timestamps: %{tire_temperatures: [{now, temperature}]},
       properties: [:tire_temperatures, :property_timestamps]
     }
 
@@ -116,5 +115,48 @@ defmodule AutoApi.UniversalPropertiesTest do
                now.utc_offset::integer-16>>
 
     assert property_data == property_data_in_timestamp
+  end
+
+  describe "put_with_timestamp/4" do
+    test "converts signle value property with timestamp to binary" do
+      now = DateTime.utc_now()
+
+      state = %DiagnosticsState{}
+
+      state = AutoApi.State.put_with_timestamp(state, :mileage, 101, now)
+
+      assert state.mileage == 101
+      assert state.property_timestamps[:mileage] == now
+      assert state.properties == [:property_timestamps, :mileage]
+    end
+
+    test "converts multiple value property with timestamp to binary" do
+      now = DateTime.utc_now()
+
+      rear_left_temperature = %{location: :rear_left, temperature: 10.0}
+
+      state = %DiagnosticsState{}
+
+      state =
+        AutoApi.State.put_with_timestamp(state, :tire_temperatures, rear_left_temperature, now)
+
+      assert state.tire_temperatures == [rear_left_temperature]
+      assert state.property_timestamps[:tire_temperatures] == [{now, rear_left_temperature}]
+      assert state.properties == [:property_timestamps, :tire_temperatures]
+
+      rear_right_temperature = %{location: :rear_right, temperature: 11.0}
+
+      state =
+        AutoApi.State.put_with_timestamp(state, :tire_temperatures, rear_right_temperature, now)
+
+      assert state.tire_temperatures == [rear_right_temperature, rear_left_temperature]
+
+      assert state.property_timestamps[:tire_temperatures] == [
+               {now, rear_right_temperature},
+               {now, rear_left_temperature}
+             ]
+
+      assert byte_size(DiagnosticsState.to_bin(state)) == 50
+    end
   end
 end
