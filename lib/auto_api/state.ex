@@ -415,7 +415,7 @@ defmodule AutoApi.State do
     case state_module.parse_state_property(property_name, [value]) do
       <<_id, data_size::integer-size(16), data::binary>> ->
         property_timestamp = CommonData.convert_state_to_bin_datetime(datetime)
-        prop_size = data_size + byte_size(property_timestamp)
+        prop_size = data_size + byte_size(property_timestamp) + 1
 
         <<0xA4, prop_size::integer-16, property_timestamp::binary, data::binary,
           state_module.property_id(property_name)>>

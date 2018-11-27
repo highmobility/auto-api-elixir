@@ -107,8 +107,8 @@ defmodule AutoApi.UniversalPropertiesTest do
 
     assert id == DiagnosticsState.property_id(:tire_temperatures)
     assert timestamp_id == 0xA4
-    # timestamp size + tire_temperature size
-    assert timestamp_size == 13
+    # timestamp size + property_id_size + tire_temperature size
+    assert timestamp_size == 14
 
     assert timestamp ==
              <<now.year - 2000, now.month, now.day, now.hour, now.minute, now.second,
