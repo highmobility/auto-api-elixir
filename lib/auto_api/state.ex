@@ -148,7 +148,7 @@ defmodule AutoApi.State do
               0xA4,
               value
             ) do
-          {:property_timestamps, true,
+          {:property_timestamps, false,
            AutoApi.State.parse_bin_property_to_property_timestamp_helper(__MODULE__, value)}
         end
       end
@@ -398,8 +398,10 @@ defmodule AutoApi.State do
         state_module,
         <<timestamp_binary::binary-size(8), prop_id, _::binary>>
       ) do
-    {state_module.property_name(prop_id),
-     CommonData.convert_bin_to_state_datetime(timestamp_binary)}
+    %{
+      state_module.property_name(prop_id) =>
+        CommonData.convert_bin_to_state_datetime(timestamp_binary)
+    }
   end
 
   def parse_state_property_timestamps_to_bin(state_module, property_name, datetimes)

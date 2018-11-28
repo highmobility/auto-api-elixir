@@ -64,7 +64,38 @@ defmodule AutoApi.UniversalPropertiesTest do
       }
 
       state = DiagnosticsState.from_bin(bin_state)
+
+      assert is_map(state.property_timestamps)
       assert state.property_timestamps[:mileage] == datetime
+    end
+
+    test "converts binary value with multiple items to state" do
+      # NOTE!: Currently elixir doesn't support converting all of the property_timestamps. if an item is repeated multiple times,
+      # we only return the last property's timestamp
+      bin_state =
+        <<4, 0, 2, 2, 1, 4, 0, 2, 3, 0, 164, 0, 11, 18, 11, 28, 12, 56, 13, 0, 0, 4, 2, 1, 164, 0,
+          11, 18, 11, 28, 13, 56, 13, 0, 0, 4, 3, 0>>
+
+      state = DoorLocksState.from_bin(bin_state)
+
+      assert state.positions ==
+               [
+                 %{door_location: :rear_left, position: :closed},
+                 %{door_location: :rear_right, position: :open}
+               ]
+
+      assert state.property_timestamps[:positions] == %DateTime{
+               year: 2018,
+               month: 11,
+               day: 28,
+               hour: 13,
+               minute: 56,
+               second: 13,
+               utc_offset: 0,
+               time_zone: "",
+               zone_abbr: "",
+               std_offset: 0
+             }
     end
 
     test "converts state to binary" do
