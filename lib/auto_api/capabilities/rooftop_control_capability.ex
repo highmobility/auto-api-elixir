@@ -34,7 +34,7 @@ defmodule AutoApi.RooftopControlCapability do
       iex> R.command_name(0x12)
       :control_rooftop
       iex> length(R.properties)
-      4
+      5
   """
 
   @spec_file "specs/rooftop_control.json"

@@ -33,6 +33,7 @@ defmodule AutoApi.RooftopControlState do
           | :loading_position_immediate
 
   @type sunroof_tilt_state :: :closed | :tilted | :half_tilted
+  @type sunroof_state :: :closed | :open | :intermediate
 
   @doc """
   RooftopControl state
@@ -41,14 +42,19 @@ defmodule AutoApi.RooftopControlState do
             position: nil,
             convertible_roof_state: nil,
             sunroof_tilt_state: nil,
+            sunroof_state: nil,
             timestamp: nil,
+            property_timestamps: %{},
             properties: []
 
   use AutoApi.State, spec_file: "specs/rooftop_control.json"
 
   @type t :: %__MODULE__{
-          convertible_roof_state: convertible_roof_state,
-          sunroof_tilt_state: sunroof_tilt_state,
+          dimming: nil | integer,
+          position: nil | integer,
+          convertible_roof_state: nil | convertible_roof_state,
+          sunroof_tilt_state: nil | sunroof_tilt_state,
+          sunroof_state: nil | sunroof_state,
           timestamp: DateTime.t() | nil,
           properties: list(atom)
         }
@@ -56,9 +62,9 @@ defmodule AutoApi.RooftopControlState do
   @doc """
   Build state based on binary value
 
-    iex> state_bin = <<0x01, 1::integer-16, 1>> <> <<0x02, 1::integer-16, 9>> <> <<0x03, 1::integer-16, 0x04>> <> <<0x04, 1::integer-16, 0x02>>
+    iex> state_bin = <<0x01, 1::integer-16, 1>> <> <<0x02, 1::integer-16, 9>> <> <<0x03, 1::integer-16, 0x04>> <> <<0x04, 1::integer-16, 0x02>> <> <<0x05, 1::integer-16, 0x01>>
     iex> AutoApi.RooftopControlState.from_bin(state_bin)
-    %AutoApi.RooftopControlState{dimming: 1, position: 9, convertible_roof_state: :open_secured, sunroof_tilt_state: :half_tilted}
+    %AutoApi.RooftopControlState{dimming: 1, position: 9, convertible_roof_state: :open_secured, sunroof_tilt_state: :half_tilted, sunroof_state: :open}
 
   """
   @spec from_bin(binary) :: __MODULE__.t()
