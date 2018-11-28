@@ -90,7 +90,7 @@ defmodule AutoApi.UniversalPropertiesTest do
                now.utc_offset::integer-16>>
   end
 
-  test "converts state with multiple item to binary" do
+  test "converts state with multiple items to binary" do
     now = DateTime.utc_now()
 
     temperature = %{location: :rear_left, temperature: 10.0}
@@ -102,10 +102,11 @@ defmodule AutoApi.UniversalPropertiesTest do
     }
 
     assert <<timestamp_id, timestamp_size::integer-16, timestamp::binary-size(8),
-             property_data_in_timestamp::binary-size(5), id, id, 5::integer-16,
-             property_data::binary-size(5)>> = DiagnosticsState.to_bin(state)
+             property_id_in_timestamp, property_data_in_timestamp::binary-size(5), property_id,
+             5::integer-16, property_data::binary-size(5)>> = DiagnosticsState.to_bin(state)
 
-    assert id == DiagnosticsState.property_id(:tire_temperatures)
+    assert property_id == DiagnosticsState.property_id(:tire_temperatures)
+    assert property_id == property_id_in_timestamp
     assert timestamp_id == 0xA4
     # timestamp size + property_id_size + tire_temperature size
     assert timestamp_size == 14
@@ -115,6 +116,59 @@ defmodule AutoApi.UniversalPropertiesTest do
                now.utc_offset::integer-16>>
 
     assert property_data == property_data_in_timestamp
+  end
+
+  test "converts DoorLocksState with multiple items to binary" do
+    rear_right_datetime = %{DateTime.utc_now() | hour: 12}
+    rear_left_datetime = %{rear_right_datetime | hour: 13}
+
+    state = %AutoApi.DoorLocksState{
+      positions: [
+        %{door_location: :rear_right, position: :open},
+        %{door_location: :rear_left, position: :closed}
+      ],
+      properties: [:property_timestamps, :positions],
+      property_timestamps: %{
+        positions: [
+          {rear_right_datetime, %{door_location: :rear_right, position: :open}},
+          {rear_left_datetime, %{door_location: :rear_left, position: :closed}}
+        ]
+      }
+    }
+
+    assert <<
+             # rear_right_position
+             4,
+             2::integer-16,
+             rear_right_position::binary-size(2),
+             # rear_left_position
+             4,
+             2::integer-16,
+             rear_left_position::binary-size(2),
+             # rear_right_position timestamp
+             0xA4,
+             11::integer-16,
+             rear_right_timestamp::binary-size(8),
+             4,
+             rear_right_position_in_timestamp::binary-size(2),
+             # rear_left_position timestamp
+             0xA4,
+             11::integer-16,
+             rear_left_timestamp::binary-size(8),
+             4,
+             rear_left_position_in_timestamp::binary-size(2)
+           >> = DoorLocksState.to_bin(state)
+
+    assert rear_right_position == <<2, 1>>
+    assert rear_right_position == rear_right_position_in_timestamp
+    assert rear_left_position == <<3, 0>>
+    assert rear_left_position == rear_left_position_in_timestamp
+
+    <<_y, _m, _d, hour, _::binary>> = rear_right_timestamp
+    assert hour == rear_right_datetime.hour
+
+    <<_y, _m, _d, hour, _::binary>> = rear_left_timestamp
+    assert hour == rear_left_datetime.hour
   end
 
   describe "put_with_timestamp/4" do

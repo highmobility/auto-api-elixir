@@ -417,8 +417,8 @@ defmodule AutoApi.State do
         property_timestamp = CommonData.convert_state_to_bin_datetime(datetime)
         prop_size = data_size + byte_size(property_timestamp) + 1
 
-        <<0xA4, prop_size::integer-16, property_timestamp::binary, data::binary,
-          state_module.property_id(property_name)>>
+        <<0xA4, prop_size::integer-16, property_timestamp::binary,
+          state_module.property_id(property_name), data::binary>>
 
       _ ->
         Logger.error(
