@@ -92,8 +92,8 @@ defmodule AutoApi.UniversalPropertiesTest do
                minute: 56,
                second: 13,
                utc_offset: 0,
-               time_zone: "",
-               zone_abbr: "",
+               time_zone: "Etc/UTC",
+               zone_abbr: "UTC",
                std_offset: 0
              }
     end

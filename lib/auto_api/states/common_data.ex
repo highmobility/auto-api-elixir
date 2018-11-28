@@ -109,9 +109,14 @@ defmodule AutoApi.CommonData do
       minute: minute,
       second: second,
       utc_offset: offset,
-      time_zone: "",
-      zone_abbr: "",
+      time_zone: get_timezone(offset),
+      zone_abbr: get_zoneabbr(offset),
       std_offset: 0
     }
   end
+
+  defp get_timezone(0), do: "Etc/UTC"
+  defp get_timezone(_), do: ""
+  defp get_zoneabbr(0), do: "UTC"
+  defp get_zoneabbr(_), do: ""
 end
