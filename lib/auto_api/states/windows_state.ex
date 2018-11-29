@@ -27,6 +27,7 @@ defmodule AutoApi.WindowsState do
   defstruct windows_open_percentages: [],
             windows_positions: [],
             timestamp: nil,
+            property_timestamps: %{},
             properties: []
 
   use AutoApi.State, spec_file: "specs/windows.json"

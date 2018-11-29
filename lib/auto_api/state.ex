@@ -31,6 +31,7 @@ defmodule AutoApi.State do
   @callback to_bin(struct) :: binary
   @callback base() :: struct
 
+  alias AutoApi.CommonData
   require Logger
 
   defmacro __using__(opts) do
@@ -97,7 +98,7 @@ defmodule AutoApi.State do
           parse_state_property(name, value)
         end
 
-        # don't convert data to binary data if it's nil
+        # don't convert data to binary data if it's empty list
         def parse_state_property(_, []) do
           <<>>
         end
@@ -115,8 +116,17 @@ defmodule AutoApi.State do
         end
 
         # properties is especial item in state
-        def parse_state_property(:properties, []) do
+        def parse_state_property(:properties, _) do
           <<>>
+        end
+
+        # property_timestamps is especial item in state
+        def parse_state_property(:property_timestamps, datetimes) do
+          datetimes
+          |> Enum.map(fn {prop_name, datetime} ->
+            AutoApi.State.parse_state_property_timestamps_to_bin(__MODULE__, prop_name, datetime)
+          end)
+          |> Enum.join("")
         end
       end
 
@@ -132,6 +142,17 @@ defmodule AutoApi.State do
         end
       end
 
+    property_timestamp =
+      quote do
+        def parse_bin_property(
+              0xA4,
+              value
+            ) do
+          {:property_timestamps, false,
+           AutoApi.State.parse_bin_property_to_property_timestamp_helper(__MODULE__, value)}
+        end
+      end
+
     prop_funs =
       for prop <- spec["properties"] do
         prop_name = String.to_atom(prop["name"])
@@ -141,6 +162,10 @@ defmodule AutoApi.State do
         multiple = prop["multiple"] || false
 
         quote do
+          def is_multiple?(unquote(prop_name)), do: unquote(multiple) == true
+          def property_name(unquote(prop_id)), do: unquote(prop_name)
+          def property_id(unquote(prop_name)), do: unquote(prop_id)
+
           case unquote(prop["type"]) do
             "enum" ->
               defp parse_enum(key, key_name, value)
@@ -270,7 +295,7 @@ defmodule AutoApi.State do
         end
       end
 
-    [timestamp] ++ [base] ++ [prop_funs]
+    [timestamp, property_timestamp] ++ [base] ++ [prop_funs]
   end
 
   def parse_state_property_list_helper(prop_id, enum_values, data) do
@@ -365,20 +390,84 @@ defmodule AutoApi.State do
     {prop_name, multiple, Enum.into(result, %{})}
   end
 
-  def parse_bin_property_to_date_helper(
-        <<year, month, day, hour, minute, second, offset::signed-integer-16>>
+  def parse_bin_property_to_date_helper(<<timestamp_binary::binary-size(8)>>) do
+    CommonData.convert_bin_to_state_datetime(timestamp_binary)
+  end
+
+  def parse_bin_property_to_property_timestamp_helper(
+        state_module,
+        <<timestamp_binary::binary-size(8), prop_id, _::binary>>
       ) do
-    %DateTime{
-      year: year + 2000,
-      month: month,
-      day: day,
-      hour: hour,
-      minute: minute,
-      second: second,
-      utc_offset: offset,
-      time_zone: "",
-      zone_abbr: "",
-      std_offset: 0
+    %{
+      state_module.property_name(prop_id) =>
+        CommonData.convert_bin_to_state_datetime(timestamp_binary)
     }
+  end
+
+  def parse_state_property_timestamps_to_bin(state_module, property_name, datetimes)
+      when is_list(datetimes) do
+    datetimes
+    |> Enum.map(fn dt_value ->
+      parse_state_property_timestamps_to_bin(state_module, property_name, dt_value)
+    end)
+    |> Enum.join("")
+  end
+
+  def parse_state_property_timestamps_to_bin(state_module, property_name, {datetime, value}) do
+    case state_module.parse_state_property(property_name, [value]) do
+      <<_id, data_size::integer-size(16), data::binary>> ->
+        property_timestamp = CommonData.convert_state_to_bin_datetime(datetime)
+        prop_size = data_size + byte_size(property_timestamp) + 1
+
+        <<0xA4, prop_size::integer-16, property_timestamp::binary,
+          state_module.property_id(property_name), data::binary>>
+
+      _ ->
+        Logger.error(
+          "AutoApi.State can't parse the data #{inspect([state_module, property_name, value])}"
+        )
+
+        <<>>
+    end
+  end
+
+  def parse_state_property_timestamps_to_bin(state_module, property_name, %DateTime{} = datetime) do
+    <<0xA4, 9::integer-16, CommonData.convert_state_to_bin_datetime(datetime)::binary,
+      state_module.property_id(property_name)>>
+  end
+
+  def put_with_timestamp(state, property_name, property_vaule, timestamp) do
+    if state.__struct__.is_multiple?(property_name) do
+      put_with_timestamp_multiple(state, property_name, property_vaule, timestamp)
+    else
+      put_with_timestamp_signle(state, property_name, property_vaule, timestamp)
+    end
+  end
+
+  defp put_with_timestamp_multiple(state, property_name, property_vaule, timestamp) do
+    current_property_timestamps = Map.get(state.property_timestamps, property_name, [])
+    new_property_timestamps = [{timestamp, property_vaule} | current_property_timestamps]
+
+    property_timestamps =
+      Map.put(state.property_timestamps, property_name, new_property_timestamps)
+
+    properties = Enum.uniq([:property_timestamps, property_name] ++ state.properties)
+
+    existing_value = Map.get(state, property_name)
+
+    state
+    |> Map.put(property_name, [property_vaule | existing_value])
+    |> Map.put(:property_timestamps, property_timestamps)
+    |> Map.put(:properties, properties)
+  end
+
+  defp put_with_timestamp_signle(state, property_name, property_vaule, timestamp) do
+    property_timestamps = Map.put(state.property_timestamps, property_name, timestamp)
+    properties = Enum.uniq([:property_timestamps, property_name] ++ state.properties)
+
+    state
+    |> Map.put(property_name, property_vaule)
+    |> Map.put(:property_timestamps, property_timestamps)
+    |> Map.put(:properties, properties)
   end
 end
