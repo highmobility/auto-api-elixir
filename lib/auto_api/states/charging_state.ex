@@ -71,7 +71,8 @@ defmodule AutoApi.ChargingState do
             plugged_in: nil,
             charging_state: nil,
             timestamp: nil,
-            properties: []
+            properties: [],
+            property_timestamps: %{}
 
   use AutoApi.State, spec_file: "specs/charging.json"
 
@@ -97,7 +98,8 @@ defmodule AutoApi.ChargingState do
           plugged_in: plugged_in,
           charging_state: charging_state | nil,
           timestamp: DateTime.t() | nil,
-          properties: list(atom)
+          properties: list(atom),
+          property_timestamps: map
         }
 
   @doc """
