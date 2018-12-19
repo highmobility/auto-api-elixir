@@ -22,7 +22,12 @@ defmodule AutoApi.TrunkState do
   """
 
   alias AutoApi.CommonData
-  defstruct trunk_lock: nil, trunk_position: nil, timestamp: nil, properties: []
+
+  defstruct trunk_lock: nil,
+            trunk_position: nil,
+            timestamp: nil,
+            properties: [],
+            property_timestamps: %{}
 
   use AutoApi.State, spec_file: "specs/trunk.json"
 
@@ -30,7 +35,8 @@ defmodule AutoApi.TrunkState do
           trunk_lock: CommonData.lock() | nil,
           trunk_position: CommonData.position() | nil,
           timestamp: DateTime.t() | nil,
-          properties: list(atom)
+          properties: list(atom),
+          property_timestamps: map
         }
 
   @doc """
