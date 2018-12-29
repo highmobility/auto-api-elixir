@@ -58,6 +58,16 @@
                     "pretty_name": "Invalid Command - Not recognised",
                     "name": "invalid_command",
                     "id": 5
+                },
+                {
+                    "pretty_name": "Pending - Capability is being refreshed",
+                    "name": "pending",
+                    "id": 6
+                },
+                {
+                    "pretty_name": "Rate Limit - Capability rate limit has been exceeded",
+                    "name": "rate_limit",
+                    "id": 7
                 }
             ],
             "id": 3,
@@ -70,5 +80,5 @@
             "id": 4
         }
     ],
-    "api_update": 5
+    "api_update": 9
 }
