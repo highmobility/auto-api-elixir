@@ -22,12 +22,13 @@ defmodule AutoApi.FuelingState do
   """
 
   alias AutoApi.CommonData
-  defstruct gas_flap: nil, timestamp: nil, properties: []
+  defstruct gas_flap_position: nil, gas_flap_lock: nil, timestamp: nil, properties: []
 
   use AutoApi.State, spec_file: "specs/fueling.json"
 
   @type t :: %__MODULE__{
-          gas_flap: CommonData.position() | nil,
+          gas_flap_position: CommonData.position() | nil,
+          gas_flap_lock: CommonData.lock() | nil,
           timestamp: DateTime.t() | nil,
           properties: list(atom)
         }
@@ -35,11 +36,11 @@ defmodule AutoApi.FuelingState do
   @doc """
   Build state based on binary value
 
-    iex> AutoApi.FuelingState.from_bin(<<0x01, 1::integer-16, 0x00>>)
-    %AutoApi.FuelingState{gas_flap: :closed}
+    iex> AutoApi.FuelingState.from_bin(<<0x03, 1::integer-16, 0x00, 0x02, 1::integer-16, 0x00>>)
+    %AutoApi.FuelingState{gas_flap_position: :closed, gas_flap_lock: :unlocked}
 
-    iex> AutoApi.FuelingState.from_bin(<<0x01, 1::integer-16, 0x01>>)
-    %AutoApi.FuelingState{gas_flap: :open}
+    iex> AutoApi.FuelingState.from_bin(<<0x03, 1::integer-16, 0x01>>)
+    %AutoApi.FuelingState{gas_flap_position: :open}
 
   """
   @spec from_bin(binary) :: __MODULE__.t()
@@ -49,14 +50,14 @@ defmodule AutoApi.FuelingState do
 
   @doc """
   Parse state to bin
-    iex> AutoApi.FuelingState.to_bin(%AutoApi.FuelingState{properties: [:gas_flap]})
+    iex> AutoApi.FuelingState.to_bin(%AutoApi.FuelingState{properties: [:gas_flap_position]})
     <<>>
 
-    iex> AutoApi.FuelingState.to_bin(%AutoApi.FuelingState{gas_flap: :closed, properties: [:gas_flap]})
-    <<1, 1::integer-16, 0>>
+    iex> AutoApi.FuelingState.to_bin(%AutoApi.FuelingState{gas_flap_position: :closed, properties: [:gas_flap_position]})
+    <<3, 1::integer-16, 0>>
 
-    iex> AutoApi.FuelingState.to_bin(%AutoApi.FuelingState{gas_flap: :open, properties: [:gas_flap]})
-    <<1, 1::integer-16, 1>>
+    iex> AutoApi.FuelingState.to_bin(%AutoApi.FuelingState{gas_flap_position: :open, properties: [:gas_flap_position]})
+    <<3, 1::integer-16, 1>>
   """
   @spec to_bin(__MODULE__.t()) :: binary
   def to_bin(%__MODULE__{} = state) do

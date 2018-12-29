@@ -1,6 +1,5 @@
 {
     "category": "parking",
-    "id_msb": 0,
     "id_lsb": 64,
     "name": "fueling",
     "api_intro": 4,
@@ -16,11 +15,26 @@
         {
             "properties": [
                 {
-                    "mandatory": true,
-                    "name": "gas_flap",
+                    "type": "enum",
                     "values": [
                         {
-                            "name": "close",
+                            "name": "unlocked",
+                            "id": 0
+                        },
+                        {
+                            "name": "locked",
+                            "id": 1
+                        }
+                    ],
+                    "id": 2,
+                    "name": "gas_flap_lock",
+                    "size": 1
+                },
+                {
+                    "type": "enum",
+                    "values": [
+                        {
+                            "name": "closed",
                             "id": 0
                         },
                         {
@@ -28,16 +42,33 @@
                             "id": 1
                         }
                     ],
-                    "type": "enum",
-                    "id": 1,
+                    "id": 3,
+                    "name": "gas_flap_position",
                     "size": 1
                 }
             ],
-            "name": "open_close_gas_flap",
+            "name": "control_gas_flap",
             "id": 18
         }
     ],
+    "id_msb": 0,
     "properties": [
+        {
+            "type": "enum",
+            "size": 1,
+            "values": [
+                {
+                    "name": "unlocked",
+                    "id": 0
+                },
+                {
+                    "name": "locked",
+                    "id": 1
+                }
+            ],
+            "id": 2,
+            "name": "gas_flap_lock"
+        },
         {
             "type": "enum",
             "size": 1,
@@ -51,9 +82,9 @@
                     "id": 1
                 }
             ],
-            "id": 1,
-            "name": "gas_flap"
+            "id": 3,
+            "name": "gas_flap_position"
         }
     ],
-    "api_update": 8
+    "api_update": 9
 }

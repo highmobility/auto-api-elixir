@@ -32,11 +32,11 @@ defmodule AutoApi.FuelingCapability do
       iex> F.command_name(0x01)
       :gas_flap_state
       iex> F.command_name(0x12)
-      :open_close_gas_flap
+      :control_gas_flap
       iex> length(F.properties)
-      1
+      2
       iex> F.properties
-      [{1, :gas_flap}]
+      [{2, :gas_flap_lock}, {3, :gas_flap_position}]
   """
 
   @spec_file "specs/fueling.json"
