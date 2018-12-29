@@ -25,10 +25,12 @@ defmodule AutoApi.LightsState do
 
   defstruct front_exterior_light: nil,
             rear_exterior_light: nil,
-            interior_light: nil,
             ambient_light: nil,
             reverse_light: nil,
             emergency_brake_light: nil,
+            fog_lights: [],
+            reading_lamps: [],
+            interior_lights: [],
             timestamp: nil,
             properties: []
 
@@ -36,15 +38,27 @@ defmodule AutoApi.LightsState do
 
   @type front_exterior_light :: :inactive | :active | :active_with_full_beam
   @type activity :: :inactive | :active
+  @type light_location :: :front | :rear
   @type ambient_light :: %{rgb_red: integer, rgb_green: integer, rgb_blue: integer}
+  @type fog_light :: %{fog_light_location: light_location, fog_light_state: activity}
+  @type reading_lamp :: %{
+          reading_lamp_location: CommonData.location(),
+          reading_lamp_state: activity
+        }
+  @type interior_lights :: %{
+          interior_light_location: light_location,
+          interior_light_state: activity
+        }
 
   @type t :: %__MODULE__{
           front_exterior_light: front_exterior_light | nil,
           rear_exterior_light: activity | nil,
-          interior_light: activity | nil,
           ambient_light: ambient_light | nil,
           reverse_light: activity | nil,
           emergency_brake_light: nil,
+          fog_lights: list(fog_light),
+          reading_lamps: list(reading_lamp),
+          interior_lights: list(reading_lamp),
           timestamp: DateTime.t() | nil,
           properties: list(atom)
         }

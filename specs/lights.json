@@ -1,212 +1,442 @@
 {
-    "category": "chassis", 
-    "id_lsb": 54, 
-    "name": "lights", 
-    "api_intro": 3, 
+    "category": "chassis",
+    "id_lsb": 54,
+    "name": "lights",
+    "api_intro": 3,
     "message_types": [
         {
-            "id": 0, 
+            "id": 0,
             "name": "get_lights_state"
-        }, 
+        },
         {
-            "id": 1, 
+            "id": 1,
             "name": "lights_state"
-        }, 
+        },
         {
             "properties": [
                 {
-                    "type": "enum", 
+                    "type": "enum",
                     "values": [
                         {
-                            "name": "inactive", 
+                            "name": "deactivate",
                             "id": 0
-                        }, 
+                        },
                         {
-                            "name": "active", 
+                            "name": "activate",
                             "id": 1
-                        }, 
+                        },
                         {
-                            "name": "active_full_beam", 
+                            "name": "activate_full_beam",
                             "id": 2
+                        },
+                        {
+                            "pretty_name": "Activate Daylight Running Lamps",
+                            "name": "activate_dlr",
+                            "id": 3
+                        },
+                        {
+                            "name": "automatic",
+                            "id": 4
                         }
-                    ], 
-                    "id": 1, 
-                    "name": "front_exterior_light", 
+                    ],
+                    "id": 1,
+                    "name": "front_exterior_light",
                     "size": 1
-                }, 
+                },
                 {
-                    "type": "enum", 
+                    "type": "enum",
                     "values": [
                         {
-                            "name": "deactivate", 
+                            "name": "deactivate",
                             "id": 0
-                        }, 
+                        },
                         {
-                            "name": "activate", 
+                            "name": "activate",
                             "id": 1
                         }
-                    ], 
-                    "id": 2, 
-                    "name": "rear_exterior_light", 
+                    ],
+                    "id": 2,
+                    "name": "rear_exterior_light",
                     "size": 1
-                }, 
-                {
-                    "type": "enum", 
-                    "values": [
-                        {
-                            "name": "deactivate", 
-                            "id": 0
-                        }, 
-                        {
-                            "name": "activate", 
-                            "id": 1
-                        }
-                    ], 
-                    "id": 3, 
-                    "name": "interior_light", 
-                    "size": 1
-                }, 
+                },
                 {
                     "items": [
                         {
-                            "size": 1, 
-                            "type": "integer", 
-                            "description": "The red colour of RGB in hex", 
+                            "size": 1,
+                            "type": "integer",
+                            "description": "The red colour of RGB in hex",
                             "name": "rgb_red"
-                        }, 
+                        },
                         {
-                            "size": 1, 
-                            "type": "integer", 
-                            "description": "The green colour of RGB in hex", 
+                            "size": 1,
+                            "type": "integer",
+                            "description": "The green colour of RGB in hex",
                             "name": "rgb_green"
-                        }, 
+                        },
                         {
-                            "size": 1, 
-                            "type": "integer", 
-                            "description": "The blue colour of RGB in hex", 
+                            "size": 1,
+                            "type": "integer",
+                            "description": "The blue colour of RGB in hex",
                             "name": "rgb_blue"
                         }
-                    ], 
-                    "id": 4, 
-                    "name": "ambient_light", 
+                    ],
+                    "id": 4,
+                    "name": "ambient_light",
                     "size": 3
+                },
+                {
+                    "items": [
+                        {
+                            "type": "enum",
+                            "values": [
+                                {
+                                    "name": "front",
+                                    "id": 0
+                                },
+                                {
+                                    "name": "rear",
+                                    "id": 1
+                                }
+                            ],
+                            "name": "fog_light_location",
+                            "size": 1
+                        },
+                        {
+                            "type": "enum",
+                            "values": [
+                                {
+                                    "name": "inactive",
+                                    "id": 0
+                                },
+                                {
+                                    "name": "active",
+                                    "id": 1
+                                }
+                            ],
+                            "name": "fog_light_state",
+                            "size": 1
+                        }
+                    ],
+                    "size": 2,
+                    "multiple": true,
+                    "id": 7,
+                    "name": "fog_lights"
+                },
+                {
+                    "items": [
+                        {
+                            "type": "enum",
+                            "values": [
+                                {
+                                    "name": "front_left",
+                                    "id": 0
+                                },
+                                {
+                                    "name": "front_right",
+                                    "id": 1
+                                },
+                                {
+                                    "name": "rear_right",
+                                    "id": 2
+                                },
+                                {
+                                    "name": "rear_left",
+                                    "id": 3
+                                }
+                            ],
+                            "name": "reading_lamp_location",
+                            "size": 1
+                        },
+                        {
+                            "type": "enum",
+                            "values": [
+                                {
+                                    "name": "inactive",
+                                    "id": 0
+                                },
+                                {
+                                    "name": "active",
+                                    "id": 1
+                                }
+                            ],
+                            "name": "reading_lamp_state",
+                            "size": 1
+                        }
+                    ],
+                    "multiple": true,
+                    "id": 8,
+                    "name": "reading_lamps",
+                    "size": 2
+                },
+                {
+                    "items": [
+                        {
+                            "type": "enum",
+                            "values": [
+                                {
+                                    "name": "front",
+                                    "id": 0
+                                },
+                                {
+                                    "name": "rear",
+                                    "id": 1
+                                }
+                            ],
+                            "name": "interior_light_location",
+                            "size": 1
+                        },
+                        {
+                            "type": "enum",
+                            "values": [
+                                {
+                                    "name": "inactive",
+                                    "id": 0
+                                },
+                                {
+                                    "name": "active",
+                                    "id": 1
+                                }
+                            ],
+                            "name": "interior_light_state",
+                            "size": 1
+                        }
+                    ],
+                    "size": 2,
+                    "multiple": true,
+                    "id": 9,
+                    "name": "interior_lights"
                 }
-            ], 
-            "name": "control_lights", 
+            ],
+            "name": "control_lights",
             "id": 18
         }
-    ], 
-    "id_msb": 0, 
+    ],
+    "id_msb": 0,
     "properties": [
         {
-            "type": "enum", 
-            "size": 1, 
+            "type": "enum",
+            "size": 1,
             "values": [
                 {
-                    "name": "inactive", 
+                    "name": "inactive",
                     "id": 0
-                }, 
+                },
                 {
-                    "name": "active", 
+                    "name": "active",
                     "id": 1
-                }, 
+                },
                 {
-                    "name": "active_with_full_beam", 
+                    "name": "active_with_full_beam",
                     "id": 2
+                },
+                {
+                    "pretty_name": "Daylight Running Lamps",
+                    "name": "dlr",
+                    "id": 3
+                },
+                {
+                    "name": "automatic",
+                    "id": 4
                 }
-            ], 
-            "id": 1, 
+            ],
+            "id": 1,
             "name": "front_exterior_light"
-        }, 
+        },
         {
-            "type": "enum", 
-            "size": 1, 
+            "type": "enum",
+            "size": 1,
             "values": [
                 {
-                    "name": "inactive", 
+                    "name": "inactive",
                     "id": 0
-                }, 
+                },
                 {
-                    "name": "active", 
+                    "name": "active",
                     "id": 1
                 }
-            ], 
-            "id": 2, 
+            ],
+            "id": 2,
             "name": "rear_exterior_light"
-        }, 
-        {
-            "type": "enum", 
-            "size": 1, 
-            "values": [
-                {
-                    "name": "inactive", 
-                    "id": 0
-                }, 
-                {
-                    "name": "active", 
-                    "id": 1
-                }
-            ], 
-            "id": 3, 
-            "name": "interior_light"
-        }, 
+        },
         {
             "items": [
                 {
-                    "size": 1, 
-                    "type": "integer", 
-                    "description": "The red colour of RGB in hex", 
+                    "size": 1,
+                    "type": "integer",
+                    "description": "The red colour of RGB in hex",
                     "name": "rgb_red"
-                }, 
+                },
                 {
-                    "size": 1, 
-                    "type": "integer", 
-                    "description": "The green colour of RGB in hex", 
+                    "size": 1,
+                    "type": "integer",
+                    "description": "The green colour of RGB in hex",
                     "name": "rgb_green"
-                }, 
+                },
                 {
-                    "size": 1, 
-                    "type": "integer", 
-                    "description": "The blue colour of RGB in hex", 
+                    "size": 1,
+                    "type": "integer",
+                    "description": "The blue colour of RGB in hex",
                     "name": "rgb_blue"
                 }
-            ], 
-            "size": 3, 
-            "id": 4, 
+            ],
+            "size": 3,
+            "id": 4,
             "name": "ambient_light"
-        }, 
+        },
         {
-            "type": "enum", 
-            "size": 1, 
+            "type": "enum",
+            "size": 1,
             "values": [
                 {
-                    "name": "inactive", 
+                    "name": "inactive",
                     "id": 0
-                }, 
+                },
                 {
-                    "name": "active", 
+                    "name": "active",
                     "id": 1
                 }
-            ], 
-            "id": 5, 
+            ],
+            "id": 5,
             "name": "reverse_light"
-        }, 
+        },
         {
-            "type": "enum", 
-            "size": 1, 
+            "type": "enum",
+            "size": 1,
             "values": [
                 {
-                    "name": "inactive", 
+                    "name": "inactive",
                     "id": 0
-                }, 
+                },
                 {
-                    "name": "active", 
+                    "name": "active",
                     "id": 1
                 }
-            ], 
-            "id": 6, 
+            ],
+            "id": 6,
             "name": "emergency_brake_light"
+        },
+        {
+            "items": [
+                {
+                    "type": "enum",
+                    "values": [
+                        {
+                            "name": "front",
+                            "id": 0
+                        },
+                        {
+                            "name": "rear",
+                            "id": 1
+                        }
+                    ],
+                    "name": "fog_light_location",
+                    "size": 1
+                },
+                {
+                    "type": "enum",
+                    "values": [
+                        {
+                            "name": "inactive",
+                            "id": 0
+                        },
+                        {
+                            "name": "active",
+                            "id": 1
+                        }
+                    ],
+                    "name": "fog_light_state",
+                    "size": 1
+                }
+            ],
+            "size": 2,
+            "multiple": true,
+            "id": 7,
+            "name": "fog_lights"
+        },
+        {
+            "items": [
+                {
+                    "type": "enum",
+                    "values": [
+                        {
+                            "name": "front_left",
+                            "id": 0
+                        },
+                        {
+                            "name": "front_right",
+                            "id": 1
+                        },
+                        {
+                            "name": "rear_right",
+                            "id": 2
+                        },
+                        {
+                            "name": "rear_left",
+                            "id": 3
+                        }
+                    ],
+                    "name": "reading_lamp_location",
+                    "size": 1
+                },
+                {
+                    "type": "enum",
+                    "values": [
+                        {
+                            "name": "inactive",
+                            "id": 0
+                        },
+                        {
+                            "name": "active",
+                            "id": 1
+                        }
+                    ],
+                    "name": "reading_lamp_state",
+                    "size": 1
+                }
+            ],
+            "size": 2,
+            "multiple": true,
+            "id": 8,
+            "name": "reading_lamps"
+        },
+        {
+            "items": [
+                {
+                    "type": "enum",
+                    "values": [
+                        {
+                            "name": "front",
+                            "id": 0
+                        },
+                        {
+                            "name": "rear",
+                            "id": 1
+                        }
+                    ],
+                    "name": "interior_light_location",
+                    "size": 1
+                },
+                {
+                    "type": "enum",
+                    "values": [
+                        {
+                            "name": "inactive",
+                            "id": 0
+                        },
+                        {
+                            "name": "active",
+                            "id": 1
+                        }
+                    ],
+                    "name": "interior_light_state",
+                    "size": 1
+                }
+            ],
+            "size": 2,
+            "multiple": true,
+            "id": 9,
+            "name": "interior_lights"
         }
-    ], 
-    "api_update": 8
+    ],
+    "api_update": 9
 }

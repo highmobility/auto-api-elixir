@@ -34,9 +34,9 @@ defmodule AutoApi.LightsCapability do
       iex> L.command_name(0x12)
       :control_lights
       iex> length(L.properties)
-      6
+      8
       iex> List.last(L.properties)
-      {6, :emergency_brake_light}
+      {9, :interior_lights}
   """
 
   @spec_file "specs/lights.json"
