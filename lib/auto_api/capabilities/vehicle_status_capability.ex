@@ -32,7 +32,7 @@ defmodule AutoApi.VehicleStatusCapability do
       iex> VS.command_name(0x01)
       :vehicle_status
       iex> length(VS.properties)
-      18
+      19
       iex> List.last(VS.properties)
       {153, :state}
   """

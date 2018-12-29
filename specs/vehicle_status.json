@@ -192,11 +192,17 @@
             "id": 17
         },
         {
+            "type": "string",
+            "description": "The car brand bytes formatted in UTF-8",
+            "name": "brand",
+            "id": 18
+        },
+        {
             "type": "capability_state",
             "multiple": true,
             "id": 153,
             "name": "state"
         }
     ],
-    "api_update": 8
+    "api_update": 9
 }
