@@ -396,7 +396,14 @@
             "multiple": true,
             "id": 29,
             "name": "trouble_codes"
+        },
+        {
+            "size": 4,
+            "type": "integer",
+            "description": "The car mileage (odometer) in meters",
+            "name": "mileage_meters",
+            "id": 30
         }
     ],
-    "api_update": 8
+    "api_update": 9
 }

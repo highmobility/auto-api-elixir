@@ -34,7 +34,7 @@ defmodule AutoApi.DiagnosticsCapability do
       iex> D.command_name(0x01)
       :diagnostics_state
       iex> length(D.properties)
-      26
+      27
   """
 
   @spec_file "specs/diagnostics.json"
