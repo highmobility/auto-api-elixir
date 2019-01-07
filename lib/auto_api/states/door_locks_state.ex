@@ -61,6 +61,9 @@ defmodule AutoApi.DoorLocksState do
 
     iex> AutoApi.DoorLocksState.from_bin(<<0x03, 2::integer-16, 0x00, 0x01>>)
     %AutoApi.DoorLocksState{locks: [%{door_location: :front_left, lock_state: :locked}]}
+
+    iex> AutoApi.DoorLocksState.from_bin(<<0x03, 2::integer-16, 0x05, 0x01>>)
+    %AutoApi.DoorLocksState{locks: [%{door_location: :all, lock_state: :locked}]}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
