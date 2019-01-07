@@ -18,42 +18,9 @@
 # licensing@high-mobility.com
 defmodule AutoApi.CommonData do
   @type location :: :front_left | :front_right | :rear_right | :rear_left
-
-  def bin_location_to_atom(0x00), do: :front_left
-  def bin_location_to_atom(0x01), do: :front_right
-  def bin_location_to_atom(0x02), do: :rear_right
-  def bin_location_to_atom(0x03), do: :rear_left
-
-  def atom_location_to_bin(:front_left), do: 0x00
-  def atom_location_to_bin(:front_right), do: 0x01
-  def atom_location_to_bin(:rear_right), do: 0x02
-  def atom_location_to_bin(:rear_left), do: 0x03
-
   @type position :: :closed | :open | :unavailable
-
-  def atom_position_to_bin(:closed), do: 0x00
-  def atom_position_to_bin(:open), do: 0x01
-  def atom_position_to_bin(_), do: 0xFF
-
-  def bin_position_to_atom(0x00), do: :closed
-  def bin_position_to_atom(0x01), do: :open
-  def bin_position_to_atom(_), do: :unavailable
-
   @type lock :: :unlocked | :locked
-
-  def atom_lock_to_bin(:unlocked), do: 0x00
-  def atom_lock_to_bin(:locked), do: 0x01
-
-  def bin_lock_to_atom(0x00), do: :unlocked
-  def bin_lock_to_atom(0x01), do: :locked
-
   @type electricity :: :on | :off
-
-  def atom_electricity_to_bin(:off), do: 0x00
-  def atom_electricity_to_bin(:on), do: 0x01
-
-  def bin_electricity_to_atom(0x00), do: :off
-  def bin_electricity_to_atom(0x01), do: :on
 
   def bin_to_ieee_754_float(<<f_value::float-32>>) do
     f_value
