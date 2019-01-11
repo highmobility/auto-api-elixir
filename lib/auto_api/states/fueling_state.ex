@@ -22,7 +22,12 @@ defmodule AutoApi.FuelingState do
   """
 
   alias AutoApi.CommonData
-  defstruct gas_flap_position: nil, gas_flap_lock: nil, timestamp: nil, properties: []
+
+  defstruct gas_flap_position: nil,
+            gas_flap_lock: nil,
+            timestamp: nil,
+            properties: [],
+            property_timestamps: %{}
 
   use AutoApi.State, spec_file: "specs/fueling.json"
 
@@ -30,7 +35,8 @@ defmodule AutoApi.FuelingState do
           gas_flap_position: CommonData.position() | nil,
           gas_flap_lock: CommonData.lock() | nil,
           timestamp: DateTime.t() | nil,
-          properties: list(atom)
+          properties: list(atom),
+          property_timestamps: map()
         }
 
   @doc """
