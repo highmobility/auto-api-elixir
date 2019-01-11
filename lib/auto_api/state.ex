@@ -162,7 +162,12 @@ defmodule AutoApi.State do
         multiple = prop["multiple"] || false
 
         quote do
-          def is_multiple?(unquote(prop_name)), do: unquote(multiple) == true
+          if unquote(multiple) do
+            def is_multiple?(unquote(prop_name)), do: true
+          else
+            def is_multiple?(unquote(prop_name)), do: false
+          end
+
           def property_name(unquote(prop_id)), do: unquote(prop_name)
           def property_id(unquote(prop_name)), do: unquote(prop_id)
 
