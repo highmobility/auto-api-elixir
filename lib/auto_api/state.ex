@@ -208,20 +208,23 @@ defmodule AutoApi.State do
                 <<>>
               end
 
-              def parse_state_property(unquote(prop_name), data) do
-                # TODO: should go through the items in order!
-                enum_values = unquote(Macro.escape(prop["items"]))
+              if unquote(multiple) do
+                def parse_state_property(unquote(prop_name), data) do
+                  # TODO: should go through the items in order!
+                  enum_values = unquote(Macro.escape(prop["items"]))
 
-                case unquote(multiple) do
-                  true ->
-                    data
-                    |> Enum.map(fn item ->
-                      parse_state_property_list(enum_values, unquote(prop_name), item)
-                    end)
-                    |> :binary.list_to_bin()
+                  data
+                  |> Enum.map(fn item ->
+                    parse_state_property_list(enum_values, unquote(prop_name), item)
+                  end)
+                  |> :binary.list_to_bin()
+                end
+              else
+                def parse_state_property(unquote(prop_name), data) do
+                  # TODO: should go through the items in order!
+                  enum_values = unquote(Macro.escape(prop["items"]))
 
-                  false ->
-                    parse_state_property_list(enum_values, unquote(prop_name), data)
+                  parse_state_property_list(enum_values, unquote(prop_name), data)
                 end
               end
 
