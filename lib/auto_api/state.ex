@@ -39,13 +39,14 @@ defmodule AutoApi.State do
       quote do
         alias AutoApi.CommonData
         @behaviour AutoApi.State
-        @spec base :: t
         @dialyzer {:nowarn_function, to_properties: 4}
         @identifier __MODULE__
                     |> Atom.to_string()
                     |> String.replace("State", "Capability")
                     |> String.to_atom()
                     |> apply(:identifier, [])
+
+        @spec base() :: t
         def base, do: %__MODULE__{}
         require Logger
 

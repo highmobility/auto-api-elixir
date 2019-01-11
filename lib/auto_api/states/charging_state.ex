@@ -38,7 +38,7 @@ defmodule AutoApi.ChargingState do
           second: integer,
           utc_time_offset: integer
         }
-  @type plugged_in :: :disconnected | :plugged_in
+  @type plugged_in :: :disconnected | :plugged_in | nil
   @type charging_state ::
           :not_charging
           | :charging

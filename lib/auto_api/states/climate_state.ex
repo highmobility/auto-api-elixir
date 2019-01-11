@@ -49,7 +49,7 @@ defmodule AutoApi.ClimateState do
 
   @type t :: %__MODULE__{
           inside_temperature: float | nil,
-          rear_temperature_setting: list(hvac_weekday_starting_time),
+          hvac_weekday_starting_times: list(hvac_weekday_starting_time),
           rear_temperature_setting: float | nil,
           timestamp: DateTime.t() | nil,
           properties: list(atom)
