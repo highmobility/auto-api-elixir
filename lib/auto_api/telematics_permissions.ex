@@ -42,7 +42,7 @@ defmodule AutoApi.TelematicsPermissions do
     true
 
   """
-  @spec permissions_list :: map
+  @spec permissions_list :: list()
   def permissions_list do
     @permissions_list
   end

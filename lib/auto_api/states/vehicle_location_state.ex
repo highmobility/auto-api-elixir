@@ -34,8 +34,8 @@ defmodule AutoApi.VehicleLocationState do
 
   @type t :: %__MODULE__{
           coordinates: coordinates | nil,
-          heading: float,
-          altitude: float,
+          heading: float | nil,
+          altitude: float | nil,
           timestamp: DateTime.t() | nil,
           properties: list(atom),
           property_timestamps: map

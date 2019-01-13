@@ -39,13 +39,14 @@ defmodule AutoApi.State do
       quote do
         alias AutoApi.CommonData
         @behaviour AutoApi.State
-        @spec base :: t
         @dialyzer {:nowarn_function, to_properties: 4}
         @identifier __MODULE__
                     |> Atom.to_string()
                     |> String.replace("State", "Capability")
                     |> String.to_atom()
                     |> apply(:identifier, [])
+
+        @spec base() :: t
         def base, do: %__MODULE__{}
         require Logger
 
@@ -162,7 +163,12 @@ defmodule AutoApi.State do
         multiple = prop["multiple"] || false
 
         quote do
-          def is_multiple?(unquote(prop_name)), do: unquote(multiple) == true
+          if unquote(multiple) do
+            def is_multiple?(unquote(prop_name)), do: true
+          else
+            def is_multiple?(unquote(prop_name)), do: false
+          end
+
           def property_name(unquote(prop_id)), do: unquote(prop_name)
           def property_id(unquote(prop_name)), do: unquote(prop_id)
 
@@ -208,20 +214,23 @@ defmodule AutoApi.State do
                 <<>>
               end
 
-              def parse_state_property(unquote(prop_name), data) do
-                # TODO: should go through the items in order!
-                enum_values = unquote(Macro.escape(prop["items"]))
+              if unquote(multiple) do
+                def parse_state_property(unquote(prop_name), data) do
+                  # TODO: should go through the items in order!
+                  enum_values = unquote(Macro.escape(prop["items"]))
 
-                case unquote(multiple) do
-                  true ->
-                    data
-                    |> Enum.map(fn item ->
-                      parse_state_property_list(enum_values, unquote(prop_name), item)
-                    end)
-                    |> :binary.list_to_bin()
+                  data
+                  |> Enum.map(fn item ->
+                    parse_state_property_list(enum_values, unquote(prop_name), item)
+                  end)
+                  |> :binary.list_to_bin()
+                end
+              else
+                def parse_state_property(unquote(prop_name), data) do
+                  # TODO: should go through the items in order!
+                  enum_values = unquote(Macro.escape(prop["items"]))
 
-                  false ->
-                    parse_state_property_list(enum_values, unquote(prop_name), data)
+                  parse_state_property_list(enum_values, unquote(prop_name), data)
                 end
               end
 
