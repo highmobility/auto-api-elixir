@@ -32,7 +32,8 @@ defmodule AutoApi.LightsState do
             reading_lamps: [],
             interior_lights: [],
             timestamp: nil,
-            properties: []
+            properties: [],
+            property_timestamps: %{}
 
   use AutoApi.State, spec_file: "specs/lights.json"
 
@@ -60,7 +61,8 @@ defmodule AutoApi.LightsState do
           reading_lamps: list(reading_lamp),
           interior_lights: list(reading_lamp),
           timestamp: DateTime.t() | nil,
-          properties: list(atom)
+          properties: list(atom),
+          property_timestamps: map()
         }
 
   @doc """
