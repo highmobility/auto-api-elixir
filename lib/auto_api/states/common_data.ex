@@ -86,4 +86,11 @@ defmodule AutoApi.CommonData do
   defp get_timezone(_), do: ""
   defp get_zoneabbr(0), do: "UTC"
   defp get_zoneabbr(_), do: ""
+
+  def convert_bin_to_state_failure_reason(0x00), do: :rate_limit
+  def convert_bin_to_state_failure_reason(0x01), do: :execution_timeout
+  def convert_bin_to_state_failure_reason(0x02), do: :format_error
+  def convert_bin_to_state_failure_reason(0x03), do: :unauthorised
+  def convert_bin_to_state_failure_reason(0x04), do: :unknown
+  def convert_bin_to_state_failure_reason(0x05), do: :pending
 end

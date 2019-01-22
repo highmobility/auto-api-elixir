@@ -245,4 +245,26 @@ defmodule AutoApi.UniversalPropertiesTest do
       assert byte_size(DiagnosticsState.to_bin(state)) == 50
     end
   end
+
+  describe "properties_failures" do
+    test "converts bin failures to state" do
+      # Put some UTF-8 weirdness in for good measure
+      locks_desc = "Could not parse it (ノಠ益ಠ)ノ彡┻━┻"
+      inside_desc = "Stuff happens ¯\_(ツ)_/¯"
+
+      bin_state =
+        <<4, 0, 2, 2, 1, 4, 0, 2, 3, 0, 165, byte_size(locks_desc) + 3::16, 3, 2,
+          byte_size(locks_desc)::8, locks_desc::binary, 165, byte_size(inside_desc) + 3::16, 2, 4,
+          byte_size(inside_desc)::8, inside_desc::binary>>
+
+      state = DoorLocksState.from_bin(bin_state)
+
+      assert length(state.positions) == 2
+
+      assert state.properties_failures == %{
+               locks: {:format_error, locks_desc},
+               inside_locks: {:unknown, inside_desc}
+             }
+    end
+  end
 end

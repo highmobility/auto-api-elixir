@@ -78,6 +78,10 @@ defmodule AutoApi.State do
           %{state | :timestamp => value}
         end
 
+        defp to_properties(state, :properties_failures, value, _) do
+          Map.update!(state, :properties_failures, &Map.merge(&1, value))
+        end
+
         defp to_properties(state, prop, value, true) do
           current_value = Map.get(state, prop)
           %{state | prop => [value | current_value]}
@@ -151,6 +155,17 @@ defmodule AutoApi.State do
             ) do
           {:property_timestamps, false,
            AutoApi.State.parse_bin_property_to_property_timestamp_helper(__MODULE__, value)}
+        end
+      end
+
+    properties_failures =
+      quote do
+        def parse_bin_property(
+              0xA5,
+              value
+            ) do
+          {:properties_failures, false,
+           AutoApi.State.parse_bin_property_to_failure_helper(__MODULE__, value)}
         end
       end
 
@@ -304,7 +319,7 @@ defmodule AutoApi.State do
         end
       end
 
-    [timestamp, property_timestamp] ++ [base] ++ [prop_funs]
+    [timestamp, property_timestamp, properties_failures] ++ [base] ++ [prop_funs]
   end
 
   def parse_state_property_list_helper(prop_id, enum_values, data) do
@@ -410,6 +425,16 @@ defmodule AutoApi.State do
     %{
       state_module.property_name(prop_id) =>
         CommonData.convert_bin_to_state_datetime(timestamp_binary)
+    }
+  end
+
+  def parse_bin_property_to_failure_helper(
+        state_module,
+        <<prop_id, reason, size, description::binary-size(size)>>
+      ) do
+    %{
+      state_module.property_name(prop_id) =>
+        {CommonData.convert_bin_to_state_failure_reason(reason), description}
     }
   end
 
