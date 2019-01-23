@@ -251,20 +251,37 @@ defmodule AutoApi.UniversalPropertiesTest do
       # Put some UTF-8 weirdness in for good measure
       locks_desc = "Could not parse it (ノಠ益ಠ)ノ彡┻━┻"
       inside_desc = "Stuff happens ¯\_(ツ)_/¯"
+      pos_desc = "Still waiting ⏳"
 
       bin_state =
-        <<4, 0, 2, 2, 1, 4, 0, 2, 3, 0, 165, byte_size(locks_desc) + 3::16, 3, 2,
-          byte_size(locks_desc)::8, locks_desc::binary, 165, byte_size(inside_desc) + 3::16, 2, 4,
-          byte_size(inside_desc)::8, inside_desc::binary>>
+        <<165, byte_size(locks_desc) + 3::16, 3, 2, byte_size(locks_desc)::8, locks_desc::binary,
+          165, byte_size(inside_desc) + 3::16, 2, 4, byte_size(inside_desc)::8,
+          inside_desc::binary, 165, byte_size(pos_desc) + 3::16, 4, 5, byte_size(pos_desc)::8,
+          pos_desc::binary>>
 
       state = DoorLocksState.from_bin(bin_state)
 
-      assert length(state.positions) == 2
-
       assert state.properties_failures == %{
                locks: {:format_error, locks_desc},
-               inside_locks: {:unknown, inside_desc}
+               inside_locks: {:unknown, inside_desc},
+               positions: {:pending, pos_desc}
              }
+    end
+
+    test "converts state failures to bin" do
+      state = %DoorLocksState{
+        properties_failures: %{
+          locks: {:rate_limit, "🏎"},
+          inside_locks: {:unauthorised, "🚫"},
+          positions: {:execution_timeout, "⏰"}
+        },
+        properties: [:properties_failures]
+      }
+
+      assert bin = DoorLocksState.to_bin(state)
+      assert String.contains?(bin, <<165, 0, 7, 3, 0, 4, 0xF0, 0x9F, 0x8F, 0x8E>>)
+      assert String.contains?(bin, <<165, 0, 7, 2, 3, 4, 0xF0, 0x9F, 0x9A, 0xAB>>)
+      assert String.contains?(bin, <<165, 0, 6, 4, 1, 3, 0xE2, 0x8F, 0xB0>>)
     end
   end
 end

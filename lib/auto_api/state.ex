@@ -133,6 +133,14 @@ defmodule AutoApi.State do
           end)
           |> Enum.join("")
         end
+
+        def parse_state_property(:properties_failures, failures) do
+          failures
+          |> Enum.map(fn {prop_name, failure} ->
+            AutoApi.State.parse_state_property_failures_to_bin(__MODULE__, prop_name, failure)
+          end)
+          |> Enum.join("")
+        end
       end
 
     spec = Poison.decode!(File.read!(opts[:spec_file]))
@@ -503,5 +511,13 @@ defmodule AutoApi.State do
     |> Map.put(property_name, property_vaule)
     |> Map.put(:property_timestamps, property_timestamps)
     |> Map.put(:properties, properties)
+  end
+
+  def parse_state_property_failures_to_bin(state_module, property_name, {reason, description}) do
+    prop_id = apply(state_module, :property_id, [property_name])
+    bin_reason = CommonData.convert_state_to_bin_failure_reason(reason)
+    size = byte_size(description) + 3
+
+    <<0xA5, size::16, prop_id, bin_reason, byte_size(description)::8, description::binary>>
   end
 end
