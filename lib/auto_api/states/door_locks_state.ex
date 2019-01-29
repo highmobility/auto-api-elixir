@@ -29,7 +29,8 @@ defmodule AutoApi.DoorLocksState do
             positions: [],
             timestamp: nil,
             properties: [],
-            property_timestamps: %{}
+            property_timestamps: %{},
+            properties_failures: %{}
 
   use AutoApi.State, spec_file: "specs/door_locks.json"
 
@@ -53,7 +54,8 @@ defmodule AutoApi.DoorLocksState do
           inside_locks: list(inside_lock),
           positions: list(position),
           timestamp: DateTime.t() | nil,
-          properties: list(atom)
+          properties: list(atom),
+          properties_failures: map()
         }
 
   @doc """
