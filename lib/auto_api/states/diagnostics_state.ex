@@ -59,7 +59,8 @@ defmodule AutoApi.DiagnosticsState do
             trouble_codes: [],
             timestamp: nil,
             property_timestamps: %{},
-            properties: []
+            properties: [],
+            properties_failures: %{}
 
   use AutoApi.State, spec_file: "specs/diagnostics.json"
 
@@ -114,7 +115,8 @@ defmodule AutoApi.DiagnosticsState do
           wheel_rpms: list(wheel_rpm),
           trouble_codes: list,
           timestamp: DateTime.t() | nil,
-          properties: list(atom)
+          properties: list(atom),
+          properties_failures: map()
         }
 
   @doc """
