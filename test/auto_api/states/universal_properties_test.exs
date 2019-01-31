@@ -283,5 +283,19 @@ defmodule AutoApi.UniversalPropertiesTest do
       assert String.contains?(bin, <<165, 0, 7, 2, 3, 4, 0xF0, 0x9F, 0x9A, 0xAB>>)
       assert String.contains?(bin, <<165, 0, 6, 4, 1, 3, 0xE2, 0x8F, 0xB0>>)
     end
+
+    test "sets a property failure" do
+      state =
+        DoorLocksState.base()
+        |> AutoApi.State.put_failure(:locks, :rate_limit, "🏎")
+        |> AutoApi.State.put_failure(:inside_locks, :unauthorised, "🚫")
+
+      assert state.properties == [:properties_failures]
+
+      assert state.properties_failures == %{
+               locks: {:rate_limit, "🏎"},
+               inside_locks: {:unauthorised, "🚫"}
+             }
+    end
   end
 end
