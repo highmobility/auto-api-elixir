@@ -283,5 +283,38 @@ defmodule AutoApi.UniversalPropertiesTest do
       assert String.contains?(bin, <<165, 0, 7, 2, 3, 4, 0xF0, 0x9F, 0x9A, 0xAB>>)
       assert String.contains?(bin, <<165, 0, 6, 4, 1, 3, 0xE2, 0x8F, 0xB0>>)
     end
+
+    test "sets a property failure" do
+      state =
+        DoorLocksState.base()
+        |> AutoApi.State.put_failure(:locks, :rate_limit, "🏎")
+        |> AutoApi.State.put_failure(:inside_locks, :unauthorised, "🚫")
+
+      assert state.properties == [:properties_failures]
+
+      assert state.properties_failures == %{
+               locks: {:rate_limit, "🏎"},
+               inside_locks: {:unauthorised, "🚫"}
+             }
+    end
+
+    test "ensures failure description is limited to 255 bytes" do
+      desc = """
+        孟郊《游子吟》
+        慈 母 手 中 线，
+        游 子 身 上 衣。
+        临 行 密 密 缝，
+        意 恐 迟 迟 归。
+        谁 言 寸 草 心，
+        报 得 三 春 晖。
+      """
+
+      state =
+        DoorLocksState.base()
+        |> AutoApi.State.put_failure(:locks, :unknown, desc <> desc)
+
+      assert %{locks: {:unknown, description}} = state.properties_failures
+      assert byte_size(description) <= 255
+    end
   end
 end
