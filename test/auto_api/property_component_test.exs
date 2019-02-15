@@ -38,10 +38,50 @@ defmodule AutoApi.PropertyComponentTest do
         assert prop_comp.failure == nil
       end
     end
+
+    property "convert uint16 to bin" do
+      forall data <- [integer: integer_2(), datetime: datetime()] do
+        prop_bin =
+          PropertyComponent.to_bin(
+            %PropertyComponent{data: data[:integer], timestamp: data[:datetime]},
+            :integer,
+            2
+          )
+
+        prop_comp = PropertyComponent.to_struct(prop_bin, :integer, 3)
+        assert prop_comp.data == data[:integer]
+        assert prop_comp.timestamp == data[:datetime]
+        assert prop_comp.failure == nil
+      end
+    end
+
+    property "convert double64 to bin" do
+      forall data <- [double: double_8(), datetime: datetime()] do
+        prop_bin =
+          PropertyComponent.to_bin(
+            %PropertyComponent{data: data[:double], timestamp: data[:datetime]},
+            :double,
+            8
+          )
+
+        prop_comp = PropertyComponent.to_struct(prop_bin, :double, 8)
+        assert prop_comp.data == data[:double]
+        assert prop_comp.timestamp == data[:datetime]
+        assert prop_comp.failure == nil
+      end
+    end
   end
 
   def integer_3 do
     oneof([0, range(10_000, 100_000), range(16_770_215, 16_777_215), 16_777_215])
+  end
+
+  def integer_2 do
+    oneof([0, range(1000, 10_000), range(60_535, 65_535), 65_535])
+  end
+
+  def double_8 do
+    oneof([0.0, float()])
   end
 
   def datetime do

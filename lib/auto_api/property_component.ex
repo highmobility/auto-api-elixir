@@ -35,6 +35,13 @@ defmodule AutoApi.PropertyComponent do
     throw :handle_failure
   end
 
+  def to_bin(%__MODULE__{} = prop, :double, size) do
+    size_bit = size * 8
+
+    <<@data_component_id, size::integer-16, prop.data::float-size(size_bit)>> <>
+      timestamp_to_bin(prop.timestamp)
+  end
+
   def to_bin(%__MODULE__{} = prop, :integer, size) do
     size_bit = size * 8
 
@@ -56,6 +63,10 @@ defmodule AutoApi.PropertyComponent do
 
   defp to_value(nil, _, _) do
     nil
+  end
+
+  defp to_value(binary_data, :double, _size) do
+    AutoApi.CommonData.convert_bin_to_double(binary_data)
   end
 
   defp to_value(binary_data, :integer, _size) do

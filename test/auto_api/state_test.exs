@@ -18,6 +18,38 @@
 # licensing@high-mobility.com
 defmodule AutoApi.StateTest do
   use ExUnit.Case
+  alias AutoApi.{PropertyComponent, DiagnosticsState}
+
+  describe "from_bin/1" do
+    test "integer size 3" do
+      mileage_prop = PropertyComponent.to_bin(%PropertyComponent{data: 16_777_215}, :integer, 3)
+
+      state =
+        DiagnosticsState.from_bin(<<0x01, byte_size(mileage_prop)::integer-16>> <> mileage_prop)
+
+      assert state.mileage.data == 16_777_215
+    end
+
+    test "integer size 2" do
+      mileage_prop = PropertyComponent.to_bin(%PropertyComponent{data: 65535}, :integer, 2)
+
+      state =
+        DiagnosticsState.from_bin(<<0x01, byte_size(mileage_prop)::integer-16>> <> mileage_prop)
+
+      assert state.mileage.data == 65535
+    end
+
+    test "double size 8" do
+      fuel_level_prop = PropertyComponent.to_bin(%PropertyComponent{data: 1.1002}, :double, 8)
+
+      state =
+        DiagnosticsState.from_bin(
+          <<0x05, byte_size(fuel_level_prop)::integer-16>> <> fuel_level_prop
+        )
+
+      assert state.fuel_level.data == 1.1002
+    end
+  end
 
   describe "parse object" do
     test "when object is a map" do

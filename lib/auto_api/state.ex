@@ -53,14 +53,14 @@ defmodule AutoApi.State do
         def identifier, do: @identifier
 
         def parse_bin_properties(<<id, size::integer-16, data::binary-size(size)>>, state) do
-          do_parse_bin_properties(id, data, state)
+          do_parse_bin_properties(id, size, data, state)
         end
 
         def parse_bin_properties(
               <<id, size::integer-16, data::binary-size(size), rest::binary>>,
               state
             ) do
-          state = do_parse_bin_properties(id, data, state)
+          state = do_parse_bin_properties(id, size, data, state)
           parse_bin_properties(rest, state)
         end
 
@@ -68,8 +68,8 @@ defmodule AutoApi.State do
           state
         end
 
-        def do_parse_bin_properties(id, data, state) do
-          {prop, multiple, value} = parse_bin_property(id, data)
+        def do_parse_bin_properties(id, size, data, state) do
+          {prop, multiple, value} = parse_bin_property(id, size, data)
 
           to_properties(state, prop, value, multiple)
         end
@@ -149,6 +149,7 @@ defmodule AutoApi.State do
       quote do
         def parse_bin_property(
               0xA2,
+              _size,
               value
             ) do
           {:timestamp, false, AutoApi.State.parse_bin_property_to_date_helper(value)}
@@ -159,6 +160,7 @@ defmodule AutoApi.State do
       quote do
         def parse_bin_property(
               0xA4,
+              _size,
               value
             ) do
           {:property_timestamps, false,
@@ -170,6 +172,7 @@ defmodule AutoApi.State do
       quote do
         def parse_bin_property(
               0xA5,
+              _size,
               value
             ) do
           {:properties_failures, false,
@@ -206,7 +209,7 @@ defmodule AutoApi.State do
                 |> List.first()
               end
 
-              def parse_bin_property(unquote(prop_id), <<value>>) do
+              def parse_bin_property(unquote(prop_id), _size, <<value>>) do
                 case parse_enum(unquote(prop_id), "id", value) do
                   nil ->
                     throw({:error, {:can_not_parse_enum, value}})
@@ -265,7 +268,7 @@ defmodule AutoApi.State do
                 )
               end
 
-              def parse_bin_property(unquote(prop["id"]), data) do
+              def parse_bin_property(unquote(prop["id"]), _size, data) do
                 data_list = :binary.bin_to_list(data)
 
                 AutoApi.State.parse_bin_property_to_list_helper(
@@ -277,7 +280,7 @@ defmodule AutoApi.State do
               end
 
             "string" ->
-              def parse_bin_property(unquote(prop["id"]), data) do
+              def parse_bin_property(unquote(prop["id"]), _size, data) do
                 value = data
 
                 {String.to_atom(unquote(prop["name"])), unquote(multiple), value}
@@ -289,7 +292,7 @@ defmodule AutoApi.State do
               end
 
             "capability_state" ->
-              def parse_bin_property(unquote(prop["id"]), _data) do
+              def parse_bin_property(unquote(prop["id"]), _size, _data) do
                 throw :not_implement
               end
 
@@ -317,9 +320,9 @@ defmodule AutoApi.State do
                 head <> bin
               end
 
-              def parse_bin_property(unquote(prop["id"]), data) do
-                value =
-                  apply(AutoApi.CommonData, :"convert_bin_to_#{unquote(prop["type"])}", [data])
+              def parse_bin_property(unquote(prop["id"]), size, bin_data) do
+                prop_type_atom = String.to_atom(unquote(prop["type"]))
+                value = AutoApi.PropertyComponent.to_struct(bin_data, prop_type_atom, size)
 
                 {String.to_atom(unquote(prop["name"])), unquote(multiple), value}
               end
