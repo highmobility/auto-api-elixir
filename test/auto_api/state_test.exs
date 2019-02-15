@@ -49,6 +49,18 @@ defmodule AutoApi.StateTest do
 
       assert state.fuel_level.data == 1.1002
     end
+
+    test "enum" do
+      anti_lock_braking_prop =
+        PropertyComponent.enum_to_bin(%PropertyComponent{data: :low}, %{low: 0x0, filled: 0x01})
+
+      state =
+        DiagnosticsState.from_bin(
+          <<0x09, byte_size(anti_lock_braking_prop)::integer-16>> <> anti_lock_braking_prop
+        )
+
+      assert state.washer_fluid_level.data == :low
+    end
   end
 
   describe "parse object" do

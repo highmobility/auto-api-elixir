@@ -26,6 +26,13 @@ defmodule AutoApi.PropertyComponent do
   @type data_types :: :integer
   @type size :: integer
 
+  @spec enum_to_bin(t, map) :: binary
+  def enum_to_bin(%__MODULE__{} = prop, enum_name_to_id) do
+    enum_id = enum_name_to_id[prop.data]
+
+    <<@data_component_id, 1::integer-16, enum_id>> <> timestamp_to_bin(prop.timestamp)
+  end
+
   @doc """
   Converts PropertyComponent struct to binary"
   """
@@ -52,10 +59,24 @@ defmodule AutoApi.PropertyComponent do
   @doc """
   Converts PropertyComponent binary to struct"
   """
+  @spec enum_to_struct(binary, data_types, size) :: binary
+  def enum_to_struct(binary, data_type, enum) do
+    prop_in_binary = split_binary_to_parts(binary, %__MODULE__{})
+    data = to_value(prop_in_binary.data, data_type, enum)
+    comon_components_to_struct(prop_in_binary, data)
+  end
+
+  @doc """
+  Converts PropertyComponent binary to struct"
+  """
   @spec to_struct(binary, data_types, size) :: binary
   def to_struct(binary, data_type, size) do
     prop_in_binary = split_binary_to_parts(binary, %__MODULE__{})
     data = to_value(prop_in_binary.data, data_type, size)
+    comon_components_to_struct(prop_in_binary, data)
+  end
+
+  defp comon_components_to_struct(prop_in_binary, data) do
     timestamp = to_value(prop_in_binary.timestamp, :timestamp, 8)
     failure = failure_to_value(prop_in_binary.failure)
     %__MODULE__{data: data, timestamp: timestamp, failure: failure}
@@ -63,6 +84,10 @@ defmodule AutoApi.PropertyComponent do
 
   defp to_value(nil, _, _) do
     nil
+  end
+
+  defp to_value(<<enum_index>>, :enum, enum) do
+    enum[enum_index]
   end
 
   defp to_value(binary_data, :double, _size) do

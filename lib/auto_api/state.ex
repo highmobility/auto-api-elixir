@@ -200,6 +200,27 @@ defmodule AutoApi.State do
 
           case unquote(prop["type"]) do
             "enum" ->
+              defp enum_name_to_id(unquote(prop_id)) do
+                enum_values = unquote(Macro.escape(prop["values"]))
+
+                enum_values
+                |> Enum.map(fn enum_value ->
+                  {String.to_atom(enum_value["name"]), enum_value["id"]}
+                end)
+                |> Map.new()
+              end
+
+              defp enum_id_to_name(unquote(prop_name)) do
+                enum_values = unquote(Macro.escape(prop["values"]))
+
+                enum_values
+                |> Enum.map(fn enum_value ->
+                  {enum_value["id"], String.to_atom(enum_value["name"])}
+                end)
+                |> Map.new()
+              end
+
+              # TODO: to remove!
               defp parse_enum(key, key_name, value)
                    when key in [unquote(prop_id), unquote(prop_name)] do
                 enum_values = unquote(Macro.escape(prop["values"]))
@@ -209,13 +230,22 @@ defmodule AutoApi.State do
                 |> List.first()
               end
 
-              def parse_bin_property(unquote(prop_id), _size, <<value>>) do
-                case parse_enum(unquote(prop_id), "id", value) do
+              def parse_bin_property(unquote(prop_id), _size, property_component_binary) do
+                enum = enum_id_to_name(unquote(prop_name))
+
+                property_component =
+                  AutoApi.PropertyComponent.enum_to_struct(
+                    property_component_binary,
+                    :enum,
+                    enum
+                  )
+
+                case property_component.data do
                   nil ->
-                    throw({:error, {:can_not_parse_enum, value}})
+                    throw({:error, {:can_not_parse_enum, property_component_binary}})
 
                   matched_value ->
-                    {unquote(prop_name), false, String.to_atom(matched_value["name"])}
+                    {unquote(prop_name), false, property_component}
                 end
               end
 
