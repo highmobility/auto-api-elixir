@@ -1,6 +1,6 @@
 # AutoAPI
 
-[**AutoAPI**](https://developers.high-mobility.com/resources/documentation/auto-api/api-structure/tutorial/) parsing source code in *Elixir*
+[**AutoAPI**](https://high-mobility.com/learn/tutorials/getting-started/auto-api-guide/) parsing source code in *Elixir*
   
 
 [![Build Status](https://travis-ci.org/highmobility/hm-auto-api-elixir.svg?branch=master)](https://travis-ci.org/highmobility/hm-auto-api-elixir)
