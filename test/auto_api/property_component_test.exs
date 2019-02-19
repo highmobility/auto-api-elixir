@@ -23,7 +23,7 @@ defmodule AutoApi.PropertyComponentTest do
   alias AutoApi.PropertyComponent
 
   describe "to_bin/3 & to_struct/3" do
-    property "convert uint24 to bin" do
+    property "converts uint24 to bin" do
       forall data <- [integer: integer_3(), datetime: datetime()] do
         prop_bin =
           PropertyComponent.to_bin(
@@ -39,7 +39,7 @@ defmodule AutoApi.PropertyComponentTest do
       end
     end
 
-    property "convert uint16 to bin" do
+    property "converts uint16 to bin" do
       forall data <- [integer: integer_2(), datetime: datetime()] do
         prop_bin =
           PropertyComponent.to_bin(
@@ -55,7 +55,7 @@ defmodule AutoApi.PropertyComponentTest do
       end
     end
 
-    property "convert double64 to bin" do
+    property "converts double64 to bin" do
       forall data <- [double: double_8(), datetime: datetime()] do
         prop_bin =
           PropertyComponent.to_bin(
@@ -69,6 +69,28 @@ defmodule AutoApi.PropertyComponentTest do
         assert prop_comp.timestamp == data[:datetime]
         assert prop_comp.failure == nil
       end
+    end
+
+    test "converts enum to bin" do
+      datetime = DateTime.utc_now()
+      enum = %{key1: 1, key2: 2}
+
+      prop_bin =
+        PropertyComponent.enum_to_bin(
+          %PropertyComponent{data: :key1, timestamp: datetime},
+          enum
+        )
+
+      enum_id_to_key =
+        enum
+        |> Enum.map(fn {k, v} -> {v, k} end)
+        |> Map.new()
+
+      prop_comp = PropertyComponent.enum_to_struct(prop_bin, :enum, enum_id_to_key)
+
+      assert prop_comp.data == :key1
+      assert DateTime.to_unix(prop_comp.timestamp) == DateTime.to_unix(datetime)
+      assert prop_comp.failure == nil
     end
   end
 
