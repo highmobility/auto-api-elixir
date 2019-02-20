@@ -25,14 +25,15 @@ defmodule AutoApi.PropertyComponentTest do
   describe "to_bin/3 & to_struct/3" do
     property "converts uint24 to bin" do
       forall data <- [integer: integer_3(), datetime: datetime()] do
+        spec = %{"type" => "integer", "size" => 3}
+
         prop_bin =
           PropertyComponent.to_bin(
             %PropertyComponent{data: data[:integer], timestamp: data[:datetime]},
-            :integer,
-            3
+            spec
           )
 
-        prop_comp = PropertyComponent.to_struct(prop_bin, :integer, 3)
+        prop_comp = PropertyComponent.to_struct(prop_bin, spec)
         assert prop_comp.data == data[:integer]
         assert prop_comp.timestamp == data[:datetime]
         assert prop_comp.failure == nil
@@ -41,14 +42,16 @@ defmodule AutoApi.PropertyComponentTest do
 
     property "converts uint16 to bin" do
       forall data <- [integer: integer_2(), datetime: datetime()] do
+        spec = %{"type" => "integer", "size" => 2}
+
         prop_bin =
+          prop_bin =
           PropertyComponent.to_bin(
             %PropertyComponent{data: data[:integer], timestamp: data[:datetime]},
-            :integer,
-            2
+            spec
           )
 
-        prop_comp = PropertyComponent.to_struct(prop_bin, :integer, 3)
+        prop_comp = PropertyComponent.to_struct(prop_bin, spec)
         assert prop_comp.data == data[:integer]
         assert prop_comp.timestamp == data[:datetime]
         assert prop_comp.failure == nil
@@ -57,14 +60,15 @@ defmodule AutoApi.PropertyComponentTest do
 
     property "converts double64 to bin" do
       forall data <- [double: double_8(), datetime: datetime()] do
+        spec = %{"type" => "double", "size" => 8}
+
         prop_bin =
           PropertyComponent.to_bin(
             %PropertyComponent{data: data[:double], timestamp: data[:datetime]},
-            :double,
-            8
+            spec
           )
 
-        prop_comp = PropertyComponent.to_struct(prop_bin, :double, 8)
+        prop_comp = PropertyComponent.to_struct(prop_bin, spec)
         assert prop_comp.data == data[:double]
         assert prop_comp.timestamp == data[:datetime]
         assert prop_comp.failure == nil
@@ -73,24 +77,57 @@ defmodule AutoApi.PropertyComponentTest do
 
     test "converts enum to bin" do
       datetime = DateTime.utc_now()
-      enum = %{key1: 1, key2: 2}
+
+      spec = %{
+        "type" => "enum",
+        "name" => "brake_fluid_level",
+        "size" => 1,
+        "values" => [
+          %{"id" => 0x00, "name" => "low"},
+          %{"id" => 1, "name" => "filled"}
+        ]
+      }
 
       prop_bin =
-        PropertyComponent.enum_to_bin(
-          %PropertyComponent{data: :key1, timestamp: datetime},
-          enum
+        PropertyComponent.to_bin(
+          %PropertyComponent{data: :low, timestamp: datetime},
+          spec
         )
 
-      enum_id_to_key =
-        enum
-        |> Enum.map(fn {k, v} -> {v, k} end)
-        |> Map.new()
+      prop_comp = PropertyComponent.to_struct(prop_bin, spec)
 
-      prop_comp = PropertyComponent.enum_to_struct(prop_bin, :enum, enum_id_to_key)
-
-      assert prop_comp.data == :key1
+      assert prop_comp.data == :low
       assert DateTime.to_unix(prop_comp.timestamp) == DateTime.to_unix(datetime)
       assert prop_comp.failure == nil
+    end
+
+    test "converts map to bin" do
+      spec = [
+        %{
+          "name" => "location",
+          "size" => 1,
+          "type" => "enum",
+          "values" => [
+            %{"id" => 0, "name" => "front_left"},
+            %{"id" => 1, "name" => "front_right"},
+            %{"id" => 2, "name" => "rear_right"},
+            %{"id" => 3, "name" => "rear_left"}
+          ]
+        },
+        %{
+          "description" => "Tire pressure in BAR formatted in 4-bytes per IEEE 754",
+          "name" => "pressure",
+          "size" => 4,
+          "type" => "float"
+        }
+      ]
+
+      prop_comp = %PropertyComponent{data: %{location: :front_left, pressure: 22.034}}
+      bin_comp = PropertyComponent.map_to_bin(prop_comp, spec)
+
+      assert bin_comp == <<1, 5::integer-16, 0x00, 65, 176, 69, 162>>
+
+      assert PropertyComponent.to_struct(bin_comp, spec) == prop_comp
     end
   end
 

@@ -234,10 +234,9 @@ defmodule AutoApi.State do
                 enum = enum_id_to_name(unquote(prop_name))
 
                 property_component =
-                  AutoApi.PropertyComponent.enum_to_struct(
+                  AutoApi.PropertyComponent.to_struct(
                     property_component_binary,
-                    :enum,
-                    enum
+                    unquote(Macro.escape(prop))
                   )
 
                 case property_component.data do
@@ -299,14 +298,10 @@ defmodule AutoApi.State do
               end
 
               def parse_bin_property(unquote(prop["id"]), _size, data) do
-                data_list = :binary.bin_to_list(data)
+                data_component =
+                  AutoApi.PropertyComponent.to_struct(data, unquote(Macro.escape(prop["items"])))
 
-                AutoApi.State.parse_bin_property_to_list_helper(
-                  unquote(prop_name),
-                  unquote(Macro.escape(prop["items"])),
-                  data_list,
-                  unquote(multiple)
-                )
+                {unquote(prop_name), unquote(multiple), data_component}
               end
 
             "string" ->
@@ -351,8 +346,7 @@ defmodule AutoApi.State do
               end
 
               def parse_bin_property(unquote(prop["id"]), size, bin_data) do
-                prop_type_atom = String.to_atom(unquote(prop["type"]))
-                value = AutoApi.PropertyComponent.to_struct(bin_data, prop_type_atom, size)
+                value = AutoApi.PropertyComponent.to_struct(bin_data, unquote(Macro.escape(prop)))
 
                 {String.to_atom(unquote(prop["name"])), unquote(multiple), value}
               end

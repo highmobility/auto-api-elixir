@@ -26,6 +26,62 @@ defmodule AutoApi.PropertyComponent do
   @type data_types :: :integer
   @type size :: integer
 
+  def map_to_bin(%__MODULE__{} = prop, spec) do
+    data_component_bin =
+      spec
+      |> Enum.map(fn item_spec ->
+        key_name = String.to_atom(item_spec["name"])
+
+        prop.data
+        |> Map.get(key_name)
+        |> data_to_bin(item_spec)
+      end)
+      |> :binary.list_to_bin()
+
+    data_component_size = byte_size(data_component_bin)
+
+    <<@data_component_id, data_component_size::integer-16>> <>
+      data_component_bin <> timestamp_to_bin(prop.timestamp)
+  end
+
+  @doc """
+  Converts PropertyComponent struct to binary"
+  """
+  def to_bin(%__MODULE__{} = prop, spec) do
+    data_component_bin = data_to_bin(prop.data, spec)
+    data_component_size = byte_size(data_component_bin)
+
+    <<@data_component_id, data_component_size::integer-16>> <>
+      data_component_bin <> timestamp_to_bin(prop.timestamp)
+  end
+
+  defp data_to_bin(data, %{"type" => "enum"} = spec) do
+    enum_id =
+      spec["values"]
+      |> Enum.find(%{}, &(&1["name"] == Atom.to_string(data)))
+      |> Map.get("id")
+
+    <<enum_id>>
+  end
+
+  defp data_to_bin(data, %{"type" => "float", "size" => size}) do
+    size_bit = size * 8
+
+    <<data::float-size(size_bit)>>
+  end
+
+  defp data_to_bin(data, %{"type" => "double", "size" => size}) do
+    size_bit = size * 8
+
+    <<data::float-size(size_bit)>>
+  end
+
+  defp data_to_bin(data, %{"type" => "integer", "size" => size}) do
+    size_bit = size * 8
+
+    <<data::integer-size(size_bit)>>
+  end
+
   @spec enum_to_bin(t, map) :: binary
   def enum_to_bin(%__MODULE__{} = prop, enum_name_to_id) do
     enum_id = enum_name_to_id[prop.data]
@@ -34,71 +90,84 @@ defmodule AutoApi.PropertyComponent do
   end
 
   @doc """
-  Converts PropertyComponent struct to binary"
-  """
-  @spec to_bin(t, data_types, size) :: binary
-  def to_bin(%__MODULE__{data: nil, failure: failure}, _, _)
-      when not is_nil(failure) do
-    throw :handle_failure
-  end
-
-  def to_bin(%__MODULE__{} = prop, :double, size) do
-    size_bit = size * 8
-
-    <<@data_component_id, size::integer-16, prop.data::float-size(size_bit)>> <>
-      timestamp_to_bin(prop.timestamp)
-  end
-
-  def to_bin(%__MODULE__{} = prop, :integer, size) do
-    size_bit = size * 8
-
-    <<@data_component_id, size::integer-16, prop.data::integer-size(size_bit)>> <>
-      timestamp_to_bin(prop.timestamp)
-  end
-
-  @doc """
   Converts PropertyComponent binary to struct"
   """
-  @spec enum_to_struct(binary, data_types, size) :: binary
-  def enum_to_struct(binary, data_type, enum) do
+  @spec to_struct(binary, map) :: binary
+  def to_struct(binary, specs) when is_list(specs) do
     prop_in_binary = split_binary_to_parts(binary, %__MODULE__{})
-    data = to_value(prop_in_binary.data, data_type, enum)
+
+    data = prop_in_binary.data
+
+    data =
+      specs
+      |> Enum.reduce({0, []}, fn spec, {counter, acc} ->
+        size = spec["size"] || Keyword.get(acc, String.to_atom("#{spec["name"]}_size"))
+        unless size, do: raise("couldn't find size for #{inspect(spec)}")
+
+        data_slice = String.slice(data, counter, size)
+
+        data_value =
+          if spec["type"] == "enum" do
+            enum_to_value(data_slice, spec)
+          else
+            to_value(data_slice, spec["type"])
+          end
+
+        {counter + size, [{String.to_atom(spec["name"]), data_value} | acc]}
+      end)
+      |> elem(1)
+      |> Enum.into(%{})
+
     comon_components_to_struct(prop_in_binary, data)
   end
 
-  @doc """
-  Converts PropertyComponent binary to struct"
-  """
-  @spec to_struct(binary, data_types, size) :: binary
-  def to_struct(binary, data_type, size) do
+  def to_struct(binary, %{"type" => "enum", "size" => size} = spec) do
     prop_in_binary = split_binary_to_parts(binary, %__MODULE__{})
-    data = to_value(prop_in_binary.data, data_type, size)
+
+    data = enum_to_value(prop_in_binary.data, spec)
+
+    comon_components_to_struct(prop_in_binary, data)
+  end
+
+  def to_struct(binary, %{"type" => data_type, "size" => size} = spec) do
+    prop_in_binary = split_binary_to_parts(binary, %__MODULE__{})
+    data = to_value(prop_in_binary.data, data_type)
     comon_components_to_struct(prop_in_binary, data)
   end
 
   defp comon_components_to_struct(prop_in_binary, data) do
-    timestamp = to_value(prop_in_binary.timestamp, :timestamp, 8)
+    timestamp = to_value(prop_in_binary.timestamp, "timestamp")
     failure = failure_to_value(prop_in_binary.failure)
     %__MODULE__{data: data, timestamp: timestamp, failure: failure}
   end
 
-  defp to_value(nil, _, _) do
+  defp enum_to_value(binary_data, %{"size" => size} = spec) do
+    size_bit = size * 8
+    <<enum_id::integer-size(size_bit)>> = binary_data
+
+    spec["values"]
+    |> Enum.find(%{}, &(&1["id"] == enum_id))
+    |> Map.get("name")
+    |> String.to_atom()
+  end
+
+  defp to_value(nil, _) do
     nil
   end
 
-  defp to_value(<<enum_index>>, :enum, enum) do
-    enum[enum_index]
+  defp to_value(binary_data, "float") do
+    AutoApi.CommonData.convert_bin_to_float(binary_data)
   end
 
-  defp to_value(binary_data, :double, _size) do
+  defp to_value(binary_data, "double") do
     AutoApi.CommonData.convert_bin_to_double(binary_data)
   end
 
-  defp to_value(binary_data, :integer, _size) do
+  defp to_value(binary_data, "integer") do
     AutoApi.CommonData.convert_bin_to_integer(binary_data)
   end
 
-  defp to_value(binary_data, :timestamp, _size) do
+  defp to_value(binary_data, "timestamp") do
     timestamp_in_milisec = AutoApi.CommonData.convert_bin_to_integer(binary_data)
 
     case DateTime.from_unix(timestamp_in_milisec, :millisecond) do

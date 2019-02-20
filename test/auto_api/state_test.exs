@@ -22,7 +22,8 @@ defmodule AutoApi.StateTest do
 
   describe "from_bin/1" do
     test "integer size 3" do
-      mileage_prop = PropertyComponent.to_bin(%PropertyComponent{data: 16_777_215}, :integer, 3)
+      spec = %{"type" => "integer", "size" => 3}
+      mileage_prop = PropertyComponent.to_bin(%PropertyComponent{data: 16_777_215}, spec)
 
       state =
         DiagnosticsState.from_bin(<<0x01, byte_size(mileage_prop)::integer-16>> <> mileage_prop)
@@ -31,7 +32,8 @@ defmodule AutoApi.StateTest do
     end
 
     test "integer size 2" do
-      mileage_prop = PropertyComponent.to_bin(%PropertyComponent{data: 65535}, :integer, 2)
+      spec = %{"type" => "integer", "size" => 2}
+      mileage_prop = PropertyComponent.to_bin(%PropertyComponent{data: 65535}, spec)
 
       state =
         DiagnosticsState.from_bin(<<0x01, byte_size(mileage_prop)::integer-16>> <> mileage_prop)
@@ -40,7 +42,8 @@ defmodule AutoApi.StateTest do
     end
 
     test "double size 8" do
-      fuel_level_prop = PropertyComponent.to_bin(%PropertyComponent{data: 1.1002}, :double, 8)
+      spec = %{"type" => "double", "size" => 8}
+      fuel_level_prop = PropertyComponent.to_bin(%PropertyComponent{data: 1.1002}, spec)
 
       state =
         DiagnosticsState.from_bin(
@@ -50,9 +53,29 @@ defmodule AutoApi.StateTest do
       assert state.fuel_level.data == 1.1002
     end
 
+    test "float size 4" do
+      spec = %{"type" => "float", "size" => 4}
+
+      engine_total_fuel_consumption_prop =
+        PropertyComponent.to_bin(%PropertyComponent{data: 1.1002}, spec)
+
+      state =
+        DiagnosticsState.from_bin(
+          <<0x13, byte_size(engine_total_fuel_consumption_prop)::integer-16>> <>
+            engine_total_fuel_consumption_prop
+        )
+
+      assert state.engine_total_fuel_consumption.data == 1.1002
+    end
+
     test "enum" do
-      anti_lock_braking_prop =
-        PropertyComponent.enum_to_bin(%PropertyComponent{data: :low}, %{low: 0x0, filled: 0x01})
+      spec = %{
+        "type" => "enum",
+        "size" => 1,
+        "values" => [%{"id" => 0, "name" => "low"}, %{"id" => 1, "name" => "filled"}]
+      }
+
+      anti_lock_braking_prop = PropertyComponent.to_bin(%PropertyComponent{data: :low}, spec)
 
       state =
         DiagnosticsState.from_bin(
@@ -60,6 +83,35 @@ defmodule AutoApi.StateTest do
         )
 
       assert state.washer_fluid_level.data == :low
+    end
+
+    test "map" do
+      spec = [
+        %{
+          "name" => "location",
+          "size" => 1,
+          "type" => "enum",
+          "values" => [
+            %{"id" => 0, "name" => "front_left"},
+            %{"id" => 1, "name" => "front_right"},
+            %{"id" => 2, "name" => "rear_right"},
+            %{"id" => 3, "name" => "rear_left"}
+          ]
+        },
+        %{
+          "description" => "Tire pressure in BAR formatted in 4-bytes per IEEE 754",
+          "name" => "pressure",
+          "size" => 4,
+          "type" => "float"
+        }
+      ]
+
+      prop_comp = %PropertyComponent{data: %{location: :front_left, pressure: 22.034}}
+      bin_comp = PropertyComponent.map_to_bin(prop_comp, spec)
+
+      state = DiagnosticsState.from_bin(<<0x1A, byte_size(bin_comp)::integer-16>> <> bin_comp)
+
+      assert state.tire_pressures == [prop_comp]
     end
   end
 
