@@ -21,24 +21,22 @@ defmodule AutoApi.VehicleLocationState do
   VehicleLocationState
   """
 
+  alias AutoApi.PropertyComponent
+
   defstruct coordinates: nil,
             heading: nil,
             altitude: nil,
-            timestamp: nil,
-            properties: [],
-            property_timestamps: %{}
+            timestamp: nil
 
   use AutoApi.State, spec_file: "specs/vehicle_location.json"
 
-  @type coordinates :: %{latitude: float, longitude: float}
+  @type coordinates :: %PropertyComponent{data: %{latitude: float, longitude: float}}
 
   @type t :: %__MODULE__{
           coordinates: coordinates | nil,
-          heading: float | nil,
-          altitude: float | nil,
-          timestamp: DateTime.t() | nil,
-          properties: list(atom),
-          property_timestamps: map
+          heading: %PropertyComponent{data: float} | nil,
+          altitude: %PropertyComponent{data: float} | nil,
+          timestamp: DateTime.t() | nil
         }
 
   @doc """
