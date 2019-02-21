@@ -75,6 +75,24 @@ defmodule AutoApi.PropertyComponentTest do
       end
     end
 
+    property "converts string to bin" do
+      forall data <- [string: utf8(), datetime: datetime()] do
+        spec = %{"type" => "string"}
+
+        prop_bin =
+          PropertyComponent.to_bin(
+            %PropertyComponent{data: data[:string], timestamp: data[:datetime]},
+            spec
+          )
+
+        prop_comp = PropertyComponent.to_struct(prop_bin, spec)
+
+        assert prop_comp.data == data[:string]
+        assert prop_comp.timestamp == data[:datetime]
+        assert prop_comp.failure == nil
+      end
+    end
+
     test "converts enum to bin" do
       datetime = DateTime.utc_now()
 

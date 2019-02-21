@@ -55,6 +55,10 @@ defmodule AutoApi.PropertyComponent do
       data_component_bin <> timestamp_to_bin(prop.timestamp)
   end
 
+  defp data_to_bin(data, %{"type" => "string"} = spec) do
+    data
+  end
+
   defp data_to_bin(data, %{"type" => "enum"} = spec) do
     enum_id =
       spec["values"]
@@ -121,11 +125,15 @@ defmodule AutoApi.PropertyComponent do
     comon_components_to_struct(prop_in_binary, data)
   end
 
+  def to_struct(binary, %{"type" => "string"} = spec) do
+    prop_in_binary = split_binary_to_parts(binary, %__MODULE__{})
+    data = to_value(prop_in_binary.data, "string")
+    comon_components_to_struct(prop_in_binary, data)
+  end
+
   def to_struct(binary, %{"type" => "enum", "size" => size} = spec) do
     prop_in_binary = split_binary_to_parts(binary, %__MODULE__{})
-
     data = enum_to_value(prop_in_binary.data, spec)
-
     comon_components_to_struct(prop_in_binary, data)
   end
 
@@ -153,6 +161,10 @@ defmodule AutoApi.PropertyComponent do
 
   defp to_value(nil, _) do
     nil
+  end
+
+  defp to_value(binary_data, "string") do
+    binary_data
   end
 
   defp to_value(binary_data, "float") do
