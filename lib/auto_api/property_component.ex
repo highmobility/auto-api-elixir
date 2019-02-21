@@ -86,13 +86,6 @@ defmodule AutoApi.PropertyComponent do
     <<data::integer-size(size_bit)>>
   end
 
-  @spec enum_to_bin(t, map) :: binary
-  def enum_to_bin(%__MODULE__{} = prop, enum_name_to_id) do
-    enum_id = enum_name_to_id[prop.data]
-
-    <<@data_component_id, 1::integer-16, enum_id>> <> timestamp_to_bin(prop.timestamp)
-  end
-
   @doc """
   Converts PropertyComponent binary to struct"
   """
