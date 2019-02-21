@@ -84,7 +84,8 @@ defmodule AutoApi.State do
 
         defp to_properties(state, prop, value, true) do
           current_value = Map.get(state, prop)
-          %{state | prop => [value | current_value]}
+          unless current_value, do: raise("`#{prop}` property is not defined as list")
+          %{state | prop => current_value ++ [value]}
         end
 
         defp to_properties(state, prop, value, false) do
@@ -139,6 +140,33 @@ defmodule AutoApi.State do
             AutoApi.State.parse_state_property_failures_to_bin(__MODULE__, prop_name, failure)
           end)
           |> Enum.join("")
+        end
+
+        @doc """
+        Puts a value in the state.
+
+        This function wraps the data in PropertyComponent
+        """
+        def put_property(state, property_name, data, timestamp \\ nil) do
+          to_properties(
+            state,
+            property_name,
+            %AutoApi.PropertyComponent{data: data, timestamp: timestamp},
+            false
+          )
+        end
+
+        @doc """
+        Appends a value into a list
+        This function wraps the data in PropertyComponent
+        """
+        def append_property(state, property_name, data, timestamp \\ nil) do
+          to_properties(
+            state,
+            property_name,
+            %AutoApi.PropertyComponent{data: data, timestamp: timestamp},
+            true
+          )
         end
       end
 
