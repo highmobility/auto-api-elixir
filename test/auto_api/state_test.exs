@@ -87,6 +87,23 @@ defmodule AutoApi.StateTest do
 
     test "map" do
       spec = [
+        %{"name" => "latitude", "type" => "double", "size" => 8},
+        %{"name" => "longitude", "type" => "double", "size" => 8}
+      ]
+
+      prop_comp = %PropertyComponent{data: %{latitude: 52.442292, longitude: 13.176732}}
+      bin_comp = PropertyComponent.map_to_bin(prop_comp, spec)
+
+      state =
+        AutoApi.VehicleLocationState.from_bin(
+          <<0x04, byte_size(bin_comp)::integer-16, bin_comp::binary>>
+        )
+
+      assert state.coordinates == prop_comp
+    end
+
+    test "list of map" do
+      spec = [
         %{
           "name" => "location",
           "size" => 1,
