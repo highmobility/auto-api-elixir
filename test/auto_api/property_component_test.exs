@@ -147,6 +147,42 @@ defmodule AutoApi.PropertyComponentTest do
 
       assert PropertyComponent.to_struct(bin_comp, spec) == prop_comp
     end
+
+    property "converts map with string to bin" do
+      forall data <- [id: integer_2(), text: utf8(), datetime: datetime()] do
+        spec = [
+          %{
+            "name" => "id",
+            "size" => 2,
+            "type" => "integer"
+          },
+          %{
+            "name" => "text_size",
+            "size" => 2,
+            "type" => "integer"
+          },
+          %{
+            "name" => "text",
+            "type" => "string"
+          }
+        ]
+
+        text = data[:text]
+        text_size = byte_size(text)
+        id = data[:id]
+
+        prop_comp = %PropertyComponent{
+          data: %{id: id, text_size: text_size, text: text}
+        }
+
+        bin_comp = PropertyComponent.map_to_bin(prop_comp, spec)
+
+        bin_data = <<id::integer-16, text_size::integer-16, text::binary>>
+        assert bin_comp == <<1, byte_size(bin_data)::integer-16, bin_data::binary>>
+
+        assert PropertyComponent.to_struct(bin_comp, spec) == prop_comp
+      end
+    end
   end
 
   def integer_3 do

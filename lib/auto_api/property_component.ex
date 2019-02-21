@@ -96,7 +96,7 @@ defmodule AutoApi.PropertyComponent do
   @doc """
   Converts PropertyComponent binary to struct"
   """
-  @spec to_struct(binary, map) :: binary
+  @spec to_struct(binary, map | list) :: binary
   def to_struct(binary, specs) when is_list(specs) do
     prop_in_binary = split_binary_to_parts(binary, %__MODULE__{})
 
@@ -108,7 +108,7 @@ defmodule AutoApi.PropertyComponent do
         size = spec["size"] || Keyword.get(acc, String.to_atom("#{spec["name"]}_size"))
         unless size, do: raise("couldn't find size for #{inspect(spec)}")
 
-        data_slice = String.slice(data, counter, size)
+        data_slice = :binary.part(data, counter, size)
 
         data_value =
           if spec["type"] == "enum" do
