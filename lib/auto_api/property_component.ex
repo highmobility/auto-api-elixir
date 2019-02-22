@@ -17,6 +17,7 @@
 # Please inquire about commercial licensing options at
 # licensing@high-mobility.com
 defmodule AutoApi.PropertyComponent do
+  require Logger
   defstruct [:data, :timestamp, :failure]
   @prop_id_to_name %{0x01 => :data, 0x02 => :timestamp}
   @data_component_id 0x01
@@ -146,10 +147,16 @@ defmodule AutoApi.PropertyComponent do
     size_bit = size * 8
     <<enum_id::integer-size(size_bit)>> = binary_data
 
-    spec["values"]
-    |> Enum.find(%{}, &(&1["id"] == enum_id))
-    |> Map.get("name")
-    |> String.to_atom()
+    enum_name =
+      spec["values"]
+      |> Enum.find(%{}, &(&1["id"] == enum_id))
+      |> Map.get("name")
+
+    if enum_name do
+      String.to_atom(enum_name)
+    else
+      Logger.warn("enum with value `#{binary_data}` doesn't exist in #{inspect spec}")
+    end
   end
 
   defp to_value(nil, _) do
