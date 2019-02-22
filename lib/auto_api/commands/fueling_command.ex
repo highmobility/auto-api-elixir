@@ -27,16 +27,6 @@ defmodule AutoApi.FuelingCommand do
 
   @doc """
   Parses the binary command and makes changes or returns the state
-
-        iex> AutoApi.FuelingCommand.execute(%AutoApi.FuelingState{}, <<0x00>>)
-        {:state, %AutoApi.FuelingState{}}
-
-        iex> command = <<0x01>> <> <<0x03, 1::integer-16, 0x01>>
-        iex> AutoApi.FuelingCommand.execute(%AutoApi.FuelingState{}, command)
-        {:state_changed, %AutoApi.FuelingState{gas_flap_position: :open}}
-
-        iex> AutoApi.FuelingCommand.execute(%AutoApi.FuelingState{}, <<0x12, 0x01, 0x01>>)
-        {:state_changed, %AutoApi.FuelingState{gas_flap_position: :open}}
   """
   @spec execute(FuelingState.t(), binary) :: {:state | :state_changed, FuelingState.t()}
   def execute(%FuelingState{} = state, <<0x00>>) do
@@ -53,22 +43,8 @@ defmodule AutoApi.FuelingCommand do
     end
   end
 
-  def execute(%FuelingState{} = state, <<0x12, _, open_close>>) do
-    gas_flap_state = if open_close == 0x00, do: :close, else: :open
-    new_state = %{state | gas_flap_position: gas_flap_state}
-
-    if new_state == state do
-      {:state, state}
-    else
-      {:state_changed, new_state}
-    end
-  end
-
   @doc """
   Converts DoorLocksCommand state to capability's state in binary
-
-        iex> AutoApi.FuelingCommand.state(%AutoApi.FuelingState{gas_flap_position: :closed, properties: [:gas_flap_position]})
-        <<1, 3, 0, 1, 0>>
   """
   @spec state(FuelingState.t()) :: binary
   def state(%FuelingState{} = state) do
@@ -77,11 +53,6 @@ defmodule AutoApi.FuelingCommand do
 
   @doc """
   Returns binary command
-      iex> AutoApi.FuelingCommand.to_bin(:get_gas_flap_state, [])
-      <<0x00>>
-
-      iex> AutoApi.FuelingCommand.to_bin(:control_gas_flap, [gas_flap_position: :close])
-      <<0x12, 0x01, 0x00>>
   """
   @spec to_bin(FuelingCapability.command_type(), list(any)) :: binary
   def to_bin(:get_gas_flap_state, _args) do

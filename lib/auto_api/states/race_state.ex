@@ -76,13 +76,6 @@ defmodule AutoApi.RaceState do
 
   @doc """
   Build state based on binary value
-
-    iex> AutoApi.RaceState.from_bin(<<0x02, 1::integer-16, 100>>)
-    %AutoApi.RaceState{understeering: 100}
-
-    iex> AutoApi.RaceState.from_bin(<<0x01, 5::integer-16, 0x03,  9.9::float-32>>)
-    %AutoApi.RaceState{accelerations: [%{g_force: 9.9, type: :rear_lateral_acceleration}]}
-
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -92,16 +85,6 @@ defmodule AutoApi.RaceState do
   @spec to_bin(__MODULE__.t()) :: binary
   @doc """
   Parse state to bin
-
-    iex> properties = [:selected_gear]
-    iex> AutoApi.RaceState.to_bin(%AutoApi.RaceState{selected_gear: 5, properties: properties})
-    <<0x0C, 0, 1, 5>>
-
-    iex> properties = AutoApi.RaceCapability.properties |> Enum.into(%{}) |> Map.values()
-    iex> AutoApi.RaceState.to_bin(%AutoApi.RaceState{properties: properties})
-    <<>>
-    iex> AutoApi.RaceState.to_bin(%AutoApi.RaceState{gas_pedal_position: 10, properties: properties})
-    <<4, 0, 1, 10>>
   """
   def to_bin(%__MODULE__{} = state) do
     parse_state_properties(state)

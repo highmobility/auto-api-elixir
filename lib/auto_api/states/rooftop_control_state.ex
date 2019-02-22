@@ -61,11 +61,6 @@ defmodule AutoApi.RooftopControlState do
 
   @doc """
   Build state based on binary value
-
-    iex> state_bin = <<0x01, 1::integer-16, 1>> <> <<0x02, 1::integer-16, 9>> <> <<0x03, 1::integer-16, 0x04>> <> <<0x04, 1::integer-16, 0x02>> <> <<0x05, 1::integer-16, 0x01>>
-    iex> AutoApi.RooftopControlState.from_bin(state_bin)
-    %AutoApi.RooftopControlState{dimming: 1, position: 9, convertible_roof_state: :open_secured, sunroof_tilt_state: :half_tilted, sunroof_state: :open}
-
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -76,9 +71,6 @@ defmodule AutoApi.RooftopControlState do
   @doc """
   Parse state to bin
 
-    iex> properties = [:dimming, :position, :convertible_roof_state, :sunroof_tilt_state]
-    iex> AutoApi.RooftopControlState.to_bin(%AutoApi.RooftopControlState{dimming: 2, position: 9, convertible_roof_state: :open_secured, sunroof_tilt_state: :half_tilted, properties: properties})
-    <<0x03, 1::integer-16, 0x04, 0x01, 1::integer-16, 2, 0x02, 1::integer-16, 9,  0x04, 1::integer-16, 0x02>>
   """
   def to_bin(%__MODULE__{} = state) do
     parse_state_properties(state)

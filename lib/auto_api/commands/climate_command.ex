@@ -27,13 +27,6 @@ defmodule AutoApi.ClimateCommand do
 
   @doc """
   Parses the binary command and makes changes or returns the state
-
-        iex> AutoApi.ClimateCommand.execute(%AutoApi.ClimateState{}, <<0x00>>)
-        {:state, %AutoApi.ClimateState{}}
-
-        iex> command = <<0x01>> <> <<0x01, 4::integer-16, -1::float-32>>
-        iex> AutoApi.ClimateCommand.execute(%AutoApi.ClimateState{}, command)
-        {:state_changed, %AutoApi.ClimateState{inside_temperature: -1.0}}
   """
   @spec execute(ClimateState.t(), binary) :: {:state | :state_changed, ClimateState.t()}
   def execute(%ClimateState{} = state, <<0x00>>) do
@@ -52,9 +45,6 @@ defmodule AutoApi.ClimateCommand do
 
   @doc """
   Converts ClimateCommand state to capability's state in binary
-
-        iex> AutoApi.ClimateCommand.state(%AutoApi.ClimateState{inside_temperature: -20.0, properties: [:inside_temperature]})
-        <<1, 1, 0, 4, -20.0::float-32>>
   """
   @spec state(ClimateState.t()) :: binary
   def state(%ClimateState{} = state) do
@@ -63,8 +53,6 @@ defmodule AutoApi.ClimateCommand do
 
   @doc """
   Returns binary command
-      iex> AutoApi.ClimateCommand.to_bin(:get_climate_state, [])
-      <<0x00>>
   """
   @spec to_bin(ClimateCapability.command_type(), list(any)) :: binary
   def to_bin(:get_climate_state = msg, _args) do

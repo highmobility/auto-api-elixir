@@ -27,15 +27,6 @@ defmodule AutoApi.WindowsCommand do
 
   @doc """
   Parses the binary command and makes changes or returns the state
-
-  ## Examples
-
-        iex> AutoApi.WindowsCommand.execute(%AutoApi.WindowsState{}, <<0x00>>)
-        {:state, %AutoApi.WindowsState{}}
-
-        iex> command = <<0x01>> <> <<0x02, 2::integer-16, 4, 0x2A>> <> <<0x03, 2::integer-16, 1, 1>>
-        iex> AutoApi.WindowsCommand.execute(%AutoApi.WindowsState{}, command)
-        {:state_changed, %AutoApi.WindowsState{windows_open_percentages: [%{window_location: :hatch, open_percentage: 42}], windows_positions: [%{window_location: :front_right, window_position: :opened}]}}
   """
   @spec execute(WindowsState.t(), binary) :: {:state | :state_changed, WindowsState.t()}
   def execute(%WindowsState{} = state, <<0x00>>) do
@@ -59,14 +50,6 @@ defmodule AutoApi.WindowsCommand do
 
   @doc """
   Converts a WindowsCommand state to capability's state in binary
-
-  ## Examples
-
-      iex> properties = [:windows_open_percentages]
-      iex> percentages = [%{window_location: :hatch, open_percentage: 42}]
-      iex> state = %AutoApi.WindowsState{windows_open_percentages: percentages, properties: properties}
-      iex> AutoApi.WindowsCommand.state(state)
-      <<0x01, 0x02, 2::integer-16, 4, 0x2A>>
   """
   @spec state(WindowsState.t()) :: binary
   def state(%WindowsState{} = state) do
@@ -75,11 +58,6 @@ defmodule AutoApi.WindowsCommand do
 
   @doc """
   Converts a command to binary format
-
-  ## Examples
-
-        iex> AutoApi.WindowsCommand.to_bin(:get_windows_state, [])
-        <<0x00>>
   """
   @spec to_bin(WindowsCapability.command_type(), list(any())) :: binary
   def to_bin(:get_windows_state, []) do

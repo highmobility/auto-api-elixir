@@ -27,14 +27,6 @@ defmodule AutoApi.HoodCommand do
 
   @doc """
   Parses the binary command and makes changes or returns the state
-
-        iex> AutoApi.HoodCommand.execute(%AutoApi.HoodState{}, <<0x00>>)
-        {:state, %AutoApi.HoodState{}}
-
-        iex> command = <<0x01>> <> <<0x01, 1::integer-16, 0>>
-        iex> AutoApi.HoodCommand.execute(%AutoApi.HoodState{}, command)
-        {:state_changed, %AutoApi.HoodState{position: :closed}}
-
   """
   @spec execute(HoodState.t(), binary) :: {:state | :state_changed, HoodState.t()}
   def execute(%HoodState{} = state, <<0x00>>) do
@@ -53,10 +45,6 @@ defmodule AutoApi.HoodCommand do
 
   @doc """
   Converts HoodCommand state to capability's state in binary
-
-        iex> properties = [:position]
-        iex> AutoApi.HoodCommand.state(%AutoApi.HoodState{position: :intermediate, properties: properties})
-        <<1, 1, 0, 1, 2>>
   """
   @spec state(HoodState.t()) :: binary
   def state(%HoodState{} = state) do
@@ -65,9 +53,6 @@ defmodule AutoApi.HoodCommand do
 
   @doc """
   Converts command to binary format
-
-      iex> AutoApi.HoodCommand.to_bin(:get_hood_state, [])
-      <<0x00>>
   """
   @spec to_bin(HoodCapability.command_type(), list(any())) :: binary
   def to_bin(:get_hood_state, []) do
