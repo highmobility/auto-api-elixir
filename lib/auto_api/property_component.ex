@@ -156,6 +156,7 @@ defmodule AutoApi.PropertyComponent do
       String.to_atom(enum_name)
     else
       Logger.warn("enum with value `#{binary_data}` doesn't exist in #{inspect spec}")
+      nil
     end
   end
 
