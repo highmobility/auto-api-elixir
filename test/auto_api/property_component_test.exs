@@ -179,10 +179,12 @@ defmodule AutoApi.PropertyComponentTest do
         bin_comp = PropertyComponent.map_to_bin(prop_comp, spec)
 
         bin_data = <<id::integer-16, text_size::integer-16, text::binary>>
-        bin_data_size = byte_size(bin_data)
+        bin_data_size_org = byte_size(bin_data)
 
         assert <<1, bin_data_size::integer-16, bin_data::binary-size(bin_data_size), _::binary>> =
                  bin_comp
+
+        assert bin_data_size_org == bin_data_size
 
         assert PropertyComponent.to_struct(bin_comp, spec) == prop_comp
       end

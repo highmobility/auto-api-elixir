@@ -25,8 +25,7 @@ defmodule AutoApi.DashboardLightsState do
   Dashboard Lights state
   """
   defstruct dashboard_light: [],
-            timestamp: nil,
-            properties: []
+            timestamp: nil
 
   use AutoApi.State, spec_file: "specs/dashboard_lights.json"
 
@@ -71,8 +70,7 @@ defmodule AutoApi.DashboardLightsState do
   @type dashboard_light :: %{light_name: light_name, state: state}
   @type t :: %__MODULE__{
           dashboard_light: list(dashboard_light),
-          timestamp: DateTime.t() | nil,
-          properties: list(atom)
+          timestamp: DateTime.t() | nil
         }
 
   @doc """

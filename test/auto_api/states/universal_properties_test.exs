@@ -18,7 +18,7 @@
 # licensing@high-mobility.com
 defmodule AutoApi.UniversalPropertiesTest do
   use ExUnit.Case
-  alias AutoApi.{DoorLocksState, DiagnosticsState}
+  alias AutoApi.DoorLocksState
 
   @tag :skip
   test "converts the state properties and the universal properties" do
