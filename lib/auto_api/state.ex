@@ -179,7 +179,7 @@ defmodule AutoApi.State do
               _size,
               value
             ) do
-          {:timestamp, false, AutoApi.State.parse_bin_property_to_date_helper(value)}
+          {:timestamp, false, DateTime.utc_now()}
         end
       end
 
