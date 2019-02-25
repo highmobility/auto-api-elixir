@@ -27,14 +27,6 @@ defmodule AutoApi.RooftopControlCommand do
 
   @doc """
   Parses the binary command and makes changes or returns the state
-
-        iex> AutoApi.RooftopControlCommand.execute(%AutoApi.RooftopControlState{}, <<0x00>>)
-        {:state, %AutoApi.RooftopControlState{}}
-
-        iex> command = <<0x01>> <> <<0x01, 1::integer-16, 100>>
-        iex> AutoApi.RooftopControlCommand.execute(%AutoApi.RooftopControlState{}, command)
-        {:state_changed, %AutoApi.RooftopControlState{dimming: 100}}
-
   """
   @spec execute(RooftopControlState.t(), binary) ::
           {:state | :state_changed, RooftopControlState.t()}
@@ -54,10 +46,6 @@ defmodule AutoApi.RooftopControlCommand do
 
   @doc """
   Converts RooftopControlCommand state to capability's state in binary
-
-        iex> properties = [:convertible_roof_state]
-        iex> AutoApi.RooftopControlCommand.state(%AutoApi.RooftopControlState{convertible_roof_state: :loading_position, properties: properties})
-        <<1, 3, 0, 1, 7>>
   """
   @spec state(RooftopControlState.t()) :: binary
   def state(%RooftopControlState{} = state) do
@@ -66,9 +54,6 @@ defmodule AutoApi.RooftopControlCommand do
 
   @doc """
   Converts command to binary format
-
-      iex> AutoApi.RooftopControlCommand.to_bin(:get_rooftop_state, [])
-      <<0x00>>
   """
   @spec to_bin(RooftopControlCapability.command_type(), list(any())) :: binary
   def to_bin(:get_rooftop_state, []) do

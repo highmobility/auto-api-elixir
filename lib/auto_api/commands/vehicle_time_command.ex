@@ -27,13 +27,6 @@ defmodule AutoApi.VehicleTimeCommand do
 
   @doc """
   Parses the binary command and makes changes or returns the state
-
-        iex> AutoApi.VehicleTimeCommand.execute(%AutoApi.VehicleTimeState{}, <<0x00>>)
-        {:state, %AutoApi.VehicleTimeState{}}
-
-        iex> command = <<0x01>> <> <<0x01, 8::integer-16, 99, 1, 31, 23, 59, 0, 4::integer-16>>
-        iex> AutoApi.VehicleTimeCommand.execute(%AutoApi.VehicleTimeState{}, command)
-        {:state_changed, %AutoApi.VehicleTimeState{vehicle_time: %{day: 31, hour: 23, minute: 59, month: 1, second: 0, utc_time_offset: 4, year: 99}}}
   """
   @spec execute(VehicleTimeState.t(), binary) :: {:state | :state_changed, VehicleTimeState.t()}
   def execute(%VehicleTimeState{} = state, <<0x00>>) do
@@ -52,10 +45,6 @@ defmodule AutoApi.VehicleTimeCommand do
 
   @doc """
   Converts DoorLocksCommand state to capability's state in binary
-
-        iex> vehicle_time = %{day: 31, hour: 23, minute: 59, month: 1, second: 0, utc_time_offset: 4, year: 91}
-        iex> AutoApi.VehicleTimeCommand.state(%AutoApi.VehicleTimeState{vehicle_time: vehicle_time, properties: [:vehicle_time]})
-        <<1, 1, 0, 8, 91, 1, 31, 23, 59, 0, 0, 4>>
   """
   @spec state(VehicleTimeState.t()) :: binary
   def state(%VehicleTimeState{} = state) do
@@ -64,8 +53,6 @@ defmodule AutoApi.VehicleTimeCommand do
 
   @doc """
   Returns binary command
-      iex> AutoApi.VehicleTimeCommand.to_bin(:get_vehicle_time, [])
-      <<0x00>>
   """
   @spec to_bin(VehicleTimeCapability.command_type(), list(any)) :: binary
   def to_bin(:get_vehicle_time = msg, _args) do

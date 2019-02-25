@@ -18,17 +18,37 @@
 # licensing@high-mobility.com
 defmodule AutoApi.ChargingStateTest do
   use ExUnit.Case
-  doctest AutoApi.ChargingState
+  alias AutoApi.{PropertyComponent, ChargingState}
 
-  describe "from_bin/1" do
-    test "with a list properties" do
-      state = AutoApi.ChargingState.from_bin(<<0x11, 3::integer-16, 0x01, 0x12, 0x01>>)
+  test "to_bin & from_bin" do
+    state = %ChargingState{
+      estimated_range: %PropertyComponent{data: 1000},
+      battery_level: %PropertyComponent{data: 10.001},
+      battery_current_ac: %PropertyComponent{data: 10.001},
+      battery_current_dc: %PropertyComponent{data: 10.002},
+      charger_voltage_ac: %PropertyComponent{data: 10.003},
+      charger_voltage_dc: %PropertyComponent{data: 10.004},
+      charge_limit: %PropertyComponent{data: 10.005},
+      time_to_complete_charge: %PropertyComponent{data: 10},
+      charging_rate_kw: %PropertyComponent{data: 10.006},
+      charge_port_state: %PropertyComponent{data: :closed},
+      charge_mode: %PropertyComponent{data: :timer_based},
+      max_charging_current: %PropertyComponent{data: 10.007},
+      plug_type: %PropertyComponent{data: :type_2},
+      charging_window_chosen: %PropertyComponent{data: :chosen},
+      departure_times: [%PropertyComponent{data: %{active_state: :inactive, hour: 1, minute: 2}}],
+      reduction_times: [%PropertyComponent{data: %{start_stop: :start, hour: 1, minute: 2}}],
+      battery_temperature: %PropertyComponent{data: 10.008},
+      timers: [%PropertyComponent{data: %{timer_type: :preferred_start_time, date: 9900}}],
+      plugged_in: %PropertyComponent{data: :disconnected},
+      charging_state: %PropertyComponent{data: :not_charging}
+    }
 
-      expected_state = %AutoApi.ChargingState{
-        departure_times: [%{active_state: :active, hour: 18, minute: 1}]
-      }
+    new_state =
+      state
+      |> ChargingState.to_bin()
+      |> ChargingState.from_bin()
 
-      assert state == expected_state
-    end
+    assert state == new_state
   end
 end

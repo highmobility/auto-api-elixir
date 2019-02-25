@@ -19,15 +19,22 @@
 defmodule AutoApi.VehicleStatusStateTest do
   use ExUnit.Case
   alias AutoApi.VehicleStatusState
-  doctest VehicleStatusState
 
-  describe "from_bin/1" do
-    test "converts multiple equipments to state" do
-      state_bin = <<17, byte_size("Wings")::integer-16>> <> "Wings"
-      state_bin = state_bin <> <<17, byte_size("Nitro")::integer-16>> <> "Nitro"
+  test "to_bin/1 & from_bin/1" do
+    state =
+      %VehicleStatusState{}
+      |> VehicleStatusState.put_property(:vin, "JYE8GP0078A086432")
+      |> VehicleStatusState.put_property(:powertrain, :all_electric)
+      |> VehicleStatusState.put_property(:gearbox, :semi_automatic)
+      |> VehicleStatusState.put_property(:model_name, "HM Concept")
+      |> VehicleStatusState.append_property(:equipments, "eq 1")
+      |> VehicleStatusState.append_property(:equipments, "eq 2")
 
-      assert state = VehicleStatusState.from_bin(state_bin)
-      assert state.equipments == ["Nitro", "Wings"]
-    end
+    new_state =
+      state
+      |> VehicleStatusState.to_bin()
+      |> VehicleStatusState.from_bin()
+
+    assert state == new_state
   end
 end

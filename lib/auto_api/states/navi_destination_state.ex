@@ -43,9 +43,6 @@ defmodule AutoApi.NaviDestinationState do
 
   @doc """
   Build state based on binary value
-
-    ix> AutoApi.NaviDestinationState.from_bin(<<0x01, 8::integer-16, 52.520008::float-32, 13.404954::float-32, 0x02, 5::integer-16>> <> "hello")
-    %AutoApi.NaviDestinationState{coordinates: %{latitude: 52.520008, longitude: 13.404954}, destination_name: "hello"}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -54,8 +51,6 @@ defmodule AutoApi.NaviDestinationState do
 
   @doc """
   Parse state to bin
-    ix> AutoApi.NaviDestinationState.to_bin(%AutoApi.NaviDestinationState{coordinates: %{latitude: 12.000001, longitude: 13.000002}, destination_name: "hello", properties: [:coordinates, :destination_name]})
-    <<0x01, 8::integer-16, 12.000001::float-32, 13.000002::float-32, 0x02, 5::integer-16, 104, 101, 108, 108, 111>>
   """
   @spec to_bin(__MODULE__.t()) :: binary
   def to_bin(%__MODULE__{} = state) do

@@ -39,9 +39,9 @@
             "properties": [
                 {
                     "mandatory": true,
-                    "description": "Charge limit percentage between 0-100",
-                    "size": 1,
-                    "type": "integer",
+                    "description": "Charge limit percentage between 0.0-1.0",
+                    "size": 8,
+                    "type": "double",
                     "id": 1,
                     "name": "charge_limit"
                 }
@@ -121,46 +121,10 @@
                             "size": 1
                         },
                         {
-                            "size": 1,
+                            "size": 8,
                             "type": "integer",
-                            "description": "Value between 0 and 99, which corresponds to 2000-2099",
-                            "name": "year"
-                        },
-                        {
-                            "size": 1,
-                            "type": "integer",
-                            "description": "Value between 1 and 12",
-                            "name": "month"
-                        },
-                        {
-                            "size": 1,
-                            "type": "integer",
-                            "description": "Value between 1 and 31",
-                            "name": "day"
-                        },
-                        {
-                            "size": 1,
-                            "type": "integer",
-                            "description": "Value between 0 and 23",
-                            "name": "hour"
-                        },
-                        {
-                            "size": 1,
-                            "type": "integer",
-                            "description": "Value between 0 and 59",
-                            "name": "minute"
-                        },
-                        {
-                            "size": 1,
-                            "type": "integer",
-                            "description": "Value between 0 and 59",
-                            "name": "second"
-                        },
-                        {
-                            "size": 2,
-                            "type": "integer",
-                            "description": "UTC time offset in minutes, which can be negative",
-                            "name": "utc_time_offset"
+                            "description": "Milliseconds since UNIX Epoch time",
+                            "name": "date"
                         }
                     ],
                     "multiple": true,
@@ -225,9 +189,9 @@
             "id": 2
         },
         {
-            "size": 1,
-            "type": "integer",
-            "description": "Battery level percentage between 0-100",
+            "size": 8,
+            "type": "double",
+            "description": "Battery level percentage between 0.0-1.0",
             "name": "battery_level",
             "id": 3
         },
@@ -268,9 +232,9 @@
             "description": "Charger voltage in 4-bytes per IEEE 754"
         },
         {
-            "size": 1,
-            "type": "integer",
-            "description": "Charge limit percentage between 0-100",
+            "size": 8,
+            "type": "double",
+            "description": "Charge limit percentage between 0.0-1.0",
             "name": "charge_limit",
             "id": 8
         },
@@ -476,46 +440,10 @@
                     "size": 1
                 },
                 {
-                    "size": 1,
+                    "size": 8,
                     "type": "integer",
-                    "description": "Value between 0 and 99, which corresponds to 2000-2099",
-                    "name": "year"
-                },
-                {
-                    "size": 1,
-                    "type": "integer",
-                    "description": "Value between 1 and 12",
-                    "name": "month"
-                },
-                {
-                    "size": 1,
-                    "type": "integer",
-                    "description": "Value between 1 and 31",
-                    "name": "day"
-                },
-                {
-                    "size": 1,
-                    "type": "integer",
-                    "description": "Value between 0 and 23",
-                    "name": "hour"
-                },
-                {
-                    "size": 1,
-                    "type": "integer",
-                    "description": "Value between 0 and 59",
-                    "name": "minute"
-                },
-                {
-                    "size": 1,
-                    "type": "integer",
-                    "description": "Value between 0 and 59",
-                    "name": "second"
-                },
-                {
-                    "size": 2,
-                    "type": "integer",
-                    "description": "UTC time offset in minutes, which can be negative",
-                    "name": "utc_time_offset"
+                    "description": "Milliseconds since UNIX Epoch time",
+                    "name": "date"
                 }
             ],
             "size": 9,
@@ -572,5 +500,5 @@
             "name": "charging_state"
         }
     ],
-    "api_update": 8
+    "api_update": 10
 }

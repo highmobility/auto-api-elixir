@@ -67,16 +67,6 @@ defmodule AutoApi.LightsState do
 
   @doc """
   Build state based on binary value
-
-    iex> AutoApi.LightsState.from_bin(<<0x01, 1::integer-16, 0x00>>)
-    %AutoApi.LightsState{front_exterior_light: :inactive}
-
-    iex> AutoApi.LightsState.from_bin(<<0x01, 1::integer-16, 0x02>>)
-    %AutoApi.LightsState{front_exterior_light: :active_with_full_beam}
-
-    iex> AutoApi.LightsState.from_bin(<<0x04, 3::integer-16, 0xFF, 0xFF, 0xFF>>)
-    %AutoApi.LightsState{ambient_light: %{rgb_green: 0xFF, rgb_red: 0xFF, rgb_blue: 0xFF}}
-
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -85,11 +75,6 @@ defmodule AutoApi.LightsState do
 
   @doc """
   Parse state to bin
-    iex> AutoApi.LightsState.to_bin(%AutoApi.LightsState{front_exterior_light: :active, properties: [:front_exterior_light]})
-    <<1, 1::integer-16, 1>>
-
-    iex> AutoApi.LightsState.to_bin(%AutoApi.LightsState{ambient_light: %{rgb_red: 5, rgb_green: 10, rgb_blue: 99}, properties: [:ambient_light]})
-    <<4, 3::integer-16, 5, 10, 99>>
   """
   @spec to_bin(__MODULE__.t()) :: binary
   def to_bin(%__MODULE__{} = state) do

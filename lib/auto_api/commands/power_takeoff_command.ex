@@ -27,14 +27,6 @@ defmodule AutoApi.PowerTakeoffCommand do
 
   @doc """
   Parses the binary command and makes changes or returns the state
-
-        iex> AutoApi.PowerTakeoffCommand.execute(%AutoApi.PowerTakeoffState{}, <<0x00>>)
-        {:state, %AutoApi.PowerTakeoffState{}}
-
-        iex> command = <<0x01>> <> <<0x01, 1::integer-16, 0x01>>
-        iex> AutoApi.PowerTakeoffCommand.execute(%AutoApi.PowerTakeoffState{}, command)
-        {:state_changed, %AutoApi.PowerTakeoffState{power_takeoff: :active}}
-
   """
   @spec execute(PowerTakeoffState.t(), binary) :: {:state | :state_changed, PowerTakeoffState.t()}
   def execute(%PowerTakeoffState{} = state, <<0x00>>) do
@@ -53,9 +45,6 @@ defmodule AutoApi.PowerTakeoffCommand do
 
   @doc """
   Converts PowerTakeoffCommand state to capability's state in binary
-
-        iex> AutoApi.PowerTakeoffCommand.state(%AutoApi.PowerTakeoffState{power_takeoff: :active, properties: [:power_takeoff]})
-        <<1, 1, 0, 1, 1>>
   """
   @spec state(PowerTakeoffState.t()) :: binary
   def state(%PowerTakeoffState{} = state) do
@@ -64,8 +53,6 @@ defmodule AutoApi.PowerTakeoffCommand do
 
   @doc """
   Returns binary command
-      iex> AutoApi.PowerTakeoffCommand.to_bin(:get_power_takeoff_state, [])
-      <<0x00>>
   """
   @spec to_bin(PowerTakeoffCapability.command_type(), list(any)) :: binary
   def to_bin(:get_power_takeoff_state = msg, _args) do

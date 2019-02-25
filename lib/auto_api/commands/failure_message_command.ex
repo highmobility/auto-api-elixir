@@ -27,14 +27,6 @@ defmodule AutoApi.FailureMessageCommand do
 
   @doc """
   Parses the binary command and makes changes or returns the state
-
-        iex> cmd = <<0x01, 2::integer-16, 0x00, 0x21>>
-        iex> cmd = cmd <> <<0x02, 1::integer-16, 0x00>>
-        iex> cmd = cmd <> <<0x03, 1::integer-16, 0x03>>
-        iex> cmd = cmd <> <<0x04, 3::integer-16>> <> "boo"
-        iex> AutoApi.FailureMessageCommand.execute(%AutoApi.FailureMessageState{}, <<0x01>> <> cmd)
-        {:state_changed, %AutoApi.FailureMessageState{failure_reason: :execution_timeout, failure_description: "boo", failed_message_identifier: 33 ,failed_message_type: 0}}
-
   """
   def execute(%FailureMessageState{} = state, <<0x01, ds::binary>>) do
     new_state = FailureMessageState.from_bin(ds)
@@ -48,10 +40,6 @@ defmodule AutoApi.FailureMessageCommand do
 
   @doc """
   Converts AutoApi.FailureMessageCommand state to capability's state in binary
-
-        iex> properties = [:failure_reason]
-        iex> AutoApi.FailureMessageCommand.state(%AutoApi.FailureMessageState{failure_reason: :incorrect_state, properties: properties})
-        <<1, 3, 0, 1, 2>>
   """
   @spec state(FailureMessageState.t()) :: binary
   def state(%FailureMessageState{} = state) do
@@ -60,10 +48,6 @@ defmodule AutoApi.FailureMessageCommand do
 
   @doc """
   Converts command to binary format
-
-      iex> opts = [failed_message_identifier: 2, failed_message_type: 1, failure_reason: :unauthorized]
-      iex> AutoApi.FailureMessageCommand.to_bin(:failure, opts)
-      <<0x01>> <> <<1, 0, 2, 0, 2, 2, 0, 1, 1, 3, 0, 1, 1>>
   """
   @spec to_bin(FailureMessageCapability.command_type(), list(any())) :: binary
   def to_bin(:failure, opts) do

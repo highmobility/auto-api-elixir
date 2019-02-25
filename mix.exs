@@ -28,6 +28,7 @@ defmodule AutoApi.Mixfile do
 
   defp deps do
     [
+      {:propcheck, "~> 1.1", only: :test},
       {:poison, "~> 3.1", runtime: false},
       {:ex_guard, "~> 1.3", only: :dev},
       {:ex_unit_notifier, "~> 0.1", only: :test},

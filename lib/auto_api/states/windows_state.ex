@@ -55,14 +55,6 @@ defmodule AutoApi.WindowsState do
 
   @doc """
   Build state based on binary value
-
-  ## Examples
-
-        iex> AutoApi.WindowsState.from_bin(<<0x02, 2::integer-16, 4, 0x2A>>)
-        %AutoApi.WindowsState{windows_open_percentages: [%{window_location: :hatch, open_percentage: 42}]}
-
-        iex> AutoApi.WindowsState.from_bin(<<0x03, 2::integer-16, 1, 1>>)
-        %AutoApi.WindowsState{windows_positions: [%{window_location: :front_right, window_position: :opened}]}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -71,14 +63,6 @@ defmodule AutoApi.WindowsState do
 
   @doc """
   Parse state to bin
-
-  ## Examples
-
-      iex> properties = [:windows_open_percentages]
-      iex> percentages = [%{window_location: :hatch, open_percentage: 42}]
-      iex> state = %AutoApi.WindowsState{windows_open_percentages: percentages, properties: properties}
-      iex> AutoApi.WindowsState.to_bin(state)
-      <<0x02, 2::integer-16, 4, 0x2A>>
   """
   @spec to_bin(__MODULE__.t()) :: binary
   def to_bin(%__MODULE__{} = state) do

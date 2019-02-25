@@ -23,7 +23,7 @@ defmodule AutoApi.DiagnosticsState do
   engine_oil_temperature: Engine oil temperature in Celsius, whereas can be negative
   """
 
-  alias AutoApi.CommonData
+  alias AutoApi.{CommonData, PropertyComponent}
 
   @type fluid_level :: :low | :filled
   @type position :: :front_left | :front_right | :rear_right | :rear_left
@@ -57,80 +57,87 @@ defmodule AutoApi.DiagnosticsState do
             tire_pressures: [],
             wheel_rpms: [],
             trouble_codes: [],
-            timestamp: nil,
-            property_timestamps: %{},
-            properties: [],
-            properties_failures: %{}
+            mileage_meters: nil,
+            timestamp: nil
 
   use AutoApi.State, spec_file: "specs/diagnostics.json"
 
-  @type check_control_message :: %{
-          id: integer,
-          remaining_minutes: integer,
-          text_size: integer,
-          text: String.t(),
-          status: String.t()
+  @type check_control_message :: %PropertyComponent{
+          data: %{
+            id: integer,
+            remaining_minutes: integer,
+            text_size: integer,
+            text: String.t(),
+            status: String.t()
+          }
         }
 
-  @type tire_temperature :: %{
-          location: CommonData.location(),
-          temperature: float
+  @type tire_temperature :: %PropertyComponent{
+          data: %{
+            location: CommonData.location(),
+            temperature: float
+          }
         }
 
-  @type tire_pressure :: %{
-          location: CommonData.location(),
-          pressure: float
+  @type tire_pressure :: %PropertyComponent{
+          data: %{
+            location: CommonData.location(),
+            pressure: float
+          }
         }
 
-  @type wheel_rpm :: %{
-          location: CommonData.location(),
-          rpm: integer
+  @type wheel_rpm :: %PropertyComponent{
+          data: %{
+            location: CommonData.location(),
+            rpm: integer
+          }
+        }
+
+  @type trouble_code :: %PropertyComponent{
+          data: %{
+            occurences: integer,
+            id_size: integer,
+            id: String.t(),
+            ecu_id_size: integer,
+            ecu_id: String.t(),
+            status_size: integer,
+            status: String.t()
+          }
         }
 
   @type t :: %__MODULE__{
-          mileage: integer | nil,
-          engine_oil_temperature: integer | nil,
-          speed: integer | nil,
-          engine_rpm: integer | nil,
-          fuel_level: integer | nil,
-          estimated_range: integer | nil,
-          washer_fluid_level: fluid_level | nil,
-          battery_voltage: float | nil,
-          adblue_level: float | nil,
-          distance_since_reset: integer | nil,
-          distance_since_start: integer | nil,
-          fuel_volume: float | nil,
-          anti_lock_braking: :inactive | :active | nil,
-          engine_coolant_temperature: integer | nil,
-          engine_total_operating_hours: float | nil,
-          engine_total_fuel_consumption: float | nil,
-          brake_fluid_level: :low | :filled | nil,
-          engine_torque: integer | nil,
-          engine_load: integer | nil,
-          wheel_based_speed: integer | nil,
-          battery_level: integer | nil,
+          mileage: PropertyComponent.t() | nil,
+          engine_oil_temperature: PropertyComponent.t() | nil,
+          speed: PropertyComponent.t() | nil,
+          engine_rpm: PropertyComponent.t() | nil,
+          fuel_level: PropertyComponent.t() | nil,
+          estimated_range: PropertyComponent.t() | nil,
+          washer_fluid_level: PropertyComponent.t() | nil,
+          battery_voltage: PropertyComponent.t() | nil,
+          adblue_level: PropertyComponent.t() | nil,
+          distance_since_reset: PropertyComponent.t() | nil,
+          distance_since_start: PropertyComponent.t() | nil,
+          fuel_volume: PropertyComponent.t() | nil,
+          anti_lock_braking: PropertyComponent.t() | nil,
+          engine_coolant_temperature: PropertyComponent.t() | nil,
+          engine_total_operating_hours: PropertyComponent.t() | nil,
+          engine_total_fuel_consumption: PropertyComponent.t() | nil,
+          brake_fluid_level: PropertyComponent.t() | nil,
+          engine_torque: PropertyComponent.t() | nil,
+          engine_load: PropertyComponent.t() | nil,
+          wheel_based_speed: PropertyComponent.t() | nil,
+          battery_level: PropertyComponent.t() | nil,
           check_control_messages: list(check_control_message),
           tire_pressures: list(tire_pressure),
           tire_temperatures: list(tire_temperature),
           wheel_rpms: list(wheel_rpm),
-          trouble_codes: list,
-          timestamp: DateTime.t() | nil,
-          properties: list(atom),
-          properties_failures: map()
+          trouble_codes: list(trouble_code),
+          mileage_meters: PropertyComponent.t() | nil,
+          timestamp: DateTime.t() | nil
         }
 
   @doc """
   Build state based on binary value
-
-    iex> AutoApi.DiagnosticsState.from_bin(<<0x01, 3::integer-16, 100::integer-24>>)
-    %AutoApi.DiagnosticsState{mileage: 100}
-    iex> AutoApi.DiagnosticsState.from_bin(<<0x01, 3::integer-16, 100::integer-24, 0x09, 1::integer-16, 0x01>>)
-    %AutoApi.DiagnosticsState{mileage: 100, washer_fluid_level: :filled}
-
-    iex> state_bin = <<25, 0, 12, 0, 3, 0, 0, 0, 2, 0, 1, 116, 0, 1, 115>>
-    iex> AutoApi.DiagnosticsState.from_bin(state_bin)
-    %AutoApi.DiagnosticsState{check_control_messages: [%{id: 3, remaining_minutes: 2, status: "s", status_size: 1, text: "t", text_size: 1}]}
-
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -140,21 +147,6 @@ defmodule AutoApi.DiagnosticsState do
   @spec to_bin(__MODULE__.t()) :: binary
   @doc """
   Parse state to bin
-
-
-    iex> properties = [:check_control_messages]
-    iex> check_control_messages = [%{id: 1, remaining_minutes: 4, text: "text", status: "status"}]
-    iex> AutoApi.DiagnosticsState.to_bin(%AutoApi.DiagnosticsState{check_control_messages: check_control_messages, properties: properties})
-    <<25, 0, 20, 0, 1, 0, 0, 0, 4, 0, 4, 116, 101, 120, 116, 0, 6, 115, 116, 97, 116, 117, 115>>
-
-    iex> properties = [:fuel_level, :mileage, :washer_fluid_level]
-    iex> AutoApi.DiagnosticsState.to_bin(%AutoApi.DiagnosticsState{engine_oil_temperature: 20,engine_rpm: 70, fuel_level: 99, mileage: 2000, speed: 100, washer_fluid_level: :low, properties: properties})
-    <<0x05, 1::integer-16, 99>> <> <<0x01, 3::integer-16, 2000::integer-24>> <> <<0x09, 1::integer-16, 0x00>>
-
-    iex> properties = AutoApi.DiagnosticsCapability.properties |> Enum.into(%{}) |> Map.values()
-    iex> AutoApi.DiagnosticsState.to_bin(%AutoApi.DiagnosticsState{engine_oil_temperature: 20,engine_rpm: 70, fuel_level: 99, mileage: 2000, speed: 100, washer_fluid_level: :low, properties: properties})
-    <<2, 0, 2, 0, 20, 4, 0, 2, 0, 70, 5, 0, 1, 99, 1, 0, 3, 0, 7, 208, 3, 0, 2, 0, 100, 9, 0, 1, 0>>
-
   """
   def to_bin(%__MODULE__{} = state) do
     parse_state_properties(state)

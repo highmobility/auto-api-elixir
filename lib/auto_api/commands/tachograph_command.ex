@@ -27,14 +27,6 @@ defmodule AutoApi.TachographCommand do
 
   @doc """
   Parses the binary command and makes changes or returns the state
-
-        iex> AutoApi.TachographCommand.execute(%AutoApi.TachographState{}, <<0x00>>)
-        {:state, %AutoApi.TachographState{}}
-
-        iex> command = <<0x01>> <> <<0x07, 2::integer-16, 53::integer-16, 0x05, 1::integer-16, 0x01>>
-        iex> AutoApi.TachographCommand.execute(%AutoApi.TachographState{}, command)
-        {:state_changed, %AutoApi.TachographState{vehicle_speed: 53, vehicle_overspeed: :overspeed}}
-
   """
   @spec execute(TachographState.t(), binary) :: {:state | :state_changed, TachographState.t()}
   def execute(%TachographState{} = state, <<0x00>>) do
@@ -53,14 +45,6 @@ defmodule AutoApi.TachographCommand do
 
   @doc """
   Converts TachographCommand state to capability's state in binary
-
-        iex> properties = [:vehicle_speed, :vehicle_direction, :vehicle_overspeed, :vehicle_motion]
-        iex> AutoApi.TachographCommand.state(%AutoApi.TachographState{vehicle_speed: 1, vehicle_direction: :reverse, properties: properties})
-        <<1, 6, 0, 1, 1, 7, 0, 2, 0, 1>>
-
-        iex> properties = AutoApi.TachographCapability.properties |> Enum.into(%{}) |> Map.values()
-        iex> AutoApi.TachographCommand.state(%AutoApi.TachographState{vehicle_overspeed: :overspeed, properties: properties})
-        <<1, 5, 0, 1, 1>>
   """
   @spec state(TachographState.t()) :: binary
   def state(%TachographState{} = state) do
@@ -69,9 +53,6 @@ defmodule AutoApi.TachographCommand do
 
   @doc """
   Converts command to binary format
-
-      iex> AutoApi.TachographCommand.to_bin(:get_tachograph_state, [])
-      <<0x00>>
   """
   @spec to_bin(TachographCapability.command_type(), list(any())) :: binary
   def to_bin(:get_tachograph_state, []) do

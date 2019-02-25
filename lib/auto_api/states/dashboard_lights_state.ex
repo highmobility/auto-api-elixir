@@ -25,8 +25,7 @@ defmodule AutoApi.DashboardLightsState do
   Dashboard Lights state
   """
   defstruct dashboard_light: [],
-            timestamp: nil,
-            properties: []
+            timestamp: nil
 
   use AutoApi.State, spec_file: "specs/dashboard_lights.json"
 
@@ -71,20 +70,11 @@ defmodule AutoApi.DashboardLightsState do
   @type dashboard_light :: %{light_name: light_name, state: state}
   @type t :: %__MODULE__{
           dashboard_light: list(dashboard_light),
-          timestamp: DateTime.t() | nil,
-          properties: list(atom)
+          timestamp: DateTime.t() | nil
         }
 
   @doc """
   Build state based on binary value
-
-    iex> AutoApi.DashboardLightsState.from_bin(<<0x01, 2::integer-16, 0x00, 0x00>>)
-    %AutoApi.DashboardLightsState{dashboard_light: [%{light_name: :high_beam, state: :inactive}]}
-
-
-    iex> AutoApi.DashboardLightsState.from_bin(<<0x01, 2::integer-16, 0x0A, 0x03, 0x01, 2::integer-16, 0x1F, 0x02>>)
-    %AutoApi.DashboardLightsState{dashboard_light: [%{light_name: :trailer_connected, state: :yellow}, %{light_name: :front_fog_light, state: :red}]}
-
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -94,10 +84,6 @@ defmodule AutoApi.DashboardLightsState do
   @spec to_bin(__MODULE__.t()) :: binary
   @doc """
   Parse state to bin
-
-    iex> properties = [:dashboard_light]
-    iex> AutoApi.DashboardLightsState.to_bin(%AutoApi.DashboardLightsState{dashboard_light: [%{light_name: :fuel_level, state: :info}, %{light_name: :lane_departure_warning_off, state: :inactive}], properties: properties})
-    <<0x01, 2::integer-16, 0x05, 0x01, 0x01, 2::integer-16, 0x22, 0x00>>
   """
   def to_bin(%__MODULE__{} = state) do
     parse_state_properties(state)
