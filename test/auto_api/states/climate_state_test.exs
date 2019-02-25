@@ -18,5 +18,5 @@
 # licensing@high-mobility.com
 defmodule AutoApi.ClimateStateTest do
   use ExUnit.Case
-  doctest AutoApi.ClimateState
+  # doctest AutoApi.ClimateState
 end

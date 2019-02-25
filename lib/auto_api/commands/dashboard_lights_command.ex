@@ -27,14 +27,6 @@ defmodule AutoApi.DashboardLightsCommand do
 
   @doc """
   Parses the binary command and makes changes or returns the state
-
-        iex> AutoApi.DashboardLightsCommand.execute(%AutoApi.DashboardLightsState{}, <<0x00>>)
-        {:state, %AutoApi.DashboardLightsState{}}
-
-        iex> command = <<0x01>> <> <<0x01, 2::integer-16, 0x02, 0x03>>
-        iex> AutoApi.DashboardLightsCommand.execute(%AutoApi.DashboardLightsState{}, command)
-        {:state_changed, %AutoApi.DashboardLightsState{dashboard_light: [%{light_name: :hazard_warning, state: :red}]}}
-
   """
   @spec execute(DashboardLightsState.t(), binary) ::
           {:state | :state_changed, DashboardLightsState.t()}
@@ -55,9 +47,6 @@ defmodule AutoApi.DashboardLightsCommand do
   @doc """
   Converts DashboardLightsCommand state to capability's state in binary
 
-        iex> properties = AutoApi.DashboardLightsCapability.properties |> Enum.into(%{}) |> Map.values()
-        iex> AutoApi.DashboardLightsCommand.state(%AutoApi.DashboardLightsState{dashboard_light: [%{light_name: :engine_oil, state: :info}], properties: properties})
-        <<0x01, 0x01, 2::integer-16, 0x08, 0x01>>
   """
   @spec state(DashboardLightsState.t()) :: binary
   def state(%DashboardLightsState{} = state) do
@@ -66,9 +55,6 @@ defmodule AutoApi.DashboardLightsCommand do
 
   @doc """
   Converts command to binary format
-
-        iex> AutoApi.DashboardLightsCommand.to_bin(:get_dashboard_lights, [])
-        <<0x00>>
   """
   @spec to_bin(DashboardLightsCapability.command_type(), list(any())) :: binary
   def to_bin(:get_dashboard_lights, []) do

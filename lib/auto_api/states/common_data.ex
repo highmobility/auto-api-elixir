@@ -32,6 +32,7 @@ defmodule AutoApi.CommonData do
   def convert_bin_to_integer(<<i_value::integer-16>>), do: i_value
   def convert_bin_to_integer(<<i_value::integer-24>>), do: i_value
   def convert_bin_to_integer(<<i_value::integer-32>>), do: i_value
+  def convert_bin_to_integer(<<i_value::integer-64>>), do: i_value
 
   def convert_bin_to_integer(o) do
     throw({:can_not_parse_integer, o})

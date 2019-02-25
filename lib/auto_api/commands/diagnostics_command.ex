@@ -27,14 +27,6 @@ defmodule AutoApi.DiagnosticsCommand do
 
   @doc """
   Parses the binary command and makes changes or returns the state
-
-        iex> AutoApi.DiagnosticsCommand.execute(%AutoApi.DiagnosticsState{}, <<0x00>>)
-        {:state, %AutoApi.DiagnosticsState{}}
-
-        iex> command = <<0x01>> <> <<0x01, 3::integer-16, 100::integer-24>> <> <<0x03, 2::integer-16, 50::integer-16>>
-        iex> AutoApi.DiagnosticsCommand.execute(%AutoApi.DiagnosticsState{}, command)
-        {:state_changed, %AutoApi.DiagnosticsState{mileage: 100, speed: 50}}
-
   """
   @spec execute(DiagnosticsState.t(), binary) :: {:state | :state_changed, DiagnosticsState.t()}
   def execute(%DiagnosticsState{} = state, <<0x00>>) do
@@ -53,11 +45,6 @@ defmodule AutoApi.DiagnosticsCommand do
 
   @doc """
   Converts DiagnosticsCommand state to capability's state in binary
-
-        iex> properties = [:fuel_level, :mileage, :washer_fluid_level]
-        iex> AutoApi.DiagnosticsCommand.state(%AutoApi.DiagnosticsState{engine_oil_temperature: 20,engine_rpm: 70, fuel_level: 99, mileage: 2000, speed: 100, washer_fluid_level: :low, properties: properties})
-        <<1, 5, 0, 1, 99, 1, 0, 3, 0, 7, 208, 9, 0, 1, 0>>
-
   """
   @spec state(DiagnosticsState.t()) :: binary
   def state(%DiagnosticsState{} = state) do
@@ -66,9 +53,6 @@ defmodule AutoApi.DiagnosticsCommand do
 
   @doc """
   Converts command to binary format
-
-      iex> AutoApi.DiagnosticsCommand.to_bin(:get_diagnostics_state, [])
-      <<0x00>>
   """
   @spec to_bin(DiagnosticsCapability.command_type(), list(any())) :: binary
   def to_bin(:get_diagnostics_state, []) do

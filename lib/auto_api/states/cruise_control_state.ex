@@ -28,8 +28,7 @@ defmodule AutoApi.CruiseControlState do
             target_speed: nil,
             acc: nil,
             acc_target_speed: nil,
-            timestamp: nil,
-            properties: []
+            timestamp: nil
 
   use AutoApi.State, spec_file: "specs/cruise_control.json"
 
@@ -44,19 +43,11 @@ defmodule AutoApi.CruiseControlState do
           target_speed: integer | nil,
           acc: acc | nil,
           acc_target_speed: integer | nil,
-          timestamp: DateTime.t() | nil,
-          properties: list(atom)
+          timestamp: DateTime.t() | nil
         }
 
   @doc """
   Build state based on binary value
-
-    iex> AutoApi.CruiseControlState.from_bin(<<0x01, 1::integer-16, 0x00>>)
-    %AutoApi.CruiseControlState{cruise_control: :inactive}
-
-    iex> AutoApi.CruiseControlState.from_bin(<<0x01, 1::integer-16, 0x01, 0x02, 1::integer-16, 0x02, 0x03, 2::integer-16, 108::integer-16, 0x04, 1::integer-16, 0x01, 0x05, 2::integer-16, 194::integer-16>>)
-    %AutoApi.CruiseControlState{cruise_control: :active, limiter: :lower_speed_requested, target_speed: 108, acc: :active, acc_target_speed: 194}
-
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -65,11 +56,6 @@ defmodule AutoApi.CruiseControlState do
 
   @doc """
   Parse state to bin
-    iex> AutoApi.CruiseControlState.to_bin(%AutoApi.CruiseControlState{properties: [:cruise_control]})
-    <<>>
-
-    iex> AutoApi.CruiseControlState.to_bin(%AutoApi.CruiseControlState{limiter: :speed_fixed, properties: [:limiter, :acc_target_speed]})
-    <<0x2, 1::integer-16, 3>>
   """
   @spec to_bin(__MODULE__.t()) :: binary
   def to_bin(%__MODULE__{} = state) do

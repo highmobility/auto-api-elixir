@@ -27,14 +27,6 @@ defmodule AutoApi.RaceCommand do
 
   @doc """
   Parses the binary command and makes changes or returns the state
-
-        iex> AutoApi.RaceCommand.execute(%AutoApi.RaceState{}, <<0x00>>)
-        {:state, %AutoApi.RaceState{}}
-
-        iex> command = <<0x01>> <> <<0x01, 5::integer-16, 0x03, 9.9::float-32>>
-        iex> AutoApi.RaceCommand.execute(%AutoApi.RaceState{}, command)
-        {:state_changed, %AutoApi.RaceState{accelerations: [%{g_force: 9.9, type: :rear_lateral_acceleration}]}}
-
   """
   @spec execute(RaceState.t(), binary) :: {:state | :state_changed, RaceState.t()}
   def execute(%RaceState{} = state, <<0x00>>) do
@@ -53,14 +45,6 @@ defmodule AutoApi.RaceCommand do
 
   @doc """
   Converts RaceCommand state to capability's state in binary
-
-        iex> properties = [:brake_pressure, :accelerator_pedal_kickdown_switch]
-        iex> AutoApi.RaceCommand.state(%AutoApi.RaceState{accelerator_pedal_kickdown_switch: :active, brake_pressure: 80.083, properties: properties})
-        <<1, 0x11, 0, 1, 1, 6, 0, 4, 66, 160, 42, 127>>
-
-        iex> properties = AutoApi.RaceCapability.properties |> Enum.into(%{}) |> Map.values()
-        iex> AutoApi.RaceCommand.state(%AutoApi.RaceState{accelerations: [%{g_force: 90.19, type: :lateral_acceleration}], properties: properties})
-        <<1, 1, 0, 5, 1, 66, 180, 97, 72>>
   """
   @spec state(RaceState.t()) :: binary
   def state(%RaceState{} = state) do
@@ -69,9 +53,6 @@ defmodule AutoApi.RaceCommand do
 
   @doc """
   Converts command to binary format
-
-      iex> AutoApi.RaceCommand.to_bin(:get_race_state, [])
-      <<0x00>>
   """
   @spec to_bin(RaceCapability.command_type(), list(any())) :: binary
   def to_bin(:get_race_state, []) do

@@ -22,8 +22,13 @@ defmodule AutoApi.DoorLocksCommand do
   """
   @behaviour AutoApi.Command
 
-  alias AutoApi.DoorLocksState
-  alias AutoApi.DoorLocksCapability
+  alias AutoApi.{DoorLocksCapability, DoorLocksState, PropertyComponent}
+
+  @lock_unlock_doors_spec %{
+    "type" => "enum",
+    "size" => 1,
+    "values" => [%{"id" => 0, "name" => "unlock"}, %{"id" => 1, "name" => "lock"}]
+  }
 
   @doc """
   Parses the binary command and makes changes or returns the state
@@ -51,10 +56,17 @@ defmodule AutoApi.DoorLocksCommand do
     end
   end
 
-  def execute(%DoorLocksState{} = state, <<0x12, 0x01, _size::binary-size(2), lock_command>>) do
-    lock_state = if lock_command == 0x00, do: :unlocked, else: :locked
+  def execute(
+        %DoorLocksState{} = state,
+        <<0x12, 0x01, prop_comp_size::integer-16, lock_comp_prop::binary-size(prop_comp_size)>>
+      ) do
+    lock_command = PropertyComponent.to_struct(lock_comp_prop, @lock_unlock_doors_spec)
+    lock_state = if lock_command.data == :unlock, do: :unlocked, else: :locked
 
-    locks = Enum.map(state.locks, fn door -> %{door | lock_state: lock_state} end)
+    locks =
+      Enum.map(state.locks, fn prop_comp ->
+        put_in(prop_comp.data.lock_state, lock_state)
+      end)
 
     new_state = %{state | locks: locks}
 
@@ -94,7 +106,10 @@ defmodule AutoApi.DoorLocksCommand do
 
   def to_bin(:lock_unlock_doors, lock_state: lock_state) when lock_state in [:lock, :unlock] do
     lock_state_bin = if lock_state == :unlock, do: 0x00, else: 0x01
+    prop_comp = <<1, 0, 1, lock_state_bin>>
+
     cmd_id = DoorLocksCapability.command_id(:lock_unlock_doors)
-    <<cmd_id>> <> <<0x01, 1::integer-16, lock_state_bin>>
+
+    <<cmd_id>> <> <<0x01, 4::integer-16, prop_comp::binary>>
   end
 end

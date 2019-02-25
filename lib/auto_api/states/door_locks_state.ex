@@ -22,40 +22,41 @@ defmodule AutoApi.DoorLocksState do
   Door lock possible values: :unlocked, :locked
   """
 
-  alias AutoApi.CommonData
+  alias AutoApi.{CommonData, PropertyComponent}
 
   defstruct inside_locks: [],
             locks: [],
             positions: [],
-            timestamp: nil,
-            properties: [],
-            property_timestamps: %{},
-            properties_failures: %{}
+            timestamp: nil
 
   use AutoApi.State, spec_file: "specs/door_locks.json"
 
-  @type lock :: %{
-          door_location: CommonData.location(),
-          lock_state: CommonData.lock()
+  @type lock :: %PropertyComponent{
+          data: %{
+            door_location: CommonData.location(),
+            lock_state: CommonData.lock()
+          }
         }
 
-  @type inside_lock :: %{
-          door_location: CommonData.location(),
-          lock_state: CommonData.lock()
+  @type inside_lock :: %PropertyComponent{
+          data: %{
+            door_location: CommonData.location(),
+            lock_state: CommonData.lock()
+          }
         }
 
-  @type position :: %{
-          door_location: CommonData.location(),
-          position: CommonData.position()
+  @type position :: %PropertyComponent{
+          data: %{
+            door_location: CommonData.location(),
+            position: CommonData.position()
+          }
         }
 
   @type t :: %__MODULE__{
           locks: list(lock),
           inside_locks: list(inside_lock),
           positions: list(position),
-          timestamp: DateTime.t() | nil,
-          properties: list(atom),
-          properties_failures: map()
+          timestamp: DateTime.t() | nil
         }
 
   @doc """

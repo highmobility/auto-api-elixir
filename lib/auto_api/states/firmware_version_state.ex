@@ -49,13 +49,6 @@ defmodule AutoApi.FirmwareVersionState do
 
   @doc """
   Build state based on binary value
-
-    iex> AutoApi.FirmwareVersionState.from_bin(<<1, 0, 3, 12, 19, 1>>)
-    %AutoApi.FirmwareVersionState{car_sdk_version: %{version_major: 12, version_minor: 19, version_patch: 1}}
-
-    iex> AutoApi.FirmwareVersionState.from_bin(<<0x02, 20::integer-16>> <> "bmg-20180611.13-5623")
-    %AutoApi.FirmwareVersionState{car_sdk_build_name: "bmg-20180611.13-5623"}
-
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -65,20 +58,6 @@ defmodule AutoApi.FirmwareVersionState do
   @spec to_bin(__MODULE__.t()) :: binary
   @doc """
   Parse state to bin
-
-    iex> properties = [:car_sdk_version]
-    iex> AutoApi.FirmwareVersionState.to_bin(%AutoApi.FirmwareVersionState{properties: properties})
-    <<>>
-
-    iex> properties = [:car_sdk_version]
-    iex> AutoApi.FirmwareVersionState.to_bin(%AutoApi.FirmwareVersionState{car_sdk_version: %{version_major: 12, version_minor: 19, version_patch: 0}, properties: properties})
-    <<1, 0, 3, 12, 19, 0>>
-
-    iex> AutoApi.FirmwareVersionState.to_bin(%AutoApi.FirmwareVersionState{car_sdk_build_name: "hello", properties: [:car_sdk_build_name]})
-    <<2, 0, 5 >> <> "hello"
-
-    iex> AutoApi.FirmwareVersionState.to_bin(%AutoApi.FirmwareVersionState{application_version: "V10", properties: [:application_version]})
-    <<3, 0, 3>> <> "V10"
   """
   def to_bin(%__MODULE__{} = state) do
     parse_state_properties(state)

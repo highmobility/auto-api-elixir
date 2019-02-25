@@ -41,9 +41,6 @@ defmodule AutoApi.TrunkState do
 
   @doc """
   Build state based on binary value
-
-    iex> AutoApi.TrunkState.from_bin(<<0x01, 1::integer-16, 0x00, 0x02, 1::integer-16, 0x01>>)
-    %AutoApi.TrunkState{trunk_lock: :unlocked, trunk_position: :open}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -52,8 +49,6 @@ defmodule AutoApi.TrunkState do
 
   @doc """
   Parse state to bin
-    iex> AutoApi.TrunkState.to_bin(%AutoApi.TrunkState{trunk_lock: :locked, trunk_position: :closed, properties: [:trunk_lock, :trunk_position]})
-    <<1, 1::integer-16, 1, 2, 1::integer-16, 0>>
   """
   @spec to_bin(__MODULE__.t()) :: binary
   def to_bin(%__MODULE__{} = state) do

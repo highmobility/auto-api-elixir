@@ -1,9 +1,9 @@
 {
     "category": "diagnostics",
+    "id_msb": 0,
     "id_lsb": 51,
     "name": "diagnostics",
     "api_intro": 3,
-    "id_msb": 0,
     "message_types": [
         {
             "id": 0,
@@ -46,9 +46,9 @@
             "description": "Engine RPM (revolutions per minute)"
         },
         {
-            "size": 1,
-            "type": "integer",
-            "description": "Fuel level percentage between 0-100",
+            "size": 8,
+            "type": "double",
+            "description": "Fuel level percentage between 0.0-1.0",
             "name": "fuel_level",
             "id": 5
         },
@@ -165,16 +165,16 @@
             "name": "brake_fluid_level"
         },
         {
-            "size": 1,
-            "type": "integer",
-            "description": "Current engine torque percentage between 0-100",
+            "size": 8,
+            "type": "double",
+            "description": "Current engine torque percentage between 0.0-1.0",
             "name": "engine_torque",
             "id": 21
         },
         {
-            "size": 1,
-            "type": "integer",
-            "description": "Current engine load percentage between 0-100",
+            "size": 8,
+            "type": "double",
+            "description": "Current engine load percentage between 0.0-1.0",
             "name": "engine_load",
             "id": 22
         },
@@ -186,9 +186,9 @@
             "id": 23
         },
         {
-            "size": 1,
-            "type": "integer",
-            "description": "Battery level in %, value between 0 and 100",
+            "size": 8,
+            "type": "double",
+            "description": "Battery level in %, value between 0.0 and 1.0",
             "name": "battery_level",
             "id": 24
         },
@@ -210,8 +210,7 @@
                     "size": 2,
                     "type": "integer",
                     "description": "Size of the text",
-                    "name": "text_size",
-                    "size_reference": "text"
+                    "name": "text_size"
                 },
                 {
                     "type": "string",
@@ -219,11 +218,10 @@
                     "description": "CCM text bytes formatted in UTF-8"
                 },
                 {
-                    "size": 2,
+                    "size": 1,
                     "type": "integer",
                     "description": "Size of the status",
-                    "name": "status_size",
-                    "size_reference": "status"
+                    "name": "status_size"
                 },
                 {
                     "type": "string",
@@ -360,8 +358,7 @@
                     "size": 1,
                     "type": "integer",
                     "description": "Size of the ID string",
-                    "name": "id_size",
-                    "size_reference": "id"
+                    "name": "id_size"
                 },
                 {
                     "type": "string",
@@ -372,8 +369,7 @@
                     "size": 1,
                     "type": "integer",
                     "description": "Size of the ECU ID string",
-                    "name": "ecu_id_size",
-                    "size_reference": "ecu_id"
+                    "name": "ecu_id_size"
                 },
                 {
                     "type": "string",
@@ -381,11 +377,10 @@
                     "description": "ECU ID bytes formatted in UTF-8"
                 },
                 {
-                    "size": 2,
+                    "size": 1,
                     "type": "integer",
-                    "description": "Size of the ECU ID string",
-                    "name": "status_size",
-                    "size_reference": "status_size"
+                    "description": "Size of the status string",
+                    "name": "status_size"
                 },
                 {
                     "type": "string",
@@ -405,5 +400,5 @@
             "id": 30
         }
     ],
-    "api_update": 9
+    "api_update": 10
 }

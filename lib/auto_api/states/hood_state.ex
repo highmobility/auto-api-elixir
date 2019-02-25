@@ -40,13 +40,6 @@ defmodule AutoApi.HoodState do
 
   @doc """
   Build state based on binary value
-
-    iex> AutoApi.HoodState.from_bin(<<0x01, 1::integer-16, 1>>)
-    %AutoApi.HoodState{position: :open}
-
-    iex> AutoApi.HoodState.from_bin(<<0x01, 1::integer-16, 0x02>>)
-    %AutoApi.HoodState{position: :intermediate}
-
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -56,10 +49,6 @@ defmodule AutoApi.HoodState do
   @spec to_bin(__MODULE__.t()) :: binary
   @doc """
   Parse state to bin
-
-    iex> properties = [:position]
-    iex> AutoApi.HoodState.to_bin(%AutoApi.HoodState{position: :closed, properties: properties})
-    <<0x01, 1::integer-16, 0x00>>
   """
   def to_bin(%__MODULE__{} = state) do
     parse_state_properties(state)

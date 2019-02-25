@@ -50,13 +50,6 @@ defmodule AutoApi.TachographState do
 
   @doc """
   Build state based on binary value
-
-    iex> AutoApi.TachographState.from_bin(<<0x06, 1::integer-16, 0x01, 0x07, 2::integer-16, 120::integer-16>>)
-    %AutoApi.TachographState{vehicle_direction: :reverse, vehicle_speed: 120}
-
-    iex> AutoApi.TachographState.from_bin(<<0x01, 2::integer-16, 0x95,  0x01>>)
-    %AutoApi.TachographState{driver_working_state: [%{driver_number: 149, working_state: :driver_available}]}
-
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -66,18 +59,6 @@ defmodule AutoApi.TachographState do
   @spec to_bin(__MODULE__.t()) :: binary
   @doc """
   Parse state to bin
-
-    iex> properties = [:vehicle_direction, :vehicle_speed]
-    iex> AutoApi.TachographState.to_bin(%AutoApi.TachographState{vehicle_speed: 123, vehicle_direction: :forward, properties: properties})
-    <<6, 0, 1, 0, 7, 0, 2, 0, 123>>
-
-    iex> properties = AutoApi.TachographCapability.properties |> Enum.into(%{}) |> Map.values()
-    iex> AutoApi.TachographState.to_bin(%AutoApi.TachographState{vehicle_motion: :detected, properties: properties})
-    <<4, 0, 1, 1>>
-
-    iex> properties = [:driver_time_state]
-    iex> AutoApi.TachographState.to_bin(%AutoApi.TachographState{driver_time_state: [%{driver_number: 9, time_state: :"9_reached"}], properties: properties})
-    <<0x02, 0, 2, 0x09, 0x04>>
   """
   def to_bin(%__MODULE__{} = state) do
     parse_state_properties(state)

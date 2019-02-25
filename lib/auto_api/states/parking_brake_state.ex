@@ -36,13 +36,6 @@ defmodule AutoApi.ParkingBrakeState do
 
   @doc """
   Build state based on binary value
-
-    iex> AutoApi.ParkingBrakeState.from_bin(<<0x01, 1::integer-16, 0x00>>)
-    %AutoApi.ParkingBrakeState{parking_brake: :inactive}
-
-    iex> AutoApi.ParkingBrakeState.from_bin(<<0x01, 1::integer-16, 0x01>>)
-    %AutoApi.ParkingBrakeState{parking_brake: :active}
-
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -51,11 +44,6 @@ defmodule AutoApi.ParkingBrakeState do
 
   @doc """
   Parse state to bin
-    iex> AutoApi.ParkingBrakeState.to_bin(%AutoApi.ParkingBrakeState{parking_brake: :inactive, properties: [:parking_brake]})
-    <<1, 1::integer-16, 0>>
-
-    iex> AutoApi.ParkingBrakeState.to_bin(%AutoApi.ParkingBrakeState{parking_brake: :active, properties: [:parking_brake]})
-    <<1, 1::integer-16, 1>>
   """
   @spec to_bin(__MODULE__.t()) :: binary
   def to_bin(%__MODULE__{} = state) do

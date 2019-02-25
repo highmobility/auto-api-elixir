@@ -27,14 +27,6 @@ defmodule AutoApi.ChargingCommand do
 
   @doc """
   Parses the binary command and makes changes or returns the state
-
-        iex> AutoApi.ChargingCommand.execute(%AutoApi.ChargingState{}, <<0x00>>)
-        {:state, %AutoApi.ChargingState{}}
-
-        iex> command = <<0x01>> <> <<0x02, 2::integer-16, 0, 0x03>>
-        iex> AutoApi.ChargingCommand.execute(%AutoApi.ChargingState{}, command)
-        {:state_changed, %AutoApi.ChargingState{estimated_range: 3}}
-
   """
   @spec execute(ChargingState.t(), binary) :: {:state | :state_changed, ChargingState.t()}
   def execute(%ChargingState{} = state, <<0x00>>) do
@@ -51,16 +43,12 @@ defmodule AutoApi.ChargingCommand do
     end
   end
 
-  def execute(%ChargingState{} = state, <<0x12, 0x01, _charging_status>>) do
+  def execute(%ChargingState{} = state, <<0x12, _::binary>>) do
     {:state_changed, state}
   end
 
   @doc """
   Converts ChargingCommand state to capability's state in binary
-
-        iex> properties = [:battery_level, :time_to_complete_charge]
-        iex> AutoApi.ChargingCommand.state(%AutoApi.ChargingState{battery_level: 01, properties: properties})
-        <<1, 3, 0, 1, 1>>
   """
   @spec state(ChargingState.t()) :: binary
   def state(%ChargingState{} = state) do
@@ -69,9 +57,6 @@ defmodule AutoApi.ChargingCommand do
 
   @doc """
   Converts command to binary format
-
-      iex> AutoApi.ChargingCommand.to_bin(:get_charge_state, [])
-      <<0x00>>
   """
   @spec to_bin(ChargingCapability.command_type(), list(any())) :: binary
   def to_bin(:get_charge_state, []) do

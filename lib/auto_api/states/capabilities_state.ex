@@ -85,9 +85,6 @@ defmodule AutoApi.CapabilitiesState do
 
   @doc """
   Build state based on binary value (NOT IMPLEMENTED)
-
-  ie> AutoApi.CapabilitiesState.from_bin(<<0x01, 4::integer-16, 0x00, 0x33, 0x00, 0x01>>)
-  %AutoApi.CapabilitiesState{diagnostics: [:get_diagnostics_state, :diagnostics_state], door_locks: []}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(
@@ -100,11 +97,6 @@ defmodule AutoApi.CapabilitiesState do
   @spec to_bin(__MODULE__.t()) :: binary
   @doc """
   Parse state to bin
-
-    iex> AutoApi.CapabilitiesState.to_bin(%AutoApi.CapabilitiesState{diagnostics: [:get_diagnostics_state, :diagnostics_state], door_locks: [:get_lock_state, :lock_state, :lock_unlock_doors]})
-    <<1, 0, 4, 0, 0x33, 0, 1, 1, 0, 5, 0, 0x20, 0, 1, 18>>
-    iex> AutoApi.CapabilitiesState.to_bin(%AutoApi.CapabilitiesState{diagnostics: [:get_diagnostics_state, :diagnostics_state], door_locks: []})
-    <<1, 0, 4, 0, 0x33, 0, 1>>
   """
   def to_bin(%__MODULE__{} = state) do
     capabilities = load_capabilities()

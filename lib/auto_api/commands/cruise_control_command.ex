@@ -27,13 +27,6 @@ defmodule AutoApi.CruiseControlCommand do
 
   @doc """
   Parses the binary command and makes changes or returns the state
-
-        iex> AutoApi.CruiseControlCommand.execute(%AutoApi.CruiseControlState{acc: :active}, <<0x00>>)
-        {:state, %AutoApi.CruiseControlState{acc: :active}}
-
-        iex> command = <<0x01>> <> <<0x03, 2::integer-16, 0x01, 0x99>>
-        iex> AutoApi.CruiseControlCommand.execute(%AutoApi.CruiseControlState{}, command)
-        {:state_changed, %AutoApi.CruiseControlState{target_speed: 409}}
   """
   @spec execute(CruiseControlState.t(), binary) ::
           {:state | :state_changed, CruiseControlState.t()}
@@ -53,12 +46,6 @@ defmodule AutoApi.CruiseControlCommand do
 
   @doc """
   Converts DoorLocksCommand state to capability's state in binary
-
-        iex> AutoApi.CruiseControlCommand.state(%AutoApi.CruiseControlState{properties: [:cruise_control]})
-        <<1>>
-
-        iex> AutoApi.CruiseControlCommand.state(%AutoApi.CruiseControlState{limiter: :not_set, properties: [:limiter]})
-        <<1, 0x02, 1::integer-16, 0>>
   """
   @spec state(CruiseControlState.t()) :: binary
   def state(%CruiseControlState{} = state) do
@@ -67,11 +54,6 @@ defmodule AutoApi.CruiseControlCommand do
 
   @doc """
   Returns binary command
-      iex> AutoApi.CruiseControlCommand.to_bin(:get_cruise_control_state, [])
-      <<0x00>>
-
-      iex> AutoApi.CruiseControlCommand.to_bin(:activate_deactivate_cruise_control, [])
-      <<0x12>>
   """
   @spec to_bin(CruiseControlCapability.command_type(), list(any)) :: binary
   def to_bin(:get_cruise_control_state = msg, _args) do

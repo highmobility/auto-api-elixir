@@ -53,15 +53,6 @@ defmodule AutoApi.FailureMessageState do
 
   @doc """
   Build state based on binary value
-
-
-    iex> cmd = <<0x01, 2::integer-16, 0x00, 0x21>>
-    iex> cmd = cmd <> <<0x02, 1::integer-16, 0x00>>
-    iex> cmd = cmd <> <<0x03, 1::integer-16, 0x01>>
-    iex> cmd = cmd <> <<0x04, 3::integer-16>> <> "boo"
-    iex> AutoApi.FailureMessageState.from_bin(cmd)
-    %AutoApi.FailureMessageState{failed_message_identifier: 33, failed_message_type: 0, failure_reason: :unauthorized, failure_description: "boo"}
-
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -73,11 +64,6 @@ defmodule AutoApi.FailureMessageState do
   @spec to_bin(__MODULE__.t()) :: binary
   @doc """
   Parse state to bin
-
-    iex> properties = [:failed_message_identifier, :failed_message_type, :failure_reason]
-    iex> AutoApi.FailureMessageState.to_bin(%AutoApi.FailureMessageState{failed_message_identifier: 2, failed_message_type: 1, failure_reason: :unauthorized, properties: properties})
-    <<1, 0, 2, 0, 2, 2, 0, 1, 1, 3, 0, 1, 1>>
-
   """
   def to_bin(%__MODULE__{} = state) do
     state

@@ -28,30 +28,30 @@ defmodule AutoApi.VehicleLocationCommandTest do
     end
 
     test "vehicle_location command" do
-      [lat, long, alt, heading] = [52.516506, 13.381815, 133.5, 84.828]
+      state =
+        %VehicleLocationState{}
+        |> VehicleLocationState.put_property(:altitude, 133.5)
+        |> VehicleLocationState.put_property(:heading, 0.5)
+        |> VehicleLocationState.put_property(:coordinates, %{
+          latitude: 52.516506,
+          longitude: 13.381815
+        })
 
-      vlocation =
-        <<0x04, 16::integer-16, lat::float-64, long::float-64>> <>
-          <<6, 0, 8, alt::float-64>> <> <<5, 0, 8, heading::float-64>>
+      command = <<0x01>> <> VehicleLocationState.to_bin(state)
 
-      command = <<0x01>> <> vlocation
-
-      assert {:state_changed, state} =
+      assert {:state_changed, new_state} =
                VehicleLocationCommand.execute(%VehicleLocationState{}, command)
 
-      assert state.altitude == alt
-      assert state.heading == heading
-      assert state.coordinates.latitude == lat
-      assert state.coordinates.longitude == long
+      assert state == new_state
     end
   end
 
   describe "state/1" do
     test "converts state to binary" do
-      state = %VehicleLocationState{heading: 82.828, properties: [:heading]}
+      state = VehicleLocationState.put_property(%VehicleLocationState{}, :altitude, 133.5)
 
       assert VehicleLocationCommand.state(state) ==
-               <<0x01, 0x05, 8::integer-16, 82.828::float-64>>
+               <<0x01>> <> VehicleLocationState.to_bin(state)
     end
   end
 

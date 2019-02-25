@@ -19,5 +19,32 @@
 defmodule AutoApi.DoorLocksStateTest do
   use ExUnit.Case
   alias AutoApi.DoorLocksState
-  doctest DoorLocksState
+
+  test "to_bin & from_bin" do
+    state =
+      %DoorLocksState{}
+      |> DoorLocksState.append_property(:positions, %{
+        door_location: :front_left,
+        position: :closed
+      })
+      |> DoorLocksState.append_property(:positions, %{
+        door_location: :front_right,
+        position: :open
+      })
+      |> DoorLocksState.append_property(:inside_locks, %{
+        door_location: :front_right,
+        lock_state: :unlocked
+      })
+      |> DoorLocksState.append_property(:locks, %{
+        door_location: :front_right,
+        lock_state: :unlocked
+      })
+
+    new_state =
+      state
+      |> DoorLocksState.to_bin()
+      |> DoorLocksState.from_bin()
+
+    assert state == new_state
+  end
 end

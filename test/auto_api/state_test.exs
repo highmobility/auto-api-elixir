@@ -18,38 +18,85 @@
 # licensing@high-mobility.com
 defmodule AutoApi.StateTest do
   use ExUnit.Case
+  alias AutoApi.{PropertyComponent, DiagnosticsState, VehicleLocationState}
 
-  describe "parse object" do
-    test "when object is a map" do
-      prop_name = :coordinates
+  describe "symmetric from_bin/1 & to_bin/1" do
+    test "integer size 4" do
+      state = %DiagnosticsState{mileage: %PropertyComponent{data: 16_777_215}}
 
-      enum_values = [
-        %{
-          "description" => "Latitude in 8-bytes per IEEE 754",
-          "name" => "latitude",
-          "size" => 8,
-          "type" => "double"
-        },
-        %{
-          "description" => "Longitude in 8-bytes per IEEE 754",
-          "name" => "longitude",
-          "size" => 8,
-          "type" => "double"
-        }
-      ]
+      new_state =
+        state
+        |> DiagnosticsState.to_bin()
+        |> DiagnosticsState.from_bin()
 
-      data_list = [64, 74, 66, 28, 222, 93, 24, 9, 64, 42, 195, 125, 65, 116, 62, 150]
-      multiple = false
+      assert new_state.mileage.data == 16_777_215
+    end
 
-      {^prop_name, ^multiple, result} =
-        AutoApi.State.parse_bin_property_to_list_helper(
-          prop_name,
-          enum_values,
-          data_list,
-          multiple
-        )
+    test "integer size 2" do
+      state = %DiagnosticsState{speed: %PropertyComponent{data: 65535}}
 
-      assert result == %{latitude: 52.516506, longitude: 13.381815}
+      new_state =
+        state
+        |> DiagnosticsState.to_bin()
+        |> DiagnosticsState.from_bin()
+
+      assert new_state.speed.data == 65535
+    end
+
+    test "double size 8" do
+      state = %DiagnosticsState{fuel_level: %PropertyComponent{data: 1.1002}}
+
+      new_state =
+        state
+        |> DiagnosticsState.to_bin()
+        |> DiagnosticsState.from_bin()
+
+      assert new_state.fuel_level.data == 1.1002
+    end
+
+    test "float size 4" do
+      state = %DiagnosticsState{engine_total_fuel_consumption: %PropertyComponent{data: 1.1003}}
+
+      new_state =
+        state
+        |> DiagnosticsState.to_bin()
+        |> DiagnosticsState.from_bin()
+
+      assert new_state.engine_total_fuel_consumption.data == 1.1003
+    end
+
+    test "enum" do
+      state = %DiagnosticsState{brake_fluid_level: %PropertyComponent{data: :low}}
+
+      new_state =
+        state
+        |> DiagnosticsState.to_bin()
+        |> DiagnosticsState.from_bin()
+
+      assert new_state.brake_fluid_level.data == :low
+    end
+
+    test "map" do
+      coordinates = %PropertyComponent{data: %{latitude: 52.442292, longitude: 13.176732}}
+      state = %VehicleLocationState{coordinates: coordinates}
+
+      new_state =
+        state
+        |> VehicleLocationState.to_bin()
+        |> VehicleLocationState.from_bin()
+
+      assert new_state.coordinates == coordinates
+    end
+
+    test "list of map" do
+      tire_pressures = %PropertyComponent{data: %{location: :front_left, pressure: 22.034}}
+
+      state =
+        %DiagnosticsState{tire_pressures: [tire_pressures]}
+        |> DiagnosticsState.to_bin()
+        |> DiagnosticsState.from_bin()
+
+      assert state.tire_pressures == [tire_pressures]
     end
   end
 end

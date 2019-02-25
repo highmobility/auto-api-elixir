@@ -42,10 +42,7 @@ defmodule AutoApi.MaintenanceState do
   @doc """
   Build state based on binary value
 
-    iex> AutoApi.MaintenanceState.from_bin(<<0x01, 2::integer-16, 0x00, 0x01>>)
-    %AutoApi.MaintenanceState{days_to_next_service: 1}
-
-    iex> AutoApi.MaintenanceState.from_bin(<<0x02, 3::integer-16,  -1::integer-24>>)
+    ix> AutoApi.MaintenanceState.from_bin(<<0x02, 3::integer-16,  -1::integer-24>>)
     %AutoApi.MaintenanceState{kilometers_to_next_service: 16777215}
 
     The above case invalid! it should convert to -1
@@ -58,11 +55,6 @@ defmodule AutoApi.MaintenanceState do
 
   @doc """
   Parse state to bin
-    iex> AutoApi.MaintenanceState.to_bin(%AutoApi.MaintenanceState{days_to_next_service: 10, properties: [:days_to_next_service]})
-    <<1, 2::integer-16, 0, 10>>
-
-    iex> AutoApi.MaintenanceState.to_bin(%AutoApi.MaintenanceState{kilometers_to_next_service: -1, properties: [:kilometers_to_next_service]})
-    <<2, 3::integer-16, -1::integer-signed-24>>
   """
   @spec to_bin(__MODULE__.t()) :: binary
   def to_bin(%__MODULE__{} = state) do

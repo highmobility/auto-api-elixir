@@ -20,50 +20,21 @@ defmodule AutoApi.VehicleLocationStateTest do
   use ExUnit.Case
   alias AutoApi.VehicleLocationState
 
-  describe "to_bin/1" do
-    test "converts altitude to bin" do
-      state = %AutoApi.VehicleLocationState{
-        altitude: 133.5,
-        properties: [:altitude, :coordinates]
-      }
+  test "to_bin/1 & from_bin" do
+    state =
+      %VehicleLocationState{}
+      |> VehicleLocationState.put_property(:altitude, 133.5)
+      |> VehicleLocationState.put_property(:heading, 0.5)
+      |> VehicleLocationState.put_property(:coordinates, %{
+        latitude: 52.516506,
+        longitude: 13.381815
+      })
 
-      assert VehicleLocationState.to_bin(state) == <<6, 0, 8, 133.5::float-64>>
-    end
+    new_state =
+      state
+      |> VehicleLocationState.to_bin()
+      |> VehicleLocationState.from_bin()
 
-    test "converts coordinates to binary" do
-      [lat, long] = [52.516506, 13.381815]
-
-      state = %AutoApi.VehicleLocationState{
-        coordinates: %{latitude: lat, longitude: long},
-        properties: [:coordinates]
-      }
-
-      assert VehicleLocationState.to_bin(state) ==
-               <<0x04, 16::integer-16, lat::float-64, long::float-64>>
-    end
-  end
-
-  describe "from_bin/1" do
-    test "converts not repeatable data to state" do
-      [lat, long] = [52.516506, 13.381815]
-
-      vlocation = <<0x04, 16::integer-16, lat::float-64, long::float-64>>
-
-      state = VehicleLocationState.from_bin(vlocation)
-      assert state.coordinates == %{latitude: 52.516506, longitude: 13.381815}
-    end
-
-    test "converts binary data to state" do
-      [lat, long, alt, heading] = [52.516506, 13.381815, 133.5, 84.828]
-
-      vlocation =
-        <<0x04, 16::integer-16, lat::float-64, long::float-64>> <>
-          <<6, 0, 8, alt::float-64>> <> <<5, 0, 8, heading::float-64>>
-
-      state = VehicleLocationState.from_bin(vlocation)
-      assert state.altitude == alt
-      assert state.coordinates == %{latitude: 52.516506, longitude: 13.381815}
-      assert state.heading == heading
-    end
+    assert new_state == state
   end
 end

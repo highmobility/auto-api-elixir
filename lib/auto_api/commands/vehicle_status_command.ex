@@ -27,13 +27,6 @@ defmodule AutoApi.VehicleStatusCommand do
 
   @doc """
   Parses the binary command and makes changes or returns the state
-
-        iex> AutoApi.VehicleStatusCommand.execute(%AutoApi.VehicleStatusState{}, <<0x00>>)
-        {:state, %AutoApi.VehicleStatusState{}}
-
-        iex> command = <<0x01>> <> <<0x01, 3::integer-16>> <> "vin"
-        iex> AutoApi.VehicleStatusCommand.execute(%AutoApi.VehicleStatusState{}, command)
-        {:state_changed, %AutoApi.VehicleStatusState{vin: "vin"}}
   """
   @spec execute(VehicleStatusState.t(), binary) ::
           {:state | :state_changed, VehicleStatusState.t()}
@@ -53,9 +46,6 @@ defmodule AutoApi.VehicleStatusCommand do
 
   @doc """
   Converts DoorLocksCommand state to capability's state in binary
-
-        iex> AutoApi.VehicleStatusCommand.state(%AutoApi.VehicleStatusState{vin: "vinasdasd", properties: [:vin]})
-        <<1, 1, 0, 9, 118, 105, 110, 97, 115, 100, 97, 115, 100>>
   """
   @spec state(VehicleStatusState.t()) :: binary
   def state(%VehicleStatusState{} = state) do
@@ -64,8 +54,6 @@ defmodule AutoApi.VehicleStatusCommand do
 
   @doc """
   Returns binary command
-      iex> AutoApi.VehicleStatusCommand.to_bin(:get_vehicle_status, [])
-      <<0x00>>
   """
   @spec to_bin(VehicleStatusCapability.command_type(), list(any)) :: binary
   def to_bin(:get_vehicle_status = msg, _args) do

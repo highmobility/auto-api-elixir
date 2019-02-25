@@ -27,14 +27,6 @@ defmodule AutoApi.MaintenanceCommand do
 
   @doc """
   Parses the binary command and makes changes or returns the state
-
-        iex> AutoApi.MaintenanceCommand.execute(%AutoApi.MaintenanceState{}, <<0x00>>)
-        {:state, %AutoApi.MaintenanceState{}}
-
-        iex> command = <<0x01>> <> <<0x01, 2::integer-16, 0x01, 0x00>>
-        iex> AutoApi.MaintenanceCommand.execute(%AutoApi.MaintenanceState{}, command)
-        {:state_changed, %AutoApi.MaintenanceState{days_to_next_service: 256}}
-
   """
   @spec execute(MaintenanceState.t(), binary) :: {:state | :state_changed, MaintenanceState.t()}
   def execute(%MaintenanceState{} = state, <<0x00>>) do
@@ -53,9 +45,6 @@ defmodule AutoApi.MaintenanceCommand do
 
   @doc """
   Converts MaintenanceCommand state to capability's state in binary
-
-        iex> AutoApi.MaintenanceCommand.state(%AutoApi.MaintenanceState{days_to_next_service: 100, properties: [:days_to_next_service]})
-        <<1, 1, 0, 2, 0, 100>>
   """
   @spec state(MaintenanceState.t()) :: binary
   def state(%MaintenanceState{} = state) do
@@ -64,8 +53,6 @@ defmodule AutoApi.MaintenanceCommand do
 
   @doc """
   Returns binary command
-      iex> AutoApi.MaintenanceCommand.to_bin(:get_maintenance_state, [])
-      <<0x00>>
   """
   @spec to_bin(MaintenanceCapability.command_type(), list(any)) :: binary
   def to_bin(:get_maintenance_state = msg, _args) do

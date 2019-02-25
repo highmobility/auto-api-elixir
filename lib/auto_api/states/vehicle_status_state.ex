@@ -21,28 +21,27 @@ defmodule AutoApi.VehicleStatusState do
   VehicleStatus state
   """
 
-  defstruct vin: "",
-            powertrain: :unknown,
-            model_name: "",
-            name: "",
-            license_plate: "",
-            sales_designation: "",
-            model_year: 00,
-            color_name: "",
-            power_in_kw: 0,
-            number_of_doors: 0,
-            number_of_seats: 0,
-            engine_volume: 0.0,
-            engine_max_torque: 0,
-            gearbox: :manual,
+  alias AutoApi.PropertyComponent
+
+  defstruct vin: nil,
+            powertrain: nil,
+            model_name: nil,
+            name: nil,
+            license_plate: nil,
+            sales_designation: nil,
+            model_year: nil,
+            color_name: nil,
+            power_in_kw: nil,
+            number_of_doors: nil,
+            number_of_seats: nil,
+            engine_volume: nil,
+            engine_max_torque: nil,
+            gearbox: nil,
             state: [],
             display_unit: nil,
             driver_seat_location: nil,
             equipments: [],
-            timestamp: nil,
-            properties: [],
-            property_timestamps: %{},
-            properties_failures: %{}
+            timestamp: nil
 
   use AutoApi.State, spec_file: "specs/vehicle_status.json"
 
@@ -52,41 +51,29 @@ defmodule AutoApi.VehicleStatusState do
   @type gearbox :: :manual | :automatic | :semi_automatic
 
   @type t :: %__MODULE__{
-          vin: String.t(),
-          powertrain: powertrain,
-          model_name: String.t(),
-          name: String.t(),
-          license_plate: String.t(),
-          sales_designation: String.t(),
-          model_year: integer,
-          color_name: String.t(),
-          power_in_kw: integer,
-          number_of_doors: integer,
-          number_of_seats: integer,
-          engine_volume: float,
-          engine_max_torque: integer,
-          gearbox: gearbox,
-          display_unit: :km | :miles | nil,
-          driver_seat_location: :left | :right | :center | nil,
-          equipments: list(String.t()),
+          vin: %PropertyComponent{data: String.t()} | nil,
+          powertrain: %PropertyComponent{data: powertrain} | nil,
+          model_name: %PropertyComponent{data: String.t()} | nil,
+          name: %PropertyComponent{data: String.t()} | nil,
+          license_plate: %PropertyComponent{data: String.t()} | nil,
+          sales_designation: %PropertyComponent{data: String.t()} | nil,
+          model_year: %PropertyComponent{data: integer} | nil,
+          color_name: %PropertyComponent{data: String.t()} | nil,
+          power_in_kw: %PropertyComponent{data: integer} | nil,
+          number_of_doors: %PropertyComponent{data: integer} | nil,
+          number_of_seats: %PropertyComponent{data: integer} | nil,
+          engine_volume: %PropertyComponent{data: float} | nil,
+          engine_max_torque: %PropertyComponent{data: integer} | nil,
+          gearbox: %PropertyComponent{data: gearbox} | nil,
+          display_unit: %PropertyComponent{data: :km | :miles} | nil,
+          driver_seat_location: %PropertyComponent{data: :left | :right | :center} | nil,
+          equipments: list(%PropertyComponent{data: String.t()}),
           state: list(any),
-          timestamp: DateTime.t() | nil,
-          properties: list(atom),
-          property_timestamps: map(),
-          properties_failures: map()
+          timestamp: DateTime.t() | nil
         }
 
   @doc """
   Build state based on binary value
-
-    iex> vin = "JYE8GP0078A086432"
-    iex> AutoApi.VehicleStatusState.from_bin(<<0x0E, 1::integer-16, 0x02, 0x02, 1::integer-16, 0x01, 0x01, byte_size(vin)::integer-16>> <> vin)
-    %AutoApi.VehicleStatusState{vin: "JYE8GP0078A086432", powertrain: :all_electric, gearbox: :semi_automatic}
-
-    iex> vin = "JYE8GP0078A086432"
-    iex> model_name = "HM Concept"
-    iex> AutoApi.VehicleStatusState.from_bin(<<0x03, byte_size(model_name)::integer-16>> <> model_name <> <<0x01, byte_size(vin)::integer-16>> <> vin)
-    %AutoApi.VehicleStatusState{vin: "JYE8GP0078A086432", model_name: "HM Concept"}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -95,9 +82,6 @@ defmodule AutoApi.VehicleStatusState do
 
   @doc """
   Parse state to bin
-    iex> AutoApi.VehicleStatusState.to_bin(%AutoApi.VehicleStatusState{vin: "vin", model_name: "model_name", properties: [:model_name, :vin]})
-    <<0x03, 10::integer-16>> <> "model_name" <> <<0x01, 3::integer-16>> <> "vin"
-
   """
   @spec to_bin(__MODULE__.t()) :: binary
   def to_bin(%__MODULE__{} = state) do
