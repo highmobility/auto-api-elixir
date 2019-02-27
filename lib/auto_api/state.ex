@@ -594,12 +594,25 @@ defmodule AutoApi.State do
   end
 
   def put_value(state, key, value, timestamp \\ nil) do
-       Map.put(state, key, %AutoApi.PropertyComponent{data: value, timestamp: timestamp})
+    Map.put(state, key, %AutoApi.PropertyComponent{data: value, timestamp: timestamp})
   end
 
   def append_value(state, key, value, timestamp \\ nil) do
     initial = Map.get(state, key)
     property_component = %AutoApi.PropertyComponent{data: value, timestamp: timestamp}
     Map.update(state, key, initial, &(&1 ++ [property_component]))
+  end
+
+  @doc """
+  Update a property value in the given state.
+
+  If a property supports multiple value, appends the value to the property list
+  """
+  def update_value(state, key, value, timestamp \\ nil) do
+    if state.__struct__.is_multiple?(key) do
+      append_value(state, key, value, timestamp)
+    else
+      put_value(state, key, value, timestamp)
+    end
   end
 end

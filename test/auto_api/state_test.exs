@@ -107,6 +107,7 @@ defmodule AutoApi.StateTest do
 
       assert new_state.mileage.data == 1000
     end
+
     test "put scalar value with timestamp" do
       now = DateTime.utc_now()
       state = %DiagnosticsState{}
@@ -121,11 +122,23 @@ defmodule AutoApi.StateTest do
     test "append values to state" do
       state = %DiagnosticsState{}
       assert state.tire_pressures == []
-      new_state = AutoApi.State.append_value(state, :tire_pressures, %{location: :front_right, pressure: 1.938})
+
+      new_state =
+        AutoApi.State.append_value(state, :tire_pressures, %{
+          location: :front_right,
+          pressure: 1.938
+        })
+
       assert tire_info = List.first(new_state.tire_pressures)
       assert tire_info.data.location == :front_right
       assert tire_info.data.pressure == 1.938
-      new_state = AutoApi.State.append_value(new_state, :tire_pressures, %{location: :front_right, pressure: 1.938})
+
+      new_state =
+        AutoApi.State.append_value(new_state, :tire_pressures, %{
+          location: :front_right,
+          pressure: 1.938
+        })
+
       assert length(new_state.tire_pressures) == 2
     end
 
@@ -133,7 +146,43 @@ defmodule AutoApi.StateTest do
       now = DateTime.utc_now()
       state = %DiagnosticsState{}
       assert state.tire_pressures == []
-      new_state = AutoApi.State.append_value(state, :tire_pressures, %{location: :front_right, pressure: 1.938}, now)
+
+      new_state =
+        AutoApi.State.append_value(
+          state,
+          :tire_pressures,
+          %{location: :front_right, pressure: 1.938},
+          now
+        )
+
+      assert tire_info = List.first(new_state.tire_pressures)
+      assert tire_info.timestamp == now
+    end
+  end
+
+  describe "update_value/4" do
+    test "update a property with single value" do
+      now = DateTime.utc_now()
+      state = %DiagnosticsState{}
+      new_state = AutoApi.State.update_value(state, :mileage, 1000, now)
+
+      assert new_state.mileage.data == 1000
+      assert new_state.mileage.timestamp == now
+    end
+
+    test "update a property with multiple valus " do
+      now = DateTime.utc_now()
+      state = %DiagnosticsState{}
+      assert state.tire_pressures == []
+
+      new_state =
+        AutoApi.State.append_value(
+          state,
+          :tire_pressures,
+          %{location: :front_right, pressure: 1.938},
+          now
+        )
+
       assert tire_info = List.first(new_state.tire_pressures)
       assert tire_info.timestamp == now
     end
