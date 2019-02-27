@@ -18,10 +18,11 @@
 # licensing@high-mobility.com
 defmodule AutoApi.PropertyComponent do
   require Logger
+
   defstruct [:data, :timestamp, :failure]
-  @prop_id_to_name %{0x01 => :data, 0x02 => :timestamp}
-  @data_component_id 0x01
-  @timestamp_component_id 0x02
+
+  @prop_id_to_name %{0x01 => :data, 0x02 => :timestamp, 0x03 => :failure}
+  @prop_name_to_id %{:data => 0x01, :timestamp => 0x02, :failure => 0x03}
 
   @type t :: %__MODULE__{data: any, timestamp: nil | DateTime.t(), failure: nil}
   @type data_types :: :integer
@@ -41,7 +42,7 @@ defmodule AutoApi.PropertyComponent do
 
     data_component_size = byte_size(data_component_bin)
 
-    <<@data_component_id, data_component_size::integer-16>> <>
+    <<@prop_name_to_id[:data], data_component_size::integer-16>> <>
       data_component_bin <> timestamp_to_bin(prop.timestamp)
   end
 
@@ -49,12 +50,25 @@ defmodule AutoApi.PropertyComponent do
   Converts PropertyComponent struct to binary"
   """
   def to_bin(%__MODULE__{} = prop, spec) do
-    data_component_bin = data_to_bin(prop.data, spec)
-    data_component_size = byte_size(data_component_bin)
-
-    <<@data_component_id, data_component_size::integer-16>> <>
-      data_component_bin <> timestamp_to_bin(prop.timestamp)
+    wrap_with_size(prop, :data, &data_to_bin(&1, spec)) <>
+      wrap_with_size(prop, :timestamp, &timestamp_to_bin/1) <>
+      wrap_with_size(prop, :failure, &failure_to_bin/1)
   end
+
+  defp wrap_with_size(prop, field, conversion_fun) do
+    case Map.get(prop, field) do
+      nil ->
+        <<>>
+
+      value ->
+        id = @prop_name_to_id[field]
+        binary_value = conversion_fun.(value)
+        size = byte_size(binary_value)
+        <<id, size::integer-16, binary_value::binary>>
+    end
+  end
+
+  defp data_to_bin(nil, _), do: <<>>
 
   defp data_to_bin(data, %{"type" => "string"} = spec) do
     data
@@ -85,6 +99,22 @@ defmodule AutoApi.PropertyComponent do
     size_bit = size * 8
 
     <<data::integer-size(size_bit)>>
+  end
+
+  defp timestamp_to_bin(nil), do: <<>>
+
+  defp timestamp_to_bin(timestamp) do
+    milisec = DateTime.to_unix(timestamp, :millisecond)
+    <<milisec::integer-64>>
+  end
+
+  defp failure_to_bin(nil), do: <<>>
+
+  defp failure_to_bin(%{reason: reason, description: description}) do
+    reason_bin = AutoApi.CommonData.convert_state_to_bin_failure_reason(reason)
+    description_size = byte_size(description)
+
+    <<reason_bin, description_size::integer-16, description::binary>>
   end
 
   @doc """
@@ -189,10 +219,15 @@ defmodule AutoApi.PropertyComponent do
     end
   end
 
-  defp failure_to_value(failure) when is_nil(failure), do: nil
+  defp failure_to_value(nil), do: nil
 
   defp failure_to_value(failure) do
-    throw :todo
+    <<reason, size::integer-16, description::binary-size(size)>> = failure
+
+    %{
+      reason: AutoApi.CommonData.convert_bin_to_state_failure_reason(reason),
+      description: description
+    }
   end
 
   defp split_binary_to_parts(
@@ -204,11 +239,4 @@ defmodule AutoApi.PropertyComponent do
   end
 
   defp split_binary_to_parts(<<>>, acc), do: acc
-
-  defp timestamp_to_bin(nil), do: <<>>
-
-  defp timestamp_to_bin(timestamp) do
-    milisec = DateTime.to_unix(timestamp, :millisecond)
-    <<@timestamp_component_id, 8::integer-16, milisec::integer-64>>
-  end
 end

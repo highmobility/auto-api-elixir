@@ -189,6 +189,32 @@ defmodule AutoApi.PropertyComponentTest do
         assert PropertyComponent.to_struct(bin_comp, spec) == prop_comp
       end
     end
+
+    @reason :execution_timeout
+    @description """
+    孟郊《游子吟》
+    慈 母 手 中 线，
+    游 子 身 上 衣。
+    临 行 密 密 缝，
+    意 恐 迟 迟 归。
+    谁 言 寸 草 心，
+    报 得 三 春 晖。
+    """
+    property "converts failure to bin" do
+      spec = %{"type" => "integer", "size" => 3}
+
+      prop_bin =
+        PropertyComponent.to_bin(
+          %PropertyComponent{failure: %{reason: @reason, description: @description}},
+          spec
+        )
+
+      prop_comp = PropertyComponent.to_struct(prop_bin, spec)
+      assert prop_comp.data == nil
+      assert prop_comp.timestamp == nil
+      assert prop_comp.failure.reason == @reason
+      assert prop_comp.failure.description == @description
+    end
   end
 
   def integer_3 do
