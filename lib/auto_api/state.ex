@@ -592,4 +592,14 @@ defmodule AutoApi.State do
     |> Map.put(:properties, properties)
     |> put_in(failure_keys, {reason, description})
   end
+
+  def put_value(state, key, value, timestamp \\ nil) do
+       Map.put(state, key, %AutoApi.PropertyComponent{data: value, timestamp: timestamp})
+  end
+
+  def append_value(state, key, value, timestamp \\ nil) do
+    initial = Map.get(state, key)
+    property_component = %AutoApi.PropertyComponent{data: value, timestamp: timestamp}
+    Map.update(state, key, initial, &(&1 ++ [property_component]))
+  end
 end
