@@ -26,12 +26,14 @@ defmodule AutoApi.PropertyComponent do
 
   @type failure :: %{reason: atom(), description: String.t()}
   @type t :: %__MODULE__{data: any, timestamp: nil | DateTime.t(), failure: nil | failure}
+  @type spec :: map() | list()
   @type data_types :: :integer
   @type size :: integer
 
   @doc """
   Converts PropertyComponent struct to binary"
   """
+  @spec to_bin(__MODULE__.t(), spec()) :: binary()
   def to_bin(%__MODULE__{} = prop, spec) do
     wrap_with_size(prop, :data, &data_to_bin(&1, spec)) <>
       wrap_with_size(prop, :timestamp, &timestamp_to_bin/1) <>
@@ -113,7 +115,7 @@ defmodule AutoApi.PropertyComponent do
   @doc """
   Converts PropertyComponent binary to struct"
   """
-  @spec to_struct(binary, map | list) :: binary
+  @spec to_struct(binary(), spec()) :: __MODULE__.t()
   def to_struct(binary, specs) when is_list(specs) do
     prop_in_binary = split_binary_to_parts(binary, %__MODULE__{})
 
