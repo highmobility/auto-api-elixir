@@ -98,5 +98,17 @@ defmodule AutoApi.StateTest do
 
       assert state.tire_pressures == [tire_pressures]
     end
+
+    test "failure" do
+      coordinates = %PropertyComponent{failure: %{reason: :unknown, description: "Unknown"}}
+      state = %VehicleLocationState{coordinates: coordinates}
+
+      new_state =
+        state
+        |> VehicleLocationState.to_bin()
+        |> VehicleLocationState.from_bin()
+
+      assert new_state.coordinates == coordinates
+    end
   end
 end

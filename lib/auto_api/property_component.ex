@@ -24,7 +24,9 @@ defmodule AutoApi.PropertyComponent do
   @prop_id_to_name %{0x01 => :data, 0x02 => :timestamp, 0x03 => :failure}
   @prop_name_to_id %{:data => 0x01, :timestamp => 0x02, :failure => 0x03}
 
-  @type failure :: %{reason: atom(), description: String.t()}
+  @type reason ::
+          :rate_limit | :execution_timeout | :format_error | :unauthorised | :unknown | :pending
+  @type failure :: %{reason: reason(), description: String.t()}
   @type t :: %__MODULE__{data: any, timestamp: nil | DateTime.t(), failure: nil | failure}
   @type spec :: map() | list()
   @type data_types :: :integer
@@ -119,27 +121,27 @@ defmodule AutoApi.PropertyComponent do
   def to_struct(binary, specs) when is_list(specs) do
     prop_in_binary = split_binary_to_parts(binary, %__MODULE__{})
 
-    data = prop_in_binary.data
-
     data =
-      specs
-      |> Enum.reduce({0, []}, fn spec, {counter, acc} ->
-        size = spec["size"] || Keyword.get(acc, String.to_atom("#{spec["name"]}_size"))
-        unless size, do: raise("couldn't find size for #{inspect(spec)}")
+      unless is_nil(prop_in_binary.data) do
+        specs
+        |> Enum.reduce({0, []}, fn spec, {counter, acc} ->
+          size = spec["size"] || Keyword.get(acc, String.to_atom("#{spec["name"]}_size"))
+          unless size, do: raise("couldn't find size for #{inspect(spec)}")
 
-        data_slice = :binary.part(data, counter, size)
+          data_slice = :binary.part(prop_in_binary.data, counter, size)
 
-        data_value =
-          if spec["type"] == "enum" do
-            enum_to_value(data_slice, spec)
-          else
-            to_value(data_slice, spec["type"])
-          end
+          data_value =
+            if spec["type"] == "enum" do
+              enum_to_value(data_slice, spec)
+            else
+              to_value(data_slice, spec["type"])
+            end
 
-        {counter + size, [{String.to_atom(spec["name"]), data_value} | acc]}
-      end)
-      |> elem(1)
-      |> Enum.into(%{})
+          {counter + size, [{String.to_atom(spec["name"]), data_value} | acc]}
+        end)
+        |> elem(1)
+        |> Enum.into(%{})
+      end
 
     comon_components_to_struct(prop_in_binary, data)
   end

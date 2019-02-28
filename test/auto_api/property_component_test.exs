@@ -231,6 +231,40 @@ defmodule AutoApi.PropertyComponentTest do
       assert DateTime.to_unix(prop_comp.timestamp) == DateTime.to_unix(component.timestamp)
       assert prop_comp.failure == component.failure
     end
+
+    test "converts failure to bin when spec is map" do
+      spec = [
+        %{
+          "name" => "location",
+          "size" => 1,
+          "type" => "enum",
+          "values" => [
+            %{"id" => 0, "name" => "front_left"},
+            %{"id" => 1, "name" => "front_right"},
+            %{"id" => 2, "name" => "rear_right"},
+            %{"id" => 3, "name" => "rear_left"}
+          ]
+        },
+        %{
+          "description" => "Tire pressure in BAR formatted in 4-bytes per IEEE 754",
+          "name" => "pressure",
+          "size" => 4,
+          "type" => "float"
+        }
+      ]
+
+      prop_bin =
+        PropertyComponent.to_bin(
+          %PropertyComponent{failure: %{reason: @reason, description: @description}},
+          spec
+        )
+
+      prop_comp = PropertyComponent.to_struct(prop_bin, spec)
+      assert prop_comp.data == nil
+      assert prop_comp.timestamp == nil
+      assert prop_comp.failure.reason == @reason
+      assert prop_comp.failure.description == @description
+    end
   end
 
   def integer_3 do
