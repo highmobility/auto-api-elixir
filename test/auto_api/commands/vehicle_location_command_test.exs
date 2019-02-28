@@ -50,8 +50,7 @@ defmodule AutoApi.VehicleLocationCommandTest do
     test "converts state to binary" do
       state = VehicleLocationState.put_property(%VehicleLocationState{}, :altitude, 133.5)
 
-      assert VehicleLocationCommand.state(state) ==
-               <<0x01>> <> VehicleLocationState.to_bin(state)
+      assert VehicleLocationCommand.state(state) == <<0x01>> <> VehicleLocationState.to_bin(state)
     end
   end
 
