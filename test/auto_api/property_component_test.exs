@@ -141,7 +141,7 @@ defmodule AutoApi.PropertyComponentTest do
       ]
 
       prop_comp = %PropertyComponent{data: %{location: :front_left, pressure: 22.034}}
-      bin_comp = PropertyComponent.map_to_bin(prop_comp, spec)
+      bin_comp = PropertyComponent.to_bin(prop_comp, spec)
 
       assert bin_comp == <<1, 5::integer-16, 0x00, 65, 176, 69, 162>>
 
@@ -176,7 +176,7 @@ defmodule AutoApi.PropertyComponentTest do
           timestamp: data[:datetime]
         }
 
-        bin_comp = PropertyComponent.map_to_bin(prop_comp, spec)
+        bin_comp = PropertyComponent.to_bin(prop_comp, spec)
 
         bin_data = <<id::integer-16, text_size::integer-16, text::binary>>
         bin_data_size_org = byte_size(bin_data)
@@ -200,7 +200,7 @@ defmodule AutoApi.PropertyComponentTest do
     谁 言 寸 草 心，
     报 得 三 春 晖。
     """
-    property "converts failure to bin" do
+    test "converts failure to bin" do
       spec = %{"type" => "integer", "size" => 3}
 
       prop_bin =
@@ -214,6 +214,22 @@ defmodule AutoApi.PropertyComponentTest do
       assert prop_comp.timestamp == nil
       assert prop_comp.failure.reason == @reason
       assert prop_comp.failure.description == @description
+    end
+
+    test "converts failure with timestamp to bin" do
+      spec = %{"type" => "integer", "size" => 3}
+
+      component = %PropertyComponent{
+        timestamp: DateTime.utc_now(),
+        failure: %{reason: @reason, description: @description}
+      }
+
+      prop_bin = PropertyComponent.to_bin(component, spec)
+      prop_comp = PropertyComponent.to_struct(prop_bin, spec)
+
+      assert prop_comp.data == component.data
+      assert DateTime.to_unix(prop_comp.timestamp) == DateTime.to_unix(component.timestamp)
+      assert prop_comp.failure == component.failure
     end
   end
 

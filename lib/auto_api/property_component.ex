@@ -24,27 +24,10 @@ defmodule AutoApi.PropertyComponent do
   @prop_id_to_name %{0x01 => :data, 0x02 => :timestamp, 0x03 => :failure}
   @prop_name_to_id %{:data => 0x01, :timestamp => 0x02, :failure => 0x03}
 
-  @type t :: %__MODULE__{data: any, timestamp: nil | DateTime.t(), failure: nil}
+  @type failure :: %{reason: atom(), description: String.t()}
+  @type t :: %__MODULE__{data: any, timestamp: nil | DateTime.t(), failure: nil | failure}
   @type data_types :: :integer
   @type size :: integer
-
-  def map_to_bin(%__MODULE__{} = prop, spec) do
-    data_component_bin =
-      spec
-      |> Enum.map(fn item_spec ->
-        key_name = String.to_atom(item_spec["name"])
-
-        prop.data
-        |> Map.get(key_name)
-        |> data_to_bin(item_spec)
-      end)
-      |> :binary.list_to_bin()
-
-    data_component_size = byte_size(data_component_bin)
-
-    <<@prop_name_to_id[:data], data_component_size::integer-16>> <>
-      data_component_bin <> timestamp_to_bin(prop.timestamp)
-  end
 
   @doc """
   Converts PropertyComponent struct to binary"
@@ -69,6 +52,16 @@ defmodule AutoApi.PropertyComponent do
   end
 
   defp data_to_bin(nil, _), do: <<>>
+
+  defp data_to_bin(data, specs) when is_list(specs) do
+    specs
+    |> Enum.map(fn %{"name" => name} = spec ->
+      data
+      |> Map.get(String.to_atom(name))
+      |> data_to_bin(spec)
+    end)
+    |> :binary.list_to_bin()
+  end
 
   defp data_to_bin(data, %{"type" => "string"} = spec) do
     data

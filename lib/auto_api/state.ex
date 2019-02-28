@@ -295,7 +295,7 @@ defmodule AutoApi.State do
                   data
                   |> Enum.map(fn item ->
                     property_component_binary =
-                      AutoApi.PropertyComponent.map_to_bin(
+                      AutoApi.PropertyComponent.to_bin(
                         item,
                         unquote(Macro.escape(prop["items"]))
                       )
@@ -308,7 +308,7 @@ defmodule AutoApi.State do
               else
                 def parse_state_property(unquote(prop_name), data) do
                   property_component_binary =
-                    AutoApi.PropertyComponent.map_to_bin(
+                    AutoApi.PropertyComponent.to_bin(
                       data,
                       unquote(Macro.escape(prop["items"]))
                     )
