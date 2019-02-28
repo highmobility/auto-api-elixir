@@ -168,6 +168,22 @@ defmodule AutoApi.State do
             true
           )
         end
+
+        @doc """
+        Puts a failure property in the state.
+
+        This function wraps the failure in PropertyComponent
+        """
+        @spec put_failure(__MODULE__.t(), atom(), atom(), String.t(), DateTime.t() | nil) ::
+                __MODULE__.t()
+        def put_failure(state, property_name, reason, description, timestamp \\ nil) do
+          prop = %AutoApi.PropertyComponent{
+            failure: %{reason: reason, description: description},
+            timestamp: timestamp
+          }
+
+          %{state | property_name => prop}
+        end
       end
 
     spec = Poison.decode!(File.read!(opts[:spec_file]))
