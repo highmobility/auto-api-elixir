@@ -190,81 +190,64 @@ defmodule AutoApi.PropertyComponentTest do
       end
     end
 
-    @reason :execution_timeout
-    @description """
-    孟郊《游子吟》
-    慈 母 手 中 线，
-    游 子 身 上 衣。
-    临 行 密 密 缝，
-    意 恐 迟 迟 归。
-    谁 言 寸 草 心，
-    报 得 三 春 晖。
-    """
-    test "converts failure to bin" do
-      spec = %{"type" => "integer", "size" => 3}
+    property "converts failure to bin" do
+      forall data <- [description: utf8(), reason: error_reason(), timestamp: datetime()] do
+        spec = %{"type" => "integer", "size" => 3}
 
-      prop_bin =
-        PropertyComponent.to_bin(
-          %PropertyComponent{failure: %{reason: @reason, description: @description}},
-          spec
-        )
-
-      prop_comp = PropertyComponent.to_struct(prop_bin, spec)
-      assert prop_comp.data == nil
-      assert prop_comp.timestamp == nil
-      assert prop_comp.failure.reason == @reason
-      assert prop_comp.failure.description == @description
-    end
-
-    test "converts failure with timestamp to bin" do
-      spec = %{"type" => "integer", "size" => 3}
-
-      component = %PropertyComponent{
-        timestamp: DateTime.utc_now(),
-        failure: %{reason: @reason, description: @description}
-      }
-
-      prop_bin = PropertyComponent.to_bin(component, spec)
-      prop_comp = PropertyComponent.to_struct(prop_bin, spec)
-
-      assert prop_comp.data == component.data
-      assert DateTime.to_unix(prop_comp.timestamp) == DateTime.to_unix(component.timestamp)
-      assert prop_comp.failure == component.failure
-    end
-
-    test "converts failure to bin when spec is map" do
-      spec = [
-        %{
-          "name" => "location",
-          "size" => 1,
-          "type" => "enum",
-          "values" => [
-            %{"id" => 0, "name" => "front_left"},
-            %{"id" => 1, "name" => "front_right"},
-            %{"id" => 2, "name" => "rear_right"},
-            %{"id" => 3, "name" => "rear_left"}
-          ]
-        },
-        %{
-          "description" => "Tire pressure in BAR formatted in 4-bytes per IEEE 754",
-          "name" => "pressure",
-          "size" => 4,
-          "type" => "float"
+        component = %PropertyComponent{
+          timestamp: data[:timestamp],
+          failure: %{reason: data[:reason], description: data[:description]}
         }
-      ]
 
-      prop_bin =
-        PropertyComponent.to_bin(
-          %PropertyComponent{failure: %{reason: @reason, description: @description}},
-          spec
-        )
+        prop_bin = PropertyComponent.to_bin(component, spec)
+        prop_comp = PropertyComponent.to_struct(prop_bin, spec)
 
-      prop_comp = PropertyComponent.to_struct(prop_bin, spec)
-      assert prop_comp.data == nil
-      assert prop_comp.timestamp == nil
-      assert prop_comp.failure.reason == @reason
-      assert prop_comp.failure.description == @description
+        assert prop_comp.data == component.data
+        assert prop_comp.timestamp == component.timestamp
+        assert prop_comp.failure == component.failure
+      end
     end
+
+    property "converts failure to bin when spec is map" do
+      forall data <- [description: utf8(), reason: error_reason(), timestamp: datetime()] do
+        spec = [
+          %{
+            "name" => "location",
+            "size" => 1,
+            "type" => "enum",
+            "values" => [
+              %{"id" => 0, "name" => "front_left"},
+              %{"id" => 1, "name" => "front_right"},
+              %{"id" => 2, "name" => "rear_right"},
+              %{"id" => 3, "name" => "rear_left"}
+            ]
+          },
+          %{
+            "description" => "Tire pressure in BAR formatted in 4-bytes per IEEE 754",
+            "name" => "pressure",
+            "size" => 4,
+            "type" => "float"
+          }
+        ]
+
+        component = %PropertyComponent{
+          timestamp: data[:timestamp],
+          failure: %{reason: data[:reason], description: data[:description]}
+        }
+
+        prop_bin = PropertyComponent.to_bin(component, spec)
+        prop_comp = PropertyComponent.to_struct(prop_bin, spec)
+
+        assert prop_comp.data == component.data
+        assert prop_comp.timestamp == component.timestamp
+        assert prop_comp.failure.reason == component.failure.reason
+        assert prop_comp.failure.description == component.failure.description
+      end
+    end
+  end
+
+  def error_reason do
+    oneof([:rate_limit, :execution_timeout, :format_error, :unauthorised, :unknown, :pending])
   end
 
   def integer_3 do
