@@ -599,11 +599,11 @@ defmodule AutoApi.State do
   If a property supports multiple value, appends the value to the property list
   """
   @spec update_property(map, atom(), any, DateTime.t() | nil) :: map
-  def update_property(state, key, value, timestamp \\ nil) do
-    if state.__struct__.is_multiple?(key) do
-      state.__struct__.append_property(state, key, value, timestamp)
+  def update_property(%state_module{} = state, key, value, timestamp \\ nil) do
+    if state_module.is_multiple?(key) do
+      state_module.append_property(state, key, value, timestamp)
     else
-      state.__struct__.put_property(state, key, value, timestamp)
+      state_module.put_property(state, key, value, timestamp)
     end
   end
 end
