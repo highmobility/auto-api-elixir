@@ -99,4 +99,32 @@ defmodule AutoApi.StateTest do
       assert state.tire_pressures == [tire_pressures]
     end
   end
+
+  describe "update_property/4" do
+    test "update a property with single value" do
+      now = DateTime.utc_now()
+      state = %DiagnosticsState{}
+      new_state = AutoApi.State.update_property(state, :mileage, 1000, now)
+
+      assert new_state.mileage.data == 1000
+      assert new_state.mileage.timestamp == now
+    end
+
+    test "update a property with multiple valus " do
+      now = DateTime.utc_now()
+      state = %DiagnosticsState{}
+      assert state.tire_pressures == []
+
+      new_state =
+        AutoApi.State.update_property(
+          state,
+          :tire_pressures,
+          %{location: :front_right, pressure: 1.938},
+          now
+        )
+
+      assert tire_info = List.first(new_state.tire_pressures)
+      assert tire_info.timestamp == now
+    end
+  end
 end

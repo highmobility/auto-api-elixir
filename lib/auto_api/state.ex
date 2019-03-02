@@ -592,4 +592,18 @@ defmodule AutoApi.State do
     |> Map.put(:properties, properties)
     |> put_in(failure_keys, {reason, description})
   end
+
+  @doc """
+  Update a property value in the given state.
+
+  If a property supports multiple value, appends the value to the property list
+  """
+  @spec update_property(map, atom(), any, DateTime.t() | nil) :: map
+  def update_property(%state_module{} = state, key, value, timestamp \\ nil) do
+    if state_module.is_multiple?(key) do
+      state_module.append_property(state, key, value, timestamp)
+    else
+      state_module.put_property(state, key, value, timestamp)
+    end
+  end
 end
