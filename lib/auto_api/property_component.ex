@@ -66,6 +66,8 @@ defmodule AutoApi.PropertyComponent do
       |> Enum.find(%{}, &(&1["name"] == Atom.to_string(data)))
       |> Map.get("id")
 
+    unless enum_id, do: Logger.warn("Enum key `#{data}` doesn't exist in #{inspect spec}")
+
     <<enum_id>>
   end
 

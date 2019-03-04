@@ -21,6 +21,8 @@ defmodule AutoApi.FailureMessageState do
   Keeps Charging state
   """
 
+  alias AutoApi.PropertyComponent
+
   @type failure_reason ::
           :unsupported_capability
           | :unauthorised
@@ -37,18 +39,16 @@ defmodule AutoApi.FailureMessageState do
             failed_message_type: nil,
             failure_reason: nil,
             failure_description: nil,
-            timestamp: nil,
-            properties: []
+            timestamp: nil
 
   use AutoApi.State, spec_file: "specs/failure_message.json"
 
   @type t :: %__MODULE__{
-          failed_message_identifier: integer | nil,
-          failed_message_type: integer | nil,
-          failure_reason: failure_reason :: nil,
-          failure_description: String.t() | nil,
-          timestamp: DateTime.t() | nil,
-          properties: list(atom)
+          failed_message_identifier: %PropertyComponent{data: integer} | nil,
+          failed_message_type: %PropertyComponent{data: integer} | nil,
+          failure_reason: %PropertyComponent{data: failure_reason} :: nil,
+          failure_description: %PropertyComponent{data: String.t()} | nil,
+          timestamp: DateTime.t() | nil
         }
 
   @doc """
@@ -71,14 +71,18 @@ defmodule AutoApi.FailureMessageState do
     |> parse_state_properties()
   end
 
-  defp unify_unauthorized_from_bin(%{failure_reason: :unauthorised} = state) do
-    %{state | failure_reason: :unauthorized}
+  defp unify_unauthorized_from_bin(
+         %{failure_reason: %{data: :unauthorised} = failure_reason} = state
+       ) do
+    %{state | failure_reason: %{failure_reason | data: :unauthorized}}
   end
 
   defp unify_unauthorized_from_bin(value), do: value
 
-  defp unify_unauthorized_to_bin(%{failure_reason: :unauthorized} = state) do
-    %{state | failure_reason: :unauthorised}
+  defp unify_unauthorized_to_bin(
+         %{failure_reason: %{data: :unauthorized} = failure_reason} = state
+       ) do
+    %{state | failure_reason: %{failure_reason | data: :unauthorised}}
   end
 
   defp unify_unauthorized_to_bin(value), do: value
