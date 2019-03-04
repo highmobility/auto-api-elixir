@@ -18,5 +18,29 @@
 # licensing@high-mobility.com
 defmodule AutoApi.FailureMessageCommandTest do
   use ExUnit.Case
-  doctest AutoApi.FailureMessageCommand
+  alias AutoApi.{FailureMessageCommand, FailureMessageState}
+
+  setup do
+    state =
+      %FailureMessageState{}
+      |> FailureMessageState.put_property(:failure_description, "desc")
+      |> FailureMessageState.put_property(:failure_reason, :vehicle_asleep)
+
+    {:ok, %{state: state}}
+  end
+
+  describe "execute/2" do
+    test "failure", %{state: state} do
+      cmd = <<0x01>> <> FailureMessageState.to_bin(state)
+
+      assert FailureMessageCommand.execute(%FailureMessageState{}, cmd) ==
+               {:state_changed, state}
+    end
+  end
+
+  describe "state/1" do
+    test "get state", %{state: state} do
+      assert FailureMessageCommand.state(state) == <<0x01>> <> FailureMessageState.to_bin(state)
+    end
+  end
 end
