@@ -98,6 +98,60 @@ defmodule AutoApi.StateTest do
 
       assert state.tire_pressures == [tire_pressures]
     end
+
+    test "failure" do
+      coordinates = %PropertyComponent{failure: %{reason: :unknown, description: "Unknown"}}
+      state = %VehicleLocationState{coordinates: coordinates}
+
+      new_state =
+        state
+        |> VehicleLocationState.to_bin()
+        |> VehicleLocationState.from_bin()
+
+      assert new_state.coordinates == coordinates
+    end
+  end
+
+  describe "put_failure/5" do
+    test "only failure" do
+      state = %DiagnosticsState{mileage: %PropertyComponent{data: 16_777_215}}
+      new_state = DiagnosticsState.put_failure(state, :speed, :unknown, "Unknown speed")
+
+      assert new_state.mileage.data == 16_777_215
+      assert new_state.speed.failure.reason == :unknown
+      assert new_state.speed.failure.description == "Unknown speed"
+      assert new_state.speed.timestamp == nil
+    end
+
+    test "failure with timestamp" do
+      timestamp = DateTime.utc_now()
+      state = %DiagnosticsState{mileage: %PropertyComponent{data: 16_777_215}}
+
+      new_state =
+        DiagnosticsState.put_failure(state, :speed, :unknown, "Unknown speed", timestamp)
+
+      assert new_state.mileage.data == 16_777_215
+      assert new_state.speed.failure.reason == :unknown
+      assert new_state.speed.failure.description == "Unknown speed"
+      assert new_state.speed.timestamp == timestamp
+    end
+
+    test "failure on maps property overrides data" do
+      timestamp = DateTime.utc_now()
+
+      state =
+        DiagnosticsState.base()
+        |> DiagnosticsState.append_property(:tire_pressures, %{
+          location: :front_left,
+          pressure: 22.034
+        })
+        |> DiagnosticsState.put_failure(:tire_pressures, :unknown, "Unknown pressure", timestamp)
+
+      refute state.tire_pressures.data
+      assert state.tire_pressures.failure.reason == :unknown
+      assert state.tire_pressures.failure.description == "Unknown pressure"
+      assert state.tire_pressures.timestamp == timestamp
+    end
   end
 
   describe "update_property/4" do

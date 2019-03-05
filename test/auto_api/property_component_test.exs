@@ -141,7 +141,7 @@ defmodule AutoApi.PropertyComponentTest do
       ]
 
       prop_comp = %PropertyComponent{data: %{location: :front_left, pressure: 22.034}}
-      bin_comp = PropertyComponent.map_to_bin(prop_comp, spec)
+      bin_comp = PropertyComponent.to_bin(prop_comp, spec)
 
       assert bin_comp == <<1, 5::integer-16, 0x00, 65, 176, 69, 162>>
 
@@ -176,7 +176,7 @@ defmodule AutoApi.PropertyComponentTest do
           timestamp: data[:datetime]
         }
 
-        bin_comp = PropertyComponent.map_to_bin(prop_comp, spec)
+        bin_comp = PropertyComponent.to_bin(prop_comp, spec)
 
         bin_data = <<id::integer-16, text_size::integer-16, text::binary>>
         bin_data_size_org = byte_size(bin_data)
@@ -189,6 +189,65 @@ defmodule AutoApi.PropertyComponentTest do
         assert PropertyComponent.to_struct(bin_comp, spec) == prop_comp
       end
     end
+
+    property "converts failure to bin" do
+      forall data <- [description: utf8(), reason: error_reason(), timestamp: datetime()] do
+        spec = %{"type" => "integer", "size" => 3}
+
+        component = %PropertyComponent{
+          timestamp: data[:timestamp],
+          failure: %{reason: data[:reason], description: data[:description]}
+        }
+
+        prop_bin = PropertyComponent.to_bin(component, spec)
+        prop_comp = PropertyComponent.to_struct(prop_bin, spec)
+
+        assert prop_comp.data == component.data
+        assert prop_comp.timestamp == component.timestamp
+        assert prop_comp.failure == component.failure
+      end
+    end
+
+    property "converts failure to bin when spec is map" do
+      forall data <- [description: utf8(), reason: error_reason(), timestamp: datetime()] do
+        spec = [
+          %{
+            "name" => "location",
+            "size" => 1,
+            "type" => "enum",
+            "values" => [
+              %{"id" => 0, "name" => "front_left"},
+              %{"id" => 1, "name" => "front_right"},
+              %{"id" => 2, "name" => "rear_right"},
+              %{"id" => 3, "name" => "rear_left"}
+            ]
+          },
+          %{
+            "description" => "Tire pressure in BAR formatted in 4-bytes per IEEE 754",
+            "name" => "pressure",
+            "size" => 4,
+            "type" => "float"
+          }
+        ]
+
+        component = %PropertyComponent{
+          timestamp: data[:timestamp],
+          failure: %{reason: data[:reason], description: data[:description]}
+        }
+
+        prop_bin = PropertyComponent.to_bin(component, spec)
+        prop_comp = PropertyComponent.to_struct(prop_bin, spec)
+
+        assert prop_comp.data == component.data
+        assert prop_comp.timestamp == component.timestamp
+        assert prop_comp.failure.reason == component.failure.reason
+        assert prop_comp.failure.description == component.failure.description
+      end
+    end
+  end
+
+  def error_reason do
+    oneof([:rate_limit, :execution_timeout, :format_error, :unauthorised, :unknown, :pending])
   end
 
   def integer_3 do

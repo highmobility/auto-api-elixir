@@ -168,6 +168,22 @@ defmodule AutoApi.State do
             true
           )
         end
+
+        @doc """
+        Puts a failure property in the state.
+
+        This function wraps the failure in PropertyComponent
+        """
+        @spec put_failure(__MODULE__.t(), atom(), atom(), String.t(), DateTime.t() | nil) ::
+                __MODULE__.t()
+        def put_failure(state, property_name, reason, description, timestamp \\ nil) do
+          prop = %AutoApi.PropertyComponent{
+            failure: %{reason: reason, description: description},
+            timestamp: timestamp
+          }
+
+          %{state | property_name => prop}
+        end
       end
 
     spec = Poison.decode!(File.read!(opts[:spec_file]))
@@ -295,7 +311,7 @@ defmodule AutoApi.State do
                   data
                   |> Enum.map(fn item ->
                     property_component_binary =
-                      AutoApi.PropertyComponent.map_to_bin(
+                      AutoApi.PropertyComponent.to_bin(
                         item,
                         unquote(Macro.escape(prop["items"]))
                       )
@@ -308,7 +324,7 @@ defmodule AutoApi.State do
               else
                 def parse_state_property(unquote(prop_name), data) do
                   property_component_binary =
-                    AutoApi.PropertyComponent.map_to_bin(
+                    AutoApi.PropertyComponent.to_bin(
                       data,
                       unquote(Macro.escape(prop["items"]))
                     )
