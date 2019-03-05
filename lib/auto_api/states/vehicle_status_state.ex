@@ -37,10 +37,11 @@ defmodule AutoApi.VehicleStatusState do
             engine_volume: nil,
             engine_max_torque: nil,
             gearbox: nil,
-            state: [],
             display_unit: nil,
             driver_seat_location: nil,
             equipments: [],
+            brand: nil,
+            state: [],
             timestamp: nil
 
   use AutoApi.State, spec_file: "specs/vehicle_status.json"
@@ -68,6 +69,7 @@ defmodule AutoApi.VehicleStatusState do
           display_unit: %PropertyComponent{data: :km | :miles} | nil,
           driver_seat_location: %PropertyComponent{data: :left | :right | :center} | nil,
           equipments: list(%PropertyComponent{data: String.t()}),
+          brand: %PropertyComponent{data: String.t()} | nil,
           state: list(any),
           timestamp: DateTime.t() | nil
         }
