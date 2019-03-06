@@ -33,8 +33,7 @@ defmodule AutoApi.FailureMessageCommandTest do
     test "failure", %{state: state} do
       cmd = <<0x01>> <> FailureMessageState.to_bin(state)
 
-      assert FailureMessageCommand.execute(%FailureMessageState{}, cmd) ==
-               {:state_changed, state}
+      assert FailureMessageCommand.execute(%FailureMessageState{}, cmd) == {:state_changed, state}
     end
   end
 
