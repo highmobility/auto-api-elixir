@@ -374,15 +374,16 @@ defmodule AutoApi.State do
                 throw :not_implement
               end
 
-              def parse_state_property(unquote(prop_name), states) do
+              def parse_state_property(unquote(prop_name), states) when is_list(states) do
                 states
-                |> Enum.map(fn state ->
-                  mod = state.__struct__
+                |> Enum.map(&parse_state_property(unquote(prop_name), &1))
+                |> :binary.list_to_bin()
+              end
 
-                  body = mod.identifier <> <<1>> <> mod.to_bin(state)
-
-                  <<unquote(prop_id), byte_size(body)::integer-16>> <> body
-                end)
+              def parse_state_property(unquote(prop_name), state) do
+                bin = AutoApi.PropertyComponent.to_bin(state, unquote(Macro.escape(prop)))
+                head = <<unquote(prop_id), byte_size(bin)::integer-16>>
+                head <> bin
               end
 
             _ ->

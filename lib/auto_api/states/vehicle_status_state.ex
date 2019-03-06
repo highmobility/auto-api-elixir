@@ -70,7 +70,7 @@ defmodule AutoApi.VehicleStatusState do
           driver_seat_location: %PropertyComponent{data: :left | :right | :center} | nil,
           equipments: list(%PropertyComponent{data: String.t()}),
           brand: %PropertyComponent{data: String.t()} | nil,
-          state: list(any),
+          state: list(%PropertyComponent{}),
           timestamp: DateTime.t() | nil
         }
 

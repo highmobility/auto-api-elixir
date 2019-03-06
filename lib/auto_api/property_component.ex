@@ -100,6 +100,10 @@ defmodule AutoApi.PropertyComponent do
     <<data::integer-size(size_bit)>>
   end
 
+  defp data_to_bin(%state_mod{} = state, %{"type" => "capability_state"}) do
+    state_mod.identifier <> <<0x01>> <> state_mod.to_bin(state)
+  end
+
   defp timestamp_to_bin(nil), do: <<>>
 
   defp timestamp_to_bin(timestamp) do
