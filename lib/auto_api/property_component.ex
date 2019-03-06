@@ -223,8 +223,8 @@ defmodule AutoApi.PropertyComponent do
   end
 
   defp to_value(binary_data, "capability_state") do
-    <<cap_id :: binary-size(2), 0x01, bin_state::binary>> = binary_data
-    cap_mod = AutoApi.Capability.list_capabilities[cap_id]
+    <<cap_id::binary-size(2), 0x01, bin_state::binary>> = binary_data
+    cap_mod = AutoApi.Capability.list_capabilities()[cap_id]
 
     cap_mod.state.from_bin(bin_state)
   end
