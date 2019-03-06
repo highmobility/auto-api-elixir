@@ -50,7 +50,7 @@ defmodule AutoApi.ChargingState do
             utc_time_offset: integer
           }
         }
-  @type plugged_in :: %PropertyComponent{data: :disconnected | :plugged_in | nil}
+  @type plugged_in :: %PropertyComponent{data: :disconnected | :plugged_in}
   @type charging_state :: %PropertyComponent{
           data:
             :not_charging
@@ -84,8 +84,7 @@ defmodule AutoApi.ChargingState do
             timers: [],
             plugged_in: nil,
             charging_state: nil,
-            timestamp: nil,
-            properties: []
+            timestamp: nil
 
   use AutoApi.State, spec_file: "specs/charging.json"
 
@@ -108,7 +107,7 @@ defmodule AutoApi.ChargingState do
           reduction_times: list(reduction_time),
           battery_temperature: PropertyComponent.t() | nil,
           timers: list(timer),
-          plugged_in: plugged_in,
+          plugged_in: plugged_in | nil,
           charging_state: charging_state | nil,
           timestamp: DateTime.t() | nil
         }
