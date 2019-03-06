@@ -21,22 +21,40 @@ defmodule AutoApi.MaintenanceState do
   Maintenance state
   """
 
-  alias AutoApi.CommonData
+  alias AutoApi.{CommonData, PropertyComponent}
 
   defstruct days_to_next_service: nil,
             kilometers_to_next_service: nil,
-            timestamp: nil,
-            properties: []
+            cbs_reports_count: nil,
+            months_to_exhaust_inpection: nil,
+            service_distance_threshold: nil,
+            teleservice_availability: nil,
+            service_time_threshold: nil,
+            automatic_teleservice_call_date: nil,
+            teleservice_battery_call_date: nil,
+            next_inspection_date: nil,
+            condition_based_services: nil,
+            brake_fluid_change_date: nil,
+            timestamp: nil
 
   use AutoApi.State, spec_file: "specs/maintenance.json"
 
   @type activity :: :inactive | :active
+  @type teleservice_availability :: :pending | :succesful | :error
 
   @type t :: %__MODULE__{
-          days_to_next_service: integer | nil,
-          kilometers_to_next_service: integer | nil,
-          timestamp: DateTime.t() | nil,
-          properties: list(atom)
+          days_to_next_service: %PropertyComponent{data: integer} | nil,
+          kilometers_to_next_service: %PropertyComponent{data: integer} | nil,
+          cbs_reports_count: %PropertyComponent{data: integer} | nil,
+          months_to_exhaust_inpection: %PropertyComponent{data: integer} | nil,
+          teleservice_availability: %PropertyComponent{data: teleservice_availability} | nil,
+          service_time_threshold: %PropertyComponent{data: integer} | nil,
+          automatic_teleservice_call_date: %PropertyComponent{data: integer} | nil,
+          teleservice_battery_call_date: %PropertyComponent{data: integer} | nil,
+          next_inspection_date: %PropertyComponent{data: integer} | nil,
+          condition_based_services: %PropertyComponent{data: integer} | nil,
+          brake_fluid_change_date: %PropertyComponent{data: integer} | nil,
+          timestamp: DateTime.t() | nil
         }
 
   @doc """
