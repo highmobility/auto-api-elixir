@@ -18,7 +18,7 @@
 # licensing@high-mobility.com
 defmodule AutoApi.StateTest do
   use ExUnit.Case
-  alias AutoApi.{PropertyComponent, DiagnosticsState, VehicleLocationState}
+  alias AutoApi.{PropertyComponent, DiagnosticsState, VehicleLocationState, VehicleStatusState}
 
   describe "symmetric from_bin/1 & to_bin/1" do
     test "integer size 4" do
@@ -74,6 +74,18 @@ defmodule AutoApi.StateTest do
         |> DiagnosticsState.from_bin()
 
       assert new_state.brake_fluid_level.data == :low
+    end
+
+    test "capability_state" do
+      inner_state = %DiagnosticsState{brake_fluid_level: %PropertyComponent{data: :low}}
+      state = %VehicleStatusState{state: [%PropertyComponent{data: inner_state}]}
+
+      new_state =
+        state
+        |> VehicleStatusState.to_bin()
+        |> VehicleStatusState.from_bin()
+
+      assert new_state.state == [%PropertyComponent{data: inner_state}]
     end
 
     test "map" do

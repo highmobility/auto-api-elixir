@@ -62,4 +62,24 @@ defmodule AutoApi.VehicleStatusStateTest do
     assert state == <<0x99, (diag_state_bin_size + 3)::integer-16, 0x01, diag_state_bin_size::integer-16, diag_state_bin::binary,
       0x99, (door_state_bin_size + 3)::integer-16, 0x01, door_state_bin_size::integer-16, door_state_bin::binary>>
   end
+
+  test "Correctly decodes state from_bin/1" do
+    bin_state = <<153, 0, 25, 1, 0, 22, 0, 51, 1, 3, 0, 16, 1, 0, 2, 0, 42, 2, 0, 8, 0, 0, 1,
+                105, 82, 129, 191, 34, 153, 0, 14, 1, 0, 11, 0, 32, 1, 4, 0, 5, 1, 0, 2, 0,
+                0>>
+
+    state = VehicleStatusState.from_bin(bin_state)
+
+    assert [diag_state, door_state] = state.state
+
+    assert diag_state.data.speed.data == 42
+    assert diag_state.data.speed.timestamp == DateTime.from_unix!(1551867428642, :millisecond)
+    refute diag_state.data.speed.failure
+
+    assert [position] = door_state.data.positions
+    assert position.data.door_location == :front_left
+    assert position.data.position == :closed
+    refute position.timestamp
+    refute position.failure
+  end
 end

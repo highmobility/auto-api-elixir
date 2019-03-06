@@ -370,8 +370,11 @@ defmodule AutoApi.State do
               end
 
             "capability_state" ->
-              def parse_bin_property(unquote(prop["id"]), _size, _data) do
-                throw :not_implement
+              def parse_bin_property(unquote(prop["id"]), _size, data) do
+                data_component =
+                  AutoApi.PropertyComponent.to_struct(data, unquote(Macro.escape(prop)))
+
+                {String.to_atom(unquote(prop["name"])), unquote(multiple), data_component}
               end
 
               def parse_state_property(unquote(prop_name), states) when is_list(states) do
