@@ -119,6 +119,33 @@ defmodule AutoApi.PropertyComponentTest do
       assert prop_comp.failure == nil
     end
 
+    test "converts capability_state to bin" do
+      datetime = DateTime.utc_now()
+
+      spec = %{
+        "type" => "capability_state"
+      }
+
+      state =
+        AutoApi.DoorLocksState.base()
+        |> AutoApi.DoorLocksState.append_property(:positions, %{
+          door_location: :front_left,
+          position: :closed
+        })
+
+      prop_bin =
+        PropertyComponent.to_bin(
+          %PropertyComponent{data: state, timestamp: datetime},
+          spec
+        )
+
+      prop_comp = PropertyComponent.to_struct(prop_bin, spec)
+
+      assert prop_comp.data == state
+      assert DateTime.to_unix(prop_comp.timestamp) == DateTime.to_unix(datetime)
+      assert prop_comp.failure == nil
+    end
+
     test "converts map to bin" do
       spec = [
         %{

@@ -100,6 +100,10 @@ defmodule AutoApi.PropertyComponent do
     <<data::integer-size(size_bit)>>
   end
 
+  defp data_to_bin(%state_mod{} = state, %{"type" => "capability_state"}) do
+    state_mod.identifier <> <<0x01>> <> state_mod.to_bin(state)
+  end
+
   defp timestamp_to_bin(nil), do: <<>>
 
   defp timestamp_to_bin(timestamp) do
@@ -216,6 +220,13 @@ defmodule AutoApi.PropertyComponent do
       {:ok, datetime} -> datetime
       _ -> nil
     end
+  end
+
+  defp to_value(binary_data, "capability_state") do
+    <<cap_id::binary-size(2), 0x01, bin_state::binary>> = binary_data
+    cap_mod = AutoApi.Capability.list_capabilities()[cap_id]
+
+    cap_mod.state.from_bin(bin_state)
   end
 
   defp failure_to_value(nil), do: nil
