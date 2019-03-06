@@ -227,8 +227,6 @@ defmodule AutoApi.State do
       for prop <- spec["properties"] do
         prop_name = String.to_atom(prop["name"])
         prop_id = prop["id"]
-        prop_type = prop["type"]
-        prop_size = prop["size"]
         multiple = prop["multiple"] || false
 
         quote do
