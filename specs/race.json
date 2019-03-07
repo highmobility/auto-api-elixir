@@ -53,23 +53,23 @@
             "name": "accelerations"
         },
         {
-            "size": 1,
-            "type": "integer",
-            "description": "The understeering percentage between 0-100% whereas up to 20% is considered OK, up to 30% marginal, over 30% critical",
+            "size": 8,
+            "type": "double",
+            "description": "The understeering percentage between 0.0-1.0 whereas up to 0.2 (20%) is considered OK, up to 0.3 (30%) marginal, over 30% critical",
             "name": "understeering",
             "id": 2
         },
         {
-            "size": 1,
-            "type": "integer",
-            "description": "The oversteering percentage between 0-100% whereas up to 20% is considered OK, up to 30% marginal, over 30% critical",
+            "size": 8,
+            "type": "double",
+            "description": "The oversteering percentage between 0.0-1.0 whereas up to 0.2 (20%) is considered OK, up to 30% marginal, over 30% critical",
             "name": "oversteering",
             "id": 3
         },
         {
-            "size": 1,
-            "type": "integer",
-            "description": "The gas pedal position between 0-100%, whereas 100% is full throttle",
+            "size": 8,
+            "type": "double",
+            "description": "The gas pedal position between 0.0-1.0, whereas 1.0 (100%) is full throttle",
             "name": "gas_pedal_position",
             "id": 4
         },
@@ -90,7 +90,7 @@
         {
             "size": 4,
             "type": "float",
-            "description": "Yaw rate in degrees per second [\u00b0/s] per IEEE 754 formatting",
+            "description": "Yaw rate in degrees per second [°/s] per IEEE 754 formatting",
             "name": "yaw_rate",
             "id": 7
         },
@@ -200,9 +200,9 @@
             "id": 12
         },
         {
-            "size": 1,
-            "type": "integer",
-            "description": "The brake pedal position between 0-100%, wheras 100% is full brakes",
+            "size": 8,
+            "type": "double",
+            "description": "The brake pedal position between 0.0-1.0, wheras 1.0 (100%) is full brakes",
             "name": "brake_pedal_position",
             "id": 13
         },
@@ -287,5 +287,5 @@
             "name": "vehicle_moving"
         }
     ],
-    "api_update": 8
+    "api_update": 10
 }

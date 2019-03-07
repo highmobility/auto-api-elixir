@@ -6,9 +6,9 @@
     "api_intro": 5,
     "properties": [
         {
-            "size": 1,
-            "type": "integer",
-            "description": "Measured raining intensity percentage, whereas 0% is no rain and 100% is maximum rain",
+            "size": 8,
+            "type": "double",
+            "description": "Measured raining intensity percentage, whereas 0.0 is no rain and 1.0 (100%) is maximum rain",
             "name": "rain_intensity",
             "id": 1
         }
@@ -22,5 +22,6 @@
             "id": 1,
             "name": "weather_conditions"
         }
-    ]
+    ],
+    "api_update": 10
 }

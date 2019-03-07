@@ -16,7 +16,7 @@
     ],
     "properties": [
         {
-            "size": 3,
+            "size": 4,
             "type": "integer",
             "description": "The car mileage (odometer) in km",
             "name": "mileage",
