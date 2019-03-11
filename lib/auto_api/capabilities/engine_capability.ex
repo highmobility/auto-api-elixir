@@ -41,7 +41,7 @@ defmodule AutoApi.EngineCapability do
   @type command_type :: :engine_state | :get_ignition_state | :turn_engine_on_off
 
   @command_module AutoApi.NotImplemented
-  @state_module AutoApi.NotImplemented
+  @state_module AutoApi.EngineState
 
   use AutoApi.Capability
 end

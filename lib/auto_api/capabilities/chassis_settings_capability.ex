@@ -55,7 +55,7 @@ defmodule AutoApi.ChassisSettingsCapability do
           | :set_chassis_position
 
   @command_module AutoApi.NotImplemented
-  @state_module AutoApi.NotImplemented
+  @state_module AutoApi.ChassisSettingsState
 
   use AutoApi.Capability
 end

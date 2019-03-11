@@ -41,7 +41,7 @@ defmodule AutoApi.OffroadCapability do
   @type command_type :: :get_offroad_state | :offroad_state
 
   @command_module AutoApi.NotImplemented
-  @state_module AutoApi.NotImplemented
+  @state_module AutoApi.OffroadState
 
   use AutoApi.Capability
 end
