@@ -41,6 +41,9 @@ defmodule AutoApi.LightConditionsState do
 
   @doc """
   Build state based on binary value
+
+    iex> AutoApi.LightConditionsState.from_bin(<<1, 7::integer-16, 1, 0, 4, 65, 201, 92, 41>>)
+    %AutoApi.LightConditionsState{outside_light: %AutoApi.PropertyComponent{data: 25.17}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -49,6 +52,10 @@ defmodule AutoApi.LightConditionsState do
 
   @doc """
   Parse state to bin
+
+    iex> state = %AutoApi.LightConditionsState{outside_light: %AutoApi.PropertyComponent{data: 25.17}, properties: [:outside_light]}
+    iex> AutoApi.LightConditionsState.to_bin(state)
+    <<1, 7::integer-16, 1, 0, 4, 65, 201, 92, 41>>
   """
   @spec to_bin(__MODULE__.t()) :: binary
   def to_bin(%__MODULE__{} = state) do

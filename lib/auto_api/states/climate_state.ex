@@ -69,8 +69,8 @@ defmodule AutoApi.ClimateState do
   @doc """
   Build state based on binary value
 
-    iex> AutoApi.ClimateState.from_bin(<<0x01, 4::integer-16, 37.0::float-32>>)
-    %AutoApi.ClimateState{inside_temperature: 37.0}
+    iex> AutoApi.ClimateState.from_bin(<<1, 7::integer-16, 1, 0, 4, 65, 224, 0, 0>>)
+    %AutoApi.ClimateState{inside_temperature: %AutoApi.PropertyComponent{data: 28.0}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -79,8 +79,10 @@ defmodule AutoApi.ClimateState do
 
   @doc """
   Parse state to bin
-    iex> AutoApi.ClimateState.to_bin(%AutoApi.ClimateState{inside_temperature: 28.00, properties: [:inside_temperature]})
-    <<1, 4::integer-16, 28.00::float-32>>
+
+    iex> state = %AutoApi.ClimateState{inside_temperature: %AutoApi.PropertyComponent{data: 28.00}, properties: [:inside_temperature]}
+    iex> AutoApi.ClimateState.to_bin(state)
+    <<1, 7::integer-16, 1, 0, 4, 65, 224, 0, 0>>
   """
   @spec to_bin(__MODULE__.t()) :: binary
   def to_bin(%__MODULE__{} = state) do

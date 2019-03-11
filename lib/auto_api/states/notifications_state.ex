@@ -45,6 +45,10 @@ defmodule AutoApi.NotificationsState do
 
   @doc """
   Build state based on binary value
+
+    iex> bin = <<1, 0, 20, 1, 0, 17, 110, 111, 116, 105, 102, 105, 99, 97, 116, 105, 111, 110, 32, 116, 101, 120, 116>>
+    iex> AutoApi.NotificationsState.from_bin(bin)
+    %AutoApi.NotificationsState{text: %AutoApi.PropertyComponent{data: "notification text"}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -53,6 +57,10 @@ defmodule AutoApi.NotificationsState do
 
   @doc """
   Parse state to bin
+
+    iex> state = %AutoApi.NotificationsState{text: %AutoApi.PropertyComponent{data: "notification text"}, properties: [:text]}
+    iex> AutoApi.NotificationsState.to_bin(state)
+    <<1, 0, 20, 1, 0, 17, 110, 111, 116, 105, 102, 105, 99, 97, 116, 105, 111, 110, 32, 116, 101, 120, 116>>
   """
   @spec to_bin(__MODULE__.t()) :: binary
   def to_bin(%__MODULE__{} = state) do

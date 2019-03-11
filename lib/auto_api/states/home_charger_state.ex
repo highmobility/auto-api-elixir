@@ -84,6 +84,9 @@ defmodule AutoApi.HomeChargerState do
 
   @doc """
   Build state based on binary value
+
+    iex> AutoApi.HomeChargerState.from_bin(<<1, 4::integer-16, 1, 0, 1, 1>>)
+    %AutoApi.HomeChargerState{charging: %AutoApi.PropertyComponent{data: :plugged_in}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -92,6 +95,10 @@ defmodule AutoApi.HomeChargerState do
 
   @doc """
   Parse state to bin
+
+    iex> state = %AutoApi.HomeChargerState{charging: %AutoApi.PropertyComponent{data: :plugged_in}, properties: [:charging]}
+    iex> AutoApi.HomeChargerState.to_bin(state)
+    <<1, 4::integer-16, 1, 0, 1, 1>>
   """
   @spec to_bin(__MODULE__.t()) :: binary
   def to_bin(%__MODULE__{} = state) do

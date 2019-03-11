@@ -16,7 +16,7 @@
 #
 # Please inquire about commercial licensing options at
 # licensing@high-mobility.com
-defmodule AutoApi.ClimateStateTest do
+defmodule AutoApi.HomeChargerStateTest do
   use ExUnit.Case
-  doctest AutoApi.ClimateState
+  doctest AutoApi.HomeChargerState
 end
