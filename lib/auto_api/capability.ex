@@ -302,7 +302,7 @@ defmodule AutoApi.Capability do
   iex> AutoApi.Capability.get_by_name("Nobody")
   nil
   """
-  @spec get_by_name(binary) :: module
+  @spec get_by_name(binary | atom) :: module
   defdelegate get_by_name(name), to: AutoApi.CapabilityDelegate
 
   @doc """
