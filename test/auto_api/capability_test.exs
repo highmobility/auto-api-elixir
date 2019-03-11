@@ -19,4 +19,32 @@
 defmodule AutoApi.CapabilityTest do
   use ExUnit.Case
   doctest AutoApi.Capability
+
+  alias AutoApi.Capability
+
+  test "all/0 does not contain duplicates" do
+    assert Enum.uniq(Capability.all()) == Capability.all()
+  end
+
+  test "get_by_name/1 works with all capabilities" do
+    capabilities = Capability.all()
+
+    assert Enum.all?(capabilities, fn cap ->
+             Capability.get_by_name(cap.name) == cap
+           end)
+  end
+
+  test "get_by_id/1 works with all capabilities" do
+    capabilities = Capability.all()
+
+    assert Enum.all?(capabilities, fn cap ->
+             Capability.get_by_id(cap.identifier) == cap
+           end)
+  end
+
+  test "list_capabilities/0 returns legacy format" do
+    cap_ids = Enum.into(Capability.all(), %{}, &{&1.identifier, &1})
+
+    assert cap_ids == Capability.list_capabilities()
+  end
 end
