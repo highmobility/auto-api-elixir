@@ -16,27 +16,24 @@
 #
 # Please inquire about commercial licensing options at
 # licensing@high-mobility.com
-defmodule AutoApi.NaviDestinationState do
+defmodule AutoApi.LightConditionsState do
   @moduledoc """
-  Keeps Navigation Destination state
+  LightConditions state
   """
 
-  alias AutoApi.{CommonData, PropertyComponent}
+  alias AutoApi.PropertyComponent
 
-  @doc """
-  Navigation destination state
-  """
-  defstruct coordinates: nil,
-            destination_name: nil,
+  defstruct outside_light: nil,
+            inside_light: nil,
             timestamp: nil,
             properties: [],
             property_timestamps: %{}
 
-  use AutoApi.State, spec_file: "specs/navi_destination.json"
+  use AutoApi.State, spec_file: "specs/light_conditions.json"
 
   @type t :: %__MODULE__{
-          coordinates: %PropertyComponent{data: CommonData.coordinates()} | nil,
-          destination_name: %PropertyComponent{data: String.t()} | nil,
+          outside_light: %PropertyComponent{data: float} | nil,
+          inside_light: %PropertyComponent{data: float} | nil,
           timestamp: DateTime.t() | nil,
           properties: list(atom),
           property_timestamps: map()

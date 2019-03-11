@@ -21,19 +21,25 @@ defmodule AutoApi.HonkHornFlashLightsState do
   Keeps HonkHornFlashLights state
   """
 
+  alias AutoApi.PropertyComponent
+
   @type flashers ::
           :inactive | :emergency_flasher_active | :left_flasher_active | :right_flasher_active
   @doc """
   HonkHornFlashLights state
   """
-  defstruct flashers: nil, timestamp: nil, properties: []
+  defstruct flashers: nil,
+            timestamp: nil,
+            properties: [],
+            property_timestamps: %{}
 
   use AutoApi.State, spec_file: "specs/honk_horn_flash_lights.json"
 
   @type t :: %__MODULE__{
-          flashers: flashers | nil,
+          flashers: %PropertyComponent{data: flashers} | nil,
           timestamp: DateTime.t() | nil,
-          properties: list(atom)
+          properties: list(atom),
+          property_timestamps: map()
         }
 
   @doc """

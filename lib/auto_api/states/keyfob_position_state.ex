@@ -16,27 +16,30 @@
 #
 # Please inquire about commercial licensing options at
 # licensing@high-mobility.com
-defmodule AutoApi.NaviDestinationState do
+defmodule AutoApi.KeyfobPositionState do
   @moduledoc """
-  Keeps Navigation Destination state
+  KeyfobPosition state
   """
 
-  alias AutoApi.{CommonData, PropertyComponent}
+  alias AutoApi.PropertyComponent
 
-  @doc """
-  Navigation destination state
-  """
-  defstruct coordinates: nil,
-            destination_name: nil,
+  defstruct keyfob_position: nil,
             timestamp: nil,
             properties: [],
             property_timestamps: %{}
 
-  use AutoApi.State, spec_file: "specs/navi_destination.json"
+  use AutoApi.State, spec_file: "specs/keyfob_position.json"
+
+  @type position ::
+          :out_of_range
+          | :outside_driver_side
+          | :outside_in_front_of_car
+          | :outside_passenger_side
+          | :outside_behind_car
+          | :inside_car
 
   @type t :: %__MODULE__{
-          coordinates: %PropertyComponent{data: CommonData.coordinates()} | nil,
-          destination_name: %PropertyComponent{data: String.t()} | nil,
+          keyfob_position: %PropertyComponent{data: position} | nil,
           timestamp: DateTime.t() | nil,
           properties: list(atom),
           property_timestamps: map()

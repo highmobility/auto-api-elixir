@@ -21,6 +21,8 @@ defmodule AutoApi.HoodState do
   Keeps Hood state
   """
 
+  alias AutoApi.PropertyComponent
+
   @type position :: :closed | :open | :intermediate
 
   @doc """
@@ -28,14 +30,16 @@ defmodule AutoApi.HoodState do
   """
   defstruct position: nil,
             timestamp: nil,
-            properties: []
+            properties: [],
+            property_timestamps: %{}
 
   use AutoApi.State, spec_file: "specs/hood.json"
 
   @type t :: %__MODULE__{
-          position: position | nil,
+          position: %PropertyComponent{data: position} | nil,
           timestamp: DateTime.t() | nil,
-          properties: list(atom)
+          properties: list(atom),
+          property_timestamps: map()
         }
 
   @doc """

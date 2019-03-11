@@ -21,18 +21,10 @@ defmodule AutoApi.RooftopControlState do
   Keeps RooftopControl state
   """
 
-  @type convertible_roof_state ::
-          :closed
-          | :open
-          | :emergency_locked
-          | :closed_secured
-          | :open_secured
-          | :hard_top_mounted
-          | :intermediate_position
-          | :loading_position
-          | :loading_position_immediate
+  alias AutoApi.PropertyComponent
 
-  @type sunroof_tilt_state :: :closed | :tilted | :half_tilted
+  @type convertible_roof_state :: :closed | :open
+  @type sunroof_tilt_state :: :closed | :tilt | :half_tilt
   @type sunroof_state :: :closed | :open | :intermediate
 
   @doc """
@@ -44,19 +36,20 @@ defmodule AutoApi.RooftopControlState do
             sunroof_tilt_state: nil,
             sunroof_state: nil,
             timestamp: nil,
-            property_timestamps: %{},
-            properties: []
+            properties: [],
+            property_timestamps: %{}
 
   use AutoApi.State, spec_file: "specs/rooftop_control.json"
 
   @type t :: %__MODULE__{
-          dimming: nil | integer,
-          position: nil | integer,
-          convertible_roof_state: nil | convertible_roof_state,
-          sunroof_tilt_state: nil | sunroof_tilt_state,
-          sunroof_state: nil | sunroof_state,
+          dimming: %PropertyComponent{data: float} | nil,
+          position: %PropertyComponent{data: float} | nil,
+          convertible_roof_state: %PropertyComponent{data: convertible_roof_state} | nil,
+          sunroof_tilt_state: %PropertyComponent{data: sunroof_tilt_state} | nil,
+          sunroof_state: %PropertyComponent{data: sunroof_state} | nil,
           timestamp: DateTime.t() | nil,
-          properties: list(atom)
+          properties: list(atom),
+          property_timestamps: map()
         }
 
   @doc """

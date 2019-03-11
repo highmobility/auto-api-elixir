@@ -21,7 +21,7 @@ defmodule AutoApi.ClimateState do
   StartStop state
   """
 
-  alias AutoApi.CommonData
+  alias AutoApi.{CommonData, PropertyComponent}
 
   defstruct inside_temperature: nil,
             outside_temperature: nil,
@@ -35,24 +35,35 @@ defmodule AutoApi.ClimateState do
             hvac_weekday_starting_times: [],
             rear_temperature_setting: nil,
             timestamp: nil,
-            properties: []
+            properties: [],
+            property_timestamps: %{}
 
   use AutoApi.State, spec_file: "specs/climate.json"
 
   @type activity :: :inactive | :active
-  @type weekday :: :monday | :tuesday | :wednesday | :thursday | :friday | :saturday | :sunday
-  @type hvac_weekday_starting_time :: %{
-          weekday: weekday | :automatic,
-          hour: integer,
-          minute: integer
+  @type hvac_weekday_starting_time :: %PropertyComponent{
+          data: %{
+            weekday: CommonData.weekday() | :automatic,
+            hour: integer,
+            minute: integer
+          }
         }
 
   @type t :: %__MODULE__{
-          inside_temperature: float | nil,
+          inside_temperature: %PropertyComponent{data: float} | nil,
+          outside_temperature: %PropertyComponent{data: float} | nil,
+          driver_temperature_setting: %PropertyComponent{data: float} | nil,
+          passenger_temperature_setting: %PropertyComponent{data: float} | nil,
+          hvac_state: %PropertyComponent{data: CommonData.activity()} | nil,
+          defogging_state: %PropertyComponent{data: CommonData.activity()} | nil,
+          defrosting_state: %PropertyComponent{data: CommonData.activity()} | nil,
+          ionising_state: %PropertyComponent{data: CommonData.activity()} | nil,
+          defrosting_temperature: %PropertyComponent{data: float} | nil,
           hvac_weekday_starting_times: list(hvac_weekday_starting_time),
-          rear_temperature_setting: float | nil,
+          rear_temperature_setting: %PropertyComponent{data: float} | nil,
           timestamp: DateTime.t() | nil,
-          properties: list(atom)
+          properties: list(atom),
+          property_timestamps: map()
         }
 
   @doc """

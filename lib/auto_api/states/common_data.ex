@@ -21,6 +21,10 @@ defmodule AutoApi.CommonData do
   @type position :: :closed | :open | :unavailable
   @type lock :: :unlocked | :locked
   @type electricity :: :on | :off
+  @type coordinates :: %{latitude: float, longitude: float}
+  @type activity :: :inactive | :active
+  @type axle :: :front_axle | :rear_axle
+  @type weekday :: :monday | :tuesday | :wednesday | :thursday | :friday | :saturday | :sunday
 
   def bin_to_ieee_754_float(<<f_value::float-32>>) do
     f_value

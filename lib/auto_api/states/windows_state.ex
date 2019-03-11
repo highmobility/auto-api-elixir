@@ -21,36 +21,34 @@ defmodule AutoApi.WindowsState do
   Keeps Windows state
   """
 
+  alias AutoApi.PropertyComponent
+
   @doc """
   Windows state
   """
   defstruct windows_open_percentages: [],
             windows_positions: [],
             timestamp: nil,
-            property_timestamps: %{},
-            properties: []
+            properties: [],
+            property_timestamps: %{}
 
   use AutoApi.State, spec_file: "specs/windows.json"
 
   @type location :: :front_left | :front_right | :rear_left | :rear_right | :hatch
-
-  @type position :: :closed | :opened | :intermediate
-
-  @type windows_open_percentages :: %{
-          window_location: location,
-          open_percentage: integer
+  @type position :: :close | :open | :intermediate
+  @type window_position :: %PropertyComponent{
+          data: %{window_position: position, window_location: location}
         }
-
-  @type windows_positions :: %{
-          window_location: location,
-          window_position: position
+  @type window_open_percentage :: %PropertyComponent{
+          data: %{window_position: position, open_percentage: float}
         }
 
   @type t :: %__MODULE__{
-          windows_open_percentages: list(windows_open_percentages) | nil,
-          windows_positions: list(windows_positions) | nil,
+          windows_open_percentages: list(window_open_percentage),
+          windows_positions: list(window_position),
           timestamp: DateTime.t() | nil,
-          properties: list(atom)
+          properties: list(atom),
+          property_timestamps: map()
         }
 
   @doc """

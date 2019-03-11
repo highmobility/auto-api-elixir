@@ -21,7 +21,7 @@ defmodule AutoApi.LightsState do
   StartStop state
   """
 
-  alias AutoApi.CommonData
+  alias AutoApi.{CommonData, PropertyComponent}
 
   defstruct front_exterior_light: nil,
             rear_exterior_light: nil,
@@ -37,29 +37,34 @@ defmodule AutoApi.LightsState do
 
   use AutoApi.State, spec_file: "specs/lights.json"
 
-  @type front_exterior_light :: :inactive | :active | :active_with_full_beam
-  @type activity :: :inactive | :active
+  @type front_exterior_light :: :inactive | :active | :active_with_full_beam | :dlr | :automatic
   @type light_location :: :front | :rear
   @type ambient_light :: %{rgb_red: integer, rgb_green: integer, rgb_blue: integer}
-  @type fog_light :: %{fog_light_location: light_location, fog_light_state: activity}
-  @type reading_lamp :: %{
-          reading_lamp_location: CommonData.location(),
-          reading_lamp_state: activity
+  @type fog_light :: %PropertyComponent{
+          data: %{fog_light_location: light_location, fog_light_state: CommonData.activity()}
         }
-  @type interior_lights :: %{
-          interior_light_location: light_location,
-          interior_light_state: activity
+  @type reading_lamp :: %PropertyComponent{
+          data: %{
+            reading_lamp_location: CommonData.location(),
+            reading_lamp_state: CommonData.activity()
+          }
+        }
+  @type interior_lights :: %PropertyComponent{
+          data: %{
+            interior_light_location: light_location,
+            interior_light_state: CommonData.activity()
+          }
         }
 
   @type t :: %__MODULE__{
-          front_exterior_light: front_exterior_light | nil,
-          rear_exterior_light: activity | nil,
-          ambient_light: ambient_light | nil,
-          reverse_light: activity | nil,
-          emergency_brake_light: nil,
+          front_exterior_light: %PropertyComponent{data: front_exterior_light} | nil,
+          rear_exterior_light: %PropertyComponent{data: CommonData.activity()} | nil,
+          ambient_light: %PropertyComponent{data: ambient_light} | nil,
+          reverse_light: %PropertyComponent{data: CommonData.activity()} | nil,
+          emergency_brake_light: %PropertyComponent{data: CommonData.activity()} | nil,
           fog_lights: list(fog_light),
           reading_lamps: list(reading_lamp),
-          interior_lights: list(reading_lamp),
+          interior_lights: list(interior_lights),
           timestamp: DateTime.t() | nil,
           properties: list(atom),
           property_timestamps: map()

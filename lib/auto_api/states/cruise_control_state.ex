@@ -21,29 +21,30 @@ defmodule AutoApi.CruiseControlState do
   CruiseControl state
   """
 
-  alias AutoApi.CommonData
+  alias AutoApi.{CommonData, PropertyComponent}
 
   defstruct cruise_control: nil,
             limiter: nil,
             target_speed: nil,
             acc: nil,
             acc_target_speed: nil,
-            timestamp: nil
+            timestamp: nil,
+            properties: [],
+            property_timestamps: %{}
 
   use AutoApi.State, spec_file: "specs/cruise_control.json"
 
-  @type cruise_control :: :inactive | :active | nil
-  @type limiter ::
-          :not_set | :higher_speed_requested | :lower_speed_requested | :speed_fixed | nil
-  @type acc :: :inactive | :active | nil
+  @type limiter :: :not_set | :higher_speed_requested | :lower_speed_requested | :speed_fixed
 
   @type t :: %__MODULE__{
-          cruise_control: cruise_control | nil,
-          limiter: limiter | nil,
-          target_speed: integer | nil,
-          acc: acc | nil,
-          acc_target_speed: integer | nil,
-          timestamp: DateTime.t() | nil
+          cruise_control: %PropertyComponent{data: CommonData.activity()} | nil,
+          limiter: %PropertyComponent{data: limiter} | nil,
+          target_speed: %PropertyComponent{data: integer} | nil,
+          acc: %PropertyComponent{data: CommonData.activity()} | nil,
+          acc_target_speed: %PropertyComponent{data: integer} | nil,
+          timestamp: DateTime.t() | nil,
+          properties: list(atom),
+          property_timestamps: map()
         }
 
   @doc """

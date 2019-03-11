@@ -21,26 +21,22 @@ defmodule AutoApi.VehicleTimeState do
   VehicleTime state
   """
 
-  alias AutoApi.CommonData
+  alias AutoApi.{CommonData, PropertyComponent}
 
-  defstruct vehicle_time: nil, timestamp: nil, properties: []
+  defstruct vehicle_time: nil,
+            timestamp: nil,
+            properties: [],
+            property_timestamps: %{}
 
   use AutoApi.State, spec_file: "specs/vehicle_time.json"
 
-  @type vehicle_time :: %{
-          year: integer,
-          month: integer,
-          day: integer,
-          hour: integer,
-          minute: integer,
-          second: integer,
-          utc_time_offset: integer
-        }
+  @type vehicle_time :: %PropertyComponent{data: integer}
 
   @type t :: %__MODULE__{
-          vehicle_time: list(vehicle_time) | vehicle_time | %{} | nil,
+          vehicle_time: list(vehicle_time) | vehicle_time | nil,
           timestamp: DateTime.t() | nil,
-          properties: list(atom)
+          properties: list(atom),
+          property_timestamps: map()
         }
 
   @doc """

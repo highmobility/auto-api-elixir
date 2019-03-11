@@ -21,11 +21,15 @@ defmodule AutoApi.DashboardLightsState do
   Keeps Charging state
   """
 
+  alias AutoApi.PropertyComponent
+
   @doc """
   Dashboard Lights state
   """
   defstruct dashboard_light: [],
-            timestamp: nil
+            timestamp: nil,
+            properties: [],
+            property_timestamps: %{}
 
   use AutoApi.State, spec_file: "specs/dashboard_lights.json"
 
@@ -67,10 +71,12 @@ defmodule AutoApi.DashboardLightsState do
           | :lane_departure_warning_off
 
   @type state :: :inactive | :info | :yellow | :red
-  @type dashboard_light :: %{light_name: light_name, state: state}
+  @type dashboard_light :: %PropertyComponent{data: %{light_name: light_name, state: state}}
   @type t :: %__MODULE__{
           dashboard_light: list(dashboard_light),
-          timestamp: DateTime.t() | nil
+          timestamp: DateTime.t() | nil,
+          properties: list(atom),
+          property_timestamps: map()
         }
 
   @doc """

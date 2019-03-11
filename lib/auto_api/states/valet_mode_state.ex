@@ -16,27 +16,24 @@
 #
 # Please inquire about commercial licensing options at
 # licensing@high-mobility.com
-defmodule AutoApi.NaviDestinationState do
+defmodule AutoApi.ValetModeState do
   @moduledoc """
-  Keeps Navigation Destination state
+  ValetMode state
   """
 
   alias AutoApi.{CommonData, PropertyComponent}
 
-  @doc """
-  Navigation destination state
-  """
-  defstruct coordinates: nil,
-            destination_name: nil,
+  defstruct valet_mode: nil,
             timestamp: nil,
             properties: [],
             property_timestamps: %{}
 
-  use AutoApi.State, spec_file: "specs/navi_destination.json"
+  use AutoApi.State, spec_file: "specs/valet_mode.json"
+
+  @type mode :: :deactivated | :activated
 
   @type t :: %__MODULE__{
-          coordinates: %PropertyComponent{data: CommonData.coordinates()} | nil,
-          destination_name: %PropertyComponent{data: String.t()} | nil,
+          valet_mode: %PropertyComponent{data: mode} | nil,
           timestamp: DateTime.t() | nil,
           properties: list(atom),
           property_timestamps: map()

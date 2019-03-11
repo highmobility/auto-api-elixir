@@ -40,7 +40,8 @@ defmodule AutoApi.FailureMessageState do
             failure_reason: nil,
             failure_description: nil,
             timestamp: nil,
-            properties: []
+            properties: [],
+            property_timestamps: %{}
 
   use AutoApi.State, spec_file: "specs/failure_message.json"
 
@@ -50,7 +51,8 @@ defmodule AutoApi.FailureMessageState do
           failure_reason: %PropertyComponent{data: failure_reason} | nil,
           failure_description: %PropertyComponent{data: String.t()} | nil,
           timestamp: DateTime.t() | nil,
-          properties: list(atom)
+          properties: list(atom),
+          property_timestamps: map()
         }
 
   @doc """

@@ -21,7 +21,7 @@ defmodule AutoApi.TrunkState do
   Trunk state
   """
 
-  alias AutoApi.CommonData
+  alias AutoApi.{CommonData, PropertyComponent}
 
   defstruct trunk_lock: nil,
             trunk_position: nil,
@@ -31,12 +31,14 @@ defmodule AutoApi.TrunkState do
 
   use AutoApi.State, spec_file: "specs/trunk.json"
 
+  @type trunk_position :: :closed | :open
+
   @type t :: %__MODULE__{
-          trunk_lock: CommonData.lock() | nil,
-          trunk_position: CommonData.position() | nil,
+          trunk_lock: %PropertyComponent{data: CommonData.lock()} | nil,
+          trunk_position: %PropertyComponent{data: trunk_position} | nil,
           timestamp: DateTime.t() | nil,
           properties: list(atom),
-          property_timestamps: map
+          property_timestamps: map()
         }
 
   @doc """

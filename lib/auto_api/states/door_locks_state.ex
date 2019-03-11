@@ -27,27 +27,29 @@ defmodule AutoApi.DoorLocksState do
   defstruct inside_locks: [],
             locks: [],
             positions: [],
-            timestamp: nil
+            timestamp: nil,
+            properties: [],
+            property_timestamps: %{}
 
   use AutoApi.State, spec_file: "specs/door_locks.json"
 
   @type lock :: %PropertyComponent{
           data: %{
-            door_location: CommonData.location(),
+            door_location: CommonData.location() | :all,
             lock_state: CommonData.lock()
           }
         }
 
   @type inside_lock :: %PropertyComponent{
           data: %{
-            door_location: CommonData.location(),
+            door_location: CommonData.location() | :all,
             lock_state: CommonData.lock()
           }
         }
 
   @type position :: %PropertyComponent{
           data: %{
-            door_location: CommonData.location(),
+            door_location: CommonData.location() | :all,
             position: CommonData.position()
           }
         }
@@ -56,7 +58,9 @@ defmodule AutoApi.DoorLocksState do
           locks: list(lock),
           inside_locks: list(inside_lock),
           positions: list(position),
-          timestamp: DateTime.t() | nil
+          timestamp: DateTime.t() | nil,
+          properties: list(atom),
+          property_timestamps: map()
         }
 
   @doc """

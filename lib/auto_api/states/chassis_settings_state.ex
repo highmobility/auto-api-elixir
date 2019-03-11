@@ -16,27 +16,39 @@
 #
 # Please inquire about commercial licensing options at
 # licensing@high-mobility.com
-defmodule AutoApi.NaviDestinationState do
+defmodule AutoApi.ChassisSettingsState do
   @moduledoc """
-  Keeps Navigation Destination state
+  ChassisSettings state
   """
 
   alias AutoApi.{CommonData, PropertyComponent}
 
-  @doc """
-  Navigation destination state
-  """
-  defstruct coordinates: nil,
-            destination_name: nil,
+  defstruct driving_mode: nil,
+            sport_chrono: nil,
+            current_spring_rates: [],
+            maximum_spring_rates: [],
+            minimum_spring_rates: [],
+            current_chassis_position: nil,
+            maximum_chassis_position: nil,
+            minimum_chassis_position: nil,
             timestamp: nil,
             properties: [],
             property_timestamps: %{}
 
-  use AutoApi.State, spec_file: "specs/navi_destination.json"
+  use AutoApi.State, spec_file: "specs/chassis_settings.json"
+
+  @type driving_mode :: :regular | :eco | :sport | :sport_plus
+  @type spring_rate :: %PropertyComponent{data: %{value: integer, axle: CommonData.axle()}}
 
   @type t :: %__MODULE__{
-          coordinates: %PropertyComponent{data: CommonData.coordinates()} | nil,
-          destination_name: %PropertyComponent{data: String.t()} | nil,
+          driving_mode: %PropertyComponent{data: driving_mode} | nil,
+          sport_chrono: %PropertyComponent{data: CommonData.activity()} | nil,
+          current_spring_rates: list(spring_rate),
+          maximum_spring_rates: list(spring_rate),
+          minimum_spring_rates: list(spring_rate),
+          current_chassis_position: %PropertyComponent{data: integer} | nil,
+          maximum_chassis_position: %PropertyComponent{data: integer} | nil,
+          minimum_chassis_position: %PropertyComponent{data: integer} | nil,
           timestamp: DateTime.t() | nil,
           properties: list(atom),
           property_timestamps: map()

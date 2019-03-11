@@ -21,19 +21,24 @@ defmodule AutoApi.PowerTakeoffState do
   PowerTakeoff state
   """
 
-  alias AutoApi.CommonData
-  defstruct power_takeoff: nil, power_takeoff_engaged: nil, timestamp: nil, properties: []
+  alias AutoApi.{CommonData, PropertyComponent}
+
+  defstruct power_takeoff: nil,
+            power_takeoff_engaged: nil,
+            timestamp: nil,
+            properties: [],
+            property_timestamps: %{}
 
   use AutoApi.State, spec_file: "specs/power_takeoff.json"
 
-  @type power_takeoff :: :inactive | :active
   @type power_takeoff_engaged :: :not_engaged | :engaged
 
   @type t :: %__MODULE__{
-          power_takeoff: power_takeoff | nil,
-          power_takeoff_engaged: power_takeoff_engaged | nil,
+          power_takeoff: %PropertyComponent{data: CommonData.activity()} | nil,
+          power_takeoff_engaged: %PropertyComponent{data: power_takeoff_engaged} | nil,
           timestamp: DateTime.t() | nil,
-          properties: list(atom)
+          properties: list(atom),
+          property_timestamps: map()
         }
 
   @doc """

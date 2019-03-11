@@ -22,6 +22,8 @@ defmodule AutoApi.TachographState do
 
   """
 
+  alias AutoApi.PropertyComponent
+
   @doc """
   Tachograph state
   """
@@ -33,19 +35,25 @@ defmodule AutoApi.TachographState do
             vehicle_direction: nil,
             vehicle_speed: nil,
             timestamp: nil,
-            properties: []
+            properties: [],
+            property_timestamps: %{}
 
   use AutoApi.State, spec_file: "specs/tachograph.json"
+
+  @type vehicle_motion :: :not_detected | :detected
+  @type vehicle_overspeed :: :no_overspeed | :overspeed
+  @type vehicle_direction :: :forward | :reverse
 
   @type t :: %__MODULE__{
           driver_working_state: list(any),
           driver_time_state: list(any),
           driver_card: list(any),
-          vehicle_motion: :not_detected | :detected | nil,
-          vehicle_overspeed: :no_overspeed | :overspeed | nil,
-          vehicle_direction: :forward | :reverse | nil,
+          vehicle_motion: %PropertyComponent{data: vehicle_motion} | nil,
+          vehicle_overspeed: %PropertyComponent{data: vehicle_overspeed} | nil,
+          vehicle_direction: %PropertyComponent{data: vehicle_direction} | nil,
           timestamp: DateTime.t() | nil,
-          properties: list(atom)
+          properties: list(atom),
+          property_timestamps: map()
         }
 
   @doc """

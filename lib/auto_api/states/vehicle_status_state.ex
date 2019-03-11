@@ -41,7 +41,9 @@ defmodule AutoApi.VehicleStatusState do
             display_unit: nil,
             driver_seat_location: nil,
             equipments: [],
-            timestamp: nil
+            timestamp: nil,
+            properties: [],
+            property_timestamps: %{}
 
   use AutoApi.State, spec_file: "specs/vehicle_status.json"
 
@@ -69,7 +71,9 @@ defmodule AutoApi.VehicleStatusState do
           driver_seat_location: %PropertyComponent{data: :left | :right | :center} | nil,
           equipments: list(%PropertyComponent{data: String.t()}),
           state: list(any),
-          timestamp: DateTime.t() | nil
+          timestamp: DateTime.t() | nil,
+          properties: list(atom),
+          property_timestamps: map()
         }
 
   @doc """

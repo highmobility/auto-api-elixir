@@ -16,27 +16,34 @@
 #
 # Please inquire about commercial licensing options at
 # licensing@high-mobility.com
-defmodule AutoApi.NaviDestinationState do
+defmodule AutoApi.SeatsState do
   @moduledoc """
-  Keeps Navigation Destination state
+  Seats state
   """
 
-  alias AutoApi.{CommonData, PropertyComponent}
+  alias AutoApi.PropertyComponent
 
-  @doc """
-  Navigation destination state
-  """
-  defstruct coordinates: nil,
-            destination_name: nil,
+  defstruct persons_detected: [],
+            seatbelts_fastened: [],
             timestamp: nil,
             properties: [],
             property_timestamps: %{}
 
-  use AutoApi.State, spec_file: "specs/navi_destination.json"
+  use AutoApi.State, spec_file: "specs/seats.json"
+
+  @type seat_location :: :front_left | :front_right | :rear_right | :rear_left | :rear_center
+  @type person_detected :: :detected | :not_detected
+  @type persons_detected :: %PropertyComponent{
+          data: %{seat_location: seat_location, persons_detected: person_detected}
+        }
+  @type seatbelt_fastened :: :not_fastened | :fastened
+  @type seatbelts_fastened :: %PropertyComponent{
+          data: %{seat_location: seat_location, seatbelt_fastened: seatbelt_fastened}
+        }
 
   @type t :: %__MODULE__{
-          coordinates: %PropertyComponent{data: CommonData.coordinates()} | nil,
-          destination_name: %PropertyComponent{data: String.t()} | nil,
+          persons_detected: list(persons_detected),
+          seatbelts_fastened: list(seatbelts_fastened),
           timestamp: DateTime.t() | nil,
           properties: list(atom),
           property_timestamps: map()

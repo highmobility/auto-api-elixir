@@ -21,7 +21,7 @@ defmodule AutoApi.FuelingState do
   Fueling state
   """
 
-  alias AutoApi.CommonData
+  alias AutoApi.{CommonData, PropertyComponent}
 
   defstruct gas_flap_position: nil,
             gas_flap_lock: nil,
@@ -31,9 +31,11 @@ defmodule AutoApi.FuelingState do
 
   use AutoApi.State, spec_file: "specs/fueling.json"
 
+  @type gas_flap_position :: :closed | :open
+
   @type t :: %__MODULE__{
-          gas_flap_position: CommonData.position() | nil,
-          gas_flap_lock: CommonData.lock() | nil,
+          gas_flap_position: %PropertyComponent{data: gas_flap_position} | nil,
+          gas_flap_lock: %PropertyComponent{data: CommonData.lock()} | nil,
           timestamp: DateTime.t() | nil,
           properties: list(atom),
           property_timestamps: map()

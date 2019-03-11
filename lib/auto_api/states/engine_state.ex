@@ -21,14 +21,17 @@ defmodule AutoApi.EngineState do
   Keeps Engine state
   """
 
+  alias AutoApi.PropertyComponent
+
   @type ignition :: :ignition_on | :ignition_off
   @type accessories_ignition :: :powered_on | :powered_off
 
   @type t :: %__MODULE__{
-          ignition: ignition | nil,
-          accessories_ignition: accessories_ignition | nil,
+          ignition: %PropertyComponent{data: ignition} | nil,
+          accessories_ignition: %PropertyComponent{data: accessories_ignition} | nil,
+          timestamp: DateTime.t() | nil,
           properties: list(atom),
-          property_timestamps: map
+          property_timestamps: map()
         }
 
   @doc """
@@ -36,6 +39,7 @@ defmodule AutoApi.EngineState do
   """
   defstruct ignition: nil,
             accessories_ignition: nil,
+            timestamp: nil,
             properties: [],
             property_timestamps: %{}
 

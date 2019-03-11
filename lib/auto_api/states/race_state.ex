@@ -22,14 +22,19 @@ defmodule AutoApi.RaceState do
 
   """
 
+  alias AutoApi.{CommonData, PropertyComponent}
+
   @type acceleration_type ::
           :longitudinal_acceleration
           | :lateral_acceleration
           | :front_lateral_acceleration
           | :rear_lateral_acceleration
-  @type acceleration :: %{type: acceleration_type, g_force: float}
-  @type active_inactive :: :inactive | :active
+  @type acceleration :: %PropertyComponent{data: %{type: acceleration_type, g_force: float}}
   @type gear_mode :: :manual | :park | :reverse | :neutral | :drive | :low_gear | :sport
+  @type axle :: :front_axle | :rear_axle
+  @type brake_torque_vectoring :: %PropertyComponent{
+          data: %{axle: axle, vectoring: CommonData.activity()}
+        }
 
   @doc """
   Race state
@@ -43,35 +48,40 @@ defmodule AutoApi.RaceState do
             yaw_rate: nil,
             rear_suspension_steering: nil,
             electronic_stability_program: nil,
-            brake_torque_vectoring: [],
+            brake_torque_vectorings: [],
             gear_mode: nil,
             selected_gear: nil,
+            brake_pedal_position: nil,
             clutch_pedal_switch: nil,
             accelerator_pedal_idle_switch: nil,
             accelerator_pedal_kickdown_switch: nil,
             timestamp: nil,
-            properties: []
+            properties: [],
+            property_timestamps: %{}
 
   use AutoApi.State, spec_file: "specs/race.json"
 
   @type t :: %__MODULE__{
           accelerations: list(acceleration),
-          understeering: integer | nil,
-          oversteering: integer | nil,
-          gas_pedal_position: integer | nil,
-          steering_angle: integer | nil,
-          brake_pressure: float | nil,
-          yaw_rate: float | nil,
-          rear_suspension_steering: integer | nil,
-          electronic_stability_program: active_inactive | nil,
-          brake_torque_vectoring: list(any),
-          gear_mode: gear_mode | nil,
-          selected_gear: integer | nil,
-          clutch_pedal_switch: active_inactive | nil,
-          accelerator_pedal_idle_switch: active_inactive | nil,
-          accelerator_pedal_kickdown_switch: active_inactive | nil,
+          understeering: %PropertyComponent{data: float} | nil,
+          oversteering: %PropertyComponent{data: float} | nil,
+          gas_pedal_position: %PropertyComponent{data: float} | nil,
+          steering_angle: %PropertyComponent{data: integer} | nil,
+          brake_pressure: %PropertyComponent{data: float} | nil,
+          yaw_rate: %PropertyComponent{data: float} | nil,
+          rear_suspension_steering: %PropertyComponent{data: integer} | nil,
+          electronic_stability_program: %PropertyComponent{data: CommonData.activity()} | nil,
+          brake_torque_vectorings: list(brake_torque_vectoring),
+          gear_mode: %PropertyComponent{data: gear_mode} | nil,
+          selected_gear: %PropertyComponent{data: integer} | nil,
+          brake_pedal_position: %PropertyComponent{data: float} | nil,
+          clutch_pedal_switch: %PropertyComponent{data: CommonData.activity()} | nil,
+          accelerator_pedal_idle_switch: %PropertyComponent{data: CommonData.activity()} | nil,
+          accelerator_pedal_kickdown_switch:
+            %PropertyComponent{data: CommonData.activity()} | nil,
           timestamp: DateTime.t() | nil,
-          properties: list(atom)
+          properties: list(atom),
+          property_timestamps: map()
         }
 
   @doc """

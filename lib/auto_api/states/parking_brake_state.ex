@@ -21,17 +21,20 @@ defmodule AutoApi.ParkingBrakeState do
   ParkingBrake state
   """
 
-  alias AutoApi.CommonData
-  defstruct parking_brake: nil, timestamp: nil, properties: []
+  alias AutoApi.{CommonData, PropertyComponent}
+
+  defstruct parking_brake: nil,
+            timestamp: nil,
+            properties: [],
+            property_timestamps: %{}
 
   use AutoApi.State, spec_file: "specs/parking_brake.json"
 
-  @type activity :: :inactive | :active
-
   @type t :: %__MODULE__{
-          parking_brake: activity | nil,
+          parking_brake: %PropertyComponent{data: CommonData.activity()} | nil,
           timestamp: DateTime.t() | nil,
-          properties: list(atom)
+          properties: list(atom),
+          property_timestamps: map()
         }
 
   @doc """

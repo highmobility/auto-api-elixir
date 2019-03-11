@@ -16,27 +16,32 @@
 #
 # Please inquire about commercial licensing options at
 # licensing@high-mobility.com
-defmodule AutoApi.NaviDestinationState do
+defmodule AutoApi.WiFiState do
   @moduledoc """
-  Keeps Navigation Destination state
+  WiFi state
   """
 
-  alias AutoApi.{CommonData, PropertyComponent}
+  alias AutoApi.PropertyComponent
 
-  @doc """
-  Navigation destination state
-  """
-  defstruct coordinates: nil,
-            destination_name: nil,
+  defstruct wifi_enabled: nil,
+            network_connected: nil,
+            network_ssid: nil,
+            network_security: nil,
             timestamp: nil,
             properties: [],
             property_timestamps: %{}
 
-  use AutoApi.State, spec_file: "specs/navi_destination.json"
+  use AutoApi.State, spec_file: "specs/wi_fi.json"
+
+  @type wifi_state :: :disabled | :enabled
+  @type network_state :: :disconnected | :connected
+  @type network_security :: :none | :wep | :wpa | :wpa2_personal
 
   @type t :: %__MODULE__{
-          coordinates: %PropertyComponent{data: CommonData.coordinates()} | nil,
-          destination_name: %PropertyComponent{data: String.t()} | nil,
+          wifi_enabled: %PropertyComponent{data: wifi_state} | nil,
+          network_connected: %PropertyComponent{data: network_state} | nil,
+          network_ssid: %PropertyComponent{data: String.t()} | nil,
+          network_security: %PropertyComponent{data: network_security} | nil,
           timestamp: DateTime.t() | nil,
           properties: list(atom),
           property_timestamps: map()

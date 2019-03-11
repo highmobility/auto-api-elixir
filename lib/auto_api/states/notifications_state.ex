@@ -16,27 +16,28 @@
 #
 # Please inquire about commercial licensing options at
 # licensing@high-mobility.com
-defmodule AutoApi.NaviDestinationState do
+defmodule AutoApi.NotificationsState do
   @moduledoc """
-  Keeps Navigation Destination state
+  Notifications state
   """
 
-  alias AutoApi.{CommonData, PropertyComponent}
+  alias AutoApi.PropertyComponent
 
-  @doc """
-  Navigation destination state
-  """
-  defstruct coordinates: nil,
-            destination_name: nil,
+  defstruct text: nil,
+            action_items: [],
+            received_action: nil,
             timestamp: nil,
             properties: [],
             property_timestamps: %{}
 
-  use AutoApi.State, spec_file: "specs/navi_destination.json"
+  use AutoApi.State, spec_file: "specs/notifications.json"
+
+  @type action_item :: %PropertyComponent{data: %{identifier: integer, name: String.t()}}
 
   @type t :: %__MODULE__{
-          coordinates: %PropertyComponent{data: CommonData.coordinates()} | nil,
-          destination_name: %PropertyComponent{data: String.t()} | nil,
+          text: %PropertyComponent{data: String.t()} | nil,
+          action_items: list(action_item),
+          received_action: %PropertyComponent{data: integer} | nil,
           timestamp: DateTime.t() | nil,
           properties: list(atom),
           property_timestamps: map()

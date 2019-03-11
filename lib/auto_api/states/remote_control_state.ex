@@ -16,27 +16,32 @@
 #
 # Please inquire about commercial licensing options at
 # licensing@high-mobility.com
-defmodule AutoApi.NaviDestinationState do
+defmodule AutoApi.RemoteControlState do
   @moduledoc """
-  Keeps Navigation Destination state
+  RemoteControl state
   """
 
-  alias AutoApi.{CommonData, PropertyComponent}
+  alias AutoApi.PropertyComponent
 
-  @doc """
-  Navigation destination state
-  """
-  defstruct coordinates: nil,
-            destination_name: nil,
+  defstruct control_mode: nil,
+            angle: nil,
             timestamp: nil,
             properties: [],
             property_timestamps: %{}
 
-  use AutoApi.State, spec_file: "specs/navi_destination.json"
+  use AutoApi.State, spec_file: "specs/remote_control.json"
+
+  @type modes ::
+          :control_mode_unavailable
+          | :control_mode_available
+          | :control_started
+          | :control_failed_to_start
+          | :control_aborted
+          | :control_ended
 
   @type t :: %__MODULE__{
-          coordinates: %PropertyComponent{data: CommonData.coordinates()} | nil,
-          destination_name: %PropertyComponent{data: String.t()} | nil,
+          control_mode: %PropertyComponent{data: modes} | nil,
+          angle: %PropertyComponent{data: integer} | nil,
           timestamp: DateTime.t() | nil,
           properties: list(atom),
           property_timestamps: map()

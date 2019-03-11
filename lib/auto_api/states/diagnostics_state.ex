@@ -58,7 +58,9 @@ defmodule AutoApi.DiagnosticsState do
             wheel_rpms: [],
             trouble_codes: [],
             mileage_meters: nil,
-            timestamp: nil
+            timestamp: nil,
+            properties: [],
+            property_timestamps: %{}
 
   use AutoApi.State, spec_file: "specs/diagnostics.json"
 
@@ -68,6 +70,7 @@ defmodule AutoApi.DiagnosticsState do
             remaining_minutes: integer,
             text_size: integer,
             text: String.t(),
+            status_size: integer,
             status: String.t()
           }
         }
@@ -106,34 +109,36 @@ defmodule AutoApi.DiagnosticsState do
         }
 
   @type t :: %__MODULE__{
-          mileage: PropertyComponent.t() | nil,
-          engine_oil_temperature: PropertyComponent.t() | nil,
-          speed: PropertyComponent.t() | nil,
-          engine_rpm: PropertyComponent.t() | nil,
-          fuel_level: PropertyComponent.t() | nil,
-          estimated_range: PropertyComponent.t() | nil,
-          washer_fluid_level: PropertyComponent.t() | nil,
-          battery_voltage: PropertyComponent.t() | nil,
-          adblue_level: PropertyComponent.t() | nil,
-          distance_since_reset: PropertyComponent.t() | nil,
-          distance_since_start: PropertyComponent.t() | nil,
-          fuel_volume: PropertyComponent.t() | nil,
-          anti_lock_braking: PropertyComponent.t() | nil,
-          engine_coolant_temperature: PropertyComponent.t() | nil,
-          engine_total_operating_hours: PropertyComponent.t() | nil,
-          engine_total_fuel_consumption: PropertyComponent.t() | nil,
-          brake_fluid_level: PropertyComponent.t() | nil,
-          engine_torque: PropertyComponent.t() | nil,
-          engine_load: PropertyComponent.t() | nil,
-          wheel_based_speed: PropertyComponent.t() | nil,
-          battery_level: PropertyComponent.t() | nil,
+          mileage: %PropertyComponent{data: integer} | nil,
+          engine_oil_temperature: %PropertyComponent{data: integer} | nil,
+          speed: %PropertyComponent{data: integer} | nil,
+          engine_rpm: %PropertyComponent{data: integer} | nil,
+          fuel_level: %PropertyComponent{data: float} | nil,
+          estimated_range: %PropertyComponent{data: integer} | nil,
+          washer_fluid_level: %PropertyComponent{data: fluid_level} | nil,
+          battery_voltage: %PropertyComponent{data: float} | nil,
+          adblue_level: %PropertyComponent{data: float} | nil,
+          distance_since_reset: %PropertyComponent{data: integer} | nil,
+          distance_since_start: %PropertyComponent{data: integer} | nil,
+          fuel_volume: %PropertyComponent{data: float} | nil,
+          anti_lock_braking: %PropertyComponent{data: CommonData.activity()} | nil,
+          engine_coolant_temperature: %PropertyComponent{data: integer} | nil,
+          engine_total_operating_hours: %PropertyComponent{data: float} | nil,
+          engine_total_fuel_consumption: %PropertyComponent{data: float} | nil,
+          brake_fluid_level: %PropertyComponent{data: fluid_level} | nil,
+          engine_torque: %PropertyComponent{data: float} | nil,
+          engine_load: %PropertyComponent{data: float} | nil,
+          wheel_based_speed: %PropertyComponent{data: integer} | nil,
+          battery_level: %PropertyComponent{data: float} | nil,
           check_control_messages: list(check_control_message),
           tire_pressures: list(tire_pressure),
           tire_temperatures: list(tire_temperature),
           wheel_rpms: list(wheel_rpm),
           trouble_codes: list(trouble_code),
-          mileage_meters: PropertyComponent.t() | nil,
-          timestamp: DateTime.t() | nil
+          mileage_meters: %PropertyComponent{data: integer} | nil,
+          timestamp: DateTime.t() | nil,
+          properties: list(atom),
+          property_timestamps: map()
         }
 
   @doc """
