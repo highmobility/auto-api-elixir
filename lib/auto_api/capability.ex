@@ -281,7 +281,7 @@ defmodule AutoApi.Capability do
   iex> AutoApi.Capability.get_by_id(<<0xDE, 0xAD>>)
   nil
   """
-  @spec get_by_id(binary) :: module
+  @spec get_by_id(binary) :: module | nil
   defdelegate get_by_id(id), to: AutoApi.CapabilityDelegate
 
   @doc """
@@ -302,7 +302,7 @@ defmodule AutoApi.Capability do
   iex> AutoApi.Capability.get_by_name("Nobody")
   nil
   """
-  @spec get_by_name(binary | atom) :: module
+  @spec get_by_name(binary | atom) :: module | nil
   defdelegate get_by_name(name), to: AutoApi.CapabilityDelegate
 
   @doc """
