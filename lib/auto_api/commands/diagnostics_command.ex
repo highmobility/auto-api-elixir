@@ -59,4 +59,9 @@ defmodule AutoApi.DiagnosticsCommand do
     cmd_id = DiagnosticsCapability.command_id(:get_diagnostics_state)
     <<cmd_id>>
   end
+
+  def to_bin(:diagnostics_state = cmd, [state_value]) do
+    cmd_id = DiagnosticsCapability.command_id(cmd)
+    <<cmd_id>> <> DiagnosticsState.to_bin(state_value)
+  end
 end
