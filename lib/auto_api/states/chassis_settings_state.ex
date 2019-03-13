@@ -37,11 +37,10 @@ defmodule AutoApi.ChassisSettingsState do
 
   use AutoApi.State, spec_file: "specs/chassis_settings.json"
 
-  @type driving_mode :: :regular | :eco | :sport | :sport_plus
   @type spring_rate :: %PropertyComponent{data: %{value: integer, axle: CommonData.axle()}}
 
   @type t :: %__MODULE__{
-          driving_mode: %PropertyComponent{data: driving_mode} | nil,
+          driving_mode: %PropertyComponent{data: CommonData.driving_mode()} | nil,
           sport_chrono: %PropertyComponent{data: CommonData.activity()} | nil,
           current_spring_rates: list(spring_rate),
           maximum_spring_rates: list(spring_rate),

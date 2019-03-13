@@ -21,7 +21,7 @@ defmodule AutoApi.HomeChargerState do
   HomeCharger state
   """
 
-  alias AutoApi.PropertyComponent
+  alias AutoApi.{CommonData, PropertyComponent}
 
   defstruct charging: nil,
             authentication_mechanism: nil,
@@ -47,9 +47,7 @@ defmodule AutoApi.HomeChargerState do
   @type charging :: :disconnected | :plugged_in | :charging
   @type authentication_mechanism :: :pin | :app
   @type plug_type :: :type_1 | :type_2 | :ccs | :chademo
-  @type solar_charging :: :deactivated | :activated
   @type enabled :: :enabled | :disabled
-  @type hotspot_security :: :none | :wep | :wpa | :wpa2_personal
   @type authentication_state :: :authenticated | :unauthenticated
   @type pricing_type :: :starting_fee | :per_minute | :per_kwh
   @type price_tariff :: %PropertyComponent{
@@ -66,10 +64,10 @@ defmodule AutoApi.HomeChargerState do
           authentication_mechanism: %PropertyComponent{data: authentication_mechanism} | nil,
           plug_type: %PropertyComponent{data: plug_type} | nil,
           charging_power: %PropertyComponent{data: float} | nil,
-          solar_charging: %PropertyComponent{data: solar_charging} | nil,
+          solar_charging: %PropertyComponent{data: CommonData.activity_switched()} | nil,
           hotspot_enabled: %PropertyComponent{data: enabled} | nil,
           hotspot_ssid: %PropertyComponent{data: String.t()} | nil,
-          wi_fi_hotspot_security: %PropertyComponent{data: hotspot_security} | nil,
+          wi_fi_hotspot_security: %PropertyComponent{data: CommonData.network_security()} | nil,
           wi_fi_hotspot_password: %PropertyComponent{data: String.t()} | nil,
           authentication_state: %PropertyComponent{data: authentication_state} | nil,
           charge_current_dc: %PropertyComponent{data: float} | nil,

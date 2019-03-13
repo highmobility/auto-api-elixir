@@ -21,7 +21,7 @@ defmodule AutoApi.WiFiState do
   WiFi state
   """
 
-  alias AutoApi.PropertyComponent
+  alias AutoApi.{CommonData, PropertyComponent}
 
   defstruct wi_fi_enabled: nil,
             network_connected: nil,
@@ -35,13 +35,12 @@ defmodule AutoApi.WiFiState do
 
   @type wifi_state :: :disabled | :enabled
   @type network_state :: :disconnected | :connected
-  @type network_security :: :none | :wep | :wpa | :wpa2_personal
 
   @type t :: %__MODULE__{
           wi_fi_enabled: %PropertyComponent{data: wifi_state} | nil,
           network_connected: %PropertyComponent{data: network_state} | nil,
           network_ssid: %PropertyComponent{data: String.t()} | nil,
-          network_security: %PropertyComponent{data: network_security} | nil,
+          network_security: %PropertyComponent{data: CommonData.network_security()} | nil,
           timestamp: DateTime.t() | nil,
           properties: list(atom),
           property_timestamps: map()

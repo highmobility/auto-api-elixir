@@ -21,7 +21,7 @@ defmodule AutoApi.VehicleLocationState do
   VehicleLocationState
   """
 
-  alias AutoApi.PropertyComponent
+  alias AutoApi.{CommonData, PropertyComponent}
 
   defstruct coordinates: nil,
             heading: nil,
@@ -32,10 +32,8 @@ defmodule AutoApi.VehicleLocationState do
 
   use AutoApi.State, spec_file: "specs/vehicle_location.json"
 
-  @type coordinates :: %{latitude: float, longitude: float}
-
   @type t :: %__MODULE__{
-          coordinates: %PropertyComponent{data: coordinates} | nil,
+          coordinates: %PropertyComponent{data: CommonData.coordinates()} | nil,
           heading: %PropertyComponent{data: float} | nil,
           altitude: %PropertyComponent{data: float} | nil,
           timestamp: DateTime.t() | nil,

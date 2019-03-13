@@ -30,10 +30,8 @@ defmodule AutoApi.ValetModeState do
 
   use AutoApi.State, spec_file: "specs/valet_mode.json"
 
-  @type mode :: :deactivated | :activated
-
   @type t :: %__MODULE__{
-          valet_mode: %PropertyComponent{data: mode} | nil,
+          valet_mode: %PropertyComponent{data: CommonData.activity_switched()} | nil,
           timestamp: DateTime.t() | nil,
           properties: list(atom),
           property_timestamps: map()

@@ -44,12 +44,11 @@ defmodule AutoApi.UsageState do
 
   use AutoApi.State, spec_file: "specs/usage.json"
 
-  @type driving_mode :: :regular | :eco | :sport | :sport_plus | :eco_plus
   @type driving_modes_activation_period :: %PropertyComponent{
-          data: %{driving_mode: driving_mode, period: float}
+          data: %{driving_mode: CommonData.driving_mode(), period: float}
         }
   @type driving_mode_energy_consumption :: %PropertyComponent{
-          data: %{driving_mode: driving_mode, consumption: float}
+          data: %{driving_mode: CommonData.driving_mode(), consumption: float}
         }
 
   @type t :: %__MODULE__{
