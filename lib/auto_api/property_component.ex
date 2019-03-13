@@ -18,45 +18,56 @@
 # licensing@high-mobility.com
 defmodule AutoApi.PropertyComponent do
   require Logger
-  defstruct [:data, :timestamp, :failure]
-  @prop_id_to_name %{0x01 => :data, 0x02 => :timestamp}
-  @data_component_id 0x01
-  @timestamp_component_id 0x02
 
-  @type t :: %__MODULE__{data: any, timestamp: nil | DateTime.t(), failure: nil}
+  defstruct [:data, :timestamp, :failure]
+
+  @prop_id_to_name %{0x01 => :data, 0x02 => :timestamp, 0x03 => :failure}
+  @prop_name_to_id %{:data => 0x01, :timestamp => 0x02, :failure => 0x03}
+
+  @type reason ::
+          :rate_limit | :execution_timeout | :format_error | :unauthorised | :unknown | :pending
+  @type failure :: %{reason: reason(), description: String.t()}
+  @type t :: %__MODULE__{data: any, timestamp: nil | DateTime.t(), failure: nil | failure}
+  @type spec :: map() | list()
   @type data_types :: :integer
   @type size :: integer
-
-  def map_to_bin(%__MODULE__{} = prop, spec) do
-    data_component_bin =
-      spec
-      |> Enum.map(fn item_spec ->
-        key_name = String.to_atom(item_spec["name"])
-
-        prop.data
-        |> Map.get(key_name)
-        |> data_to_bin(item_spec)
-      end)
-      |> :binary.list_to_bin()
-
-    data_component_size = byte_size(data_component_bin)
-
-    <<@data_component_id, data_component_size::integer-16>> <>
-      data_component_bin <> timestamp_to_bin(prop.timestamp)
-  end
 
   @doc """
   Converts PropertyComponent struct to binary"
   """
+  @spec to_bin(__MODULE__.t(), spec()) :: binary()
   def to_bin(%__MODULE__{} = prop, spec) do
-    data_component_bin = data_to_bin(prop.data, spec)
-    data_component_size = byte_size(data_component_bin)
-
-    <<@data_component_id, data_component_size::integer-16>> <>
-      data_component_bin <> timestamp_to_bin(prop.timestamp)
+    wrap_with_size(prop, :data, &data_to_bin(&1, spec)) <>
+      wrap_with_size(prop, :timestamp, &timestamp_to_bin/1) <>
+      wrap_with_size(prop, :failure, &failure_to_bin/1)
   end
 
-  defp data_to_bin(data, %{"type" => "string"} = spec) do
+  defp wrap_with_size(prop, field, conversion_fun) do
+    case Map.get(prop, field) do
+      nil ->
+        <<>>
+
+      value ->
+        id = @prop_name_to_id[field]
+        binary_value = conversion_fun.(value)
+        size = byte_size(binary_value)
+        <<id, size::integer-16, binary_value::binary>>
+    end
+  end
+
+  defp data_to_bin(nil, _), do: <<>>
+
+  defp data_to_bin(data, specs) when is_list(specs) do
+    specs
+    |> Enum.map(fn %{"name" => name} = spec ->
+      data
+      |> Map.get(String.to_atom(name))
+      |> data_to_bin(spec)
+    end)
+    |> :binary.list_to_bin()
+  end
+
+  defp data_to_bin(data, %{"type" => "string"}) do
     data
   end
 
@@ -65,6 +76,8 @@ defmodule AutoApi.PropertyComponent do
       spec["values"]
       |> Enum.find(%{}, &(&1["name"] == Atom.to_string(data)))
       |> Map.get("id")
+
+    unless enum_id, do: Logger.warn("Enum key `#{data}` doesn't exist in #{inspect spec}")
 
     <<enum_id>>
   end
@@ -87,51 +100,71 @@ defmodule AutoApi.PropertyComponent do
     <<data::integer-size(size_bit)>>
   end
 
+  defp data_to_bin(%state_mod{} = state, %{"type" => "capability_state"}) do
+    state_mod.identifier <> <<0x01>> <> state_mod.to_bin(state)
+  end
+
+  defp timestamp_to_bin(nil), do: <<>>
+
+  defp timestamp_to_bin(timestamp) do
+    milisec = DateTime.to_unix(timestamp, :millisecond)
+    <<milisec::integer-64>>
+  end
+
+  defp failure_to_bin(nil), do: <<>>
+
+  defp failure_to_bin(%{reason: reason, description: description}) do
+    reason_bin = AutoApi.CommonData.convert_state_to_bin_failure_reason(reason)
+    description_size = byte_size(description)
+
+    <<reason_bin, description_size::integer-16, description::binary>>
+  end
+
   @doc """
   Converts PropertyComponent binary to struct"
   """
-  @spec to_struct(binary, map | list) :: %__MODULE__{}
+  @spec to_struct(binary(), spec()) :: __MODULE__.t()
   def to_struct(binary, specs) when is_list(specs) do
     prop_in_binary = split_binary_to_parts(binary, %__MODULE__{})
 
-    data = prop_in_binary.data
-
     data =
-      specs
-      |> Enum.reduce({0, []}, fn spec, {counter, acc} ->
-        size = spec["size"] || Keyword.get(acc, String.to_atom("#{spec["name"]}_size"))
-        unless size, do: raise("couldn't find size for #{inspect(spec)}")
+      unless is_nil(prop_in_binary.data) do
+        specs
+        |> Enum.reduce({0, []}, fn spec, {counter, acc} ->
+          size = spec["size"] || Keyword.get(acc, String.to_atom("#{spec["name"]}_size"))
+          unless size, do: raise("couldn't find size for #{inspect(spec)}")
 
-        data_slice = :binary.part(data, counter, size)
+          data_slice = :binary.part(prop_in_binary.data, counter, size)
 
-        data_value =
-          if spec["type"] == "enum" do
-            enum_to_value(data_slice, spec)
-          else
-            to_value(data_slice, spec["type"])
-          end
+          data_value =
+            if spec["type"] == "enum" do
+              enum_to_value(data_slice, spec)
+            else
+              to_value(data_slice, spec["type"])
+            end
 
-        {counter + size, [{String.to_atom(spec["name"]), data_value} | acc]}
-      end)
-      |> elem(1)
-      |> Enum.into(%{})
+          {counter + size, [{String.to_atom(spec["name"]), data_value} | acc]}
+        end)
+        |> elem(1)
+        |> Enum.into(%{})
+      end
 
     common_components_to_struct(prop_in_binary, data)
   end
 
-  def to_struct(binary, %{"type" => "string"} = spec) do
+  def to_struct(binary, %{"type" => "string"}) do
     prop_in_binary = split_binary_to_parts(binary, %__MODULE__{})
     data = to_value(prop_in_binary.data, "string")
     common_components_to_struct(prop_in_binary, data)
   end
 
-  def to_struct(binary, %{"type" => "enum", "size" => size} = spec) do
+  def to_struct(binary, %{"type" => "enum"} = spec) do
     prop_in_binary = split_binary_to_parts(binary, %__MODULE__{})
     data = enum_to_value(prop_in_binary.data, spec)
     common_components_to_struct(prop_in_binary, data)
   end
 
-  def to_struct(binary, %{"type" => data_type, "size" => size} = spec) do
+  def to_struct(binary, %{"type" => data_type}) do
     prop_in_binary = split_binary_to_parts(binary, %__MODULE__{})
     data = to_value(prop_in_binary.data, data_type)
     common_components_to_struct(prop_in_binary, data)
@@ -189,10 +222,22 @@ defmodule AutoApi.PropertyComponent do
     end
   end
 
-  defp failure_to_value(failure) when is_nil(failure), do: nil
+  defp to_value(binary_data, "capability_state") do
+    <<cap_id::binary-size(2), 0x01, bin_state::binary>> = binary_data
+    cap_mod = AutoApi.Capability.list_capabilities()[cap_id]
+
+    cap_mod.state.from_bin(bin_state)
+  end
+
+  defp failure_to_value(nil), do: nil
 
   defp failure_to_value(failure) do
-    throw :todo
+    <<reason, size::integer-16, description::binary-size(size)>> = failure
+
+    %{
+      reason: AutoApi.CommonData.convert_bin_to_state_failure_reason(reason),
+      description: description
+    }
   end
 
   defp split_binary_to_parts(
@@ -204,11 +249,4 @@ defmodule AutoApi.PropertyComponent do
   end
 
   defp split_binary_to_parts(<<>>, acc), do: acc
-
-  defp timestamp_to_bin(nil), do: <<>>
-
-  defp timestamp_to_bin(timestamp) do
-    milisec = DateTime.to_unix(timestamp, :millisecond)
-    <<@timestamp_component_id, 8::integer-16, milisec::integer-64>>
-  end
 end

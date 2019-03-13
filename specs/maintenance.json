@@ -1,6 +1,5 @@
 {
     "category": "diagnostics",
-    "id_msb": 0,
     "id_lsb": 52,
     "name": "maintenance",
     "api_intro": 3,
@@ -14,6 +13,8 @@
             "name": "maintenance_state"
         }
     ],
+    "api_update": 10,
+    "id_msb": 0,
     "properties": [
         {
             "size": 2,
@@ -83,24 +84,24 @@
         },
         {
             "size": 8,
-            "id": 8,
+            "type": "integer",
+            "description": "Milliseconds since UNIX Epoch time",
             "name": "automatic_teleservice_call_date",
-            "type": "integer",
-            "description": "Milliseconds since UNIX Epoch time"
+            "id": 8
         },
         {
             "size": 8,
-            "id": 9,
+            "type": "integer",
+            "description": "Milliseconds since UNIX Epoch time",
             "name": "teleservice_battery_call_date",
-            "type": "integer",
-            "description": "Milliseconds since UNIX Epoch time"
+            "id": 9
         },
         {
             "size": 8,
-            "id": 10,
-            "name": "next_inspection_date",
             "type": "integer",
-            "description": "Milliseconds since UNIX Epoch time"
+            "description": "Milliseconds since UNIX Epoch time",
+            "name": "next_inspection_date",
+            "id": 10
         },
         {
             "items": [
@@ -153,14 +154,14 @@
                     "description": "CBS text bytes formatted in UTF-8"
                 },
                 {
-                    "name": "description_size",
-                    "type": "integer",
                     "size": 2,
-                    "description": "Size of the description string"
+                    "type": "integer",
+                    "description": "Size of the description string",
+                    "name": "description_size"
                 },
                 {
-                    "name": "description",
                     "type": "string",
+                    "name": "description",
                     "description": "Description bytes formatted in UTF-8"
                 }
             ],
@@ -170,11 +171,10 @@
         },
         {
             "size": 8,
-            "id": 12,
-            "name": "brake_fluid_change_date",
             "type": "integer",
-            "description": "Milliseconds since UNIX Epoch time"
+            "description": "Milliseconds since UNIX Epoch time",
+            "name": "brake_fluid_change_date",
+            "id": 12
         }
-    ],
-    "api_update": 10
+    ]
 }

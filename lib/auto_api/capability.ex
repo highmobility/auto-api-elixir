@@ -231,60 +231,6 @@ defmodule AutoApi.Capability do
     end
   end
 
-  @capabilities %{
-    <<0x00, 0x2>> => AutoApi.FailureMessageCapability,
-    <<0x00, 0x03>> => AutoApi.FirmwareVersionCapability,
-    <<0x00, 0x10>> => AutoApi.CapabilitiesCapability,
-    <<0x00, 0x33>> => AutoApi.DiagnosticsCapability,
-    <<0x00, 0x20>> => AutoApi.DoorLocksCapability,
-    <<0x00, 0x42>> => AutoApi.WindscreenCapability,
-    <<0x00, 0x45>> => AutoApi.WindowsCapability,
-    <<0x00, 0x59>> => AutoApi.WiFiCapability,
-    <<0x00, 0x55>> => AutoApi.WeatherConditionsCapability,
-    <<0x00, 0x22>> => AutoApi.WakeUpCapability,
-    <<0x00, 0x43>> => AutoApi.VideoHandoverCapability,
-    <<0x00, 0x50>> => AutoApi.VehicleTimeCapability,
-    <<0x00, 0x11>> => AutoApi.VehicleStatusCapability,
-    <<0x00, 0x30>> => AutoApi.VehicleLocationCapability,
-    <<0x00, 0x21>> => AutoApi.TrunkCapability,
-    <<0x00, 0x46>> => AutoApi.TheftAlarmCapability,
-    <<0x00, 0x44>> => AutoApi.TextInputCapability,
-    <<0x00, 0x25>> => AutoApi.RooftopControlCapability,
-    <<0x00, 0x27>> => AutoApi.RemoteControlCapability,
-    <<0x00, 0x28>> => AutoApi.ValetModeCapability,
-    <<0x00, 0x57>> => AutoApi.RaceCapability,
-    <<0x00, 0x47>> => AutoApi.ParkingTicketCapability,
-    <<0x00, 0x58>> => AutoApi.ParkingBrakeCapability,
-    <<0x00, 0x65>> => AutoApi.PowerTakeoffCapability,
-    <<0x00, 0x56>> => AutoApi.SeatsCapability,
-    <<0x00, 0x34>> => AutoApi.MaintenanceCapability,
-    <<0x00, 0x49>> => AutoApi.BrowserCapability,
-    <<0x00, 0x23>> => AutoApi.ChargingCapability,
-    <<0x00, 0x53>> => AutoApi.ChassisSettingsCapability,
-    <<0x00, 0x24>> => AutoApi.ClimateCapability,
-    <<0x00, 0x41>> => AutoApi.DriverFatigueCapability,
-    <<0x00, 0x35>> => AutoApi.EngineCapability,
-    <<0x00, 0x40>> => AutoApi.FuelingCapability,
-    <<0x00, 0x51>> => AutoApi.GraphicsCapability,
-    <<0x00, 0x29>> => AutoApi.HeartRateCapability,
-    <<0x00, 0x60>> => AutoApi.HomeChargerCapability,
-    <<0x00, 0x48>> => AutoApi.KeyfobPositionCapability,
-    <<0x00, 0x36>> => AutoApi.LightsCapability,
-    <<0x00, 0x54>> => AutoApi.LightConditionsCapability,
-    <<0x00, 0x37>> => AutoApi.MessagingCapability,
-    <<0x00, 0x31>> => AutoApi.NaviDestinationCapability,
-    <<0x00, 0x38>> => AutoApi.NotificationsCapability,
-    <<0x00, 0x52>> => AutoApi.OffroadCapability,
-    <<0x00, 0x26>> => AutoApi.HonkHornFlashLightsCapability,
-    <<0x00, 0x67>> => AutoApi.HoodCapability,
-    <<0x00, 0x61>> => AutoApi.DashboardLightsCapability,
-    <<0x00, 0x63>> => AutoApi.StartStopCapability,
-    <<0x00, 0x64>> => AutoApi.TachographCapability,
-    <<0x00, 0x62>> => AutoApi.CruiseControlCapability,
-    <<0x00, 0x66>> => AutoApi.MobileCapability,
-    <<0x00, 0x68>> => AutoApi.UsageCapability
-  }
-
   @doc """
     Returns full capabilities with all of them marked as disabled
 
@@ -295,9 +241,9 @@ defmodule AutoApi.Capability do
       <<0, 0x20, 0>>
   """
   def blank_capabilities do
-    caps_len = length(Map.keys(@capabilities))
+    caps_len = length(all())
 
-    for {_, cap_module} <- @capabilities do
+    for cap_module <- all() do
       iden = apply(cap_module, :identifier, [])
 
       cap_module
@@ -308,5 +254,67 @@ defmodule AutoApi.Capability do
     |> Enum.reduce(<<caps_len>>, fn i, x -> x <> i end)
   end
 
-  def list_capabilities, do: @capabilities
+  @doc """
+  Returns a list of all capability modules.
+
+  ## Examples
+
+  iex> capabilities = AutoApi.Capability.all()
+  iex> length(capabilities)
+  51
+  iex> List.first(capabilities)
+  AutoApi.BrowserCapability
+  """
+  @spec all() :: list(module)
+  defdelegate all(), to: AutoApi.CapabilityDelegate
+
+  @doc """
+  Returns a capability module by its binary id.
+
+  Returns `nil` if there is no capability with the given id.
+
+  ## Examples
+
+  iex> AutoApi.Capability.get_by_id(<<0x00, 0x35>>)
+  AutoApi.EngineCapability
+
+  iex> AutoApi.Capability.get_by_id(<<0xDE, 0xAD>>)
+  nil
+  """
+  @spec get_by_id(binary) :: module | nil
+  defdelegate get_by_id(id), to: AutoApi.CapabilityDelegate
+
+  @doc """
+  Returns a capability module by its name.
+
+  The name can be specified either as an atom or a string.
+
+  Returns `nil` if there is no capability with the given name.
+
+  ## Examples
+
+  iex> AutoApi.Capability.get_by_name("door_locks")
+  AutoApi.DoorLocksCapability
+
+  iex> AutoApi.Capability.get_by_name(:wake_up)
+  AutoApi.WakeUpCapability
+
+  iex> AutoApi.Capability.get_by_name("Nobody")
+  nil
+  """
+  @spec get_by_name(binary | atom) :: module | nil
+  defdelegate get_by_name(name), to: AutoApi.CapabilityDelegate
+
+  @doc """
+  Returns a map with the capability identifiers as keys and the modules as values.
+
+  ## Examples
+
+  iex> capabilities = AutoApi.Capability.all()
+  iex> list = Enum.into(capabilities, %{}, &{&1.identifier, &1})
+  iex> AutoApi.Capability.list_capabilities == list
+  true
+  """
+  @deprecated "Use all/0 and AutoApi.Capability.identifier/0 instead"
+  defdelegate list_capabilities(), to: AutoApi.CapabilityDelegate
 end

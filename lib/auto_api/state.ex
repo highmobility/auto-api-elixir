@@ -168,6 +168,22 @@ defmodule AutoApi.State do
             true
           )
         end
+
+        @doc """
+        Puts a failure property in the state.
+
+        This function wraps the failure in PropertyComponent
+        """
+        @spec put_failure(__MODULE__.t(), atom(), atom(), String.t(), DateTime.t() | nil) ::
+                __MODULE__.t()
+        def put_failure(state, property_name, reason, description, timestamp \\ nil) do
+          prop = %AutoApi.PropertyComponent{
+            failure: %{reason: reason, description: description},
+            timestamp: timestamp
+          }
+
+          %{state | property_name => prop}
+        end
       end
 
     spec = Poison.decode!(File.read!(opts[:spec_file]))
@@ -211,8 +227,6 @@ defmodule AutoApi.State do
       for prop <- spec["properties"] do
         prop_name = String.to_atom(prop["name"])
         prop_id = prop["id"]
-        prop_type = prop["type"]
-        prop_size = prop["size"]
         multiple = prop["multiple"] || false
 
         quote do
@@ -295,7 +309,7 @@ defmodule AutoApi.State do
                   data
                   |> Enum.map(fn item ->
                     property_component_binary =
-                      AutoApi.PropertyComponent.map_to_bin(
+                      AutoApi.PropertyComponent.to_bin(
                         item,
                         unquote(Macro.escape(prop["items"]))
                       )
@@ -308,7 +322,7 @@ defmodule AutoApi.State do
               else
                 def parse_state_property(unquote(prop_name), data) do
                   property_component_binary =
-                    AutoApi.PropertyComponent.map_to_bin(
+                    AutoApi.PropertyComponent.to_bin(
                       data,
                       unquote(Macro.escape(prop["items"]))
                     )
@@ -354,19 +368,23 @@ defmodule AutoApi.State do
               end
 
             "capability_state" ->
-              def parse_bin_property(unquote(prop["id"]), _size, _data) do
-                throw :not_implement
+              def parse_bin_property(unquote(prop["id"]), _size, data) do
+                data_component =
+                  AutoApi.PropertyComponent.to_struct(data, unquote(Macro.escape(prop)))
+
+                {String.to_atom(unquote(prop["name"])), unquote(multiple), data_component}
               end
 
-              def parse_state_property(unquote(prop_name), states) do
+              def parse_state_property(unquote(prop_name), states) when is_list(states) do
                 states
-                |> Enum.map(fn state ->
-                  mod = state.__struct__
+                |> Enum.map(&parse_state_property(unquote(prop_name), &1))
+                |> :binary.list_to_bin()
+              end
 
-                  body = mod.identifier <> <<1>> <> mod.to_bin(state)
-
-                  <<unquote(prop_id), byte_size(body)::integer-16>> <> body
-                end)
+              def parse_state_property(unquote(prop_name), state) do
+                bin = AutoApi.PropertyComponent.to_bin(state, unquote(Macro.escape(prop)))
+                head = <<unquote(prop_id), byte_size(bin)::integer-16>>
+                head <> bin
               end
 
             _ ->
