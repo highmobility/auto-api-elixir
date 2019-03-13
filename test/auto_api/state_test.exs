@@ -18,7 +18,14 @@
 # licensing@high-mobility.com
 defmodule AutoApi.StateTest do
   use ExUnit.Case
-  alias AutoApi.{PropertyComponent, DiagnosticsState, VehicleLocationState, VehicleStatusState}
+
+  alias AutoApi.{
+    PropertyComponent,
+    State,
+    DiagnosticsState,
+    VehicleLocationState,
+    VehicleStatusState
+  }
 
   describe "symmetric from_bin/1 & to_bin/1" do
     test "integer size 4" do
@@ -127,7 +134,7 @@ defmodule AutoApi.StateTest do
   describe "put_failure/5" do
     test "only failure" do
       state = %DiagnosticsState{mileage: %PropertyComponent{data: 16_777_215}}
-      new_state = DiagnosticsState.put_failure(state, :speed, :unknown, "Unknown speed")
+      new_state = State.put_failure(state, :speed, :unknown, "Unknown speed")
 
       assert new_state.mileage.data == 16_777_215
       assert new_state.speed.failure.reason == :unknown
@@ -139,8 +146,7 @@ defmodule AutoApi.StateTest do
       timestamp = DateTime.utc_now()
       state = %DiagnosticsState{mileage: %PropertyComponent{data: 16_777_215}}
 
-      new_state =
-        DiagnosticsState.put_failure(state, :speed, :unknown, "Unknown speed", timestamp)
+      new_state = State.put_failure(state, :speed, :unknown, "Unknown speed", timestamp)
 
       assert new_state.mileage.data == 16_777_215
       assert new_state.speed.failure.reason == :unknown
@@ -157,7 +163,7 @@ defmodule AutoApi.StateTest do
           location: :front_left,
           pressure: 22.034
         })
-        |> DiagnosticsState.put_failure(:tire_pressures, :unknown, "Unknown pressure", timestamp)
+        |> State.put_failure(:tire_pressures, :unknown, "Unknown pressure", timestamp)
 
       refute state.tire_pressures.data
       assert state.tire_pressures.failure.reason == :unknown

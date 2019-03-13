@@ -598,19 +598,6 @@ defmodule AutoApi.State do
     <<0xA5, size::16, prop_id, bin_reason, byte_size(description)::8, description::binary>>
   end
 
-  def put_failure(state, property, reason, description) when byte_size(description) > 255 do
-    put_failure(state, property, reason, binary_part(description, 0, 255))
-  end
-
-  def put_failure(state, property, reason, description) do
-    properties = Enum.uniq([:properties_failures | state.properties])
-    failure_keys = [Access.key(:properties_failures), Access.key(property)]
-
-    state
-    |> Map.put(:properties, properties)
-    |> put_in(failure_keys, {reason, description})
-  end
-
   @doc """
   Update a property value in the given state.
 
@@ -623,5 +610,13 @@ defmodule AutoApi.State do
     else
       state_module.put_property(state, key, value, timestamp)
     end
+  end
+
+  @doc """
+  Update a property failure in the given state.
+  """
+  @spec put_failure(struct, atom, atom, String.t(), DateTime.t() | nil) :: module
+  def put_failure(%state_module{} = state, property, reason, description, timestamp \\ nil) do
+    state_module.put_failure(state, property, reason, description, timestamp)
   end
 end
