@@ -86,6 +86,10 @@ defmodule AutoApi.RaceState do
 
   @doc """
   Build state based on binary value
+
+    iex> bin = <<2, 0, 11, 1, 0, 8, 64, 54, 43, 133, 30, 184, 81, 236>>
+    iex> AutoApi.RaceState.from_bin(bin)
+    %AutoApi.RaceState{understeering: %AutoApi.PropertyComponent{data: 22.17}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -95,6 +99,10 @@ defmodule AutoApi.RaceState do
   @spec to_bin(__MODULE__.t()) :: binary
   @doc """
   Parse state to bin
+
+    iex> state = %AutoApi.RaceState{understeering: %AutoApi.PropertyComponent{data: 22.17}, properties: [:understeering]}
+    iex> AutoApi.RaceState.to_bin(state)
+    <<2, 0, 11, 1, 0, 8, 64, 54, 43, 133, 30, 184, 81, 236>>
   """
   def to_bin(%__MODULE__{} = state) do
     parse_state_properties(state)

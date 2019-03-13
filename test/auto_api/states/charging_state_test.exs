@@ -18,6 +18,7 @@
 # licensing@high-mobility.com
 defmodule AutoApi.ChargingStateTest do
   use ExUnit.Case
+  doctest AutoApi.ChargingState
   alias AutoApi.{PropertyComponent, ChargingState}
 
   test "to_bin & from_bin" do

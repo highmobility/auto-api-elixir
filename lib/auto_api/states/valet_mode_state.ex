@@ -41,6 +41,10 @@ defmodule AutoApi.ValetModeState do
 
   @doc """
   Build state based on binary value
+
+    iex> bin = <<1, 0, 4, 1, 0, 1, 1>>
+    iex> AutoApi.ValetModeState.from_bin(bin)
+    %AutoApi.ValetModeState{valet_mode: %AutoApi.PropertyComponent{data: :activated}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -49,6 +53,10 @@ defmodule AutoApi.ValetModeState do
 
   @doc """
   Parse state to bin
+
+    iex> state = %AutoApi.ValetModeState{valet_mode: %AutoApi.PropertyComponent{data: :activated}, properties: [:valet_mode]}
+    iex> AutoApi.ValetModeState.to_bin(state)
+    <<1, 0, 4, 1, 0, 1, 1>>
   """
   @spec to_bin(__MODULE__.t()) :: binary
   def to_bin(%__MODULE__{} = state) do

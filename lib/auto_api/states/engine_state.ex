@@ -47,6 +47,10 @@ defmodule AutoApi.EngineState do
 
   @doc """
   Build state based on binary value
+
+    iex> bin = <<1, 0, 4, 1, 0, 1, 0>>
+    iex> AutoApi.EngineState.from_bin(bin)
+    %AutoApi.EngineState{ignition: %AutoApi.PropertyComponent{data: :ignition_off}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -56,6 +60,10 @@ defmodule AutoApi.EngineState do
   @spec to_bin(__MODULE__.t()) :: binary
   @doc """
   Parse state to bin
+
+    iex> state = %AutoApi.EngineState{ignition: %AutoApi.PropertyComponent{data: :ignition_off}, properties: [:ignition]}
+    iex> AutoApi.EngineState.to_bin(state)
+    <<1, 0, 4, 1, 0, 1, 0>>
   """
   def to_bin(%__MODULE__{} = state) do
     parse_state_properties(state)

@@ -40,6 +40,10 @@ defmodule AutoApi.WeatherConditionsState do
 
   @doc """
   Build state based on binary value
+
+    iex> bin = <<1, 0, 11, 1, 0, 8, 64, 41, 102, 102, 102, 102, 102, 102>>
+    iex> AutoApi.WeatherConditionsState.from_bin(bin)
+    %AutoApi.WeatherConditionsState{rain_intensity: %AutoApi.PropertyComponent{data: 12.7}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -48,6 +52,10 @@ defmodule AutoApi.WeatherConditionsState do
 
   @doc """
   Parse state to bin
+
+    iex> state = %AutoApi.WeatherConditionsState{rain_intensity: %AutoApi.PropertyComponent{data: 12.7}, properties: [:rain_intensity]}
+    iex> AutoApi.WeatherConditionsState.to_bin(state)
+    <<1, 0, 11, 1, 0, 8, 64, 41, 102, 102, 102, 102, 102, 102>>
   """
   @spec to_bin(__MODULE__.t()) :: binary
   def to_bin(%__MODULE__{} = state) do

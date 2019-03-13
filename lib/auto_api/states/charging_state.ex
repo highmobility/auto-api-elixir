@@ -111,6 +111,10 @@ defmodule AutoApi.ChargingState do
 
   @doc """
   Build state based on binary value
+
+    iex> bin = <<2, 0, 5, 1, 0, 2, 1, 44>>
+    iex> AutoApi.ChargingState.from_bin(bin)
+    %AutoApi.ChargingState{estimated_range: %AutoApi.PropertyComponent{data: 300}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -120,6 +124,10 @@ defmodule AutoApi.ChargingState do
   @spec to_bin(__MODULE__.t()) :: binary
   @doc """
   Parse state to bin
+
+    iex> state = %AutoApi.ChargingState{estimated_range: %AutoApi.PropertyComponent{data: 300}, properties: [:estimated_range]}
+    iex> AutoApi.ChargingState.to_bin(state)
+    <<2, 0, 5, 1, 0, 2, 1, 44>>
   """
   def to_bin(%__MODULE__{} = state) do
     parse_state_properties(state)

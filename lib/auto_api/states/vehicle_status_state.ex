@@ -78,6 +78,10 @@ defmodule AutoApi.VehicleStatusState do
 
   @doc """
   Build state based on binary value
+
+    iex> bin = <<1, 0, 20, 1, 0, 17, 88, 86, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 49>>
+    iex> AutoApi.VehicleStatusState.from_bin(bin)
+    %AutoApi.VehicleStatusState{vin: %AutoApi.PropertyComponent{data: "XV000000000000001"}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -86,6 +90,10 @@ defmodule AutoApi.VehicleStatusState do
 
   @doc """
   Parse state to bin
+
+    iex> state = %AutoApi.VehicleStatusState{vin: %AutoApi.PropertyComponent{data: "XV000000000000001"}, properties: [:vin]}
+    iex> AutoApi.VehicleStatusState.to_bin(state)
+    <<1, 0, 20, 1, 0, 17, 88, 86, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 49>>
   """
   @spec to_bin(__MODULE__.t()) :: binary
   def to_bin(%__MODULE__{} = state) do

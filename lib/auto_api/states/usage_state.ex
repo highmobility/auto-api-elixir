@@ -75,6 +75,10 @@ defmodule AutoApi.UsageState do
 
   @doc """
   Build state based on binary value
+
+    iex> bin = <<1, 0, 5, 1, 0, 2, 0, 203>>
+    iex> AutoApi.UsageState.from_bin(bin)
+    %AutoApi.UsageState{average_weekly_distance: %AutoApi.PropertyComponent{data: 203}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -83,6 +87,10 @@ defmodule AutoApi.UsageState do
 
   @doc """
   Parse state to bin
+
+    iex> state = %AutoApi.UsageState{average_weekly_distance: %AutoApi.PropertyComponent{data: 203}, properties: [:average_weekly_distance]}
+    iex> AutoApi.UsageState.to_bin(state)
+    <<1, 0, 5, 1, 0, 2, 0, 203>>
   """
   @spec to_bin(__MODULE__.t()) :: binary
   def to_bin(%__MODULE__{} = state) do

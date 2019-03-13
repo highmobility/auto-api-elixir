@@ -43,6 +43,10 @@ defmodule AutoApi.PowerTakeoffState do
 
   @doc """
   Build state based on binary value
+
+    iex> bin = <<1, 0, 4, 1, 0, 1, 1>>
+    iex> AutoApi.PowerTakeoffState.from_bin(bin)
+    %AutoApi.PowerTakeoffState{power_takeoff: %AutoApi.PropertyComponent{data: :active}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -51,6 +55,10 @@ defmodule AutoApi.PowerTakeoffState do
 
   @doc """
   Parse state to bin
+
+    iex> state = %AutoApi.PowerTakeoffState{power_takeoff: %AutoApi.PropertyComponent{data: :active}, properties: [:power_takeoff]}
+    iex> AutoApi.PowerTakeoffState.to_bin(state)
+    <<1, 0, 4, 1, 0, 1, 1>>
   """
   @spec to_bin(__MODULE__.t()) :: binary
   def to_bin(%__MODULE__{} = state) do

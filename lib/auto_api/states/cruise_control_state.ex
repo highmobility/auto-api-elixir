@@ -49,6 +49,10 @@ defmodule AutoApi.CruiseControlState do
 
   @doc """
   Build state based on binary value
+
+    iex> bin = <<1, 0, 4, 1, 0, 1, 1>>
+    iex> AutoApi.CruiseControlState.from_bin(bin)
+    %AutoApi.CruiseControlState{cruise_control: %AutoApi.PropertyComponent{data: :active}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -57,6 +61,10 @@ defmodule AutoApi.CruiseControlState do
 
   @doc """
   Parse state to bin
+
+    iex> state = %AutoApi.CruiseControlState{cruise_control: %AutoApi.PropertyComponent{data: :active}, properties: [:cruise_control]}
+    iex> AutoApi.CruiseControlState.to_bin(state)
+    <<1, 0, 4, 1, 0, 1, 1>>
   """
   @spec to_bin(__MODULE__.t()) :: binary
   def to_bin(%__MODULE__{} = state) do

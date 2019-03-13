@@ -37,10 +37,10 @@ defmodule AutoApi.WindowsState do
   @type location :: :front_left | :front_right | :rear_left | :rear_right | :hatch
   @type position :: :close | :open | :intermediate
   @type window_position :: %PropertyComponent{
-          data: %{window_position: position, window_location: location}
+          data: %{window_location: location, window_position: position}
         }
   @type window_open_percentage :: %PropertyComponent{
-          data: %{window_position: position, open_percentage: float}
+          data: %{window_location: location, open_percentage: float}
         }
 
   @type t :: %__MODULE__{
@@ -53,6 +53,10 @@ defmodule AutoApi.WindowsState do
 
   @doc """
   Build state based on binary value
+
+    iex> bin = <<2, 0, 12, 1, 0, 9, 4, 63, 199, 10, 61, 112, 163, 215, 10>>
+    iex> AutoApi.WindowsState.from_bin(bin)
+    %AutoApi.WindowsState{windows_open_percentages: [%AutoApi.PropertyComponent{data: %{window_location: :hatch, open_percentage: 0.18}}]}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -61,6 +65,10 @@ defmodule AutoApi.WindowsState do
 
   @doc """
   Parse state to bin
+
+    iex> state = %AutoApi.WindowsState{windows_open_percentages: [%AutoApi.PropertyComponent{data: %{window_location: :hatch, open_percentage: 0.18}}], properties: [:windows_open_percentages]}
+    iex> AutoApi.WindowsState.to_bin(state)
+    <<2, 0, 12, 1, 0, 9, 4, 63, 199, 10, 61, 112, 163, 215, 10>>
   """
   @spec to_bin(__MODULE__.t()) :: binary
   def to_bin(%__MODULE__{} = state) do

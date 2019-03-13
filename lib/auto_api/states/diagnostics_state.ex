@@ -143,6 +143,10 @@ defmodule AutoApi.DiagnosticsState do
 
   @doc """
   Build state based on binary value
+
+    iex> bin = <<1, 0, 7, 1, 0, 4, 0, 0, 0, 12>>
+    iex> AutoApi.DiagnosticsState.from_bin(bin)
+    %AutoApi.DiagnosticsState{mileage: %AutoApi.PropertyComponent{data: 12}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -152,6 +156,10 @@ defmodule AutoApi.DiagnosticsState do
   @spec to_bin(__MODULE__.t()) :: binary
   @doc """
   Parse state to bin
+
+    iex> state = %AutoApi.DiagnosticsState{mileage: %AutoApi.PropertyComponent{data: 12}, properties: [:mileage]}
+    iex> AutoApi.DiagnosticsState.to_bin(state)
+    <<1, 0, 7, 1, 0, 4, 0, 0, 0, 12>>
   """
   def to_bin(%__MODULE__{} = state) do
     parse_state_properties(state)

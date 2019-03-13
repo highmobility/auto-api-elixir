@@ -72,6 +72,10 @@ defmodule AutoApi.LightsState do
 
   @doc """
   Build state based on binary value
+
+    iex> bin = <<5, 0, 4, 1, 0, 1, 1>>
+    iex> AutoApi.LightsState.from_bin(bin)
+    %AutoApi.LightsState{reverse_light: %AutoApi.PropertyComponent{data: :active}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -80,6 +84,10 @@ defmodule AutoApi.LightsState do
 
   @doc """
   Parse state to bin
+
+    iex> state = %AutoApi.LightsState{reverse_light: %AutoApi.PropertyComponent{data: :active}, properties: [:reverse_light]}
+    iex> AutoApi.LightsState.to_bin(state)
+    <<5, 0, 4, 1, 0, 1, 1>>
   """
   @spec to_bin(__MODULE__.t()) :: binary
   def to_bin(%__MODULE__{} = state) do

@@ -23,7 +23,7 @@ defmodule AutoApi.WiFiState do
 
   alias AutoApi.PropertyComponent
 
-  defstruct wifi_enabled: nil,
+  defstruct wi_fi_enabled: nil,
             network_connected: nil,
             network_ssid: nil,
             network_security: nil,
@@ -38,7 +38,7 @@ defmodule AutoApi.WiFiState do
   @type network_security :: :none | :wep | :wpa | :wpa2_personal
 
   @type t :: %__MODULE__{
-          wifi_enabled: %PropertyComponent{data: wifi_state} | nil,
+          wi_fi_enabled: %PropertyComponent{data: wifi_state} | nil,
           network_connected: %PropertyComponent{data: network_state} | nil,
           network_ssid: %PropertyComponent{data: String.t()} | nil,
           network_security: %PropertyComponent{data: network_security} | nil,
@@ -49,6 +49,10 @@ defmodule AutoApi.WiFiState do
 
   @doc """
   Build state based on binary value
+
+    iex> bin = <<1, 0, 4, 1, 0, 1, 1>>
+    iex> AutoApi.WiFiState.from_bin(bin)
+    %AutoApi.WiFiState{wi_fi_enabled: %AutoApi.PropertyComponent{data: :enabled}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -57,6 +61,10 @@ defmodule AutoApi.WiFiState do
 
   @doc """
   Parse state to bin
+
+    iex> state = %AutoApi.WiFiState{wi_fi_enabled: %AutoApi.PropertyComponent{data: :enabled}, properties: [:wifi_enabled]}
+    iex> AutoApi.WiFiState.to_bin(state)
+    <<1, 0, 4, 1, 0, 1, 1>>
   """
   @spec to_bin(__MODULE__.t()) :: binary
   def to_bin(%__MODULE__{} = state) do

@@ -18,6 +18,7 @@
 # licensing@high-mobility.com
 defmodule AutoApi.VehicleStatusStateTest do
   use ExUnit.Case
+  doctest AutoApi.VehicleStatusState
   alias AutoApi.VehicleStatusState
 
   test "to_bin/1 & from_bin/1" do
