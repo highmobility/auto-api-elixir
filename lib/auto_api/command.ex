@@ -75,7 +75,7 @@ defmodule AutoApi.Command do
     end
   end
 
-  @spec execute(map, atom, binary) :: map
+  @spec execute(map, atom, binary) :: {:state | :state_changed, map}
   def execute(struct, command, binary_command) do
     <<_::binary-size(2), sub_command::binary>> = binary_command
     command.execute(struct, sub_command)
