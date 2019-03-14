@@ -18,5 +18,18 @@
 # licensing@high-mobility.com
 defmodule AutoApi.CommandTest do
   use ExUnit.Case
+  alias AutoApi.{Command, DiagnosticsState, DiagnosticsCapability}
   doctest AutoApi.Command
+
+  describe "to_bin/3" do
+    test "convert diagnostics_state command" do
+      state =
+        %DiagnosticsState{}
+        |> DiagnosticsState.put_property(:mileage, 100)
+        |> DiagnosticsState.put_property(:fuel_level, 10)
+
+      expected_bin = DiagnosticsCapability.identifier() <> <<1>> <> DiagnosticsState.to_bin(state)
+      assert Command.to_bin(:diagnostics, :diagnostics_state, [state]) == expected_bin
+    end
+  end
 end

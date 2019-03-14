@@ -43,4 +43,13 @@ defmodule AutoApi.DiagnosticsCommandTest do
       assert DiagnosticsCommand.state(state) == <<0x01>> <> DiagnosticsState.to_bin(state)
     end
   end
+
+  describe "to_bin/2" do
+    test "get state command" do
+      state = %DiagnosticsState{mileage: %PropertyComponent{data: 100}}
+
+      assert DiagnosticsCommand.to_bin(:diagnostics_state, [state]) ==
+               <<0x01>> <> DiagnosticsState.to_bin(state)
+    end
+  end
 end
