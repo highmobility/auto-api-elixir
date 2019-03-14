@@ -38,9 +38,7 @@ defmodule AutoApi.FirmwareVersionState do
   defstruct car_sdk_version: nil,
             car_sdk_build_name: nil,
             application_version: nil,
-            timestamp: nil,
-            properties: [],
-            property_timestamps: %{}
+            timestamp: nil
 
   use AutoApi.State, spec_file: "specs/firmware_version.json"
 
@@ -48,9 +46,7 @@ defmodule AutoApi.FirmwareVersionState do
           car_sdk_version: car_sdk_version | nil,
           car_sdk_build_name: %PropertyComponent{data: String.t()} | nil,
           application_version: %PropertyComponent{data: String.t()} | nil,
-          timestamp: DateTime.t() | nil,
-          properties: list(atom),
-          property_timestamps: map()
+          timestamp: DateTime.t() | nil
         }
 
   @doc """
@@ -69,7 +65,7 @@ defmodule AutoApi.FirmwareVersionState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.FirmwareVersionState{application_version: %AutoApi.PropertyComponent{data: "3.1.7"}, properties: [:application_version]}
+    iex> state = %AutoApi.FirmwareVersionState{application_version: %AutoApi.PropertyComponent{data: "3.1.7"}}
     iex> AutoApi.FirmwareVersionState.to_bin(state)
     <<3, 0, 8, 1, 0, 5, 51, 46, 49, 46, 55>>
   """

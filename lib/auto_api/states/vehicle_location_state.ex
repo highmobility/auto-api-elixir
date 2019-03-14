@@ -26,9 +26,7 @@ defmodule AutoApi.VehicleLocationState do
   defstruct coordinates: nil,
             heading: nil,
             altitude: nil,
-            timestamp: nil,
-            properties: [],
-            property_timestamps: %{}
+            timestamp: nil
 
   use AutoApi.State, spec_file: "specs/vehicle_location.json"
 
@@ -36,9 +34,7 @@ defmodule AutoApi.VehicleLocationState do
           coordinates: %PropertyComponent{data: CommonData.coordinates()} | nil,
           heading: %PropertyComponent{data: float} | nil,
           altitude: %PropertyComponent{data: float} | nil,
-          timestamp: DateTime.t() | nil,
-          properties: list(atom),
-          property_timestamps: map()
+          timestamp: DateTime.t() | nil
         }
 
   @doc """
@@ -56,7 +52,7 @@ defmodule AutoApi.VehicleLocationState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.VehicleLocationState{heading: %AutoApi.PropertyComponent{data: 175.81}, properties: [:heading]}
+    iex> state = %AutoApi.VehicleLocationState{heading: %AutoApi.PropertyComponent{data: 175.81}}
     iex> AutoApi.VehicleLocationState.to_bin(state)
     <<5, 0, 11, 1, 0, 8, 64, 101, 249, 235, 133, 30, 184, 82>>
   """

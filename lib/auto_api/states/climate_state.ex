@@ -34,9 +34,7 @@ defmodule AutoApi.ClimateState do
             defrosting_temperature: nil,
             hvac_weekday_starting_times: [],
             rear_temperature_setting: nil,
-            timestamp: nil,
-            properties: [],
-            property_timestamps: %{}
+            timestamp: nil
 
   use AutoApi.State, spec_file: "specs/climate.json"
 
@@ -61,9 +59,7 @@ defmodule AutoApi.ClimateState do
           defrosting_temperature: %PropertyComponent{data: float} | nil,
           hvac_weekday_starting_times: list(hvac_weekday_starting_time),
           rear_temperature_setting: %PropertyComponent{data: float} | nil,
-          timestamp: DateTime.t() | nil,
-          properties: list(atom),
-          property_timestamps: map()
+          timestamp: DateTime.t() | nil
         }
 
   @doc """
@@ -80,7 +76,7 @@ defmodule AutoApi.ClimateState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.ClimateState{inside_temperature: %AutoApi.PropertyComponent{data: 28.00}, properties: [:inside_temperature]}
+    iex> state = %AutoApi.ClimateState{inside_temperature: %AutoApi.PropertyComponent{data: 28.00}}
     iex> AutoApi.ClimateState.to_bin(state)
     <<1, 7::integer-16, 1, 0, 4, 65, 224, 0, 0>>
   """

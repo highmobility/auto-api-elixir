@@ -24,17 +24,13 @@ defmodule AutoApi.ValetModeState do
   alias AutoApi.{CommonData, PropertyComponent}
 
   defstruct valet_mode: nil,
-            timestamp: nil,
-            properties: [],
-            property_timestamps: %{}
+            timestamp: nil
 
   use AutoApi.State, spec_file: "specs/valet_mode.json"
 
   @type t :: %__MODULE__{
           valet_mode: %PropertyComponent{data: CommonData.activity_switched()} | nil,
-          timestamp: DateTime.t() | nil,
-          properties: list(atom),
-          property_timestamps: map()
+          timestamp: DateTime.t() | nil
         }
 
   @doc """
@@ -52,7 +48,7 @@ defmodule AutoApi.ValetModeState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.ValetModeState{valet_mode: %AutoApi.PropertyComponent{data: :activated}, properties: [:valet_mode]}
+    iex> state = %AutoApi.ValetModeState{valet_mode: %AutoApi.PropertyComponent{data: :activated}}
     iex> AutoApi.ValetModeState.to_bin(state)
     <<1, 0, 4, 1, 0, 1, 1>>
   """

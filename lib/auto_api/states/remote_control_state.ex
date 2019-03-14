@@ -25,9 +25,7 @@ defmodule AutoApi.RemoteControlState do
 
   defstruct control_mode: nil,
             angle: nil,
-            timestamp: nil,
-            properties: [],
-            property_timestamps: %{}
+            timestamp: nil
 
   use AutoApi.State, spec_file: "specs/remote_control.json"
 
@@ -42,9 +40,7 @@ defmodule AutoApi.RemoteControlState do
   @type t :: %__MODULE__{
           control_mode: %PropertyComponent{data: modes} | nil,
           angle: %PropertyComponent{data: integer} | nil,
-          timestamp: DateTime.t() | nil,
-          properties: list(atom),
-          property_timestamps: map()
+          timestamp: DateTime.t() | nil
         }
 
   @doc """
@@ -62,7 +58,7 @@ defmodule AutoApi.RemoteControlState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.RemoteControlState{control_mode: %AutoApi.PropertyComponent{data: :control_started}, properties: [:control_mode]}
+    iex> state = %AutoApi.RemoteControlState{control_mode: %AutoApi.PropertyComponent{data: :control_started}}
     iex> AutoApi.RemoteControlState.to_bin(state)
     <<1, 0, 4, 1, 0, 1, 2>>
   """

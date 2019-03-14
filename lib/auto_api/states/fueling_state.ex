@@ -25,9 +25,7 @@ defmodule AutoApi.FuelingState do
 
   defstruct gas_flap_position: nil,
             gas_flap_lock: nil,
-            timestamp: nil,
-            properties: [],
-            property_timestamps: %{}
+            timestamp: nil
 
   use AutoApi.State, spec_file: "specs/fueling.json"
 
@@ -36,9 +34,7 @@ defmodule AutoApi.FuelingState do
   @type t :: %__MODULE__{
           gas_flap_position: %PropertyComponent{data: gas_flap_position} | nil,
           gas_flap_lock: %PropertyComponent{data: CommonData.lock()} | nil,
-          timestamp: DateTime.t() | nil,
-          properties: list(atom),
-          property_timestamps: map()
+          timestamp: DateTime.t() | nil
         }
 
   @doc """
@@ -56,7 +52,7 @@ defmodule AutoApi.FuelingState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.FuelingState{gas_flap_position: %AutoApi.PropertyComponent{data: :closed}, properties: [:gas_flap_position]}
+    iex> state = %AutoApi.FuelingState{gas_flap_position: %AutoApi.PropertyComponent{data: :closed}}
     iex> AutoApi.FuelingState.to_bin(state)
     <<3, 0, 4, 1, 0, 1, 0>>
   """

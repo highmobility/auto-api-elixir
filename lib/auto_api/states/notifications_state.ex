@@ -26,9 +26,7 @@ defmodule AutoApi.NotificationsState do
   defstruct text: nil,
             action_items: [],
             received_action: nil,
-            timestamp: nil,
-            properties: [],
-            property_timestamps: %{}
+            timestamp: nil
 
   use AutoApi.State, spec_file: "specs/notifications.json"
 
@@ -38,9 +36,7 @@ defmodule AutoApi.NotificationsState do
           text: %PropertyComponent{data: String.t()} | nil,
           action_items: list(action_item),
           received_action: %PropertyComponent{data: integer} | nil,
-          timestamp: DateTime.t() | nil,
-          properties: list(atom),
-          property_timestamps: map()
+          timestamp: DateTime.t() | nil
         }
 
   @doc """
@@ -58,7 +54,7 @@ defmodule AutoApi.NotificationsState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.NotificationsState{text: %AutoApi.PropertyComponent{data: "notification text"}, properties: [:text]}
+    iex> state = %AutoApi.NotificationsState{text: %AutoApi.PropertyComponent{data: "notification text"}}
     iex> AutoApi.NotificationsState.to_bin(state)
     <<1, 0, 20, 1, 0, 17, 110, 111, 116, 105, 102, 105, 99, 97, 116, 105, 111, 110, 32, 116, 101, 120, 116>>
   """

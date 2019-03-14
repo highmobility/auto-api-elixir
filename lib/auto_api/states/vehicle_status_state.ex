@@ -42,9 +42,7 @@ defmodule AutoApi.VehicleStatusState do
             equipments: [],
             brand: nil,
             state: [],
-            timestamp: nil,
-            properties: [],
-            property_timestamps: %{}
+            timestamp: nil
 
   use AutoApi.State, spec_file: "specs/vehicle_status.json"
 
@@ -73,9 +71,7 @@ defmodule AutoApi.VehicleStatusState do
           equipments: list(%PropertyComponent{data: String.t()}),
           brand: %PropertyComponent{data: String.t()} | nil,
           state: list(%PropertyComponent{}),
-          timestamp: DateTime.t() | nil,
-          properties: list(atom),
-          property_timestamps: map()
+          timestamp: DateTime.t() | nil
         }
 
   @doc """
@@ -93,7 +89,7 @@ defmodule AutoApi.VehicleStatusState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.VehicleStatusState{vin: %AutoApi.PropertyComponent{data: "XV000000000000001"}, properties: [:vin]}
+    iex> state = %AutoApi.VehicleStatusState{vin: %AutoApi.PropertyComponent{data: "XV000000000000001"}}
     iex> AutoApi.VehicleStatusState.to_bin(state)
     <<1, 0, 20, 1, 0, 17, 88, 86, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 49>>
   """

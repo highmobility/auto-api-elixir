@@ -24,17 +24,13 @@ defmodule AutoApi.ParkingBrakeState do
   alias AutoApi.{CommonData, PropertyComponent}
 
   defstruct parking_brake: nil,
-            timestamp: nil,
-            properties: [],
-            property_timestamps: %{}
+            timestamp: nil
 
   use AutoApi.State, spec_file: "specs/parking_brake.json"
 
   @type t :: %__MODULE__{
           parking_brake: %PropertyComponent{data: CommonData.activity()} | nil,
-          timestamp: DateTime.t() | nil,
-          properties: list(atom),
-          property_timestamps: map()
+          timestamp: DateTime.t() | nil
         }
 
   @doc """
@@ -52,7 +48,7 @@ defmodule AutoApi.ParkingBrakeState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.ParkingBrakeState{parking_brake: %AutoApi.PropertyComponent{data: :active}, properties: [:parking_brake]}
+    iex> state = %AutoApi.ParkingBrakeState{parking_brake: %AutoApi.PropertyComponent{data: :active}}
     iex> AutoApi.ParkingBrakeState.to_bin(state)
     <<1, 0, 4, 1, 0, 1, 1>>
   """

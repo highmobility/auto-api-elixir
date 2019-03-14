@@ -28,9 +28,7 @@ defmodule AutoApi.WindowsState do
   """
   defstruct windows_open_percentages: [],
             windows_positions: [],
-            timestamp: nil,
-            properties: [],
-            property_timestamps: %{}
+            timestamp: nil
 
   use AutoApi.State, spec_file: "specs/windows.json"
 
@@ -46,9 +44,7 @@ defmodule AutoApi.WindowsState do
   @type t :: %__MODULE__{
           windows_open_percentages: list(window_open_percentage),
           windows_positions: list(window_position),
-          timestamp: DateTime.t() | nil,
-          properties: list(atom),
-          property_timestamps: map()
+          timestamp: DateTime.t() | nil
         }
 
   @doc """
@@ -66,7 +62,7 @@ defmodule AutoApi.WindowsState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.WindowsState{windows_open_percentages: [%AutoApi.PropertyComponent{data: %{window_location: :hatch, open_percentage: 0.18}}], properties: [:windows_open_percentages]}
+    iex> state = %AutoApi.WindowsState{windows_open_percentages: [%AutoApi.PropertyComponent{data: %{window_location: :hatch, open_percentage: 0.18}}]}
     iex> AutoApi.WindowsState.to_bin(state)
     <<2, 0, 12, 1, 0, 9, 4, 63, 199, 10, 61, 112, 163, 215, 10>>
   """

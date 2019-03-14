@@ -31,9 +31,7 @@ defmodule AutoApi.ChassisSettingsState do
             current_chassis_position: nil,
             maximum_chassis_position: nil,
             minimum_chassis_position: nil,
-            timestamp: nil,
-            properties: [],
-            property_timestamps: %{}
+            timestamp: nil
 
   use AutoApi.State, spec_file: "specs/chassis_settings.json"
 
@@ -48,9 +46,7 @@ defmodule AutoApi.ChassisSettingsState do
           current_chassis_position: %PropertyComponent{data: integer} | nil,
           maximum_chassis_position: %PropertyComponent{data: integer} | nil,
           minimum_chassis_position: %PropertyComponent{data: integer} | nil,
-          timestamp: DateTime.t() | nil,
-          properties: list(atom),
-          property_timestamps: map()
+          timestamp: DateTime.t() | nil
         }
 
   @doc """
@@ -67,7 +63,7 @@ defmodule AutoApi.ChassisSettingsState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.ChassisSettingsState{driving_mode: %AutoApi.PropertyComponent{data: :regular}, properties: [:driving_mode]}
+    iex> state = %AutoApi.ChassisSettingsState{driving_mode: %AutoApi.PropertyComponent{data: :regular}}
     iex> AutoApi.ChassisSettingsState.to_bin(state)
     <<1, 4::integer-16, 1, 0, 1, 0>>
   """

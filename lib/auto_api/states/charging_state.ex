@@ -77,9 +77,7 @@ defmodule AutoApi.ChargingState do
             timers: [],
             plugged_in: nil,
             charging_state: nil,
-            timestamp: nil,
-            properties: [],
-            property_timestamps: %{}
+            timestamp: nil
 
   use AutoApi.State, spec_file: "specs/charging.json"
 
@@ -104,9 +102,7 @@ defmodule AutoApi.ChargingState do
           timers: list(timer),
           plugged_in: plugged_in | nil,
           charging_state: charging_state | nil,
-          timestamp: DateTime.t() | nil,
-          properties: list(atom),
-          property_timestamps: map()
+          timestamp: DateTime.t() | nil
         }
 
   @doc """
@@ -125,7 +121,7 @@ defmodule AutoApi.ChargingState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.ChargingState{estimated_range: %AutoApi.PropertyComponent{data: 300}, properties: [:estimated_range]}
+    iex> state = %AutoApi.ChargingState{estimated_range: %AutoApi.PropertyComponent{data: 300}}
     iex> AutoApi.ChargingState.to_bin(state)
     <<2, 0, 5, 1, 0, 2, 1, 44>>
   """

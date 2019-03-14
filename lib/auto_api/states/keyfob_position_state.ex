@@ -24,9 +24,7 @@ defmodule AutoApi.KeyfobPositionState do
   alias AutoApi.PropertyComponent
 
   defstruct keyfob_position: nil,
-            timestamp: nil,
-            properties: [],
-            property_timestamps: %{}
+            timestamp: nil
 
   use AutoApi.State, spec_file: "specs/keyfob_position.json"
 
@@ -40,9 +38,7 @@ defmodule AutoApi.KeyfobPositionState do
 
   @type t :: %__MODULE__{
           keyfob_position: %PropertyComponent{data: position} | nil,
-          timestamp: DateTime.t() | nil,
-          properties: list(atom),
-          property_timestamps: map()
+          timestamp: DateTime.t() | nil
         }
 
   @doc """
@@ -59,7 +55,7 @@ defmodule AutoApi.KeyfobPositionState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.KeyfobPositionState{keyfob_position: %AutoApi.PropertyComponent{data: :out_of_range}, properties: [:keyfob_position]}
+    iex> state = %AutoApi.KeyfobPositionState{keyfob_position: %AutoApi.PropertyComponent{data: :out_of_range}}
     iex> AutoApi.KeyfobPositionState.to_bin(state)
     <<1, 4::integer-16, 1, 0, 1, 0>>
   """

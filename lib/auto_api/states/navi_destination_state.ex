@@ -28,18 +28,14 @@ defmodule AutoApi.NaviDestinationState do
   """
   defstruct coordinates: nil,
             destination_name: nil,
-            timestamp: nil,
-            properties: [],
-            property_timestamps: %{}
+            timestamp: nil
 
   use AutoApi.State, spec_file: "specs/navi_destination.json"
 
   @type t :: %__MODULE__{
           coordinates: %PropertyComponent{data: CommonData.coordinates()} | nil,
           destination_name: %PropertyComponent{data: String.t()} | nil,
-          timestamp: DateTime.t() | nil,
-          properties: list(atom),
-          property_timestamps: map()
+          timestamp: DateTime.t() | nil
         }
 
   @doc """
@@ -57,7 +53,7 @@ defmodule AutoApi.NaviDestinationState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.NaviDestinationState{destination_name: %AutoApi.PropertyComponent{data: "Home"}, properties: [:destination_name]}
+    iex> state = %AutoApi.NaviDestinationState{destination_name: %AutoApi.PropertyComponent{data: "Home"}}
     iex> AutoApi.NaviDestinationState.to_bin(state)
     <<2, 0, 7, 1, 0, 4, 72, 111, 109, 101>>
   """

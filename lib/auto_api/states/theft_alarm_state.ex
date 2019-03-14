@@ -24,9 +24,7 @@ defmodule AutoApi.TheftAlarmState do
   alias AutoApi.PropertyComponent
 
   defstruct theft_alarm: nil,
-            timestamp: nil,
-            properties: [],
-            property_timestamps: %{}
+            timestamp: nil
 
   use AutoApi.State, spec_file: "specs/theft_alarm.json"
 
@@ -34,9 +32,7 @@ defmodule AutoApi.TheftAlarmState do
 
   @type t :: %__MODULE__{
           theft_alarm: %PropertyComponent{data: alarm} | nil,
-          timestamp: DateTime.t() | nil,
-          properties: list(atom),
-          property_timestamps: map()
+          timestamp: DateTime.t() | nil
         }
 
   @doc """
@@ -54,7 +50,7 @@ defmodule AutoApi.TheftAlarmState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.TheftAlarmState{theft_alarm: %AutoApi.PropertyComponent{data: :triggered}, properties: [:theft_alarm]}
+    iex> state = %AutoApi.TheftAlarmState{theft_alarm: %AutoApi.PropertyComponent{data: :triggered}}
     iex> AutoApi.TheftAlarmState.to_bin(state)
     <<1, 0, 4, 1, 0, 1, 2>>
   """

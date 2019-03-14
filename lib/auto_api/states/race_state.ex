@@ -55,9 +55,7 @@ defmodule AutoApi.RaceState do
             clutch_pedal_switch: nil,
             accelerator_pedal_idle_switch: nil,
             accelerator_pedal_kickdown_switch: nil,
-            timestamp: nil,
-            properties: [],
-            property_timestamps: %{}
+            timestamp: nil
 
   use AutoApi.State, spec_file: "specs/race.json"
 
@@ -79,9 +77,7 @@ defmodule AutoApi.RaceState do
           accelerator_pedal_idle_switch: %PropertyComponent{data: CommonData.activity()} | nil,
           accelerator_pedal_kickdown_switch:
             %PropertyComponent{data: CommonData.activity()} | nil,
-          timestamp: DateTime.t() | nil,
-          properties: list(atom),
-          property_timestamps: map()
+          timestamp: DateTime.t() | nil
         }
 
   @doc """
@@ -100,7 +96,7 @@ defmodule AutoApi.RaceState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.RaceState{understeering: %AutoApi.PropertyComponent{data: 22.17}, properties: [:understeering]}
+    iex> state = %AutoApi.RaceState{understeering: %AutoApi.PropertyComponent{data: 22.17}}
     iex> AutoApi.RaceState.to_bin(state)
     <<2, 0, 11, 1, 0, 8, 64, 54, 43, 133, 30, 184, 81, 236>>
   """

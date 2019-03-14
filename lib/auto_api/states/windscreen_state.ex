@@ -31,9 +31,7 @@ defmodule AutoApi.WindscreenState do
             windscreen_needs_replacement: nil,
             windscreen_damage_confidence: nil,
             windscreen_damage_detection_time: nil,
-            timestamp: nil,
-            properties: [],
-            property_timestamps: %{}
+            timestamp: nil
 
   use AutoApi.State, spec_file: "specs/windscreen.json"
 
@@ -58,9 +56,7 @@ defmodule AutoApi.WindscreenState do
             %PropertyComponent{data: windscreen_needs_replacement} | nil,
           windscreen_damage_confidence: %PropertyComponent{data: float} | nil,
           windscreen_damage_detection_time: %PropertyComponent{data: integer} | nil,
-          timestamp: DateTime.t() | nil,
-          properties: list(atom),
-          property_timestamps: map()
+          timestamp: DateTime.t() | nil
         }
 
   @doc """
@@ -78,7 +74,7 @@ defmodule AutoApi.WindscreenState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.WindscreenState{wipers: %AutoApi.PropertyComponent{data: :automatic}, properties: [:wipers]}
+    iex> state = %AutoApi.WindscreenState{wipers: %AutoApi.PropertyComponent{data: :automatic}}
     iex> AutoApi.WindscreenState.to_bin(state)
     <<1, 0, 4, 1, 0, 1, 2>>
   """

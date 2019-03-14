@@ -25,18 +25,14 @@ defmodule AutoApi.LightConditionsState do
 
   defstruct outside_light: nil,
             inside_light: nil,
-            timestamp: nil,
-            properties: [],
-            property_timestamps: %{}
+            timestamp: nil
 
   use AutoApi.State, spec_file: "specs/light_conditions.json"
 
   @type t :: %__MODULE__{
           outside_light: %PropertyComponent{data: float} | nil,
           inside_light: %PropertyComponent{data: float} | nil,
-          timestamp: DateTime.t() | nil,
-          properties: list(atom),
-          property_timestamps: map()
+          timestamp: DateTime.t() | nil
         }
 
   @doc """
@@ -54,7 +50,7 @@ defmodule AutoApi.LightConditionsState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.LightConditionsState{outside_light: %AutoApi.PropertyComponent{data: 25.17}, properties: [:outside_light]}
+    iex> state = %AutoApi.LightConditionsState{outside_light: %AutoApi.PropertyComponent{data: 25.17}}
     iex> AutoApi.LightConditionsState.to_bin(state)
     <<1, 7::integer-16, 1, 0, 4, 65, 201, 92, 41>>
   """

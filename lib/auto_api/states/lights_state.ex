@@ -31,9 +31,7 @@ defmodule AutoApi.LightsState do
             fog_lights: [],
             reading_lamps: [],
             interior_lights: [],
-            timestamp: nil,
-            properties: [],
-            property_timestamps: %{}
+            timestamp: nil
 
   use AutoApi.State, spec_file: "specs/lights.json"
 
@@ -65,9 +63,7 @@ defmodule AutoApi.LightsState do
           fog_lights: list(fog_light),
           reading_lamps: list(reading_lamp),
           interior_lights: list(interior_lights),
-          timestamp: DateTime.t() | nil,
-          properties: list(atom),
-          property_timestamps: map()
+          timestamp: DateTime.t() | nil
         }
 
   @doc """
@@ -85,7 +81,7 @@ defmodule AutoApi.LightsState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.LightsState{reverse_light: %AutoApi.PropertyComponent{data: :active}, properties: [:reverse_light]}
+    iex> state = %AutoApi.LightsState{reverse_light: %AutoApi.PropertyComponent{data: :active}}
     iex> AutoApi.LightsState.to_bin(state)
     <<5, 0, 4, 1, 0, 1, 1>>
   """

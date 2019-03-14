@@ -24,9 +24,7 @@ defmodule AutoApi.MobileState do
   alias AutoApi.PropertyComponent
 
   defstruct connection: nil,
-            timestamp: nil,
-            properties: [],
-            property_timestamps: %{}
+            timestamp: nil
 
   use AutoApi.State, spec_file: "specs/mobile.json"
 
@@ -34,9 +32,7 @@ defmodule AutoApi.MobileState do
 
   @type t :: %__MODULE__{
           connection: %PropertyComponent{data: connection} | nil,
-          timestamp: DateTime.t() | nil,
-          properties: list(atom),
-          property_timestamps: map()
+          timestamp: DateTime.t() | nil
         }
 
   @doc """
@@ -53,7 +49,7 @@ defmodule AutoApi.MobileState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.MobileState{connection: %AutoApi.PropertyComponent{data: :connected}, properties: [:connection]}
+    iex> state = %AutoApi.MobileState{connection: %AutoApi.PropertyComponent{data: :connected}}
     iex> AutoApi.MobileState.to_bin(state)
     <<1, 4::integer-16, 1, 0, 1, 1>>
   """

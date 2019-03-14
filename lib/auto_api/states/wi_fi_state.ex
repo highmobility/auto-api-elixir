@@ -27,9 +27,7 @@ defmodule AutoApi.WiFiState do
             network_connected: nil,
             network_ssid: nil,
             network_security: nil,
-            timestamp: nil,
-            properties: [],
-            property_timestamps: %{}
+            timestamp: nil
 
   use AutoApi.State, spec_file: "specs/wi_fi.json"
 
@@ -41,9 +39,7 @@ defmodule AutoApi.WiFiState do
           network_connected: %PropertyComponent{data: network_state} | nil,
           network_ssid: %PropertyComponent{data: String.t()} | nil,
           network_security: %PropertyComponent{data: CommonData.network_security()} | nil,
-          timestamp: DateTime.t() | nil,
-          properties: list(atom),
-          property_timestamps: map()
+          timestamp: DateTime.t() | nil
         }
 
   @doc """
@@ -61,7 +57,7 @@ defmodule AutoApi.WiFiState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.WiFiState{wi_fi_enabled: %AutoApi.PropertyComponent{data: :enabled}, properties: [:wifi_enabled]}
+    iex> state = %AutoApi.WiFiState{wi_fi_enabled: %AutoApi.PropertyComponent{data: :enabled}}
     iex> AutoApi.WiFiState.to_bin(state)
     <<1, 0, 4, 1, 0, 1, 1>>
   """

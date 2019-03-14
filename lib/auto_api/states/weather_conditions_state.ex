@@ -25,17 +25,13 @@ defmodule AutoApi.WeatherConditionsState do
 
   defstruct rain_intensity: nil,
             wheel_suspension: nil,
-            timestamp: nil,
-            properties: [],
-            property_timestamps: %{}
+            timestamp: nil
 
   use AutoApi.State, spec_file: "specs/weather_conditions.json"
 
   @type t :: %__MODULE__{
           rain_intensity: %PropertyComponent{data: float} | nil,
-          timestamp: DateTime.t() | nil,
-          properties: list(atom),
-          property_timestamps: map()
+          timestamp: DateTime.t() | nil
         }
 
   @doc """
@@ -53,7 +49,7 @@ defmodule AutoApi.WeatherConditionsState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.WeatherConditionsState{rain_intensity: %AutoApi.PropertyComponent{data: 12.7}, properties: [:rain_intensity]}
+    iex> state = %AutoApi.WeatherConditionsState{rain_intensity: %AutoApi.PropertyComponent{data: 12.7}}
     iex> AutoApi.WeatherConditionsState.to_bin(state)
     <<1, 0, 11, 1, 0, 8, 64, 41, 102, 102, 102, 102, 102, 102>>
   """

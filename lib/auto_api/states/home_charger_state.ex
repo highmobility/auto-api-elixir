@@ -38,9 +38,7 @@ defmodule AutoApi.HomeChargerState do
             minimum_charge_current: nil,
             coordinates: nil,
             price_tariffs: [],
-            timestamp: nil,
-            properties: [],
-            property_timestamps: %{}
+            timestamp: nil
 
   use AutoApi.State, spec_file: "specs/home_charger.json"
 
@@ -75,9 +73,7 @@ defmodule AutoApi.HomeChargerState do
           minimum_charge_current: %PropertyComponent{data: float} | nil,
           coordinates: %PropertyComponent{data: CommonData.coordinates()} | nil,
           price_tariffs: list(price_tariff),
-          timestamp: DateTime.t() | nil,
-          properties: list(atom),
-          property_timestamps: map()
+          timestamp: DateTime.t() | nil
         }
 
   @doc """
@@ -94,7 +90,7 @@ defmodule AutoApi.HomeChargerState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.HomeChargerState{charging: %AutoApi.PropertyComponent{data: :plugged_in}, properties: [:charging]}
+    iex> state = %AutoApi.HomeChargerState{charging: %AutoApi.PropertyComponent{data: :plugged_in}}
     iex> AutoApi.HomeChargerState.to_bin(state)
     <<1, 4::integer-16, 1, 0, 1, 1>>
   """

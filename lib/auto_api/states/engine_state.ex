@@ -29,9 +29,7 @@ defmodule AutoApi.EngineState do
   @type t :: %__MODULE__{
           ignition: %PropertyComponent{data: ignition} | nil,
           accessories_ignition: %PropertyComponent{data: accessories_ignition} | nil,
-          timestamp: DateTime.t() | nil,
-          properties: list(atom),
-          property_timestamps: map()
+          timestamp: DateTime.t() | nil
         }
 
   @doc """
@@ -39,9 +37,7 @@ defmodule AutoApi.EngineState do
   """
   defstruct ignition: nil,
             accessories_ignition: nil,
-            timestamp: nil,
-            properties: [],
-            property_timestamps: %{}
+            timestamp: nil
 
   use AutoApi.State, spec_file: "specs/engine.json"
 
@@ -61,7 +57,7 @@ defmodule AutoApi.EngineState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.EngineState{ignition: %AutoApi.PropertyComponent{data: :ignition_off}, properties: [:ignition]}
+    iex> state = %AutoApi.EngineState{ignition: %AutoApi.PropertyComponent{data: :ignition_off}}
     iex> AutoApi.EngineState.to_bin(state)
     <<1, 0, 4, 1, 0, 1, 0>>
   """

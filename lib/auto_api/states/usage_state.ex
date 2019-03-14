@@ -38,9 +38,7 @@ defmodule AutoApi.UsageState do
             last_trip_date: nil,
             average_fuel_consumption: nil,
             current_fuel_consumption: nil,
-            timestamp: nil,
-            properties: [],
-            property_timestamps: %{}
+            timestamp: nil
 
   use AutoApi.State, spec_file: "specs/usage.json"
 
@@ -67,9 +65,7 @@ defmodule AutoApi.UsageState do
           last_trip_date: %PropertyComponent{data: integer} | nil,
           average_fuel_consumption: %PropertyComponent{data: float} | nil,
           current_fuel_consumption: %PropertyComponent{data: float} | nil,
-          timestamp: DateTime.t() | nil,
-          properties: list(atom),
-          property_timestamps: map()
+          timestamp: DateTime.t() | nil
         }
 
   @doc """
@@ -87,7 +83,7 @@ defmodule AutoApi.UsageState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.UsageState{average_weekly_distance: %AutoApi.PropertyComponent{data: 203}, properties: [:average_weekly_distance]}
+    iex> state = %AutoApi.UsageState{average_weekly_distance: %AutoApi.PropertyComponent{data: 203}}
     iex> AutoApi.UsageState.to_bin(state)
     <<1, 0, 5, 1, 0, 2, 0, 203>>
   """

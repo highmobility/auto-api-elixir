@@ -58,9 +58,7 @@ defmodule AutoApi.DiagnosticsState do
             wheel_rpms: [],
             trouble_codes: [],
             mileage_meters: nil,
-            timestamp: nil,
-            properties: [],
-            property_timestamps: %{}
+            timestamp: nil
 
   use AutoApi.State, spec_file: "specs/diagnostics.json"
 
@@ -136,9 +134,7 @@ defmodule AutoApi.DiagnosticsState do
           wheel_rpms: list(wheel_rpm),
           trouble_codes: list(trouble_code),
           mileage_meters: %PropertyComponent{data: integer} | nil,
-          timestamp: DateTime.t() | nil,
-          properties: list(atom),
-          property_timestamps: map()
+          timestamp: DateTime.t() | nil
         }
 
   @doc """
@@ -157,7 +153,7 @@ defmodule AutoApi.DiagnosticsState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.DiagnosticsState{mileage: %AutoApi.PropertyComponent{data: 12}, properties: [:mileage]}
+    iex> state = %AutoApi.DiagnosticsState{mileage: %AutoApi.PropertyComponent{data: 12}}
     iex> AutoApi.DiagnosticsState.to_bin(state)
     <<1, 0, 7, 1, 0, 4, 0, 0, 0, 12>>
   """

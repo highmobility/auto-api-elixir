@@ -39,9 +39,7 @@ defmodule AutoApi.FailureMessageState do
             failed_message_type: nil,
             failure_reason: nil,
             failure_description: nil,
-            timestamp: nil,
-            properties: [],
-            property_timestamps: %{}
+            timestamp: nil
 
   use AutoApi.State, spec_file: "specs/failure_message.json"
 
@@ -50,9 +48,7 @@ defmodule AutoApi.FailureMessageState do
           failed_message_type: %PropertyComponent{data: integer} | nil,
           failure_reason: %PropertyComponent{data: failure_reason} | nil,
           failure_description: %PropertyComponent{data: String.t()} | nil,
-          timestamp: DateTime.t() | nil,
-          properties: list(atom),
-          property_timestamps: map()
+          timestamp: DateTime.t() | nil
         }
 
   @doc """
@@ -73,7 +69,7 @@ defmodule AutoApi.FailureMessageState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.FailureMessageState{failure_description: %AutoApi.PropertyComponent{data: "something happened"}, properties: [:failure_description]}
+    iex> state = %AutoApi.FailureMessageState{failure_description: %AutoApi.PropertyComponent{data: "something happened"}}
     iex> AutoApi.FailureMessageState.to_bin(state)
     <<4, 0, 21, 1, 0, 18, 115, 111, 109, 101, 116, 104, 105, 110, 103, 32, 104, 97, 112, 112, 101, 110, 101, 100>>
   """

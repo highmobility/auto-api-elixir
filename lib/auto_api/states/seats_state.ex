@@ -25,9 +25,7 @@ defmodule AutoApi.SeatsState do
 
   defstruct persons_detected: [],
             seatbelts_fastened: [],
-            timestamp: nil,
-            properties: [],
-            property_timestamps: %{}
+            timestamp: nil
 
   use AutoApi.State, spec_file: "specs/seats.json"
 
@@ -44,9 +42,7 @@ defmodule AutoApi.SeatsState do
   @type t :: %__MODULE__{
           persons_detected: list(persons_detected),
           seatbelts_fastened: list(seatbelts_fastened),
-          timestamp: DateTime.t() | nil,
-          properties: list(atom),
-          property_timestamps: map()
+          timestamp: DateTime.t() | nil
         }
 
   @doc """
@@ -64,7 +60,7 @@ defmodule AutoApi.SeatsState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.SeatsState{persons_detected: [%AutoApi.PropertyComponent{data: %{seat_location: :rear_center, person_detected: :detected}}], properties: [:persons_detected]}
+    iex> state = %AutoApi.SeatsState{persons_detected: [%AutoApi.PropertyComponent{data: %{seat_location: :rear_center, person_detected: :detected}}]}
     iex> AutoApi.SeatsState.to_bin(state)
     <<2, 0, 5, 1, 0, 2, 4, 1>>
   """

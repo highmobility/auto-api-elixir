@@ -35,9 +35,7 @@ defmodule AutoApi.RooftopControlState do
             convertible_roof_state: nil,
             sunroof_tilt_state: nil,
             sunroof_state: nil,
-            timestamp: nil,
-            properties: [],
-            property_timestamps: %{}
+            timestamp: nil
 
   use AutoApi.State, spec_file: "specs/rooftop_control.json"
 
@@ -47,9 +45,7 @@ defmodule AutoApi.RooftopControlState do
           convertible_roof_state: %PropertyComponent{data: convertible_roof_state} | nil,
           sunroof_tilt_state: %PropertyComponent{data: sunroof_tilt_state} | nil,
           sunroof_state: %PropertyComponent{data: sunroof_state} | nil,
-          timestamp: DateTime.t() | nil,
-          properties: list(atom),
-          property_timestamps: map()
+          timestamp: DateTime.t() | nil
         }
 
   @doc """
@@ -68,7 +64,7 @@ defmodule AutoApi.RooftopControlState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.RooftopControlState{dimming: %AutoApi.PropertyComponent{data: 0.17}, properties: [:dimming]}
+    iex> state = %AutoApi.RooftopControlState{dimming: %AutoApi.PropertyComponent{data: 0.17}}
     iex> AutoApi.RooftopControlState.to_bin(state)
     <<1, 0, 11, 1, 0, 8, 63, 197, 194, 143, 92, 40, 245, 195>>
   """

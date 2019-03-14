@@ -24,17 +24,13 @@ defmodule AutoApi.VehicleTimeState do
   alias AutoApi.{CommonData, PropertyComponent}
 
   defstruct vehicle_time: nil,
-            timestamp: nil,
-            properties: [],
-            property_timestamps: %{}
+            timestamp: nil
 
   use AutoApi.State, spec_file: "specs/vehicle_time.json"
 
   @type t :: %__MODULE__{
           vehicle_time: %PropertyComponent{data: integer} | nil,
-          timestamp: DateTime.t() | nil,
-          properties: list(atom),
-          property_timestamps: map()
+          timestamp: DateTime.t() | nil
         }
 
   @doc """
@@ -52,7 +48,7 @@ defmodule AutoApi.VehicleTimeState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.VehicleTimeState{vehicle_time: %AutoApi.PropertyComponent{data: 12}, properties: [:vehicle_time]}
+    iex> state = %AutoApi.VehicleTimeState{vehicle_time: %AutoApi.PropertyComponent{data: 12}}
     iex> AutoApi.VehicleTimeState.to_bin(state)
     <<1, 0, 11, 1, 0, 8, 0, 0, 0, 0, 0, 0, 0, 12>>
   """

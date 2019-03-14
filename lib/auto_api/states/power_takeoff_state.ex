@@ -25,9 +25,7 @@ defmodule AutoApi.PowerTakeoffState do
 
   defstruct power_takeoff: nil,
             power_takeoff_engaged: nil,
-            timestamp: nil,
-            properties: [],
-            property_timestamps: %{}
+            timestamp: nil
 
   use AutoApi.State, spec_file: "specs/power_takeoff.json"
 
@@ -36,9 +34,7 @@ defmodule AutoApi.PowerTakeoffState do
   @type t :: %__MODULE__{
           power_takeoff: %PropertyComponent{data: CommonData.activity()} | nil,
           power_takeoff_engaged: %PropertyComponent{data: power_takeoff_engaged} | nil,
-          timestamp: DateTime.t() | nil,
-          properties: list(atom),
-          property_timestamps: map()
+          timestamp: DateTime.t() | nil
         }
 
   @doc """
@@ -56,7 +52,7 @@ defmodule AutoApi.PowerTakeoffState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.PowerTakeoffState{power_takeoff: %AutoApi.PropertyComponent{data: :active}, properties: [:power_takeoff]}
+    iex> state = %AutoApi.PowerTakeoffState{power_takeoff: %AutoApi.PropertyComponent{data: :active}}
     iex> AutoApi.PowerTakeoffState.to_bin(state)
     <<1, 0, 4, 1, 0, 1, 1>>
   """

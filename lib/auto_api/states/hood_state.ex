@@ -29,17 +29,13 @@ defmodule AutoApi.HoodState do
   Hood state
   """
   defstruct position: nil,
-            timestamp: nil,
-            properties: [],
-            property_timestamps: %{}
+            timestamp: nil
 
   use AutoApi.State, spec_file: "specs/hood.json"
 
   @type t :: %__MODULE__{
           position: %PropertyComponent{data: position} | nil,
-          timestamp: DateTime.t() | nil,
-          properties: list(atom),
-          property_timestamps: map()
+          timestamp: DateTime.t() | nil
         }
 
   @doc """
@@ -58,7 +54,7 @@ defmodule AutoApi.HoodState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.HoodState{position: %AutoApi.PropertyComponent{data: :open}, properties: [:position]}
+    iex> state = %AutoApi.HoodState{position: %AutoApi.PropertyComponent{data: :open}}
     iex> AutoApi.HoodState.to_bin(state)
     <<1, 0, 4, 1, 0, 1, 1>>
   """

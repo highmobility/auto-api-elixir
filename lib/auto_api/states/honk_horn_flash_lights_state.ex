@@ -29,17 +29,13 @@ defmodule AutoApi.HonkHornFlashLightsState do
   HonkHornFlashLights state
   """
   defstruct flashers: nil,
-            timestamp: nil,
-            properties: [],
-            property_timestamps: %{}
+            timestamp: nil
 
   use AutoApi.State, spec_file: "specs/honk_horn_flash_lights.json"
 
   @type t :: %__MODULE__{
           flashers: %PropertyComponent{data: flashers} | nil,
-          timestamp: DateTime.t() | nil,
-          properties: list(atom),
-          property_timestamps: map()
+          timestamp: DateTime.t() | nil
         }
 
   @doc """
@@ -58,7 +54,7 @@ defmodule AutoApi.HonkHornFlashLightsState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.HonkHornFlashLightsState{flashers: %AutoApi.PropertyComponent{data: :inactive}, properties: [:flashers]}
+    iex> state = %AutoApi.HonkHornFlashLightsState{flashers: %AutoApi.PropertyComponent{data: :inactive}}
     iex> AutoApi.HonkHornFlashLightsState.to_bin(state)
     <<1, 0, 4, 1, 0, 1, 0>>
   """

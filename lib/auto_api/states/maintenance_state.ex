@@ -35,9 +35,7 @@ defmodule AutoApi.MaintenanceState do
             next_inspection_date: nil,
             condition_based_services: [],
             brake_fluid_change_date: nil,
-            timestamp: nil,
-            properties: [],
-            property_timestamps: %{}
+            timestamp: nil
 
   use AutoApi.State, spec_file: "specs/maintenance.json"
 
@@ -70,9 +68,7 @@ defmodule AutoApi.MaintenanceState do
           next_inspection_date: %PropertyComponent{data: integer} | nil,
           condition_based_services: list(condition_based_services),
           brake_fluid_change_date: %PropertyComponent{data: integer} | nil,
-          timestamp: DateTime.t() | nil,
-          properties: list(atom),
-          property_timestamps: map()
+          timestamp: DateTime.t() | nil
         }
 
   @doc """

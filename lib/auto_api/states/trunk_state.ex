@@ -25,9 +25,7 @@ defmodule AutoApi.TrunkState do
 
   defstruct trunk_lock: nil,
             trunk_position: nil,
-            timestamp: nil,
-            properties: [],
-            property_timestamps: %{}
+            timestamp: nil
 
   use AutoApi.State, spec_file: "specs/trunk.json"
 
@@ -36,9 +34,7 @@ defmodule AutoApi.TrunkState do
   @type t :: %__MODULE__{
           trunk_lock: %PropertyComponent{data: CommonData.lock()} | nil,
           trunk_position: %PropertyComponent{data: trunk_position} | nil,
-          timestamp: DateTime.t() | nil,
-          properties: list(atom),
-          property_timestamps: map()
+          timestamp: DateTime.t() | nil
         }
 
   @doc """
@@ -56,7 +52,7 @@ defmodule AutoApi.TrunkState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.TrunkState{trunk_lock: %AutoApi.PropertyComponent{data: :locked}, properties: [:trunk_lock]}
+    iex> state = %AutoApi.TrunkState{trunk_lock: %AutoApi.PropertyComponent{data: :locked}}
     iex> AutoApi.TrunkState.to_bin(state)
     <<1, 0, 4, 1, 0, 1, 1>>
   """

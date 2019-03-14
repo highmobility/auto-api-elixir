@@ -28,9 +28,7 @@ defmodule AutoApi.CruiseControlState do
             target_speed: nil,
             acc: nil,
             acc_target_speed: nil,
-            timestamp: nil,
-            properties: [],
-            property_timestamps: %{}
+            timestamp: nil
 
   use AutoApi.State, spec_file: "specs/cruise_control.json"
 
@@ -42,9 +40,7 @@ defmodule AutoApi.CruiseControlState do
           target_speed: %PropertyComponent{data: integer} | nil,
           acc: %PropertyComponent{data: CommonData.activity()} | nil,
           acc_target_speed: %PropertyComponent{data: integer} | nil,
-          timestamp: DateTime.t() | nil,
-          properties: list(atom),
-          property_timestamps: map()
+          timestamp: DateTime.t() | nil
         }
 
   @doc """
@@ -62,7 +58,7 @@ defmodule AutoApi.CruiseControlState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.CruiseControlState{cruise_control: %AutoApi.PropertyComponent{data: :active}, properties: [:cruise_control]}
+    iex> state = %AutoApi.CruiseControlState{cruise_control: %AutoApi.PropertyComponent{data: :active}}
     iex> AutoApi.CruiseControlState.to_bin(state)
     <<1, 0, 4, 1, 0, 1, 1>>
   """

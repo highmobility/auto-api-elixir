@@ -34,9 +34,7 @@ defmodule AutoApi.TachographState do
             vehicle_overspeed: nil,
             vehicle_direction: nil,
             vehicle_speed: nil,
-            timestamp: nil,
-            properties: [],
-            property_timestamps: %{}
+            timestamp: nil
 
   use AutoApi.State, spec_file: "specs/tachograph.json"
 
@@ -69,9 +67,7 @@ defmodule AutoApi.TachographState do
           vehicle_overspeed: %PropertyComponent{data: vehicle_overspeed} | nil,
           vehicle_direction: %PropertyComponent{data: vehicle_direction} | nil,
           vehicle_speed: %PropertyComponent{data: integer} | nil,
-          timestamp: DateTime.t() | nil,
-          properties: list(atom),
-          property_timestamps: map()
+          timestamp: DateTime.t() | nil
         }
 
   @doc """
@@ -90,7 +86,7 @@ defmodule AutoApi.TachographState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.TachographState{vehicle_motion: %AutoApi.PropertyComponent{data: :detected}, properties: [:vehicle_motion]}
+    iex> state = %AutoApi.TachographState{vehicle_motion: %AutoApi.PropertyComponent{data: :detected}}
     iex> AutoApi.TachographState.to_bin(state)
     <<4, 0, 4, 1, 0, 1, 1>>
   """

@@ -28,9 +28,7 @@ defmodule AutoApi.ParkingTicketState do
             operator_ticket_id: nil,
             ticket_start_time: nil,
             ticket_end_time: nil,
-            timestamp: nil,
-            properties: [],
-            property_timestamps: %{}
+            timestamp: nil
 
   use AutoApi.State, spec_file: "specs/parking_ticket.json"
 
@@ -42,9 +40,7 @@ defmodule AutoApi.ParkingTicketState do
           operator_ticket_id: %PropertyComponent{data: String.t()} | nil,
           ticket_start_time: %PropertyComponent{data: integer} | nil,
           ticket_end_time: %PropertyComponent{data: integer} | nil,
-          timestamp: DateTime.t() | nil,
-          properties: list(atom),
-          property_timestamps: map()
+          timestamp: DateTime.t() | nil
         }
 
   @doc """
@@ -62,7 +58,7 @@ defmodule AutoApi.ParkingTicketState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.ParkingTicketState{parking_ticket_state: %AutoApi.PropertyComponent{data: :started}, properties: [:parking_ticket_state]}
+    iex> state = %AutoApi.ParkingTicketState{parking_ticket_state: %AutoApi.PropertyComponent{data: :started}}
     iex> AutoApi.ParkingTicketState.to_bin(state)
     <<1, 0, 4, 1, 0, 1, 1>>
   """

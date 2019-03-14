@@ -27,9 +27,7 @@ defmodule AutoApi.DoorLocksState do
   defstruct inside_locks: [],
             locks: [],
             positions: [],
-            timestamp: nil,
-            properties: [],
-            property_timestamps: %{}
+            timestamp: nil
 
   use AutoApi.State, spec_file: "specs/door_locks.json"
 
@@ -58,9 +56,7 @@ defmodule AutoApi.DoorLocksState do
           locks: list(lock),
           inside_locks: list(inside_lock),
           positions: list(position),
-          timestamp: DateTime.t() | nil,
-          properties: list(atom),
-          property_timestamps: map()
+          timestamp: DateTime.t() | nil
         }
 
   @doc """
@@ -79,7 +75,7 @@ defmodule AutoApi.DoorLocksState do
 
   @doc """
   Parse state to bin
-    iex> AutoApi.DoorLocksState.to_bin(%AutoApi.DoorLocksState{positions: [%{door_location: :front_left, position: :open}], properties: [:positions]})
+    iex> AutoApi.DoorLocksState.to_bin(%AutoApi.DoorLocksState{positions: [%{door_location: :front_left, position: :open}]})
     <<0x04, 2::integer-16, 0x00, 0x01>>
   """
   @spec to_bin(__MODULE__.t()) :: binary

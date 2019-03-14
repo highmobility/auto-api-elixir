@@ -27,9 +27,7 @@ defmodule AutoApi.DashboardLightsState do
   Dashboard Lights state
   """
   defstruct dashboard_light: [],
-            timestamp: nil,
-            properties: [],
-            property_timestamps: %{}
+            timestamp: nil
 
   use AutoApi.State, spec_file: "specs/dashboard_lights.json"
 
@@ -74,9 +72,7 @@ defmodule AutoApi.DashboardLightsState do
   @type dashboard_light :: %PropertyComponent{data: %{light_name: light_name, state: state}}
   @type t :: %__MODULE__{
           dashboard_light: list(dashboard_light),
-          timestamp: DateTime.t() | nil,
-          properties: list(atom),
-          property_timestamps: map()
+          timestamp: DateTime.t() | nil
         }
 
   @doc """
@@ -95,7 +91,7 @@ defmodule AutoApi.DashboardLightsState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.DashboardLightsState{dashboard_light: [%AutoApi.PropertyComponent{data: %{light_name: :low_beam, state: :info}}], properties: [:dashboard_light]}
+    iex> state = %AutoApi.DashboardLightsState{dashboard_light: [%AutoApi.PropertyComponent{data: %{light_name: :low_beam, state: :info}}]}
     iex> AutoApi.DashboardLightsState.to_bin(state)
     <<1, 0, 5, 1, 0, 2, 1, 1>>
   """
