@@ -23,8 +23,6 @@ defmodule AutoApi.CapabilitiesCapability do
       iex> alias AutoApi.CapabilitiesCapability, as: C
       iex> C.identifier
       <<0x00, 0x10>>
-      iex> C.capability_size
-      1
       iex> C.name
       :capabilities
       iex> C.description
@@ -41,8 +39,6 @@ defmodule AutoApi.CapabilitiesCapability do
 
   @spec_file "specs/capabilities.json"
   @type command_type :: :get_capabilities | :get_capability | :capabilities
-  @capability_size 1
-  @sub_capabilities []
 
   @command_module AutoApi.CapabilitiesCommand
   @state_module AutoApi.CapabilitiesState

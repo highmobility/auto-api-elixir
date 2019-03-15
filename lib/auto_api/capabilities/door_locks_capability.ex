@@ -23,8 +23,6 @@ defmodule AutoApi.DoorLocksCapability do
       iex> alias AutoApi.DoorLocksCapability, as: D
       iex> D.identifier
       <<0x00, 0x20>>
-      iex> D.capability_size
-      1
       iex> D.name
       :door_locks
       iex> D.description
@@ -43,8 +41,6 @@ defmodule AutoApi.DoorLocksCapability do
 
   @spec_file "specs/door_locks.json"
   @type command_type :: :get_lock_state | :lock_state | :lock_unlock_doors
-  @capability_size 1
-  @sub_capabilities []
 
   @command_module AutoApi.DoorLocksCommand
   @state_module AutoApi.DoorLocksState

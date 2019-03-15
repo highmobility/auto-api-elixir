@@ -23,8 +23,6 @@ defmodule AutoApi.HonkHornFlashLightsCapability do
       iex> alias AutoApi.HonkHornFlashLightsCapability, as: H
       iex> H.identifier
       <<0x00, 0x26>>
-      iex> H.capability_size
-      1
       iex> H.name
       :honk_horn_flash_lights
       iex> H.description
