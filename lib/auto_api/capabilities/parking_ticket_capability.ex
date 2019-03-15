@@ -45,7 +45,7 @@ defmodule AutoApi.ParkingTicketCapability do
   @type command_type :: :get_parking_ticket | :parking_ticket | :start_parking | :end_parking
 
   @command_module AutoApi.NotImplemented
-  @state_module AutoApi.NotImplemented
+  @state_module AutoApi.ParkingTicketState
 
   use AutoApi.Capability
 end

@@ -22,10 +22,14 @@ defmodule AutoApi.FirmwareVersionState do
 
   """
 
-  @type car_sdk_version :: %{
-          version_major: integer,
-          version_minor: integer,
-          version_patch: integer
+  alias AutoApi.PropertyComponent
+
+  @type car_sdk_version :: %PropertyComponent{
+          data: %{
+            version_major: integer,
+            version_minor: integer,
+            version_patch: integer
+          }
         }
 
   @doc """
@@ -34,21 +38,23 @@ defmodule AutoApi.FirmwareVersionState do
   defstruct car_sdk_version: nil,
             car_sdk_build_name: nil,
             application_version: nil,
-            timestamp: nil,
-            properties: []
+            timestamp: nil
 
   use AutoApi.State, spec_file: "specs/firmware_version.json"
 
   @type t :: %__MODULE__{
           car_sdk_version: car_sdk_version | nil,
-          car_sdk_build_name: String.t() | nil,
-          application_version: String.t() | nil,
-          timestamp: DateTime.t() | nil,
-          properties: list(atom)
+          car_sdk_build_name: %PropertyComponent{data: String.t()} | nil,
+          application_version: %PropertyComponent{data: String.t()} | nil,
+          timestamp: DateTime.t() | nil
         }
 
   @doc """
   Build state based on binary value
+
+    iex> bin = <<3, 0, 8, 1, 0, 5, 51, 46, 49, 46, 55>>
+    iex> AutoApi.FirmwareVersionState.from_bin(bin)
+    %AutoApi.FirmwareVersionState{application_version: %AutoApi.PropertyComponent{data: "3.1.7"}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -58,6 +64,10 @@ defmodule AutoApi.FirmwareVersionState do
   @spec to_bin(__MODULE__.t()) :: binary
   @doc """
   Parse state to bin
+
+    iex> state = %AutoApi.FirmwareVersionState{application_version: %AutoApi.PropertyComponent{data: "3.1.7"}}
+    iex> AutoApi.FirmwareVersionState.to_bin(state)
+    <<3, 0, 8, 1, 0, 5, 51, 46, 49, 46, 55>>
   """
   def to_bin(%__MODULE__{} = state) do
     parse_state_properties(state)

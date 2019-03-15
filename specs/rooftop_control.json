@@ -16,17 +16,17 @@
             "properties": [
                 {
                     "id": 1,
-                    "type": "integer",
-                    "description": "Percentage value between 0-100 whereas 100 is opaque",
+                    "type": "double",
+                    "description": "Percentage value between 0.0-1.0 whereas 1.0 is opaque",
                     "name": "dimming",
-                    "size": 1
+                    "size": 8
                 },
                 {
                     "id": 2,
-                    "type": "integer",
-                    "description": "Percentage value between 0-100 whereas 100 is fully open",
+                    "type": "double",
+                    "description": "Percentage value between 0.0-1.0 whereas 1.0 is fully open",
                     "name": "position",
-                    "size": 1
+                    "size": 8
                 },
                 {
                     "type": "enum",
@@ -92,16 +92,16 @@
     "id_msb": 0,
     "properties": [
         {
-            "size": 1,
-            "type": "integer",
-            "description": "Percentage value between 0-100 whereas 100 is opaque",
+            "size": 8,
+            "type": "double",
+            "description": "Percentage value between 0.0-1.0 whereas 1.0 is opaque",
             "name": "dimming",
             "id": 1
         },
         {
-            "size": 1,
-            "type": "integer",
-            "description": "Percentage value between 0-100 whereas 100 is fully open",
+            "size": 8,
+            "type": "double",
+            "description": "Percentage value between 0.0-1.0 whereas 1.0 is fully open",
             "name": "position",
             "id": 2
         },
@@ -190,5 +190,5 @@
             "name": "sunroof_state"
         }
     ],
-    "api_update": 8
+    "api_update": 10
 }

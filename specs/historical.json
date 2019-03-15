@@ -1,0 +1,50 @@
+{
+    "name": "historical",
+    "pretty_state_name": "Historical States",
+    "category": "api_structure",
+    "id_msb": 0,
+    "id_lsb": 18,
+    "api_intro": 8,
+    "api_update": 10,
+    "message_types": [
+        {
+            "id": 0,
+            "name": "get_states",
+            "properties": [
+                {
+                    "id": 1,
+                    "name": "capability_identifier",
+                    "size": 2,
+                    "type": "integer",
+                    "mandatory": true
+                },
+                {
+                    "id": 2,
+                    "name": "start_date",
+                    "size": 8,
+                    "type": "integer",
+                    "description": "Milliseconds since UNIX Epoch time"
+                },
+                {
+                    "id": 3,
+                    "name": "end_date",
+                    "size": 8,
+                    "type": "integer",
+                    "description": "Milliseconds since UNIX Epoch time"
+                }
+            ]
+        },
+        {
+            "id": 1,
+            "name": "states"
+        }
+    ],
+    "properties": [
+        {
+            "id": 1,
+            "type": "capability_state",
+            "name": "states",
+            "multiple": true
+        }
+    ]
+}

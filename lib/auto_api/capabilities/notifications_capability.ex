@@ -41,7 +41,7 @@ defmodule AutoApi.NotificationsCapability do
   @type command_type :: :notification | :notification_action | :clear_notification
 
   @command_module AutoApi.NotImplemented
-  @state_module AutoApi.NotImplemented
+  @state_module AutoApi.NotificationsState
 
   use AutoApi.Capability
 end

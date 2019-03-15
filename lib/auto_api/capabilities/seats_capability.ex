@@ -41,7 +41,7 @@ defmodule AutoApi.SeatsCapability do
   @type command_type :: :get_seats_state | :seats_state
 
   @command_module AutoApi.NotImplemented
-  @state_module AutoApi.NotImplemented
+  @state_module AutoApi.SeatsState
 
   use AutoApi.Capability
 end

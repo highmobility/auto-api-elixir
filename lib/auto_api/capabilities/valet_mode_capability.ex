@@ -43,6 +43,6 @@ defmodule AutoApi.ValetModeCapability do
   @type command_type :: :get_valet_mode | :valet_mode | :activate_deactivate_valet_mode
 
   @command_module AutoApi.NotImplemented
-  @state_module AutoApi.NotImplemented
+  @state_module AutoApi.ValetModeState
   use AutoApi.Capability
 end

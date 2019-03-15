@@ -46,7 +46,7 @@ defmodule AutoApi.RemoteControlCapability do
           | :start_stop_control
 
   @command_module AutoApi.NotImplemented
-  @state_module AutoApi.NotImplemented
+  @state_module AutoApi.RemoteControlState
 
   use AutoApi.Capability
 end

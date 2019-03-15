@@ -39,7 +39,7 @@ defmodule AutoApi.UsageCapability do
   @type command_type :: :get_usage | :usage
 
   @command_module AutoApi.NotImplemented
-  @state_module AutoApi.NotImplemented
+  @state_module AutoApi.UsageState
 
   use AutoApi.Capability
 end

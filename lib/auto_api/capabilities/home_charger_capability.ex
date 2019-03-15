@@ -58,7 +58,7 @@ defmodule AutoApi.HomeChargerCapability do
           | :authenticate_expire
 
   @command_module AutoApi.NotImplemented
-  @state_module AutoApi.NotImplemented
+  @state_module AutoApi.HomeChargerState
 
   use AutoApi.Capability
 end

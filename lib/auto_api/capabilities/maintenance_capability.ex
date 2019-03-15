@@ -41,7 +41,7 @@ defmodule AutoApi.MaintenanceCapability do
   @type command_type :: :get_maintenance_state | :maintenance_state
 
   @command_module AutoApi.MaintenanceCommand
-  @state_module AutoApi.NotImplemented
+  @state_module AutoApi.MaintenanceState
 
   use AutoApi.Capability
 end

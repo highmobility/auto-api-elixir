@@ -21,6 +21,8 @@ defmodule AutoApi.DashboardLightsState do
   Keeps Charging state
   """
 
+  alias AutoApi.PropertyComponent
+
   @doc """
   Dashboard Lights state
   """
@@ -67,7 +69,7 @@ defmodule AutoApi.DashboardLightsState do
           | :lane_departure_warning_off
 
   @type state :: :inactive | :info | :yellow | :red
-  @type dashboard_light :: %{light_name: light_name, state: state}
+  @type dashboard_light :: %PropertyComponent{data: %{light_name: light_name, state: state}}
   @type t :: %__MODULE__{
           dashboard_light: list(dashboard_light),
           timestamp: DateTime.t() | nil
@@ -75,6 +77,10 @@ defmodule AutoApi.DashboardLightsState do
 
   @doc """
   Build state based on binary value
+
+    iex> bin = <<1, 0, 5, 1, 0, 2, 1, 1>>
+    iex> AutoApi.DashboardLightsState.from_bin(bin)
+    %AutoApi.DashboardLightsState{dashboard_light: [%AutoApi.PropertyComponent{data: %{light_name: :low_beam, state: :info}}]}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -84,6 +90,10 @@ defmodule AutoApi.DashboardLightsState do
   @spec to_bin(__MODULE__.t()) :: binary
   @doc """
   Parse state to bin
+
+    iex> state = %AutoApi.DashboardLightsState{dashboard_light: [%AutoApi.PropertyComponent{data: %{light_name: :low_beam, state: :info}}]}
+    iex> AutoApi.DashboardLightsState.to_bin(state)
+    <<1, 0, 5, 1, 0, 2, 1, 1>>
   """
   def to_bin(%__MODULE__{} = state) do
     parse_state_properties(state)

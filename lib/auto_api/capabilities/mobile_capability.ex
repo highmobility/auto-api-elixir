@@ -39,7 +39,7 @@ defmodule AutoApi.MobileCapability do
   @type command_type :: :get_mobile_state | :mobile_state
 
   @command_module AutoApi.NotImplemented
-  @state_module AutoApi.NotImplemented
+  @state_module AutoApi.MobileState
 
   use AutoApi.Capability
 end

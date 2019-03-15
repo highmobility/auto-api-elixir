@@ -46,7 +46,7 @@ defmodule AutoApi.WeatherConditionsCapability do
           | :enable_disable_wi_fi
 
   @command_module AutoApi.NotImplemented
-  @state_module AutoApi.NotImplemented
+  @state_module AutoApi.WeatherConditionsState
 
   use AutoApi.Capability
 end

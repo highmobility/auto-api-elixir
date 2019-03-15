@@ -21,7 +21,7 @@ defmodule AutoApi.ClimateState do
   StartStop state
   """
 
-  alias AutoApi.CommonData
+  alias AutoApi.{CommonData, PropertyComponent}
 
   defstruct inside_temperature: nil,
             outside_temperature: nil,
@@ -34,32 +34,39 @@ defmodule AutoApi.ClimateState do
             defrosting_temperature: nil,
             hvac_weekday_starting_times: [],
             rear_temperature_setting: nil,
-            timestamp: nil,
-            properties: []
+            timestamp: nil
 
   use AutoApi.State, spec_file: "specs/climate.json"
 
   @type activity :: :inactive | :active
-  @type weekday :: :monday | :tuesday | :wednesday | :thursday | :friday | :saturday | :sunday
-  @type hvac_weekday_starting_time :: %{
-          weekday: weekday | :automatic,
-          hour: integer,
-          minute: integer
+  @type hvac_weekday_starting_time :: %PropertyComponent{
+          data: %{
+            weekday: CommonData.weekday() | :automatic,
+            hour: integer,
+            minute: integer
+          }
         }
 
   @type t :: %__MODULE__{
-          inside_temperature: float | nil,
+          inside_temperature: %PropertyComponent{data: float} | nil,
+          outside_temperature: %PropertyComponent{data: float} | nil,
+          driver_temperature_setting: %PropertyComponent{data: float} | nil,
+          passenger_temperature_setting: %PropertyComponent{data: float} | nil,
+          hvac_state: %PropertyComponent{data: CommonData.activity()} | nil,
+          defogging_state: %PropertyComponent{data: CommonData.activity()} | nil,
+          defrosting_state: %PropertyComponent{data: CommonData.activity()} | nil,
+          ionising_state: %PropertyComponent{data: CommonData.activity()} | nil,
+          defrosting_temperature: %PropertyComponent{data: float} | nil,
           hvac_weekday_starting_times: list(hvac_weekday_starting_time),
-          rear_temperature_setting: float | nil,
-          timestamp: DateTime.t() | nil,
-          properties: list(atom)
+          rear_temperature_setting: %PropertyComponent{data: float} | nil,
+          timestamp: DateTime.t() | nil
         }
 
   @doc """
   Build state based on binary value
 
-    iex> AutoApi.ClimateState.from_bin(<<0x01, 4::integer-16, 37.0::float-32>>)
-    %AutoApi.ClimateState{inside_temperature: 37.0}
+    iex> AutoApi.ClimateState.from_bin(<<1, 7::integer-16, 1, 0, 4, 65, 224, 0, 0>>)
+    %AutoApi.ClimateState{inside_temperature: %AutoApi.PropertyComponent{data: 28.0}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -68,8 +75,10 @@ defmodule AutoApi.ClimateState do
 
   @doc """
   Parse state to bin
-    iex> AutoApi.ClimateState.to_bin(%AutoApi.ClimateState{inside_temperature: 28.00, properties: [:inside_temperature]})
-    <<1, 4::integer-16, 28.00::float-32>>
+
+    iex> state = %AutoApi.ClimateState{inside_temperature: %AutoApi.PropertyComponent{data: 28.00}}
+    iex> AutoApi.ClimateState.to_bin(state)
+    <<1, 7::integer-16, 1, 0, 4, 65, 224, 0, 0>>
   """
   @spec to_bin(__MODULE__.t()) :: binary
   def to_bin(%__MODULE__{} = state) do

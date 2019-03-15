@@ -39,7 +39,7 @@ defmodule AutoApi.FirmwareVersionCapability do
   @type command_type :: :get_firmware_version | :firmware_version
 
   @command_module AutoApi.NotImplemented
-  @state_module AutoApi.NotImplemented
+  @state_module AutoApi.FirmwareVersionState
 
   use AutoApi.Capability
 end

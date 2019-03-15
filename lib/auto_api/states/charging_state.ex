@@ -35,19 +35,11 @@ defmodule AutoApi.ChargingState do
   @type reduction_time :: %PropertyComponent{
           data: %{start_stop: :start | :stop, hour: integer, minute: integer}
         }
-  @type timer_type :: %PropertyComponent{
-          data: :preferred_start_time | :preferred_end_time | :departure_date
-        }
+  @type timer_type :: :preferred_start_time | :preferred_end_time | :departure_date
   @type timer :: %PropertyComponent{
           data: %{
             timer_type: timer_type,
-            year: integer,
-            month: integer,
-            day: integer,
-            hour: integer,
-            minute: integer,
-            second: integer,
-            utc_time_offset: integer
+            date: integer
           }
         }
   @type plugged_in :: %PropertyComponent{data: :disconnected | :plugged_in}
@@ -60,6 +52,7 @@ defmodule AutoApi.ChargingState do
             | :charging_paused
             | :charging_error
         }
+  @type charging_window_chosen :: %PropertyComponent{data: :not_chosen | :chosen}
 
   @doc """
   Charging state
@@ -89,23 +82,23 @@ defmodule AutoApi.ChargingState do
   use AutoApi.State, spec_file: "specs/charging.json"
 
   @type t :: %__MODULE__{
-          estimated_range: PropertyComponent.t() | nil,
-          battery_level: PropertyComponent.t() | nil,
-          battery_current_ac: PropertyComponent.t() | nil,
-          battery_current_dc: PropertyComponent.t() | nil,
-          charger_voltage_ac: PropertyComponent.t() | nil,
-          charger_voltage_dc: PropertyComponent.t() | nil,
-          charge_limit: PropertyComponent.t() | nil,
-          time_to_complete_charge: PropertyComponent.t() | nil,
-          charging_rate_kw: PropertyComponent.t() | nil,
+          estimated_range: %PropertyComponent{data: integer} | nil,
+          battery_level: %PropertyComponent{data: float} | nil,
+          battery_current_ac: %PropertyComponent{data: float} | nil,
+          battery_current_dc: %PropertyComponent{data: float} | nil,
+          charger_voltage_ac: %PropertyComponent{data: float} | nil,
+          charger_voltage_dc: %PropertyComponent{data: float} | nil,
+          charge_limit: %PropertyComponent{data: float} | nil,
+          time_to_complete_charge: %PropertyComponent{data: integer} | nil,
+          charging_rate_kw: %PropertyComponent{data: float} | nil,
           charge_port_state: charge_port_state | nil,
           charge_mode: charge_mode | nil,
-          max_charging_current: PropertyComponent.t() | nil,
+          max_charging_current: %PropertyComponent{data: float} | nil,
           plug_type: plug_type | nil,
-          charging_window_chosen: :not_chosen | :chosen | nil,
+          charging_window_chosen: charging_window_chosen | nil,
           departure_times: list(departure_time),
           reduction_times: list(reduction_time),
-          battery_temperature: PropertyComponent.t() | nil,
+          battery_temperature: %PropertyComponent{data: float} | nil,
           timers: list(timer),
           plugged_in: plugged_in | nil,
           charging_state: charging_state | nil,
@@ -114,6 +107,10 @@ defmodule AutoApi.ChargingState do
 
   @doc """
   Build state based on binary value
+
+    iex> bin = <<2, 0, 5, 1, 0, 2, 1, 44>>
+    iex> AutoApi.ChargingState.from_bin(bin)
+    %AutoApi.ChargingState{estimated_range: %AutoApi.PropertyComponent{data: 300}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -123,6 +120,10 @@ defmodule AutoApi.ChargingState do
   @spec to_bin(__MODULE__.t()) :: binary
   @doc """
   Parse state to bin
+
+    iex> state = %AutoApi.ChargingState{estimated_range: %AutoApi.PropertyComponent{data: 300}}
+    iex> AutoApi.ChargingState.to_bin(state)
+    <<2, 0, 5, 1, 0, 2, 1, 44>>
   """
   def to_bin(%__MODULE__{} = state) do
     parse_state_properties(state)

@@ -41,7 +41,7 @@ defmodule AutoApi.LightConditionsCapability do
   @type command_type :: :get_light_conditions | :light_conditions
 
   @command_module AutoApi.NotImplemented
-  @state_module AutoApi.NotImplemented
+  @state_module AutoApi.LightConditionsState
 
   use AutoApi.Capability
 end

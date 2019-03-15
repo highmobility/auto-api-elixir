@@ -21,30 +21,24 @@ defmodule AutoApi.VehicleTimeState do
   VehicleTime state
   """
 
-  alias AutoApi.CommonData
+  alias AutoApi.{CommonData, PropertyComponent}
 
-  defstruct vehicle_time: nil, timestamp: nil, properties: []
+  defstruct vehicle_time: nil,
+            timestamp: nil
 
   use AutoApi.State, spec_file: "specs/vehicle_time.json"
 
-  @type vehicle_time :: %{
-          year: integer,
-          month: integer,
-          day: integer,
-          hour: integer,
-          minute: integer,
-          second: integer,
-          utc_time_offset: integer
-        }
-
   @type t :: %__MODULE__{
-          vehicle_time: list(vehicle_time) | vehicle_time | %{} | nil,
-          timestamp: DateTime.t() | nil,
-          properties: list(atom)
+          vehicle_time: %PropertyComponent{data: integer} | nil,
+          timestamp: DateTime.t() | nil
         }
 
   @doc """
   Build state based on binary value
+
+    iex> bin = <<1, 0, 11, 1, 0, 8, 0, 0, 0, 0, 0, 0, 0, 12>>
+    iex> AutoApi.VehicleTimeState.from_bin(bin)
+    %AutoApi.VehicleTimeState{vehicle_time: %AutoApi.PropertyComponent{data: 12}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -53,6 +47,10 @@ defmodule AutoApi.VehicleTimeState do
 
   @doc """
   Parse state to bin
+
+    iex> state = %AutoApi.VehicleTimeState{vehicle_time: %AutoApi.PropertyComponent{data: 12}}
+    iex> AutoApi.VehicleTimeState.to_bin(state)
+    <<1, 0, 11, 1, 0, 8, 0, 0, 0, 0, 0, 0, 0, 12>>
   """
   @spec to_bin(__MODULE__.t()) :: binary
   def to_bin(%__MODULE__{} = state) do

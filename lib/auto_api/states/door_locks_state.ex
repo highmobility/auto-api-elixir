@@ -33,21 +33,21 @@ defmodule AutoApi.DoorLocksState do
 
   @type lock :: %PropertyComponent{
           data: %{
-            door_location: CommonData.location(),
+            door_location: CommonData.location() | :all,
             lock_state: CommonData.lock()
           }
         }
 
   @type inside_lock :: %PropertyComponent{
           data: %{
-            door_location: CommonData.location(),
+            door_location: CommonData.location() | :all,
             lock_state: CommonData.lock()
           }
         }
 
   @type position :: %PropertyComponent{
           data: %{
-            door_location: CommonData.location(),
+            door_location: CommonData.location() | :all,
             position: CommonData.position()
           }
         }
@@ -75,7 +75,7 @@ defmodule AutoApi.DoorLocksState do
 
   @doc """
   Parse state to bin
-    iex> AutoApi.DoorLocksState.to_bin(%AutoApi.DoorLocksState{positions: [%{door_location: :front_left, position: :open}], properties: [:positions]})
+    iex> AutoApi.DoorLocksState.to_bin(%AutoApi.DoorLocksState{positions: [%{door_location: :front_left, position: :open}]})
     <<0x04, 2::integer-16, 0x00, 0x01>>
   """
   @spec to_bin(__MODULE__.t()) :: binary

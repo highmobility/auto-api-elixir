@@ -33,14 +33,27 @@ defmodule AutoApi.MaintenanceState do
             automatic_teleservice_call_date: nil,
             teleservice_battery_call_date: nil,
             next_inspection_date: nil,
-            condition_based_services: nil,
+            condition_based_services: [],
             brake_fluid_change_date: nil,
             timestamp: nil
 
   use AutoApi.State, spec_file: "specs/maintenance.json"
 
+  @type condition_based_services :: %PropertyComponent{
+          data: %{
+            year: integer,
+            month: integer,
+            identifier: integer,
+            due_status: :ok | :pending | :overdue,
+            text_size: integer,
+            text: String.t(),
+            description_size: integer,
+            description: String.t()
+          }
+        }
+
   @type activity :: :inactive | :active
-  @type teleservice_availability :: :pending | :succesful | :error
+  @type teleservice_availability :: :pending | :idle | :succesful | :error
 
   @type t :: %__MODULE__{
           days_to_next_service: %PropertyComponent{data: integer} | nil,
@@ -48,11 +61,12 @@ defmodule AutoApi.MaintenanceState do
           cbs_reports_count: %PropertyComponent{data: integer} | nil,
           months_to_exhaust_inpection: %PropertyComponent{data: integer} | nil,
           teleservice_availability: %PropertyComponent{data: teleservice_availability} | nil,
+          service_distance_threshold: %PropertyComponent{data: integer} | nil,
           service_time_threshold: %PropertyComponent{data: integer} | nil,
           automatic_teleservice_call_date: %PropertyComponent{data: integer} | nil,
           teleservice_battery_call_date: %PropertyComponent{data: integer} | nil,
           next_inspection_date: %PropertyComponent{data: integer} | nil,
-          condition_based_services: %PropertyComponent{data: integer} | nil,
+          condition_based_services: list(condition_based_services),
           brake_fluid_change_date: %PropertyComponent{data: integer} | nil,
           timestamp: DateTime.t() | nil
         }

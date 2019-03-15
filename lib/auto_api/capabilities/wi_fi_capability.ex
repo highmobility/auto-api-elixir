@@ -52,7 +52,7 @@ defmodule AutoApi.WiFiCapability do
           | :enable_disable_wi_fi
 
   @command_module AutoApi.NotImplemented
-  @state_module AutoApi.NotImplemented
+  @state_module AutoApi.WiFiState
 
   use AutoApi.Capability
 end

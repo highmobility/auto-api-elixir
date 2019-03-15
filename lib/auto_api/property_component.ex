@@ -149,28 +149,28 @@ defmodule AutoApi.PropertyComponent do
         |> Enum.into(%{})
       end
 
-    comon_components_to_struct(prop_in_binary, data)
+    common_components_to_struct(prop_in_binary, data)
   end
 
   def to_struct(binary, %{"type" => "string"}) do
     prop_in_binary = split_binary_to_parts(binary, %__MODULE__{})
     data = to_value(prop_in_binary.data, "string")
-    comon_components_to_struct(prop_in_binary, data)
+    common_components_to_struct(prop_in_binary, data)
   end
 
   def to_struct(binary, %{"type" => "enum"} = spec) do
     prop_in_binary = split_binary_to_parts(binary, %__MODULE__{})
     data = enum_to_value(prop_in_binary.data, spec)
-    comon_components_to_struct(prop_in_binary, data)
+    common_components_to_struct(prop_in_binary, data)
   end
 
   def to_struct(binary, %{"type" => data_type}) do
     prop_in_binary = split_binary_to_parts(binary, %__MODULE__{})
     data = to_value(prop_in_binary.data, data_type)
-    comon_components_to_struct(prop_in_binary, data)
+    common_components_to_struct(prop_in_binary, data)
   end
 
-  defp comon_components_to_struct(prop_in_binary, data) do
+  defp common_components_to_struct(prop_in_binary, data) do
     timestamp = to_value(prop_in_binary.timestamp, "timestamp")
     failure = failure_to_value(prop_in_binary.failure)
     %__MODULE__{data: data, timestamp: timestamp, failure: failure}

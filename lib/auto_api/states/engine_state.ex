@@ -21,14 +21,15 @@ defmodule AutoApi.EngineState do
   Keeps Engine state
   """
 
+  alias AutoApi.PropertyComponent
+
   @type ignition :: :ignition_on | :ignition_off
   @type accessories_ignition :: :powered_on | :powered_off
 
   @type t :: %__MODULE__{
-          ignition: ignition | nil,
-          accessories_ignition: accessories_ignition | nil,
-          properties: list(atom),
-          property_timestamps: map
+          ignition: %PropertyComponent{data: ignition} | nil,
+          accessories_ignition: %PropertyComponent{data: accessories_ignition} | nil,
+          timestamp: DateTime.t() | nil
         }
 
   @doc """
@@ -36,13 +37,16 @@ defmodule AutoApi.EngineState do
   """
   defstruct ignition: nil,
             accessories_ignition: nil,
-            properties: [],
-            property_timestamps: %{}
+            timestamp: nil
 
   use AutoApi.State, spec_file: "specs/engine.json"
 
   @doc """
   Build state based on binary value
+
+    iex> bin = <<1, 0, 4, 1, 0, 1, 0>>
+    iex> AutoApi.EngineState.from_bin(bin)
+    %AutoApi.EngineState{ignition: %AutoApi.PropertyComponent{data: :ignition_off}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -52,6 +56,10 @@ defmodule AutoApi.EngineState do
   @spec to_bin(__MODULE__.t()) :: binary
   @doc """
   Parse state to bin
+
+    iex> state = %AutoApi.EngineState{ignition: %AutoApi.PropertyComponent{data: :ignition_off}}
+    iex> AutoApi.EngineState.to_bin(state)
+    <<1, 0, 4, 1, 0, 1, 0>>
   """
   def to_bin(%__MODULE__{} = state) do
     parse_state_properties(state)

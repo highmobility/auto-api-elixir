@@ -44,16 +44,16 @@
                             "size": 1
                         },
                         {
-                            "size": 1,
-                            "type": "integer",
-                            "description": "Value between 0 and 100",
+                            "size": 8,
+                            "type": "double",
+                            "description": "Value between 0.0 and 1.0",
                             "name": "open_percentage"
                         }
                     ],
                     "multiple": true,
                     "id": 1,
                     "name": "windows_open_percentages",
-                    "size": 2
+                    "size": 9
                 },
                 {
                     "items": [
@@ -142,13 +142,13 @@
                     "size": 1
                 },
                 {
-                    "size": 1,
-                    "type": "integer",
-                    "description": "Value between 0 and 100",
+                    "size": 8,
+                    "type": "double",
+                    "description": "Value between 0.0 and 1.0",
                     "name": "open_percentage"
                 }
             ],
-            "size": 2,
+            "size": 9,
             "multiple": true,
             "id": 2,
             "name": "windows_open_percentages"
@@ -186,11 +186,11 @@
                     "type": "enum",
                     "values": [
                         {
-                            "name": "closed",
+                            "name": "close",
                             "id": 0
                         },
                         {
-                            "name": "opened",
+                            "name": "open",
                             "id": 1
                         },
                         {
@@ -208,5 +208,5 @@
             "name": "windows_positions"
         }
     ],
-    "api_update": 8
+    "api_update": 10
 }

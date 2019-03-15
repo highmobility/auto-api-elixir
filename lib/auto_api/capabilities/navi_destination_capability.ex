@@ -43,7 +43,7 @@ defmodule AutoApi.NaviDestinationCapability do
   @type command_type :: :get_navi_destination | :navi_destination | :set_navi_destination
 
   @command_module AutoApi.NotImplemented
-  @state_module AutoApi.NotImplemented
+  @state_module AutoApi.NaviDestinationState
 
   use AutoApi.Capability
 end

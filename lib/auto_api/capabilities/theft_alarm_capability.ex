@@ -43,7 +43,7 @@ defmodule AutoApi.TheftAlarmCapability do
   @type command_type :: :get_theft_alarm_state | :theft_alarm_state | :set_theft_alarm_state
 
   @command_module AutoApi.NotImplemented
-  @state_module AutoApi.NotImplemented
+  @state_module AutoApi.TheftAlarmState
 
   use AutoApi.Capability
 end

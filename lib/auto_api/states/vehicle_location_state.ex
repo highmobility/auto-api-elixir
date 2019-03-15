@@ -21,7 +21,7 @@ defmodule AutoApi.VehicleLocationState do
   VehicleLocationState
   """
 
-  alias AutoApi.PropertyComponent
+  alias AutoApi.{CommonData, PropertyComponent}
 
   defstruct coordinates: nil,
             heading: nil,
@@ -30,10 +30,8 @@ defmodule AutoApi.VehicleLocationState do
 
   use AutoApi.State, spec_file: "specs/vehicle_location.json"
 
-  @type coordinates :: %PropertyComponent{data: %{latitude: float, longitude: float}}
-
   @type t :: %__MODULE__{
-          coordinates: coordinates | nil,
+          coordinates: %PropertyComponent{data: CommonData.coordinates()} | nil,
           heading: %PropertyComponent{data: float} | nil,
           altitude: %PropertyComponent{data: float} | nil,
           timestamp: DateTime.t() | nil
@@ -41,6 +39,10 @@ defmodule AutoApi.VehicleLocationState do
 
   @doc """
   Build state based on binary value
+
+    iex> bin = <<5, 0, 11, 1, 0, 8, 64, 101, 249, 235, 133, 30, 184, 82>>
+    iex> AutoApi.VehicleLocationState.from_bin(bin)
+    %AutoApi.VehicleLocationState{heading: %AutoApi.PropertyComponent{data: 175.81}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -49,6 +51,10 @@ defmodule AutoApi.VehicleLocationState do
 
   @doc """
   Parse state to bin
+
+    iex> state = %AutoApi.VehicleLocationState{heading: %AutoApi.PropertyComponent{data: 175.81}}
+    iex> AutoApi.VehicleLocationState.to_bin(state)
+    <<5, 0, 11, 1, 0, 8, 64, 101, 249, 235, 133, 30, 184, 82>>
   """
   @spec to_bin(__MODULE__.t()) :: binary
   def to_bin(%__MODULE__{} = state) do

@@ -21,26 +21,28 @@ defmodule AutoApi.TrunkState do
   Trunk state
   """
 
-  alias AutoApi.CommonData
+  alias AutoApi.{CommonData, PropertyComponent}
 
   defstruct trunk_lock: nil,
             trunk_position: nil,
-            timestamp: nil,
-            properties: [],
-            property_timestamps: %{}
+            timestamp: nil
 
   use AutoApi.State, spec_file: "specs/trunk.json"
 
+  @type trunk_position :: :closed | :open
+
   @type t :: %__MODULE__{
-          trunk_lock: CommonData.lock() | nil,
-          trunk_position: CommonData.position() | nil,
-          timestamp: DateTime.t() | nil,
-          properties: list(atom),
-          property_timestamps: map
+          trunk_lock: %PropertyComponent{data: CommonData.lock()} | nil,
+          trunk_position: %PropertyComponent{data: trunk_position} | nil,
+          timestamp: DateTime.t() | nil
         }
 
   @doc """
   Build state based on binary value
+
+    iex> bin = <<1, 0, 4, 1, 0, 1, 1>>
+    iex> AutoApi.TrunkState.from_bin(bin)
+    %AutoApi.TrunkState{trunk_lock: %AutoApi.PropertyComponent{data: :locked}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -49,6 +51,10 @@ defmodule AutoApi.TrunkState do
 
   @doc """
   Parse state to bin
+
+    iex> state = %AutoApi.TrunkState{trunk_lock: %AutoApi.PropertyComponent{data: :locked}}
+    iex> AutoApi.TrunkState.to_bin(state)
+    <<1, 0, 4, 1, 0, 1, 1>>
   """
   @spec to_bin(__MODULE__.t()) :: binary
   def to_bin(%__MODULE__{} = state) do

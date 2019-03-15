@@ -13,9 +13,9 @@
             "id": 1
         },
         {
-            "size": 1,
-            "type": "integer",
-            "description": "The wheel suspension level percentage, whereas 0% is no suspension and 100% maximum suspension",
+            "size": 8,
+            "type": "double",
+            "description": "The wheel suspension level percentage, whereas 0.0 is no suspension and 1.0 maximum suspension",
             "name": "wheel_suspension",
             "id": 2
         }
@@ -29,5 +29,6 @@
             "id": 1,
             "name": "offroad_state"
         }
-    ]
+    ],
+    "api_update": 10
 }

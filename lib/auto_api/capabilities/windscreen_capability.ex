@@ -43,7 +43,7 @@ defmodule AutoApi.WindscreenCapability do
   @type command_type :: :get_windscreen_state | :windscreen_state | :set_windscreen_damage
 
   @command_module AutoApi.NotImplemented
-  @state_module AutoApi.NotImplemented
+  @state_module AutoApi.WindscreenState
 
   use AutoApi.Capability
 end
