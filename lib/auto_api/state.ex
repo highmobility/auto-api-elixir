@@ -40,17 +40,21 @@ defmodule AutoApi.State do
         alias AutoApi.CommonData
         @behaviour AutoApi.State
         @dialyzer {:nowarn_function, to_properties: 4}
-        @identifier __MODULE__
+
+        @capability __MODULE__
                     |> Atom.to_string()
                     |> String.replace("State", "Capability")
                     |> String.to_atom()
-                    |> apply(:identifier, [])
 
         @spec base() :: t
         def base, do: %__MODULE__{}
         require Logger
 
-        def identifier, do: @identifier
+        def capability, do: @capability
+
+        def identifier, do: apply(@capability, :identifier, [])
+
+        def name, do: apply(@capability, :name, [])
 
         def parse_bin_properties(<<id, size::integer-16, data::binary-size(size)>>, state) do
           do_parse_bin_properties(id, size, data, state)
