@@ -136,7 +136,7 @@ defmodule AutoApi.Capability do
           [:lock_state, :get_lock_state, :lock_unlock_doors]
 
       """
-      @spec to_map(binary) :: list(command_type) :: list(map)
+      @spec to_map(binary) :: list(command_type)
       def to_map(capability_bin) do
         id = @identifier
 
