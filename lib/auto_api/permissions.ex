@@ -371,10 +371,14 @@ defmodule AutoApi.Permissions do
   end
 
   def to_binary(perms) do
-    Enum.reduce(perms, 0, fn p, acc -> conver_bin_to_int(p) |> bor(acc) end)
+    Enum.reduce(perms, 0, fn p, acc ->
+      p
+      |> convert_bin_to_int()
+      |> bor(acc)
+    end)
   end
 
-  defp conver_bin_to_int(key) do
+  defp convert_bin_to_int(key) do
     <<i::integer-128>> = elem(@permissions[key], 0)
     i
   end
