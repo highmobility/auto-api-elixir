@@ -40,14 +40,14 @@ defmodule AutoApi.StateTest do
     end
 
     test "integer size 2" do
-      state = %DiagnosticsState{speed: %PropertyComponent{data: 65535}}
+      state = %DiagnosticsState{speed: %PropertyComponent{data: 65_535}}
 
       new_state =
         state
         |> DiagnosticsState.to_bin()
         |> DiagnosticsState.from_bin()
 
-      assert new_state.speed.data == 65535
+      assert new_state.speed.data == 65_535
     end
 
     test "double size 8" do
