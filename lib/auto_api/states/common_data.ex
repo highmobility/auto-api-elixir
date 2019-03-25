@@ -17,6 +17,8 @@
 # Please inquire about commercial licensing options at
 # licensing@high-mobility.com
 defmodule AutoApi.CommonData do
+  @moduledoc false
+
   @type location :: :front_left | :front_right | :rear_right | :rear_left | :hatch | :all
   @type position :: :closed | :open | :unavailable
   @type lock :: :unlocked | :locked

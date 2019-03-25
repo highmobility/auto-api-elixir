@@ -17,6 +17,21 @@
 # Please inquire about commercial licensing options at
 # licensing@high-mobility.com
 defmodule AutoApi.PropertyComponent do
+  @moduledoc """
+  Data wrapper for state properties.
+
+  The struct contains three fields: `data`, `timestamp` and `failure`.
+
+  The `data` field can be either a scalar or a map, and when set it contains
+  the actual value of the state property.
+
+  The `timestamp` field indicates when the data was last updated, and it is
+  in `DateTime` format.
+
+  The `failure` is set if there was an error that prevented retrieving the
+  property data.
+  """
+
   require Logger
 
   defstruct [:data, :timestamp, :failure]

@@ -17,6 +17,10 @@
 # Please inquire about commercial licensing options at
 # licensing@high-mobility.com
 defmodule AutoApi.Permissions do
+  @moduledoc """
+  Handles the conversion of AutoApi permissions between text and binary format
+  """
+
   use Bitwise
 
   @auto_api_id 0x10
