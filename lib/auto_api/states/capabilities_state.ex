@@ -97,19 +97,24 @@ defmodule AutoApi.CapabilitiesState do
   @spec to_bin(__MODULE__.t()) :: binary
   @doc """
   Parse state to bin
+
+  ## Examples
+
+      iex> state = %AutoApi.CapabilitiesState{diagnostics: [:get_diagnostics_state], race: [:get_race_state, :race_state]}
+      iex> AutoApi.CapabilitiesState.to_bin(state)
+      <<0x01, 0x00, 0x03, 0, 0x33, 0x00, 0x01, 0x00, 0x04, 0x00, 0x57, 0x00, 0x01>>
+
   """
   def to_bin(%__MODULE__{} = state) do
-    capabilities = load_capabilities()
-
     state
     |> Map.from_struct()
-    |> Enum.reduce(<<>>, fn cap, acc -> encode_capability(capabilities, cap, acc) end)
+    |> Enum.reduce(<<>>, &encode_capability/2)
   end
 
-  defp encode_capability(_capabilities, {_cap_name, []}, encoded_binary), do: encoded_binary
+  defp encode_capability({_cap_name, []}, encoded_binary), do: encoded_binary
 
-  defp encode_capability(capabilities, {cap_name, commands}, encoded_binary) do
-    cap_module = capabilities[cap_name]
+  defp encode_capability({cap_name, commands}, encoded_binary) do
+    cap_module = AutoApi.Capability.get_by_name(cap_name)
     cap_id = apply(cap_module, :identifier, [])
     encoded_commands = Enum.reduce(commands, <<>>, &encode_command(cap_module, &1, &2))
     len = 2 + byte_size(encoded_commands)
@@ -121,10 +126,5 @@ defmodule AutoApi.CapabilitiesState do
     command_id = apply(cap_module, :command_id, [command_name])
 
     encoded_commands <> <<command_id::8>>
-  end
-
-  defp load_capabilities() do
-    AutoApi.Capability.list_capabilities()
-    |> Enum.map(fn {_k, cap_module} -> {apply(cap_module, :name, []), cap_module} end)
   end
 end

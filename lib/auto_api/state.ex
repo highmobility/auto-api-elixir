@@ -124,28 +124,6 @@ defmodule AutoApi.State do
           <<>>
         end
 
-        # properties is especial item in state
-        def parse_state_property(:properties, _) do
-          <<>>
-        end
-
-        # property_timestamps is especial item in state
-        def parse_state_property(:property_timestamps, datetimes) do
-          datetimes
-          |> Enum.map(fn {prop_name, datetime} ->
-            AutoApi.State.parse_state_property_timestamps_to_bin(__MODULE__, prop_name, datetime)
-          end)
-          |> Enum.join("")
-        end
-
-        def parse_state_property(:properties_failures, failures) do
-          failures
-          |> Enum.map(fn {prop_name, failure} ->
-            AutoApi.State.parse_state_property_failures_to_bin(__MODULE__, prop_name, failure)
-          end)
-          |> Enum.join("")
-        end
-
         @doc """
         Puts a value in the state.
 
@@ -200,30 +178,6 @@ defmodule AutoApi.State do
               value
             ) do
           {:timestamp, false, DateTime.utc_now()}
-        end
-      end
-
-    property_timestamp =
-      quote do
-        def parse_bin_property(
-              0xA4,
-              _size,
-              value
-            ) do
-          {:property_timestamps, false,
-           AutoApi.State.parse_bin_property_to_property_timestamp_helper(__MODULE__, value)}
-        end
-      end
-
-    properties_failures =
-      quote do
-        def parse_bin_property(
-              0xA5,
-              _size,
-              value
-            ) do
-          {:properties_failures, false,
-           AutoApi.State.parse_bin_property_to_failure_helper(__MODULE__, value)}
         end
       end
 
@@ -408,7 +362,7 @@ defmodule AutoApi.State do
         end
       end
 
-    [timestamp, property_timestamp, properties_failures] ++ [base] ++ [prop_funs]
+    [timestamp, base, prop_funs]
   end
 
   def parse_state_property_list_helper(prop_id, enum_values, data) do

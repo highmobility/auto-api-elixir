@@ -23,8 +23,6 @@ defmodule AutoApi.DiagnosticsCapability do
       iex> alias AutoApi.DiagnosticsCapability, as: D
       iex> D.identifier
       <<0x00, 0x33>>
-      iex> D.capability_size
-      1
       iex> D.name
       :diagnostics
       iex> D.description
@@ -39,8 +37,6 @@ defmodule AutoApi.DiagnosticsCapability do
 
   @spec_file "specs/diagnostics.json"
   @type command_type :: :get_diagnostics_state | :diagnostics_state
-  @capability_size 1
-  @sub_capabilities []
 
   @command_module AutoApi.DiagnosticsCommand
   @state_module AutoApi.DiagnosticsState

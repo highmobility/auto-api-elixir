@@ -23,8 +23,6 @@ defmodule AutoApi.MaintenanceCapability do
       iex> alias AutoApi.MaintenanceCapability, as: M
       iex> M.identifier
       <<0x00, 0x34>>
-      iex> M.capability_size
-      1
       iex> M.name
       :maintenance
       iex> M.description

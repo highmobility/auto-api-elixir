@@ -22,10 +22,9 @@ defmodule AutoApi.CapabilitiesCommand do
   """
   @behaviour AutoApi.Command
 
-  import AutoApi.Capability, only: [list_capabilities: 0]
-
   alias AutoApi.CapabilitiesState
   alias AutoApi.CapabilitiesCapability
+  alias AutoApi.Capability
 
   @doc """
   Parses the binary command and makes changes or returns the state
@@ -54,8 +53,8 @@ defmodule AutoApi.CapabilitiesCommand do
 
   def execute(%CapabilitiesState{} = state, <<0x02, capability_id::binary-size(2)>>) do
     capability_name =
-      list_capabilities()
-      |> Map.get(capability_id)
+      capability_id
+      |> Capability.get_by_id()
       |> apply(:name, [])
 
     new_state = struct(%CapabilitiesState{}, [{capability_name, Map.get(state, capability_name)}])
