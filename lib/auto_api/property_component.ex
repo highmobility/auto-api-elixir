@@ -136,7 +136,7 @@ defmodule AutoApi.PropertyComponent do
   end
 
   @doc """
-  Converts PropertyComponent binary to struct"
+  Converts PropertyComponent binary to struct
   """
   @spec to_struct(binary(), spec()) :: __MODULE__.t()
   def to_struct(binary, specs) when is_list(specs) do
@@ -149,14 +149,10 @@ defmodule AutoApi.PropertyComponent do
           size = spec["size"] || Keyword.get(acc, String.to_atom("#{spec["name"]}_size"))
           unless size, do: raise("couldn't find size for #{inspect(spec)}")
 
-          data_slice = :binary.part(prop_in_binary.data, counter, size)
-
           data_value =
-            if spec["type"] == "enum" do
-              enum_to_value(data_slice, spec)
-            else
-              to_value(data_slice, spec["type"])
-            end
+            prop_in_binary.data
+            |> :binary.part(counter, size)
+            |> to_value(spec)
 
           {counter + size, [{String.to_atom(spec["name"]), data_value} | acc]}
         end)
@@ -167,31 +163,55 @@ defmodule AutoApi.PropertyComponent do
     common_components_to_struct(prop_in_binary, data)
   end
 
-  def to_struct(binary, %{"type" => "string"}) do
+  def to_struct(binary, type) do
     prop_in_binary = split_binary_to_parts(binary, %__MODULE__{})
-    data = to_value(prop_in_binary.data, "string")
-    common_components_to_struct(prop_in_binary, data)
-  end
-
-  def to_struct(binary, %{"type" => "enum"} = spec) do
-    prop_in_binary = split_binary_to_parts(binary, %__MODULE__{})
-    data = enum_to_value(prop_in_binary.data, spec)
-    common_components_to_struct(prop_in_binary, data)
-  end
-
-  def to_struct(binary, %{"type" => data_type}) do
-    prop_in_binary = split_binary_to_parts(binary, %__MODULE__{})
-    data = to_value(prop_in_binary.data, data_type)
+    data = to_value(prop_in_binary.data, type)
     common_components_to_struct(prop_in_binary, data)
   end
 
   defp common_components_to_struct(prop_in_binary, data) do
-    timestamp = to_value(prop_in_binary.timestamp, "timestamp")
+    timestamp = to_value(prop_in_binary.timestamp, %{"type" => "timestamp"})
     failure = failure_to_value(prop_in_binary.failure)
     %__MODULE__{data: data, timestamp: timestamp, failure: failure}
   end
 
-  defp enum_to_value(binary_data, %{"size" => size} = spec) do
+  defp to_value(nil, _) do
+    nil
+  end
+
+  defp to_value(binary_data, %{"type" => "string"}) do
+    binary_data
+  end
+
+  defp to_value(binary_data, %{"type" => "float"}) do
+    AutoApi.CommonData.convert_bin_to_float(binary_data)
+  end
+
+  defp to_value(binary_data, %{"type" => "double"}) do
+    AutoApi.CommonData.convert_bin_to_double(binary_data)
+  end
+
+  defp to_value(binary_data, %{"type" => "integer"}) do
+    AutoApi.CommonData.convert_bin_to_integer(binary_data)
+  end
+
+  defp to_value(binary_data, %{"type" => "timestamp"}) do
+    timestamp_in_milisec = AutoApi.CommonData.convert_bin_to_integer(binary_data)
+
+    case DateTime.from_unix(timestamp_in_milisec, :millisecond) do
+      {:ok, datetime} -> datetime
+      _ -> nil
+    end
+  end
+
+  defp to_value(binary_data, %{"type" => "capability_state"}) do
+    <<cap_id::binary-size(2), 0x01, bin_state::binary>> = binary_data
+    cap_mod = AutoApi.Capability.get_by_id(cap_id)
+
+    cap_mod.state.from_bin(bin_state)
+  end
+
+  defp to_value(binary_data, %{"type" => "enum", "size" => size} = spec) do
     size_bit = size * 8
     <<enum_id::integer-size(size_bit)>> = binary_data
 
@@ -206,42 +226,6 @@ defmodule AutoApi.PropertyComponent do
       Logger.warn("enum with value `#{binary_data}` doesn't exist in #{inspect spec}")
       nil
     end
-  end
-
-  defp to_value(nil, _) do
-    nil
-  end
-
-  defp to_value(binary_data, "string") do
-    binary_data
-  end
-
-  defp to_value(binary_data, "float") do
-    AutoApi.CommonData.convert_bin_to_float(binary_data)
-  end
-
-  defp to_value(binary_data, "double") do
-    AutoApi.CommonData.convert_bin_to_double(binary_data)
-  end
-
-  defp to_value(binary_data, "integer") do
-    AutoApi.CommonData.convert_bin_to_integer(binary_data)
-  end
-
-  defp to_value(binary_data, "timestamp") do
-    timestamp_in_milisec = AutoApi.CommonData.convert_bin_to_integer(binary_data)
-
-    case DateTime.from_unix(timestamp_in_milisec, :millisecond) do
-      {:ok, datetime} -> datetime
-      _ -> nil
-    end
-  end
-
-  defp to_value(binary_data, "capability_state") do
-    <<cap_id::binary-size(2), 0x01, bin_state::binary>> = binary_data
-    cap_mod = AutoApi.Capability.get_by_id(cap_id)
-
-    cap_mod.state.from_bin(bin_state)
   end
 
   defp failure_to_value(nil), do: nil
