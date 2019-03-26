@@ -139,33 +139,9 @@ defmodule AutoApi.PropertyComponent do
   Converts PropertyComponent binary to struct
   """
   @spec to_struct(binary(), spec()) :: __MODULE__.t()
-  def to_struct(binary, specs) when is_list(specs) do
+  def to_struct(binary, specs) do
     prop_in_binary = split_binary_to_parts(binary, %__MODULE__{})
-
-    data =
-      unless is_nil(prop_in_binary.data) do
-        specs
-        |> Enum.reduce({0, []}, fn spec, {counter, acc} ->
-          size = spec["size"] || Keyword.get(acc, String.to_atom("#{spec["name"]}_size"))
-          unless size, do: raise("couldn't find size for #{inspect(spec)}")
-
-          data_value =
-            prop_in_binary.data
-            |> :binary.part(counter, size)
-            |> to_value(spec)
-
-          {counter + size, [{String.to_atom(spec["name"]), data_value} | acc]}
-        end)
-        |> elem(1)
-        |> Enum.into(%{})
-      end
-
-    common_components_to_struct(prop_in_binary, data)
-  end
-
-  def to_struct(binary, type) do
-    prop_in_binary = split_binary_to_parts(binary, %__MODULE__{})
-    data = to_value(prop_in_binary.data, type)
+    data = to_value(prop_in_binary.data, specs)
     common_components_to_struct(prop_in_binary, data)
   end
 
@@ -226,6 +202,23 @@ defmodule AutoApi.PropertyComponent do
       Logger.warn("enum with value `#{binary_data}` doesn't exist in #{inspect spec}")
       nil
     end
+  end
+
+  defp to_value(binary_data, specs) when is_list(specs) do
+    specs
+    |> Enum.reduce({0, []}, fn spec, {counter, acc} ->
+      size = spec["size"] || Keyword.get(acc, String.to_atom("#{spec["name"]}_size"))
+      unless size, do: raise("couldn't find size for #{inspect(spec)}")
+
+      data_value =
+        binary_data
+        |> :binary.part(counter, size)
+        |> to_value(spec)
+
+      {counter + size, [{String.to_atom(spec["name"]), data_value} | acc]}
+    end)
+    |> elem(1)
+    |> Enum.into(%{})
   end
 
   defp failure_to_value(nil), do: nil
