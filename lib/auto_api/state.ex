@@ -60,9 +60,9 @@ defmodule AutoApi.State do
         end
 
         defp parse_bin_properties(
-              <<id, size::integer-16, data::binary-size(size), rest::binary>>,
-              state
-            ) do
+               <<id, size::integer-16, data::binary-size(size), rest::binary>>,
+               state
+             ) do
           state = do_parse_bin_properties(id, size, data, state)
           parse_bin_properties(rest, state)
         end
@@ -174,10 +174,10 @@ defmodule AutoApi.State do
     timestamp =
       quote do
         defp parse_bin_property(
-              0xA2,
-              _size,
-              value
-            ) do
+               0xA2,
+               _size,
+               value
+             ) do
           {:timestamp, false, DateTime.utc_now()}
         end
       end
@@ -261,14 +261,6 @@ defmodule AutoApi.State do
                 end
               end
 
-              defp parse_state_property_list(enum_values, unquote(prop_name), data) do
-                AutoApi.State.parse_state_property_list_helper(
-                  unquote(prop_id),
-                  enum_values,
-                  data
-                )
-              end
-
               defp parse_bin_property(unquote(prop["id"]), _size, data) do
                 data_component =
                   AutoApi.PropertyComponent.to_struct(data, unquote(Macro.escape(prop["items"])))
@@ -334,54 +326,6 @@ defmodule AutoApi.State do
       end
 
     [timestamp, base, prop_funs]
-  end
-
-  defp parse_state_property_list_helper(prop_id, enum_values, data) do
-    find_type_fun = fn enum_values, key_name, value ->
-      enum_values
-      |> Enum.filter(fn v -> v[key_name] == value end)
-      |> List.first()
-    end
-
-    reduce_func = fn {sub_prop, value}, acc ->
-      bin =
-        case sub_prop["type"] do
-          "enum" ->
-            case find_type_fun.(sub_prop["values"], "name", Atom.to_string(value)) do
-              nil ->
-                throw({:error, {:can_not_parse_enum, value}})
-
-              matched_value ->
-                <<matched_value["id"]>>
-            end
-
-          "string" ->
-            <<byte_size(value)::integer-16>> <> value
-
-          type ->
-            apply(AutoApi.CommonData, :"convert_state_to_bin_#{type}", [
-              value,
-              sub_prop["size"]
-            ])
-        end
-
-      acc <> bin
-    end
-
-    binary_object =
-      enum_values
-      |> Enum.reject(&Map.get(&1, "size_reference", nil))
-      |> Enum.map(fn sub_prop ->
-        key = String.to_atom(sub_prop["name"])
-        value = Map.get(data, key, 0)
-        {sub_prop, value}
-      end)
-      |> Enum.reduce(
-        <<>>,
-        &reduce_func.(&1, &2)
-      )
-
-    <<prop_id, byte_size(binary_object)::integer-16>> <> binary_object
   end
 
   @doc """
