@@ -198,26 +198,6 @@ defmodule AutoApi.State do
 
           case unquote(prop["type"]) do
             "enum" ->
-              defp enum_name_to_id(unquote(prop_id)) do
-                enum_values = unquote(Macro.escape(prop["values"]))
-
-                enum_values
-                |> Enum.map(fn enum_value ->
-                  {String.to_atom(enum_value["name"]), enum_value["id"]}
-                end)
-                |> Map.new()
-              end
-
-              defp enum_id_to_name(unquote(prop_name)) do
-                enum_values = unquote(Macro.escape(prop["values"]))
-
-                enum_values
-                |> Enum.map(fn enum_value ->
-                  {enum_value["id"], String.to_atom(enum_value["name"])}
-                end)
-                |> Map.new()
-              end
-
               def parse_bin_property(unquote(prop_id), _size, property_component_binary) do
                 property_component =
                   AutoApi.PropertyComponent.to_struct(
