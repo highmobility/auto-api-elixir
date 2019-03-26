@@ -31,7 +31,6 @@ defmodule AutoApi.State do
   @callback to_bin(struct) :: binary
   @callback base() :: struct
 
-  alias AutoApi.CommonData
   require Logger
 
   defmacro __using__(opts) do
@@ -219,16 +218,6 @@ defmodule AutoApi.State do
                 |> Map.new()
               end
 
-              # TODO: to remove!
-              defp parse_enum(key, key_name, value)
-                   when key in [unquote(prop_id), unquote(prop_name)] do
-                enum_values = unquote(Macro.escape(prop["values"]))
-
-                enum_values
-                |> Enum.filter(fn v -> v[key_name] == value end)
-                |> List.first()
-              end
-
               def parse_bin_property(unquote(prop_id), _size, property_component_binary) do
                 property_component =
                   AutoApi.PropertyComponent.to_struct(
@@ -411,149 +400,6 @@ defmodule AutoApi.State do
       )
 
     <<prop_id, byte_size(binary_object)::integer-16>> <> binary_object
-  end
-
-  def parse_bin_property_to_list_helper(prop_name, items, data_list, multiple) do
-    {_, result} =
-      items
-      |> Enum.reduce({0, []}, fn x, {counter, acc} ->
-        size = x["size"] || Keyword.get(acc, String.to_atom("#{x["name"]}_size"))
-
-        unless size, do: raise("couldn't find size for #{inspect(x)}")
-
-        data_slice = :binary.list_to_bin(Enum.slice(data_list, counter, size))
-
-        data_value =
-          case x["type"] do
-            "enum" ->
-              <<enum_value>> = data_slice
-
-              x["values"]
-              |> Enum.filter(&(&1["id"] == enum_value))
-              |> List.first()
-              |> case do
-                nil ->
-                  Logger.error(
-                    "Can not parse #{inspect enum_value} for #{prop_name} in #{__MODULE__}"
-                  )
-
-                  0x00
-
-                matched_value ->
-                  String.to_atom(matched_value["name"])
-              end
-
-            "string" ->
-              data_slice
-
-            type ->
-              apply(AutoApi.CommonData, :"convert_bin_to_#{type}", [data_slice])
-          end
-
-        # TODO: convert binary slices to their types
-        {counter + size, [{String.to_atom(x["name"]), data_value} | acc]}
-      end)
-
-    {prop_name, multiple, Enum.into(result, %{})}
-  end
-
-  def parse_bin_property_to_date_helper(<<timestamp_binary::binary-size(8)>>) do
-    CommonData.convert_bin_to_state_datetime(timestamp_binary)
-  end
-
-  def parse_bin_property_to_property_timestamp_helper(
-        state_module,
-        <<timestamp_binary::binary-size(8), prop_id, _::binary>>
-      ) do
-    %{
-      state_module.property_name(prop_id) =>
-        CommonData.convert_bin_to_state_datetime(timestamp_binary)
-    }
-  end
-
-  def parse_bin_property_to_failure_helper(
-        state_module,
-        <<prop_id, reason, size, description::binary-size(size)>>
-      ) do
-    %{
-      state_module.property_name(prop_id) =>
-        {CommonData.convert_bin_to_state_failure_reason(reason), description}
-    }
-  end
-
-  def parse_state_property_timestamps_to_bin(state_module, property_name, datetimes)
-      when is_list(datetimes) do
-    datetimes
-    |> Enum.map(fn dt_value ->
-      parse_state_property_timestamps_to_bin(state_module, property_name, dt_value)
-    end)
-    |> Enum.join("")
-  end
-
-  def parse_state_property_timestamps_to_bin(state_module, property_name, {datetime, value}) do
-    case state_module.parse_state_property(property_name, [value]) do
-      <<_id, data_size::integer-size(16), data::binary>> ->
-        property_timestamp = CommonData.convert_state_to_bin_datetime(datetime)
-        prop_size = data_size + byte_size(property_timestamp) + 1
-
-        <<0xA4, prop_size::integer-16, property_timestamp::binary,
-          state_module.property_id(property_name), data::binary>>
-
-      _ ->
-        Logger.error(
-          "AutoApi.State can't parse the data #{inspect([state_module, property_name, value])}"
-        )
-
-        <<>>
-    end
-  end
-
-  def parse_state_property_timestamps_to_bin(state_module, property_name, %DateTime{} = datetime) do
-    <<0xA4, 9::integer-16, CommonData.convert_state_to_bin_datetime(datetime)::binary,
-      state_module.property_id(property_name)>>
-  end
-
-  def put_with_timestamp(state, property_name, property_vaule, timestamp) do
-    if state.__struct__.is_multiple?(property_name) do
-      put_with_timestamp_multiple(state, property_name, property_vaule, timestamp)
-    else
-      put_with_timestamp_signle(state, property_name, property_vaule, timestamp)
-    end
-  end
-
-  defp put_with_timestamp_multiple(state, property_name, property_vaule, timestamp) do
-    current_property_timestamps = Map.get(state.property_timestamps, property_name, [])
-    new_property_timestamps = [{timestamp, property_vaule} | current_property_timestamps]
-
-    property_timestamps =
-      Map.put(state.property_timestamps, property_name, new_property_timestamps)
-
-    properties = Enum.uniq([:property_timestamps, property_name] ++ state.properties)
-
-    existing_value = Map.get(state, property_name)
-
-    state
-    |> Map.put(property_name, [property_vaule | existing_value])
-    |> Map.put(:property_timestamps, property_timestamps)
-    |> Map.put(:properties, properties)
-  end
-
-  defp put_with_timestamp_signle(state, property_name, property_vaule, timestamp) do
-    property_timestamps = Map.put(state.property_timestamps, property_name, timestamp)
-    properties = Enum.uniq([:property_timestamps, property_name] ++ state.properties)
-
-    state
-    |> Map.put(property_name, property_vaule)
-    |> Map.put(:property_timestamps, property_timestamps)
-    |> Map.put(:properties, properties)
-  end
-
-  def parse_state_property_failures_to_bin(state_module, property_name, {reason, description}) do
-    prop_id = apply(state_module, :property_id, [property_name])
-    bin_reason = CommonData.convert_state_to_bin_failure_reason(reason)
-    size = byte_size(description) + 3
-
-    <<0xA5, size::16, prop_id, bin_reason, byte_size(description)::8, description::binary>>
   end
 
   @doc """
