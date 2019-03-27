@@ -164,7 +164,11 @@ defmodule AutoApi.State do
             timestamp: timestamp
           }
 
-          %{state | property_name => prop}
+          if is_multiple?(property_name) do
+            %{state | property_name => [prop]}
+          else
+            %{state | property_name => prop}
+          end
         end
       end
 

@@ -165,10 +165,11 @@ defmodule AutoApi.StateTest do
         })
         |> State.put_failure(:tire_pressures, :unknown, "Unknown pressure", timestamp)
 
-      refute state.tire_pressures.data
-      assert state.tire_pressures.failure.reason == :unknown
-      assert state.tire_pressures.failure.description == "Unknown pressure"
-      assert state.tire_pressures.timestamp == timestamp
+      assert [pressures] = state.tire_pressures
+      refute pressures.data
+      assert pressures.failure.reason == :unknown
+      assert pressures.failure.description == "Unknown pressure"
+      assert pressures.timestamp == timestamp
     end
   end
 
