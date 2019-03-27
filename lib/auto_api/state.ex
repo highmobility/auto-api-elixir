@@ -83,10 +83,6 @@ defmodule AutoApi.State do
           %{state | :timestamp => value}
         end
 
-        defp to_properties(state, :properties_failures, value, _) do
-          Map.update!(state, :properties_failures, &Map.merge(&1, value))
-        end
-
         defp to_properties(state, prop, value, true) do
           current_value = Map.get(state, prop)
           unless current_value, do: raise("`#{prop}` property is not defined as list")
