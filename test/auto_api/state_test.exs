@@ -129,6 +129,18 @@ defmodule AutoApi.StateTest do
 
       assert new_state.coordinates == coordinates
     end
+
+    test "failure on list property" do
+      pressures = %PropertyComponent{failure: %{reason: :unknown, description: "Unknown"}}
+      state = %DiagnosticsState{tire_pressures: [pressures]}
+
+      new_state =
+        state
+        |> DiagnosticsState.to_bin()
+        |> DiagnosticsState.from_bin()
+
+      assert new_state.tire_pressures == [pressures]
+    end
   end
 
   describe "put_failure/5" do
