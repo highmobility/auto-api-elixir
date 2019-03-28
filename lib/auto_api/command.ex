@@ -17,6 +17,10 @@
 # Please inquire about commercial licensing options at
 # licensing@high-mobility.com
 defmodule AutoApi.Command do
+  @moduledoc """
+  Command behavior for handling AutoApi commands
+  """
+
   alias AutoApi.Capability
 
   @type execute_return_atom :: :state | :state_changed

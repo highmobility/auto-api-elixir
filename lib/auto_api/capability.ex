@@ -17,6 +17,10 @@
 # Please inquire about commercial licensing options at
 # licensing@high-mobility.com
 defmodule AutoApi.Capability do
+  @moduledoc """
+  Capability behaviour
+  """
+
   @callback name() :: atom
   @callback command_name(integer) :: atom
   @callback command_name(integer) :: atom
