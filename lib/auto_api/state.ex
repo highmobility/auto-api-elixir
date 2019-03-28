@@ -156,19 +156,14 @@ defmodule AutoApi.State do
 
         This function wraps the failure in PropertyComponent
         """
-        @spec put_failure(__MODULE__.t(), atom(), atom(), String.t(), DateTime.t() | nil) ::
-                __MODULE__.t()
+        @spec put_failure(struct(), atom(), atom(), String.t(), DateTime.t() | nil) :: struct()
         def put_failure(state, property_name, reason, description, timestamp \\ nil) do
-          prop = %AutoApi.PropertyComponent{
+          value = %AutoApi.PropertyComponent{
             failure: %{reason: reason, description: description},
             timestamp: timestamp
           }
 
-          if is_multiple?(property_name) do
-            %{state | property_name => [prop]}
-          else
-            %{state | property_name => prop}
-          end
+          override_property(state, property_name, value)
         end
       end
 
@@ -194,8 +189,16 @@ defmodule AutoApi.State do
         quote do
           if unquote(multiple) do
             def is_multiple?(unquote(prop_name)), do: true
+
+            defp override_property(%__MODULE__{} = state, unquote(prop_name), value) do
+              %{state | unquote(prop_name) => [value]}
+            end
           else
             def is_multiple?(unquote(prop_name)), do: false
+
+            defp override_property(%__MODULE__{} = state, unquote(prop_name), value) do
+              %{state | unquote(prop_name) => value}
+            end
           end
 
           def property_name(unquote(prop_id)), do: unquote(prop_name)
@@ -577,7 +580,7 @@ defmodule AutoApi.State do
   @doc """
   Update a property failure in the given state.
   """
-  @spec put_failure(struct, atom, atom, String.t(), DateTime.t() | nil) :: module
+  @spec put_failure(struct, atom, atom, String.t(), DateTime.t() | nil) :: struct
   def put_failure(%state_module{} = state, property, reason, description, timestamp \\ nil) do
     state_module.put_failure(state, property, reason, description, timestamp)
   end
