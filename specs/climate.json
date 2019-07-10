@@ -1,308 +1,123 @@
 {
     "category": "chassis",
-    "id_msb": 0,
-    "id_lsb": 36,
     "name": "climate",
-    "api_intro": 2,
-    "message_types": [
-        {
-            "id": 0,
-            "name": "get_climate_state"
-        },
-        {
-            "id": 1,
-            "name": "climate_state"
-        },
-        {
-            "properties": [
-                {
-                    "mandatory": true,
-                    "name": "weekdays_starting_times",
-                    "items": [
-                        {
-                            "type": "enum",
-                            "values": [
-                                {
-                                    "name": "monday",
-                                    "id": 0
-                                },
-                                {
-                                    "name": "tuesday",
-                                    "id": 1
-                                },
-                                {
-                                    "name": "wednesday",
-                                    "id": 2
-                                },
-                                {
-                                    "name": "thursday",
-                                    "id": 3
-                                },
-                                {
-                                    "name": "friday",
-                                    "id": 4
-                                },
-                                {
-                                    "name": "saturday",
-                                    "id": 5
-                                },
-                                {
-                                    "name": "sunday",
-                                    "id": 6
-                                },
-                                {
-                                    "name": "automatic",
-                                    "id": 7
-                                }
-                            ],
-                            "name": "weekday",
-                            "size": 1
-                        },
-                        {
-                            "items": [
-                                {
-                                    "type": "integer",
-                                    "name": "hours",
-                                    "size": 1
-                                },
-                                {
-                                    "type": "integer",
-                                    "name": "minutes",
-                                    "size": 1
-                                }
-                            ],
-                            "size": 2,
-                            "description": "Time of day. Use 0xFF to remove the set time.",
-                            "name": "time"
-                        }
-                    ],
-                    "multiple": true,
-                    "id": 1,
-                    "size": 3
-                }
-            ],
-            "name": "change_starting_times",
-            "id": 18
-        },
-        {
-            "properties": [
-                {
-                    "mandatory": true,
-                    "name": "active_state",
-                    "values": [
-                        {
-                            "name": "stop_hvac",
-                            "id": 0
-                        },
-                        {
-                            "name": "start_hvac",
-                            "id": 1
-                        }
-                    ],
-                    "type": "enum",
-                    "id": 1,
-                    "size": 1
-                }
-            ],
-            "name": "start_stop_hvac",
-            "id": 19
-        },
-        {
-            "properties": [
-                {
-                    "mandatory": true,
-                    "name": "active_state",
-                    "values": [
-                        {
-                            "name": "stop_defogging",
-                            "id": 0
-                        },
-                        {
-                            "name": "start_defogging",
-                            "id": 1
-                        }
-                    ],
-                    "type": "enum",
-                    "id": 1,
-                    "size": 1
-                }
-            ],
-            "name": "start_stop_defogging",
-            "id": 20
-        },
-        {
-            "properties": [
-                {
-                    "mandatory": true,
-                    "name": "active_state",
-                    "values": [
-                        {
-                            "name": "stop_defrosting",
-                            "id": 0
-                        },
-                        {
-                            "name": "start_defrosting",
-                            "id": 1
-                        }
-                    ],
-                    "type": "enum",
-                    "id": 1,
-                    "size": 1
-                }
-            ],
-            "name": "start_stop_defrosting",
-            "id": 21
-        },
-        {
-            "properties": [
-                {
-                    "mandatory": true,
-                    "name": "active_state",
-                    "values": [
-                        {
-                            "name": "stop_ionising",
-                            "id": 0
-                        },
-                        {
-                            "name": "start_ionising",
-                            "id": 1
-                        }
-                    ],
-                    "type": "enum",
-                    "id": 1,
-                    "size": 1
-                }
-            ],
-            "name": "start_stop_ionising",
-            "id": 22
-        },
-        {
-            "properties": [
-                {
-                    "id": 1,
-                    "type": "float",
-                    "description": "Driver temperature in Celsius",
-                    "name": "driver",
-                    "size": 4
-                },
-                {
-                    "id": 2,
-                    "type": "float",
-                    "description": "Passenger temperature in Celsius",
-                    "name": "passenger",
-                    "size": 4
-                },
-                {
-                    "id": 3,
-                    "type": "float",
-                    "description": "Rear temperature in Celsius",
-                    "name": "rear",
-                    "size": 4
-                }
-            ],
-            "name": "set_temperature_settings",
-            "id": 23
-        }
-    ],
+    "getters": "default",
+    "state": "all",
+    "api": {
+        "intro": 2,
+        "update": 11
+    },
+    "identifier": {
+        "lsb": 36,
+        "msb": 0
+    },
     "properties": [
         {
-            "size": 4,
+            "id": 1,
             "type": "float",
             "description": "The inside temperature in celsius per IEEE 754 formatting",
             "name": "inside_temperature",
-            "id": 1
+            "size": 4
         },
         {
-            "size": 4,
+            "id": 2,
             "type": "float",
             "description": "The outside temperature in celsius per IEEE 754 formatting",
             "name": "outside_temperature",
-            "id": 2
+            "size": 4
         },
         {
-            "size": 4,
+            "id": 3,
             "type": "float",
             "description": "The driver temperature setting in celsius per IEEE 754 formatting",
             "name": "driver_temperature_setting",
-            "id": 3
+            "size": 4
         },
         {
-            "size": 4,
+            "id": 4,
             "type": "float",
             "description": "The passenger temperature setting in celsius per IEEE 754 formatting",
             "name": "passenger_temperature_setting",
-            "id": 4
+            "size": 4
         },
         {
             "type": "enum",
-            "size": 1,
             "values": [
                 {
-                    "name": "inactive",
-                    "id": 0
+                    "verb": "stop",
+                    "id": 0,
+                    "name": "inactive"
                 },
                 {
-                    "name": "active",
-                    "id": 1
+                    "verb": "start",
+                    "id": 1,
+                    "name": "active"
                 }
             ],
             "id": 5,
-            "name": "hvac_state"
+            "name": "hvac_state",
+            "size": 1
         },
         {
             "type": "enum",
-            "size": 1,
             "values": [
                 {
-                    "name": "inactive",
-                    "id": 0
+                    "verb": "stop_defogging",
+                    "id": 0,
+                    "name": "inactive"
                 },
                 {
-                    "name": "active",
-                    "id": 1
+                    "verb": "start_defogging",
+                    "id": 1,
+                    "name": "active"
                 }
             ],
             "id": 6,
-            "name": "defogging_state"
+            "name": "defogging_state",
+            "size": 1
         },
         {
             "type": "enum",
-            "size": 1,
             "values": [
                 {
-                    "name": "inactive",
-                    "id": 0
+                    "verb": "stop_defrosting",
+                    "id": 0,
+                    "name": "inactive"
                 },
                 {
-                    "name": "active",
-                    "id": 1
+                    "verb": "start_defrosting",
+                    "id": 1,
+                    "name": "active"
                 }
             ],
             "id": 7,
-            "name": "defrosting_state"
+            "name": "defrosting_state",
+            "size": 1
         },
         {
             "type": "enum",
-            "size": 1,
             "values": [
                 {
-                    "name": "inactive",
-                    "id": 0
+                    "verb": "stop_ionising",
+                    "id": 0,
+                    "name": "inactive"
                 },
                 {
-                    "name": "active",
-                    "id": 1
+                    "verb": "start_ionising",
+                    "id": 1,
+                    "name": "active"
                 }
             ],
             "id": 8,
-            "name": "ionising_state"
+            "name": "ionising_state",
+            "size": 1
         },
         {
-            "size": 4,
+            "id": 9,
             "type": "float",
             "description": "The defrosting temperature setting in celsius per IEEE 754 formatting",
             "name": "defrosting_temperature",
-            "id": 9
+            "size": 4
         },
         {
             "pretty_name": "HVAC weekday starting times",
@@ -313,36 +128,36 @@
                     "type": "enum",
                     "values": [
                         {
-                            "name": "monday",
-                            "id": 0
+                            "id": 0,
+                            "name": "monday"
                         },
                         {
-                            "name": "tuesday",
-                            "id": 1
+                            "id": 1,
+                            "name": "tuesday"
                         },
                         {
-                            "name": "wednesday",
-                            "id": 2
+                            "id": 2,
+                            "name": "wednesday"
                         },
                         {
-                            "name": "thursday",
-                            "id": 3
+                            "id": 3,
+                            "name": "thursday"
                         },
                         {
-                            "name": "friday",
-                            "id": 4
+                            "id": 4,
+                            "name": "friday"
                         },
                         {
-                            "name": "saturday",
-                            "id": 5
+                            "id": 5,
+                            "name": "saturday"
                         },
                         {
-                            "name": "sunday",
-                            "id": 6
+                            "id": 6,
+                            "name": "sunday"
                         },
                         {
-                            "name": "automatic",
-                            "id": 7
+                            "id": 7,
+                            "name": "automatic"
                         }
                     ],
                     "name": "weekday",
@@ -350,27 +165,67 @@
                 },
                 {
                     "size": 1,
-                    "type": "integer",
+                    "type": "uinteger",
                     "description": "Value between 0 and 23",
                     "name": "hour"
                 },
                 {
                     "size": 1,
-                    "type": "integer",
+                    "type": "uinteger",
                     "description": "Value between 0 and 59",
                     "name": "minute"
                 }
             ],
+            "type": "custom",
             "id": 11,
             "size": 3
         },
         {
-            "size": 4,
+            "id": 12,
             "type": "float",
             "description": "The rear temperature in celsius per IEEE 754 formatting",
             "name": "rear_temperature_setting",
-            "id": 12
+            "size": 4
         }
     ],
-    "api_update": 8
+    "setters": [
+        {
+            "mandatory": [
+                11
+            ],
+            "name": "change_starting_times"
+        },
+        {
+            "mandatory": [
+                5
+            ],
+            "name": "start_stop_hvac"
+        },
+        {
+            "mandatory": [
+                6
+            ],
+            "name": "start_stop_defogging"
+        },
+        {
+            "mandatory": [
+                7
+            ],
+            "name": "start_stop_defrosting"
+        },
+        {
+            "mandatory": [
+                8
+            ],
+            "name": "start_stop_ionising"
+        },
+        {
+            "optional": [
+                3,
+                4,
+                12
+            ],
+            "name": "set_temperature_settings"
+        }
+    ]
 }

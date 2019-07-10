@@ -1,194 +1,140 @@
 {
     "category": "chassis",
-    "id_lsb": 37,
     "name": "rooftop_control",
-    "api_intro": 3,
-    "message_types": [
-        {
-            "id": 0,
-            "name": "get_rooftop_state"
-        },
-        {
-            "id": 1,
-            "name": "rooftop_state"
-        },
-        {
-            "properties": [
-                {
-                    "id": 1,
-                    "type": "double",
-                    "description": "Percentage value between 0.0-1.0 whereas 1.0 is opaque",
-                    "name": "dimming",
-                    "size": 8
-                },
-                {
-                    "id": 2,
-                    "type": "double",
-                    "description": "Percentage value between 0.0-1.0 whereas 1.0 is fully open",
-                    "name": "position",
-                    "size": 8
-                },
-                {
-                    "type": "enum",
-                    "values": [
-                        {
-                            "name": "closed",
-                            "id": 0
-                        },
-                        {
-                            "name": "open",
-                            "id": 1
-                        }
-                    ],
-                    "id": 3,
-                    "name": "convertible_roof_state",
-                    "size": 1
-                },
-                {
-                    "type": "enum",
-                    "size": 1,
-                    "values": [
-                        {
-                            "name": "closed",
-                            "id": 0
-                        },
-                        {
-                            "name": "tilt",
-                            "id": 1
-                        },
-                        {
-                            "name": "half_tilt",
-                            "id": 2
-                        }
-                    ],
-                    "id": 4,
-                    "name": "sunroof_tilt_state"
-                },
-                {
-                    "type": "enum",
-                    "size": 1,
-                    "values": [
-                        {
-                            "name": "closed",
-                            "id": 0
-                        },
-                        {
-                            "name": "open",
-                            "id": 1
-                        },
-                        {
-                            "name": "intermediate",
-                            "id": 2
-                        }
-                    ],
-                    "id": 5,
-                    "name": "sunroof_state"
-                }
-            ],
-            "name": "control_rooftop",
-            "id": 18
+    "getters": {
+        "default": {
+            "name_override": "rooftop"
         }
-    ],
-    "id_msb": 0,
+    },
+    "state": "all",
+    "api": {
+        "intro": 3,
+        "update": 11
+    },
+    "identifier": {
+        "lsb": 37,
+        "msb": 0
+    },
     "properties": [
         {
-            "size": 8,
+            "id": 1,
             "type": "double",
             "description": "Percentage value between 0.0-1.0 whereas 1.0 is opaque",
             "name": "dimming",
-            "id": 1
+            "size": 8
         },
         {
-            "size": 8,
+            "id": 2,
             "type": "double",
             "description": "Percentage value between 0.0-1.0 whereas 1.0 is fully open",
             "name": "position",
-            "id": 2
+            "size": 8
         },
         {
             "type": "enum",
-            "size": 1,
             "values": [
                 {
-                    "name": "closed",
-                    "id": 0
+                    "verb": "close",
+                    "id": 0,
+                    "name": "closed"
                 },
                 {
-                    "name": "open",
-                    "id": 1
+                    "id": 1,
+                    "name": "open"
                 },
                 {
-                    "name": "emergency_locked",
-                    "id": 2
+                    "id": 2,
+                    "disabled_in_setter": true,
+                    "name": "emergency_locked"
                 },
                 {
-                    "name": "closed_secured",
-                    "id": 3
+                    "id": 3,
+                    "disabled_in_setter": true,
+                    "name": "closed_secured"
                 },
                 {
-                    "name": "open_secured",
-                    "id": 4
+                    "id": 4,
+                    "disabled_in_setter": true,
+                    "name": "open_secured"
                 },
                 {
-                    "name": "hard_top_mounted",
-                    "id": 5
+                    "id": 5,
+                    "disabled_in_setter": true,
+                    "name": "hard_top_mounted"
                 },
                 {
-                    "name": "intermediate_position",
-                    "id": 6
+                    "id": 6,
+                    "disabled_in_setter": true,
+                    "name": "intermediate_position"
                 },
                 {
-                    "name": "loading_position",
-                    "id": 7
+                    "id": 7,
+                    "disabled_in_setter": true,
+                    "name": "loading_position"
                 },
                 {
-                    "name": "loading_position_immediate",
-                    "id": 8
+                    "id": 8,
+                    "disabled_in_setter": true,
+                    "name": "loading_position_immediate"
                 }
             ],
             "id": 3,
-            "name": "convertible_roof_state"
+            "name": "convertible_roof_state",
+            "size": 1
         },
         {
             "type": "enum",
-            "size": 1,
             "values": [
                 {
-                    "name": "closed",
-                    "id": 0
+                    "verb": "close",
+                    "id": 0,
+                    "name": "closed"
                 },
                 {
-                    "name": "tilted",
-                    "id": 1
+                    "id": 1,
+                    "name": "tilted"
                 },
                 {
-                    "name": "half_tilted",
-                    "id": 2
+                    "id": 2,
+                    "name": "half_tilted"
                 }
             ],
             "id": 4,
-            "name": "sunroof_tilt_state"
+            "name": "sunroof_tilt_state",
+            "size": 1
         },
         {
             "type": "enum",
-            "size": 1,
             "values": [
                 {
-                    "name": "closed",
-                    "id": 0
+                    "verb": "close",
+                    "id": 0,
+                    "name": "closed"
                 },
                 {
-                    "name": "open",
-                    "id": 1
+                    "id": 1,
+                    "name": "open"
                 },
                 {
-                    "name": "intermediate",
-                    "id": 2
+                    "id": 2,
+                    "name": "intermediate"
                 }
             ],
             "id": 5,
-            "name": "sunroof_state"
+            "name": "sunroof_state",
+            "size": 1
         }
     ],
-    "api_update": 10
+    "setters": [
+        {
+            "optional": [
+                1,
+                2,
+                3,
+                4,
+                5
+            ],
+            "name": "control_rooftop"
+        }
+    ]
 }

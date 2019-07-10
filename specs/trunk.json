@@ -1,90 +1,60 @@
 {
     "category": "digital_key",
-    "id_lsb": 33,
     "name": "trunk",
-    "api_intro": 1,
-    "message_types": [
-        {
-            "id": 0,
-            "name": "get_trunk_state"
-        },
-        {
-            "id": 1,
-            "name": "trunk_state"
-        },
-        {
-            "properties": [
-                {
-                    "type": "enum",
-                    "values": [
-                        {
-                            "name": "unlocked",
-                            "id": 0
-                        },
-                        {
-                            "name": "locked",
-                            "id": 1
-                        }
-                    ],
-                    "id": 1,
-                    "name": "trunk_lock",
-                    "size": 1
-                },
-                {
-                    "type": "enum",
-                    "values": [
-                        {
-                            "name": "closed",
-                            "id": 0
-                        },
-                        {
-                            "name": "open",
-                            "id": 1
-                        }
-                    ],
-                    "id": 2,
-                    "name": "trunk_position",
-                    "size": 1
-                }
-            ],
-            "name": "control_trunk",
-            "id": 18
-        }
-    ],
-    "id_msb": 0,
+    "getters": "default",
+    "state": "all",
+    "api": {
+        "intro": 1,
+        "update": 11
+    },
+    "identifier": {
+        "lsb": 33,
+        "msb": 0
+    },
     "properties": [
         {
             "type": "enum",
-            "size": 1,
             "values": [
                 {
-                    "name": "unlocked",
-                    "id": 0
+                    "verb": "unlock",
+                    "id": 0,
+                    "name": "unlocked"
                 },
                 {
-                    "name": "locked",
-                    "id": 1
+                    "verb": "lock",
+                    "id": 1,
+                    "name": "locked"
                 }
             ],
             "id": 1,
-            "name": "trunk_lock"
+            "name": "trunk_lock",
+            "size": 1
         },
         {
             "type": "enum",
-            "size": 1,
             "values": [
                 {
-                    "name": "closed",
-                    "id": 0
+                    "verb": "close",
+                    "id": 0,
+                    "name": "closed"
                 },
                 {
-                    "name": "open",
-                    "id": 1
+                    "id": 1,
+                    "name": "open"
                 }
             ],
             "id": 2,
-            "name": "trunk_position"
+            "name": "trunk_position",
+            "size": 1
         }
     ],
-    "api_update": 8
+    "setters": [
+        {
+            "optional": [
+                1,
+                2
+            ],
+            "name": "control_trunk"
+        }
+    ]
 }

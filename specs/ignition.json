@@ -1,18 +1,14 @@
 {
-    "category": "parking",
-    "name": "fueling",
-    "getters": {
-        "default": {
-            "name_override": "gas_flap"
-        }
-    },
+    "category": "digital_key",
+    "name": "ignition",
+    "getters": "default",
     "state": "all",
     "api": {
-        "intro": 4,
+        "intro": 3,
         "update": 11
     },
     "identifier": {
-        "lsb": 64,
+        "lsb": 53,
         "msb": 0
     },
     "properties": [
@@ -20,45 +16,41 @@
             "type": "enum",
             "values": [
                 {
-                    "verb": "unlock",
                     "id": 0,
-                    "name": "unlocked"
+                    "name": false
                 },
                 {
-                    "verb": "lock",
                     "id": 1,
-                    "name": "locked"
+                    "name": true
                 }
             ],
-            "id": 2,
-            "name": "gas_flap_lock",
+            "id": 1,
+            "name": "ignition",
             "size": 1
         },
         {
             "type": "enum",
             "values": [
                 {
-                    "verb": "close",
                     "id": 0,
-                    "name": "closed"
+                    "name": false
                 },
                 {
                     "id": 1,
-                    "name": "open"
+                    "name": true
                 }
             ],
-            "id": 3,
-            "name": "gas_flap_position",
+            "id": 2,
+            "name": "accessories_ignition",
             "size": 1
         }
     ],
     "setters": [
         {
-            "optional": [
-                2,
-                3
+            "mandatory": [
+                1
             ],
-            "name": "control_gas_flap"
+            "name": "turn_ignition_on_off"
         }
     ]
 }

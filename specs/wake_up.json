@@ -1,14 +1,39 @@
 {
     "category": "digital_key",
-    "id_msb": 0,
-    "id_lsb": 34,
+    "api": {
+        "intro": 2,
+        "update": 11
+    },
     "name": "wake_up",
-    "api_update": 5,
-    "api_intro": 2,
-    "message_types": [
+    "identifier": {
+        "lsb": 34,
+        "msb": 0
+    },
+    "properties": [
         {
-            "id": 2,
-            "name": "wake_up"
+            "type": "enum",
+            "values": [
+                {
+                    "id": 0,
+                    "name": "wake_up"
+                }
+            ],
+            "id": 1,
+            "name": "wake_up",
+            "size": 1
+        }
+    ],
+    "setters": [
+        {
+            "name": "wake_up",
+            "constants": [
+                {
+                    "property_id": 1,
+                    "value": [
+                        0
+                    ]
+                }
+            ]
         }
     ]
 }

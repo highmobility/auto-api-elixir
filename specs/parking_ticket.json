@@ -1,75 +1,38 @@
 {
     "category": "parking",
-    "id_lsb": 71,
     "name": "parking_ticket",
-    "api_intro": 4,
-    "message_types": [
-        {
-            "id": 0,
-            "name": "get_parking_ticket"
-        },
-        {
-            "id": 1,
-            "name": "parking_ticket"
-        },
-        {
-            "id": 2,
-            "name": "start_parking",
-            "properties": [
-                {
-                    "id": 1,
-                    "name": "operator_name",
-                    "type": "string",
-                    "description": "Operator Name bytes formatted in UTF-8"
-                },
-                {
-                    "id": 2,
-                    "name": "operator_ticket_id",
-                    "pretty_name": "Operator ticket ID",
-                    "type": "string",
-                    "mandatory": true,
-                    "title_case_name": "operatorTicketID",
-                    "description": "Operator Ticket ID bytes formatted in UTF-8"
-                },
-                {
-                    "id": 3,
-                    "name": "ticket_start_time",
-                    "type": "integer",
-                    "size": 8,
-                    "mandatory": true,
-                    "description": "Milliseconds since UNIX Epoch time"
-                },
-                {
-                    "id": 4,
-                    "type": "integer",
-                    "size": 8,
-                    "name": "ticket_end_time",
-                    "description": "Milliseconds since UNIX Epoch time"
-                }
-            ]
-        },
-        {
-            "id": 3,
-            "name": "end_parking"
+    "getters": {
+        "default": {
+            "omit_state_text": true
         }
-    ],
-    "id_msb": 0,
+    },
+    "state": "all",
+    "api": {
+        "intro": 4,
+        "update": 11
+    },
+    "identifier": {
+        "lsb": 71,
+        "msb": 0
+    },
     "properties": [
         {
             "type": "enum",
-            "size": 1,
             "values": [
                 {
-                    "name": "ended",
-                    "id": 0
+                    "verb": "end",
+                    "id": 0,
+                    "name": "ended"
                 },
                 {
-                    "name": "started",
-                    "id": 1
+                    "verb": "start",
+                    "id": 1,
+                    "name": "started"
                 }
             ],
             "id": 1,
-            "name": "parking_ticket_state"
+            "name": "parking_ticket_state",
+            "size": 1
         },
         {
             "type": "string",
@@ -78,27 +41,50 @@
             "id": 2
         },
         {
-            "pretty_name": "Operator ticket ID",
-            "type": "string",
+            "pretty_name": "Operator Ticket ID",
             "description": "Operator Ticket ID bytes formatted in UTF-8",
-            "name": "operator_ticket_id",
+            "title_case_name": "operatorTicketID",
+            "type": "string",
             "id": 3,
-            "title_case_name": "operatorTicketID"
+            "name": "operator_ticket_id"
         },
         {
-            "size": 8,
             "id": 4,
+            "type": "timestamp",
+            "description": "Milliseconds since UNIX Epoch time",
             "name": "ticket_start_time",
-            "type": "integer",
-            "description": "Milliseconds since UNIX Epoch time"
+            "size": 8
         },
         {
-            "size": 8,
             "id": 5,
+            "type": "timestamp",
+            "description": "Milliseconds since UNIX Epoch time",
             "name": "ticket_end_time",
-            "type": "integer",
-            "description": "Milliseconds since UNIX Epoch time"
+            "size": 8
         }
     ],
-    "api_update": 10
+    "setters": [
+        {
+            "mandatory": [
+                3,
+                4
+            ],
+            "optional": [
+                2,
+                5
+            ],
+            "name": "start_parking"
+        },
+        {
+            "name": "end_parking",
+            "constants": [
+                {
+                    "property_id": 1,
+                    "value": [
+                        0
+                    ]
+                }
+            ]
+        }
+    ]
 }

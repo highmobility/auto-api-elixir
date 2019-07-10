@@ -1,72 +1,79 @@
 {
     "category": "diagnostics",
-    "id_lsb": 104,
+    "state": "all",
+    "api": {
+        "intro": 8,
+        "update": 11
+    },
     "name": "usage",
-    "api_intro": 8,
-    "message_types": [
-        {
-            "id": 0,
-            "name": "get_usage"
-        },
-        {
-            "id": 1,
-            "name": "usage"
+    "identifier": {
+        "lsb": 104,
+        "msb": 0
+    },
+    "getters": {
+        "default": {
+            "omit_state_text": true
         }
-    ],
-    "id_msb": 0,
+    },
     "properties": [
         {
-            "size": 2,
-            "type": "integer",
+            "id": 1,
+            "type": "uinteger",
             "description": "Average weekly distance in km",
             "name": "average_weekly_distance",
-            "id": 1
+            "size": 2
         },
         {
-            "size": 2,
-            "type": "integer",
+            "id": 2,
+            "type": "uinteger",
             "description": "Average weekyl distance, over long term, in km",
             "name": "average_weekly_distance_long_run",
-            "id": 2
+            "size": 2
         },
         {
-            "size": 8,
+            "id": 3,
             "type": "double",
             "description": "Acceleration evaluation in % from 0.0 to 1.0",
             "name": "acceleration_evaluation",
-            "id": 3
+            "size": 8
         },
         {
-            "size": 8,
+            "id": 4,
             "type": "double",
             "description": "Driving style's evaluation in % from 0.0 to 1.0",
             "name": "driving_style_evaluation",
-            "id": 4
+            "size": 8
         },
         {
+            "multiple": true,
+            "name": "driving_modes_activation_periods",
             "items": [
                 {
                     "type": "enum",
                     "values": [
                         {
-                            "name": "regular",
-                            "id": 0
+                            "id": 0,
+                            "name": "regular"
                         },
                         {
-                            "name": "eco",
-                            "id": 1
+                            "id": 1,
+                            "name": "eco"
                         },
                         {
-                            "name": "sport",
-                            "id": 2
+                            "id": 2,
+                            "name": "sport"
                         },
                         {
-                            "name": "sportPlus",
-                            "id": 3
+                            "id": 3,
+                            "name": "sportPlus"
                         },
                         {
-                            "name": "ecoPlus",
-                            "id": 4
+                            "id": 4,
+                            "name": "ecoPlus"
+                        },
+                        {
+                            "id": 5,
+                            "name": "comfort"
                         }
                     ],
                     "name": "driving_mode",
@@ -79,35 +86,40 @@
                     "name": "period"
                 }
             ],
-            "size": 9,
-            "multiple": true,
+            "type": "custom",
             "id": 5,
-            "name": "driving_modes_activation_periods"
+            "size": 9
         },
         {
+            "multiple": true,
+            "name": "driving_mode_energy_consumption",
             "items": [
                 {
                     "type": "enum",
                     "values": [
                         {
-                            "name": "regular",
-                            "id": 0
+                            "id": 0,
+                            "name": "regular"
                         },
                         {
-                            "name": "eco",
-                            "id": 1
+                            "id": 1,
+                            "name": "eco"
                         },
                         {
-                            "name": "sport",
-                            "id": 2
+                            "id": 2,
+                            "name": "sport"
                         },
                         {
-                            "name": "sportPlus",
-                            "id": 3
+                            "id": 3,
+                            "name": "sportPlus"
                         },
                         {
-                            "name": "ecoPlus",
-                            "id": 4
+                            "id": 4,
+                            "name": "ecoPlus"
+                        },
+                        {
+                            "id": 5,
+                            "name": "comfort"
                         }
                     ],
                     "name": "driving_mode",
@@ -120,75 +132,73 @@
                     "name": "consumption"
                 }
             ],
-            "size": 2,
-            "multiple": true,
+            "type": "custom",
             "id": 6,
-            "name": "driving_mode_energy_consumption"
+            "size": 2
         },
         {
-            "size": 4,
+            "id": 7,
             "type": "float",
             "description": "Energy consumption in the last trip in kWh",
             "name": "last_trip_energy_consumption",
-            "id": 7
+            "size": 4
         },
         {
-            "size": 4,
+            "id": 8,
             "type": "float",
             "description": "Fuel consumption in the last trip in L",
             "name": "last_trip_fuel_consumption",
-            "id": 8
+            "size": 4
         },
         {
-            "size": 4,
-            "type": "integer",
+            "id": 9,
+            "type": "uinteger",
             "description": "Mileage after the last trip in km",
             "name": "mileage_after_last_trip",
-            "id": 9
+            "size": 4
         },
         {
-            "size": 8,
+            "id": 10,
             "type": "double",
             "description": "Portion of the last trip used in electric mode between 0.0-1.0",
             "name": "last_trip_electric_portion",
-            "id": 10
+            "size": 8
         },
         {
-            "size": 4,
+            "id": 11,
             "type": "float",
             "description": "Energy recuperation rate for last trip, in kWh / 100 km",
             "name": "last_trip_average_energy_recuperation",
-            "id": 11
+            "size": 4
         },
         {
-            "size": 8,
+            "id": 12,
             "type": "double",
             "description": "Battery % remaining after last trip between 0.0-1.0",
             "name": "last_trip_battery_remaining",
-            "id": 12
+            "size": 8
         },
         {
-            "size": 8,
             "id": 13,
+            "type": "timestamp",
+            "description": "Milliseconds since UNIX Epoch time",
             "name": "last_trip_date",
-            "type": "integer",
-            "description": "Milliseconds since UNIX Epoch time"
+            "size": 8
         },
         {
             "pretty_name": "Average fuel consumption for current trip",
             "description": "Average fuel consumption in liters/100km per IEEE 754 formatting",
-            "name": "average_fuel_consumption",
+            "size": 4,
             "type": "float",
             "id": 14,
-            "size": 4
+            "name": "average_fuel_consumption"
         },
         {
-            "size": 4,
+            "id": 15,
             "type": "float",
             "description": "Current fuel consumption in liters/100km per IEEE 754 formatting",
             "name": "current_fuel_consumption",
-            "id": 15
+            "size": 4
         }
-    ],
-    "api_update": 10
+    ]
 }

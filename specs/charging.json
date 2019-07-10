@@ -1,199 +1,30 @@
 {
     "category": "chassis",
-    "id_lsb": 35,
     "name": "charging",
-    "api_intro": 2,
-    "message_types": [
-        {
-            "id": 0,
-            "name": "get_charge_state"
-        },
-        {
-            "id": 1,
-            "name": "charge_state"
-        },
-        {
-            "properties": [
-                {
-                    "mandatory": true,
-                    "name": "active_state",
-                    "values": [
-                        {
-                            "name": "stop_charging",
-                            "id": 0
-                        },
-                        {
-                            "name": "start_charging",
-                            "id": 1
-                        }
-                    ],
-                    "type": "enum",
-                    "id": 1,
-                    "size": 1
-                }
-            ],
-            "name": "start_stop_charging",
-            "id": 18
-        },
-        {
-            "properties": [
-                {
-                    "mandatory": true,
-                    "description": "Charge limit percentage between 0.0-1.0",
-                    "size": 8,
-                    "type": "double",
-                    "id": 1,
-                    "name": "charge_limit"
-                }
-            ],
-            "name": "set_charge_limit",
-            "id": 19
-        },
-        {
-            "properties": [
-                {
-                    "mandatory": true,
-                    "name": "charge_port_state",
-                    "values": [
-                        {
-                            "name": "closed",
-                            "id": 0
-                        },
-                        {
-                            "name": "open",
-                            "id": 1
-                        }
-                    ],
-                    "type": "enum",
-                    "id": 1,
-                    "size": 1
-                }
-            ],
-            "name": "open_close_charging_port",
-            "id": 20
-        },
-        {
-            "properties": [
-                {
-                    "mandatory": true,
-                    "name": "charge_mode",
-                    "values": [
-                        {
-                            "name": "timer_based",
-                            "id": 1
-                        },
-                        {
-                            "name": "inductive",
-                            "id": 2
-                        }
-                    ],
-                    "type": "enum",
-                    "id": 1,
-                    "size": 1
-                }
-            ],
-            "name": "set_charge_mode",
-            "id": 21
-        },
-        {
-            "properties": [
-                {
-                    "mandatory": true,
-                    "name": "timers",
-                    "items": [
-                        {
-                            "type": "enum",
-                            "values": [
-                                {
-                                    "name": "preferred_start_time",
-                                    "id": 0
-                                },
-                                {
-                                    "name": "preferred_end_time",
-                                    "id": 1
-                                },
-                                {
-                                    "name": "departure_date",
-                                    "id": 2
-                                }
-                            ],
-                            "name": "timer_type",
-                            "size": 1
-                        },
-                        {
-                            "size": 8,
-                            "type": "integer",
-                            "description": "Milliseconds since UNIX Epoch time",
-                            "name": "date"
-                        }
-                    ],
-                    "multiple": true,
-                    "id": 13,
-                    "size": 9
-                }
-            ],
-            "name": "set_charging_timers",
-            "id": 22
-        },
-        {
-            "properties": [
-                {
-                    "pretty_name": "Reduction of charging-current times",
-                    "mandatory": true,
-                    "name": "reduction_times",
-                    "items": [
-                        {
-                            "type": "enum",
-                            "values": [
-                                {
-                                    "name": "start",
-                                    "id": 0
-                                },
-                                {
-                                    "name": "stop",
-                                    "id": 1
-                                }
-                            ],
-                            "name": "start_stop",
-                            "size": 1
-                        },
-                        {
-                            "size": 1,
-                            "type": "integer",
-                            "description": "Value between 0 and 23",
-                            "name": "hour"
-                        },
-                        {
-                            "size": 1,
-                            "type": "integer",
-                            "description": "Value between 0 and 59",
-                            "name": "minute"
-                        }
-                    ],
-                    "multiple": true,
-                    "id": 1,
-                    "size": 3
-                }
-            ],
-            "name": "set_reduction_of_charging_current_times",
-            "id": 23
-        }
-    ],
-    "id_msb": 0,
+    "getters": "default",
+    "state": "all",
+    "api": {
+        "intro": 2,
+        "update": 11
+    },
+    "identifier": {
+        "lsb": 35,
+        "msb": 0
+    },
     "properties": [
         {
-            "size": 2,
-            "type": "integer",
+            "id": 2,
+            "type": "uinteger",
             "description": "Estimated range in km",
             "name": "estimated_range",
-            "id": 2
+            "size": 2
         },
         {
-            "size": 8,
+            "id": 3,
             "type": "double",
             "description": "Battery level percentage between 0.0-1.0",
             "name": "battery_level",
-            "id": 3
+            "size": 8
         },
         {
             "pretty_name": "Battery current (AC)",
@@ -232,18 +63,18 @@
             "description": "Charger voltage in 4-bytes per IEEE 754"
         },
         {
-            "size": 8,
+            "id": 8,
             "type": "double",
             "description": "Charge limit percentage between 0.0-1.0",
             "name": "charge_limit",
-            "id": 8
+            "size": 8
         },
         {
-            "size": 1,
-            "type": "integer",
+            "id": 9,
+            "type": "uinteger",
             "description": "Time until charging completed in minutes",
             "name": "time_to_complete_charge",
-            "id": 9
+            "size": 1
         },
         {
             "pretty_name": "Charging rate (kW)",
@@ -256,102 +87,106 @@
         },
         {
             "type": "enum",
-            "size": 1,
             "values": [
                 {
-                    "name": "closed",
-                    "id": 0
+                    "verb": "close",
+                    "id": 0,
+                    "name": "closed"
                 },
                 {
-                    "name": "open",
-                    "id": 1
+                    "id": 1,
+                    "name": "open"
                 }
             ],
             "id": 11,
-            "name": "charge_port_state"
+            "name": "charge_port_state",
+            "size": 1
         },
         {
             "type": "enum",
-            "size": 1,
             "values": [
                 {
-                    "name": "immediate",
-                    "id": 0
+                    "id": 0,
+                    "name": "immediate"
                 },
                 {
-                    "name": "timer_based",
-                    "id": 1
+                    "id": 1,
+                    "name": "timer_based"
                 },
                 {
-                    "name": "inductive",
-                    "id": 2
+                    "id": 2,
+                    "disabled_in_setter": true,
+                    "name": "inductive"
                 }
             ],
             "id": 12,
-            "name": "charge_mode"
+            "name": "charge_mode",
+            "size": 1
         },
         {
             "pretty_name": "Maximum charging current",
             "description": "Maximum charging current in 4-bytes per IEEE 754",
-            "name": "max_charging_current",
+            "size": 4,
             "type": "float",
             "id": 14,
-            "size": 4
+            "name": "max_charging_current"
         },
         {
             "type": "enum",
-            "size": 1,
             "values": [
                 {
-                    "name": "type_1",
-                    "id": 0
+                    "id": 0,
+                    "name": "type_1"
                 },
                 {
-                    "name": "type_2",
-                    "id": 1
+                    "id": 1,
+                    "name": "type_2"
                 },
                 {
                     "pretty_name": "Combined Charging System (CCS)",
-                    "name": "ccs",
-                    "id": 2
+                    "id": 2,
+                    "name": "ccs"
                 },
                 {
                     "pretty_name": "CHAdeMO",
-                    "name": "chademo",
-                    "id": 3
+                    "id": 3,
+                    "name": "chademo"
                 }
             ],
             "id": 15,
-            "name": "plug_type"
+            "name": "plug_type",
+            "size": 1
         },
         {
             "type": "enum",
-            "size": 1,
             "values": [
                 {
-                    "name": "not_chosen",
-                    "id": 0
+                    "id": 0,
+                    "name": "not_chosen"
                 },
                 {
-                    "name": "chosen",
-                    "id": 1
+                    "id": 1,
+                    "name": "chosen"
                 }
             ],
             "id": 16,
-            "name": "charging_window_chosen"
+            "name": "charging_window_chosen",
+            "size": 1
         },
         {
+            "multiple": true,
+            "name": "departure_times",
             "items": [
                 {
                     "type": "enum",
                     "values": [
                         {
-                            "name": "inactive",
-                            "id": 0
+                            "id": 0,
+                            "name": "inactive"
                         },
                         {
-                            "name": "active",
-                            "id": 1
+                            "id": 1,
+                            "name": "active"
                         }
                     ],
                     "name": "active_state",
@@ -359,21 +194,20 @@
                 },
                 {
                     "size": 1,
-                    "type": "integer",
+                    "type": "uinteger",
                     "description": "Value between 0 and 23",
                     "name": "hour"
                 },
                 {
                     "size": 1,
-                    "type": "integer",
+                    "type": "uinteger",
                     "description": "Value between 0 and 59",
                     "name": "minute"
                 }
             ],
-            "size": 3,
-            "multiple": true,
+            "type": "custom",
             "id": 17,
-            "name": "departure_times"
+            "size": 3
         },
         {
             "pretty_name": "Reduction of charging-current times",
@@ -384,12 +218,12 @@
                     "type": "enum",
                     "values": [
                         {
-                            "name": "start",
-                            "id": 0
+                            "id": 0,
+                            "name": "start"
                         },
                         {
-                            "name": "stop",
-                            "id": 1
+                            "id": 1,
+                            "name": "stop"
                         }
                     ],
                     "name": "start_stop",
@@ -397,43 +231,46 @@
                 },
                 {
                     "size": 1,
-                    "type": "integer",
+                    "type": "uinteger",
                     "description": "Value between 0 and 23",
                     "name": "hour"
                 },
                 {
                     "size": 1,
-                    "type": "integer",
+                    "type": "uinteger",
                     "description": "Value between 0 and 59",
                     "name": "minute"
                 }
             ],
+            "type": "custom",
             "id": 19,
             "size": 3
         },
         {
-            "size": 4,
+            "id": 20,
             "type": "float",
             "description": "Battery temperature in Celsius in 4-bytes per IEEE 754",
             "name": "battery_temperature",
-            "id": 20
+            "size": 4
         },
         {
+            "multiple": true,
+            "name": "timers",
             "items": [
                 {
                     "type": "enum",
                     "values": [
                         {
-                            "name": "preferred_start_time",
-                            "id": 0
+                            "id": 0,
+                            "name": "preferred_start_time"
                         },
                         {
-                            "name": "preferred_end_time",
-                            "id": 1
+                            "id": 1,
+                            "name": "preferred_end_time"
                         },
                         {
-                            "name": "departure_date",
-                            "id": 2
+                            "id": 2,
+                            "name": "departure_date"
                         }
                     ],
                     "name": "timer_type",
@@ -441,64 +278,102 @@
                 },
                 {
                     "size": 8,
-                    "type": "integer",
+                    "type": "timestamp",
                     "description": "Milliseconds since UNIX Epoch time",
                     "name": "date"
                 }
             ],
-            "size": 9,
-            "multiple": true,
+            "type": "custom",
             "id": 21,
-            "name": "timers"
+            "size": 9
         },
         {
             "type": "enum",
-            "size": 1,
             "values": [
                 {
-                    "name": "disconnected",
-                    "id": 0
+                    "id": 0,
+                    "name": "disconnected"
                 },
                 {
-                    "name": "plugged_in",
-                    "id": 1
+                    "id": 1,
+                    "name": "plugged_in"
                 }
             ],
             "id": 22,
-            "name": "plugged_in"
+            "name": "plugged_in",
+            "size": 1
         },
         {
             "type": "enum",
-            "size": 1,
             "values": [
                 {
-                    "name": "not_charging",
-                    "id": 0
+                    "verb": "stop_charging",
+                    "id": 0,
+                    "name": "not_charging"
                 },
                 {
-                    "name": "charging",
-                    "id": 1
+                    "verb": "start_charging",
+                    "id": 1,
+                    "name": "charging"
                 },
                 {
-                    "name": "charging_complete",
-                    "id": 2
+                    "id": 2,
+                    "name": "charging_complete"
                 },
                 {
-                    "name": "initialising",
-                    "id": 3
+                    "id": 3,
+                    "name": "initialising"
                 },
                 {
-                    "name": "charging_paused",
-                    "id": 4
+                    "id": 4,
+                    "name": "charging_paused"
                 },
                 {
-                    "name": "charging_error",
-                    "id": 5
+                    "id": 5,
+                    "name": "charging_error"
                 }
             ],
             "id": 23,
-            "name": "charging_state"
+            "name": "charging_state",
+            "size": 1
         }
     ],
-    "api_update": 10
+    "setters": [
+        {
+            "mandatory": [
+                23
+            ],
+            "name": "start_stop_charging"
+        },
+        {
+            "mandatory": [
+                8
+            ],
+            "name": "set_charge_limit"
+        },
+        {
+            "mandatory": [
+                11
+            ],
+            "name": "open_close_charging_port"
+        },
+        {
+            "mandatory": [
+                12
+            ],
+            "name": "set_charge_mode"
+        },
+        {
+            "mandatory": [
+                21
+            ],
+            "name": "set_charging_timers"
+        },
+        {
+            "mandatory": [
+                19
+            ],
+            "name": "set_reduction_of_charging_current_times"
+        }
+    ]
 }

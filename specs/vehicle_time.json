@@ -1,27 +1,41 @@
 {
     "category": "poi",
-    "id_msb": 0,
-    "id_lsb": 80,
+    "state": "all",
+    "api": {
+        "intro": 5,
+        "update": 11
+    },
     "name": "vehicle_time",
-    "api_intro": 5,
+    "identifier": {
+        "lsb": 80,
+        "msb": 0
+    },
+    "getters": {
+        "default": {
+            "omit_state_text": true
+        }
+    },
     "properties": [
         {
-            "size": 8,
-            "id": 1,
-            "name": "vehicle_time",
-            "type": "integer",
-            "description": "Milliseconds since UNIX Epoch time"
-        }
-    ],
-    "message_types": [
-        {
-            "id": 0,
-            "name": "get_vehicle_time"
-        },
-        {
+            "description": "Vehicle time in a 24h format",
+            "items": [
+                {
+                    "size": 1,
+                    "type": "uinteger",
+                    "description": "Value between 0 and 23",
+                    "name": "hour"
+                },
+                {
+                    "size": 1,
+                    "type": "uinteger",
+                    "description": "Value between 0 and 59",
+                    "name": "minute"
+                }
+            ],
+            "size": 2,
+            "type": "custom",
             "id": 1,
             "name": "vehicle_time"
         }
-    ],
-    "api_update": 10
+    ]
 }

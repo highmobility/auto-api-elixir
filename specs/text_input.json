@@ -1,13 +1,27 @@
 {
     "category": "headunit",
-    "id_msb": 0,
-    "id_lsb": 68,
+    "api": {
+        "intro": 4,
+        "update": 11
+    },
     "name": "text_input",
-    "api_update": 5,
-    "api_intro": 4,
-    "message_types": [
+    "identifier": {
+        "lsb": 68,
+        "msb": 0
+    },
+    "properties": [
         {
-            "id": 0,
+            "type": "string",
+            "description": "The UTF8 bytes of the string",
+            "name": "text",
+            "id": 1
+        }
+    ],
+    "setters": [
+        {
+            "mandatory": [
+                1
+            ],
             "name": "text_input"
         }
     ]

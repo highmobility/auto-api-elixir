@@ -1,18 +1,38 @@
 {
     "category": "headunit",
-    "id_msb": 0,
-    "id_lsb": 55,
+    "state": "all",
+    "api": {
+        "intro": 4,
+        "update": 11
+    },
     "name": "messaging",
-    "api_update": 5,
-    "api_intro": 4,
-    "message_types": [
+    "identifier": {
+        "lsb": 55,
+        "msb": 0
+    },
+    "properties": [
         {
-            "id": 0,
-            "name": "message_received"
+            "type": "string",
+            "description": "The text bytes of UTF8",
+            "name": "text",
+            "id": 1
         },
         {
-            "id": 1,
-            "name": "send_message"
+            "type": "string",
+            "description": "The optional handle of message, bytes of UTF8",
+            "name": "handle",
+            "id": 2
+        }
+    ],
+    "setters": [
+        {
+            "mandatory": [
+                1
+            ],
+            "optional": [
+                2
+            ],
+            "name": "message_recieved"
         }
     ]
 }

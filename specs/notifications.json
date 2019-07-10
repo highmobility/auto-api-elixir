@@ -1,32 +1,15 @@
 {
     "category": "headunit",
-    "id_msb": 0,
-    "id_lsb": 56,
+    "state": "all",
+    "api": {
+        "intro": 4,
+        "update": 11
+    },
     "name": "notifications",
-    "api_intro": 4,
-    "message_types": [
-        {
-            "id": 0,
-            "name": "notification"
-        },
-        {
-            "id": 2,
-            "name": "clear_notification"
-        },
-        {
-            "properties": [
-                {
-                    "type": "integer",
-                    "mandatory": true,
-                    "id": 1,
-                    "name": "action_id",
-                    "size": 1
-                }
-            ],
-            "name": "notification_action",
-            "id": 17
-        }
-    ],
+    "identifier": {
+        "lsb": 56,
+        "msb": 0
+    },
     "properties": [
         {
             "type": "string",
@@ -37,7 +20,7 @@
         {
             "items": [
                 {
-                    "type": "integer",
+                    "type": "uinteger",
                     "name": "identifier",
                     "size": 1
                 },
@@ -49,14 +32,55 @@
             ],
             "multiple": true,
             "id": 2,
-            "name": "action_items"
+            "name": "action_items",
+            "type": "custom"
         },
         {
-            "size": 1,
-            "type": "integer",
-            "id": 16,
-            "name": "received_action"
+            "id": 3,
+            "type": "uinteger",
+            "description": "Identifier of the activated action.",
+            "name": "activated_action",
+            "size": 1
+        },
+        {
+            "type": "enum",
+            "values": [
+                {
+                    "id": 0,
+                    "name": "clear"
+                }
+            ],
+            "id": 4,
+            "name": "clear",
+            "size": 1
         }
     ],
-    "api_update": 8
+    "setters": [
+        {
+            "mandatory": [
+                1
+            ],
+            "optional": [
+                2
+            ],
+            "name": "notification"
+        },
+        {
+            "mandatory": [
+                3
+            ],
+            "name": "action"
+        },
+        {
+            "name": "clear_notification",
+            "constants": [
+                {
+                    "property_id": 4,
+                    "value": [
+                        0
+                    ]
+                }
+            ]
+        }
+    ]
 }

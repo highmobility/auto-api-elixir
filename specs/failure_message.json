@@ -1,77 +1,77 @@
 {
     "category": "api_structure",
-    "id_lsb": 2,
+    "state": "all",
+    "api": {
+        "intro": 2,
+        "update": 11
+    },
     "name": "failure_message",
-    "api_intro": 2,
-    "message_types": [
-        {
-            "id": 1,
-            "name": "failure"
-        }
-    ],
-    "id_msb": 0,
+    "identifier": {
+        "lsb": 2,
+        "msb": 0
+    },
     "properties": [
         {
-            "size": 2,
-            "type": "integer",
+            "id": 1,
+            "type": "uinteger",
             "description": "Capability identifier of the failed message",
             "name": "failed_message_identifier",
-            "id": 1
+            "size": 2
         },
         {
-            "size": 1,
-            "type": "integer",
+            "id": 2,
+            "type": "uinteger",
             "description": "Message type of the failed message",
             "name": "failed_message_type",
-            "id": 2
+            "size": 1
         },
         {
             "type": "enum",
-            "size": 1,
             "values": [
                 {
                     "pretty_name": "Unsupported Capability - Car has not the capability to perform the command",
-                    "name": "unsupported_capability",
-                    "id": 0
+                    "id": 0,
+                    "name": "unsupported_capability"
                 },
                 {
                     "pretty_name": "Unauthorised - User has not been authenticated or lacks permissions",
-                    "name": "unauthorised",
-                    "id": 1
+                    "id": 1,
+                    "name": "unauthorised"
                 },
                 {
                     "pretty_name": "Incorrect State - Command can not be executed in the current car state",
-                    "name": "incorrect_state",
-                    "id": 2
+                    "id": 2,
+                    "name": "incorrect_state"
                 },
                 {
                     "pretty_name": "Execution Timeout - Command failed to execute in time for an unknown reason",
-                    "name": "execution_timeout",
-                    "id": 3
+                    "id": 3,
+                    "name": "execution_timeout"
                 },
                 {
                     "pretty_name": "Vehicle Asleep - Car has to be waken up before the command can be used. If this is for a virtual car, the emulator has to be loaded",
-                    "name": "vehicle_asleep",
-                    "id": 4
+                    "id": 4,
+                    "name": "vehicle_asleep"
                 },
                 {
                     "pretty_name": "Invalid Command - Not recognised",
-                    "name": "invalid_command",
-                    "id": 5
+                    "id": 5,
+                    "name": "invalid_command"
                 },
                 {
                     "pretty_name": "Pending - Capability is being refreshed",
-                    "name": "pending",
-                    "id": 6
+                    "id": 6,
+                    "name": "pending"
                 },
                 {
                     "pretty_name": "Rate Limit - Capability rate limit has been exceeded",
-                    "name": "rate_limit",
-                    "id": 7
+                    "id": 7,
+                    "name": "rate_limit"
                 }
             ],
             "id": 3,
-            "name": "failure_reason"
+            "name": "failure_reason",
+            "size": 1
         },
         {
             "type": "string",
@@ -79,6 +79,5 @@
             "name": "failure_description",
             "id": 4
         }
-    ],
-    "api_update": 9
+    ]
 }

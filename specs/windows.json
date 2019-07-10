@@ -1,141 +1,47 @@
 {
     "category": "chassis",
-    "id_lsb": 69,
     "name": "windows",
-    "api_intro": 2,
-    "message_types": [
-        {
-            "id": 0,
-            "name": "get_windows_state"
-        },
-        {
-            "id": 1,
-            "name": "windows_state"
-        },
-        {
-            "properties": [
-                {
-                    "items": [
-                        {
-                            "type": "enum",
-                            "values": [
-                                {
-                                    "name": "front_left",
-                                    "id": 0
-                                },
-                                {
-                                    "name": "front_right",
-                                    "id": 1
-                                },
-                                {
-                                    "name": "rear_right",
-                                    "id": 2
-                                },
-                                {
-                                    "name": "rear_left",
-                                    "id": 3
-                                },
-                                {
-                                    "name": "hatch",
-                                    "id": 4
-                                }
-                            ],
-                            "name": "window_location",
-                            "size": 1
-                        },
-                        {
-                            "size": 8,
-                            "type": "double",
-                            "description": "Value between 0.0 and 1.0",
-                            "name": "open_percentage"
-                        }
-                    ],
-                    "multiple": true,
-                    "id": 1,
-                    "name": "windows_open_percentages",
-                    "size": 9
-                },
-                {
-                    "items": [
-                        {
-                            "type": "enum",
-                            "values": [
-                                {
-                                    "name": "front_left",
-                                    "id": 0
-                                },
-                                {
-                                    "name": "front_right",
-                                    "id": 1
-                                },
-                                {
-                                    "name": "rear_right",
-                                    "id": 2
-                                },
-                                {
-                                    "name": "rear_left",
-                                    "id": 3
-                                },
-                                {
-                                    "name": "hatch",
-                                    "id": 4
-                                }
-                            ],
-                            "name": "window_location",
-                            "size": 1
-                        },
-                        {
-                            "type": "enum",
-                            "values": [
-                                {
-                                    "name": "close",
-                                    "id": 0
-                                },
-                                {
-                                    "name": "open",
-                                    "id": 1
-                                }
-                            ],
-                            "name": "window_position",
-                            "size": 1
-                        }
-                    ],
-                    "multiple": true,
-                    "id": 2,
-                    "name": "windows_positions",
-                    "size": 2
-                }
-            ],
-            "name": "control_windows",
-            "id": 18
+    "getters": {
+        "default": {
+            "name_override": "windows"
         }
-    ],
-    "id_msb": 0,
+    },
+    "state": "all",
+    "api": {
+        "intro": 2,
+        "update": 11
+    },
+    "identifier": {
+        "lsb": 69,
+        "msb": 0
+    },
     "properties": [
         {
+            "multiple": true,
+            "name": "windows_open_percentages",
             "items": [
                 {
                     "type": "enum",
                     "values": [
                         {
-                            "name": "front_left",
-                            "id": 0
+                            "id": 0,
+                            "name": "front_left"
                         },
                         {
-                            "name": "front_right",
-                            "id": 1
+                            "id": 1,
+                            "name": "front_right"
                         },
                         {
-                            "name": "rear_right",
-                            "id": 2
+                            "id": 2,
+                            "name": "rear_right"
                         },
                         {
-                            "name": "rear_left",
-                            "id": 3
+                            "id": 3,
+                            "name": "rear_left"
                         },
                         {
-                            "name": "hatch",
-                            "id": 4
+                            "id": 4,
+                            "name": "hatch"
                         }
                     ],
                     "name": "window_location",
@@ -148,35 +54,36 @@
                     "name": "open_percentage"
                 }
             ],
-            "size": 9,
-            "multiple": true,
+            "type": "custom",
             "id": 2,
-            "name": "windows_open_percentages"
+            "size": 9
         },
         {
+            "multiple": true,
+            "name": "windows_positions",
             "items": [
                 {
                     "type": "enum",
                     "values": [
                         {
-                            "name": "front_left",
-                            "id": 0
+                            "id": 0,
+                            "name": "front_left"
                         },
                         {
-                            "name": "front_right",
-                            "id": 1
+                            "id": 1,
+                            "name": "front_right"
                         },
                         {
-                            "name": "rear_right",
-                            "id": 2
+                            "id": 2,
+                            "name": "rear_right"
                         },
                         {
-                            "name": "rear_left",
-                            "id": 3
+                            "id": 3,
+                            "name": "rear_left"
                         },
                         {
-                            "name": "hatch",
-                            "id": 4
+                            "id": 4,
+                            "name": "hatch"
                         }
                     ],
                     "name": "window_location",
@@ -186,27 +93,35 @@
                     "type": "enum",
                     "values": [
                         {
-                            "name": "close",
-                            "id": 0
+                            "id": 0,
+                            "name": "closed"
                         },
                         {
-                            "name": "open",
-                            "id": 1
+                            "id": 1,
+                            "name": "open"
                         },
                         {
-                            "name": "intermediate",
-                            "id": 2
+                            "id": 2,
+                            "disabled_in_setter": true,
+                            "name": "intermediate"
                         }
                     ],
                     "name": "window_position",
                     "size": 1
                 }
             ],
-            "size": 2,
-            "multiple": true,
+            "type": "custom",
             "id": 3,
-            "name": "windows_positions"
+            "size": 2
         }
     ],
-    "api_update": 10
+    "setters": [
+        {
+            "optional": [
+                2,
+                3
+            ],
+            "name": "control_windows"
+        }
+    ]
 }

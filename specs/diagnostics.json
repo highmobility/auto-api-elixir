@@ -1,125 +1,122 @@
 {
     "category": "diagnostics",
-    "id_msb": 0,
-    "id_lsb": 51,
+    "state": "all",
+    "api": {
+        "intro": 3,
+        "update": 11
+    },
     "name": "diagnostics",
-    "api_intro": 3,
-    "message_types": [
-        {
-            "id": 0,
-            "name": "get_diagnostics_state"
-        },
-        {
-            "id": 1,
-            "name": "diagnostics_state"
-        }
-    ],
+    "identifier": {
+        "lsb": 51,
+        "msb": 0
+    },
+    "getters": "default",
     "properties": [
         {
-            "size": 4,
-            "type": "integer",
+            "id": 1,
+            "type": "uinteger",
             "description": "The car mileage (odometer) in km",
             "name": "mileage",
-            "id": 1
+            "size": 4
         },
         {
-            "size": 2,
+            "id": 2,
             "type": "integer",
             "description": "Engine oil temperature in Celsius, whereas can be negative",
             "name": "engine_oil_temperature",
-            "id": 2
+            "size": 2
         },
         {
-            "size": 2,
+            "id": 3,
             "type": "integer",
             "description": "The vehicle speed in km/h, whereas can be negative",
             "name": "speed",
-            "id": 3
+            "size": 2
         },
         {
             "pretty_name": "Engine RPM",
             "name": "engine_rpm",
             "title_case_name": "engineRPM",
             "size": 2,
-            "type": "integer",
+            "type": "uinteger",
             "id": 4,
             "description": "Engine RPM (revolutions per minute)"
         },
         {
-            "size": 8,
+            "id": 5,
             "type": "double",
             "description": "Fuel level percentage between 0.0-1.0",
             "name": "fuel_level",
-            "id": 5
+            "size": 8
         },
         {
-            "size": 2,
+            "id": 6,
             "type": "integer",
             "description": "Estimated range (with combustion engine)",
             "name": "estimated_range",
-            "id": 6
+            "size": 2
         },
         {
             "type": "enum",
-            "size": 1,
             "values": [
                 {
-                    "name": "low",
-                    "id": 0
+                    "id": 0,
+                    "name": "low"
                 },
                 {
-                    "name": "filled",
-                    "id": 1
+                    "id": 1,
+                    "name": "filled"
                 }
             ],
             "id": 9,
-            "name": "washer_fluid_level"
+            "name": "washer_fluid_level",
+            "size": 1
         },
         {
-            "size": 4,
+            "id": 11,
             "type": "float",
             "description": "Battery voltage per IEEE 754 formatting",
             "name": "battery_voltage",
-            "id": 11
+            "size": 4
         },
         {
-            "size": 4,
+            "id": 12,
             "type": "float",
             "description": "AdBlue level in liters formatted in 4-bytes per IEEE 754 formatting",
             "name": "adblue_level",
-            "id": 12
+            "size": 4
         },
         {
-            "size": 2,
-            "type": "integer",
+            "id": 13,
+            "type": "uinteger",
             "description": "The distance driven in km since reset",
             "name": "distance_since_reset",
-            "id": 13
+            "size": 2
         },
         {
-            "size": 2,
-            "type": "integer",
+            "id": 14,
+            "type": "uinteger",
             "description": "The distance driven in km since trip start",
             "name": "distance_since_start",
-            "id": 14
+            "size": 2
         },
         {
-            "size": 4,
+            "id": 15,
             "type": "float",
             "description": "The fuel volume measured in liters formatted in 4-bytes per IEEE 754 formatting",
             "name": "fuel_volume",
-            "id": 15
+            "size": 4
         },
         {
             "pretty_name": "Anti-lock braking system (ABS)",
             "values": [
                 {
-                    "name": "inactive",
-                    "id": 0
+                    "id": 0,
+                    "name": "inactive"
                 },
                 {
-                    "name": "active",
-                    "id": 1
+                    "id": 1,
+                    "name": "active"
                 }
             ],
             "name": "anti_lock_braking",
@@ -128,87 +125,88 @@
             "size": 1
         },
         {
-            "size": 2,
+            "id": 17,
             "type": "integer",
             "description": "Engine coolant temperature in Celsius, whereas can be negative",
             "name": "engine_coolant_temperature",
-            "id": 17
+            "size": 2
         },
         {
-            "size": 4,
+            "id": 18,
             "type": "float",
             "description": "The accumulated time of engine operation per IEEE 754 formatting",
             "name": "engine_total_operating_hours",
-            "id": 18
+            "size": 4
         },
         {
-            "size": 4,
+            "id": 19,
             "type": "float",
             "description": "The accumulated lifespan fuel consumption in liters per IEEE 754 formatting",
             "name": "engine_total_fuel_consumption",
-            "id": 19
+            "size": 4
         },
         {
             "type": "enum",
-            "size": 1,
             "values": [
                 {
-                    "name": "low",
-                    "id": 0
+                    "id": 0,
+                    "name": "low"
                 },
                 {
-                    "name": "filled",
-                    "id": 1
+                    "id": 1,
+                    "name": "filled"
                 }
             ],
             "id": 20,
-            "name": "brake_fluid_level"
+            "name": "brake_fluid_level",
+            "size": 1
         },
         {
-            "size": 8,
+            "id": 21,
             "type": "double",
             "description": "Current engine torque percentage between 0.0-1.0",
             "name": "engine_torque",
-            "id": 21
+            "size": 8
         },
         {
-            "size": 8,
+            "id": 22,
             "type": "double",
             "description": "Current engine load percentage between 0.0-1.0",
             "name": "engine_load",
-            "id": 22
+            "size": 8
         },
         {
-            "size": 2,
+            "id": 23,
             "type": "integer",
             "description": "The vehicle speed in km/h measured at the wheel base, whereas can be negative",
             "name": "wheel_based_speed",
-            "id": 23
+            "size": 2
         },
         {
-            "size": 8,
+            "id": 24,
             "type": "double",
             "description": "Battery level in %, value between 0.0 and 1.0",
             "name": "battery_level",
-            "id": 24
+            "size": 8
         },
         {
             "items": [
                 {
+                    "pretty_name": "ID",
                     "size": 2,
-                    "type": "integer",
+                    "type": "uinteger",
                     "description": "Check Control Message identifier",
                     "name": "id"
                 },
                 {
                     "size": 4,
-                    "type": "integer",
+                    "type": "uinteger",
                     "description": "Remaining time of the message in minutes",
                     "name": "remaining_minutes"
                 },
                 {
                     "size": 2,
-                    "type": "integer",
+                    "type": "uinteger",
                     "description": "Size of the text",
                     "name": "text_size"
                 },
@@ -219,7 +217,7 @@
                 },
                 {
                     "size": 1,
-                    "type": "integer",
+                    "type": "uinteger",
                     "description": "Size of the status",
                     "name": "status_size"
                 },
@@ -231,28 +229,31 @@
             ],
             "multiple": true,
             "id": 25,
-            "name": "check_control_messages"
+            "name": "check_control_messages",
+            "type": "custom"
         },
         {
+            "multiple": true,
+            "name": "tire_pressures",
             "items": [
                 {
                     "type": "enum",
                     "values": [
                         {
-                            "name": "front_left",
-                            "id": 0
+                            "id": 0,
+                            "name": "front_left"
                         },
                         {
-                            "name": "front_right",
-                            "id": 1
+                            "id": 1,
+                            "name": "front_right"
                         },
                         {
-                            "name": "rear_right",
-                            "id": 2
+                            "id": 2,
+                            "name": "rear_right"
                         },
                         {
-                            "name": "rear_left",
-                            "id": 3
+                            "id": 3,
+                            "name": "rear_left"
                         }
                     ],
                     "name": "location",
@@ -265,31 +266,32 @@
                     "name": "pressure"
                 }
             ],
-            "multiple": true,
+            "type": "custom",
             "id": 26,
-            "name": "tire_pressures",
             "size": 5
         },
         {
+            "multiple": true,
+            "name": "tire_temperatures",
             "items": [
                 {
                     "type": "enum",
                     "values": [
                         {
-                            "name": "front_left",
-                            "id": 0
+                            "id": 0,
+                            "name": "front_left"
                         },
                         {
-                            "name": "front_right",
-                            "id": 1
+                            "id": 1,
+                            "name": "front_right"
                         },
                         {
-                            "name": "rear_right",
-                            "id": 2
+                            "id": 2,
+                            "name": "rear_right"
                         },
                         {
-                            "name": "rear_left",
-                            "id": 3
+                            "id": 3,
+                            "name": "rear_left"
                         }
                     ],
                     "name": "location",
@@ -302,9 +304,8 @@
                     "name": "temperature"
                 }
             ],
-            "multiple": true,
+            "type": "custom",
             "id": 27,
-            "name": "tire_temperatures",
             "size": 5
         },
         {
@@ -316,20 +317,20 @@
                     "type": "enum",
                     "values": [
                         {
-                            "name": "front_left",
-                            "id": 0
+                            "id": 0,
+                            "name": "front_left"
                         },
                         {
-                            "name": "front_right",
-                            "id": 1
+                            "id": 1,
+                            "name": "front_right"
                         },
                         {
-                            "name": "rear_right",
-                            "id": 2
+                            "id": 2,
+                            "name": "rear_right"
                         },
                         {
-                            "name": "rear_left",
-                            "id": 3
+                            "id": 3,
+                            "name": "rear_left"
                         }
                     ],
                     "name": "location",
@@ -338,11 +339,12 @@
                 {
                     "pretty_name": "RPM",
                     "size": 2,
-                    "type": "integer",
+                    "type": "uinteger",
                     "description": "The RPM measured at this wheel",
                     "name": "rpm"
                 }
             ],
+            "type": "custom",
             "id": 28,
             "size": 3
         },
@@ -350,35 +352,39 @@
             "items": [
                 {
                     "size": 1,
-                    "type": "integer",
+                    "type": "uinteger",
                     "description": "Number of occurences",
                     "name": "occurences"
                 },
                 {
+                    "pretty_name": "ID Size",
                     "size": 1,
-                    "type": "integer",
+                    "type": "uinteger",
                     "description": "Size of the ID string",
                     "name": "id_size"
                 },
                 {
+                    "pretty_name": "ID",
                     "type": "string",
                     "name": "id",
                     "description": "ID bytes formatted in UTF-8"
                 },
                 {
+                    "pretty_name": "ECU ID Size",
                     "size": 1,
-                    "type": "integer",
+                    "type": "uinteger",
                     "description": "Size of the ECU ID string",
                     "name": "ecu_id_size"
                 },
                 {
+                    "pretty_name": "ECU ID",
                     "type": "string",
                     "name": "ecu_id",
                     "description": "ECU ID bytes formatted in UTF-8"
                 },
                 {
                     "size": 1,
-                    "type": "integer",
+                    "type": "uinteger",
                     "description": "Size of the status string",
                     "name": "status_size"
                 },
@@ -390,15 +396,15 @@
             ],
             "multiple": true,
             "id": 29,
-            "name": "trouble_codes"
+            "name": "trouble_codes",
+            "type": "custom"
         },
         {
-            "size": 4,
-            "type": "integer",
+            "id": 30,
+            "type": "uinteger",
             "description": "The car mileage (odometer) in meters",
             "name": "mileage_meters",
-            "id": 30
+            "size": 4
         }
-    ],
-    "api_update": 10
+    ]
 }

@@ -1,52 +1,56 @@
 {
     "category": "api_structure",
-    "id_lsb": 3,
+    "state": "all",
+    "api": {
+        "intro": 4,
+        "update": 11
+    },
     "name": "firmware_version",
-    "api_intro": 4,
-    "message_types": [
-        {
-            "id": 0,
-            "name": "get_firmware_version"
-        },
-        {
-            "id": 1,
-            "name": "firmware_version"
+    "identifier": {
+        "lsb": 3,
+        "msb": 0
+    },
+    "getters": {
+        "default": {
+            "omit_state_text": true
         }
-    ],
-    "id_msb": 0,
+    },
     "properties": [
         {
+            "pretty_name": "HMKit Version",
+            "name": "hmkit_version",
+            "title_case_name": "HMKitVersion",
             "items": [
                 {
                     "size": 1,
-                    "type": "integer",
-                    "description": "Car SDK version major number",
+                    "type": "uinteger",
+                    "description": "HMKit version major number",
                     "name": "version_major"
                 },
                 {
                     "size": 1,
-                    "type": "integer",
-                    "description": "Car SDK version minor number",
+                    "type": "uinteger",
+                    "description": "HMKit version minor number",
                     "name": "version_minor"
                 },
                 {
                     "size": 1,
-                    "type": "integer",
-                    "description": "Car SDK version patch number",
+                    "type": "uinteger",
+                    "description": "HMKit version patch number",
                     "name": "version_patch"
                 }
             ],
-            "size": 3,
+            "type": "custom",
             "id": 1,
-            "title_case_name": "carSDKVersion",
-            "name": "car_sdk_version"
+            "size": 3
         },
         {
-            "name": "car_sdk_build_name",
+            "pretty_name": "HMKit Build Name",
+            "description": "HMKit version build name bytes formatted in UTF-8",
+            "title_case_name": "HMKitBuildName",
             "type": "string",
-            "description": "Car SDK version build name bytes formatted in UTF-8",
-            "title_case_name": "carSDKBuildName",
-            "id": 2
+            "id": 2,
+            "name": "hmkit_build_name"
         },
         {
             "type": "string",
@@ -54,6 +58,5 @@
             "name": "application_version",
             "id": 3
         }
-    ],
-    "api_update": 5
+    ]
 }

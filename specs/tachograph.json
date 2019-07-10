@@ -1,15 +1,24 @@
 {
     "category": "heavy_duty",
-    "id_msb": 0,
-    "id_lsb": 100,
+    "state": "all",
+    "api": {
+        "intro": 7,
+        "update": 11
+    },
     "name": "tachograph",
-    "api_intro": 7,
+    "identifier": {
+        "lsb": 100,
+        "msb": 0
+    },
+    "getters": "default",
     "properties": [
         {
+            "multiple": true,
+            "name": "drivers_working_states",
             "items": [
                 {
                     "size": 1,
-                    "type": "integer",
+                    "type": "uinteger",
                     "description": "The driver number",
                     "name": "driver_number"
                 },
@@ -17,36 +26,37 @@
                     "type": "enum",
                     "values": [
                         {
-                            "name": "resting",
-                            "id": 0
+                            "id": 0,
+                            "name": "resting"
                         },
                         {
-                            "name": "driver_available",
-                            "id": 1
+                            "id": 1,
+                            "name": "driver_available"
                         },
                         {
-                            "name": "working",
-                            "id": 2
+                            "id": 2,
+                            "name": "working"
                         },
                         {
-                            "name": "driving",
-                            "id": 3
+                            "id": 3,
+                            "name": "driving"
                         }
                     ],
                     "name": "working_state",
                     "size": 1
                 }
             ],
-            "size": 2,
-            "multiple": true,
+            "type": "custom",
             "id": 1,
-            "name": "driver_working_state"
+            "size": 2
         },
         {
+            "multiple": true,
+            "name": "drivers_time_states",
             "items": [
                 {
                     "size": 1,
-                    "type": "integer",
+                    "type": "uinteger",
                     "description": "The driver number",
                     "name": "driver_number"
                 },
@@ -54,54 +64,55 @@
                     "type": "enum",
                     "values": [
                         {
-                            "name": "normal",
-                            "id": 0
+                            "id": 0,
+                            "name": "normal"
                         },
                         {
                             "pretty_name": "15 minutes before 4\u00bd hours",
-                            "name": "15_min_before_4",
-                            "id": 1
+                            "id": 1,
+                            "name": "15_min_before_4"
                         },
                         {
                             "pretty_name": "4\u00bd hours reached",
-                            "name": "4_reached",
-                            "id": 2
+                            "id": 2,
+                            "name": "4_reached"
                         },
                         {
                             "pretty_name": "15 minutes before 9 hours",
-                            "name": "15_min_before_9",
-                            "id": 3
+                            "id": 3,
+                            "name": "15_min_before_9"
                         },
                         {
                             "pretty_name": "9 hours reached",
-                            "name": "9_reached",
-                            "id": 4
+                            "id": 4,
+                            "name": "9_reached"
                         },
                         {
                             "pretty_name": "15 minutes before 16 hours",
-                            "name": "15_min_before_16",
-                            "id": 5
+                            "id": 5,
+                            "name": "15_min_before_16"
                         },
                         {
                             "pretty_name": "16 hours reached",
-                            "name": "16_reached",
-                            "id": 6
+                            "id": 6,
+                            "name": "16_reached"
                         }
                     ],
                     "name": "time_state",
                     "size": 1
                 }
             ],
-            "size": 2,
-            "multiple": true,
+            "type": "custom",
             "id": 2,
-            "name": "driver_time_state"
+            "size": 2
         },
         {
+            "multiple": true,
+            "name": "drivers_cards",
             "items": [
                 {
                     "size": 1,
-                    "type": "integer",
+                    "type": "uinteger",
                     "description": "The driver number",
                     "name": "driver_number"
                 },
@@ -109,87 +120,76 @@
                     "type": "enum",
                     "values": [
                         {
-                            "name": "not_present",
-                            "id": 0
+                            "id": 0,
+                            "name": "not_present"
                         },
                         {
-                            "name": "present",
-                            "id": 1
+                            "id": 1,
+                            "name": "present"
                         }
                     ],
                     "name": "card",
                     "size": 1
                 }
             ],
-            "size": 2,
-            "multiple": true,
+            "type": "custom",
             "id": 3,
-            "name": "driver_card"
+            "size": 2
         },
         {
             "type": "enum",
-            "size": 1,
             "values": [
                 {
-                    "name": "not_detected",
-                    "id": 0
+                    "id": 0,
+                    "name": "not_detected"
                 },
                 {
-                    "name": "detected",
-                    "id": 1
+                    "id": 1,
+                    "name": "detected"
                 }
             ],
             "id": 4,
-            "name": "vehicle_motion"
+            "name": "vehicle_motion",
+            "size": 1
         },
         {
             "type": "enum",
-            "size": 1,
             "values": [
                 {
-                    "name": "no_overspeed",
-                    "id": 0
+                    "id": 0,
+                    "name": "no_overspeed"
                 },
                 {
-                    "name": "overspeed",
-                    "id": 1
+                    "id": 1,
+                    "name": "overspeed"
                 }
             ],
             "id": 5,
-            "name": "vehicle_overspeed"
+            "name": "vehicle_overspeed",
+            "size": 1
         },
         {
             "type": "enum",
-            "size": 1,
             "values": [
                 {
-                    "name": "forward",
-                    "id": 0
+                    "id": 0,
+                    "name": "forward"
                 },
                 {
-                    "name": "reverse",
-                    "id": 1
+                    "id": 1,
+                    "name": "reverse"
                 }
             ],
             "id": 6,
-            "name": "vehicle_direction"
+            "name": "vehicle_direction",
+            "size": 1
         },
         {
-            "size": 2,
+            "id": 7,
             "type": "integer",
             "description": "The tachograph vehicle speed in km/h",
             "name": "vehicle_speed",
-            "id": 7
-        }
-    ],
-    "message_types": [
-        {
-            "id": 0,
-            "name": "get_tachograph_state"
-        },
-        {
-            "id": 1,
-            "name": "tachograph_state"
+            "size": 2
         }
     ]
 }

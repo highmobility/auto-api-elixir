@@ -1,14 +1,40 @@
 {
     "category": "health",
-    "id_msb": 0,
-    "id_lsb": 65,
+    "state": "all",
+    "api": {
+        "intro": 4,
+        "update": 11
+    },
     "name": "driver_fatigue",
-    "api_update": 5,
-    "api_intro": 4,
-    "message_types": [
+    "identifier": {
+        "lsb": 65,
+        "msb": 0
+    },
+    "getters": "default",
+    "properties": [
         {
+            "type": "enum",
+            "values": [
+                {
+                    "id": 0,
+                    "name": "light"
+                },
+                {
+                    "id": 1,
+                    "name": "pause_recommended"
+                },
+                {
+                    "id": 2,
+                    "name": "action_needed"
+                },
+                {
+                    "id": 3,
+                    "name": "car_ready_to_take_over"
+                }
+            ],
             "id": 1,
-            "name": "driver_fatigue_detected"
+            "name": "fatigue_level_detected",
+            "size": 1
         }
     ]
 }

@@ -1,51 +1,20 @@
 {
     "category": "poi",
-    "id_msb": 0,
-    "id_lsb": 49,
     "name": "navi_destination",
-    "api_intro": 4,
-    "message_types": [
-        {
-            "id": 0,
-            "name": "get_navi_destination"
-        },
-        {
-            "id": 1,
-            "name": "navi_destination"
-        },
-        {
-            "properties": [
-                {
-                    "items": [
-                        {
-                            "size": 8,
-                            "type": "double",
-                            "description": "Latitude in 8-bytes per IEEE 754",
-                            "name": "latitude"
-                        },
-                        {
-                            "size": 8,
-                            "type": "double",
-                            "description": "Longitude in 8-bytes per IEEE 754",
-                            "name": "longitude"
-                        }
-                    ],
-                    "mandatory": true,
-                    "id": 1,
-                    "name": "coordinates",
-                    "size": 16
-                },
-                {
-                    "type": "string",
-                    "description": "Destination name bytes formatted in UTF-8",
-                    "name": "destination_name",
-                    "id": 2
-                }
-            ],
-            "name": "set_navi_destination",
-            "id": 18
+    "getters": {
+        "default": {
+            "omit_state_text": true
         }
-    ],
+    },
+    "state": "all",
+    "api": {
+        "intro": 4,
+        "update": 11
+    },
+    "identifier": {
+        "lsb": 49,
+        "msb": 0
+    },
     "properties": [
         {
             "items": [
@@ -62,7 +31,8 @@
                     "name": "longitude"
                 }
             ],
-            "id": 7,
+            "type": "custom",
+            "id": 1,
             "name": "coordinates",
             "size": 16
         },
@@ -71,7 +41,59 @@
             "description": "Destination name bytes formatted in UTF-8",
             "name": "destination_name",
             "id": 2
+        },
+        {
+            "id": 3,
+            "type": "uinteger",
+            "description": "Remaining number of POI data slots available.",
+            "name": "data_slots_free",
+            "size": 1
+        },
+        {
+            "id": 4,
+            "type": "uinteger",
+            "description": "Maximum number of POI data slots.",
+            "name": "data_slots_max",
+            "size": 1
+        },
+        {
+            "description": "Remaining time until reaching the destination.",
+            "items": [
+                {
+                    "size": 1,
+                    "type": "uinteger",
+                    "description": "Value between 0 and 23",
+                    "name": "hour"
+                },
+                {
+                    "size": 1,
+                    "type": "uinteger",
+                    "description": "Value between 0 and 59",
+                    "name": "minute"
+                }
+            ],
+            "size": 2,
+            "type": "custom",
+            "id": 5,
+            "name": "arrival_duration"
+        },
+        {
+            "id": 6,
+            "type": "uinteger",
+            "description": "Remaining distance to reach the destination.",
+            "name": "distance_to_destination",
+            "size": 2
         }
     ],
-    "api_update": 8
+    "setters": [
+        {
+            "mandatory": [
+                1
+            ],
+            "optional": [
+                2
+            ],
+            "name": "set_navi_destination"
+        }
+    ]
 }

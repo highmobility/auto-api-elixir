@@ -1,41 +1,39 @@
 {
     "category": "api_structure",
-    "id_lsb": 16,
+    "state": "all",
+    "api": {
+        "intro": 2,
+        "update": 11
+    },
     "name": "capabilities",
-    "api_intro": 2,
-    "message_types": [
-        {
-            "id": 0,
-            "name": "get_capabilities"
-        },
-        {
-            "id": 1,
-            "name": "capabilities"
-        },
-        {
-            "id": 2,
-            "name": "get_capability"
+    "identifier": {
+        "lsb": 16,
+        "msb": 0
+    },
+    "getters": {
+        "default": {
+            "omit_state_text": true
         }
-    ],
-    "id_msb": 0,
+    },
     "properties": [
         {
             "items": [
                 {
                     "size": 2,
-                    "type": "integer",
+                    "type": "uinteger",
                     "description": "The identifier of the supported capability",
                     "name": "capability_identifier"
                 },
                 {
-                    "type": "byte_array",
-                    "name": "supported_message_types",
-                    "description": "Array of message type identifiers"
+                    "type": "list_uinteger",
+                    "name": "supported_properties",
+                    "description": "Array of supported property identifiers"
                 }
             ],
+            "multiple": true,
             "id": 1,
-            "name": "capability"
+            "name": "capabilities",
+            "type": "custom"
         }
-    ],
-    "api_update": 5
+    ]
 }

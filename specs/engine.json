@@ -1,75 +1,75 @@
 {
-    "category": "digital_key", 
-    "id_lsb": 53, 
-    "name": "engine", 
-    "api_intro": 3, 
+    "category": "digital_key",
+    "id_lsb": 53,
+    "name": "engine",
+    "api_intro": 3,
     "message_types": [
         {
-            "id": 0, 
+            "id": 0,
             "name": "get_ignition_state"
-        }, 
+        },
         {
-            "id": 1, 
+            "id": 1,
             "name": "ignition_state"
-        }, 
+        },
         {
             "properties": [
                 {
-                    "mandatory": true, 
-                    "name": "ignition", 
+                    "mandatory": true,
+                    "name": "ignition",
                     "values": [
                         {
-                            "name": "ignition_off", 
+                            "name": "ignition_off",
                             "id": 0
-                        }, 
+                        },
                         {
-                            "name": "ignition_on", 
+                            "name": "ignition_on",
                             "id": 1
                         }
-                    ], 
-                    "type": "enum", 
-                    "id": 1, 
+                    ],
+                    "type": "enum",
+                    "id": 1,
                     "size": 1
                 }
-            ], 
-            "name": "turn_ignition_on_off", 
+            ],
+            "name": "turn_ignition_on_off",
             "id": 18
         }
-    ], 
-    "id_msb": 0, 
+    ],
+    "id_msb": 0,
     "properties": [
         {
-            "type": "enum", 
-            "size": 1, 
+            "type": "enum",
+            "size": 1,
             "values": [
                 {
-                    "name": "ignition_off", 
+                    "name": "ignition_off",
                     "id": 0
-                }, 
+                },
                 {
-                    "name": "ignition_on", 
+                    "name": "ignition_on",
                     "id": 1
                 }
-            ], 
-            "id": 1, 
+            ],
+            "id": 1,
             "name": "ignition"
-        }, 
+        },
         {
-            "type": "enum", 
-            "size": 1, 
+            "type": "enum",
+            "size": 1,
             "values": [
                 {
-                    "name": "powered_off", 
+                    "name": "powered_off",
                     "id": 0
-                }, 
+                },
                 {
-                    "name": "powered_on", 
+                    "name": "powered_on",
                     "id": 1
                 }
-            ], 
-            "id": 2, 
+            ],
+            "id": 2,
             "name": "accessories_ignition"
         }
-    ], 
+    ],
     "api_update": 8
 }

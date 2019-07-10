@@ -1,23 +1,29 @@
 {
     "category": "headunit",
-    "id_msb": 0,
-    "id_lsb": 73,
+    "api": {
+        "intro": 4,
+        "update": 11
+    },
     "name": "browser",
-    "api_update": 5,
-    "api_intro": 4,
-    "message_types": [
+    "identifier": {
+        "lsb": 73,
+        "msb": 0
+    },
+    "properties": [
         {
-            "properties": [
-                {
-                    "type": "string",
-                    "mandatory": true,
-                    "description": "The UTF8 bytes of the URL string",
-                    "name": "url",
-                    "id": 1
-                }
+            "pretty_name": "URL",
+            "type": "string",
+            "description": "The UTF8 bytes of the URL string",
+            "name": "url",
+            "id": 1
+        }
+    ],
+    "setters": [
+        {
+            "mandatory": [
+                1
             ],
-            "name": "load_url",
-            "id": 0
+            "name": "load_url"
         }
     ]
 }

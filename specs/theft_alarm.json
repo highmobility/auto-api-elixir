@@ -1,67 +1,47 @@
 {
-    "category": "parking", 
-    "id_lsb": 70, 
-    "name": "theft_alarm", 
-    "api_intro": 4, 
-    "message_types": [
-        {
-            "id": 0, 
-            "name": "get_theft_alarm_state"
-        }, 
-        {
-            "id": 1, 
-            "name": "theft_alarm_state"
-        }, 
-        {
-            "properties": [
-                {
-                    "mandatory": true, 
-                    "name": "theft_alarm", 
-                    "values": [
-                        {
-                            "name": "unarm", 
-                            "id": 0
-                        }, 
-                        {
-                            "name": "arm", 
-                            "id": 1
-                        }, 
-                        {
-                            "name": "trigger", 
-                            "id": 2
-                        }
-                    ], 
-                    "type": "enum", 
-                    "id": 1, 
-                    "size": 1
-                }
-            ], 
-            "name": "set_theft_alarm_state", 
-            "id": 18
-        }
-    ], 
-    "id_msb": 0, 
+    "category": "parking",
+    "name": "theft_alarm",
+    "getters": "default",
+    "state": "all",
+    "api": {
+        "intro": 4,
+        "update": 11
+    },
+    "identifier": {
+        "lsb": 70,
+        "msb": 0
+    },
     "properties": [
         {
-            "type": "enum", 
-            "size": 1, 
+            "type": "enum",
             "values": [
                 {
-                    "name": "not_armed", 
-                    "id": 0
-                }, 
+                    "verb": "unarm",
+                    "id": 0,
+                    "name": "not_armed"
+                },
                 {
-                    "name": "armed", 
-                    "id": 1
-                }, 
+                    "verb": "arm",
+                    "id": 1,
+                    "name": "armed"
+                },
                 {
-                    "name": "triggered", 
-                    "id": 2
+                    "verb": "trigger",
+                    "id": 2,
+                    "name": "triggered"
                 }
-            ], 
-            "id": 1, 
-            "name": "theft_alarm"
+            ],
+            "id": 1,
+            "name": "theft_alarm",
+            "size": 1
         }
-    ], 
-    "api_update": 8
+    ],
+    "setters": [
+        {
+            "mandatory": [
+                1
+            ],
+            "name": "set_theft_alarm"
+        }
+    ]
 }

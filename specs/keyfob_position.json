@@ -1,52 +1,52 @@
 {
     "category": "chassis",
-    "id_lsb": 72,
+    "state": "all",
+    "api": {
+        "intro": 4,
+        "update": 11
+    },
     "name": "keyfob_position",
-    "api_intro": 4,
-    "message_types": [
-        {
-            "id": 0,
-            "name": "get_keyfob_position"
-        },
-        {
-            "id": 1,
-            "name": "keyfob_position"
+    "identifier": {
+        "lsb": 72,
+        "msb": 0
+    },
+    "getters": {
+        "default": {
+            "omit_state_text": true
         }
-    ],
-    "id_msb": 0,
+    },
     "properties": [
         {
             "type": "enum",
-            "size": 1,
             "values": [
                 {
-                    "name": "out_of_range",
-                    "id": 0
+                    "id": 0,
+                    "name": "out_of_range"
                 },
                 {
-                    "name": "outside_driver_side",
-                    "id": 1
+                    "id": 1,
+                    "name": "outside_driver_side"
                 },
                 {
-                    "name": "outside_in_front_of_car",
-                    "id": 2
+                    "id": 2,
+                    "name": "outside_in_front_of_car"
                 },
                 {
-                    "name": "outside_passenger_side",
-                    "id": 3
+                    "id": 3,
+                    "name": "outside_passenger_side"
                 },
                 {
-                    "name": "outside_behind_car",
-                    "id": 4
+                    "id": 4,
+                    "name": "outside_behind_car"
                 },
                 {
-                    "name": "inside_car",
-                    "id": 5
+                    "id": 5,
+                    "name": "inside_car"
                 }
             ],
             "id": 1,
-            "name": "keyfob_position"
+            "name": "keyfob_position",
+            "size": 1
         }
-    ],
-    "api_update": 5
+    ]
 }

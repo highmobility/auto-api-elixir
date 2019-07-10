@@ -1,102 +1,108 @@
 {
     "category": "parking",
-    "id_lsb": 39,
     "name": "remote_control",
-    "api_intro": 2,
-    "message_types": [
-        {
-            "id": 0,
-            "name": "get_control_mode"
-        },
-        {
-            "id": 1,
-            "name": "control_mode"
-        },
-        {
-            "properties": [
-                {
-                    "id": 1,
-                    "type": "integer",
-                    "description": "Speed in km/h",
-                    "name": "speed",
-                    "size": 1
-                },
-                {
-                    "id": 2,
-                    "type": "integer",
-                    "description": "Angle of the steering",
-                    "name": "angle",
-                    "size": 2
-                }
-            ],
-            "name": "control_command",
-            "id": 4
-        },
-        {
-            "properties": [
-                {
-                    "mandatory": true,
-                    "name": "start_stop",
-                    "values": [
-                        {
-                            "name": "start",
-                            "id": 0
-                        },
-                        {
-                            "name": "stop",
-                            "id": 1
-                        }
-                    ],
-                    "type": "enum",
-                    "id": 1,
-                    "size": 1
-                }
-            ],
-            "name": "start_stop_control",
-            "id": 18
-        }
+    "getters": {
+        "static": [
+            {
+                "name": "get_control_mode",
+                "properties": [
+                    1
+                ]
+            }
+        ]
+    },
+    "state": [
+        1,
+        2
     ],
-    "id_msb": 0,
+    "api": {
+        "intro": 2,
+        "update": 11
+    },
+    "identifier": {
+        "lsb": 39,
+        "msb": 0
+    },
     "properties": [
         {
             "type": "enum",
-            "size": 1,
             "values": [
                 {
-                    "name": "control_mode_unavailable",
-                    "id": 0
+                    "id": 0,
+                    "name": "unavailable"
                 },
                 {
-                    "name": "control_mode_available",
-                    "id": 1
+                    "id": 1,
+                    "name": "available"
                 },
                 {
-                    "name": "control_started",
-                    "id": 2
+                    "verb": "start",
+                    "id": 2,
+                    "name": "started"
                 },
                 {
-                    "name": "control_failed_to_start",
-                    "id": 3
+                    "id": 3,
+                    "name": "failed_to_start"
                 },
                 {
-                    "name": "control_aborted",
-                    "id": 4
+                    "verb": "abort",
+                    "id": 4,
+                    "name": "aborted"
                 },
                 {
-                    "name": "control_ended",
-                    "id": 5
+                    "verb": "stop",
+                    "id": 5,
+                    "name": "ended"
                 }
             ],
             "id": 1,
-            "name": "control_mode"
+            "name": "control_mode",
+            "size": 1
         },
         {
-            "size": 2,
+            "id": 2,
             "type": "integer",
             "description": "Wheel base angle in degrees",
             "name": "angle",
-            "id": 2
+            "size": 2
+        },
+        {
+            "id": 3,
+            "type": "integer",
+            "description": "Speed in km/h",
+            "name": "speed",
+            "size": 1
         }
     ],
-    "api_update": 8
+    "setters": [
+        {
+            "optional": [
+                2,
+                3
+            ],
+            "name": "control_command"
+        },
+        {
+            "name": "start_control",
+            "constants": [
+                {
+                    "property_id": 1,
+                    "value": [
+                        2
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "stop_control",
+            "constants": [
+                {
+                    "property_id": 1,
+                    "value": [
+                        5
+                    ]
+                }
+            ]
+        }
+    ]
 }

@@ -1,255 +1,122 @@
 {
     "category": "infrastructure",
-    "id_msb": 0,
-    "id_lsb": 96,
     "name": "home_charger",
-    "api_intro": 6,
-    "message_types": [
-        {
-            "id": 0,
-            "name": "get_home_charger_state"
-        },
-        {
-            "id": 1,
-            "name": "home_charger_state"
-        },
-        {
-            "properties": [
-                {
-                    "mandatory": true,
-                    "description": "The current in 4-bytes per IEEE 754",
-                    "size": 4,
-                    "type": "float",
-                    "id": 1,
-                    "name": "charging_current"
-                }
-            ],
-            "name": "set_charge_current",
-            "id": 18
-        },
-        {
-            "properties": [
-                {
-                    "items": [
-                        {
-                            "type": "enum",
-                            "values": [
-                                {
-                                    "name": "starting_fee",
-                                    "id": 0
-                                },
-                                {
-                                    "name": "per_minute",
-                                    "id": 1
-                                },
-                                {
-                                    "pretty_name": "Per kWh",
-                                    "name": "per_kwh",
-                                    "id": 2
-                                }
-                            ],
-                            "name": "pricing_type",
-                            "size": 1
-                        },
-                        {
-                            "size": 4,
-                            "type": "float",
-                            "description": "The price in 4-bytes per IEEE 754",
-                            "name": "price"
-                        },
-                        {
-                            "type": "integer",
-                            "size": "2",
-                            "name": "currency_size",
-                            "size_reference": "currency"
-                        },
-                        {
-                            "type": "string",
-                            "name": "currency",
-                            "description": "The currency alphabetic code per ISO 4217 or crypto currency symbol"
-                        }
-                    ],
-                    "mandatory": true,
-                    "id": 18,
-                    "name": "price_tariffs",
-                    "multiple": true
-                }
-            ],
-            "name": "set_price_tariffs",
-            "id": 19
-        },
-        {
-            "properties": [
-                {
-                    "mandatory": true,
-                    "name": "solar_charging",
-                    "values": [
-                        {
-                            "name": "deactivated",
-                            "id": 0
-                        },
-                        {
-                            "name": "activated",
-                            "id": 1
-                        }
-                    ],
-                    "type": "enum",
-                    "id": 1,
-                    "size": 1
-                }
-            ],
-            "name": "activate_deactivate_solar_charging",
-            "id": 20
-        },
-        {
-            "properties": [
-                {
-                    "mandatory": true,
-                    "name": "hotspot_enabled",
-                    "values": [
-                        {
-                            "name": "disabled",
-                            "id": 0
-                        },
-                        {
-                            "name": "enabled",
-                            "id": 1
-                        }
-                    ],
-                    "type": "enum",
-                    "id": 1,
-                    "size": 1
-                }
-            ],
-            "name": "enable_disable_wi_fi_hotspot",
-            "id": 21
-        },
-        {
-            "properties": [
-                {
-                    "mandatory": true,
-                    "name": "authentication",
-                    "values": [
-                        {
-                            "name": "expire_authentication",
-                            "id": 0
-                        },
-                        {
-                            "name": "authenticate",
-                            "id": 1
-                        }
-                    ],
-                    "type": "enum",
-                    "id": 1,
-                    "size": 1
-                }
-            ],
-            "name": "authenticate_expire",
-            "id": 22
-        }
-    ],
+    "getters": "default",
+    "state": "all",
+    "api": {
+        "intro": 6,
+        "update": 11
+    },
+    "identifier": {
+        "lsb": 96,
+        "msb": 0
+    },
     "properties": [
         {
             "type": "enum",
-            "size": 1,
             "values": [
                 {
-                    "name": "disconnected",
-                    "id": 0
+                    "id": 0,
+                    "name": "disconnected"
                 },
                 {
-                    "name": "plugged_in",
-                    "id": 1
+                    "id": 1,
+                    "name": "plugged_in"
                 },
                 {
-                    "name": "charging",
-                    "id": 2
+                    "id": 2,
+                    "name": "charging"
                 }
             ],
             "id": 1,
-            "name": "charging"
+            "name": "charging",
+            "size": 1
         },
         {
             "type": "enum",
-            "size": 1,
             "values": [
                 {
                     "pretty_name": "PIN",
-                    "name": "pin",
-                    "id": 0
+                    "id": 0,
+                    "name": "pin"
                 },
                 {
-                    "name": "app",
-                    "id": 1
+                    "id": 1,
+                    "name": "app"
                 }
             ],
             "id": 2,
-            "name": "authentication_mechanism"
+            "name": "authentication_mechanism",
+            "size": 1
         },
         {
             "type": "enum",
-            "size": 1,
             "values": [
                 {
-                    "name": "type_1",
-                    "id": 0
+                    "id": 0,
+                    "name": "type_1"
                 },
                 {
-                    "name": "type_2",
-                    "id": 1
+                    "id": 1,
+                    "name": "type_2"
                 },
                 {
                     "pretty_name": "Combined Charging System (CCS)",
-                    "name": "ccs",
-                    "id": 2
+                    "id": 2,
+                    "name": "ccs"
                 },
                 {
                     "pretty_name": "CHAdeMO",
-                    "name": "chademo",
-                    "id": 3
+                    "id": 3,
+                    "name": "chademo"
                 }
             ],
             "id": 3,
-            "name": "plug_type"
+            "name": "plug_type",
+            "size": 1
         },
         {
-            "size": 4,
+            "id": 4,
             "type": "float",
             "description": "Charging power in kW formatted in 4-bytes per IEEE 754",
             "name": "charging_power",
-            "id": 4
+            "size": 4
         },
         {
             "type": "enum",
-            "size": 1,
             "values": [
                 {
-                    "name": "deactivated",
-                    "id": 0
+                    "verb": "deactivate",
+                    "id": 0,
+                    "name": "deactivated"
                 },
                 {
-                    "name": "activated",
-                    "id": 1
+                    "verb": "activate",
+                    "id": 1,
+                    "name": "activated"
                 }
             ],
             "id": 5,
-            "name": "solar_charging"
+            "name": "solar_charging",
+            "size": 1
         },
         {
             "type": "enum",
-            "size": 1,
             "values": [
                 {
-                    "name": "disabled",
-                    "id": 0
+                    "verb": "disable",
+                    "id": 0,
+                    "name": "disabled"
                 },
                 {
-                    "name": "enabled",
-                    "id": 1
+                    "verb": "enable",
+                    "id": 1,
+                    "name": "enabled"
                 }
             ],
             "id": 8,
-            "name": "hotspot_enabled"
+            "name": "hotspot_enabled",
+            "size": 1
         },
         {
             "pretty_name": "Hotspot SSID",
@@ -263,23 +130,23 @@
             "pretty_name": "Wi-Fi Hotspot security",
             "values": [
                 {
-                    "name": "none",
-                    "id": 0
+                    "id": 0,
+                    "name": "none"
                 },
                 {
                     "pretty_name": "WEP",
-                    "name": "wep",
-                    "id": 1
+                    "id": 1,
+                    "name": "wep"
                 },
                 {
                     "pretty_name": "WPA/WPA2 Personal",
-                    "name": "wpa",
-                    "id": 2
+                    "id": 2,
+                    "name": "wpa"
                 },
                 {
                     "pretty_name": "WPA2 Personal",
-                    "name": "wpa2_personal",
-                    "id": 3
+                    "id": 3,
+                    "name": "wpa2_personal"
                 }
             ],
             "name": "wi_fi_hotspot_security",
@@ -288,7 +155,7 @@
             "size": 1
         },
         {
-            "pretty_name": "Wi-Fi Hotspot password",
+            "pretty_name": "Wi-Fi Hotspot Password",
             "type": "string",
             "description": "The Wi-Fi Hotspot password formatted in UTF-8",
             "name": "wi_fi_hotspot_password",
@@ -296,43 +163,45 @@
         },
         {
             "type": "enum",
-            "size": 1,
             "values": [
                 {
-                    "name": "unauthenticated",
-                    "id": 0
+                    "verb": "expire_authentication",
+                    "id": 0,
+                    "name": "unauthenticated"
                 },
                 {
-                    "name": "authenticated",
-                    "id": 1
+                    "verb": "authenticate",
+                    "id": 1,
+                    "name": "authenticated"
                 }
             ],
             "id": 13,
-            "name": "authentication_state"
+            "name": "authentication_state",
+            "size": 1
         },
         {
             "pretty_name": "Charge current (DC)",
             "description": "The charge current (DC) per IEEE 754",
-            "name": "charge_current_dc",
+            "size": 4,
             "type": "float",
             "id": 14,
-            "size": 4
+            "name": "charge_current_dc"
         },
         {
             "pretty_name": "Maximum charge current",
             "description": "The maximum possible charge current per IEEE 754",
-            "name": "maximum_charge_current",
+            "size": 4,
             "type": "float",
             "id": 15,
-            "size": 4
+            "name": "maximum_charge_current"
         },
         {
             "pretty_name": "Minimum charge current",
             "description": "The minimal possible charge current per IEEE 754",
-            "name": "minimum_charge_current",
+            "size": 4,
             "type": "float",
             "id": 16,
-            "size": 4
+            "name": "minimum_charge_current"
         },
         {
             "items": [
@@ -349,9 +218,10 @@
                     "name": "longitude"
                 }
             ],
-            "size": 16,
+            "type": "custom",
             "id": 17,
-            "name": "coordinates"
+            "name": "coordinates",
+            "size": 16
         },
         {
             "items": [
@@ -359,17 +229,17 @@
                     "type": "enum",
                     "values": [
                         {
-                            "name": "starting_fee",
-                            "id": 0
+                            "id": 0,
+                            "name": "starting_fee"
                         },
                         {
-                            "name": "per_minute",
-                            "id": 1
+                            "id": 1,
+                            "name": "per_minute"
                         },
                         {
                             "pretty_name": "Per kWh",
-                            "name": "per_kwh",
-                            "id": 2
+                            "id": 2,
+                            "name": "per_kwh"
                         }
                     ],
                     "name": "pricing_type",
@@ -382,10 +252,10 @@
                     "name": "price"
                 },
                 {
-                    "type": "integer",
-                    "size": "2",
-                    "name": "currency_size",
-                    "size_reference": "currency"
+                    "size": 1,
+                    "type": "uinteger",
+                    "description": "Size of the currency string",
+                    "name": "currency_size"
                 },
                 {
                     "type": "string",
@@ -395,8 +265,40 @@
             ],
             "multiple": true,
             "id": 18,
-            "name": "price_tariffs"
+            "name": "price_tariffs",
+            "type": "custom"
         }
     ],
-    "api_update": 8
+    "setters": [
+        {
+            "mandatory": [
+                14
+            ],
+            "name": "set_charge_current"
+        },
+        {
+            "mandatory": [
+                18
+            ],
+            "name": "set_price_tariffs"
+        },
+        {
+            "mandatory": [
+                5
+            ],
+            "name": "activate_deactivate_solar_charging"
+        },
+        {
+            "mandatory": [
+                8
+            ],
+            "name": "enable_disable_wi_fi_hotspot"
+        },
+        {
+            "mandatory": [
+                13
+            ],
+            "name": "authenticate_expire"
+        }
+    ]
 }

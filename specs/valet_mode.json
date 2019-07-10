@@ -1,59 +1,46 @@
 {
     "category": "parking",
-    "id_lsb": 40,
     "name": "valet_mode",
-    "api_intro": 3,
-    "message_types": [
-        {
-            "id": 0,
-            "name": "get_valet_mode"
-        },
-        {
-            "id": 1,
-            "name": "valet_mode"
-        },
-        {
-            "properties": [
-                {
-                    "mandatory": true,
-                    "name": "valet_mode",
-                    "values": [
-                        {
-                            "name": "deactivate",
-                            "id": 0
-                        },
-                        {
-                            "name": "activate",
-                            "id": 1
-                        }
-                    ],
-                    "type": "enum",
-                    "id": 1,
-                    "size": 1
-                }
-            ],
-            "name": "activate_deactivate_valet_mode",
-            "id": 18
+    "getters": {
+        "default": {
+            "omit_state_text": true
         }
-    ],
-    "id_msb": 0,
+    },
+    "state": "all",
+    "api": {
+        "intro": 3,
+        "update": 11
+    },
+    "identifier": {
+        "lsb": 40,
+        "msb": 0
+    },
     "properties": [
         {
             "type": "enum",
-            "size": 1,
             "values": [
                 {
-                    "name": "deactivated",
-                    "id": 0
+                    "verb": "deactivate",
+                    "id": 0,
+                    "name": "deactivated"
                 },
                 {
-                    "name": "activated",
-                    "id": 1
+                    "verb": "activate",
+                    "id": 1,
+                    "name": "activated"
                 }
             ],
             "id": 1,
-            "name": "valet_mode"
+            "name": "valet_mode",
+            "size": 1
         }
     ],
-    "api_update": 8
+    "setters": [
+        {
+            "mandatory": [
+                1
+            ],
+            "name": "activate_deactivate_valet_mode"
+        }
+    ]
 }
