@@ -46,10 +46,10 @@ defmodule AutoApi.Capability do
               |> Enum.join(" ")
       end
 
-      message_types =
-        @raw_spec["message_types"]
-        |> Enum.map(fn msg_type -> {msg_type["id"], String.to_atom(msg_type["name"])} end)
-        |> Enum.into(%{})
+      message_types = []
+        #@raw_spec["message_types"]
+        #|> Enum.map(fn msg_type -> {msg_type["id"], String.to_atom(msg_type["name"])} end)
+        #|> Enum.into(%{})
 
       @commands message_types
       properties =

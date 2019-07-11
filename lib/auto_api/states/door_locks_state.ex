@@ -29,7 +29,7 @@ defmodule AutoApi.DoorLocksState do
             positions: [],
             timestamp: nil
 
-  use AutoApi.State, spec_file: "specs/door_locks.json"
+  use AutoApi.State, spec_file: "specs/doors.json"
 
   @type lock :: %PropertyComponent{
           data: %{
