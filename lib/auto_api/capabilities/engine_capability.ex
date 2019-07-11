@@ -37,7 +37,7 @@ defmodule AutoApi.EngineCapability do
       {2, :accessories_ignition}
   """
 
-  @spec_file "specs/engine.json"
+  @spec_file "specs/ignition.json"
   @type command_type :: :engine_state | :get_ignition_state | :turn_engine_on_off
 
   @command_module AutoApi.NotImplemented

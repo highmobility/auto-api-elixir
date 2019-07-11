@@ -39,7 +39,7 @@ defmodule AutoApi.DoorLocksCapability do
       {0x04, :positions}
   """
 
-  @spec_file "specs/door_locks.json"
+  @spec_file "specs/doors.json"
   @type command_type :: :get_lock_state | :lock_state | :lock_unlock_doors
 
   @command_module AutoApi.DoorLocksCommand
