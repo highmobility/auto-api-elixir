@@ -115,6 +115,12 @@ defmodule AutoApi.PropertyComponent do
     <<data::integer-size(size_bit)>>
   end
 
+  defp data_to_bin(data, %{"type" => "uinteger", "size" => size}) do
+    size_bit = size * 8
+
+    <<data::integer-size(size_bit)>>
+  end
+
   defp data_to_bin(%state_mod{} = state, %{"type" => "capability_state"}) do
     state_mod.identifier <> <<0x01>> <> state_mod.to_bin(state)
   end
@@ -168,6 +174,10 @@ defmodule AutoApi.PropertyComponent do
   end
 
   defp to_value(binary_data, %{"type" => "integer"}) do
+    AutoApi.CommonData.convert_bin_to_integer(binary_data)
+  end
+
+  defp to_value(binary_data, %{"type" => "uinteger"}) do
     AutoApi.CommonData.convert_bin_to_integer(binary_data)
   end
 
