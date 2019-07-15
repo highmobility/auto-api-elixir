@@ -27,10 +27,6 @@ defmodule AutoApi.VehicleStatusCapability do
       :vehicle_status
       iex> VS.description
       "Vehicle Status"
-      iex> VS.command_name(0x00)
-      :get_vehicle_status
-      iex> VS.command_name(0x01)
-      :vehicle_status
       iex> length(VS.properties)
       19
       iex> List.last(VS.properties)

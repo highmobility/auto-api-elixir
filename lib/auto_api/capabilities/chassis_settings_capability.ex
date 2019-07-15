@@ -27,18 +27,6 @@ defmodule AutoApi.ChassisSettingsCapability do
       :chassis_settings
       iex> C.description
       "Chassis Settings"
-      iex> C.command_name(0x00)
-      :get_chassis_settings
-      iex> C.command_name(0x01)
-      :chassis_settings
-      iex> C.command_name(0x12)
-      :set_driving_mode
-      iex> C.command_name(0x13)
-      :start_stop_sports_chrono
-      iex> C.command_name(0x14)
-      :set_spring_rates
-      iex> C.command_name(0x15)
-      :set_chassis_position
       iex> length(C.properties)
       8
       iex> List.last(C.properties)

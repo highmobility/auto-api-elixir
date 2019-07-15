@@ -27,10 +27,6 @@ defmodule AutoApi.TachographCapability do
       :tachograph
       iex> T.description
       "Tachograph"
-      iex> T.command_name(0x00)
-      :get_tachograph_state
-      iex> T.command_name(0x01)
-      :tachograph_state
       iex> length(T.properties)
       7
       iex> List.last(T.properties)

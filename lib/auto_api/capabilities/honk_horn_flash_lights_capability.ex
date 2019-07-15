@@ -27,12 +27,6 @@ defmodule AutoApi.HonkHornFlashLightsCapability do
       :honk_horn_flash_lights
       iex> H.description
       "Honk Horn Flash Lights"
-      iex> H.command_name(0x00)
-      :get_flashers_state
-      iex> H.command_name(0x01)
-      :flashers_state
-      iex> H.command_name(0x13)
-      :activate_deactivate_emergency_flashers
       iex> length(H.properties)
       1
       iex> List.last(H.properties)

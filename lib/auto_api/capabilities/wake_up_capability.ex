@@ -27,8 +27,6 @@ defmodule AutoApi.WakeUpCapability do
       :wake_up
       iex> W.description
       "Wake Up"
-      iex> W.command_name(0x02)
-      :wake_up
       iex> length(W.properties)
       0
   """

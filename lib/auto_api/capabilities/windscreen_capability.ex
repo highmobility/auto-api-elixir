@@ -27,12 +27,6 @@ defmodule AutoApi.WindscreenCapability do
       :windscreen
       iex> W.description
       "Windscreen"
-      iex> W.command_name(0x00)
-      :get_windscreen_state
-      iex> W.command_name(0x01)
-      :windscreen_state
-      iex> W.command_name(0x12)
-      :set_windscreen_damage
       iex> length(W.properties)
       8
       iex> List.last(W.properties)

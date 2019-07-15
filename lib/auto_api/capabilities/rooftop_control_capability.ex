@@ -27,12 +27,6 @@ defmodule AutoApi.RooftopControlCapability do
       :rooftop_control
       iex> R.description
       "Rooftop Control"
-      iex> R.command_name(0x00)
-      :get_rooftop_state
-      iex> R.command_name(0x01)
-      :rooftop_state
-      iex> R.command_name(0x12)
-      :control_rooftop
       iex> length(R.properties)
       5
   """

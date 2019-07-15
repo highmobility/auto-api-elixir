@@ -27,10 +27,6 @@ defmodule AutoApi.VehicleTimeCapability do
       :vehicle_time
       iex> VT.description
       "Vehicle Time"
-      iex> VT.command_name(0x00)
-      :get_vehicle_time
-      iex> VT.command_name(0x01)
-      :vehicle_time
       iex> length(VT.properties)
       1
   """

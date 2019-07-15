@@ -27,10 +27,6 @@ defmodule AutoApi.RaceCapability do
       :race
       iex> R.description
       "Race"
-      iex> R.command_name(0x00)
-      :get_race_state
-      iex> R.command_name(0x01)
-      :race_state
       iex> length(R.properties)
       18
       iex> List.last(R.properties)

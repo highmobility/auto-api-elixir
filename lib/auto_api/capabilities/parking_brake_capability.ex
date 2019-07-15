@@ -27,12 +27,6 @@ defmodule AutoApi.ParkingBrakeCapability do
       :parking_brake
       iex> P.description
       "Parking Brake"
-      iex> P.command_name(0x00)
-      :get_parking_brake_state
-      iex> P.command_name(0x01)
-      :parking_brake_state
-      iex> P.command_name(0x12)
-      :set_parking_brake
       iex> length(P.properties)
       1
       iex> P.properties

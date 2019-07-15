@@ -27,14 +27,6 @@ defmodule AutoApi.ParkingTicketCapability do
       :parking_ticket
       iex> P.description
       "Parking Ticket"
-      iex> P.command_name(0x00)
-      :get_parking_ticket
-      iex> P.command_name(0x01)
-      :parking_ticket
-      iex> P.command_name(0x02)
-      :start_parking
-      iex> P.command_name(0x03)
-      :end_parking
       iex> length(P.properties)
       5
       iex> List.last(P.properties)

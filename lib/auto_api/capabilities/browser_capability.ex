@@ -27,8 +27,6 @@ defmodule AutoApi.BrowserCapability do
       :browser
       iex> B.description
       "Browser"
-      iex> B.command_name(0x00)
-      :load_url
       iex> length(B.properties)
       0
   """

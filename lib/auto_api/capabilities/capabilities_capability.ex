@@ -27,12 +27,6 @@ defmodule AutoApi.CapabilitiesCapability do
       :capabilities
       iex> C.description
       "Capabilities"
-      iex> C.command_name(0x00)
-      :get_capabilities
-      iex> C.command_name(0x02)
-      :get_capability
-      iex> C.command_name(0x01)
-      :capabilities
       iex> List.last(C.properties)
       {0x01, :capability}
   """

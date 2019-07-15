@@ -27,10 +27,6 @@ defmodule AutoApi.VehicleLocationCapability do
       :vehicle_location
       iex> VL.description
       "Vehicle Location"
-      iex> VL.command_name(0x00)
-      :get_vehicle_location
-      iex> VL.command_name(0x01)
-      :vehicle_location
       iex> length(VL.properties)
       3
       iex> VL.properties

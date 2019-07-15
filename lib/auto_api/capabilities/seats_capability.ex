@@ -27,10 +27,6 @@ defmodule AutoApi.SeatsCapability do
       :seats
       iex> S.description
       "Seats"
-      iex> S.command_name(0x00)
-      :get_seats_state
-      iex> S.command_name(0x01)
-      :seats_state
       iex> length(S.properties)
       2
       iex> List.last(S.properties)

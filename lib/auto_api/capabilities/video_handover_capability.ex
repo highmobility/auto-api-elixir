@@ -27,8 +27,6 @@ defmodule AutoApi.VideoHandoverCapability do
       :video_handover
       iex> VH.description
       "Video Handover"
-      iex> VH.command_name(0x00)
-      :video_handover
       iex> length(VH.properties)
       0
   """

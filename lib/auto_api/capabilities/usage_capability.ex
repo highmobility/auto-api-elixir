@@ -27,10 +27,6 @@ defmodule AutoApi.UsageCapability do
       :usage
       iex> U.description
       "Usage"
-      iex> U.command_name(0x00)
-      :get_usage
-      iex> U.command_name(0x01)
-      :usage
       iex> length(U.properties)
       0x0E
   """

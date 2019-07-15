@@ -27,12 +27,6 @@ defmodule AutoApi.NaviDestinationCapability do
       :navi_destination
       iex> N.description
       "Navi Destination"
-      iex> N.command_name(0x00)
-      :get_navi_destination
-      iex> N.command_name(0x01)
-      :navi_destination
-      iex> N.command_name(0x12)
-      :set_navi_destination
       iex> length(N.properties)
       2
       iex> List.last(N.properties)

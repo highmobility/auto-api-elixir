@@ -27,8 +27,6 @@ defmodule AutoApi.TextInputCapability do
       :text_input
       iex> T.description
       "Text Input"
-      iex> T.command_name(0x00)
-      :text_input
       iex> length(T.properties)
       0
   """

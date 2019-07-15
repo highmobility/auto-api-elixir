@@ -27,12 +27,6 @@ defmodule AutoApi.PowerTakeoffCapability do
       :power_takeoff
       iex> PT.description
       "Power Takeoff"
-      iex> PT.command_name(0x00)
-      :get_power_takeoff_state
-      iex> PT.command_name(0x01)
-      :power_takeoff_state
-      iex> PT.command_name(0x02)
-      :activate_deactivate_power_takeoff
       iex> PT.properties
       [{1, :power_takeoff}, {2, :power_takeoff_engaged}]
   """

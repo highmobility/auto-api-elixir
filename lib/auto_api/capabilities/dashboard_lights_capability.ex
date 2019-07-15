@@ -27,10 +27,6 @@ defmodule AutoApi.DashboardLightsCapability do
       :dashboard_lights
       iex> F.description
       "Dashboard Lights"
-      iex> F.command_name(0x00)
-      :get_dashboard_lights
-      iex> F.command_name(0x01)
-      :dashboard_lights
       iex> F.properties
       [{0x01, :dashboard_light}]
   """

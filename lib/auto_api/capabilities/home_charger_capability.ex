@@ -27,20 +27,6 @@ defmodule AutoApi.HomeChargerCapability do
       :home_charger
       iex> H.description
       "Home Charger"
-      iex> H.command_name(0x00)
-      :get_home_charger_state
-      iex> H.command_name(0x01)
-      :home_charger_state
-      iex> H.command_name(0x12)
-      :set_charge_current
-      iex> H.command_name(0x13)
-      :set_price_tariffs
-      iex> H.command_name(0x14)
-      :activate_deactivate_solar_charging
-      iex> H.command_name(0x15)
-      :enable_disable_wi_fi_hotspot
-      iex> H.command_name(0x16)
-      :authenticate_expire
       iex> length(H.properties)
       15
       iex> List.last(H.properties)

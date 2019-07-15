@@ -27,12 +27,6 @@ defmodule AutoApi.EngineCapability do
       :engine
       iex> E.description
       "Engine"
-      iex> E.command_name(0x00)
-      :get_ignition_state
-      iex> E.command_name(0x01)
-      :ignition_state
-      iex> E.command_name(0x12)
-      :turn_ignition_on_off
       iex> List.last(E.properties)
       {2, :accessories_ignition}
   """

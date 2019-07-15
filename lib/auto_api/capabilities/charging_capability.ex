@@ -27,22 +27,6 @@ defmodule AutoApi.ChargingCapability do
       :charging
       iex> C.description
       "Charging"
-      iex> C.command_name(0x00)
-      :get_charge_state
-      iex> C.command_name(0x01)
-      :charge_state
-      iex> C.command_name(0x12)
-      :start_stop_charging
-      iex> C.command_name(0x13)
-      :set_charge_limit
-      iex> C.command_name(0x14)
-      :open_close_charging_port
-      iex> C.command_name(0x15)
-      :set_charge_mode
-      iex> C.command_name(0x16)
-      :set_charging_timers
-      iex> C.command_name(0x17)
-      :set_reduction_of_charging_current_times
       iex> length(C.properties)
       20
       iex> List.last(C.properties)

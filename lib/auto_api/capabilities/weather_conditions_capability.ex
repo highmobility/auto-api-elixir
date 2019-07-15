@@ -27,10 +27,6 @@ defmodule AutoApi.WeatherConditionsCapability do
       :weather_conditions
       iex> W.description
       "Weather Conditions"
-      iex> W.command_name(0x00)
-      :get_weather_conditions
-      iex> W.command_name(0x01)
-      :weather_conditions
       iex> length(W.properties)
       1
       iex> W.properties

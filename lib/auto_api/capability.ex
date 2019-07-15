@@ -46,21 +46,16 @@ defmodule AutoApi.Capability do
               |> Enum.join(" ")
       end
 
-      message_types = []
-        #@raw_spec["message_types"]
-        #|> Enum.map(fn msg_type -> {msg_type["id"], String.to_atom(msg_type["name"])} end)
-        #|> Enum.into(%{})
-
-      @commands message_types
       properties =
         (@raw_spec["properties"] || [])
         |> Enum.map(fn prop -> {prop["id"], String.to_atom(prop["name"])} end)
 
       @properties properties
 
-      @command_ids Enum.into(Enum.map(@commands, fn {k, v} -> {v, k} end), %{})
-
-      @commands_list Enum.into(@commands, [])
+      setters =
+        (@raw_spec["setters"] || [])
+        |> Enum.map(fn setter -> {0x01, String.to_atom(setter["name"])} end)
+      @setters setters
 
       @doc false
       @spec raw_spec() :: map()
@@ -72,7 +67,7 @@ defmodule AutoApi.Capability do
         #{inspect @commands_list, base: :hex}
       """
       @spec commands :: list({integer, atom})
-      def commands, do: @commands_list
+      def commands, do: @setters
 
       @doc """
       Returns the command module related to this capability
@@ -105,24 +100,6 @@ defmodule AutoApi.Capability do
       def description, do: @desc
 
       @doc """
-      Returns commands readable name.
-
-      Available commands:
-
-      ```
-      #{inspect @commands, base: :hex}
-      ```
-      """
-      @spec command_name(integer) :: __MODULE__.command_type() | nil
-      def command_name(id), do: Map.get(@commands, id)
-
-      @doc """
-      Return commands id based on atom
-      """
-      @spec command_id(__MODULE__.command_type()) :: integer | nil
-      def command_id(name), do: Map.get(@command_ids, name, -1)
-
-      @doc """
       Retunrs properties under #{@desc}:
       ```
       #{inspect @properties, base: :hex}
@@ -130,47 +107,6 @@ defmodule AutoApi.Capability do
       """
       @spec properties :: list(tuple())
       def properties, do: @properties
-
-      @doc """
-      Returns list of supported sub capability based on binary value
-
-      ## Example
-
-          iex> AutoApi.DoorLocksCapability.to_map(<<0x00, 0x20, 0x01, 0x00, 0x12>>)
-          [:lock_state, :get_lock_state, :lock_unlock_doors]
-
-      """
-      @spec to_map(binary) :: list(command_type)
-      def to_map(capability_bin) do
-        id = @identifier
-
-        <<^id::binary-size(2), caps::binary>> = capability_bin
-
-        caps
-        |> :binary.bin_to_list()
-        |> Enum.map(fn action -> command_name(action) end)
-      end
-
-      @doc """
-      Returns binary value of capability based on list of available supported capabilities
-
-      ## Example
-
-          iex> AutoApi.DoorLocksCapability.to_bin([:get_lock_state, :lock_unlock_doors])
-          <<0x00, 0x20, 0x00, 0x12>>
-
-      """
-      @spec to_bin(list(command_type)) :: binary
-      def to_bin(actions_list) do
-        cap_iden = identifier()
-
-        caps_binary =
-          actions_list
-          |> Enum.map(fn cap -> command_id(cap) end)
-          |> :binary.list_to_bin()
-
-        cap_iden <> caps_binary
-      end
     end
   end
 

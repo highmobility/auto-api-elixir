@@ -27,12 +27,6 @@ defmodule AutoApi.ValetModeCapability do
       :valet_mode
       iex> V.description
       "Valet Mode"
-      iex> V.command_name(0x00)
-      :get_valet_mode
-      iex> V.command_name(0x01)
-      :valet_mode
-      iex> V.command_name(0x12)
-      :activate_deactivate_valet_mode
       iex> length(V.properties)
       1
       iex> List.last(V.properties)

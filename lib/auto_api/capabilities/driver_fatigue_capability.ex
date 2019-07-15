@@ -27,8 +27,6 @@ defmodule AutoApi.DriverFatigueCapability do
       :driver_fatigue
       iex> D.description
       "Driver Fatigue"
-      iex> D.command_name(0x01)
-      :driver_fatigue_detected
       iex> length(D.properties)
       0
   """

@@ -27,10 +27,6 @@ defmodule AutoApi.MaintenanceCapability do
       :maintenance
       iex> M.description
       "Maintenance"
-      iex> M.command_name(0x00)
-      :get_maintenance_state
-      iex> M.command_name(0x01)
-      :maintenance_state
       iex> length(M.properties)
       12
   """

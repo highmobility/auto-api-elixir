@@ -27,16 +27,6 @@ defmodule AutoApi.WiFiCapability do
       :wi_fi
       iex> W.description
       "Wi-Fi"
-      iex> W.command_name(0x00)
-      :get_wi_fi_state
-      iex> W.command_name(0x01)
-      :wi_fi_state
-      iex> W.command_name(0x02)
-      :connect_to_network
-      iex> W.command_name(0x03)
-      :forget_network
-      iex> W.command_name(0x04)
-      :enable_disable_wi_fi
       iex> length(W.properties)
       4
       iex> W.properties

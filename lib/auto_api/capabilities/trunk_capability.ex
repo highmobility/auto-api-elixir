@@ -27,12 +27,6 @@ defmodule AutoApi.TrunkCapability do
       :trunk
       iex> T.description
       "Trunk"
-      iex> T.command_name(0x00)
-      :get_trunk_state
-      iex> T.command_name(0x01)
-      :trunk_state
-      iex> T.command_name(0x12)
-      :control_trunk
       iex> length(T.properties)
       2
       iex> T.properties

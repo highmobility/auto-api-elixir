@@ -27,12 +27,6 @@ defmodule AutoApi.CruiseControlCapability do
       :cruise_control
       iex> CC.description
       "Cruise Control"
-      iex> CC.command_name(0x00)
-      :get_cruise_control_state
-      iex> CC.command_name(0x01)
-      :cruise_control_state
-      iex> CC.command_name(0x12)
-      :activate_deactivate_cruise_control
       iex> CC.properties
       [{1, :cruise_control}, {2, :limiter}, {3, :target_speed}, {4, :acc}, {5, :acc_target_speed}]
   """

@@ -27,8 +27,6 @@ defmodule AutoApi.GraphicsCapability do
       :graphics
       iex> G.description
       "Graphics"
-      iex> G.command_name(0x00)
-      :display_image
       iex> length(G.properties)
       0
   """

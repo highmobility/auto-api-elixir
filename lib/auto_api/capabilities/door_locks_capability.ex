@@ -27,12 +27,6 @@ defmodule AutoApi.DoorLocksCapability do
       :door_locks
       iex> D.description
       "Door Locks"
-      iex> D.command_name(0x00)
-      :get_lock_state
-      iex> D.command_name(0x01)
-      :lock_state
-      iex> D.command_name(0x12)
-      :lock_unlock_doors
       iex> length(D.properties)
       3
       iex> List.last(D.properties)

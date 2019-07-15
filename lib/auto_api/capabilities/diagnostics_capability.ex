@@ -27,10 +27,6 @@ defmodule AutoApi.DiagnosticsCapability do
       :diagnostics
       iex> D.description
       "Diagnostics"
-      iex> D.command_name(0x00)
-      :get_diagnostics_state
-      iex> D.command_name(0x01)
-      :diagnostics_state
       iex> length(D.properties)
       27
   """

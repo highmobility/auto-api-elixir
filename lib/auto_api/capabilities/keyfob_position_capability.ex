@@ -27,10 +27,6 @@ defmodule AutoApi.KeyfobPositionCapability do
       :keyfob_position
       iex> K.description
       "Keyfob Position"
-      iex> K.command_name(0x00)
-      :get_keyfob_position
-      iex> K.command_name(0x01)
-      :keyfob_position
       iex> length(K.properties)
       1
       iex> List.last(K.properties)

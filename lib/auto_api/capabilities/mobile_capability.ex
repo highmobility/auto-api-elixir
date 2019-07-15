@@ -27,10 +27,6 @@ defmodule AutoApi.MobileCapability do
       :mobile
       iex> M.description
       "Mobile"
-      iex> M.command_name(0x00)
-      :get_mobile_state
-      iex> M.command_name(0x01)
-      :mobile_state
       iex> length(M.properties)
       1
   """

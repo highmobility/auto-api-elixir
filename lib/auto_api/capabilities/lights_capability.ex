@@ -27,12 +27,6 @@ defmodule AutoApi.LightsCapability do
       :lights
       iex> L.description
       "Lights"
-      iex> L.command_name(0x00)
-      :get_lights_state
-      iex> L.command_name(0x01)
-      :lights_state
-      iex> L.command_name(0x12)
-      :control_lights
       iex> length(L.properties)
       8
       iex> List.last(L.properties)

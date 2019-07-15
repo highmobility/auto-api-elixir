@@ -29,10 +29,6 @@ defmodule AutoApi.HoodCapability do
       :hood
       iex> H.description
       "Hood"
-      iex> H.command_name(0x00)
-      :get_hood_state
-      iex> H.command_name(0x01)
-      :hood_state
       iex> length(H.properties)
       0
   """

@@ -27,10 +27,6 @@ defmodule AutoApi.OffroadCapability do
       :offroad
       iex> O.description
       "Offroad"
-      iex> O.command_name(0x00)
-      :get_offroad_state
-      iex> O.command_name(0x01)
-      :offroad_state
       iex> length(O.properties)
       2
       iex> List.last(O.properties)

@@ -27,12 +27,6 @@ defmodule AutoApi.RemoteControlCapability do
       :remote_control
       iex> R.description
       "Remote Control"
-      iex> R.command_name(0x00)
-      :get_control_mode
-      iex> R.command_name(0x01)
-      :control_mode
-      iex> R.command_name(0x12)
-      :start_stop_control
       iex> length(R.properties)
       2
       iex> R.properties

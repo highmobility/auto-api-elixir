@@ -27,12 +27,6 @@ defmodule AutoApi.FuelingCapability do
       :fueling
       iex> F.description
       "Fueling"
-      iex> F.command_name(0x00)
-      :get_gas_flap_state
-      iex> F.command_name(0x01)
-      :gas_flap_state
-      iex> F.command_name(0x12)
-      :control_gas_flap
       iex> length(F.properties)
       2
       iex> F.properties

@@ -27,12 +27,6 @@ defmodule AutoApi.NotificationsCapability do
       :notifications
       iex> N.description
       "Notifications"
-      iex> N.command_name(0x00)
-      :notification
-      iex> N.command_name(0x02)
-      :clear_notification
-      iex> N.command_name(0x11)
-      :notification_action
       iex> length(N.properties)
       3
   """

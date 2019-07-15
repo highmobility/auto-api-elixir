@@ -27,12 +27,6 @@ defmodule AutoApi.WindowsCapability do
       :windows
       iex> W.description
       "Windows"
-      iex> W.command_name(0x00)
-      :get_windows_state
-      iex> W.command_name(0x01)
-      :windows_state
-      iex> W.command_name(0x12)
-      :control_windows
       iex> length(W.properties)
       2
       iex> W.properties

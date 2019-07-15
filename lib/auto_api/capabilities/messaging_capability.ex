@@ -27,10 +27,6 @@ defmodule AutoApi.MessagingCapability do
       :messaging
       iex> M.description
       "Messaging"
-      iex> M.command_name(0x00)
-      :message_received
-      iex> M.command_name(0x01)
-      :send_message
       iex> length(M.properties)
       0
   """

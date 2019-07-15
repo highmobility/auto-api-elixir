@@ -27,10 +27,6 @@ defmodule AutoApi.FirmwareVersionCapability do
       :firmware_version
       iex> F.description
       "Firmware Version"
-      iex> F.command_name(0x00)
-      :get_firmware_version
-      iex> F.command_name(0x01)
-      :firmware_version
       iex> length(F.properties)
       3
   """

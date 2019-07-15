@@ -27,10 +27,6 @@ defmodule AutoApi.LightConditionsCapability do
       :light_conditions
       iex> L.description
       "Light Conditions"
-      iex> L.command_name(0x00)
-      :get_light_conditions
-      iex> L.command_name(0x01)
-      :light_conditions
       iex> length(L.properties)
       2
       iex> List.last(L.properties)
