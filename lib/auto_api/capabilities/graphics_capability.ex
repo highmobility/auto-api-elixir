@@ -28,7 +28,7 @@ defmodule AutoApi.GraphicsCapability do
       iex> G.description
       "Graphics"
       iex> length(G.properties)
-      0
+      1
   """
 
   @spec_file "specs/graphics.json"

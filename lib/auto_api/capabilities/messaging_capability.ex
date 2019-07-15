@@ -28,7 +28,7 @@ defmodule AutoApi.MessagingCapability do
       iex> M.description
       "Messaging"
       iex> length(M.properties)
-      0
+      2
   """
 
   @spec_file "specs/messaging.json"

@@ -27,7 +27,6 @@ defmodule AutoApi.StartStopCapability do
       :start_stop
       iex> SS.description
       "Start Stop"
-      :activate_deactivate_start_stop
       iex> SS.properties
       [{1, :start_stop}]
   """

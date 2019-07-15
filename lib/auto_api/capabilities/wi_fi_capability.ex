@@ -26,11 +26,11 @@ defmodule AutoApi.WiFiCapability do
       iex> W.name
       :wi_fi
       iex> W.description
-      "Wi-Fi"
+      "Wi Fi"
       iex> length(W.properties)
-      4
+      5
       iex> W.properties
-      [{1, :wi_fi_enabled}, {2, :network_connected}, {3, :network_ssid}, {4, :network_security}]
+      [{1, :wi_fi_enabled}, {2, :network_connected}, {3, :network_ssid}, {4, :network_security}, {5, :password}]
   """
 
   @spec_file "specs/wi_fi.json"

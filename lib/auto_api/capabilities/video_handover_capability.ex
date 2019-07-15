@@ -28,7 +28,7 @@ defmodule AutoApi.VideoHandoverCapability do
       iex> VH.description
       "Video Handover"
       iex> length(VH.properties)
-      0
+      3
   """
 
   @spec_file "specs/video_handover.json"

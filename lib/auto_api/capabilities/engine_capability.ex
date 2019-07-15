@@ -24,9 +24,9 @@ defmodule AutoApi.EngineCapability do
       iex> E.identifier
       <<0x00, 0x35>>
       iex> E.name
-      :engine
+      :ignition
       iex> E.description
-      "Engine"
+      "Ignition"
       iex> List.last(E.properties)
       {2, :accessories_ignition}
   """

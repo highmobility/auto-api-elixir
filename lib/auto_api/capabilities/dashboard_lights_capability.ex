@@ -28,7 +28,7 @@ defmodule AutoApi.DashboardLightsCapability do
       iex> F.description
       "Dashboard Lights"
       iex> F.properties
-      [{0x01, :dashboard_light}]
+      [{0x01, :dashboard_lights}]
   """
 
   @spec_file "specs/dashboard_lights.json"

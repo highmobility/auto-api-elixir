@@ -28,7 +28,7 @@ defmodule AutoApi.DriverFatigueCapability do
       iex> D.description
       "Driver Fatigue"
       iex> length(D.properties)
-      0
+      1
   """
 
   @spec_file "specs/driver_fatigue.json"

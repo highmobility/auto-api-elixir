@@ -24,13 +24,13 @@ defmodule AutoApi.DoorLocksCapability do
       iex> D.identifier
       <<0x00, 0x20>>
       iex> D.name
-      :door_locks
+      :doors
       iex> D.description
-      "Door Locks"
+      "Doors"
       iex> length(D.properties)
-      3
+      5
       iex> List.last(D.properties)
-      {0x04, :positions}
+      {0x06, :locks_state}
   """
 
   @spec_file "specs/doors.json"

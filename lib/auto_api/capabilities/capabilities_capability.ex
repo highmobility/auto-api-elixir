@@ -28,7 +28,7 @@ defmodule AutoApi.CapabilitiesCapability do
       iex> C.description
       "Capabilities"
       iex> List.last(C.properties)
-      {0x01, :capability}
+      {0x01, :capabilities}
   """
 
   @spec_file "specs/capabilities.json"

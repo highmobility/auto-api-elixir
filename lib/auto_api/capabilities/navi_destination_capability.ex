@@ -28,9 +28,9 @@ defmodule AutoApi.NaviDestinationCapability do
       iex> N.description
       "Navi Destination"
       iex> length(N.properties)
-      2
+      6
       iex> List.last(N.properties)
-      {0x02, :destination_name}
+      {0x06, :distance_to_destination}
   """
 
   @spec_file "specs/navi_destination.json"

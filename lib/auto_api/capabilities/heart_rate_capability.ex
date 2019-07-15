@@ -28,7 +28,7 @@ defmodule AutoApi.HeartRateCapability do
       iex> H.description
       "Heart Rate"
       iex> length(H.properties)
-      0
+      1
   """
 
   @spec_file "specs/heart_rate.json"

@@ -28,9 +28,9 @@ defmodule AutoApi.HonkHornFlashLightsCapability do
       iex> H.description
       "Honk Horn Flash Lights"
       iex> length(H.properties)
-      1
+      4
       iex> List.last(H.properties)
-      {0x01, :flashers}
+      {0x04, :emergency_flashers_active_state}
   """
 
   @spec_file "specs/honk_horn_flash_lights.json"

@@ -28,7 +28,7 @@ defmodule AutoApi.BrowserCapability do
       iex> B.description
       "Browser"
       iex> length(B.properties)
-      0
+      1
   """
 
   @spec_file "specs/browser.json"

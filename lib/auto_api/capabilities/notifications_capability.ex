@@ -28,7 +28,7 @@ defmodule AutoApi.NotificationsCapability do
       iex> N.description
       "Notifications"
       iex> length(N.properties)
-      3
+      4
   """
 
   @spec_file "specs/notifications.json"

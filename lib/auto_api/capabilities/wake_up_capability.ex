@@ -28,7 +28,7 @@ defmodule AutoApi.WakeUpCapability do
       iex> W.description
       "Wake Up"
       iex> length(W.properties)
-      0
+      1
   """
 
   @spec_file "specs/wake_up.json"

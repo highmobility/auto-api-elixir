@@ -28,9 +28,9 @@ defmodule AutoApi.RemoteControlCapability do
       iex> R.description
       "Remote Control"
       iex> length(R.properties)
-      2
+      3
       iex> R.properties
-      [{1, :control_mode}, {2, :angle}]
+      [{1, :control_mode}, {2, :angle}, {3, :speed}]
   """
 
   @spec_file "specs/remote_control.json"

@@ -28,7 +28,7 @@ defmodule AutoApi.TextInputCapability do
       iex> T.description
       "Text Input"
       iex> length(T.properties)
-      0
+      1
   """
 
   @spec_file "specs/text_input.json"
