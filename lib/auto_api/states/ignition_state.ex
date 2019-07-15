@@ -16,9 +16,9 @@
 #
 # Please inquire about commercial licensing options at
 # licensing@high-mobility.com
-defmodule AutoApi.EngineState do
+defmodule AutoApi.IgnitionState do
   @moduledoc """
-  Keeps Engine state
+  Keeps Ignition state
   """
 
   alias AutoApi.PropertyComponent
@@ -33,7 +33,7 @@ defmodule AutoApi.EngineState do
         }
 
   @doc """
-  Engine state
+  Ignition state
   """
   defstruct ignition: nil,
             accessories_ignition: nil,
@@ -45,8 +45,8 @@ defmodule AutoApi.EngineState do
   Build state based on binary value
 
     iex> bin = <<1, 0, 4, 1, 0, 1, 0>>
-    iex> AutoApi.EngineState.from_bin(bin)
-    %AutoApi.EngineState{ignition: %AutoApi.PropertyComponent{data: :ignition_off}}
+    iex> AutoApi.IgnitionState.from_bin(bin)
+    %AutoApi.IgnitionState{ignition: %AutoApi.PropertyComponent{data: :ignition_off}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -57,8 +57,8 @@ defmodule AutoApi.EngineState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.EngineState{ignition: %AutoApi.PropertyComponent{data: :ignition_off}}
-    iex> AutoApi.EngineState.to_bin(state)
+    iex> state = %AutoApi.IgnitionState{ignition: %AutoApi.PropertyComponent{data: :ignition_off}}
+    iex> AutoApi.IgnitionState.to_bin(state)
     <<1, 0, 4, 1, 0, 1, 0>>
   """
   def to_bin(%__MODULE__{} = state) do

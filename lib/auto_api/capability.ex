@@ -155,7 +155,7 @@ defmodule AutoApi.Capability do
   ## Examples
 
   iex> AutoApi.Capability.get_by_id(<<0x00, 0x35>>)
-  AutoApi.EngineCapability
+  AutoApi.IgnitionCapability
 
   iex> AutoApi.Capability.get_by_id(<<0xDE, 0xAD>>)
   nil

@@ -31,7 +31,7 @@ defmodule AutoApi.CapabilityHelper do
     AutoApi.DiagnosticsCapability,
     AutoApi.DoorsCapability,
     AutoApi.DriverFatigueCapability,
-    AutoApi.EngineCapability,
+    AutoApi.IgnitionCapability,
     AutoApi.FailureMessageCapability,
     AutoApi.FirmwareVersionCapability,
     AutoApi.FuelingCapability,

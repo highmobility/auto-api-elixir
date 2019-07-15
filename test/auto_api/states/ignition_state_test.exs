@@ -16,26 +16,7 @@
 #
 # Please inquire about commercial licensing options at
 # licensing@high-mobility.com
-defmodule AutoApi.EngineCapability do
-  @moduledoc """
-  Basic settings for Engine Capability
-
-      iex> alias AutoApi.EngineCapability, as: E
-      iex> E.identifier
-      <<0x00, 0x35>>
-      iex> E.name
-      :ignition
-      iex> E.description
-      "Ignition"
-      iex> List.last(E.properties)
-      {2, :accessories_ignition}
-  """
-
-  @spec_file "specs/ignition.json"
-  @type command_type :: :engine_state | :get_ignition_state | :turn_engine_on_off
-
-  @command_module AutoApi.NotImplemented
-  @state_module AutoApi.EngineState
-
-  use AutoApi.Capability
+defmodule AutoApi.IgnitionStateTest do
+  use ExUnit.Case
+  doctest AutoApi.IgnitionState
 end
