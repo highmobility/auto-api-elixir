@@ -29,7 +29,7 @@ defmodule AutoApi.CapabilityHelper do
     AutoApi.CruiseControlCapability,
     AutoApi.DashboardLightsCapability,
     AutoApi.DiagnosticsCapability,
-    AutoApi.DoorLocksCapability,
+    AutoApi.DoorsCapability,
     AutoApi.DriverFatigueCapability,
     AutoApi.EngineCapability,
     AutoApi.FailureMessageCapability,

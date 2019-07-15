@@ -45,8 +45,8 @@ defmodule AutoApi.VehicleStatusStateTest do
       |> AutoApi.DiagnosticsState.put_property(:speed, 42, DateTime.utc_now())
 
     door_state =
-      AutoApi.DoorLocksState.base()
-      |> AutoApi.DoorLocksState.append_property(:positions, %{
+      AutoApi.DoorsState.base()
+      |> AutoApi.DoorsState.append_property(:positions, %{
         door_location: :front_left,
         position: :closed
       })
@@ -58,7 +58,7 @@ defmodule AutoApi.VehicleStatusStateTest do
     diag_state_bin_size = byte_size(diag_state_bin)
 
     door_state_bin =
-      AutoApi.DoorLocksState.identifier() <> <<0x01>> <> AutoApi.DoorLocksState.to_bin(door_state)
+      AutoApi.DoorsState.identifier() <> <<0x01>> <> AutoApi.DoorsState.to_bin(door_state)
 
     door_state_bin_size = byte_size(door_state_bin)
 

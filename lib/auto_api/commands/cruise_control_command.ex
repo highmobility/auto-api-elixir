@@ -45,7 +45,7 @@ defmodule AutoApi.CruiseControlCommand do
   end
 
   @doc """
-  Converts DoorLocksCommand state to capability's state in binary
+  Converts Command state to capability's state in binary
   """
   @spec state(CruiseControlState.t()) :: binary
   def state(%CruiseControlState{} = state) do

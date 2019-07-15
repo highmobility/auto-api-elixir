@@ -16,21 +16,21 @@
 #
 # Please inquire about commercial licensing options at
 # licensing@high-mobility.com
-defmodule AutoApi.DoorLocksTest do
+defmodule AutoApi.DoorsTest do
   use ExUnit.Case
-  alias AutoApi.{DoorLocksCommand, DoorLocksState, PropertyComponent}
+  alias AutoApi.{DoorsCommand, DoorsState, PropertyComponent}
 
   describe "execute/2" do
     test "lock_unlock_doors lock command" do
-      command = DoorLocksCommand.to_bin(:lock_unlock_doors, lock_state: :lock)
+      command = DoorsCommand.to_bin(:lock_unlock_doors, lock_state: :lock)
 
       state =
-        DoorLocksState.append_property(%DoorLocksState{}, :locks, %{
+        DoorsState.append_property(%DoorsState{}, :locks, %{
           door_location: :front_right,
           lock_state: :unlocked
         })
 
-      assert {:state_changed, new_state} = DoorLocksCommand.execute(state, command)
+      assert {:state_changed, new_state} = DoorsCommand.execute(state, command)
 
       assert new_state.locks == [
                %PropertyComponent{data: %{door_location: :front_right, lock_state: :locked}}
@@ -38,15 +38,15 @@ defmodule AutoApi.DoorLocksTest do
     end
 
     test "lock_unlock_doors unlock command" do
-      command = DoorLocksCommand.to_bin(:lock_unlock_doors, lock_state: :unlock)
+      command = DoorsCommand.to_bin(:lock_unlock_doors, lock_state: :unlock)
 
       state =
-        DoorLocksState.append_property(%DoorLocksState{}, :locks, %{
+        DoorsState.append_property(%DoorsState{}, :locks, %{
           door_location: :front_right,
           lock_state: :locked
         })
 
-      assert {:state_changed, new_state} = DoorLocksCommand.execute(state, command)
+      assert {:state_changed, new_state} = DoorsCommand.execute(state, command)
 
       assert new_state.locks == [
                %PropertyComponent{data: %{door_location: :front_right, lock_state: :unlocked}}

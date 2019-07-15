@@ -172,8 +172,8 @@ defmodule AutoApi.Capability do
 
   ## Examples
 
-  iex> AutoApi.Capability.get_by_name("door_locks")
-  AutoApi.DoorLocksCapability
+  iex> AutoApi.Capability.get_by_name("doors")
+  AutoApi.DoorsCapability
 
   iex> AutoApi.Capability.get_by_name(:wake_up)
   AutoApi.WakeUpCapability

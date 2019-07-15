@@ -16,7 +16,7 @@
 #
 # Please inquire about commercial licensing options at
 # licensing@high-mobility.com
-defmodule AutoApi.DoorLocksState do
+defmodule AutoApi.DoorsState do
   @moduledoc """
   Door position possible values: :closed, :open
   Door lock possible values: :unlocked, :locked
@@ -62,11 +62,11 @@ defmodule AutoApi.DoorLocksState do
   @doc """
   Build state based on binary value
 
-    iex> AutoApi.DoorLocksState.from_bin(<<0x03, 2::integer-16, 0x00, 0x01>>)
-    %AutoApi.DoorLocksState{locks: [%{door_location: :front_left, lock_state: :locked}]}
+    iex> AutoApi.DoorsState.from_bin(<<0x03, 2::integer-16, 0x00, 0x01>>)
+    %AutoApi.DoorsState{locks: [%{door_location: :front_left, lock_state: :locked}]}
 
-    iex> AutoApi.DoorLocksState.from_bin(<<0x03, 2::integer-16, 0x05, 0x01>>)
-    %AutoApi.DoorLocksState{locks: [%{door_location: :all, lock_state: :locked}]}
+    iex> AutoApi.DoorsState.from_bin(<<0x03, 2::integer-16, 0x05, 0x01>>)
+    %AutoApi.DoorsState{locks: [%{door_location: :all, lock_state: :locked}]}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -75,7 +75,7 @@ defmodule AutoApi.DoorLocksState do
 
   @doc """
   Parse state to bin
-    iex> AutoApi.DoorLocksState.to_bin(%AutoApi.DoorLocksState{positions: [%{door_location: :front_left, position: :open}]})
+    iex> AutoApi.DoorsState.to_bin(%AutoApi.DoorsState{positions: [%{door_location: :front_left, position: :open}]})
     <<0x04, 2::integer-16, 0x00, 0x01>>
   """
   @spec to_bin(__MODULE__.t()) :: binary

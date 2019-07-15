@@ -44,7 +44,7 @@ defmodule AutoApi.FuelingCommand do
   end
 
   @doc """
-  Converts DoorLocksCommand state to capability's state in binary
+  Converts Command state to capability's state in binary
   """
   @spec state(FuelingState.t()) :: binary
   def state(%FuelingState{} = state) do

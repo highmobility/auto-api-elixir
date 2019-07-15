@@ -16,35 +16,7 @@
 #
 # Please inquire about commercial licensing options at
 # licensing@high-mobility.com
-defmodule AutoApi.DoorLocksStateTest do
+defmodule AutoApi.DoorsCapabilityTest do
   use ExUnit.Case
-  alias AutoApi.DoorLocksState
-
-  test "to_bin & from_bin" do
-    state =
-      %DoorLocksState{}
-      |> DoorLocksState.append_property(:positions, %{
-        door_location: :front_left,
-        position: :closed
-      })
-      |> DoorLocksState.append_property(:positions, %{
-        door_location: :front_right,
-        position: :open
-      })
-      |> DoorLocksState.append_property(:inside_locks, %{
-        door_location: :front_right,
-        lock_state: :unlocked
-      })
-      |> DoorLocksState.append_property(:locks, %{
-        door_location: :front_right,
-        lock_state: :unlocked
-      })
-
-    new_state =
-      state
-      |> DoorLocksState.to_bin()
-      |> DoorLocksState.from_bin()
-
-    assert state == new_state
-  end
+  doctest AutoApi.DoorsCapability
 end

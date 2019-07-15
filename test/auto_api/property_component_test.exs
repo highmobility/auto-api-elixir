@@ -127,8 +127,8 @@ defmodule AutoApi.PropertyComponentTest do
       }
 
       state =
-        AutoApi.DoorLocksState.base()
-        |> AutoApi.DoorLocksState.append_property(:positions, %{
+        AutoApi.DoorsState.base()
+        |> AutoApi.DoorsState.append_property(:positions, %{
           door_location: :front_left,
           position: :closed
         })

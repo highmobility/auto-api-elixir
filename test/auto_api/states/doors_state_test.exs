@@ -16,28 +16,35 @@
 #
 # Please inquire about commercial licensing options at
 # licensing@high-mobility.com
-defmodule AutoApi.DoorLocksCapability do
-  @moduledoc """
-  Basic settings for Door Locks Capability
+defmodule AutoApi.DoorsStateTest do
+  use ExUnit.Case
+  alias AutoApi.DoorsState
 
-      iex> alias AutoApi.DoorLocksCapability, as: D
-      iex> D.identifier
-      <<0x00, 0x20>>
-      iex> D.name
-      :doors
-      iex> D.description
-      "Doors"
-      iex> length(D.properties)
-      5
-      iex> List.last(D.properties)
-      {0x06, :locks_state}
-  """
+  test "to_bin & from_bin" do
+    state =
+      %DoorsState{}
+      |> DoorsState.append_property(:positions, %{
+        door_location: :front_left,
+        position: :closed
+      })
+      |> DoorsState.append_property(:positions, %{
+        door_location: :front_right,
+        position: :open
+      })
+      |> DoorsState.append_property(:inside_locks, %{
+        door_location: :front_right,
+        lock_state: :unlocked
+      })
+      |> DoorsState.append_property(:locks, %{
+        door_location: :front_right,
+        lock_state: :unlocked
+      })
 
-  @spec_file "specs/doors.json"
-  @type command_type :: :get_lock_state | :lock_state | :lock_unlock_doors
+    new_state =
+      state
+      |> DoorsState.to_bin()
+      |> DoorsState.from_bin()
 
-  @command_module AutoApi.DoorLocksCommand
-  @state_module AutoApi.DoorLocksState
-
-  use AutoApi.Capability
+    assert state == new_state
+  end
 end
