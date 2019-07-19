@@ -20,7 +20,7 @@ defmodule AutoApi.TachographCommand do
   @moduledoc """
   Handles Tachograph commands and apply binary commands on `%AutoApi.TachographState{}`
   """
-  @behaviour AutoApi.Command
+  use AutoApi.Command
 
   alias AutoApi.TachographState
   alias AutoApi.TachographCapability
@@ -49,14 +49,5 @@ defmodule AutoApi.TachographCommand do
   @spec state(TachographState.t()) :: binary
   def state(%TachographState{} = state) do
     <<0x01, TachographState.to_bin(state)::binary>>
-  end
-
-  @doc """
-  Converts command to binary format
-  """
-  @spec to_bin(TachographCapability.command_type(), list(any())) :: binary
-  def to_bin(:get_tachograph_state, []) do
-    cmd_id = TachographCapability.command_id(:get_tachograph_state)
-    <<cmd_id>>
   end
 end

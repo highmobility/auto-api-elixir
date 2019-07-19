@@ -22,7 +22,7 @@ defmodule AutoApi.CommandTest do
   doctest AutoApi.Command
 
   describe "to_bin/3" do
-    test "convert diagnostics_state command" do
+    test "convert set command" do
       state =
         %DiagnosticsState{}
         |> DiagnosticsState.put_property(:mileage, 100)

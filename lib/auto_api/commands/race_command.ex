@@ -20,7 +20,7 @@ defmodule AutoApi.RaceCommand do
   @moduledoc """
   Handles Race commands and apply binary commands on `%AutoApi.RaceState{}`
   """
-  @behaviour AutoApi.Command
+  use AutoApi.Command
 
   alias AutoApi.RaceState
   alias AutoApi.RaceCapability
@@ -49,14 +49,5 @@ defmodule AutoApi.RaceCommand do
   @spec state(RaceState.t()) :: binary
   def state(%RaceState{} = state) do
     <<0x01, RaceState.to_bin(state)::binary>>
-  end
-
-  @doc """
-  Converts command to binary format
-  """
-  @spec to_bin(RaceCapability.command_type(), list(any())) :: binary
-  def to_bin(:get_race_state, []) do
-    cmd_id = RaceCapability.command_id(:get_race_state)
-    <<cmd_id>>
   end
 end

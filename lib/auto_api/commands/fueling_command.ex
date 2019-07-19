@@ -20,7 +20,7 @@ defmodule AutoApi.FuelingCommand do
   @moduledoc """
   Handles  commands and apply binary commands on `%AutoApi.FuelingState{}`
   """
-  @behaviour AutoApi.Command
+  use AutoApi.Command
 
   alias AutoApi.FuelingState
   alias AutoApi.FuelingCapability
@@ -49,20 +49,5 @@ defmodule AutoApi.FuelingCommand do
   @spec state(FuelingState.t()) :: binary
   def state(%FuelingState{} = state) do
     <<0x01, FuelingState.to_bin(state)::binary>>
-  end
-
-  @doc """
-  Returns binary command
-  """
-  @spec to_bin(FuelingCapability.command_type(), list(any)) :: binary
-  def to_bin(:get_gas_flap_state, _args) do
-    cmd_id = FuelingCapability.command_id(:get_gas_flap_state)
-    <<cmd_id>>
-  end
-
-  def to_bin(:control_gas_flap = cmd, gas_flap_position: state) do
-    cmd_id = FuelingCapability.command_id(cmd)
-    gas_flap_value = if state == :close, do: 0x00, else: 0x01
-    <<cmd_id, 0x01, gas_flap_value>>
   end
 end

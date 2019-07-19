@@ -20,7 +20,7 @@ defmodule AutoApi.DoorsCommand do
   @moduledoc """
   Handles  commands and apply binary commands on `%AutoApi.DoorsState{}`
   """
-  @behaviour AutoApi.Command
+  use AutoApi.Command
 
   alias AutoApi.{DoorsCapability, DoorsState, PropertyComponent}
 
@@ -86,30 +86,5 @@ defmodule AutoApi.DoorsCommand do
   @spec state(DoorsState.t()) :: binary
   def state(%DoorsState{} = state) do
     <<0x01, DoorsState.to_bin(state)::binary>>
-  end
-
-  @doc """
-  Returns binary command
-      iex> AutoApi.DoorsCommand.to_bin(:get_lock_state, [])
-      <<0x00>>
-
-      iex> AutoApi.DoorsCommand.to_bin(:lock_unlock_doors, [lock_state: :unlock])
-      <<0x12, 0x01, 1::integer-16, 0x00>>
-      iex> AutoApi.DoorsCommand.to_bin(:lock_unlock_doors, [lock_state: :lock])
-      <<0x12, 0x01, 1::integer-16, 0x01>>
-  """
-  @spec to_bin(DoorsCapability.command_type(), list(any)) :: binary
-  def to_bin(:get_lock_state, _args) do
-    cmd_id = DoorsCapability.command_id(:get_lock_state)
-    <<cmd_id>>
-  end
-
-  def to_bin(:lock_unlock_doors, lock_state: lock_state) when lock_state in [:lock, :unlock] do
-    lock_state_bin = if lock_state == :unlock, do: 0x00, else: 0x01
-    prop_comp = <<1, 0, 1, lock_state_bin>>
-
-    cmd_id = DoorsCapability.command_id(:lock_unlock_doors)
-
-    <<cmd_id>> <> <<0x01, 4::integer-16, prop_comp::binary>>
   end
 end

@@ -20,7 +20,7 @@ defmodule AutoApi.VehicleTimeCommand do
   @moduledoc """
   Handles  commands and apply binary commands on `%AutoApi.VehicleTimeState{}`
   """
-  @behaviour AutoApi.Command
+  use AutoApi.Command
 
   alias AutoApi.VehicleTimeState
   alias AutoApi.VehicleTimeCapability
@@ -49,14 +49,5 @@ defmodule AutoApi.VehicleTimeCommand do
   @spec state(VehicleTimeState.t()) :: binary
   def state(%VehicleTimeState{} = state) do
     <<0x01, VehicleTimeState.to_bin(state)::binary>>
-  end
-
-  @doc """
-  Returns binary command
-  """
-  @spec to_bin(VehicleTimeCapability.command_type(), list(any)) :: binary
-  def to_bin(:get_vehicle_time = msg, _args) do
-    cmd_id = VehicleTimeCapability.command_id(msg)
-    <<cmd_id>>
   end
 end

@@ -20,7 +20,7 @@ defmodule AutoApi.PowerTakeoffCommand do
   @moduledoc """
   Handles  commands and apply binary commands on `%AutoApi.PowerTakeoffState{}`
   """
-  @behaviour AutoApi.Command
+  use AutoApi.Command
 
   alias AutoApi.PowerTakeoffState
   alias AutoApi.PowerTakeoffCapability
@@ -49,14 +49,5 @@ defmodule AutoApi.PowerTakeoffCommand do
   @spec state(PowerTakeoffState.t()) :: binary
   def state(%PowerTakeoffState{} = state) do
     <<0x01, PowerTakeoffState.to_bin(state)::binary>>
-  end
-
-  @doc """
-  Returns binary command
-  """
-  @spec to_bin(PowerTakeoffCapability.command_type(), list(any)) :: binary
-  def to_bin(:get_power_takeoff_state = msg, _args) do
-    cmd_id = PowerTakeoffCapability.command_id(msg)
-    <<cmd_id>>
   end
 end

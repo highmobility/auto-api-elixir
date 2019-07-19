@@ -201,6 +201,8 @@ defmodule AutoApi.State do
           def property_name(unquote(prop_id)), do: unquote(prop_name)
           def property_id(unquote(prop_name)), do: unquote(prop_id)
 
+          def property_spec(unquote(prop_name)), do: unquote(Macro.escape(prop))
+
           case unquote(prop["type"]) do
             "enum" ->
               defp parse_bin_property(unquote(prop_id), _size, property_component_binary) do

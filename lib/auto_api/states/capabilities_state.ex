@@ -122,8 +122,8 @@ defmodule AutoApi.CapabilitiesState do
     encoded_binary <> <<0x01>> <> <<len::integer-16>> <> cap_id <> encoded_commands
   end
 
-  defp encode_command(cap_module, command_name, encoded_commands) do
-    command_id = apply(cap_module, :command_id, [command_name])
+  defp encode_command(_cap_module, command_name, encoded_commands) do
+    command_id = 0x01
 
     encoded_commands <> <<command_id::8>>
   end

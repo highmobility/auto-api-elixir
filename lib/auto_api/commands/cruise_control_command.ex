@@ -20,7 +20,7 @@ defmodule AutoApi.CruiseControlCommand do
   @moduledoc """
   Handles  commands and apply binary commands on `%AutoApi.CruiseControlState{}`
   """
-  @behaviour AutoApi.Command
+  use AutoApi.Command
 
   alias AutoApi.CruiseControlState
   alias AutoApi.CruiseControlCapability
@@ -50,19 +50,5 @@ defmodule AutoApi.CruiseControlCommand do
   @spec state(CruiseControlState.t()) :: binary
   def state(%CruiseControlState{} = state) do
     <<0x01, CruiseControlState.to_bin(state)::binary>>
-  end
-
-  @doc """
-  Returns binary command
-  """
-  @spec to_bin(CruiseControlCapability.command_type(), list(any)) :: binary
-  def to_bin(:get_cruise_control_state = msg, _args) do
-    cmd_id = CruiseControlCapability.command_id(msg)
-    <<cmd_id>>
-  end
-
-  def to_bin(:activate_deactivate_cruise_control = msg, []) do
-    cmd_id = CruiseControlCapability.command_id(msg)
-    <<cmd_id>>
   end
 end

@@ -20,7 +20,7 @@ defmodule AutoApi.DashboardLightsCommand do
   @moduledoc """
   Handles Dashboard Lights commands and apply binary commands on `%AutoApi.DashboardLightsState{}`
   """
-  @behaviour AutoApi.Command
+  use AutoApi.Command
 
   alias AutoApi.DashboardLightsState
   alias AutoApi.DashboardLightsCapability
@@ -51,14 +51,5 @@ defmodule AutoApi.DashboardLightsCommand do
   @spec state(DashboardLightsState.t()) :: binary
   def state(%DashboardLightsState{} = state) do
     <<0x01, DashboardLightsState.to_bin(state)::binary>>
-  end
-
-  @doc """
-  Converts command to binary format
-  """
-  @spec to_bin(DashboardLightsCapability.command_type(), list(any())) :: binary
-  def to_bin(:get_dashboard_lights, []) do
-    cmd_id = DashboardLightsCapability.command_id(:get_dashboard_lights)
-    <<cmd_id>>
   end
 end

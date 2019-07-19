@@ -20,7 +20,7 @@ defmodule AutoApi.ChargingCommand do
   @moduledoc """
   Handles Charging commands and apply binary commands on `%AutoApi.ChargingState{}`
   """
-  @behaviour AutoApi.Command
+  use AutoApi.Command
 
   alias AutoApi.ChargingState
   alias AutoApi.ChargingCapability
@@ -53,14 +53,5 @@ defmodule AutoApi.ChargingCommand do
   @spec state(ChargingState.t()) :: binary
   def state(%ChargingState{} = state) do
     <<0x01, ChargingState.to_bin(state)::binary>>
-  end
-
-  @doc """
-  Converts command to binary format
-  """
-  @spec to_bin(ChargingCapability.command_type(), list(any())) :: binary
-  def to_bin(:get_charge_state, []) do
-    cmd_id = ChargingCapability.command_id(:get_charge_state)
-    <<cmd_id>>
   end
 end

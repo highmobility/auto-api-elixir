@@ -100,7 +100,7 @@ defmodule AutoApi.Capability do
       def description, do: @desc
 
       @doc """
-      Retunrs properties under #{@desc}:
+      Returns properties under #{@desc}:
       ```
       #{inspect @properties, base: :hex}
       ```

@@ -20,7 +20,7 @@ defmodule AutoApi.HoodCommand do
   @moduledoc """
   Handles Hood commands and apply binary commands on `%AutoApi.HoodState{}`
   """
-  @behaviour AutoApi.Command
+  use AutoApi.Command
 
   alias AutoApi.HoodState
   alias AutoApi.HoodCapability
@@ -49,14 +49,5 @@ defmodule AutoApi.HoodCommand do
   @spec state(HoodState.t()) :: binary
   def state(%HoodState{} = state) do
     <<0x01, HoodState.to_bin(state)::binary>>
-  end
-
-  @doc """
-  Converts command to binary format
-  """
-  @spec to_bin(HoodCapability.command_type(), list(any())) :: binary
-  def to_bin(:get_hood_state, []) do
-    cmd_id = HoodCapability.command_id(:get_hood_state)
-    <<cmd_id>>
   end
 end

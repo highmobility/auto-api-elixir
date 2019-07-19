@@ -20,7 +20,7 @@ defmodule AutoApi.WindowsCommand do
   @moduledoc """
   Handles Windows commands and apply binary commands on `%AutoApi.WindowsState{}`
   """
-  @behaviour AutoApi.Command
+  use AutoApi.Command
 
   alias AutoApi.WindowsState
   alias AutoApi.WindowsCapability
@@ -54,19 +54,5 @@ defmodule AutoApi.WindowsCommand do
   @spec state(WindowsState.t()) :: binary
   def state(%WindowsState{} = state) do
     <<0x01, WindowsState.to_bin(state)::binary>>
-  end
-
-  @doc """
-  Converts a command to binary format
-  """
-  @spec to_bin(WindowsCapability.command_type(), list(any())) :: binary
-  def to_bin(:get_windows_state, []) do
-    cmd_id = WindowsCapability.command_id(:get_windows_state)
-    <<cmd_id>>
-  end
-
-  def to_bin(:control_windows, _args) do
-    # TODO
-    raise "Not implemented!"
   end
 end

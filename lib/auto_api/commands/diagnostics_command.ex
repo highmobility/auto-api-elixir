@@ -20,7 +20,7 @@ defmodule AutoApi.DiagnosticsCommand do
   @moduledoc """
   Handles Diagnostics commands and apply binary commands on `%AutoApi.DiagnosticsState{}`
   """
-  @behaviour AutoApi.Command
+  use AutoApi.Command
 
   alias AutoApi.DiagnosticsState
   alias AutoApi.DiagnosticsCapability
@@ -49,19 +49,5 @@ defmodule AutoApi.DiagnosticsCommand do
   @spec state(DiagnosticsState.t()) :: binary
   def state(%DiagnosticsState{} = state) do
     <<0x01, DiagnosticsState.to_bin(state)::binary>>
-  end
-
-  @doc """
-  Converts command to binary format
-  """
-  @spec to_bin(DiagnosticsCapability.command_type(), list(any())) :: binary
-  def to_bin(:get_diagnostics_state, []) do
-    cmd_id = DiagnosticsCapability.command_id(:get_diagnostics_state)
-    <<cmd_id>>
-  end
-
-  def to_bin(:diagnostics_state = cmd, [state_value]) do
-    cmd_id = DiagnosticsCapability.command_id(cmd)
-    <<cmd_id>> <> DiagnosticsState.to_bin(state_value)
   end
 end

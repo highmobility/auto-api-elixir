@@ -20,7 +20,7 @@ defmodule AutoApi.FailureMessageCommand do
   @moduledoc """
   Handles FailureMessage commands and apply binary commands on `%AutoApi.FailureMessageState{}`
   """
-  @behaviour AutoApi.Command
+  use AutoApi.Command
 
   alias AutoApi.FailureMessageState
   alias AutoApi.FailureMessageCapability

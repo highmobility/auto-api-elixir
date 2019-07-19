@@ -20,7 +20,7 @@ defmodule AutoApi.RooftopControlCommand do
   @moduledoc """
   Handles Hood commands and apply binary commands on `%AutoApi.RooftopControlState{}`
   """
-  @behaviour AutoApi.Command
+  use AutoApi.Command
 
   alias AutoApi.RooftopControlState
   alias AutoApi.RooftopControlCapability
@@ -50,14 +50,5 @@ defmodule AutoApi.RooftopControlCommand do
   @spec state(RooftopControlState.t()) :: binary
   def state(%RooftopControlState{} = state) do
     <<0x01, RooftopControlState.to_bin(state)::binary>>
-  end
-
-  @doc """
-  Converts command to binary format
-  """
-  @spec to_bin(RooftopControlCapability.command_type(), list(any())) :: binary
-  def to_bin(:get_rooftop_state, []) do
-    cmd_id = RooftopControlCapability.command_id(:get_rooftop_state)
-    <<cmd_id>>
   end
 end
