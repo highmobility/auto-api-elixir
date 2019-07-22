@@ -29,7 +29,7 @@ defmodule AutoApi.Command do
 
       @capability __MODULE__
                   |> Atom.to_string()
-                  |> String.replace("State", "Capability")
+                  |> String.replace("Command", "Capability")
                   |> String.to_atom()
 
       @doc """
@@ -59,7 +59,7 @@ defmodule AutoApi.Command do
         preamble = <<@capability.identifier() :: binary, 0x00>>
         state = @capability.state()
 
-        Enum.into(properties, preamble, &state.property_id/1)
+        Enum.reduce(properties, preamble, & &2 <> <<state.property_id(&1) :: 8>>)
       end
 
       @spec to_bin(:set, list({:atom, AutoApi.PropertyComponent.t()})) :: binary()

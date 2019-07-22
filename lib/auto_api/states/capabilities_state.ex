@@ -127,4 +127,9 @@ defmodule AutoApi.CapabilitiesState do
 
     encoded_commands <> <<command_id::8>>
   end
+
+  # Implement this manually as this is the only capability state which doesn't `use`
+  # AutoApi.State
+  def property_id(:capabilities), do: 0x01
+  def property_name(0x01), do: :capabilities
 end

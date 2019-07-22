@@ -18,18 +18,33 @@
 # licensing@high-mobility.com
 defmodule AutoApi.CommandTest do
   use ExUnit.Case
-  alias AutoApi.{Command, DiagnosticsState, DiagnosticsCapability}
   doctest AutoApi.Command
 
-  describe "to_bin/3" do
-    test "convert set command" do
-      state =
-        %DiagnosticsState{}
-        |> DiagnosticsState.put_property(:mileage, 100)
-        |> DiagnosticsState.put_property(:fuel_level, 10)
+  alias AutoApi.Capability
 
-      expected_bin = DiagnosticsCapability.identifier() <> <<1>> <> DiagnosticsState.to_bin(state)
-      assert Command.to_bin(:diagnostics, :diagnostics_state, [state]) == expected_bin
+  describe "to_bin/2" do
+    test "get/2 works with all properties and all capabilities" do
+      results =
+        Capability.all()
+        |> Enum.map(&{&1, &1.command})
+        |> Enum.reject(fn {_cap, command} -> command == AutoApi.NotImplemented end)
+        |> Enum.map(fn {cap, command} ->
+          prop_names = Enum.map(cap.properties, &elem(&1, 1))
+
+          {cap, apply(command, :to_bin, [:get, prop_names])}
+        end)
+
+      assert Enum.all?(results, &assert_get_command/1)
+    end
+
+    defp assert_get_command({capability, binary_command}) do
+      preamble = <<capability.identifier() :: binary, 0x00>>
+      command_bin =
+        capability.properties
+        |> Enum.map(&elem(&1, 0))
+        |> Enum.reduce(<<>>, &(&2 <> <<&1>>))
+
+      assert <<preamble :: binary, command_bin :: binary>> == binary_command
     end
   end
 end
