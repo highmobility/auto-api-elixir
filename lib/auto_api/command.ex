@@ -52,7 +52,7 @@ defmodule AutoApi.Command do
 
           iex> prop = %AutoApi.PropertyComponent{data: 42, timestamp: ~U[2019-07-18 13:58:40.489250Z], failure: nil}
           iex> AutoApi.DiagnosticsCommand.to_bin(:set, speed: prop)
-          <<0x00, 0x33, 0x01, 0x03, 1, 0, 2, 0, 42, 2, 0, 8, 0, 0, 1, 108, 5, 96, 184, 105>
+          <<0x00, 0x33, 0x01, 0x03, 1, 0, 2, 0, 42, 2, 0, 8, 0, 0, 1, 108, 5, 96, 184, 105>>
       """
       @spec to_bin(:get, list(:atom)) :: binary()
       def to_bin(:get, properties) when is_list(properties) do
