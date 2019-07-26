@@ -20,10 +20,10 @@ defmodule AutoApi.CommandTest do
   use ExUnit.Case
   doctest AutoApi.Command
 
-  alias AutoApi.Capability
+  alias AutoApi.{Capability, PropertyComponent}
 
   describe "to_bin/2" do
-    test "get/2 works with all properties and all capabilities" do
+    test "get works with all properties and all capabilities" do
       results =
         Capability.all()
         |> Enum.map(&{&1, &1.command})
@@ -45,6 +45,15 @@ defmodule AutoApi.CommandTest do
         |> Enum.reduce(<<>>, &(&2 <> <<&1>>))
 
       assert <<preamble :: binary, command_bin :: binary>> == binary_command
+    end
+
+    test "set works" do
+      # Generating automatically values is hard so for now I'll just test manually one
+      timestamp = ~U[2019-07-26 15:36:33.867501Z]
+      properties = [inside_locks_state: %PropertyComponent{data: :unlocked, timestamp: timestamp}]
+
+      bin_command = AutoApi.DoorsCommand.to_bin(:set, properties)
+      assert bin_command == <<0, 32, 1, 5, 1, 0, 1, 0, 2, 0, 8, 0, 0, 1, 108, 46, 237, 55, 75>>
     end
   end
 end
