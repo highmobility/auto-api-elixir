@@ -138,7 +138,7 @@
                             "name": "rear"
                         }
                     ],
-                    "name": "fog_light_location",
+                    "name": "location",
                     "size": 1
                 },
                 {
@@ -155,7 +155,7 @@
                             "name": "active"
                         }
                     ],
-                    "name": "fog_light_state",
+                    "name": "state",
                     "size": 1
                 }
             ],
@@ -187,7 +187,7 @@
                             "name": "rear_left"
                         }
                     ],
-                    "name": "reading_lamp_location",
+                    "name": "location",
                     "size": 1
                 },
                 {
@@ -204,7 +204,7 @@
                             "name": "active"
                         }
                     ],
-                    "name": "reading_lamp_state",
+                    "name": "state",
                     "size": 1
                 }
             ],
@@ -228,7 +228,7 @@
                             "name": "rear"
                         }
                     ],
-                    "name": "interior_light_location",
+                    "name": "location",
                     "size": 1
                 },
                 {
@@ -245,7 +245,7 @@
                             "name": "active"
                         }
                     ],
-                    "name": "interior_light_state",
+                    "name": "state",
                     "size": 1
                 }
             ],

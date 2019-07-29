@@ -39,18 +39,18 @@ defmodule AutoApi.LightsState do
   @type light_location :: :front | :rear
   @type ambient_light :: %{rgb_red: integer, rgb_green: integer, rgb_blue: integer}
   @type fog_light :: %PropertyComponent{
-          data: %{fog_light_location: light_location, fog_light_state: CommonData.activity()}
+          data: %{location: light_location, state: CommonData.activity()}
         }
   @type reading_lamp :: %PropertyComponent{
           data: %{
-            reading_lamp_location: CommonData.location(),
-            reading_lamp_state: CommonData.activity()
+            location: CommonData.location(),
+            state: CommonData.activity()
           }
         }
   @type interior_lights :: %PropertyComponent{
           data: %{
-            interior_light_location: light_location,
-            interior_light_state: CommonData.activity()
+            location: light_location,
+            state: CommonData.activity()
           }
         }
 
