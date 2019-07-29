@@ -1,14 +1,16 @@
 {
     "category": "chassis",
     "name": "honk_horn_flash_lights",
-    "getters": [
-        {
-            "name": "get_flashers_state",
-            "properties": [
-                1
-            ]
-        }
-    ],
+    "getters": {
+        "static": [
+            {
+                "name": "get_flashers_state",
+                "properties": [
+                    1
+                ]
+            }
+        ]
+    },
     "state": [
         1
     ],
