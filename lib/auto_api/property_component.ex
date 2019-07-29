@@ -72,16 +72,6 @@ defmodule AutoApi.PropertyComponent do
 
   defp data_to_bin(nil, _), do: <<>>
 
-  defp data_to_bin(data, specs) when is_list(specs) do
-    specs
-    |> Enum.map(fn %{"name" => name} = spec ->
-      data
-      |> Map.get(String.to_atom(name))
-      |> data_to_bin(spec)
-    end)
-    |> :binary.list_to_bin()
-  end
-
   defp data_to_bin(data, %{"type" => "string"}) do
     data
   end
@@ -119,6 +109,21 @@ defmodule AutoApi.PropertyComponent do
     size_bit = size * 8
 
     <<data::integer-size(size_bit)>>
+  end
+
+  defp data_to_bin(data, %{"type" => "timestamp"}) do
+    timestamp_to_bin(data)
+  end
+
+  defp data_to_bin(data, %{"type" => "custom"} = specs) do
+    specs
+    |> Map.get("items")
+    |> Enum.map(fn %{"name" => name} = spec ->
+      data
+      |> Map.get(String.to_atom(name))
+      |> data_to_bin(spec)
+    end)
+    |> :binary.list_to_bin()
   end
 
   defp data_to_bin(%state_mod{} = state, %{"type" => "capability_state"}) do

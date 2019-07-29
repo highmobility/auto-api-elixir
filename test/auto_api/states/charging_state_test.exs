@@ -22,6 +22,7 @@ defmodule AutoApi.ChargingStateTest do
   alias AutoApi.{PropertyComponent, ChargingState}
 
   test "to_bin & from_bin" do
+    date = ~U[2019-07-29 10:15:09.654Z]
     state = %ChargingState{
       estimated_range: %PropertyComponent{data: 1000},
       battery_level: %PropertyComponent{data: 10.001},
@@ -40,7 +41,7 @@ defmodule AutoApi.ChargingStateTest do
       departure_times: [%PropertyComponent{data: %{active_state: :inactive, hour: 1, minute: 2}}],
       reduction_times: [%PropertyComponent{data: %{start_stop: :start, hour: 1, minute: 2}}],
       battery_temperature: %PropertyComponent{data: 10.008},
-      timers: [%PropertyComponent{data: %{timer_type: :preferred_start_time, date: 9900}}],
+      timers: [%PropertyComponent{data: %{timer_type: :preferred_start_time, date: date}}],
       plugged_in: %PropertyComponent{data: :disconnected},
       charging_state: %PropertyComponent{data: :not_charging}
     }

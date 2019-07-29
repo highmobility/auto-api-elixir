@@ -232,8 +232,7 @@ defmodule AutoApi.State do
                 head <> property_component_binary
               end
 
-            nil ->
-              # list type
+            "custom" ->
               defp parse_state_property(unquote(prop_name), []) do
                 <<>>
               end
@@ -245,7 +244,7 @@ defmodule AutoApi.State do
                     property_component_binary =
                       AutoApi.PropertyComponent.to_bin(
                         item,
-                        unquote(Macro.escape(prop["items"]))
+                        unquote(Macro.escape(prop))
                       )
 
                     head = <<unquote(prop_id), byte_size(property_component_binary)::integer-16>>
@@ -258,7 +257,7 @@ defmodule AutoApi.State do
                   property_component_binary =
                     AutoApi.PropertyComponent.to_bin(
                       data,
-                      unquote(Macro.escape(prop["items"]))
+                      unquote(Macro.escape(prop))
                     )
 
                   head = <<unquote(prop_id), byte_size(property_component_binary)::integer-16>>
