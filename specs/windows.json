@@ -44,7 +44,7 @@
                             "name": "hatch"
                         }
                     ],
-                    "name": "window_location",
+                    "name": "location",
                     "size": 1
                 },
                 {
@@ -86,7 +86,7 @@
                             "name": "hatch"
                         }
                     ],
-                    "name": "window_location",
+                    "name": "location",
                     "size": 1
                 },
                 {
@@ -106,7 +106,7 @@
                             "name": "intermediate"
                         }
                     ],
-                    "name": "window_position",
+                    "name": "position",
                     "size": 1
                 }
             ],
