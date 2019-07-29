@@ -17,11 +17,11 @@
             "values": [
                 {
                     "id": 0,
-                    "name": false
+                    "name": "off"
                 },
                 {
                     "id": 1,
-                    "name": true
+                    "name": "on"
                 }
             ],
             "id": 1,
@@ -33,11 +33,11 @@
             "values": [
                 {
                     "id": 0,
-                    "name": false
+                    "name": "off"
                 },
                 {
                     "id": 1,
-                    "name": true
+                    "name": "on"
                 }
             ],
             "id": 2,
