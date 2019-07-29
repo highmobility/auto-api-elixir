@@ -25,7 +25,7 @@ defmodule AutoApi.MaintenanceStateTest do
       %MaintenanceState{}
       |> MaintenanceState.put_property(
         :next_inspection_date,
-        DateTime.to_unix(DateTime.utc_now())
+        DateTime.truncate(DateTime.utc_now(), :millisecond)
       )
 
     new_state =
