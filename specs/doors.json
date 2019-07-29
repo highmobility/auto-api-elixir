@@ -1,11 +1,7 @@
 {
     "category": "digital_key",
     "name": "doors",
-    "getters": {
-        "default": {
-            "name_override": "locks"
-        }
-    },
+    "getters": "default",
     "state": "all",
     "api": {
         "intro": 1,
@@ -18,7 +14,7 @@
     "properties": [
         {
             "multiple": true,
-            "name": "doors_inside_locks",
+            "name": "inside_locks",
             "items": [
                 {
                     "type": "enum",
@@ -40,7 +36,7 @@
                             "id": 3
                         }
                     ],
-                    "name": "door_location",
+                    "name": "location",
                     "size": 1
                 },
                 {
@@ -65,7 +61,7 @@
         },
         {
             "multiple": true,
-            "name": "doors_locks",
+            "name": "locks",
             "items": [
                 {
                     "type": "enum",
@@ -87,7 +83,7 @@
                             "id": 3
                         }
                     ],
-                    "name": "door_location",
+                    "name": "location",
                     "size": 1
                 },
                 {
@@ -138,7 +134,7 @@
                             "id": 5
                         }
                     ],
-                    "name": "door_location",
+                    "name": "location",
                     "size": 1
                 },
                 {

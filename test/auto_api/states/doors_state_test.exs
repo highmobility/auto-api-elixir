@@ -24,19 +24,19 @@ defmodule AutoApi.DoorsStateTest do
     state =
       %DoorsState{}
       |> DoorsState.append_property(:positions, %{
-        door_location: :front_left,
+        location: :front_left,
         position: :closed
       })
       |> DoorsState.append_property(:positions, %{
-        door_location: :front_right,
+        location: :front_right,
         position: :open
       })
       |> DoorsState.append_property(:inside_locks, %{
-        door_location: :front_right,
+        location: :front_right,
         lock_state: :unlocked
       })
       |> DoorsState.append_property(:locks, %{
-        door_location: :front_right,
+        location: :front_right,
         lock_state: :unlocked
       })
 
