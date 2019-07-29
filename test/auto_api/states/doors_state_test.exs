@@ -18,6 +18,7 @@
 # licensing@high-mobility.com
 defmodule AutoApi.DoorsStateTest do
   use ExUnit.Case
+  doctest AutoApi.DoorsState
   alias AutoApi.DoorsState
 
   test "to_bin & from_bin" do

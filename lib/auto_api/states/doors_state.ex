@@ -66,11 +66,11 @@ defmodule AutoApi.DoorsState do
   @doc """
   Build state based on binary value
 
-    iex> AutoApi.DoorsState.from_bin(<<0x03, 2::integer-16, 0x00, 0x01>>)
-    %AutoApi.DoorsState{locks: [%{location: :front_left, lock_state: :locked}]}
+    iex> AutoApi.DoorsState.from_bin(<<0x03, 5::integer-16, 0x01, 2::integer-16, 0x00, 0x01>>)
+    %AutoApi.DoorsState{locks: [%AutoApi.PropertyComponent{data: %{location: :front_left, lock_state: :locked}}]}
 
-    iex> AutoApi.DoorsState.from_bin(<<0x03, 2::integer-16, 0x05, 0x01>>)
-    %AutoApi.DoorsState{locks: [%{location: :all, lock_state: :locked}]}
+    iex> AutoApi.DoorsState.from_bin(<<0x04, 5::integer-16,  0x01, 2::integer-16, 0x05, 0x00>>)
+    %AutoApi.DoorsState{positions: [%AutoApi.PropertyComponent{data: %{location: :all, position: :closed}}]}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -79,8 +79,8 @@ defmodule AutoApi.DoorsState do
 
   @doc """
   Parse state to bin
-    iex> AutoApi.DoorsState.to_bin(%AutoApi.DoorsState{positions: [%{location: :front_left, position: :open}]})
-    <<0x04, 2::integer-16, 0x00, 0x01>>
+    iex> AutoApi.DoorsState.to_bin(%AutoApi.DoorsState{positions: [%AutoApi.PropertyComponent{data: %{location: :front_left, position: :open}}]})
+    <<0x04, 5::integer-16, 0x01, 2::integer-16, 0x00, 0x01>>
   """
   @spec to_bin(__MODULE__.t()) :: binary
   def to_bin(%__MODULE__{} = state) do
