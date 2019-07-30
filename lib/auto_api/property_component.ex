@@ -219,8 +219,9 @@ defmodule AutoApi.PropertyComponent do
     end
   end
 
-  defp to_value(binary_data, specs) when is_list(specs) do
+  defp to_value(binary_data,  %{"type" => "custom"} = specs) do
     specs
+    |> Map.get("items")
     |> Enum.reduce({0, []}, fn spec, {counter, acc} ->
       size = spec["size"] || Keyword.get(acc, String.to_atom("#{spec["name"]}_size"))
       unless size, do: raise("couldn't find size for #{inspect(spec)}")

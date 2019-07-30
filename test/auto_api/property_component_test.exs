@@ -146,26 +146,31 @@ defmodule AutoApi.PropertyComponentTest do
       assert prop_comp.failure == nil
     end
 
-    test "converts map to bin" do
-      spec = [
-        %{
-          "name" => "location",
-          "size" => 1,
-          "type" => "enum",
-          "values" => [
-            %{"id" => 0, "name" => "front_left"},
-            %{"id" => 1, "name" => "front_right"},
-            %{"id" => 2, "name" => "rear_right"},
-            %{"id" => 3, "name" => "rear_left"}
-          ]
-        },
-        %{
-          "description" => "Tire pressure in BAR formatted in 4-bytes per IEEE 754",
-          "name" => "pressure",
-          "size" => 4,
-          "type" => "float"
-        }
-      ]
+    test "converts custom type to bin" do
+      spec = %{
+        "type" => "custom",
+        "size" => 2,
+        "id" => 0xFD,
+        "items" => [
+          %{
+            "name" => "location",
+            "size" => 1,
+            "type" => "enum",
+            "values" => [
+              %{"id" => 0, "name" => "front_left"},
+              %{"id" => 1, "name" => "front_right"},
+              %{"id" => 2, "name" => "rear_right"},
+              %{"id" => 3, "name" => "rear_left"}
+            ]
+          },
+          %{
+            "description" => "Tire pressure in BAR formatted in 4-bytes per IEEE 754",
+            "name" => "pressure",
+            "size" => 4,
+            "type" => "float"
+          },
+        ]
+      }
 
       prop_comp = %PropertyComponent{data: %{location: :front_left, pressure: 22.034}}
       bin_comp = PropertyComponent.to_bin(prop_comp, spec)
