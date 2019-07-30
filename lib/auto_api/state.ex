@@ -267,7 +267,7 @@ defmodule AutoApi.State do
 
               defp parse_bin_property(unquote(prop["id"]), _size, data) do
                 data_component =
-                  AutoApi.PropertyComponent.to_struct(data, unquote(Macro.escape(prop["items"])))
+                  AutoApi.PropertyComponent.to_struct(data, unquote(Macro.escape(prop)))
 
                 {unquote(prop_name), unquote(multiple), data_component}
               end

@@ -93,6 +93,24 @@ defmodule AutoApi.PropertyComponentTest do
       end
     end
 
+    property "converts timestamp to bin" do
+      forall data <- [timestamp: datetime(), datetime: datetime()] do
+        spec = %{"type" => "timestamp"}
+
+        prop_bin =
+          PropertyComponent.to_bin(
+            %PropertyComponent{data: data[:timestamp], timestamp: data[:datetime]},
+            spec
+          )
+
+        prop_comp = PropertyComponent.to_struct(prop_bin, spec)
+
+        assert prop_comp.data == data[:timestamp]
+        assert prop_comp.timestamp == data[:datetime]
+        assert prop_comp.failure == nil
+      end
+    end
+
     test "converts enum to bin" do
       datetime = DateTime.utc_now()
 
@@ -129,7 +147,7 @@ defmodule AutoApi.PropertyComponentTest do
       state =
         AutoApi.DoorsState.base()
         |> AutoApi.DoorsState.append_property(:positions, %{
-          door_location: :front_left,
+          location: :front_left,
           position: :closed
         })
 
@@ -180,24 +198,27 @@ defmodule AutoApi.PropertyComponentTest do
       assert PropertyComponent.to_struct(bin_comp, spec) == prop_comp
     end
 
-    property "converts map with string to bin" do
+    property "converts custom value with string to bin" do
       forall data <- [id: integer_2(), text: utf8(), datetime: datetime()] do
-        spec = [
-          %{
-            "name" => "id",
-            "size" => 2,
-            "type" => "integer"
-          },
-          %{
-            "name" => "text_size",
-            "size" => 2,
-            "type" => "integer"
-          },
-          %{
-            "name" => "text",
-            "type" => "string"
-          }
-        ]
+        spec = %{
+          "type" => "custom",
+          "items" => [
+            %{
+              "name" => "id",
+              "size" => 2,
+              "type" => "integer"
+            },
+            %{
+              "name" => "text_size",
+              "size" => 2,
+              "type" => "integer"
+            },
+            %{
+              "name" => "text",
+              "type" => "string"
+            }
+          ]
+        }
 
         text = data[:text]
         text_size = byte_size(text)
