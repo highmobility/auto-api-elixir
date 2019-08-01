@@ -88,7 +88,7 @@ defmodule AutoApi.VehicleStatusStateTest do
     refute diag_state.data.speed.failure
 
     assert [position] = door_state.data.positions
-    assert position.data.door_location == :front_left
+    assert position.data.location == :front_left
     assert position.data.position == :closed
     refute position.timestamp
     refute position.failure

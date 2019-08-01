@@ -36,9 +36,9 @@ defmodule AutoApi.VehicleTimeState do
   @doc """
   Build state based on binary value
 
-    iex> bin = <<1, 0, 11, 1, 0, 8, 0, 0, 0, 0, 0, 0, 0, 12>>
+    iex> bin = <<1, 0, 5, 1, 0, 2, 12, 42>>
     iex> AutoApi.VehicleTimeState.from_bin(bin)
-    %AutoApi.VehicleTimeState{vehicle_time: %AutoApi.PropertyComponent{data: 12}}
+    %AutoApi.VehicleTimeState{vehicle_time: %AutoApi.PropertyComponent{data: %{hour: 12, minute: 42}}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -48,9 +48,9 @@ defmodule AutoApi.VehicleTimeState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.VehicleTimeState{vehicle_time: %AutoApi.PropertyComponent{data: 12}}
+    iex> state = %AutoApi.VehicleTimeState{vehicle_time: %AutoApi.PropertyComponent{data: %{hour: 12, minute: 42}}}
     iex> AutoApi.VehicleTimeState.to_bin(state)
-    <<1, 0, 11, 1, 0, 8, 0, 0, 0, 0, 0, 0, 0, 12>>
+    <<1, 0, 5, 1, 0, 2, 12, 42>>
   """
   @spec to_bin(__MODULE__.t()) :: binary
   def to_bin(%__MODULE__{} = state) do
