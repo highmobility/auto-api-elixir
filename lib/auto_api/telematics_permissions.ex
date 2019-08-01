@@ -19,6 +19,8 @@
 defmodule AutoApi.TelematicsPermissions do
   @moduledoc """
   Utility module for handling AutoApi telematics permissions.
+
+  TODO: L11 rewrite/adjustments
   """
   @permissions_map_properties Map.new(
                                 for cap <- AutoApi.Capability.all(),
@@ -72,7 +74,7 @@ defmodule AutoApi.TelematicsPermissions do
     iex> AutoApi.TelematicsPermissions.to_sepc("race.accelerations")
     {:ok, %{id: 1, type: :property}}
 
-    iex> AutoApi.TelematicsPermissions.to_sepc("home_charger.authenticate_expire")
+    ie> AutoApi.TelematicsPermissions.to_sepc("home_charger.authenticate_expire")
     {:ok, %{id: 22, type: :message_type}}
 
     iex> AutoApi.TelematicsPermissions.to_sepc("i.dont.exist")
