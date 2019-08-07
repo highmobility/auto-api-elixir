@@ -23,7 +23,6 @@ defmodule AutoApi.PowerTakeoffCommand do
   use AutoApi.Command
 
   alias AutoApi.PowerTakeoffState
-  alias AutoApi.PowerTakeoffCapability
 
   @doc """
   Parses the binary command and makes changes or returns the state

@@ -23,7 +23,6 @@ defmodule AutoApi.ClimateCommand do
   use AutoApi.Command
 
   alias AutoApi.ClimateState
-  alias AutoApi.ClimateCapability
 
   @doc """
   Parses the binary command and makes changes or returns the state

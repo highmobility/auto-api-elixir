@@ -23,7 +23,6 @@ defmodule AutoApi.DiagnosticsCommand do
   use AutoApi.Command
 
   alias AutoApi.DiagnosticsState
-  alias AutoApi.DiagnosticsCapability
 
   @doc """
   Parses the binary command and makes changes or returns the state

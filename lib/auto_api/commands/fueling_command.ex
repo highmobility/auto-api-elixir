@@ -23,7 +23,6 @@ defmodule AutoApi.FuelingCommand do
   use AutoApi.Command
 
   alias AutoApi.FuelingState
-  alias AutoApi.FuelingCapability
 
   @doc """
   Parses the binary command and makes changes or returns the state

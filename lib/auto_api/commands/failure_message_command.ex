@@ -57,7 +57,6 @@ defmodule AutoApi.FailureMessageCommand do
       %FailureMessageState{}
       |> Map.merge(state)
 
-    cmd_id = FailureMessageCapability.command_id(:failure)
-    <<cmd_id>> <> FailureMessageState.to_bin(state)
+    <<0x01>> <> FailureMessageState.to_bin(state)
   end
 end

@@ -23,7 +23,6 @@ defmodule AutoApi.CruiseControlCommand do
   use AutoApi.Command
 
   alias AutoApi.CruiseControlState
-  alias AutoApi.CruiseControlCapability
 
   @doc """
   Parses the binary command and makes changes or returns the state

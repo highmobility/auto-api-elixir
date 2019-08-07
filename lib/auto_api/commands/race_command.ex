@@ -23,7 +23,6 @@ defmodule AutoApi.RaceCommand do
   use AutoApi.Command
 
   alias AutoApi.RaceState
-  alias AutoApi.RaceCapability
 
   @doc """
   Parses the binary command and makes changes or returns the state

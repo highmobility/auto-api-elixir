@@ -23,7 +23,6 @@ defmodule AutoApi.DashboardLightsCommand do
   use AutoApi.Command
 
   alias AutoApi.DashboardLightsState
-  alias AutoApi.DashboardLightsCapability
 
   @doc """
   Parses the binary command and makes changes or returns the state

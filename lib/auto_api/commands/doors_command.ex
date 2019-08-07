@@ -22,7 +22,7 @@ defmodule AutoApi.DoorsCommand do
   """
   use AutoApi.Command
 
-  alias AutoApi.{DoorsCapability, DoorsState, PropertyComponent}
+  alias AutoApi.{DoorsState, PropertyComponent}
 
   @lock_unlock_doors_spec %{
     "type" => "enum",

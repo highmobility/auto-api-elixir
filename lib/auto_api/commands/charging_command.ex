@@ -23,7 +23,6 @@ defmodule AutoApi.ChargingCommand do
   use AutoApi.Command
 
   alias AutoApi.ChargingState
-  alias AutoApi.ChargingCapability
 
   @doc """
   Parses the binary command and makes changes or returns the state

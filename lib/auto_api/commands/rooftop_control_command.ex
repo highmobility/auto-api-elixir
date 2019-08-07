@@ -23,7 +23,6 @@ defmodule AutoApi.RooftopControlCommand do
   use AutoApi.Command
 
   alias AutoApi.RooftopControlState
-  alias AutoApi.RooftopControlCapability
 
   @doc """
   Parses the binary command and makes changes or returns the state

@@ -23,7 +23,6 @@ defmodule AutoApi.WindowsCommand do
   use AutoApi.Command
 
   alias AutoApi.WindowsState
-  alias AutoApi.WindowsCapability
 
   @doc """
   Parses the binary command and makes changes or returns the state

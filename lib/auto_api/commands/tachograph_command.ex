@@ -23,7 +23,6 @@ defmodule AutoApi.TachographCommand do
   use AutoApi.Command
 
   alias AutoApi.TachographState
-  alias AutoApi.TachographCapability
 
   @doc """
   Parses the binary command and makes changes or returns the state

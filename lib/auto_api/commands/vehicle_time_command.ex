@@ -23,7 +23,6 @@ defmodule AutoApi.VehicleTimeCommand do
   use AutoApi.Command
 
   alias AutoApi.VehicleTimeState
-  alias AutoApi.VehicleTimeCapability
 
   @doc """
   Parses the binary command and makes changes or returns the state

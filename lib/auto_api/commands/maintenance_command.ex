@@ -23,7 +23,6 @@ defmodule AutoApi.MaintenanceCommand do
   use AutoApi.Command
 
   alias AutoApi.MaintenanceState
-  alias AutoApi.MaintenanceCapability
 
   @doc """
   Parses the binary command and makes changes or returns the state

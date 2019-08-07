@@ -23,7 +23,6 @@ defmodule AutoApi.HoodCommand do
   use AutoApi.Command
 
   alias AutoApi.HoodState
-  alias AutoApi.HoodCapability
 
   @doc """
   Parses the binary command and makes changes or returns the state

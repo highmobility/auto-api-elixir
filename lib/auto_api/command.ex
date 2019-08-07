@@ -25,7 +25,7 @@ defmodule AutoApi.Command do
 
   defmacro __using__(_opts) do
     quote do
-      @behavior AutoApi.Command
+      @behaviour AutoApi.Command
 
       @capability __MODULE__
                   |> Atom.to_string()

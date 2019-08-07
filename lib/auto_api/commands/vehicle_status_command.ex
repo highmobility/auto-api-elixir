@@ -23,7 +23,6 @@ defmodule AutoApi.VehicleStatusCommand do
   use AutoApi.Command
 
   alias AutoApi.VehicleStatusState
-  alias AutoApi.VehicleStatusCapability
 
   @doc """
   Parses the binary command and makes changes or returns the state

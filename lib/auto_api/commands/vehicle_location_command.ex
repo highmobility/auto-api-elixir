@@ -22,7 +22,7 @@ defmodule AutoApi.VehicleLocationCommand do
   """
   use AutoApi.Command
 
-  alias AutoApi.{VehicleLocationCapability, VehicleLocationState}
+  alias AutoApi.VehicleLocationState
 
   @doc """
   Parses the binary command and makes changes or returns the state

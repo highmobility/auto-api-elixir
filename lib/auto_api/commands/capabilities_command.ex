@@ -23,7 +23,6 @@ defmodule AutoApi.CapabilitiesCommand do
   use AutoApi.Command
 
   alias AutoApi.CapabilitiesState
-  alias AutoApi.CapabilitiesCapability
   alias AutoApi.Capability
 
   @doc """
