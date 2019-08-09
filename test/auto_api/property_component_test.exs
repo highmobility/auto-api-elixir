@@ -119,6 +119,30 @@ defmodule AutoApi.PropertyComponentTest do
       assert prop_comp.failure == nil
     end
 
+    test "converts enum to bin when it's nil" do
+      spec = %{
+        "type" => "enum",
+        "name" => "brake_fluid_level",
+        "size" => 1,
+        "values" => [
+          %{"id" => 0x00, "name" => "low"},
+          %{"id" => 1, "name" => "filled"}
+        ]
+      }
+
+      prop_bin =
+        PropertyComponent.to_bin(
+          %PropertyComponent{failure: %{reason: :unknown, description: ""}},
+          spec
+        )
+
+      prop_comp = PropertyComponent.to_struct(prop_bin, spec)
+
+      refute prop_comp.data
+      refute prop_comp.timestamp
+      assert prop_comp.failure == %{reason: :unknown, description: ""}
+    end
+
     test "converts capability_state to bin" do
       datetime = DateTime.utc_now()
 
