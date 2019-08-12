@@ -1,59 +1,38 @@
 {
-    "category": "digital_key",
-    "name": "trunk",
-    "getters": "default",
-    "state": "all",
+    "category": "digital_key", 
+    "name": "trunk", 
+    "getters": {
+        "default": {}
+    }, 
+    "state": "all", 
     "api": {
-        "intro": 1,
+        "intro": 1, 
         "update": 11
-    },
+    }, 
     "identifier": {
-        "lsb": 33,
+        "lsb": 33, 
         "msb": 0
-    },
+    }, 
     "properties": [
         {
-            "type": "enum",
-            "values": [
-                {
-                    "verb": "unlock",
-                    "id": 0,
-                    "name": "unlocked"
-                },
-                {
-                    "verb": "lock",
-                    "id": 1,
-                    "name": "locked"
-                }
-            ],
-            "id": 1,
-            "name": "trunk_lock",
-            "size": 1
-        },
+            "type": "types.lock_state", 
+            "id": 1, 
+            "name_cased": "lock", 
+            "name": "lock"
+        }, 
         {
-            "type": "enum",
-            "values": [
-                {
-                    "verb": "close",
-                    "id": 0,
-                    "name": "closed"
-                },
-                {
-                    "id": 1,
-                    "name": "open"
-                }
-            ],
-            "id": 2,
-            "name": "trunk_position",
-            "size": 1
+            "type": "types.position", 
+            "id": 2, 
+            "name_cased": "position", 
+            "name": "position"
         }
-    ],
+    ], 
     "setters": [
         {
             "optional": [
-                1,
+                1, 
                 2
-            ],
+            ], 
             "name": "control_trunk"
         }
     ]

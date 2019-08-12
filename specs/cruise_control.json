@@ -1,98 +1,83 @@
 {
-    "category": "chassis",
-    "name": "cruise_control",
-    "getters": "default",
-    "state": "all",
+    "category": "chassis", 
+    "name": "cruise_control", 
+    "getters": {
+        "default": {}
+    }, 
+    "state": "all", 
     "api": {
-        "intro": 7,
+        "intro": 7, 
         "update": 11
-    },
+    }, 
     "identifier": {
-        "lsb": 98,
+        "lsb": 98, 
         "msb": 0
-    },
+    }, 
     "properties": [
         {
-            "type": "enum",
-            "values": [
-                {
-                    "id": 0,
-                    "name": "inactive"
-                },
-                {
-                    "id": 1,
-                    "name": "active"
-                }
-            ],
-            "id": 1,
-            "name": "cruise_control",
-            "size": 1
-        },
+            "type": "types.active_state", 
+            "id": 1, 
+            "name_cased": "cruiseControl", 
+            "name": "cruise_control"
+        }, 
         {
-            "type": "enum",
-            "values": [
+            "name": "limiter", 
+            "name_cased": "limiter", 
+            "enum_values": [
                 {
-                    "id": 0,
+                    "id": 0, 
                     "name": "not_set"
-                },
+                }, 
                 {
-                    "id": 1,
+                    "id": 1, 
                     "name": "higher_speed_requested"
-                },
+                }, 
                 {
-                    "id": 2,
+                    "id": 2, 
                     "name": "lower_speed_requested"
-                },
+                }, 
                 {
-                    "id": 3,
+                    "id": 3, 
                     "name": "speed_fixed"
                 }
-            ],
-            "id": 2,
-            "name": "limiter",
+            ], 
+            "type": "enum", 
+            "id": 2, 
             "size": 1
-        },
+        }, 
         {
-            "id": 3,
-            "type": "integer",
-            "description": "The target speed in km/h",
-            "name": "target_speed",
-            "size": 2
-        },
+            "description": "The target speed in km/h", 
+            "name_cased": "targetSpeed", 
+            "size": 2, 
+            "type": "integer", 
+            "id": 3, 
+            "name": "target_speed"
+        }, 
         {
-            "pretty_name": "Adaptive Cruise Control",
-            "values": [
-                {
-                    "id": 0,
-                    "name": "inactive"
-                },
-                {
-                    "id": 1,
-                    "name": "active"
-                }
-            ],
-            "name": "acc",
-            "type": "enum",
-            "id": 4,
-            "size": 1
-        },
+            "pretty_name": "Adaptive Cruise Control", 
+            "type": "types.active_state", 
+            "id": 4, 
+            "name_cased": "adaptiveCruiseControl", 
+            "name": "adaptive_cruise_control"
+        }, 
         {
-            "pretty_name": "Adaptive Cruise Control target speed",
-            "description": "The target speed in km/h of the Adaptive Cruise Control",
-            "size": 2,
-            "type": "integer",
-            "id": 5,
-            "name": "acc_target_speed"
+            "pretty_name": "Adaptive Cruise Control (ACC) target speed", 
+            "name": "acc_target_speed", 
+            "name_cased": "accTargetSpeed", 
+            "size": 2, 
+            "type": "integer", 
+            "id": 5, 
+            "description": "The target speed in km/h of the Adaptive Cruise Control"
         }
-    ],
+    ], 
     "setters": [
         {
             "mandatory": [
                 1
-            ],
+            ], 
             "optional": [
                 3
-            ],
+            ], 
             "name": "activate_deactivate_cruise_control"
         }
     ]

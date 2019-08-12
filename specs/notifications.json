@@ -1,81 +1,73 @@
 {
-    "category": "headunit",
-    "state": "all",
+    "category": "headunit", 
+    "state": "all", 
     "api": {
-        "intro": 4,
+        "intro": 4, 
         "update": 11
-    },
-    "name": "notifications",
+    }, 
+    "name": "notifications", 
     "identifier": {
-        "lsb": 56,
+        "lsb": 56, 
         "msb": 0
-    },
+    }, 
     "properties": [
         {
-            "type": "string",
-            "description": "Text for the notification, bytes in UTF8.",
-            "name": "text",
+            "name": "text", 
+            "type": "string", 
+            "description": "Text for the notification, bytes in UTF8", 
+            "name_cased": "text", 
             "id": 1
-        },
+        }, 
         {
-            "items": [
-                {
-                    "type": "uinteger",
-                    "name": "identifier",
-                    "size": 1
-                },
-                {
-                    "type": "string",
-                    "name": "name",
-                    "description": "Name of the action, bytes in UTF8."
-                }
-            ],
-            "multiple": true,
-            "id": 2,
-            "name": "action_items",
-            "type": "custom"
-        },
+            "type": "types.action_item", 
+            "multiple": true, 
+            "id": 2, 
+            "name_cased": "actionItems", 
+            "name": "action_items"
+        }, 
         {
-            "id": 3,
-            "type": "uinteger",
-            "description": "Identifier of the activated action.",
-            "name": "activated_action",
-            "size": 1
-        },
+            "description": "Identifier of the activated action", 
+            "name_cased": "activatedAction", 
+            "size": 1, 
+            "type": "uinteger", 
+            "id": 3, 
+            "name": "activated_action"
+        }, 
         {
-            "type": "enum",
-            "values": [
+            "name": "clear", 
+            "name_cased": "clear", 
+            "enum_values": [
                 {
-                    "id": 0,
+                    "id": 0, 
                     "name": "clear"
                 }
-            ],
-            "id": 4,
-            "name": "clear",
+            ], 
+            "type": "enum", 
+            "id": 4, 
             "size": 1
         }
-    ],
+    ], 
     "setters": [
         {
             "mandatory": [
                 1
-            ],
+            ], 
             "optional": [
                 2
-            ],
+            ], 
             "name": "notification"
-        },
+        }, 
         {
             "mandatory": [
                 3
-            ],
+            ], 
             "name": "action"
-        },
+        }, 
         {
-            "name": "clear_notification",
+            "name": "clear_notification", 
             "constants": [
                 {
-                    "property_id": 4,
+                    "property_id": 4, 
                     "value": [
                         0
                     ]

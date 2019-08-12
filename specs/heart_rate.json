@@ -1,27 +1,28 @@
 {
-    "category": "health",
+    "category": "health", 
     "api": {
-        "intro": 4,
+        "intro": 4, 
         "update": 11
-    },
-    "name": "heart_rate",
+    }, 
+    "name": "heart_rate", 
     "identifier": {
-        "lsb": 41,
+        "lsb": 41, 
         "msb": 0
-    },
+    }, 
     "properties": [
         {
-            "type": "uinteger",
-            "id": 1,
-            "name": "heart_rate",
+            "name": "heart_rate", 
+            "type": "uinteger", 
+            "id": 1, 
+            "name_cased": "heartRate", 
             "size": 1
         }
-    ],
+    ], 
     "setters": [
         {
             "mandatory": [
                 1
-            ],
+            ], 
             "name": "send_heart_rate"
         }
     ]

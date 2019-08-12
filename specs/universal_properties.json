@@ -1,29 +1,30 @@
 {
-    "category": "universal",
+    "category": "universal", 
     "api": {
-        "intro": 7,
+        "intro": 7, 
         "update": 11
-    },
-    "name": "universal_properties",
+    }, 
+    "name": "universal_properties", 
     "properties": [
         {
-            "type": "uinteger",
-            "id": 160,
-            "name": "nonce",
+            "name": "nonce", 
+            "type": "uinteger", 
+            "id": 160, 
+            "name_cased": "nonce", 
             "size": 9
-        },
+        }, 
         {
-            "type": "uinteger",
-            "id": 161,
-            "name": "car_signature",
+            "name": "car_signature", 
+            "type": "uinteger", 
+            "id": 161, 
+            "name_cased": "carSignature", 
             "size": 64
-        },
+        }, 
         {
-            "id": 162,
-            "type": "timestamp",
-            "description": "Milliseconds since UNIX Epoch time",
-            "name": "timestamp",
-            "size": 8
+            "type": "types.timestamp", 
+            "id": 162, 
+            "name_cased": "timestamp", 
+            "name": "timestamp"
         }
     ]
 }

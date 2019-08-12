@@ -1,39 +1,41 @@
 {
-    "category": "api_structure",
-    "name": "multi_command",
+    "category": "api_structure", 
+    "name": "multi_command", 
     "state": [
         1
-    ],
+    ], 
     "api": {
-        "intro": 8,
+        "intro": 8, 
         "update": 11
-    },
-    "pretty_state_name": "Multi Command",
+    }, 
+    "pretty_state_name": "Multi Command", 
     "identifier": {
-        "lsb": 19,
+        "lsb": 19, 
         "msb": 0
-    },
+    }, 
     "properties": [
         {
-            "type": "capability_state",
-            "multiple": true,
-            "description": "The bytes of incoming capabilities (states)",
-            "name": "multi_states",
-            "id": 1
-        },
+            "multiple": true, 
+            "description": "The bytes of incoming capabilities (states)", 
+            "name_cased": "multiStates", 
+            "type": "types.capability_state", 
+            "id": 1, 
+            "name": "multi_states"
+        }, 
         {
-            "type": "capability_state",
-            "multiple": true,
-            "description": "The bytes of outgoing capabilities (commands)",
-            "name": "multi_commands",
-            "id": 2
+            "multiple": true, 
+            "description": "The bytes of outgoing capabilities (commands)", 
+            "name_cased": "multiCommands", 
+            "type": "types.capability_state", 
+            "id": 2, 
+            "name": "multi_commands"
         }
-    ],
+    ], 
     "setters": [
         {
             "mandatory": [
                 2
-            ],
+            ], 
             "name": "multi_command"
         }
     ]

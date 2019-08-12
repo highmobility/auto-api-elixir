@@ -1,30 +1,34 @@
 {
-    "category": "diagnostics",
-    "state": "all",
+    "category": "diagnostics", 
+    "state": "all", 
     "api": {
-        "intro": 5,
+        "intro": 5, 
         "update": 11
-    },
-    "name": "offroad",
+    }, 
+    "name": "offroad", 
     "identifier": {
-        "lsb": 82,
+        "lsb": 82, 
         "msb": 0
-    },
-    "getters": "default",
+    }, 
+    "getters": {
+        "default": {}
+    }, 
     "properties": [
         {
-            "id": 1,
-            "type": "integer",
-            "description": "The route elevation incline in degrees, which is a negative number for decline",
-            "name": "route_incline",
-            "size": 2
-        },
+            "description": "The route elevation incline in degrees, which is a negative number for decline", 
+            "name_cased": "routeIncline", 
+            "size": 2, 
+            "type": "integer", 
+            "id": 1, 
+            "name": "route_incline"
+        }, 
         {
-            "id": 2,
-            "type": "double",
-            "description": "The wheel suspension level percentage, whereas 0.0 is no suspension and 1.0 maximum suspension",
-            "name": "wheel_suspension",
-            "size": 8
+            "description": "The wheel suspension level percentage, whereas 0.0 is no suspension and 1.0 maximum suspension", 
+            "name_cased": "wheelSuspension", 
+            "size": 8, 
+            "type": "double", 
+            "id": 2, 
+            "name": "wheel_suspension"
         }
     ]
 }

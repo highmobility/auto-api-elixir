@@ -1,45 +1,33 @@
 {
-    "category": "parking",
-    "name": "valet_mode",
+    "category": "parking", 
+    "name": "valet_mode", 
     "getters": {
         "default": {
-            "omit_state_text": true
+            "name": "get_valet_mode"
         }
-    },
-    "state": "all",
+    }, 
+    "state": "all", 
     "api": {
-        "intro": 3,
+        "intro": 3, 
         "update": 11
-    },
+    }, 
     "identifier": {
-        "lsb": 40,
+        "lsb": 40, 
         "msb": 0
-    },
+    }, 
     "properties": [
         {
-            "type": "enum",
-            "values": [
-                {
-                    "verb": "deactivate",
-                    "id": 0,
-                    "name": "deactivated"
-                },
-                {
-                    "verb": "activate",
-                    "id": 1,
-                    "name": "activated"
-                }
-            ],
-            "id": 1,
-            "name": "valet_mode",
-            "size": 1
+            "type": "types.active_state", 
+            "id": 1, 
+            "name_cased": "status", 
+            "name": "status"
         }
-    ],
+    ], 
     "setters": [
         {
             "mandatory": [
                 1
-            ],
+            ], 
             "name": "activate_deactivate_valet_mode"
         }
     ]

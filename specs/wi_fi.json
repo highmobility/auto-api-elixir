@@ -1,121 +1,79 @@
 {
-    "category": "headunit",
-    "name": "wi_fi",
-    "getters": "default",
+    "category": "headunit", 
+    "name": "wi_fi", 
+    "getters": {
+        "default": {}
+    }, 
     "state": [
-        1,
-        2,
-        3,
+        1, 
+        2, 
+        3, 
         4
-    ],
+    ], 
     "api": {
-        "intro": 6,
+        "intro": 6, 
         "update": 11
-    },
+    }, 
     "identifier": {
-        "lsb": 89,
+        "lsb": 89, 
         "msb": 0
-    },
+    }, 
     "properties": [
         {
-            "pretty_name": "Wi-Fi Enabled",
-            "values": [
-                {
-                    "verb": "disable",
-                    "id": 0,
-                    "name": "disabled"
-                },
-                {
-                    "verb": "enable",
-                    "id": 1,
-                    "name": "enabled"
-                }
-            ],
-            "name": "wi_fi_enabled",
-            "title_case_name": "wifiEnabled",
-            "type": "enum",
-            "id": 1,
-            "size": 1
-        },
+            "type": "types.enabled_state", 
+            "id": 1, 
+            "name_cased": "status", 
+            "name": "status"
+        }, 
         {
-            "type": "enum",
-            "values": [
-                {
-                    "id": 0,
-                    "name": "disconnected"
-                },
-                {
-                    "id": 1,
-                    "name": "connected"
-                }
-            ],
-            "id": 2,
-            "name": "network_connected",
-            "size": 1
-        },
+            "type": "types.connection_state", 
+            "id": 2, 
+            "name_cased": "networkConnection", 
+            "name": "network_connected"
+        }, 
         {
-            "pretty_name": "Network SSID",
-            "description": "The network SSID formatted in UTF-8",
-            "title_case_name": "networkSSID",
-            "type": "string",
-            "id": 3,
+            "pretty_name": "Network SSID", 
+            "description": "The network SSID formatted in UTF-8", 
+            "name_cased": "networkSSID", 
+            "type": "string", 
+            "id": 3, 
             "name": "network_ssid"
-        },
+        }, 
         {
-            "type": "enum",
-            "values": [
-                {
-                    "id": 0,
-                    "name": "none"
-                },
-                {
-                    "pretty_name": "WEP",
-                    "id": 1,
-                    "name": "wep"
-                },
-                {
-                    "pretty_name": "WPA/WPA2 Personal",
-                    "id": 2,
-                    "name": "wpa"
-                },
-                {
-                    "pretty_name": "WPA2 Personal",
-                    "id": 3,
-                    "name": "wpa2_personal"
-                }
-            ],
-            "id": 4,
-            "name": "network_security",
-            "size": 1
-        },
+            "type": "types.network_security", 
+            "id": 4, 
+            "name_cased": "networkSecurity", 
+            "name": "network_security"
+        }, 
         {
-            "type": "string",
-            "description": "The network password formatted in UTF-8",
-            "name": "password",
+            "name": "password", 
+            "type": "string", 
+            "description": "The network password formatted in UTF-8", 
+            "name_cased": "password", 
             "id": 5
         }
-    ],
+    ], 
     "setters": [
         {
             "mandatory": [
-                3,
+                3, 
                 4
-            ],
+            ], 
             "optional": [
                 5
-            ],
+            ], 
             "name": "connect_to_network"
-        },
+        }, 
         {
             "mandatory": [
                 3
-            ],
+            ], 
             "name": "forget_network"
-        },
+        }, 
         {
             "mandatory": [
                 1
-            ],
+            ], 
             "name": "enable_disable_wi_fi"
         }
     ]

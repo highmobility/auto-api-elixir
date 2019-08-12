@@ -1,27 +1,27 @@
 {
-    "category": "environment",
-    "state": "all",
+    "category": "environment", 
+    "state": "all", 
     "api": {
-        "intro": 5,
+        "intro": 5, 
         "update": 11
-    },
-    "name": "weather_conditions",
+    }, 
+    "name": "weather_conditions", 
     "identifier": {
-        "lsb": 85,
+        "lsb": 85, 
         "msb": 0
-    },
+    }, 
     "getters": {
         "default": {
-            "omit_state_text": true
+            "name": "get_weather_conditions"
         }
-    },
+    }, 
     "properties": [
         {
-            "id": 1,
-            "type": "double",
-            "description": "Measured raining intensity percentage, whereas 0.0 is no rain and 1.0 (100%) is maximum rain",
-            "name": "rain_intensity",
-            "size": 8
+            "name": "rain_intensity", 
+            "type": "types.percentage", 
+            "description": "Measured raining intensity percentage, whereas 0% is no rain and 100% is maximum rain", 
+            "name_cased": "rainIntensity", 
+            "id": 1
         }
     ]
 }

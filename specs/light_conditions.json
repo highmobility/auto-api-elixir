@@ -1,33 +1,34 @@
 {
-    "category": "environment",
-    "state": "all",
+    "category": "environment", 
+    "state": "all", 
     "api": {
-        "intro": 5,
+        "intro": 5, 
         "update": 11
-    },
-    "name": "light_conditions",
+    }, 
+    "name": "light_conditions", 
     "identifier": {
-        "lsb": 84,
+        "lsb": 84, 
         "msb": 0
-    },
+    }, 
     "getters": {
         "default": {
-            "omit_state_text": true
+            "name": "get_light_conditions"
         }
-    },
+    }, 
     "properties": [
         {
-            "id": 1,
-            "type": "float",
-            "description": "Measured outside illuminance in lux, formatted as IEEE 754 decimal",
-            "name": "outside_light",
-            "size": 4
-        },
+            "description": "Measured outside illuminance in lux, formatted as IEEE 754 decimal", 
+            "name_cased": "outsideLight", 
+            "size": 4, 
+            "type": "float", 
+            "id": 1, 
+            "name": "outside_light"
+        }, 
         {
-            "id": 2,
-            "type": "float",
-            "description": "Measured inside illuminance in lux, formatted as IEEE 754 decimal",
-            "name": "inside_light",
+            "id": 2, 
+            "type": "float", 
+            "description": "Measured inside illuminance in lux, formatted as IEEE 754 decimal", 
+            "name": "inside_light", 
             "size": 4
         }
     ]

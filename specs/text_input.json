@@ -1,27 +1,28 @@
 {
-    "category": "headunit",
+    "category": "headunit", 
     "api": {
-        "intro": 4,
+        "intro": 4, 
         "update": 11
-    },
-    "name": "text_input",
+    }, 
+    "name": "text_input", 
     "identifier": {
-        "lsb": 68,
+        "lsb": 68, 
         "msb": 0
-    },
+    }, 
     "properties": [
         {
-            "type": "string",
-            "description": "The UTF8 bytes of the string",
-            "name": "text",
+            "name": "text", 
+            "type": "string", 
+            "description": "The UTF8 bytes of the string", 
+            "name_cased": "text", 
             "id": 1
         }
-    ],
+    ], 
     "setters": [
         {
             "mandatory": [
                 1
-            ],
+            ], 
             "name": "text_input"
         }
     ]

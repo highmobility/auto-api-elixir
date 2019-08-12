@@ -1,28 +1,29 @@
 {
-    "category": "headunit",
+    "category": "headunit", 
     "api": {
-        "intro": 4,
+        "intro": 4, 
         "update": 11
-    },
-    "name": "graphics",
+    }, 
+    "name": "graphics", 
     "identifier": {
-        "lsb": 81,
+        "lsb": 81, 
         "msb": 0
-    },
+    }, 
     "properties": [
         {
-            "pretty_name": "Image URL",
-            "type": "string",
-            "description": "The UTF8 bytes of the image URL string",
-            "name": "image_url",
-            "id": 1
+            "pretty_name": "Image URL", 
+            "description": "The UTF8 bytes of the image URL string", 
+            "name_cased": "imageURL", 
+            "type": "string", 
+            "id": 1, 
+            "name": "image_url"
         }
-    ],
+    ], 
     "setters": [
         {
             "mandatory": [
                 1
-            ],
+            ], 
             "name": "display_image"
         }
     ]

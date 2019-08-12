@@ -1,55 +1,37 @@
 {
-    "category": "digital_key",
-    "name": "ignition",
-    "getters": "default",
-    "state": "all",
+    "category": "digital_key", 
+    "name": "ignition", 
+    "getters": {
+        "default": {}
+    }, 
+    "state": "all", 
     "api": {
-        "intro": 3,
+        "intro": 3, 
         "update": 11
-    },
+    }, 
     "identifier": {
-        "lsb": 53,
+        "lsb": 53, 
         "msb": 0
-    },
+    }, 
     "properties": [
         {
-            "type": "enum",
-            "values": [
-                {
-                    "id": 0,
-                    "name": "off"
-                },
-                {
-                    "id": 1,
-                    "name": "on"
-                }
-            ],
-            "id": 1,
-            "name": "ignition",
-            "size": 1
-        },
+            "type": "types.on_off_state", 
+            "id": 1, 
+            "name_cased": "status", 
+            "name": "status"
+        }, 
         {
-            "type": "enum",
-            "values": [
-                {
-                    "id": 0,
-                    "name": "off"
-                },
-                {
-                    "id": 1,
-                    "name": "on"
-                }
-            ],
-            "id": 2,
-            "name": "accessories_ignition",
-            "size": 1
+            "type": "types.on_off_state", 
+            "id": 2, 
+            "name_cased": "accessoriesStatus", 
+            "name": "accessories_status"
         }
-    ],
+    ], 
     "setters": [
         {
             "mandatory": [
                 1
-            ],
+            ], 
             "name": "turn_ignition_on_off"
         }
     ]

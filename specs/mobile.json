@@ -1,33 +1,25 @@
 {
-    "category": "headunit",
-    "name": "mobile",
-    "getters": "default",
-    "state": "all",
+    "category": "headunit", 
+    "name": "mobile", 
+    "getters": {
+        "default": {}
+    }, 
+    "state": "all", 
     "api": {
-        "intro": 8,
+        "intro": 8, 
         "update": 11
-    },
-    "pretty_state_name": "Mobile",
+    }, 
+    "pretty_state_name": "Mobile", 
     "identifier": {
-        "lsb": 102,
+        "lsb": 102, 
         "msb": 0
-    },
+    }, 
     "properties": [
         {
-            "type": "enum",
-            "values": [
-                {
-                    "id": 0,
-                    "name": "disconnected"
-                },
-                {
-                    "id": 1,
-                    "name": "connected"
-                }
-            ],
-            "id": 1,
-            "name": "connection",
-            "size": 1
+            "type": "types.connection_state", 
+            "id": 1, 
+            "name_cased": "connection", 
+            "name": "connection"
         }
     ]
 }

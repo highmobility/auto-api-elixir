@@ -1,51 +1,52 @@
 {
-    "category": "chassis",
-    "state": "all",
+    "category": "chassis", 
+    "state": "all", 
     "api": {
-        "intro": 4,
+        "intro": 4, 
         "update": 11
-    },
-    "name": "keyfob_position",
+    }, 
+    "name": "keyfob_position", 
     "identifier": {
-        "lsb": 72,
+        "lsb": 72, 
         "msb": 0
-    },
+    }, 
     "getters": {
         "default": {
-            "omit_state_text": true
+            "name": "get_keyfob_position"
         }
-    },
+    }, 
     "properties": [
         {
-            "type": "enum",
-            "values": [
+            "name": "location", 
+            "name_cased": "location", 
+            "enum_values": [
                 {
-                    "id": 0,
+                    "id": 0, 
                     "name": "out_of_range"
-                },
+                }, 
                 {
-                    "id": 1,
+                    "id": 1, 
                     "name": "outside_driver_side"
-                },
+                }, 
                 {
-                    "id": 2,
+                    "id": 2, 
                     "name": "outside_in_front_of_car"
-                },
+                }, 
                 {
-                    "id": 3,
+                    "id": 3, 
                     "name": "outside_passenger_side"
-                },
+                }, 
                 {
-                    "id": 4,
+                    "id": 4, 
                     "name": "outside_behind_car"
-                },
+                }, 
                 {
-                    "id": 5,
+                    "id": 5, 
                     "name": "inside_car"
                 }
-            ],
-            "id": 1,
-            "name": "keyfob_position",
+            ], 
+            "type": "enum", 
+            "id": 1, 
             "size": 1
         }
     ]

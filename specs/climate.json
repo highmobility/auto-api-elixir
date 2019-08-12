@@ -1,230 +1,137 @@
 {
-    "category": "chassis",
-    "name": "climate",
-    "getters": "default",
-    "state": "all",
+    "category": "chassis", 
+    "name": "climate", 
+    "getters": {
+        "default": {}
+    }, 
+    "state": "all", 
     "api": {
-        "intro": 2,
+        "intro": 2, 
         "update": 11
-    },
+    }, 
     "identifier": {
-        "lsb": 36,
+        "lsb": 36, 
         "msb": 0
-    },
+    }, 
     "properties": [
         {
-            "id": 1,
-            "type": "float",
-            "description": "The inside temperature in celsius per IEEE 754 formatting",
-            "name": "inside_temperature",
-            "size": 4
-        },
+            "description": "The inside temperature in celsius per IEEE 754 formatting", 
+            "name_cased": "insideTemperature", 
+            "size": 4, 
+            "type": "float", 
+            "id": 1, 
+            "name": "inside_temperature"
+        }, 
         {
-            "id": 2,
-            "type": "float",
-            "description": "The outside temperature in celsius per IEEE 754 formatting",
-            "name": "outside_temperature",
-            "size": 4
-        },
+            "description": "The outside temperature in celsius per IEEE 754 formatting", 
+            "name_cased": "outsideTemperature", 
+            "size": 4, 
+            "type": "float", 
+            "id": 2, 
+            "name": "outside_temperature"
+        }, 
         {
-            "id": 3,
-            "type": "float",
-            "description": "The driver temperature setting in celsius per IEEE 754 formatting",
-            "name": "driver_temperature_setting",
-            "size": 4
-        },
+            "description": "The driver temperature setting in celsius per IEEE 754 formatting", 
+            "name_cased": "driverTemperatureSetting", 
+            "size": 4, 
+            "type": "float", 
+            "id": 3, 
+            "name": "driver_temperature_setting"
+        }, 
         {
-            "id": 4,
-            "type": "float",
-            "description": "The passenger temperature setting in celsius per IEEE 754 formatting",
-            "name": "passenger_temperature_setting",
-            "size": 4
-        },
+            "description": "The passenger temperature setting in celsius per IEEE 754 formatting", 
+            "name_cased": "passengerTemperatureSetting", 
+            "size": 4, 
+            "type": "float", 
+            "id": 4, 
+            "name": "passenger_temperature_setting"
+        }, 
         {
-            "type": "enum",
-            "values": [
-                {
-                    "verb": "stop",
-                    "id": 0,
-                    "name": "inactive"
-                },
-                {
-                    "verb": "start",
-                    "id": 1,
-                    "name": "active"
-                }
-            ],
-            "id": 5,
-            "name": "hvac_state",
-            "size": 1
-        },
+            "type": "types.active_state", 
+            "id": 5, 
+            "name_cased": "hvacState", 
+            "name": "hvac_state"
+        }, 
         {
-            "type": "enum",
-            "values": [
-                {
-                    "verb": "stop_defogging",
-                    "id": 0,
-                    "name": "inactive"
-                },
-                {
-                    "verb": "start_defogging",
-                    "id": 1,
-                    "name": "active"
-                }
-            ],
-            "id": 6,
-            "name": "defogging_state",
-            "size": 1
-        },
+            "type": "types.active_state", 
+            "id": 6, 
+            "name_cased": "defoggingState", 
+            "name": "defogging_state"
+        }, 
         {
-            "type": "enum",
-            "values": [
-                {
-                    "verb": "stop_defrosting",
-                    "id": 0,
-                    "name": "inactive"
-                },
-                {
-                    "verb": "start_defrosting",
-                    "id": 1,
-                    "name": "active"
-                }
-            ],
-            "id": 7,
-            "name": "defrosting_state",
-            "size": 1
-        },
+            "type": "types.active_state", 
+            "id": 7, 
+            "name_cased": "defrostingState", 
+            "name": "defrosting_state"
+        }, 
         {
-            "type": "enum",
-            "values": [
-                {
-                    "verb": "stop_ionising",
-                    "id": 0,
-                    "name": "inactive"
-                },
-                {
-                    "verb": "start_ionising",
-                    "id": 1,
-                    "name": "active"
-                }
-            ],
-            "id": 8,
-            "name": "ionising_state",
-            "size": 1
-        },
+            "type": "types.active_state", 
+            "id": 8, 
+            "name_cased": "ionisingState", 
+            "name": "ionising_state"
+        }, 
         {
-            "id": 9,
-            "type": "float",
-            "description": "The defrosting temperature setting in celsius per IEEE 754 formatting",
-            "name": "defrosting_temperature",
-            "size": 4
-        },
+            "description": "The defrosting temperature setting in celsius per IEEE 754 formatting", 
+            "name_cased": "defrostingTemperatureSetting", 
+            "size": 4, 
+            "type": "float", 
+            "id": 9, 
+            "name": "defrosting_temperature_setting"
+        }, 
         {
-            "pretty_name": "HVAC weekday starting times",
-            "multiple": true,
-            "name": "hvac_weekday_starting_times",
-            "items": [
-                {
-                    "type": "enum",
-                    "values": [
-                        {
-                            "id": 0,
-                            "name": "monday"
-                        },
-                        {
-                            "id": 1,
-                            "name": "tuesday"
-                        },
-                        {
-                            "id": 2,
-                            "name": "wednesday"
-                        },
-                        {
-                            "id": 3,
-                            "name": "thursday"
-                        },
-                        {
-                            "id": 4,
-                            "name": "friday"
-                        },
-                        {
-                            "id": 5,
-                            "name": "saturday"
-                        },
-                        {
-                            "id": 6,
-                            "name": "sunday"
-                        },
-                        {
-                            "id": 7,
-                            "name": "automatic"
-                        }
-                    ],
-                    "name": "weekday",
-                    "size": 1
-                },
-                {
-                    "size": 1,
-                    "type": "uinteger",
-                    "description": "Value between 0 and 23",
-                    "name": "hour"
-                },
-                {
-                    "size": 1,
-                    "type": "uinteger",
-                    "description": "Value between 0 and 59",
-                    "name": "minute"
-                }
-            ],
-            "type": "custom",
-            "id": 11,
-            "size": 3
-        },
+            "pretty_name": "HVAC weekday starting times", 
+            "multiple": true, 
+            "name": "hvac_weekday_starting_times", 
+            "name_cased": "hvacWeekdayStartingTimes", 
+            "type": "types.hvac_weekday_starting_time", 
+            "id": 11
+        }, 
         {
-            "id": 12,
-            "type": "float",
-            "description": "The rear temperature in celsius per IEEE 754 formatting",
-            "name": "rear_temperature_setting",
-            "size": 4
+            "description": "The rear temperature in celsius per IEEE 754 formatting", 
+            "name_cased": "rearTemperatureSetting", 
+            "size": 4, 
+            "type": "float", 
+            "id": 12, 
+            "name": "rear_temperature_setting"
         }
-    ],
+    ], 
     "setters": [
         {
             "mandatory": [
                 11
-            ],
+            ], 
             "name": "change_starting_times"
-        },
+        }, 
         {
             "mandatory": [
                 5
-            ],
+            ], 
             "name": "start_stop_hvac"
-        },
+        }, 
         {
             "mandatory": [
                 6
-            ],
+            ], 
             "name": "start_stop_defogging"
-        },
+        }, 
         {
             "mandatory": [
                 7
-            ],
+            ], 
             "name": "start_stop_defrosting"
-        },
+        }, 
         {
             "mandatory": [
                 8
-            ],
+            ], 
             "name": "start_stop_ionising"
-        },
+        }, 
         {
             "optional": [
-                3,
-                4,
+                3, 
+                4, 
                 12
-            ],
+            ], 
             "name": "set_temperature_settings"
         }
     ]

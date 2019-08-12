@@ -1,54 +1,42 @@
 {
-    "category": "poi",
-    "state": "all",
+    "category": "poi", 
+    "state": "all", 
     "api": {
-        "intro": 2,
+        "intro": 2, 
         "update": 11
-    },
-    "name": "vehicle_location",
+    }, 
+    "name": "vehicle_location", 
     "identifier": {
-        "lsb": 48,
+        "lsb": 48, 
         "msb": 0
-    },
+    }, 
     "getters": {
         "default": {
-            "omit_state_text": true
+            "name": "get_vehicle_location"
         }
-    },
+    }, 
     "properties": [
         {
-            "items": [
-                {
-                    "size": 8,
-                    "type": "double",
-                    "description": "Latitude in 8-bytes per IEEE 754",
-                    "name": "latitude"
-                },
-                {
-                    "size": 8,
-                    "type": "double",
-                    "description": "Longitude in 8-bytes per IEEE 754",
-                    "name": "longitude"
-                }
-            ],
-            "type": "custom",
-            "id": 4,
-            "name": "coordinates",
-            "size": 16
-        },
+            "type": "types.coordinates", 
+            "id": 4, 
+            "name_cased": "coordinates", 
+            "name": "coordinates"
+        }, 
         {
-            "id": 5,
-            "type": "double",
-            "description": "Heading in 8-bytes per IEEE 754",
-            "name": "heading",
-            "size": 8
-        },
+            "description": "Heading in 8-bytes per IEEE 754", 
+            "name_cased": "heading", 
+            "size": 8, 
+            "type": "double", 
+            "id": 5, 
+            "name": "heading"
+        }, 
         {
-            "id": 6,
-            "type": "double",
-            "description": "Altitude in meters above the WGS 84 reference ellipsoid per double precision IEEE 754 formatting",
-            "name": "altitude",
-            "size": 8
+            "description": "Altitude in meters above the WGS 84 reference ellipsoid per double precision IEEE 754 formatting", 
+            "name_cased": "altitude", 
+            "size": 8, 
+            "type": "double", 
+            "id": 6, 
+            "name": "altitude"
         }
     ]
 }

@@ -1,32 +1,35 @@
 {
-    "category": "digital_key",
-    "state": "all",
+    "category": "digital_key", 
+    "state": "all", 
     "identifier": {
-        "lsb": 103,
+        "lsb": 103, 
         "msb": 0
-    },
-    "name": "hood",
-    "api_intro": 11,
-    "getters": "default",
+    }, 
+    "name": "hood", 
+    "api_intro": 11, 
+    "getters": {
+        "default": {}
+    }, 
     "properties": [
         {
-            "type": "enum",
-            "values": [
+            "name": "position", 
+            "name_cased": "position", 
+            "enum_values": [
                 {
-                    "id": 0,
+                    "id": 0, 
                     "name": "closed"
-                },
+                }, 
                 {
-                    "id": 1,
+                    "id": 1, 
                     "name": "open"
-                },
+                }, 
                 {
-                    "id": 2,
+                    "id": 2, 
                     "name": "intermediate"
                 }
-            ],
-            "id": 1,
-            "name": "position",
+            ], 
+            "type": "enum", 
+            "id": 1, 
             "size": 1
         }
     ]

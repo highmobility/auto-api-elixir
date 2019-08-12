@@ -1,46 +1,49 @@
 {
-    "category": "parking",
-    "name": "theft_alarm",
-    "getters": "default",
-    "state": "all",
+    "category": "parking", 
+    "name": "theft_alarm", 
+    "getters": {
+        "default": {}
+    }, 
+    "state": "all", 
     "api": {
-        "intro": 4,
+        "intro": 4, 
         "update": 11
-    },
+    }, 
     "identifier": {
-        "lsb": 70,
+        "lsb": 70, 
         "msb": 0
-    },
+    }, 
     "properties": [
         {
-            "type": "enum",
-            "values": [
+            "name": "status", 
+            "name_cased": "status", 
+            "enum_values": [
                 {
-                    "verb": "unarm",
-                    "id": 0,
-                    "name": "not_armed"
-                },
+                    "verb": "unarm", 
+                    "id": 0, 
+                    "name": "unarmed"
+                }, 
                 {
-                    "verb": "arm",
-                    "id": 1,
+                    "verb": "arm", 
+                    "id": 1, 
                     "name": "armed"
-                },
+                }, 
                 {
-                    "verb": "trigger",
-                    "id": 2,
+                    "verb": "trigger", 
+                    "id": 2, 
                     "name": "triggered"
                 }
-            ],
-            "id": 1,
-            "name": "theft_alarm",
+            ], 
+            "type": "enum", 
+            "id": 1, 
             "size": 1
         }
-    ],
+    ], 
     "setters": [
         {
             "mandatory": [
                 1
-            ],
+            ], 
             "name": "set_theft_alarm"
         }
     ]

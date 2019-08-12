@@ -1,208 +1,228 @@
 {
-    "category": "api_structure",
-    "state": "all",
+    "category": "api_structure", 
+    "state": "all", 
     "api": {
-        "intro": 2,
+        "intro": 2, 
         "update": 11
-    },
-    "name": "vehicle_status",
+    }, 
+    "name": "vehicle_status", 
     "identifier": {
-        "lsb": 17,
+        "lsb": 17, 
         "msb": 0
-    },
+    }, 
     "getters": {
         "default": {
-            "omit_state_text": true
+            "name": "get_vehicle_status"
         }
-    },
+    }, 
     "properties": [
         {
-            "pretty_name": "VIN",
-            "description": "The unique Vehicle Identification Number",
-            "size": 17,
-            "type": "string",
-            "id": 1,
-            "name": "vin"
-        },
+            "pretty_name": "VIN", 
+            "name": "vin", 
+            "name_cased": "vin", 
+            "size": 17, 
+            "type": "string", 
+            "id": 1, 
+            "description": "The unique Vehicle Identification Number"
+        }, 
         {
-            "type": "enum",
-            "values": [
+            "name": "powertrain", 
+            "name_cased": "powertrain", 
+            "enum_values": [
                 {
-                    "id": 0,
+                    "id": 0, 
                     "name": "unknown"
-                },
+                }, 
                 {
-                    "id": 1,
+                    "id": 1, 
                     "name": "all_electric"
-                },
+                }, 
                 {
-                    "id": 2,
+                    "id": 2, 
                     "name": "combustion_engine"
-                },
+                }, 
                 {
-                    "pretty_name": "Plug-in Hybrid (PHEV)",
-                    "id": 3,
+                    "pretty_name": "Plug-in Hybrid EV", 
+                    "id": 3, 
                     "name": "phev"
-                },
+                }, 
                 {
-                    "id": 4,
+                    "id": 4, 
                     "name": "hydrogen"
-                },
+                }, 
                 {
-                    "id": 5,
+                    "id": 5, 
                     "name": "hydrogen_hybrid"
                 }
-            ],
-            "id": 2,
-            "name": "powertrain",
+            ], 
+            "type": "enum", 
+            "id": 2, 
             "size": 1
-        },
+        }, 
         {
-            "type": "string",
-            "description": "The car model name bytes formatted in UTF-8",
-            "name": "model_name",
+            "name": "model_name", 
+            "type": "string", 
+            "description": "The car model name bytes formatted in UTF-8", 
+            "name_cased": "modelName", 
             "id": 3
-        },
+        }, 
         {
-            "type": "string",
-            "description": "The car name (nickname) bytes formatted in UTF-8",
-            "name": "name",
+            "name": "name", 
+            "type": "string", 
+            "description": "The car name (nickname) bytes formatted in UTF-8", 
+            "name_cased": "name", 
             "id": 4
-        },
+        }, 
         {
-            "type": "string",
-            "description": "The license plate bytes formatted in UTF-8",
-            "name": "license_plate",
+            "name": "license_plate", 
+            "type": "string", 
+            "description": "The license plate bytes formatted in UTF-8", 
+            "name_cased": "licensePlate", 
             "id": 5
-        },
+        }, 
         {
-            "type": "string",
-            "description": "The sales designation of the model formatted in UTF-8",
-            "name": "sales_designation",
+            "name": "sales_designation", 
+            "type": "string", 
+            "description": "The sales designation of the model formatted in UTF-8", 
+            "name_cased": "salesDesignation", 
             "id": 6
-        },
+        }, 
         {
-            "id": 7,
-            "type": "uinteger",
-            "description": "The car model manufacturing year number",
-            "name": "model_year",
-            "size": 2
-        },
+            "description": "The car model manufacturing year number", 
+            "name_cased": "modelYear", 
+            "size": 2, 
+            "type": "uinteger", 
+            "id": 7, 
+            "name": "model_year"
+        }, 
         {
-            "type": "string",
-            "description": "The color name formatted in UTF-8",
-            "name": "color_name",
+            "name": "colour_name", 
+            "type": "string", 
+            "description": "The colour name formatted in UTF-8", 
+            "name_cased": "colourName", 
             "id": 8
-        },
+        }, 
         {
-            "id": 9,
-            "type": "uinteger",
-            "description": "The power of the car measured in kw",
-            "name": "power_in_kw",
-            "size": 2
-        },
+            "pretty_name": "Power in kW", 
+            "name": "power_in_kw", 
+            "name_cased": "powerInKW", 
+            "size": 2, 
+            "type": "uinteger", 
+            "id": 9, 
+            "description": "The power of the car measured in kw"
+        }, 
         {
-            "id": 10,
-            "type": "uinteger",
-            "description": "The number of doors",
-            "name": "number_of_doors",
-            "size": 1
-        },
+            "description": "The number of doors", 
+            "name_cased": "numberOfDoors", 
+            "size": 1, 
+            "type": "uinteger", 
+            "id": 10, 
+            "name": "number_of_doors"
+        }, 
         {
-            "id": 11,
-            "type": "uinteger",
-            "description": "The number of seats",
-            "name": "number_of_seats",
-            "size": 1
-        },
+            "description": "The number of seats", 
+            "name_cased": "numberOfSeats", 
+            "size": 1, 
+            "type": "uinteger", 
+            "id": 11, 
+            "name": "number_of_seats"
+        }, 
         {
-            "id": 12,
-            "type": "float",
-            "description": "The engine volume displacement in liters per IEEE 754 formatting",
-            "name": "engine_volume",
-            "size": 4
-        },
+            "description": "The engine volume displacement in liters per IEEE 754 formatting", 
+            "name_cased": "engineVolume", 
+            "size": 4, 
+            "type": "float", 
+            "id": 12, 
+            "name": "engine_volume"
+        }, 
         {
-            "id": 13,
-            "type": "uinteger",
-            "description": "The maximum engine torque in Nm",
-            "name": "engine_max_torque",
-            "size": 2
-        },
+            "description": "The maximum engine torque in Nm", 
+            "name_cased": "engineMaxTorque", 
+            "size": 2, 
+            "type": "uinteger", 
+            "id": 13, 
+            "name": "engine_max_torque"
+        }, 
         {
-            "type": "enum",
-            "values": [
+            "name": "gearbox", 
+            "name_cased": "gearbox", 
+            "enum_values": [
                 {
-                    "id": 0,
+                    "id": 0, 
                     "name": "manual"
-                },
+                }, 
                 {
-                    "id": 1,
+                    "id": 1, 
                     "name": "automatic"
-                },
+                }, 
                 {
-                    "id": 2,
+                    "id": 2, 
                     "name": "semi_automatic"
                 }
-            ],
-            "id": 14,
-            "name": "gearbox",
+            ], 
+            "type": "enum", 
+            "id": 14, 
             "size": 1
-        },
+        }, 
         {
-            "type": "enum",
-            "values": [
+            "name": "display_unit", 
+            "name_cased": "displayUnit", 
+            "enum_values": [
                 {
-                    "id": 0,
+                    "id": 0, 
                     "name": "km"
-                },
+                }, 
                 {
-                    "id": 1,
+                    "id": 1, 
                     "name": "miles"
                 }
-            ],
-            "id": 15,
-            "name": "display_unit",
+            ], 
+            "type": "enum", 
+            "id": 15, 
             "size": 1
-        },
+        }, 
         {
-            "type": "enum",
-            "values": [
+            "name": "driver_seat_location", 
+            "name_cased": "driverSeatLocation", 
+            "enum_values": [
                 {
-                    "id": 0,
+                    "id": 0, 
                     "name": "left"
-                },
+                }, 
                 {
-                    "id": 1,
+                    "id": 1, 
                     "name": "right"
-                },
+                }, 
                 {
-                    "id": 2,
+                    "id": 2, 
                     "name": "center"
                 }
-            ],
-            "id": 16,
-            "name": "driver_seat_location",
+            ], 
+            "type": "enum", 
+            "id": 16, 
             "size": 1
-        },
+        }, 
         {
-            "type": "string",
-            "multiple": true,
-            "description": "Equipment that the vehicle is equipped with",
-            "name": "equipments",
-            "id": 17
-        },
+            "multiple": true, 
+            "description": "Names of equipment the vehicle is equipped with", 
+            "name_cased": "equipments", 
+            "type": "string", 
+            "id": 17, 
+            "name": "equipments"
+        }, 
         {
-            "type": "string",
-            "description": "The car brand bytes formatted in UTF-8",
-            "name": "brand",
+            "name": "brand", 
+            "type": "string", 
+            "description": "The car brand bytes formatted in UTF-8", 
+            "name_cased": "brand", 
             "id": 18
-        },
+        }, 
         {
-            "type": "capability_state",
-            "multiple": true,
-            "id": 153,
-            "name": "state"
+            "type": "types.capability_state", 
+            "multiple": true, 
+            "id": 153, 
+            "name_cased": "states", 
+            "name": "states"
         }
     ]
 }

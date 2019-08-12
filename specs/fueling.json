@@ -1,63 +1,40 @@
 {
-    "category": "parking",
-    "name": "fueling",
+    "category": "parking", 
+    "name": "fueling", 
     "getters": {
         "default": {
-            "name_override": "gas_flap"
+            "name": "get_gas_flap_state"
         }
-    },
-    "state": "all",
+    }, 
+    "state": "all", 
     "api": {
-        "intro": 4,
+        "intro": 4, 
         "update": 11
-    },
+    }, 
     "identifier": {
-        "lsb": 64,
+        "lsb": 64, 
         "msb": 0
-    },
+    }, 
     "properties": [
         {
-            "type": "enum",
-            "values": [
-                {
-                    "verb": "unlock",
-                    "id": 0,
-                    "name": "unlocked"
-                },
-                {
-                    "verb": "lock",
-                    "id": 1,
-                    "name": "locked"
-                }
-            ],
-            "id": 2,
-            "name": "gas_flap_lock",
-            "size": 1
-        },
+            "type": "types.lock_state", 
+            "id": 2, 
+            "name_cased": "gasFlapLock", 
+            "name": "gas_flap_lock"
+        }, 
         {
-            "type": "enum",
-            "values": [
-                {
-                    "verb": "close",
-                    "id": 0,
-                    "name": "closed"
-                },
-                {
-                    "id": 1,
-                    "name": "open"
-                }
-            ],
-            "id": 3,
-            "name": "gas_flap_position",
-            "size": 1
+            "type": "types.position", 
+            "id": 3, 
+            "name_cased": "gasFlapPosition", 
+            "name": "gas_flap_position"
         }
-    ],
+    ], 
     "setters": [
         {
             "optional": [
-                2,
+                2, 
                 3
-            ],
+            ], 
             "name": "control_gas_flap"
         }
     ]

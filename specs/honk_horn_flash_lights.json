@@ -1,97 +1,88 @@
 {
-    "category": "chassis",
-    "name": "honk_horn_flash_lights",
+    "category": "chassis", 
+    "name": "honk_horn_flash_lights", 
     "getters": {
         "static": [
             {
-                "name": "get_flashers_state",
+                "name": "get_flashers_state", 
                 "properties": [
                     1
                 ]
             }
         ]
-    },
+    }, 
     "state": [
         1
-    ],
+    ], 
     "api": {
-        "intro": 2,
+        "intro": 2, 
         "update": 11
-    },
+    }, 
     "identifier": {
-        "lsb": 38,
+        "lsb": 38, 
         "msb": 0
-    },
+    }, 
     "properties": [
         {
-            "type": "enum",
-            "values": [
+            "name": "flashers", 
+            "name_cased": "flashers", 
+            "enum_values": [
                 {
-                    "name": "inactive",
-                    "id": 0
-                },
+                    "id": 0, 
+                    "name": "inactive"
+                }, 
                 {
-                    "name": "emergency_flasher_active",
-                    "id": 1
-                },
+                    "id": 1, 
+                    "name": "emergency_flasher_active"
+                }, 
                 {
-                    "name": "left_flasher_active",
-                    "id": 2
-                },
+                    "id": 2, 
+                    "name": "left_flasher_active"
+                }, 
                 {
-                    "name": "right_flasher_active",
-                    "id": 3
+                    "id": 3, 
+                    "name": "right_flasher_active"
                 }
-            ],
-            "id": 1,
-            "name": "flashers",
+            ], 
+            "type": "enum", 
+            "id": 1, 
             "size": 1
-        },
+        }, 
         {
-            "id": 2,
-            "type": "uinteger",
-            "description": "Number of seconds to honk the horn",
-            "name": "honk_seconds",
-            "size": 1
-        },
+            "description": "Number of seconds to honk the horn", 
+            "name_cased": "honkSeconds", 
+            "size": 1, 
+            "type": "uinteger", 
+            "id": 2, 
+            "name": "honk_seconds"
+        }, 
         {
-            "id": 3,
-            "type": "uinteger",
-            "description": "Number of times to flash the lights",
-            "name": "flash_times",
-            "size": 1
-        },
+            "description": "Number of times to flash the lights", 
+            "name_cased": "flashTimes", 
+            "size": 1, 
+            "type": "uinteger", 
+            "id": 3, 
+            "name": "flash_times"
+        }, 
         {
-            "type": "enum",
-            "values": [
-                {
-                    "verb": "deactivate",
-                    "id": 0,
-                    "name": "deactive"
-                },
-                {
-                    "verb": "activate",
-                    "id": 1,
-                    "name": "active"
-                }
-            ],
-            "id": 4,
-            "name": "emergency_flashers_active_state",
-            "size": 1
+            "type": "types.active_state", 
+            "id": 4, 
+            "name_cased": "emergencyFlashersState", 
+            "name": "emergency_flashers_state"
         }
-    ],
+    ], 
     "setters": [
         {
             "optional": [
-                2,
+                2, 
                 3
-            ],
+            ], 
             "name": "honk_flash"
-        },
+        }, 
         {
             "mandatory": [
                 4
-            ],
+            ], 
             "name": "activate_deactivate_emergency_flasher"
         }
     ]

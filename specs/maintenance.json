@@ -1,177 +1,122 @@
 {
-    "category": "diagnostics",
-    "state": "all",
+    "category": "diagnostics", 
+    "state": "all", 
     "api": {
-        "intro": 3,
+        "intro": 3, 
         "update": 11
-    },
-    "name": "maintenance",
+    }, 
+    "name": "maintenance", 
     "identifier": {
-        "lsb": 52,
+        "lsb": 52, 
         "msb": 0
-    },
-    "getters": "default",
+    }, 
+    "getters": {
+        "default": {}
+    }, 
     "properties": [
         {
-            "id": 1,
-            "type": "integer",
-            "description": "Number of days until next servicing of the car, whereas negative is overdue",
-            "name": "days_to_next_service",
-            "size": 2
-        },
+            "description": "Number of days until next servicing of the car, whereas negative is overdue", 
+            "name_cased": "daysToNextService", 
+            "size": 2, 
+            "type": "integer", 
+            "id": 1, 
+            "name": "days_to_next_service"
+        }, 
         {
-            "id": 2,
-            "type": "uinteger",
-            "description": "The amount of kilometers until next servicing of the car",
-            "name": "kilometers_to_next_service",
-            "size": 4
-        },
+            "description": "The amount of kilometers until next servicing of the car", 
+            "name_cased": "kilometersToNextService", 
+            "size": 4, 
+            "type": "uinteger", 
+            "id": 2, 
+            "name": "kilometers_to_next_service"
+        }, 
         {
-            "id": 3,
-            "type": "uinteger",
-            "description": "The number of CBS reports",
-            "name": "cbs_reports_count",
-            "size": 1
-        },
+            "description": "The number of CBS reports", 
+            "name_cased": "cbsReportsCount", 
+            "size": 1, 
+            "type": "uinteger", 
+            "id": 3, 
+            "name": "cbs_reports_count"
+        }, 
         {
-            "id": 4,
-            "type": "uinteger",
-            "description": "Number of months until exhaust inspection",
-            "name": "months_to_exhaust_inpection",
-            "size": 1
-        },
+            "description": "Number of months until exhaust inspection", 
+            "name_cased": "monthsToExhaustInspection", 
+            "size": 1, 
+            "type": "uinteger", 
+            "id": 4, 
+            "name": "months_to_exhaust_inspection"
+        }, 
         {
-            "type": "enum",
-            "values": [
+            "name": "teleservice_availability", 
+            "name_cased": "teleserviceAvailability", 
+            "enum_values": [
                 {
-                    "id": 0,
+                    "id": 0, 
                     "name": "pending"
-                },
+                }, 
                 {
-                    "id": 1,
+                    "id": 1, 
                     "name": "idle"
-                },
+                }, 
                 {
-                    "id": 2,
+                    "id": 2, 
                     "name": "succesful"
-                },
+                }, 
                 {
-                    "id": 3,
+                    "id": 3, 
                     "name": "error"
                 }
-            ],
-            "id": 5,
-            "name": "teleservice_availability",
+            ], 
+            "type": "enum", 
+            "id": 5, 
             "size": 1
-        },
+        }, 
         {
-            "id": 6,
-            "type": "uinteger",
-            "description": "Distance threshold for Service",
-            "name": "service_distance_threshold",
-            "size": 2
-        },
+            "description": "Distance threshold for Service", 
+            "name_cased": "serviceDistanceThreshold", 
+            "size": 2, 
+            "type": "uinteger", 
+            "id": 6, 
+            "name": "service_distance_threshold"
+        }, 
         {
-            "id": 7,
-            "type": "uinteger",
-            "description": "Time threshold, in weeks, for Service",
-            "name": "service_time_threshold",
-            "size": 1
-        },
+            "description": "Time threshold, in weeks, for Service", 
+            "name_cased": "serviceTimeThreshold", 
+            "size": 1, 
+            "type": "uinteger", 
+            "id": 7, 
+            "name": "service_time_threshold"
+        }, 
         {
-            "id": 8,
-            "type": "timestamp",
-            "description": "Milliseconds since UNIX Epoch time",
-            "name": "automatic_teleservice_call_date",
-            "size": 8
-        },
+            "type": "types.timestamp", 
+            "id": 8, 
+            "name_cased": "automaticTeleserviceCallDate", 
+            "name": "automatic_teleservice_call_date"
+        }, 
         {
-            "id": 9,
-            "type": "timestamp",
-            "description": "Milliseconds since UNIX Epoch time",
-            "name": "teleservice_battery_call_date",
-            "size": 8
-        },
+            "type": "types.timestamp", 
+            "id": 9, 
+            "name_cased": "teleserviceBatteryCallDate", 
+            "name": "teleservice_battery_call_date"
+        }, 
         {
-            "id": 10,
-            "type": "timestamp",
-            "description": "Milliseconds since UNIX Epoch time",
-            "name": "next_inspection_date",
-            "size": 8
-        },
+            "type": "types.timestamp", 
+            "id": 10, 
+            "name_cased": "nextInspectionDate", 
+            "name": "next_inspection_date"
+        }, 
         {
-            "items": [
-                {
-                    "size": 1,
-                    "type": "uinteger",
-                    "description": "Value between 0 and 99, which corresponds to 2000-2099",
-                    "name": "year"
-                },
-                {
-                    "size": 1,
-                    "type": "uinteger",
-                    "description": "Value between 1 and 12",
-                    "name": "month"
-                },
-                {
-                    "size": 2,
-                    "type": "uinteger",
-                    "description": "CBS identifier",
-                    "name": "identifier"
-                },
-                {
-                    "type": "enum",
-                    "values": [
-                        {
-                            "id": 0,
-                            "name": "ok"
-                        },
-                        {
-                            "id": 1,
-                            "name": "pending"
-                        },
-                        {
-                            "id": 2,
-                            "name": "overdue"
-                        }
-                    ],
-                    "name": "due_status",
-                    "size": 1
-                },
-                {
-                    "size": 2,
-                    "type": "uinteger",
-                    "description": "Size of the CBS text",
-                    "name": "text_size"
-                },
-                {
-                    "type": "string",
-                    "name": "text",
-                    "description": "CBS text bytes formatted in UTF-8"
-                },
-                {
-                    "size": 2,
-                    "type": "uinteger",
-                    "description": "Size of the description string",
-                    "name": "description_size"
-                },
-                {
-                    "type": "string",
-                    "name": "description",
-                    "description": "Description bytes formatted in UTF-8"
-                }
-            ],
-            "multiple": true,
-            "id": 11,
-            "name": "condition_based_services",
-            "type": "custom"
-        },
+            "type": "types.condition_based_service", 
+            "multiple": true, 
+            "id": 11, 
+            "name_cased": "conditionBasedServices", 
+            "name": "condition_based_services"
+        }, 
         {
-            "id": 12,
-            "type": "timestamp",
-            "description": "Milliseconds since UNIX Epoch time",
-            "name": "brake_fluid_change_date",
-            "size": 8
+            "type": "types.timestamp", 
+            "id": 12, 
+            "name_cased": "brakeFluidChangeDate", 
+            "name": "brake_fluid_change_date"
         }
     ]
 }

@@ -1,41 +1,31 @@
 {
-    "category": "parking",
-    "name": "parking_brake",
-    "getters": "default",
-    "state": "all",
+    "category": "parking", 
+    "name": "parking_brake", 
+    "getters": {
+        "default": {}
+    }, 
+    "state": "all", 
     "api": {
-        "intro": 5,
+        "intro": 5, 
         "update": 11
-    },
+    }, 
     "identifier": {
-        "lsb": 88,
+        "lsb": 88, 
         "msb": 0
-    },
+    }, 
     "properties": [
         {
-            "type": "enum",
-            "values": [
-                {
-                    "verb": "deacticate",
-                    "id": 0,
-                    "name": "inactive"
-                },
-                {
-                    "verb": "activate",
-                    "id": 1,
-                    "name": "active"
-                }
-            ],
-            "id": 1,
-            "name": "parking_brake",
-            "size": 1
+            "type": "types.active_state", 
+            "id": 1, 
+            "name_cased": "status", 
+            "name": "status"
         }
-    ],
+    ], 
     "setters": [
         {
             "mandatory": [
                 1
-            ],
+            ], 
             "name": "set_parling_brake"
         }
     ]

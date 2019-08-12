@@ -1,118 +1,32 @@
 {
-    "category": "chassis",
-    "state": "all",
+    "category": "chassis", 
+    "state": "all", 
     "api": {
-        "intro": 5,
+        "intro": 5, 
         "update": 11
-    },
-    "name": "seats",
+    }, 
+    "name": "seats", 
     "identifier": {
-        "lsb": 86,
+        "lsb": 86, 
         "msb": 0
-    },
-    "getters": "default",
+    }, 
+    "getters": {
+        "default": {}
+    }, 
     "properties": [
         {
-            "multiple": true,
-            "name": "persons_detected",
-            "items": [
-                {
-                    "type": "enum",
-                    "values": [
-                        {
-                            "id": 0,
-                            "name": "front_left"
-                        },
-                        {
-                            "id": 1,
-                            "name": "front_right"
-                        },
-                        {
-                            "id": 2,
-                            "name": "rear_right"
-                        },
-                        {
-                            "id": 3,
-                            "name": "rear_left"
-                        },
-                        {
-                            "id": 4,
-                            "name": "rear_center"
-                        }
-                    ],
-                    "name": "seat_location",
-                    "size": 1
-                },
-                {
-                    "type": "enum",
-                    "values": [
-                        {
-                            "id": 0,
-                            "name": "not_detected"
-                        },
-                        {
-                            "id": 1,
-                            "name": "detected"
-                        }
-                    ],
-                    "name": "person_detected",
-                    "size": 1
-                }
-            ],
-            "type": "custom",
-            "id": 2,
-            "size": 2
-        },
+            "type": "types.person_detected", 
+            "multiple": true, 
+            "id": 2, 
+            "name_cased": "personsDetected", 
+            "name": "persons_detected"
+        }, 
         {
-            "multiple": true,
-            "name": "seatbelts_fastened",
-            "items": [
-                {
-                    "type": "enum",
-                    "values": [
-                        {
-                            "id": 0,
-                            "name": "front_left"
-                        },
-                        {
-                            "id": 1,
-                            "name": "front_right"
-                        },
-                        {
-                            "id": 2,
-                            "name": "rear_right"
-                        },
-                        {
-                            "id": 3,
-                            "name": "rear_left"
-                        },
-                        {
-                            "id": 4,
-                            "name": "rear_center"
-                        }
-                    ],
-                    "name": "seat_location",
-                    "size": 1
-                },
-                {
-                    "type": "enum",
-                    "values": [
-                        {
-                            "id": 0,
-                            "name": "not_fastened"
-                        },
-                        {
-                            "id": 1,
-                            "name": "fastened"
-                        }
-                    ],
-                    "name": "seatbelt_fastened",
-                    "size": 1
-                }
-            ],
-            "type": "custom",
-            "id": 3,
-            "size": 2
+            "type": "types.seatbelt_fastened", 
+            "multiple": true, 
+            "id": 3, 
+            "name_cased": "seatbeltsFastened", 
+            "name": "seatbelts_fastened"
         }
     ]
 }

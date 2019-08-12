@@ -1,60 +1,49 @@
 {
-    "category": "heavy_duty",
-    "name": "power_takeoff",
-    "getters": "default",
-    "state": "all",
+    "category": "heavy_duty", 
+    "name": "power_takeoff", 
+    "getters": {
+        "default": {}
+    }, 
+    "state": "all", 
     "api": {
-        "intro": 7,
+        "intro": 7, 
         "update": 11
-    },
-    "pretty_state_name": "Power Take-Off",
+    }, 
+    "pretty_state_name": "Power Take-Off", 
     "identifier": {
-        "lsb": 101,
+        "lsb": 101, 
         "msb": 0
-    },
+    }, 
     "properties": [
         {
-            "pretty_name": "Power Take-Off",
-            "values": [
-                {
-                    "verb": "deactivate",
-                    "id": 0,
-                    "name": "inactive"
-                },
-                {
-                    "verb": "activate",
-                    "id": 1,
-                    "name": "active"
-                }
-            ],
-            "name": "power_takeoff",
-            "type": "enum",
-            "id": 1,
-            "size": 1
-        },
+            "type": "types.active_state", 
+            "id": 1, 
+            "name_cased": "status", 
+            "name": "status"
+        }, 
         {
-            "pretty_name": "Power Take-Off engaged",
-            "values": [
+            "name": "engaged", 
+            "name_cased": "engaged", 
+            "enum_values": [
                 {
-                    "id": 0,
+                    "id": 0, 
                     "name": "not_engaged"
-                },
+                }, 
                 {
-                    "id": 1,
+                    "id": 1, 
                     "name": "engaged"
                 }
-            ],
-            "name": "power_takeoff_engaged",
-            "type": "enum",
-            "id": 2,
+            ], 
+            "type": "enum", 
+            "id": 2, 
             "size": 1
         }
-    ],
+    ], 
     "setters": [
         {
             "mandatory": [
                 1
-            ],
+            ], 
             "name": "activate_deactivate_power_takeoff"
         }
     ]

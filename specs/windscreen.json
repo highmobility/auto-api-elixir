@@ -1,186 +1,165 @@
 {
-    "category": "chassis",
-    "name": "windscreen",
-    "getters": "default",
-    "state": "all",
+    "category": "chassis", 
+    "name": "windscreen", 
+    "getters": {
+        "default": {}
+    }, 
+    "state": "all", 
     "api": {
-        "intro": 4,
+        "intro": 4, 
         "update": 11
-    },
+    }, 
     "identifier": {
-        "lsb": 66,
+        "lsb": 66, 
         "msb": 0
-    },
+    }, 
     "properties": [
         {
-            "type": "enum",
-            "values": [
+            "name": "wipers", 
+            "name_cased": "wipers", 
+            "enum_values": [
                 {
-                    "verb": "deactivate",
-                    "id": 0,
+                    "verb": "deactivate", 
+                    "id": 0, 
                     "name": "inactive"
-                },
+                }, 
                 {
-                    "verb": "activate",
-                    "id": 1,
+                    "verb": "activate", 
+                    "id": 1, 
                     "name": "active"
-                },
+                }, 
                 {
-                    "id": 2,
+                    "id": 2, 
                     "name": "automatic"
                 }
-            ],
-            "id": 1,
-            "name": "wipers",
+            ], 
+            "type": "enum", 
+            "id": 1, 
             "size": 1
-        },
+        }, 
         {
-            "type": "enum",
-            "values": [
+            "name": "wipers_intensity", 
+            "name_cased": "wipersIntensity", 
+            "enum_values": [
                 {
-                    "pretty_name": "Level 0, inactive",
-                    "id": 0,
+                    "pretty_name": "Level 0, inactive", 
+                    "id": 0, 
                     "name": "level_0"
-                },
+                }, 
                 {
-                    "id": 1,
+                    "id": 1, 
                     "name": "level_1"
-                },
+                }, 
                 {
-                    "id": 2,
+                    "id": 2, 
                     "name": "level_2"
-                },
+                }, 
                 {
-                    "id": 3,
+                    "id": 3, 
                     "name": "level_3"
                 }
-            ],
-            "id": 2,
-            "name": "wipers_intensity",
+            ], 
+            "type": "enum", 
+            "id": 2, 
             "size": 1
-        },
+        }, 
         {
-            "type": "enum",
-            "values": [
+            "name": "windscreen_damage", 
+            "name_cased": "windscreenDamage", 
+            "enum_values": [
                 {
-                    "id": 0,
+                    "id": 0, 
                     "name": "no_impact_detected"
-                },
+                }, 
                 {
-                    "id": 1,
+                    "id": 1, 
                     "name": "impact_but_no_damage_detected"
-                },
+                }, 
                 {
-                    "id": 2,
+                    "id": 2, 
                     "name": "damage_smaller_than_1_inch"
-                },
+                }, 
                 {
-                    "id": 3,
+                    "id": 3, 
                     "name": "damage_larger_than_1_inch"
                 }
-            ],
-            "id": 3,
-            "name": "windscreen_damage",
+            ], 
+            "type": "enum", 
+            "id": 3, 
             "size": 1
-        },
+        }, 
         {
-            "items": [
-                {
-                    "size": 1,
-                    "type": "uinteger",
-                    "description": "Representing the horizontal size of the matrix seen from the inside of the car, starting from index 1",
-                    "name": "horisontal_size"
-                },
-                {
-                    "size": 1,
-                    "type": "uinteger",
-                    "description": "Representing the vertical size of the matrix, starting from index 1",
-                    "name": "vertical_axis"
-                }
-            ],
-            "type": "custom",
-            "id": 4,
-            "name": "windscreen_zone_matrix",
-            "size": 2
-        },
+            "name": "windscreen_zone_matrix", 
+            "type": "types.zone", 
+            "description": "Representing the size of the matrix, seen from the inside of the vehicle", 
+            "name_cased": "windscreenZoneMatrix", 
+            "id": 4
+        }, 
         {
-            "items": [
-                {
-                    "size": 1,
-                    "type": "uinteger",
-                    "description": "Representing the horizontal position of the zone in a matrix seen from the inside of the car, starting from index 1",
-                    "name": "horisontal_size"
-                },
-                {
-                    "size": 1,
-                    "type": "uinteger",
-                    "description": "Representing the vertical position of the zone, starting from index 1",
-                    "name": "vertical_axis"
-                }
-            ],
-            "type": "custom",
-            "id": 5,
-            "name": "windscreen_damage_zone",
-            "size": 2
-        },
+            "name": "windscreen_damage_zone", 
+            "type": "types.zone", 
+            "description": "Representing the position in the zone, seen from the inside of the vehicle (1-based index)", 
+            "name_cased": "windscreenDamageZone", 
+            "id": 5
+        }, 
         {
-            "type": "enum",
-            "values": [
+            "name": "windscreen_needs_replacement", 
+            "name_cased": "windscreenNeedsReplacement", 
+            "enum_values": [
                 {
-                    "id": 0,
+                    "id": 0, 
                     "name": "unknown"
-                },
+                }, 
                 {
-                    "id": 1,
+                    "id": 1, 
                     "name": "no_replacement_needed"
-                },
+                }, 
                 {
-                    "id": 2,
+                    "id": 2, 
                     "name": "replacement_needed"
                 }
-            ],
-            "id": 6,
-            "name": "windscreen_needs_replacement",
+            ], 
+            "type": "enum", 
+            "id": 6, 
             "size": 1
-        },
+        }, 
         {
-            "id": 7,
-            "type": "double",
-            "description": "Percentage between 0.0-1.0, confidence of damage detection. Zero if no impact detected.",
-            "name": "windscreen_damage_confidence",
-            "size": 8
-        },
+            "name": "windscreen_damage_confidence", 
+            "type": "types.percentage", 
+            "description": "Confidence of damage detection, 0% if no impact detected", 
+            "name_cased": "windscreenDamageConfidence", 
+            "id": 7
+        }, 
         {
-            "id": 8,
-            "type": "timestamp",
-            "description": "Milliseconds since UNIX Epoch time",
-            "name": "windscreen_damage_detection_time",
-            "size": 8
+            "type": "types.timestamp", 
+            "id": 8, 
+            "name_cased": "windscreenDamageDetectionTime", 
+            "name": "windscreen_damage_detection_time"
         }
-    ],
+    ], 
     "setters": [
         {
             "mandatory": [
                 3
-            ],
+            ], 
             "optional": [
                 5
-            ],
+            ], 
             "name": "set_windscreen_damage"
-        },
+        }, 
         {
             "mandatory": [
                 6
-            ],
+            ], 
             "name": "set_windscreen_replacement_needed"
-        },
+        }, 
         {
             "mandatory": [
                 1
-            ],
+            ], 
             "optional": [
                 2
-            ],
+            ], 
             "name": "control_wipers"
         }
     ]

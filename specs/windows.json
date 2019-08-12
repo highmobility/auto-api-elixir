@@ -1,126 +1,42 @@
 {
-    "category": "chassis",
-    "name": "windows",
+    "category": "chassis", 
+    "name": "windows", 
     "getters": {
         "default": {
-            "name_override": "windows"
+            "name": "get_windows"
         }
-    },
-    "state": "all",
+    }, 
+    "state": "all", 
     "api": {
-        "intro": 2,
+        "intro": 2, 
         "update": 11
-    },
+    }, 
     "identifier": {
-        "lsb": 69,
+        "lsb": 69, 
         "msb": 0
-    },
+    }, 
     "properties": [
         {
-            "multiple": true,
-            "name": "windows_open_percentages",
-            "items": [
-                {
-                    "type": "enum",
-                    "values": [
-                        {
-                            "id": 0,
-                            "name": "front_left"
-                        },
-                        {
-                            "id": 1,
-                            "name": "front_right"
-                        },
-                        {
-                            "id": 2,
-                            "name": "rear_right"
-                        },
-                        {
-                            "id": 3,
-                            "name": "rear_left"
-                        },
-                        {
-                            "id": 4,
-                            "name": "hatch"
-                        }
-                    ],
-                    "name": "location",
-                    "size": 1
-                },
-                {
-                    "size": 8,
-                    "type": "double",
-                    "description": "Value between 0.0 and 1.0",
-                    "name": "open_percentage"
-                }
-            ],
-            "type": "custom",
-            "id": 2,
-            "size": 9
-        },
+            "type": "types.window_open_percentage", 
+            "multiple": true, 
+            "id": 2, 
+            "name_cased": "openPercentages", 
+            "name": "open_percentages"
+        }, 
         {
-            "multiple": true,
-            "name": "windows_positions",
-            "items": [
-                {
-                    "type": "enum",
-                    "values": [
-                        {
-                            "id": 0,
-                            "name": "front_left"
-                        },
-                        {
-                            "id": 1,
-                            "name": "front_right"
-                        },
-                        {
-                            "id": 2,
-                            "name": "rear_right"
-                        },
-                        {
-                            "id": 3,
-                            "name": "rear_left"
-                        },
-                        {
-                            "id": 4,
-                            "name": "hatch"
-                        }
-                    ],
-                    "name": "location",
-                    "size": 1
-                },
-                {
-                    "type": "enum",
-                    "values": [
-                        {
-                            "id": 0,
-                            "name": "closed"
-                        },
-                        {
-                            "id": 1,
-                            "name": "open"
-                        },
-                        {
-                            "id": 2,
-                            "disabled_in_setter": true,
-                            "name": "intermediate"
-                        }
-                    ],
-                    "name": "position",
-                    "size": 1
-                }
-            ],
-            "type": "custom",
-            "id": 3,
-            "size": 2
+            "type": "types.window_position", 
+            "multiple": true, 
+            "id": 3, 
+            "name_cased": "positions", 
+            "name": "positions"
         }
-    ],
+    ], 
     "setters": [
         {
             "optional": [
-                2,
+                2, 
                 3
-            ],
+            ], 
             "name": "control_windows"
         }
     ]

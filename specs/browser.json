@@ -1,28 +1,29 @@
 {
-    "category": "headunit",
+    "category": "headunit", 
     "api": {
-        "intro": 4,
+        "intro": 4, 
         "update": 11
-    },
-    "name": "browser",
+    }, 
+    "name": "browser", 
     "identifier": {
-        "lsb": 73,
+        "lsb": 73, 
         "msb": 0
-    },
+    }, 
     "properties": [
         {
-            "pretty_name": "URL",
-            "type": "string",
-            "description": "The UTF8 bytes of the URL string",
-            "name": "url",
-            "id": 1
+            "pretty_name": "URL", 
+            "description": "The UTF8 bytes of the URL string", 
+            "name_cased": "url", 
+            "type": "string", 
+            "id": 1, 
+            "name": "url"
         }
-    ],
+    ], 
     "setters": [
         {
             "mandatory": [
                 1
-            ],
+            ], 
             "name": "load_url"
         }
     ]

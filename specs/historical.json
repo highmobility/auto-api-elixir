@@ -1,55 +1,57 @@
 {
-    "category": "api_structure",
-    "name": "historical",
+    "category": "api_structure", 
+    "name": "historical", 
     "state": [
         1
-    ],
+    ], 
     "api": {
-        "intro": 8,
+        "intro": 8, 
         "update": 11
-    },
-    "pretty_state_name": "Historical States",
+    }, 
+    "pretty_state_name": "Historical States", 
     "identifier": {
-        "lsb": 18,
+        "lsb": 18, 
         "msb": 0
-    },
+    }, 
     "properties": [
         {
-            "type": "capability_state",
-            "multiple": true,
-            "id": 1,
+            "type": "types.capability_state", 
+            "multiple": true, 
+            "id": 1, 
+            "name_cased": "states", 
             "name": "states"
-        },
+        }, 
         {
-            "type": "uinteger",
-            "id": 2,
-            "name": "capability_identifier",
-            "size": 2
-        },
+            "pretty_name": "Capability ID", 
+            "name": "capability_id", 
+            "name_cased": "capabilityID", 
+            "size": 2, 
+            "type": "uinteger", 
+            "id": 2, 
+            "description": "The identifier of the Capability"
+        }, 
         {
-            "id": 3,
-            "type": "timestamp",
-            "description": "Milliseconds since UNIX Epoch time",
-            "name": "start_date",
-            "size": 8
-        },
+            "type": "types.timestamp", 
+            "id": 3, 
+            "name_cased": "startDate", 
+            "name": "start_date"
+        }, 
         {
-            "id": 4,
-            "type": "timestamp",
-            "description": "Milliseconds since UNIX Epoch time",
-            "name": "end_date",
-            "size": 8
+            "type": "types.timestamp", 
+            "id": 4, 
+            "name_cased": "endDate", 
+            "name": "end_date"
         }
-    ],
+    ], 
     "setters": [
         {
             "mandatory": [
                 2
-            ],
+            ], 
             "optional": [
-                3,
+                3, 
                 4
-            ],
+            ], 
             "name": "request_states"
         }
     ]

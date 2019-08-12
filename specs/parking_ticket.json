@@ -1,85 +1,93 @@
 {
-    "category": "parking",
-    "name": "parking_ticket",
+    "category": "parking", 
+    "name": "parking_ticket", 
     "getters": {
         "default": {
-            "omit_state_text": true
+            "name": "get_parking_ticket"
         }
-    },
-    "state": "all",
+    }, 
+    "state": "all", 
     "api": {
-        "intro": 4,
+        "intro": 4, 
         "update": 11
-    },
+    }, 
     "identifier": {
-        "lsb": 71,
+        "lsb": 71, 
         "msb": 0
-    },
+    }, 
     "properties": [
         {
-            "type": "enum",
-            "values": [
+            "name": "status", 
+            "name_cased": "status", 
+            "enum_values": [
                 {
-                    "verb": "end",
-                    "id": 0,
+                    "verb": "end", 
+                    "id": 0, 
                     "name": "ended"
-                },
+                }, 
                 {
-                    "verb": "start",
-                    "id": 1,
+                    "verb": "start", 
+                    "id": 1, 
                     "name": "started"
                 }
-            ],
-            "id": 1,
-            "name": "parking_ticket_state",
+            ], 
+            "type": "enum", 
+            "id": 1, 
             "size": 1
-        },
+        }, 
         {
-            "type": "string",
-            "description": "Operator Name bytes formatted in UTF-8",
-            "name": "operator_name",
+            "name": "operator_name", 
+            "type": "string", 
+            "description": "Operator Name bytes formatted in UTF-8", 
+            "name_cased": "operatorName", 
             "id": 2
-        },
+        }, 
         {
-            "pretty_name": "Operator Ticket ID",
-            "description": "Operator Ticket ID bytes formatted in UTF-8",
-            "title_case_name": "operatorTicketID",
-            "type": "string",
-            "id": 3,
+            "pretty_name": "Operator Ticket ID", 
+            "description": "Operator Ticket ID bytes formatted in UTF-8", 
+            "name_cased": "operatorTicketID", 
+            "type": "string", 
+            "id": 3, 
             "name": "operator_ticket_id"
-        },
+        }, 
         {
-            "id": 4,
-            "type": "timestamp",
-            "description": "Milliseconds since UNIX Epoch time",
-            "name": "ticket_start_time",
-            "size": 8
-        },
+            "type": "types.timestamp", 
+            "id": 4, 
+            "name_cased": "ticketStartTime", 
+            "name": "ticket_start_time"
+        }, 
         {
-            "id": 5,
-            "type": "timestamp",
-            "description": "Milliseconds since UNIX Epoch time",
-            "name": "ticket_end_time",
-            "size": 8
+            "type": "types.timestamp", 
+            "id": 5, 
+            "name_cased": "ticketEndTime", 
+            "name": "ticket_end_time"
         }
-    ],
+    ], 
     "setters": [
         {
             "mandatory": [
-                3,
+                3, 
                 4
-            ],
+            ], 
             "optional": [
-                2,
+                2, 
                 5
-            ],
-            "name": "start_parking"
-        },
-        {
-            "name": "end_parking",
+            ], 
+            "name": "start_parking", 
             "constants": [
                 {
-                    "property_id": 1,
+                    "property_id": 1, 
+                    "value": [
+                        1
+                    ]
+                }
+            ]
+        }, 
+        {
+            "name": "end_parking", 
+            "constants": [
+                {
+                    "property_id": 1, 
                     "value": [
                         0
                     ]

@@ -1,34 +1,35 @@
 {
-    "category": "digital_key",
+    "category": "digital_key", 
     "api": {
-        "intro": 2,
+        "intro": 2, 
         "update": 11
-    },
-    "name": "wake_up",
+    }, 
+    "name": "wake_up", 
     "identifier": {
-        "lsb": 34,
+        "lsb": 34, 
         "msb": 0
-    },
+    }, 
     "properties": [
         {
-            "type": "enum",
-            "values": [
+            "name": "wake_up", 
+            "name_cased": "wakeUp", 
+            "enum_values": [
                 {
-                    "id": 0,
+                    "id": 0, 
                     "name": "wake_up"
                 }
-            ],
-            "id": 1,
-            "name": "wake_up",
+            ], 
+            "type": "enum", 
+            "id": 1, 
             "size": 1
         }
-    ],
+    ], 
     "setters": [
         {
-            "name": "wake_up",
+            "name": "wake_up", 
             "constants": [
                 {
-                    "property_id": 1,
+                    "property_id": 1, 
                     "value": [
                         0
                     ]

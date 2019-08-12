@@ -1,39 +1,27 @@
 {
-    "category": "api_structure",
-    "state": "all",
+    "category": "api_structure", 
+    "state": "all", 
     "api": {
-        "intro": 2,
+        "intro": 2, 
         "update": 11
-    },
-    "name": "capabilities",
+    }, 
+    "name": "capabilities", 
     "identifier": {
-        "lsb": 16,
+        "lsb": 16, 
         "msb": 0
-    },
+    }, 
     "getters": {
         "default": {
-            "omit_state_text": true
+            "name": "get_capabilities"
         }
-    },
+    }, 
     "properties": [
         {
-            "items": [
-                {
-                    "size": 2,
-                    "type": "uinteger",
-                    "description": "The identifier of the supported capability",
-                    "name": "capability_identifier"
-                },
-                {
-                    "type": "list_uinteger",
-                    "name": "supported_properties",
-                    "description": "Array of supported property identifiers"
-                }
-            ],
-            "multiple": true,
-            "id": 1,
-            "name": "capabilities",
-            "type": "custom"
+            "type": "types.supported_capability", 
+            "multiple": true, 
+            "id": 1, 
+            "name_cased": "capabilities", 
+            "name": "capabilities"
         }
     ]
 }

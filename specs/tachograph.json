@@ -1,195 +1,87 @@
 {
-    "category": "heavy_duty",
-    "state": "all",
+    "category": "heavy_duty", 
+    "state": "all", 
     "api": {
-        "intro": 7,
+        "intro": 7, 
         "update": 11
-    },
-    "name": "tachograph",
+    }, 
+    "name": "tachograph", 
     "identifier": {
-        "lsb": 100,
+        "lsb": 100, 
         "msb": 0
-    },
-    "getters": "default",
+    }, 
+    "getters": {
+        "default": {}
+    }, 
     "properties": [
         {
-            "multiple": true,
-            "name": "drivers_working_states",
-            "items": [
-                {
-                    "size": 1,
-                    "type": "uinteger",
-                    "description": "The driver number",
-                    "name": "driver_number"
-                },
-                {
-                    "type": "enum",
-                    "values": [
-                        {
-                            "id": 0,
-                            "name": "resting"
-                        },
-                        {
-                            "id": 1,
-                            "name": "driver_available"
-                        },
-                        {
-                            "id": 2,
-                            "name": "working"
-                        },
-                        {
-                            "id": 3,
-                            "name": "driving"
-                        }
-                    ],
-                    "name": "working_state",
-                    "size": 1
-                }
-            ],
-            "type": "custom",
-            "id": 1,
-            "size": 2
-        },
+            "type": "types.driver_working_state", 
+            "multiple": true, 
+            "id": 1, 
+            "name_cased": "driversWorkingStates", 
+            "name": "drivers_working_states"
+        }, 
         {
-            "multiple": true,
-            "name": "drivers_time_states",
-            "items": [
-                {
-                    "size": 1,
-                    "type": "uinteger",
-                    "description": "The driver number",
-                    "name": "driver_number"
-                },
-                {
-                    "type": "enum",
-                    "values": [
-                        {
-                            "id": 0,
-                            "name": "normal"
-                        },
-                        {
-                            "pretty_name": "15 minutes before 4\u00bd hours",
-                            "id": 1,
-                            "name": "15_min_before_4"
-                        },
-                        {
-                            "pretty_name": "4\u00bd hours reached",
-                            "id": 2,
-                            "name": "4_reached"
-                        },
-                        {
-                            "pretty_name": "15 minutes before 9 hours",
-                            "id": 3,
-                            "name": "15_min_before_9"
-                        },
-                        {
-                            "pretty_name": "9 hours reached",
-                            "id": 4,
-                            "name": "9_reached"
-                        },
-                        {
-                            "pretty_name": "15 minutes before 16 hours",
-                            "id": 5,
-                            "name": "15_min_before_16"
-                        },
-                        {
-                            "pretty_name": "16 hours reached",
-                            "id": 6,
-                            "name": "16_reached"
-                        }
-                    ],
-                    "name": "time_state",
-                    "size": 1
-                }
-            ],
-            "type": "custom",
-            "id": 2,
-            "size": 2
-        },
+            "type": "types.driver_time_state", 
+            "multiple": true, 
+            "id": 2, 
+            "name_cased": "driversTimeStates", 
+            "name": "drivers_time_states"
+        }, 
         {
-            "multiple": true,
-            "name": "drivers_cards",
-            "items": [
-                {
-                    "size": 1,
-                    "type": "uinteger",
-                    "description": "The driver number",
-                    "name": "driver_number"
-                },
-                {
-                    "type": "enum",
-                    "values": [
-                        {
-                            "id": 0,
-                            "name": "not_present"
-                        },
-                        {
-                            "id": 1,
-                            "name": "present"
-                        }
-                    ],
-                    "name": "card",
-                    "size": 1
-                }
-            ],
-            "type": "custom",
-            "id": 3,
-            "size": 2
-        },
+            "type": "types.driver_card_present", 
+            "multiple": true, 
+            "id": 3, 
+            "name_cased": "driversCardsPresent", 
+            "name": "drivers_cards_present"
+        }, 
         {
-            "type": "enum",
-            "values": [
-                {
-                    "id": 0,
-                    "name": "not_detected"
-                },
-                {
-                    "id": 1,
-                    "name": "detected"
-                }
-            ],
-            "id": 4,
-            "name": "vehicle_motion",
-            "size": 1
-        },
+            "type": "types.detected", 
+            "id": 4, 
+            "name_cased": "vehicleMotion", 
+            "name": "vehicle_motion"
+        }, 
         {
-            "type": "enum",
-            "values": [
+            "name": "vehicle_overspeed", 
+            "name_cased": "vehicleOverspeed", 
+            "enum_values": [
                 {
-                    "id": 0,
+                    "id": 0, 
                     "name": "no_overspeed"
-                },
+                }, 
                 {
-                    "id": 1,
+                    "id": 1, 
                     "name": "overspeed"
                 }
-            ],
-            "id": 5,
-            "name": "vehicle_overspeed",
+            ], 
+            "type": "enum", 
+            "id": 5, 
             "size": 1
-        },
+        }, 
         {
-            "type": "enum",
-            "values": [
+            "name": "vehicle_direction", 
+            "name_cased": "vehicleDirection", 
+            "enum_values": [
                 {
-                    "id": 0,
+                    "id": 0, 
                     "name": "forward"
-                },
+                }, 
                 {
-                    "id": 1,
+                    "id": 1, 
                     "name": "reverse"
                 }
-            ],
-            "id": 6,
-            "name": "vehicle_direction",
+            ], 
+            "type": "enum", 
+            "id": 6, 
             "size": 1
-        },
+        }, 
         {
-            "id": 7,
-            "type": "integer",
-            "description": "The tachograph vehicle speed in km/h",
-            "name": "vehicle_speed",
-            "size": 2
+            "description": "The tachograph vehicle speed in km/h", 
+            "name_cased": "vehicleSpeed", 
+            "size": 2, 
+            "type": "integer", 
+            "id": 7, 
+            "name": "vehicle_speed"
         }
     ]
 }

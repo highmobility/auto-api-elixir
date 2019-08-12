@@ -1,98 +1,74 @@
 {
-    "category": "poi",
-    "name": "navi_destination",
+    "category": "poi", 
+    "name": "navi_destination", 
     "getters": {
         "default": {
-            "omit_state_text": true
+            "name": "get_navi_destination"
         }
-    },
-    "state": "all",
+    }, 
+    "state": "all", 
     "api": {
-        "intro": 4,
+        "intro": 4, 
         "update": 11
-    },
+    }, 
     "identifier": {
-        "lsb": 49,
+        "lsb": 49, 
         "msb": 0
-    },
+    }, 
     "properties": [
         {
-            "items": [
-                {
-                    "size": 8,
-                    "type": "double",
-                    "description": "Latitude in 8-bytes per IEEE 754",
-                    "name": "latitude"
-                },
-                {
-                    "size": 8,
-                    "type": "double",
-                    "description": "Longitude in 8-bytes per IEEE 754",
-                    "name": "longitude"
-                }
-            ],
-            "type": "custom",
-            "id": 1,
-            "name": "coordinates",
-            "size": 16
-        },
+            "type": "types.coordinates", 
+            "id": 1, 
+            "name_cased": "coordinates", 
+            "name": "coordinates"
+        }, 
         {
-            "type": "string",
-            "description": "Destination name bytes formatted in UTF-8",
-            "name": "destination_name",
+            "name": "destination_name", 
+            "type": "string", 
+            "description": "Destination name bytes formatted in UTF-8", 
+            "name_cased": "destinationName", 
             "id": 2
-        },
+        }, 
         {
-            "id": 3,
-            "type": "uinteger",
-            "description": "Remaining number of POI data slots available.",
-            "name": "data_slots_free",
-            "size": 1
-        },
+            "description": "Remaining number of POI data slots available.", 
+            "name_cased": "dataSlotsFree", 
+            "size": 1, 
+            "type": "uinteger", 
+            "id": 3, 
+            "name": "data_slots_free"
+        }, 
         {
-            "id": 4,
-            "type": "uinteger",
-            "description": "Maximum number of POI data slots.",
-            "name": "data_slots_max",
-            "size": 1
-        },
+            "description": "Maximum number of POI data slots.", 
+            "name_cased": "dataSlotsMax", 
+            "size": 1, 
+            "type": "uinteger", 
+            "id": 4, 
+            "name": "data_slots_max"
+        }, 
         {
-            "description": "Remaining time until reaching the destination.",
-            "items": [
-                {
-                    "size": 1,
-                    "type": "uinteger",
-                    "description": "Value between 0 and 23",
-                    "name": "hour"
-                },
-                {
-                    "size": 1,
-                    "type": "uinteger",
-                    "description": "Value between 0 and 59",
-                    "name": "minute"
-                }
-            ],
-            "size": 2,
-            "type": "custom",
-            "id": 5,
-            "name": "arrival_duration"
-        },
+            "name": "arrival_duration", 
+            "type": "types.time", 
+            "description": "Remaining time until reaching the destination.", 
+            "name_cased": "arrivalDuration", 
+            "id": 5
+        }, 
         {
-            "id": 6,
-            "type": "uinteger",
-            "description": "Remaining distance to reach the destination.",
-            "name": "distance_to_destination",
-            "size": 2
+            "description": "Remaining distance to reach the destination.", 
+            "name_cased": "distanceToDestination", 
+            "size": 2, 
+            "type": "uinteger", 
+            "id": 6, 
+            "name": "distance_to_destination"
         }
-    ],
+    ], 
     "setters": [
         {
             "mandatory": [
                 1
-            ],
+            ], 
             "optional": [
                 2
-            ],
+            ], 
             "name": "set_navi_destination"
         }
     ]

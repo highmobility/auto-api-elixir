@@ -1,61 +1,41 @@
 {
-    "category": "api_structure",
-    "state": "all",
+    "category": "api_structure", 
+    "state": "all", 
     "api": {
-        "intro": 4,
+        "intro": 4, 
         "update": 11
-    },
-    "name": "firmware_version",
+    }, 
+    "name": "firmware_version", 
     "identifier": {
-        "lsb": 3,
+        "lsb": 3, 
         "msb": 0
-    },
+    }, 
     "getters": {
         "default": {
-            "omit_state_text": true
+            "name": "get_firmware_version"
         }
-    },
+    }, 
     "properties": [
         {
-            "pretty_name": "HMKit Version",
-            "name": "hmkit_version",
-            "title_case_name": "HMKitVersion",
-            "items": [
-                {
-                    "size": 1,
-                    "type": "uinteger",
-                    "description": "HMKit version major number",
-                    "name": "version_major"
-                },
-                {
-                    "size": 1,
-                    "type": "uinteger",
-                    "description": "HMKit version minor number",
-                    "name": "version_minor"
-                },
-                {
-                    "size": 1,
-                    "type": "uinteger",
-                    "description": "HMKit version patch number",
-                    "name": "version_patch"
-                }
-            ],
-            "type": "custom",
-            "id": 1,
-            "size": 3
-        },
+            "name": "hmkit_version", 
+            "type": "types.hmkit_version", 
+            "description": "HMKit version", 
+            "name_cased": "hmKitVersion", 
+            "id": 1
+        }, 
         {
-            "pretty_name": "HMKit Build Name",
-            "description": "HMKit version build name bytes formatted in UTF-8",
-            "title_case_name": "HMKitBuildName",
-            "type": "string",
-            "id": 2,
+            "pretty_name": "HMKit Build Name", 
+            "description": "HMKit version build name bytes formatted in UTF-8", 
+            "name_cased": "hmKitBuildName", 
+            "type": "string", 
+            "id": 2, 
             "name": "hmkit_build_name"
-        },
+        }, 
         {
-            "type": "string",
-            "description": "Application version bytes formatted in UTF-8",
-            "name": "application_version",
+            "name": "application_version", 
+            "type": "string", 
+            "description": "Application version bytes formatted in UTF-8", 
+            "name_cased": "applicationVersion", 
             "id": 3
         }
     ]

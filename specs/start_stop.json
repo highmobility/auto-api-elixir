@@ -1,43 +1,32 @@
 {
-    "category": "digital_key",
-    "name": "start_stop",
-    "getters": "default",
-    "state": "all",
+    "category": "digital_key", 
+    "name": "start_stop", 
+    "getters": {
+        "default": {}
+    }, 
+    "state": "all", 
     "api": {
-        "intro": 7,
+        "intro": 7, 
         "update": 11
-    },
-    "pretty_state_name": "Start-Stop",
+    }, 
+    "pretty_state_name": "Start-Stop", 
     "identifier": {
-        "lsb": 99,
+        "lsb": 99, 
         "msb": 0
-    },
+    }, 
     "properties": [
         {
-            "pretty_name": "Start-Stop",
-            "values": [
-                {
-                    "verb": "deactivate",
-                    "id": 0,
-                    "name": "inactive"
-                },
-                {
-                    "verb": "activate",
-                    "id": 1,
-                    "name": "active"
-                }
-            ],
-            "name": "start_stop",
-            "type": "enum",
-            "id": 1,
-            "size": 1
+            "type": "types.active_state", 
+            "id": 1, 
+            "name_cased": "status", 
+            "name": "status"
         }
-    ],
+    ], 
     "setters": [
         {
             "mandatory": [
                 1
-            ],
+            ], 
             "name": "activate_deactivate_start_stop"
         }
     ]

@@ -1,210 +1,122 @@
 {
-    "category": "chassis",
-    "name": "chassis_settings",
+    "category": "chassis", 
+    "name": "chassis_settings", 
     "getters": {
         "default": {
-            "omit_state_text": true
+            "name": "get_chassis_settings"
         }
-    },
-    "state": "all",
+    }, 
+    "state": "all", 
     "api": {
-        "intro": 5,
+        "intro": 5, 
         "update": 11
-    },
+    }, 
     "identifier": {
-        "lsb": 83,
+        "lsb": 83, 
         "msb": 0
-    },
+    }, 
     "properties": [
         {
-            "type": "enum",
-            "values": [
-                {
-                    "id": 0,
-                    "name": "regular"
-                },
-                {
-                    "id": 1,
-                    "name": "eco"
-                },
-                {
-                    "id": 2,
-                    "name": "sport"
-                },
-                {
-                    "id": 3,
-                    "name": "sport_plus"
-                },
-                {
-                    "id": 4,
-                    "name": "ecoPlus"
-                },
-                {
-                    "id": 5,
-                    "name": "comfort"
-                }
-            ],
-            "id": 1,
-            "name": "driving_mode",
-            "size": 1
-        },
+            "type": "types.driving_mode", 
+            "id": 1, 
+            "name_cased": "drivingMode", 
+            "name": "driving_mode"
+        }, 
         {
-            "type": "enum",
-            "values": [
+            "name": "sport_chrono", 
+            "name_cased": "sportChrono", 
+            "enum_values": [
                 {
-                    "verb": "stop",
-                    "id": 0,
+                    "verb": "stop", 
+                    "id": 0, 
                     "name": "inactive"
-                },
+                }, 
                 {
-                    "verb": "start",
-                    "id": 1,
+                    "verb": "start", 
+                    "id": 1, 
                     "name": "active"
-                },
+                }, 
                 {
-                    "id": 2,
+                    "id": 2, 
                     "name": "reset"
                 }
-            ],
-            "id": 2,
-            "name": "sport_chrono",
+            ], 
+            "type": "enum", 
+            "id": 2, 
             "size": 1
-        },
+        }, 
         {
-            "multiple": true,
-            "name": "current_spring_rates",
-            "items": [
-                {
-                    "type": "enum",
-                    "values": [
-                        {
-                            "id": 0,
-                            "name": "front_axle"
-                        },
-                        {
-                            "id": 1,
-                            "name": "rear_axle"
-                        }
-                    ],
-                    "name": "axle",
-                    "size": 1
-                },
-                {
-                    "size": 1,
-                    "type": "uinteger",
-                    "description": "The suspension spring rate in N/mm",
-                    "name": "value"
-                }
-            ],
-            "type": "custom",
-            "id": 5,
-            "size": 2
-        },
+            "multiple": true, 
+            "description": "The current values for the spring rates", 
+            "name_cased": "currentSpringRates", 
+            "type": "types.spring_rate", 
+            "id": 5, 
+            "name": "current_spring_rates"
+        }, 
         {
-            "multiple": true,
-            "name": "maximum_spring_rates",
-            "items": [
-                {
-                    "type": "enum",
-                    "values": [
-                        {
-                            "id": 0,
-                            "name": "front_axle"
-                        },
-                        {
-                            "id": 1,
-                            "name": "rear_axle"
-                        }
-                    ],
-                    "name": "axle",
-                    "size": 1
-                },
-                {
-                    "size": 1,
-                    "type": "uinteger",
-                    "description": "The maximum possible value for the spring rate",
-                    "name": "value"
-                }
-            ],
-            "type": "custom",
-            "id": 6,
-            "size": 2
-        },
+            "multiple": true, 
+            "description": "The maximum possible values for the spring rates", 
+            "name_cased": "maximumSpringRates", 
+            "type": "types.spring_rate", 
+            "id": 6, 
+            "name": "maximum_spring_rates"
+        }, 
         {
-            "multiple": true,
-            "name": "minimum_spring_rates",
-            "items": [
-                {
-                    "type": "enum",
-                    "values": [
-                        {
-                            "id": 0,
-                            "name": "front_axle"
-                        },
-                        {
-                            "id": 1,
-                            "name": "rear_axle"
-                        }
-                    ],
-                    "name": "axle",
-                    "size": 1
-                },
-                {
-                    "size": 1,
-                    "type": "uinteger",
-                    "description": "The minimum possible value for the spring rate",
-                    "name": "value"
-                }
-            ],
-            "type": "custom",
-            "id": 7,
-            "size": 2
-        },
+            "multiple": true, 
+            "description": "The minimum possible values for the spring rates", 
+            "name_cased": "minimumSpringRate", 
+            "type": "types.spring_rate", 
+            "id": 7, 
+            "name": "minimum_spring_rates"
+        }, 
         {
-            "id": 8,
-            "type": "integer",
-            "description": "The chassis position in mm calculated from the lowest point",
-            "name": "current_chassis_position",
+            "description": "The chassis position in mm calculated from the lowest point", 
+            "name_cased": "currentChassisPosition", 
+            "size": 1, 
+            "type": "integer", 
+            "id": 8, 
+            "name": "current_chassis_position"
+        }, 
+        {
+            "descrition": "The maximum possible value for the chassis position", 
+            "name": "maximum_chassis_position", 
+            "name_cased": "maximumChassisPosition", 
+            "type": "integer", 
+            "id": 9, 
             "size": 1
-        },
+        }, 
         {
-            "type": "integer",
-            "descrition": "The maximum possible value for the chassis position",
-            "id": 9,
-            "name": "maximum_chassis_position",
-            "size": 1
-        },
-        {
-            "id": 10,
-            "type": "integer",
-            "description": "The minimum possible value for the chassis position",
-            "name": "minimum_chassis_position",
-            "size": 1
+            "description": "The minimum possible value for the chassis position", 
+            "name_cased": "minimumChassisPosition", 
+            "size": 1, 
+            "type": "integer", 
+            "id": 10, 
+            "name": "minimum_chassis_position"
         }
-    ],
+    ], 
     "setters": [
         {
             "mandatory": [
                 1
-            ],
+            ], 
             "name": "set_driving_mode"
-        },
+        }, 
         {
             "mandatory": [
                 2
-            ],
+            ], 
             "name": "start_stop_sports_chrono"
-        },
+        }, 
         {
             "mandatory": [
                 5
-            ],
+            ], 
             "name": "set_spring_rates"
-        },
+        }, 
         {
             "mandatory": [
                 8
-            ],
+            ], 
             "name": "set_chassis_position"
         }
     ]
