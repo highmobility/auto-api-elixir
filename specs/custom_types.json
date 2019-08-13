@@ -75,7 +75,8 @@
             ], 
             "type": "custom", 
             "name": "coordinates", 
-            "name_cased": "coordinates"
+            "name_cased": "coordinates", 
+            "size": 16
         }, 
         {
             "size": 1, 
@@ -161,31 +162,6 @@
         }, 
         {
             "size": 1, 
-            "type": "uinteger", 
-            "description": "Value between 0 and 23", 
-            "name_cased": "hour", 
-            "name": "hour"
-        }, 
-        {
-            "size": 1, 
-            "type": "enum", 
-            "name": "lock_state", 
-            "name_cased": "lockState", 
-            "enum_values": [
-                {
-                    "verb": "unlock", 
-                    "id": 0, 
-                    "name": "unlocked"
-                }, 
-                {
-                    "verb": "lock", 
-                    "id": 1, 
-                    "name": "locked"
-                }
-            ]
-        }, 
-        {
-            "size": 1, 
             "type": "enum", 
             "name": "location", 
             "name_cased": "location", 
@@ -226,10 +202,21 @@
         }, 
         {
             "size": 1, 
-            "type": "uinteger", 
-            "description": "Value between 0 and 59", 
-            "name_cased": "minute", 
-            "name": "minute"
+            "type": "enum", 
+            "name": "lock_state", 
+            "name_cased": "lockState", 
+            "enum_values": [
+                {
+                    "verb": "unlock", 
+                    "id": 0, 
+                    "name": "unlocked"
+                }, 
+                {
+                    "verb": "lock", 
+                    "id": 1, 
+                    "name": "locked"
+                }
+            ]
         }, 
         {
             "size": 1, 
@@ -364,6 +351,28 @@
             "type": "custom", 
             "name": "supported_capability", 
             "name_cased": "supportedCapability"
+        }, 
+        {
+            "items": [
+                {
+                    "size": 1, 
+                    "type": "uinteger", 
+                    "description": "Value between 0 and 23", 
+                    "name_cased": "hour", 
+                    "name": "hour"
+                }, 
+                {
+                    "size": 1, 
+                    "type": "uinteger", 
+                    "description": "Value between 0 and 59", 
+                    "name_cased": "minute", 
+                    "name": "minute"
+                }
+            ], 
+            "type": "custom", 
+            "name": "time", 
+            "name_cased": "time", 
+            "size": 2
         }, 
         {
             "size": 8, 
@@ -1332,24 +1341,6 @@
             "type": "custom", 
             "name": "spring_rate", 
             "name_cased": "springRate", 
-            "size": 2
-        }, 
-        {
-            "items": [
-                {
-                    "type": "types.hour", 
-                    "name": "hour", 
-                    "name_cased": "hour"
-                }, 
-                {
-                    "type": "types.minute", 
-                    "name": "minute", 
-                    "name_cased": "minute"
-                }
-            ], 
-            "type": "custom", 
-            "name": "time", 
-            "name_cased": "time", 
             "size": 2
         }, 
         {
