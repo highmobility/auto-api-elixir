@@ -1,6 +1,7 @@
 {
     "category": "chassis", 
     "name": "charging", 
+    "name_cased": "charging", 
     "getters": {
         "default": {}
     }, 

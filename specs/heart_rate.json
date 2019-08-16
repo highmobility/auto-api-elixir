@@ -5,6 +5,7 @@
         "update": 11
     }, 
     "name": "heart_rate", 
+    "name_cased": "heartRate", 
     "identifier": {
         "lsb": 41, 
         "msb": 0

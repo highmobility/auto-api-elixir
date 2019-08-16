@@ -1,6 +1,7 @@
 {
     "category": "chassis", 
     "name": "lights", 
+    "name_cased": "lights", 
     "getters": {
         "default": {}
     }, 

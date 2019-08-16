@@ -5,6 +5,7 @@
         "update": 11
     }, 
     "name": "universal_properties", 
+    "name_cased": "universalProperties", 
     "properties": [
         {
             "name": "nonce", 

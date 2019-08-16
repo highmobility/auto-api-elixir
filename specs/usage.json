@@ -1,19 +1,20 @@
 {
     "category": "diagnostics", 
+    "name": "usage", 
+    "name_cased": "usage", 
+    "getters": {
+        "default": {
+            "name": "get_usage"
+        }
+    }, 
     "state": "all", 
     "api": {
         "intro": 8, 
         "update": 11
     }, 
-    "name": "usage", 
     "identifier": {
         "lsb": 104, 
         "msb": 0
-    }, 
-    "getters": {
-        "default": {
-            "name": "get_usage"
-        }
     }, 
     "properties": [
         {

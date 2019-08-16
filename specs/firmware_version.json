@@ -1,19 +1,20 @@
 {
     "category": "api_structure", 
+    "name": "firmware_version", 
+    "name_cased": "firmwareVersion", 
+    "getters": {
+        "default": {
+            "name": "get_firmware_version"
+        }
+    }, 
     "state": "all", 
     "api": {
         "intro": 4, 
         "update": 11
     }, 
-    "name": "firmware_version", 
     "identifier": {
         "lsb": 3, 
         "msb": 0
-    }, 
-    "getters": {
-        "default": {
-            "name": "get_firmware_version"
-        }
     }, 
     "properties": [
         {

@@ -1,17 +1,18 @@
 {
     "category": "diagnostics", 
+    "name": "offroad", 
+    "name_cased": "offroad", 
+    "getters": {
+        "default": {}
+    }, 
     "state": "all", 
     "api": {
         "intro": 5, 
         "update": 11
     }, 
-    "name": "offroad", 
     "identifier": {
         "lsb": 82, 
         "msb": 0
-    }, 
-    "getters": {
-        "default": {}
     }, 
     "properties": [
         {

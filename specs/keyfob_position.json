@@ -1,19 +1,20 @@
 {
     "category": "chassis", 
+    "name": "keyfob_position", 
+    "name_cased": "keyfobPosition", 
+    "getters": {
+        "default": {
+            "name": "get_keyfob_position"
+        }
+    }, 
     "state": "all", 
     "api": {
         "intro": 4, 
         "update": 11
     }, 
-    "name": "keyfob_position", 
     "identifier": {
         "lsb": 72, 
         "msb": 0
-    }, 
-    "getters": {
-        "default": {
-            "name": "get_keyfob_position"
-        }
     }, 
     "properties": [
         {

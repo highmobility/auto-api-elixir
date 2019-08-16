@@ -1,17 +1,18 @@
 {
     "category": "diagnostics", 
+    "name": "race", 
+    "name_cased": "race", 
+    "getters": {
+        "default": {}
+    }, 
     "state": "all", 
     "api": {
         "intro": 5, 
         "update": 11
     }, 
-    "name": "race", 
     "identifier": {
         "lsb": 87, 
         "msb": 0
-    }, 
-    "getters": {
-        "default": {}
     }, 
     "properties": [
         {

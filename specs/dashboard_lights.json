@@ -1,19 +1,20 @@
 {
     "category": "diagnostics", 
+    "name": "dashboard_lights", 
+    "name_cased": "dashboardLights", 
+    "getters": {
+        "default": {
+            "name": "get_dashboard_lights"
+        }
+    }, 
     "state": "all", 
     "api": {
         "intro": 7, 
         "update": 11
     }, 
-    "name": "dashboard_lights", 
     "identifier": {
         "lsb": 97, 
         "msb": 0
-    }, 
-    "getters": {
-        "default": {
-            "name": "get_dashboard_lights"
-        }
     }, 
     "properties": [
         {

@@ -1,19 +1,20 @@
 {
     "category": "environment", 
+    "name": "light_conditions", 
+    "name_cased": "lightConditions", 
+    "getters": {
+        "default": {
+            "name": "get_light_conditions"
+        }
+    }, 
     "state": "all", 
     "api": {
         "intro": 5, 
         "update": 11
     }, 
-    "name": "light_conditions", 
     "identifier": {
         "lsb": 84, 
         "msb": 0
-    }, 
-    "getters": {
-        "default": {
-            "name": "get_light_conditions"
-        }
     }, 
     "properties": [
         {

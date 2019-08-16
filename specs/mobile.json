@@ -1,15 +1,16 @@
 {
     "category": "headunit", 
     "name": "mobile", 
+    "name_cased": "mobile", 
     "getters": {
         "default": {}
     }, 
+    "pretty_name": "Mobile", 
     "state": "all", 
     "api": {
         "intro": 8, 
         "update": 11
     }, 
-    "pretty_state_name": "Mobile", 
     "identifier": {
         "lsb": 102, 
         "msb": 0

@@ -1,6 +1,7 @@
 {
     "category": "chassis", 
     "name": "chassis_settings", 
+    "name_cased": "chassisSettings", 
     "getters": {
         "default": {
             "name": "get_chassis_settings"

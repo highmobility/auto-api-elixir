@@ -1,17 +1,18 @@
 {
     "category": "diagnostics", 
+    "name": "diagnostics", 
+    "name_cased": "diagnostics", 
+    "getters": {
+        "default": {}
+    }, 
     "state": "all", 
     "api": {
         "intro": 3, 
         "update": 11
     }, 
-    "name": "diagnostics", 
     "identifier": {
         "lsb": 51, 
         "msb": 0
-    }, 
-    "getters": {
-        "default": {}
     }, 
     "properties": [
         {

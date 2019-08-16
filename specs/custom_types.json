@@ -1016,11 +1016,10 @@
                     "name_cased": "drivingMode"
                 }, 
                 {
-                    "size": 8, 
-                    "type": "double", 
-                    "description": "Percentage of the period used for a driving mode", 
+                    "type": "types.percentage", 
+                    "name": "period", 
                     "name_cased": "period", 
-                    "name": "period"
+                    "description": "Percentage of the period used for a driving mode"
                 }
             ], 
             "type": "custom", 
@@ -1057,22 +1056,22 @@
                     "size": 1, 
                     "type": "uinteger", 
                     "description": "HMKit version major number", 
-                    "name_cased": "versionMajor", 
-                    "name": "version_major"
+                    "name_cased": "major", 
+                    "name": "major"
                 }, 
                 {
                     "size": 1, 
                     "type": "uinteger", 
                     "description": "HMKit version minor number", 
-                    "name_cased": "versionMinor", 
-                    "name": "version_minor"
+                    "name_cased": "minor", 
+                    "name": "minor"
                 }, 
                 {
                     "size": 1, 
                     "type": "uinteger", 
                     "description": "HMKit version patch number", 
-                    "name_cased": "versionPatch", 
-                    "name": "version_patch"
+                    "name_cased": "patch", 
+                    "name": "patch"
                 }
             ], 
             "type": "custom", 
@@ -1291,7 +1290,7 @@
             ], 
             "type": "custom", 
             "name": "rgb_colour", 
-            "name_cased": "rgbColour", 
+            "name_cased": "RGBColour", 
             "size": 3
         }, 
         {

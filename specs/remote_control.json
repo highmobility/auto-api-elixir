@@ -1,6 +1,7 @@
 {
     "category": "parking", 
     "name": "remote_control", 
+    "name_cased": "remoteControl", 
     "getters": {
         "default": {
             "skip_properties_getter": true, 

@@ -1,17 +1,18 @@
 {
     "category": "health", 
+    "name": "driver_fatigue", 
+    "name_cased": "driverFatigue", 
+    "getters": {
+        "default": {}
+    }, 
     "state": "all", 
     "api": {
         "intro": 4, 
         "update": 11
     }, 
-    "name": "driver_fatigue", 
     "identifier": {
         "lsb": 65, 
         "msb": 0
-    }, 
-    "getters": {
-        "default": {}
     }, 
     "properties": [
         {

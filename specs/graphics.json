@@ -5,6 +5,7 @@
         "update": 11
     }, 
     "name": "graphics", 
+    "name_cased": "graphics", 
     "identifier": {
         "lsb": 81, 
         "msb": 0

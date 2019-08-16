@@ -1,14 +1,15 @@
 {
     "category": "digital_key", 
+    "name": "hood", 
+    "name_cased": "hood", 
+    "api_intro": 11, 
+    "getters": {
+        "default": {}
+    }, 
     "state": "all", 
     "identifier": {
         "lsb": 103, 
         "msb": 0
-    }, 
-    "name": "hood", 
-    "api_intro": 11, 
-    "getters": {
-        "default": {}
     }, 
     "properties": [
         {

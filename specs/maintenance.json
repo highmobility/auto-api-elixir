@@ -1,17 +1,18 @@
 {
     "category": "diagnostics", 
+    "name": "maintenance", 
+    "name_cased": "maintenance", 
+    "getters": {
+        "default": {}
+    }, 
     "state": "all", 
     "api": {
         "intro": 3, 
         "update": 11
     }, 
-    "name": "maintenance", 
     "identifier": {
         "lsb": 52, 
         "msb": 0
-    }, 
-    "getters": {
-        "default": {}
     }, 
     "properties": [
         {

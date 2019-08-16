@@ -1,6 +1,7 @@
 {
     "category": "chassis", 
     "name": "cruise_control", 
+    "name_cased": "cruiseControl", 
     "getters": {
         "default": {}
     }, 

@@ -1,6 +1,7 @@
 {
     "category": "parking", 
     "name": "theft_alarm", 
+    "name_cased": "theftAlarm", 
     "getters": {
         "default": {}
     }, 

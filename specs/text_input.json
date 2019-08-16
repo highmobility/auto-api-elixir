@@ -5,6 +5,7 @@
         "update": 11
     }, 
     "name": "text_input", 
+    "name_cased": "textInput", 
     "identifier": {
         "lsb": 68, 
         "msb": 0

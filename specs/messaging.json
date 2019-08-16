@@ -1,11 +1,12 @@
 {
     "category": "headunit", 
+    "name": "messaging", 
+    "name_cased": "messaging", 
     "state": "all", 
     "api": {
         "intro": 4, 
         "update": 11
     }, 
-    "name": "messaging", 
     "identifier": {
         "lsb": 55, 
         "msb": 0

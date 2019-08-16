@@ -5,6 +5,7 @@
         "update": 11
     }, 
     "name": "browser", 
+    "name_cased": "browser", 
     "identifier": {
         "lsb": 73, 
         "msb": 0

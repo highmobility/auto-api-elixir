@@ -1,19 +1,20 @@
 {
     "category": "api_structure", 
+    "name": "capabilities", 
+    "name_cased": "capabilities", 
+    "getters": {
+        "default": {
+            "name": "get_capabilities"
+        }
+    }, 
     "state": "all", 
     "api": {
         "intro": 2, 
         "update": 11
     }, 
-    "name": "capabilities", 
     "identifier": {
         "lsb": 16, 
         "msb": 0
-    }, 
-    "getters": {
-        "default": {
-            "name": "get_capabilities"
-        }
     }, 
     "properties": [
         {

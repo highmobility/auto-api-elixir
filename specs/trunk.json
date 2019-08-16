@@ -1,6 +1,7 @@
 {
     "category": "digital_key", 
     "name": "trunk", 
+    "name_cased": "trunk", 
     "getters": {
         "default": {}
     }, 

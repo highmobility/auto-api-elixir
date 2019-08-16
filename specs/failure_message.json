@@ -6,6 +6,7 @@
         "update": 11
     }, 
     "name": "failure_message", 
+    "name_cased": "failureMessage", 
     "identifier": {
         "lsb": 2, 
         "msb": 0

@@ -5,6 +5,7 @@
         "update": 11
     }, 
     "name": "wake_up", 
+    "name_cased": "wakeUp", 
     "identifier": {
         "lsb": 34, 
         "msb": 0

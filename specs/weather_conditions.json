@@ -1,19 +1,20 @@
 {
     "category": "environment", 
+    "name": "weather_conditions", 
+    "name_cased": "weatherConditions", 
+    "getters": {
+        "default": {
+            "name": "get_weather_conditions"
+        }
+    }, 
     "state": "all", 
     "api": {
         "intro": 5, 
         "update": 11
     }, 
-    "name": "weather_conditions", 
     "identifier": {
         "lsb": 85, 
         "msb": 0
-    }, 
-    "getters": {
-        "default": {
-            "name": "get_weather_conditions"
-        }
     }, 
     "properties": [
         {

@@ -1,11 +1,12 @@
 {
     "category": "headunit", 
+    "name": "notifications", 
+    "name_cased": "notifications", 
     "state": "all", 
     "api": {
         "intro": 4, 
         "update": 11
     }, 
-    "name": "notifications", 
     "identifier": {
         "lsb": 56, 
         "msb": 0

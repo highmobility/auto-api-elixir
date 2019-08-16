@@ -1,6 +1,8 @@
 {
     "category": "api_structure", 
     "name": "multi_command", 
+    "name_cased": "multiCommand", 
+    "pretty_name": "Multi Command", 
     "state": [
         1
     ], 
@@ -8,7 +10,6 @@
         "intro": 8, 
         "update": 11
     }, 
-    "pretty_state_name": "Multi Command", 
     "identifier": {
         "lsb": 19, 
         "msb": 0

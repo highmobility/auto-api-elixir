@@ -1,6 +1,7 @@
 {
     "category": "parking", 
     "name": "parking_ticket", 
+    "name_cased": "parkingTicket", 
     "getters": {
         "default": {
             "name": "get_parking_ticket"

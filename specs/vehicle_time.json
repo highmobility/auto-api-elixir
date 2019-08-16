@@ -1,19 +1,20 @@
 {
     "category": "poi", 
+    "name": "vehicle_time", 
+    "name_cased": "vehicleTime", 
+    "getters": {
+        "default": {
+            "name": "get_vehicle_time"
+        }
+    }, 
     "state": "all", 
     "api": {
         "intro": 5, 
         "update": 11
     }, 
-    "name": "vehicle_time", 
     "identifier": {
         "lsb": 80, 
         "msb": 0
-    }, 
-    "getters": {
-        "default": {
-            "name": "get_vehicle_time"
-        }
     }, 
     "properties": [
         {

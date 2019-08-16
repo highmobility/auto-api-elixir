@@ -1,6 +1,7 @@
 {
     "category": "digital_key", 
     "name": "ignition", 
+    "name_cased": "ignition", 
     "getters": {
         "default": {}
     }, 

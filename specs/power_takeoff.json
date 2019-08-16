@@ -1,15 +1,16 @@
 {
     "category": "heavy_duty", 
     "name": "power_takeoff", 
+    "name_cased": "powerTakeoff", 
     "getters": {
         "default": {}
     }, 
+    "pretty_name": "Power Take-Off", 
     "state": "all", 
     "api": {
         "intro": 7, 
         "update": 11
     }, 
-    "pretty_state_name": "Power Take-Off", 
     "identifier": {
         "lsb": 101, 
         "msb": 0

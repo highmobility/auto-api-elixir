@@ -1,6 +1,8 @@
 {
     "category": "api_structure", 
     "name": "historical", 
+    "name_cased": "historical", 
+    "pretty_name": "Historical States", 
     "state": [
         1
     ], 
@@ -8,7 +10,6 @@
         "intro": 8, 
         "update": 11
     }, 
-    "pretty_state_name": "Historical States", 
     "identifier": {
         "lsb": 18, 
         "msb": 0
