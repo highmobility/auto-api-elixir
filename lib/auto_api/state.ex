@@ -210,7 +210,7 @@ defmodule AutoApi.State do
                     unquote(Macro.escape(prop))
                   )
 
-                case property_component.data do
+                case property_component.data || property_component.failure do
                   nil ->
                     throw({:error, {:can_not_parse_enum, property_component_binary}})
 
