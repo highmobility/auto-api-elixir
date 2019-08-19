@@ -35,6 +35,7 @@ defmodule AutoApi.RaceState do
   @type brake_torque_vectoring :: %PropertyComponent{
           data: %{axle: axle, vectoring: CommonData.activity()}
         }
+  @type vehicle_moving :: :moving | :not_moving
 
   @doc """
   Race state
@@ -55,6 +56,7 @@ defmodule AutoApi.RaceState do
             clutch_pedal_switch: nil,
             accelerator_pedal_idle_switch: nil,
             accelerator_pedal_kickdown_switch: nil,
+            vehicle_moving: nil,
             timestamp: nil
 
   use AutoApi.State, spec_file: "specs/race.json"
@@ -77,6 +79,7 @@ defmodule AutoApi.RaceState do
           accelerator_pedal_idle_switch: %PropertyComponent{data: CommonData.activity()} | nil,
           accelerator_pedal_kickdown_switch:
             %PropertyComponent{data: CommonData.activity()} | nil,
+          vehicle_moving: %PropertyComponent{data: vehicle_moving} | nil,
           timestamp: DateTime.t() | nil
         }
 

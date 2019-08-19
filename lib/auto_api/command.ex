@@ -17,6 +17,12 @@
 # Please inquire about commercial licensing options at
 # licensing@high-mobility.com
 defmodule AutoApi.Command do
+  @moduledoc """
+  Command behavior for handling AutoApi commands
+  """
+
+  alias AutoApi.Capability
+
   @type execute_return_atom :: :state | :state_changed
   @callback execute(struct, binary) :: {execute_return_atom, struct}
   @callback state(struct) :: binary
@@ -61,16 +67,14 @@ defmodule AutoApi.Command do
 
 
   """
+  @spec meta_data(binary) :: map()
   def meta_data(<<id::binary-size(2), type, _data::binary>>) do
-    capabilities = AutoApi.Capability.list_capabilities()
-
-    with {:capability, capability_module} when not is_nil(capability_module) <-
-           {:capability, capabilities[id]},
+    with capability_module when not is_nil(capability_module) <- Capability.get_by_id(id),
          capability_name <- apply(capability_module, :name, []),
          command_name <- apply(capability_module, :command_name, [type]) do
       %{message_id: capability_name, message_type: command_name, module: capability_module}
     else
-      {:capability, nil} ->
+      nil ->
         %{}
     end
   end
@@ -87,24 +91,11 @@ defmodule AutoApi.Command do
   end
 
   def to_bin(capability_name, action, args) do
-    with {:ok, capability} <- export_cap(capability_name) do
+    if capability = Capability.get_by_name(capability_name) do
       command_bin = capability.command.to_bin(action, args)
       <<capability.identifier::binary, command_bin::binary>>
     else
-      _ -> <<>>
-    end
-  end
-
-  defp export_cap(capability_name) do
-    cap =
-      AutoApi.Capability.list_capabilities()
-      |> Enum.filter(fn {_, c} -> apply(c, :name, []) == capability_name end)
-      |> Enum.map(fn {_, c} -> c end)
-
-    if Enum.empty?(cap) do
-      {:error, :no_match}
-    else
-      {:ok, List.first(cap)}
+      <<>>
     end
   end
 end

@@ -17,14 +17,17 @@
 # Please inquire about commercial licensing options at
 # licensing@high-mobility.com
 defmodule AutoApi.TelematicsPermissions do
+  @moduledoc """
+  Utility module for handling AutoApi telematics permissions.
+  """
   @permissions_map_properties Map.new(
-                                for {_, cap} <- AutoApi.Capability.list_capabilities(),
+                                for cap <- AutoApi.Capability.all(),
                                     {id, prop} <- cap.properties,
                                     do: {"#{cap.name()}.#{prop}", %{type: :property, id: id}}
                               )
 
   @permissions_map_message_types Map.new(
-                                   for {_, cap} <- AutoApi.Capability.list_capabilities(),
+                                   for cap <- AutoApi.Capability.all(),
                                        {id, cmd} <- cap.commands,
                                        do:
                                          {"#{cap.name()}.#{cmd}", %{type: :message_type, id: id}}

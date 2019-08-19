@@ -17,6 +17,10 @@
 # Please inquire about commercial licensing options at
 # licensing@high-mobility.com
 defmodule AutoApi.Permissions do
+  @moduledoc """
+  Handles the conversion of AutoApi permissions between text and binary format
+  """
+
   use Bitwise
 
   @auto_api_id 0x10
@@ -367,10 +371,14 @@ defmodule AutoApi.Permissions do
   end
 
   def to_binary(perms) do
-    Enum.reduce(perms, 0, fn p, acc -> conver_bin_to_int(p) |> bor(acc) end)
+    Enum.reduce(perms, 0, fn p, acc ->
+      p
+      |> convert_bin_to_int()
+      |> bor(acc)
+    end)
   end
 
-  defp conver_bin_to_int(key) do
+  defp convert_bin_to_int(key) do
     <<i::integer-128>> = elem(@permissions[key], 0)
     i
   end
