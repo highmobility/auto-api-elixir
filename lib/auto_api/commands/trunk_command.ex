@@ -16,34 +16,21 @@
 #
 # Please inquire about commercial licensing options at
 # licensing@high-mobility.com
-defmodule AutoApi.TrunkCapability do
+defmodule AutoApi.TrunkCommand do
   @moduledoc """
-  Basic settings for Trunk Capability
-
-      iex> alias AutoApi.TrunkCapability, as: T
-      iex> T.identifier
-      <<0x00, 0x21>>
-      iex> T.name
-      :trunk
-      iex> T.description
-      "Trunk"
-      iex> T.command_name(0x00)
-      :get_trunk_state
-      iex> T.command_name(0x01)
-      :trunk_state
-      iex> T.command_name(0x12)
-      :control_trunk
-      iex> length(T.properties)
-      2
-      iex> T.properties
-      [{1, :trunk_lock}, {2, :trunk_position}]
+  Handles  commands and apply binary commands on `%AutoApi.TrunkState{}`
   """
+  @behaviour AutoApi.Command
 
-  @spec_file "specs/trunk.json"
-  @type command_type :: :get_trunk_state | :trunk_state | :open_close_trunk
+  alias AutoApi.TrunkState
 
-  @command_module AutoApi.TrunkCapability
-  @state_module AutoApi.TrunkState
+  @spec execute(TrunkState.t(), binary) :: {:state | :state_changed, TrunkState.t()}
+  def execute(%TrunkState{} = state, <<0x00>>) do
+    {:state, state}
+  end
 
-  use AutoApi.Capability
+  @spec state(TrunkState.t()) :: binary
+  def state(%TrunkState{} = state) do
+    <<0x01, TrunkState.to_bin(state)::binary>>
+  end
 end

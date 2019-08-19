@@ -16,34 +16,27 @@
 #
 # Please inquire about commercial licensing options at
 # licensing@high-mobility.com
-defmodule AutoApi.TrunkCapability do
-  @moduledoc """
-  Basic settings for Trunk Capability
+defmodule AutoApi.TrunkCommandTest do
+  use ExUnit.Case
+  alias AutoApi.{TrunkCommand, TrunkState}
 
-      iex> alias AutoApi.TrunkCapability, as: T
-      iex> T.identifier
-      <<0x00, 0x21>>
-      iex> T.name
-      :trunk
-      iex> T.description
-      "Trunk"
-      iex> T.command_name(0x00)
-      :get_trunk_state
-      iex> T.command_name(0x01)
-      :trunk_state
-      iex> T.command_name(0x12)
-      :control_trunk
-      iex> length(T.properties)
-      2
-      iex> T.properties
-      [{1, :trunk_lock}, {2, :trunk_position}]
-  """
+  describe "execute/2" do
+    test "get trunk state command" do
+      command = <<0x00>>
 
-  @spec_file "specs/trunk.json"
-  @type command_type :: :get_trunk_state | :trunk_state | :open_close_trunk
+      state = TrunkState.put_property(%TrunkState{}, :trunk_lock, :locked)
 
-  @command_module AutoApi.TrunkCapability
-  @state_module AutoApi.TrunkState
+      assert {:state, new_state} = TrunkCommand.execute(state, command)
 
-  use AutoApi.Capability
+      assert new_state == state
+    end
+  end
+
+  describe "state/1" do
+    test "get binary state" do
+      state = TrunkState.put_property(%TrunkState{}, :trunk_lock, :locked)
+
+      assert TrunkCommand.state(state) == <<1, 1, 0, 4, 1, 0, 1, 1>>
+    end
+  end
 end
