@@ -181,6 +181,7 @@ defmodule AutoApi.State do
       for prop <- spec["properties"] do
         prop_name = String.to_atom(prop["name"])
         prop_id = prop["id"]
+        prop_type = prop["type"]
         multiple = prop["multiple"] || false
 
         quote do
@@ -203,128 +204,28 @@ defmodule AutoApi.State do
 
           def property_spec(unquote(prop_name)), do: unquote(Macro.escape(prop))
 
-          case unquote(prop["type"]) do
-            "enum" ->
-              defp parse_bin_property(unquote(prop_id), _size, property_component_binary) do
-                property_component =
-                  AutoApi.PropertyComponent.to_struct(
-                    property_component_binary,
-                    unquote(Macro.escape(prop))
-                  )
+          defp parse_bin_property(unquote(prop_id), size, bin_data) do
+            value = AutoApi.PropertyComponent.to_struct(bin_data, unquote(Macro.escape(prop)))
 
-                case property_component.data do
-                  nil ->
-                    throw({:error, {:can_not_parse_enum, property_component_binary}})
+            #TODO: Check if this is still needed
+            if unquote(prop_type) == "enum" and is_nil(value) do
+              throw({:error, {:can_not_parse_enum, bin_data}})
+            end
 
-                  matched_value ->
-                    {unquote(prop_name), false, property_component}
-                end
-              end
+            {String.to_atom(unquote(prop["name"])), unquote(multiple), value}
+          end
 
-              defp parse_state_property(unquote(prop_name), property_component) do
-                property_component_binary =
-                  AutoApi.PropertyComponent.to_bin(
-                    property_component,
-                    unquote(Macro.escape(prop))
-                  )
+          defp parse_state_property(unquote(prop_name), data) when is_list(data) do
+            data
+            |> Enum.map(&parse_state_property(unquote(prop_name), &1))
+            |> :binary.list_to_bin()
+          end
 
-                head = <<unquote(prop_id), byte_size(property_component_binary)::integer-16>>
-                head <> property_component_binary
-              end
+          defp parse_state_property(unquote(prop_name), data) do
+            data_bin = AutoApi.PropertyComponent.to_bin(data, unquote(Macro.escape(prop)))
 
-            "custom" ->
-              defp parse_state_property(unquote(prop_name), []) do
-                <<>>
-              end
-
-              if unquote(multiple) do
-                defp parse_state_property(unquote(prop_name), data) do
-                  data
-                  |> Enum.map(fn item ->
-                    property_component_binary =
-                      AutoApi.PropertyComponent.to_bin(
-                        item,
-                        unquote(Macro.escape(prop))
-                      )
-
-                    head = <<unquote(prop_id), byte_size(property_component_binary)::integer-16>>
-                    head <> property_component_binary
-                  end)
-                  |> :binary.list_to_bin()
-                end
-              else
-                defp parse_state_property(unquote(prop_name), data) do
-                  property_component_binary =
-                    AutoApi.PropertyComponent.to_bin(
-                      data,
-                      unquote(Macro.escape(prop))
-                    )
-
-                  head = <<unquote(prop_id), byte_size(property_component_binary)::integer-16>>
-                  head <> property_component_binary
-                end
-              end
-
-              defp parse_bin_property(unquote(prop["id"]), _size, data) do
-                data_component =
-                  AutoApi.PropertyComponent.to_struct(data, unquote(Macro.escape(prop)))
-
-                {unquote(prop_name), unquote(multiple), data_component}
-              end
-
-            "string" ->
-              defp parse_bin_property(unquote(prop["id"]), _size, data) do
-                data_component =
-                  AutoApi.PropertyComponent.to_struct(data, unquote(Macro.escape(prop)))
-
-                {String.to_atom(unquote(prop["name"])), unquote(multiple), data_component}
-              end
-
-              defp parse_state_property(unquote(prop_name), data) when is_list(data) do
-                data
-                |> Enum.map(&parse_state_property(unquote(prop_name), &1))
-                |> :binary.list_to_bin()
-              end
-
-              defp parse_state_property(unquote(prop_name), data) do
-                bin = AutoApi.PropertyComponent.to_bin(data, unquote(Macro.escape(prop)))
-                head = <<unquote(prop_id), byte_size(bin)::integer-16>>
-                head <> bin
-              end
-
-            "capability_state" ->
-              defp parse_bin_property(unquote(prop["id"]), _size, data) do
-                data_component =
-                  AutoApi.PropertyComponent.to_struct(data, unquote(Macro.escape(prop)))
-
-                {String.to_atom(unquote(prop["name"])), unquote(multiple), data_component}
-              end
-
-              defp parse_state_property(unquote(prop_name), states) when is_list(states) do
-                states
-                |> Enum.map(&parse_state_property(unquote(prop_name), &1))
-                |> :binary.list_to_bin()
-              end
-
-              defp parse_state_property(unquote(prop_name), state) do
-                bin = AutoApi.PropertyComponent.to_bin(state, unquote(Macro.escape(prop)))
-                head = <<unquote(prop_id), byte_size(bin)::integer-16>>
-                head <> bin
-              end
-
-            _ ->
-              # scalar types
-              defp parse_state_property(unquote(prop_name), data) do
-                bin = AutoApi.PropertyComponent.to_bin(data, unquote(Macro.escape(prop)))
-                head = <<unquote(prop_id), byte_size(bin)::integer-16>>
-                head <> bin
-              end
-
-              defp parse_bin_property(unquote(prop["id"]), size, bin_data) do
-                value = AutoApi.PropertyComponent.to_struct(bin_data, unquote(Macro.escape(prop)))
-
-                {String.to_atom(unquote(prop["name"])), unquote(multiple), value}
-              end
+            head = <<unquote(prop_id), byte_size(data_bin)::integer-16>>
+            head <> data_bin
           end
         end
       end
