@@ -78,7 +78,7 @@ defmodule AutoApi.PropertyComponent do
 
   defp data_to_bin(data, %{"type" => "enum"} = spec) do
     enum_id =
-      spec["values"]
+      spec["enum_values"]
       |> Enum.find(%{}, &(&1["name"] == Atom.to_string(data)))
       |> Map.get("id")
 
@@ -213,7 +213,7 @@ defmodule AutoApi.PropertyComponent do
     <<enum_id::integer-size(size_bit)>> = binary_data
 
     enum_name =
-      spec["values"]
+      spec["enum_values"]
       |> Enum.find(%{}, &(&1["id"] == enum_id))
       |> Map.get("name")
 
