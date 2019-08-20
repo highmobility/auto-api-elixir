@@ -130,6 +130,12 @@ defmodule AutoApi.PropertyComponent do
     state_mod.identifier <> <<0x01>> <> state_mod.to_bin(state)
   end
 
+  defp data_to_bin(data, %{"type" => "types." <> type}) do
+    type_spec = AutoApi.CustomType.spec(type)
+
+    data_to_bin(data, type_spec)
+  end
+
   defp timestamp_to_bin(nil), do: <<>>
 
   defp timestamp_to_bin(timestamp) do
@@ -236,6 +242,13 @@ defmodule AutoApi.PropertyComponent do
     |> elem(1)
     |> Enum.into(%{})
   end
+
+  defp to_value(binary_data, %{"type" => "types." <> type}) do
+    type_spec = AutoApi.CustomType.spec(type)
+
+    to_value(binary_data, type_spec)
+  end
+
 
   defp failure_to_value(nil), do: nil
 
