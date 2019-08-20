@@ -229,13 +229,15 @@ defmodule AutoApi.PropertyComponent do
     specs
     |> Map.get("items")
     |> Enum.reduce({0, []}, fn spec, {counter, acc} ->
-      size = spec["size"] || Keyword.get(acc, String.to_atom("#{spec["name"]}_size"))
+      item_spec = fetch_item_spec(spec)
+      size = item_spec["size"]
+
       unless size, do: raise("couldn't find size for #{inspect(spec)}")
 
       data_value =
         binary_data
         |> :binary.part(counter, size)
-        |> to_value(spec)
+        |> to_value(item_spec)
 
       {counter + size, [{String.to_atom(spec["name"]), data_value} | acc]}
     end)
@@ -270,4 +272,10 @@ defmodule AutoApi.PropertyComponent do
   end
 
   defp split_binary_to_parts(<<>>, acc), do: acc
+
+  defp fetch_item_spec(%{"type" => "types." <> type}) do
+    AutoApi.CustomType.spec(type)
+  end
+
+  defp fetch_item_spec(spec), do: spec
 end
