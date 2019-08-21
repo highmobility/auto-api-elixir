@@ -252,11 +252,11 @@
             "enum_values": [
                 {
                     "id": 0, 
-                    "name": false
+                    "name": "off"
                 }, 
                 {
                     "id": 1, 
-                    "name": true
+                    "name": "on"
                 }
             ], 
             "type": "enum", 

@@ -38,8 +38,8 @@ defmodule AutoApi.ParkingTicketState do
           status: %PropertyComponent{data: parking_ticket_state} | nil,
           operator_name: %PropertyComponent{data: String.t()} | nil,
           operator_ticket_id: %PropertyComponent{data: String.t()} | nil,
-          ticket_start_time: %PropertyComponent{data: integer} | nil,
-          ticket_end_time: %PropertyComponent{data: integer} | nil,
+          ticket_start_time: %PropertyComponent{data: DateTime.t()} | nil,
+          ticket_end_time: %PropertyComponent{data: DateTime.t()} | nil,
           timestamp: DateTime.t() | nil
         }
 

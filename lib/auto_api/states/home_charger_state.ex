@@ -23,10 +23,10 @@ defmodule AutoApi.HomeChargerState do
 
   alias AutoApi.{CommonData, PropertyComponent}
 
-  defstruct charging: nil,
+  defstruct charging_status: nil,
             authentication_mechanism: nil,
             plug_type: nil,
-            charging_power: nil,
+            charging_power_kw: nil,
             solar_charging: nil,
             hotspot_enabled: nil,
             hotspot_ssid: nil,
@@ -42,7 +42,7 @@ defmodule AutoApi.HomeChargerState do
 
   use AutoApi.State, spec_file: "specs/home_charger.json"
 
-  @type charging :: :disconnected | :plugged_in | :charging
+  @type charging_status :: :disconnected | :plugged_in | :charging
   @type authentication_mechanism :: :pin | :app
   @type plug_type :: :type_1 | :type_2 | :ccs | :chademo
   @type enabled :: :enabled | :disabled
@@ -51,18 +51,17 @@ defmodule AutoApi.HomeChargerState do
   @type price_tariff :: %PropertyComponent{
           data: %{
             currency: String.t(),
-            currency_size: integer,
             price: float,
             pricing_type: pricing_type
           }
         }
 
   @type t :: %__MODULE__{
-          charging: %PropertyComponent{data: charging} | nil,
+          charging_status: %PropertyComponent{data: charging_status} | nil,
           authentication_mechanism: %PropertyComponent{data: authentication_mechanism} | nil,
           plug_type: %PropertyComponent{data: plug_type} | nil,
-          charging_power: %PropertyComponent{data: float} | nil,
-          solar_charging: %PropertyComponent{data: CommonData.activity_switched()} | nil,
+          charging_power_kw: %PropertyComponent{data: float} | nil,
+          solar_charging: %PropertyComponent{data: CommonData.activity()} | nil,
           hotspot_enabled: %PropertyComponent{data: enabled} | nil,
           hotspot_ssid: %PropertyComponent{data: String.t()} | nil,
           wi_fi_hotspot_security: %PropertyComponent{data: CommonData.network_security()} | nil,
@@ -80,7 +79,7 @@ defmodule AutoApi.HomeChargerState do
   Build state based on binary value
 
     iex> AutoApi.HomeChargerState.from_bin(<<1, 4::integer-16, 1, 0, 1, 1>>)
-    %AutoApi.HomeChargerState{charging: %AutoApi.PropertyComponent{data: :plugged_in}}
+    %AutoApi.HomeChargerState{charging_status: %AutoApi.PropertyComponent{data: :plugged_in}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -90,7 +89,7 @@ defmodule AutoApi.HomeChargerState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.HomeChargerState{charging: %AutoApi.PropertyComponent{data: :plugged_in}}
+    iex> state = %AutoApi.HomeChargerState{charging_status: %AutoApi.PropertyComponent{data: :plugged_in}}
     iex> AutoApi.HomeChargerState.to_bin(state)
     <<1, 4::integer-16, 1, 0, 1, 1>>
   """

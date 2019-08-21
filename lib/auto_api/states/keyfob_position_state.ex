@@ -23,7 +23,7 @@ defmodule AutoApi.KeyfobPositionState do
 
   alias AutoApi.PropertyComponent
 
-  defstruct keyfob_position: nil,
+  defstruct location: nil,
             timestamp: nil
 
   use AutoApi.State, spec_file: "specs/keyfob_position.json"
@@ -37,7 +37,7 @@ defmodule AutoApi.KeyfobPositionState do
           | :inside_car
 
   @type t :: %__MODULE__{
-          keyfob_position: %PropertyComponent{data: position} | nil,
+          location: %PropertyComponent{data: position} | nil,
           timestamp: DateTime.t() | nil
         }
 
@@ -45,7 +45,7 @@ defmodule AutoApi.KeyfobPositionState do
   Build state based on binary value
 
     iex> AutoApi.KeyfobPositionState.from_bin(<<1, 4::integer-16, 1, 0, 1, 0>>)
-    %AutoApi.KeyfobPositionState{keyfob_position: %AutoApi.PropertyComponent{data: :out_of_range}}
+    %AutoApi.KeyfobPositionState{location: %AutoApi.PropertyComponent{data: :out_of_range}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -55,7 +55,7 @@ defmodule AutoApi.KeyfobPositionState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.KeyfobPositionState{keyfob_position: %AutoApi.PropertyComponent{data: :out_of_range}}
+    iex> state = %AutoApi.KeyfobPositionState{location: %AutoApi.PropertyComponent{data: :out_of_range}}
     iex> AutoApi.KeyfobPositionState.to_bin(state)
     <<1, 4::integer-16, 1, 0, 1, 0>>
   """
