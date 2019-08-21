@@ -246,9 +246,9 @@
             ]
         }, 
         {
-            "pretty_name": "On-Off", 
-            "name": "on_off", 
-            "name_cased": "onOff", 
+            "pretty_name": "On-Off-State", 
+            "name": "on_off_state", 
+            "name_cased": "onOffState", 
             "enum_values": [
                 {
                     "id": 0, 

@@ -27,7 +27,7 @@
             "mandatory": [
                 1
             ], 
-            "name": "set_parling_brake"
+            "name": "set_parking_brake"
         }
     ]
 }
