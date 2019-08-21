@@ -1,11 +1,14 @@
 {
     "category": "digital_key", 
+    "disabled_in": [
+        "ble"
+    ], 
+    "name": "wake_up", 
+    "name_cased": "wakeUp", 
     "api": {
         "intro": 2, 
         "update": 11
     }, 
-    "name": "wake_up", 
-    "name_cased": "wakeUp", 
     "identifier": {
         "lsb": 34, 
         "msb": 0

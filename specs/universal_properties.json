@@ -22,9 +22,11 @@
             "size": 64
         }, 
         {
-            "type": "types.timestamp", 
-            "id": 162, 
+            "description": "Milliseconds since UNIX Epoch time", 
             "name_cased": "timestamp", 
+            "size": 8, 
+            "type": "timestamp", 
+            "id": 162, 
             "name": "timestamp"
         }
     ]

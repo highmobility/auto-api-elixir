@@ -89,21 +89,27 @@
             "name": "service_time_threshold"
         }, 
         {
-            "type": "types.timestamp", 
-            "id": 8, 
+            "description": "Milliseconds since UNIX Epoch time", 
             "name_cased": "automaticTeleserviceCallDate", 
+            "size": 8, 
+            "type": "timestamp", 
+            "id": 8, 
             "name": "automatic_teleservice_call_date"
         }, 
         {
-            "type": "types.timestamp", 
-            "id": 9, 
+            "description": "Milliseconds since UNIX Epoch time", 
             "name_cased": "teleserviceBatteryCallDate", 
+            "size": 8, 
+            "type": "timestamp", 
+            "id": 9, 
             "name": "teleservice_battery_call_date"
         }, 
         {
-            "type": "types.timestamp", 
-            "id": 10, 
+            "description": "Milliseconds since UNIX Epoch time", 
             "name_cased": "nextInspectionDate", 
+            "size": 8, 
+            "type": "timestamp", 
+            "id": 10, 
             "name": "next_inspection_date"
         }, 
         {
@@ -114,9 +120,11 @@
             "name": "condition_based_services"
         }, 
         {
-            "type": "types.timestamp", 
-            "id": 12, 
+            "description": "Milliseconds since UNIX Epoch time", 
             "name_cased": "brakeFluidChangeDate", 
+            "size": 8, 
+            "type": "timestamp", 
+            "id": 12, 
             "name": "brake_fluid_change_date"
         }
     ]

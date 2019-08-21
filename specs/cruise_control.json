@@ -1,5 +1,8 @@
 {
     "category": "chassis", 
+    "disabled_in": [
+        "web"
+    ], 
     "name": "cruise_control", 
     "name_cased": "cruiseControl", 
     "getters": {

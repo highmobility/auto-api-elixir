@@ -1,5 +1,8 @@
 {
     "category": "parking", 
+    "disabled_in": [
+        "web"
+    ], 
     "name": "remote_control", 
     "name_cased": "remoteControl", 
     "getters": {

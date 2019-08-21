@@ -110,9 +110,11 @@
             "name": "last_trip_battery_remaining"
         }, 
         {
-            "type": "types.timestamp", 
-            "id": 13, 
+            "description": "Milliseconds since UNIX Epoch time", 
             "name_cased": "lastTripDate", 
+            "size": 8, 
+            "type": "timestamp", 
+            "id": 13, 
             "name": "last_trip_date"
         }, 
         {

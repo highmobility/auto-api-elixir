@@ -1,5 +1,8 @@
 {
     "category": "chassis", 
+    "disabled_in": [
+        "web"
+    ], 
     "name": "keyfob_position", 
     "name_cased": "keyfobPosition", 
     "getters": {

@@ -52,15 +52,19 @@
             "name": "operator_ticket_id"
         }, 
         {
-            "type": "types.timestamp", 
-            "id": 4, 
+            "description": "Milliseconds since UNIX Epoch time", 
             "name_cased": "ticketStartTime", 
+            "size": 8, 
+            "type": "timestamp", 
+            "id": 4, 
             "name": "ticket_start_time"
         }, 
         {
-            "type": "types.timestamp", 
-            "id": 5, 
+            "description": "Milliseconds since UNIX Epoch time", 
             "name_cased": "ticketEndTime", 
+            "size": 8, 
+            "type": "timestamp", 
+            "id": 5, 
             "name": "ticket_end_time"
         }
     ], 

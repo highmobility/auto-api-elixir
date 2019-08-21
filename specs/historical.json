@@ -1,5 +1,8 @@
 {
     "category": "api_structure", 
+    "disabled_in": [
+        "ble"
+    ], 
     "name": "historical", 
     "name_cased": "historical", 
     "pretty_name": "Historical States", 
@@ -32,15 +35,19 @@
             "description": "The identifier of the Capability"
         }, 
         {
-            "type": "types.timestamp", 
-            "id": 3, 
+            "description": "Milliseconds since UNIX Epoch time", 
             "name_cased": "startDate", 
+            "size": 8, 
+            "type": "timestamp", 
+            "id": 3, 
             "name": "start_date"
         }, 
         {
-            "type": "types.timestamp", 
-            "id": 4, 
+            "description": "Milliseconds since UNIX Epoch time", 
             "name_cased": "endDate", 
+            "size": 8, 
+            "type": "timestamp", 
+            "id": 4, 
             "name": "end_date"
         }
     ], 

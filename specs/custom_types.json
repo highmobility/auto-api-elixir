@@ -246,10 +246,9 @@
             ]
         }, 
         {
-            "size": 1, 
-            "type": "enum", 
-            "name": "on_off_state", 
-            "name_cased": "onOffState", 
+            "pretty_name": "On-Off", 
+            "name": "on_off", 
+            "name_cased": "onOff", 
             "enum_values": [
                 {
                     "id": 0, 
@@ -259,7 +258,9 @@
                     "id": 1, 
                     "name": true
                 }
-            ]
+            ], 
+            "type": "enum", 
+            "size": 1
         }, 
         {
             "size": 8, 
@@ -375,13 +376,6 @@
             "size": 2
         }, 
         {
-            "size": 8, 
-            "type": "uinteger", 
-            "description": "Milliseconds since UNIX Epoch time", 
-            "name_cased": "timestamp", 
-            "name": "timestamp"
-        }, 
-        {
             "size": 1, 
             "type": "enum", 
             "name": "window_location", 
@@ -439,19 +433,19 @@
                     "enum_values": [
                         {
                             "id": 0, 
-                            "name": "longitudinal_acceleration"
+                            "name": "longitudinal"
                         }, 
                         {
                             "id": 1, 
-                            "name": "lateral_acceleration"
+                            "name": "lateral"
                         }, 
                         {
                             "id": 2, 
-                            "name": "front_lateral_acceleration"
+                            "name": "front_lateral"
                         }, 
                         {
                             "id": 3, 
-                            "name": "rear_lateral_acceleration"
+                            "name": "rear_lateral"
                         }
                     ]
                 }, 
@@ -1365,9 +1359,11 @@
                     ]
                 }, 
                 {
-                    "type": "types.timestamp", 
-                    "name": "date", 
-                    "name_cased": "date"
+                    "size": 8, 
+                    "type": "timestamp", 
+                    "description": "Milliseconds since UNIX Epoch time", 
+                    "name_cased": "date", 
+                    "name": "date"
                 }
             ], 
             "type": "custom", 

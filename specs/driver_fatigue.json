@@ -1,5 +1,8 @@
 {
     "category": "health", 
+    "disabled_in": [
+        "web"
+    ], 
     "name": "driver_fatigue", 
     "name_cased": "driverFatigue", 
     "getters": {
