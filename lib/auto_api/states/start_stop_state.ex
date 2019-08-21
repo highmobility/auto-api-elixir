@@ -23,13 +23,13 @@ defmodule AutoApi.StartStopState do
 
   alias AutoApi.{CommonData, PropertyComponent}
 
-  defstruct start_stop: nil,
+  defstruct status: nil,
             timestamp: nil
 
   use AutoApi.State, spec_file: "specs/start_stop.json"
 
   @type t :: %__MODULE__{
-          start_stop: %PropertyComponent{data: CommonData.activity()} | nil,
+          status: %PropertyComponent{data: CommonData.activity()} | nil,
           timestamp: DateTime.t() | nil
         }
 
@@ -38,7 +38,7 @@ defmodule AutoApi.StartStopState do
 
     iex> bin = <<1, 0, 4, 1, 0, 1, 1>>
     iex> AutoApi.StartStopState.from_bin(bin)
-    %AutoApi.StartStopState{start_stop: %AutoApi.PropertyComponent{data: :active}}
+    %AutoApi.StartStopState{status: %AutoApi.PropertyComponent{data: :active}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -48,7 +48,7 @@ defmodule AutoApi.StartStopState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.StartStopState{start_stop: %AutoApi.PropertyComponent{data: :active}}
+    iex> state = %AutoApi.StartStopState{status: %AutoApi.PropertyComponent{data: :active}}
     iex> AutoApi.StartStopState.to_bin(state)
     <<1, 0, 4, 1, 0, 1, 1>>
   """

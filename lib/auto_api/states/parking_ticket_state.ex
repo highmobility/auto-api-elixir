@@ -23,7 +23,7 @@ defmodule AutoApi.ParkingTicketState do
 
   alias AutoApi.{CommonData, PropertyComponent}
 
-  defstruct parking_ticket_state: nil,
+  defstruct status: nil,
             operator_name: nil,
             operator_ticket_id: nil,
             ticket_start_time: nil,
@@ -35,7 +35,7 @@ defmodule AutoApi.ParkingTicketState do
   @type parking_ticket_state :: :ended | :started
 
   @type t :: %__MODULE__{
-          parking_ticket_state: %PropertyComponent{data: parking_ticket_state} | nil,
+          status: %PropertyComponent{data: parking_ticket_state} | nil,
           operator_name: %PropertyComponent{data: String.t()} | nil,
           operator_ticket_id: %PropertyComponent{data: String.t()} | nil,
           ticket_start_time: %PropertyComponent{data: integer} | nil,
@@ -48,7 +48,7 @@ defmodule AutoApi.ParkingTicketState do
 
     iex> bin = <<1, 0, 4, 1, 0, 1, 1>>
     iex> AutoApi.ParkingTicketState.from_bin(bin)
-    %AutoApi.ParkingTicketState{parking_ticket_state: %AutoApi.PropertyComponent{data: :started}}
+    %AutoApi.ParkingTicketState{status: %AutoApi.PropertyComponent{data: :started}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -58,7 +58,7 @@ defmodule AutoApi.ParkingTicketState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.ParkingTicketState{parking_ticket_state: %AutoApi.PropertyComponent{data: :started}}
+    iex> state = %AutoApi.ParkingTicketState{status: %AutoApi.PropertyComponent{data: :started}}
     iex> AutoApi.ParkingTicketState.to_bin(state)
     <<1, 0, 4, 1, 0, 1, 1>>
   """
