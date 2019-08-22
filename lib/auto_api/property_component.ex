@@ -72,6 +72,10 @@ defmodule AutoApi.PropertyComponent do
 
   defp data_to_bin(nil, _), do: <<>>
 
+  defp data_to_bin(data, %{"embedded" => true, "type" => "string"}) do
+    <<byte_size(data) :: integer-16, data :: binary>>
+  end
+
   defp data_to_bin(data, %{"type" => "string"}) do
     data
   end
@@ -118,6 +122,7 @@ defmodule AutoApi.PropertyComponent do
   defp data_to_bin(data, %{"type" => "custom"} = specs) do
     specs
     |> Map.get("items")
+    |> Enum.map(&Map.put(&1, "embedded", true))
     |> Enum.map(fn %{"name" => name} = spec ->
       data
       |> Map.get(String.to_atom(name))
@@ -230,9 +235,8 @@ defmodule AutoApi.PropertyComponent do
     |> Map.get("items")
     |> Enum.reduce({0, []}, fn spec, {counter, acc} ->
       item_spec = fetch_item_spec(spec)
-      size = item_spec["size"]
-
-      unless size, do: raise("couldn't find size for #{inspect(spec)}")
+      size = fetch_item_size(binary_data, counter, item_spec)
+      counter = if (item_spec["type"] == "string"), do: counter + 2, else: counter
 
       data_value =
         binary_data
@@ -250,7 +254,6 @@ defmodule AutoApi.PropertyComponent do
 
     to_value(binary_data, type_spec)
   end
-
 
   defp failure_to_value(nil), do: nil
 
@@ -278,4 +281,19 @@ defmodule AutoApi.PropertyComponent do
   end
 
   defp fetch_item_spec(spec), do: spec
+
+  defp fetch_item_size(_binary_data, _counter, %{"size" => size}) do
+    size
+  end
+
+  defp fetch_item_size(binary_data, counter, %{"type" => "string"}) do
+    # String type without size spec has a fixed size header of 2 bytes
+    binary_data
+    |> :binary.part(counter, 2)
+    |> AutoApi.CommonData.convert_bin_to_integer()
+  end
+
+  defp fetch_item_size(_, _, spec) do
+    raise("couldn't find size for #{inspect(spec)}")
+  end
 end

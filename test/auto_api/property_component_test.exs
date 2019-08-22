@@ -118,7 +118,7 @@ defmodule AutoApi.PropertyComponentTest do
         "type" => "enum",
         "name" => "brake_fluid_level",
         "size" => 1,
-        "values" => [
+        "enum_values" => [
           %{"id" => 0x00, "name" => "low"},
           %{"id" => 1, "name" => "filled"}
         ]
@@ -174,7 +174,7 @@ defmodule AutoApi.PropertyComponentTest do
             "name" => "location",
             "size" => 1,
             "type" => "enum",
-            "values" => [
+            "enum_values" => [
               %{"id" => 0, "name" => "front_left"},
               %{"id" => 1, "name" => "front_right"},
               %{"id" => 2, "name" => "rear_right"},
@@ -209,11 +209,6 @@ defmodule AutoApi.PropertyComponentTest do
               "type" => "integer"
             },
             %{
-              "name" => "text_size",
-              "size" => 2,
-              "type" => "integer"
-            },
-            %{
               "name" => "text",
               "type" => "string"
             }
@@ -225,7 +220,7 @@ defmodule AutoApi.PropertyComponentTest do
         id = data[:id]
 
         prop_comp = %PropertyComponent{
-          data: %{id: id, text_size: text_size, text: text},
+          data: %{id: id, text: text},
           timestamp: data[:datetime]
         }
 
@@ -268,7 +263,7 @@ defmodule AutoApi.PropertyComponentTest do
             "name" => "location",
             "size" => 1,
             "type" => "enum",
-            "values" => [
+            "enum_values" => [
               %{"id" => 0, "name" => "front_left"},
               %{"id" => 1, "name" => "front_right"},
               %{"id" => 2, "name" => "rear_right"},
