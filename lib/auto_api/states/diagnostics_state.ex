@@ -25,9 +25,6 @@ defmodule AutoApi.DiagnosticsState do
 
   alias AutoApi.{CommonData, PropertyComponent}
 
-  @type fluid_level :: :low | :filled
-  @type position :: :front_left | :front_right | :rear_right | :rear_left
-  @type tire_data :: %{position: position, pressure: float}
   @doc """
   Diagnostics state
   """
@@ -62,13 +59,14 @@ defmodule AutoApi.DiagnosticsState do
 
   use AutoApi.State, spec_file: "specs/diagnostics.json"
 
+  @type fluid_level :: :low | :filled
+  @type position :: :front_left | :front_right | :rear_right | :rear_left
+  @type tire_data :: %{position: position, pressure: float}
   @type check_control_message :: %PropertyComponent{
           data: %{
             id: integer,
             remaining_minutes: integer,
-            text_size: integer,
             text: String.t(),
-            status_size: integer,
             status: String.t()
           }
         }
@@ -97,11 +95,8 @@ defmodule AutoApi.DiagnosticsState do
   @type trouble_code :: %PropertyComponent{
           data: %{
             occurences: integer,
-            id_size: integer,
             id: String.t(),
-            ecu_id_size: integer,
             ecu_id: String.t(),
-            status_size: integer,
             status: String.t()
           }
         }

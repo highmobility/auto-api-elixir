@@ -48,9 +48,7 @@ defmodule AutoApi.DiagnosticsStateTest do
           data: %{
             id: 1,
             remaining_minutes: 300,
-            text_size: 4,
             text: "text",
-            status_size: 6,
             status: "status"
           }
         }
@@ -62,11 +60,8 @@ defmodule AutoApi.DiagnosticsStateTest do
         %PropertyComponent{
           data: %{
             occurences: 1,
-            id_size: 2,
             id: "id",
-            ecu_id_size: 6,
             ecu_id: "ecu_id",
-            status_size: 6,
             status: "status"
           }
         }
