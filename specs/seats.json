@@ -23,11 +23,11 @@
             "name": "persons_detected"
         }, 
         {
-            "type": "types.seatbelt_fastened", 
+            "type": "types.seatbelt_state", 
             "multiple": true, 
             "id": 3, 
-            "name_cased": "seatbeltsFastened", 
-            "name": "seatbelts_fastened"
+            "name_cased": "seatbeltsState", 
+            "name": "seatbelts_state"
         }
     ]
 }

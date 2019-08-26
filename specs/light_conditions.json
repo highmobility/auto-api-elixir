@@ -26,11 +26,12 @@
             "name": "outside_light"
         }, 
         {
-            "id": 2, 
-            "type": "float", 
             "description": "Measured inside illuminance in lux, formatted as IEEE 754 decimal", 
-            "name": "inside_light", 
-            "size": 4
+            "name_cased": "insideLight", 
+            "size": 4, 
+            "type": "float", 
+            "id": 2, 
+            "name": "inside_light"
         }
     ]
 }

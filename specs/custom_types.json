@@ -35,7 +35,7 @@
             ]
         }, 
         {
-            "type": "uinteger", 
+            "type": "bytes", 
             "name": "capability_state", 
             "name_cased": "capabilityState", 
             "description": "The bytes of a Capability state"
@@ -343,7 +343,7 @@
                 }, 
                 {
                     "pretty_name": "Supported property IDs", 
-                    "type": "uinteger", 
+                    "type": "bytes", 
                     "name": "supported_property_ids", 
                     "name_cased": "supportedPropertyIDs", 
                     "description": "Array of supported property identifiers"
@@ -407,8 +407,8 @@
             "items": [
                 {
                     "type": "uinteger", 
-                    "name": "horisontal", 
-                    "name_cased": "horisontal", 
+                    "name": "horizontal", 
+                    "name_cased": "horizontal", 
                     "size": 1
                 }, 
                 {
@@ -923,37 +923,37 @@
                             "pretty_name": "15 minutes before 4\u00bd hours", 
                             "id": 1, 
                             "name_cased": "15minBefore4", 
-                            "name": "15_min_before_4"
+                            "name": "fifteen_min_before_four"
                         }, 
                         {
                             "pretty_name": "4\u00bd hours reached", 
                             "id": 2, 
                             "name_cased": "4Reached", 
-                            "name": "4_reached"
+                            "name": "four_reached"
                         }, 
                         {
                             "pretty_name": "15 minutes before 9 hours", 
                             "id": 3, 
                             "name_cased": "15minBefore9", 
-                            "name": "15_min_before_9"
+                            "name": "fifteen_min_before_nine"
                         }, 
                         {
                             "pretty_name": "9 hours reached", 
                             "id": 4, 
                             "name_cased": "9Reached", 
-                            "name": "9_reached"
+                            "name": "nine_reached"
                         }, 
                         {
                             "pretty_name": "15 minutes before 16 hours", 
                             "id": 5, 
                             "name_cased": "15minBefore16", 
-                            "name": "15_min_before_16"
+                            "name": "fifteen_min_before_sixteen"
                         }, 
                         {
                             "pretty_name": "16 hours reached", 
                             "id": 6, 
                             "name_cased": "16Reached", 
-                            "name": "16_reached"
+                            "name": "sixteen_reached"
                         }
                     ]
                 }
@@ -1255,7 +1255,7 @@
             ], 
             "type": "custom", 
             "name": "reduction_time", 
-            "name_cased": "departureTime", 
+            "name_cased": "reductionTime", 
             "size": 3
         }, 
         {
@@ -1297,8 +1297,8 @@
                 {
                     "size": 1, 
                     "type": "enum", 
-                    "name": "fastened", 
-                    "name_cased": "fastened", 
+                    "name": "fastened_state", 
+                    "name_cased": "fastenedState", 
                     "enum_values": [
                         {
                             "id": 0, 
@@ -1312,8 +1312,8 @@
                 }
             ], 
             "type": "custom", 
-            "name": "seatbelt_fastened", 
-            "name_cased": "seatbeltFastened", 
+            "name": "seatbelt_state", 
+            "name_cased": "seatbeltState", 
             "size": 2
         }, 
         {
