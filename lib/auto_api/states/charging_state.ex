@@ -30,16 +30,16 @@ defmodule AutoApi.ChargingState do
   @type charge_mode :: %PropertyComponent{data: :immediate | :timer_based | :inductive}
   @type plug_type :: %PropertyComponent{data: :type_1 | :type_2 | :ccs | :chademo}
   @type departure_time :: %PropertyComponent{
-          data: %{active_state: :inactive | :active, hour: integer, minute: integer}
+          data: %{state: :inactive | :active, time: %{hour: integer, minute: integer}}
         }
   @type reduction_time :: %PropertyComponent{
-          data: %{start_stop: :start | :stop, hour: integer, minute: integer}
+          data: %{start_stop: :start | :stop, time: %{hour: integer, minute: integer}}
         }
   @type timer_type :: :preferred_start_time | :preferred_end_time | :departure_date
   @type timer :: %PropertyComponent{
           data: %{
             timer_type: timer_type,
-            date: integer
+            date: DateTime.t()
           }
         }
   @type plugged_in :: %PropertyComponent{data: :disconnected | :plugged_in}
