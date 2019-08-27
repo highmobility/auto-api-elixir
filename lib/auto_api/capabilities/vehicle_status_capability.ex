@@ -30,7 +30,7 @@ defmodule AutoApi.VehicleStatusCapability do
       iex> length(VS.properties)
       19
       iex> List.last(VS.properties)
-      {153, :state}
+      {153, :states}
   """
 
   @spec_file "specs/vehicle_status.json"

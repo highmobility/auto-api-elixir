@@ -30,11 +30,11 @@ defmodule AutoApi.WindowsCapability do
       iex> length(W.properties)
       2
       iex> W.properties
-      [{2, :windows_open_percentages}, {3, :windows_positions}]
+      [{2, :open_percentages}, {3, :positions}]
   """
 
   @spec_file "specs/windows.json"
-  @type command_type :: :get_windows_state | :windows_state | :control_windows
+  @type command_type :: :get_windows | :windows_state | :control_windows
 
   @command_module AutoApi.WindowsCommand
   @state_module AutoApi.WindowsState

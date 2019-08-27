@@ -30,11 +30,11 @@ defmodule AutoApi.TheftAlarmCapability do
       iex> length(T.properties)
       1
       iex> T.properties
-      [{1, :theft_alarm}]
+      [{1, :status}]
   """
 
   @spec_file "specs/theft_alarm.json"
-  @type command_type :: :get_theft_alarm_state | :theft_alarm_state | :set_theft_alarm_state
+  @type command_type :: :get_theft_alarm_state | :theft_alarm_state | :set_theft_alarm
 
   @command_module AutoApi.NotImplemented
   @state_module AutoApi.TheftAlarmState

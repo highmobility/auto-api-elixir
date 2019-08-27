@@ -30,7 +30,7 @@ defmodule AutoApi.KeyfobPositionCapability do
       iex> length(K.properties)
       1
       iex> List.last(K.properties)
-      {0x01, :keyfob_position}
+      {0x01, :location}
   """
 
   @spec_file "specs/keyfob_position.json"

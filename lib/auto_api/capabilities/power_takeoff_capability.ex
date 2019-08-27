@@ -26,9 +26,9 @@ defmodule AutoApi.PowerTakeoffCapability do
       iex> PT.name
       :power_takeoff
       iex> PT.description
-      "Power Takeoff"
+      "Power Take-Off"
       iex> PT.properties
-      [{1, :power_takeoff}, {2, :power_takeoff_engaged}]
+      [{1, :status}, {2, :engaged}]
   """
 
   @spec_file "specs/power_takeoff.json"

@@ -30,7 +30,7 @@ defmodule AutoApi.SeatsCapability do
       iex> length(S.properties)
       2
       iex> List.last(S.properties)
-      {0x03, :seatbelts_fastened}
+      {0x03, :seatbelts_state}
   """
 
   @spec_file "specs/seats.json"

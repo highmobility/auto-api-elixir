@@ -30,7 +30,7 @@ defmodule AutoApi.ParkingBrakeCapability do
       iex> length(P.properties)
       1
       iex> P.properties
-      [{1, :parking_brake}]
+      [{1, :status}]
   """
 
   @spec_file "specs/parking_brake.json"

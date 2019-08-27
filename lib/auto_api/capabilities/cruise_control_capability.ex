@@ -28,7 +28,7 @@ defmodule AutoApi.CruiseControlCapability do
       iex> CC.description
       "Cruise Control"
       iex> CC.properties
-      [{1, :cruise_control}, {2, :limiter}, {3, :target_speed}, {4, :acc}, {5, :acc_target_speed}]
+      [{1, :cruise_control}, {2, :limiter}, {3, :target_speed}, {4, :adaptive_cruise_control}, {5, :acc_target_speed}]
   """
 
   @spec_file "specs/cruise_control.json"

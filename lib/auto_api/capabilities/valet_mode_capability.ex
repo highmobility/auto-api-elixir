@@ -30,7 +30,7 @@ defmodule AutoApi.ValetModeCapability do
       iex> length(V.properties)
       1
       iex> List.last(V.properties)
-      {0x01, :valet_mode}
+      {0x01, :status}
   """
 
   @spec_file "specs/valet_mode.json"

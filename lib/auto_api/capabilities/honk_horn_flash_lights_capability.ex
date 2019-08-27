@@ -30,7 +30,7 @@ defmodule AutoApi.HonkHornFlashLightsCapability do
       iex> length(H.properties)
       4
       iex> List.last(H.properties)
-      {0x04, :emergency_flashers_active_state}
+      {0x04, :emergency_flashers_state}
   """
 
   @spec_file "specs/honk_horn_flash_lights.json"

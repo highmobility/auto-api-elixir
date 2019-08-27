@@ -28,7 +28,7 @@ defmodule AutoApi.IgnitionCapability do
       iex> E.description
       "Ignition"
       iex> List.last(E.properties)
-      {2, :accessories_ignition}
+      {2, :accessories_status}
   """
 
   @spec_file "specs/ignition.json"

@@ -26,9 +26,9 @@ defmodule AutoApi.StartStopCapability do
       iex> SS.name
       :start_stop
       iex> SS.description
-      "Start Stop"
+      "Start-Stop"
       iex> SS.properties
-      [{1, :start_stop}]
+      [{1, :status}]
   """
 
   @spec_file "specs/start_stop.json"
