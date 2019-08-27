@@ -141,7 +141,7 @@ defmodule AutoApi.PropertyComponentTest do
       datetime = DateTime.utc_now()
 
       spec = %{
-        "type" => "capability_state"
+        "type" => "types.capability_state"
       }
 
       state =

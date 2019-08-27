@@ -30,7 +30,7 @@ defmodule AutoApi.VehicleStatusState do
             license_plate: nil,
             sales_designation: nil,
             model_year: nil,
-            color_name: nil,
+            colour_name: nil,
             power_in_kw: nil,
             number_of_doors: nil,
             number_of_seats: nil,
@@ -41,7 +41,7 @@ defmodule AutoApi.VehicleStatusState do
             driver_seat_location: nil,
             equipments: [],
             brand: nil,
-            state: [],
+            states: [],
             timestamp: nil
 
   use AutoApi.State, spec_file: "specs/vehicle_status.json"
@@ -59,7 +59,7 @@ defmodule AutoApi.VehicleStatusState do
           license_plate: %PropertyComponent{data: String.t()} | nil,
           sales_designation: %PropertyComponent{data: String.t()} | nil,
           model_year: %PropertyComponent{data: integer} | nil,
-          color_name: %PropertyComponent{data: String.t()} | nil,
+          colour_name: %PropertyComponent{data: String.t()} | nil,
           power_in_kw: %PropertyComponent{data: integer} | nil,
           number_of_doors: %PropertyComponent{data: integer} | nil,
           number_of_seats: %PropertyComponent{data: integer} | nil,
@@ -70,7 +70,7 @@ defmodule AutoApi.VehicleStatusState do
           driver_seat_location: %PropertyComponent{data: :left | :right | :center} | nil,
           equipments: list(%PropertyComponent{data: String.t()}),
           brand: %PropertyComponent{data: String.t()} | nil,
-          state: list(%PropertyComponent{}),
+          states: list(%PropertyComponent{}),
           timestamp: DateTime.t() | nil
         }
 

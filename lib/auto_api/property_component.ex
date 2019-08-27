@@ -131,7 +131,8 @@ defmodule AutoApi.PropertyComponent do
     |> :binary.list_to_bin()
   end
 
-  defp data_to_bin(%state_mod{} = state, %{"type" => "capability_state"}) do
+  # Workaround while `capability_state` type is `bytes`
+  defp data_to_bin(%state_mod{} = state, %{"type" => "types.capability_state"}) do
     state_mod.identifier <> <<0x01>> <> state_mod.to_bin(state)
   end
 
@@ -206,13 +207,6 @@ defmodule AutoApi.PropertyComponent do
     end
   end
 
-  defp to_value(binary_data, %{"type" => "capability_state"}) do
-    <<cap_id::binary-size(2), 0x01, bin_state::binary>> = binary_data
-    cap_mod = AutoApi.Capability.get_by_id(cap_id)
-
-    cap_mod.state.from_bin(bin_state)
-  end
-
   defp to_value(binary_data, %{"type" => "enum", "size" => size} = spec) do
     size_bit = size * 8
     <<enum_id::integer-size(size_bit)>> = binary_data
@@ -247,6 +241,14 @@ defmodule AutoApi.PropertyComponent do
     end)
     |> elem(1)
     |> Enum.into(%{})
+  end
+
+  # Workaround while `capability_state` type is `bytes`
+  defp to_value(binary_data, %{"type" => "types.capability_state"}) do
+    <<cap_id::binary-size(2), 0x01, bin_state::binary>> = binary_data
+    cap_mod = AutoApi.Capability.get_by_id(cap_id)
+
+    cap_mod.state.from_bin(bin_state)
   end
 
   defp to_value(binary_data, %{"type" => "types." <> type}) do

@@ -85,14 +85,14 @@ defmodule AutoApi.StateTest do
 
     test "capability_state" do
       inner_state = %DiagnosticsState{brake_fluid_level: %PropertyComponent{data: :low}}
-      state = %VehicleStatusState{state: [%PropertyComponent{data: inner_state}]}
+      state = %VehicleStatusState{states: [%PropertyComponent{data: inner_state}]}
 
       new_state =
         state
         |> VehicleStatusState.to_bin()
         |> VehicleStatusState.from_bin()
 
-      assert new_state.state == [%PropertyComponent{data: inner_state}]
+      assert new_state.states == [%PropertyComponent{data: inner_state}]
     end
 
     test "map" do

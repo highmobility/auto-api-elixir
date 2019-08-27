@@ -64,8 +64,8 @@ defmodule AutoApi.VehicleStatusStateTest do
 
     state =
       VehicleStatusState.base()
-      |> VehicleStatusState.append_property(:state, diag_state)
-      |> VehicleStatusState.append_property(:state, door_state)
+      |> VehicleStatusState.append_property(:states, diag_state)
+      |> VehicleStatusState.append_property(:states, door_state)
       |> VehicleStatusState.to_bin()
 
     assert state ==
@@ -81,7 +81,7 @@ defmodule AutoApi.VehicleStatusStateTest do
 
     state = VehicleStatusState.from_bin(bin_state)
 
-    assert [diag_state, door_state] = state.state
+    assert [diag_state, door_state] = state.states
 
     assert diag_state.data.speed.data == 42
     assert diag_state.data.speed.timestamp == DateTime.from_unix!(1_551_867_428_642, :millisecond)
