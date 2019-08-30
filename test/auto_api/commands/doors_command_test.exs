@@ -21,8 +21,8 @@ defmodule AutoApi.DoorsCommandTest do
   alias AutoApi.{DoorsCommand, DoorsState, PropertyComponent}
 
   describe "execute/2" do
-  #TODO
-  @tag :skip
+    # TODO
+    @tag :skip
     test "lock_unlock_doors lock command" do
       command = DoorsCommand.to_bin(:set, lock_state: :lock)
 
@@ -39,8 +39,8 @@ defmodule AutoApi.DoorsCommandTest do
              ]
     end
 
-  #TODO
-  @tag :skip
+    # TODO
+    @tag :skip
     test "lock_unlock_doors unlock command" do
       command = DoorsCommand.to_bin(:set, lock_state: :unlock)
 

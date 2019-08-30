@@ -32,7 +32,6 @@ defmodule AutoApi.WiFiState do
 
   use AutoApi.State, spec_file: "specs/wi_fi.json"
 
-
   @type t :: %__MODULE__{
           status: %PropertyComponent{data: CommonData.enabled_state()} | nil,
           network_connected: %PropertyComponent{data: CommonData.network_state()} | nil,

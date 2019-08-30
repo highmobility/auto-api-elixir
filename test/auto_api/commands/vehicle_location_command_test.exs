@@ -22,14 +22,14 @@ defmodule AutoApi.VehicleLocationCommandTest do
   doctest VehicleLocationCommand
 
   describe "execute/2" do
-    #TODO
+    # TODO
     @tag :skip
     test "get_vehicle_location command" do
       state = %VehicleLocationState{}
       assert VehicleLocationCommand.execute(%VehicleLocationState{}, <<0x00>>) == {:state, state}
     end
 
-    #TODO
+    # TODO
     @tag :skip
     test "vehicle_location command" do
       state =

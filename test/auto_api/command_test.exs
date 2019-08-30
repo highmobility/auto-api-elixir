@@ -38,13 +38,14 @@ defmodule AutoApi.CommandTest do
     end
 
     defp assert_get_command({capability, binary_command}) do
-      preamble = <<capability.identifier() :: binary, 0x00>>
+      preamble = <<capability.identifier()::binary, 0x00>>
+
       command_bin =
         capability.properties
         |> Enum.map(&elem(&1, 0))
         |> Enum.reduce(<<>>, &(&2 <> <<&1>>))
 
-      assert <<preamble :: binary, command_bin :: binary>> == binary_command
+      assert <<preamble::binary, command_bin::binary>> == binary_command
     end
 
     test "set works" do

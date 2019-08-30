@@ -33,11 +33,11 @@ defmodule AutoApi.CapabilitiesState do
   use AutoApi.State, spec_file: "specs/capabilities.json"
 
   @type capability :: %PropertyComponent{
-    data: %{
-          capability_id: integer(),
-      supported_property_ids: binary()
-    }
-  }
+          data: %{
+            capability_id: integer(),
+            supported_property_ids: binary()
+          }
+        }
 
   @type t :: %__MODULE__{
           capabilities: list(capability()),

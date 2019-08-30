@@ -207,7 +207,7 @@ defmodule AutoApi.State do
           defp parse_bin_property(unquote(prop_id), size, bin_data) do
             value = AutoApi.PropertyComponent.to_struct(bin_data, unquote(Macro.escape(prop)))
 
-            #TODO: Check if this is still needed
+            # TODO: Check if this is still needed
             if unquote(prop_type) == "enum" and is_nil(value) do
               throw({:error, {:can_not_parse_enum, bin_data}})
             end

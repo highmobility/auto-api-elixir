@@ -85,7 +85,11 @@ defmodule AutoApi.StateTest do
     end
 
     test "bytes" do
-      state = %CapabilitiesState{capabilities: [%PropertyComponent{data: %{capability_id: 0x33, supported_property_ids: <<0x04, 0x0D>>}}]}
+      state = %CapabilitiesState{
+        capabilities: [
+          %PropertyComponent{data: %{capability_id: 0x33, supported_property_ids: <<0x04, 0x0D>>}}
+        ]
+      }
 
       new_state =
         state

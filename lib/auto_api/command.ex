@@ -56,22 +56,22 @@ defmodule AutoApi.Command do
       """
       @spec to_bin(:get, list(:atom)) :: binary()
       def to_bin(:get, properties) when is_list(properties) do
-        preamble = <<@capability.identifier() :: binary, 0x00>>
+        preamble = <<@capability.identifier()::binary, 0x00>>
         state = @capability.state()
 
-        Enum.reduce(properties, preamble, & &2 <> <<state.property_id(&1) :: 8>>)
+        Enum.reduce(properties, preamble, &(&2 <> <<state.property_id(&1)::8>>))
       end
 
       @spec to_bin(:set, list({:atom, AutoApi.PropertyComponent.t()})) :: binary()
       def to_bin(:set, properties) when is_list(properties) do
-        preamble = <<@capability.identifier() :: binary, 0x01>>
+        preamble = <<@capability.identifier()::binary, 0x01>>
         state = @capability.state()
 
         Enum.into(properties, preamble, fn {property_name, value} ->
           spec = state.property_spec(property_name)
           value_bin = AutoApi.PropertyComponent.to_bin(value, spec)
 
-          <<state.property_id(property_name) :: 8, value_bin :: binary>>
+          <<state.property_id(property_name)::8, value_bin::binary>>
         end)
       end
     end

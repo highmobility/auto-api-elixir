@@ -55,6 +55,7 @@ defmodule AutoApi.Capability do
       setters =
         (@raw_spec["setters"] || [])
         |> Enum.map(fn setter -> {0x01, String.to_atom(setter["name"])} end)
+
       @setters setters
 
       @doc false

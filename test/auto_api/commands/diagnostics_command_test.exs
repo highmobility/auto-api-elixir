@@ -21,15 +21,15 @@ defmodule AutoApi.DiagnosticsCommandTest do
   alias AutoApi.{DiagnosticsCommand, DiagnosticsState, PropertyComponent}
 
   describe "execute/2" do
-  #TODO
-  @tag :skip
+    # TODO
+    @tag :skip
     test "get_diagnostics_state" do
       assert DiagnosticsCommand.execute(%DiagnosticsState{}, <<0x00>>) ==
                {:state, %AutoApi.DiagnosticsState{}}
     end
 
-  #TODO
-  @tag :skip
+    # TODO
+    @tag :skip
     test "diagnostics_state" do
       mileage_prop = %PropertyComponent{data: 100}
 
@@ -41,8 +41,8 @@ defmodule AutoApi.DiagnosticsCommandTest do
   end
 
   describe "state/1" do
-  #TODO
-  @tag :skip
+    # TODO
+    @tag :skip
     test "get state" do
       state = %DiagnosticsState{mileage: %PropertyComponent{data: 100}}
 
