@@ -1,4 +1,6 @@
 defmodule AutoApi.CustomType.Implementation do
+  @moduledoc false
+
   @external_resource "specs/custom_types.json"
 
   defmacro __before_compile__(_env) do
