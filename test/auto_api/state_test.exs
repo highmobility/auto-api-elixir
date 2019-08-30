@@ -24,7 +24,8 @@ defmodule AutoApi.StateTest do
     State,
     DiagnosticsState,
     VehicleLocationState,
-    VehicleStatusState
+    VehicleStatusState,
+    CapabilitiesState
   }
 
   describe "symmetric from_bin/1 & to_bin/1" do
@@ -70,6 +71,29 @@ defmodule AutoApi.StateTest do
         |> DiagnosticsState.from_bin()
 
       assert new_state.engine_total_fuel_consumption.data == 1.1003
+    end
+
+    test "string" do
+      state = %VehicleStatusState{vin: %PropertyComponent{data: "XV000000000000001"}}
+
+      new_state =
+        state
+        |> VehicleStatusState.to_bin()
+        |> VehicleStatusState.from_bin()
+
+      assert new_state.vin.data == "XV000000000000001"
+    end
+
+    test "bytes" do
+      state = %CapabilitiesState{capabilities: [%PropertyComponent{data: %{capability_id: 0x33, supported_property_ids: <<0x04, 0x0D>>}}]}
+
+      new_state =
+        state
+        |> CapabilitiesState.to_bin()
+        |> CapabilitiesState.from_bin()
+
+      assert data = List.first(new_state.capabilities).data
+      assert data.supported_property_ids == <<0x04, 0x0D>>
     end
 
     test "enum" do

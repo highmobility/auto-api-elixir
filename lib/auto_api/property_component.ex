@@ -73,10 +73,18 @@ defmodule AutoApi.PropertyComponent do
   defp data_to_bin(nil, _), do: <<>>
 
   defp data_to_bin(data, %{"embedded" => true, "type" => "string"}) do
-    <<byte_size(data) :: integer-16, data :: binary>>
+    <<byte_size(data)::integer-16, data::binary>>
+  end
+
+  defp data_to_bin(data, %{"embedded" => true, "type" => "bytes"}) do
+    <<byte_size(data)::integer-16, data::binary>>
   end
 
   defp data_to_bin(data, %{"type" => "string"}) do
+    data
+  end
+
+  defp data_to_bin(data, %{"type" => "bytes"}) do
     data
   end
 
@@ -182,6 +190,10 @@ defmodule AutoApi.PropertyComponent do
     binary_data
   end
 
+  defp to_value(binary_data, %{"type" => "bytes"}) do
+    binary_data
+  end
+
   defp to_value(binary_data, %{"type" => "float"}) do
     AutoApi.CommonData.convert_bin_to_float(binary_data)
   end
@@ -224,13 +236,13 @@ defmodule AutoApi.PropertyComponent do
     end
   end
 
-  defp to_value(binary_data,  %{"type" => "custom"} = specs) do
+  defp to_value(binary_data, %{"type" => "custom"} = specs) do
     specs
     |> Map.get("items")
     |> Enum.reduce({0, []}, fn spec, {counter, acc} ->
       item_spec = fetch_item_spec(spec)
       size = fetch_item_size(binary_data, counter, item_spec)
-      counter = if (item_spec["type"] == "string"), do: counter + 2, else: counter
+      counter = update_counter(item_spec, counter)
 
       data_value =
         binary_data
@@ -295,7 +307,18 @@ defmodule AutoApi.PropertyComponent do
     |> AutoApi.CommonData.convert_bin_to_integer()
   end
 
+  defp fetch_item_size(binary_data, counter, %{"type" => "bytes"}) do
+    # Bytes type without size spec has a fixed size header of 2 bytes
+    binary_data
+    |> :binary.part(counter, 2)
+    |> AutoApi.CommonData.convert_bin_to_integer()
+  end
+
   defp fetch_item_size(_, _, spec) do
     raise("couldn't find size for #{inspect(spec)}")
   end
+
+  defp update_counter(%{"type" => "string"}, counter), do: counter + 2
+  defp update_counter(%{"type" => "bytes"}, counter), do: counter + 2
+  defp update_counter(_, counter), do: counter
 end

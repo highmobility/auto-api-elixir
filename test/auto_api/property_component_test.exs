@@ -186,7 +186,7 @@ defmodule AutoApi.PropertyComponentTest do
             "name" => "pressure",
             "size" => 4,
             "type" => "float"
-          },
+          }
         ]
       }
 
