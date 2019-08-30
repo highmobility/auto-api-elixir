@@ -23,7 +23,7 @@ defmodule AutoApi.FailureMessageStateTest do
   test "to_bin & from_bin" do
     state =
       %FailureMessageState{}
-      |> FailureMessageState.put_property(:failed_message_identifier, 0x35)
+      |> FailureMessageState.put_property(:failed_message_id, 0x35)
       |> FailureMessageState.put_property(:failed_message_type, 0x00)
       |> FailureMessageState.put_property(:failure_reason, :unauthorized)
       |> FailureMessageState.put_property(

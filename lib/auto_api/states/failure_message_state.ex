@@ -35,7 +35,7 @@ defmodule AutoApi.FailureMessageState do
   @doc """
   FailureMessage state
   """
-  defstruct failed_message_identifier: nil,
+  defstruct failed_message_id: nil,
             failed_message_type: nil,
             failure_reason: nil,
             failure_description: nil,
@@ -44,7 +44,7 @@ defmodule AutoApi.FailureMessageState do
   use AutoApi.State, spec_file: "specs/failure_message.json"
 
   @type t :: %__MODULE__{
-          failed_message_identifier: %PropertyComponent{data: integer} | nil,
+          failed_message_id: %PropertyComponent{data: integer} | nil,
           failed_message_type: %PropertyComponent{data: integer} | nil,
           failure_reason: %PropertyComponent{data: failure_reason} | nil,
           failure_description: %PropertyComponent{data: String.t()} | nil,
