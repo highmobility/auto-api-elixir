@@ -3,9 +3,7 @@
     "name": "windows", 
     "name_cased": "windows", 
     "getters": {
-        "default": {
-            "name": "get_windows"
-        }
+        "name": "get_windows"
     }, 
     "state": "all", 
     "api": {

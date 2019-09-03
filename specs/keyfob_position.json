@@ -6,9 +6,7 @@
     "name": "keyfob_position", 
     "name_cased": "keyfobPosition", 
     "getters": {
-        "default": {
-            "name": "get_keyfob_position"
-        }
+        "name": "get_keyfob_position"
     }, 
     "state": "all", 
     "api": {

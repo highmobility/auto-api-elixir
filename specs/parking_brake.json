@@ -2,9 +2,7 @@
     "category": "parking", 
     "name": "parking_brake", 
     "name_cased": "parkingBrake", 
-    "getters": {
-        "default": {}
-    }, 
+    "getters": {}, 
     "state": "all", 
     "api": {
         "intro": 5, 

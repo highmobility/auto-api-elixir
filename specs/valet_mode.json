@@ -3,9 +3,7 @@
     "name": "valet_mode", 
     "name_cased": "valetMode", 
     "getters": {
-        "default": {
-            "name": "get_valet_mode"
-        }
+        "name": "get_valet_mode"
     }, 
     "state": "all", 
     "api": {

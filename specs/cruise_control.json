@@ -5,9 +5,7 @@
     ], 
     "name": "cruise_control", 
     "name_cased": "cruiseControl", 
-    "getters": {
-        "default": {}
-    }, 
+    "getters": {}, 
     "state": "all", 
     "api": {
         "intro": 7, 

@@ -3,9 +3,7 @@
     "name": "weather_conditions", 
     "name_cased": "weatherConditions", 
     "getters": {
-        "default": {
-            "name": "get_weather_conditions"
-        }
+        "name": "get_weather_conditions"
     }, 
     "state": "all", 
     "api": {

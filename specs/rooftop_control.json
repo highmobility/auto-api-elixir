@@ -3,9 +3,7 @@
     "name": "rooftop_control", 
     "name_cased": "rooftopControl", 
     "getters": {
-        "default": {
-            "name": "get_rooftop_state"
-        }
+        "name": "get_rooftop_state"
     }, 
     "state": "all", 
     "api": {

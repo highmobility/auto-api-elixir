@@ -2,9 +2,7 @@
     "category": "heavy_duty", 
     "name": "power_takeoff", 
     "name_cased": "powerTakeoff", 
-    "getters": {
-        "default": {}
-    }, 
+    "getters": {}, 
     "pretty_name": "Power Take-Off", 
     "state": "all", 
     "api": {

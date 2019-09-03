@@ -3,9 +3,7 @@
     "name": "light_conditions", 
     "name_cased": "lightConditions", 
     "getters": {
-        "default": {
-            "name": "get_light_conditions"
-        }
+        "name": "get_light_conditions"
     }, 
     "state": "all", 
     "api": {

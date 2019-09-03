@@ -3,9 +3,7 @@
     "name": "chassis_settings", 
     "name_cased": "chassisSettings", 
     "getters": {
-        "default": {
-            "name": "get_chassis_settings"
-        }
+        "name": "get_chassis_settings"
     }, 
     "state": "all", 
     "api": {

@@ -3,9 +3,7 @@
     "name": "navi_destination", 
     "name_cased": "naviDestination", 
     "getters": {
-        "default": {
-            "name": "get_navi_destination"
-        }
+        "name": "get_navi_destination"
     }, 
     "state": "all", 
     "api": {

@@ -2,9 +2,7 @@
     "category": "digital_key", 
     "name": "doors", 
     "name_cased": "doors", 
-    "getters": {
-        "default": {}
-    }, 
+    "getters": {}, 
     "state": "all", 
     "api": {
         "intro": 1, 

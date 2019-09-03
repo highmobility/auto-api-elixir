@@ -2,9 +2,7 @@
     "category": "diagnostics", 
     "name": "maintenance", 
     "name_cased": "maintenance", 
-    "getters": {
-        "default": {}
-    }, 
+    "getters": {}, 
     "state": "all", 
     "api": {
         "intro": 3, 

@@ -2,9 +2,7 @@
     "category": "diagnostics", 
     "name": "offroad", 
     "name_cased": "offroad", 
-    "getters": {
-        "default": {}
-    }, 
+    "getters": {}, 
     "state": "all", 
     "api": {
         "intro": 5, 

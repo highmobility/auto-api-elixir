@@ -5,9 +5,7 @@
     ], 
     "name": "driver_fatigue", 
     "name_cased": "driverFatigue", 
-    "getters": {
-        "default": {}
-    }, 
+    "getters": {}, 
     "state": "all", 
     "api": {
         "intro": 4, 

@@ -2,9 +2,7 @@
     "category": "digital_key", 
     "name": "start_stop", 
     "name_cased": "startStop", 
-    "getters": {
-        "default": {}
-    }, 
+    "getters": {}, 
     "pretty_name": "Start-Stop", 
     "state": "all", 
     "api": {

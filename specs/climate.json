@@ -2,9 +2,7 @@
     "category": "chassis", 
     "name": "climate", 
     "name_cased": "climate", 
-    "getters": {
-        "default": {}
-    }, 
+    "getters": {}, 
     "state": "all", 
     "api": {
         "intro": 2, 

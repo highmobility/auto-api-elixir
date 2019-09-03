@@ -3,9 +3,7 @@
     "name": "vehicle_location", 
     "name_cased": "vehicleLocation", 
     "getters": {
-        "default": {
-            "name": "get_vehicle_location"
-        }
+        "name": "get_vehicle_location"
     }, 
     "state": "all", 
     "api": {

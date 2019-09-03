@@ -2,9 +2,7 @@
     "category": "digital_key", 
     "name": "trunk", 
     "name_cased": "trunk", 
-    "getters": {
-        "default": {}
-    }, 
+    "getters": {}, 
     "state": "all", 
     "api": {
         "intro": 1, 

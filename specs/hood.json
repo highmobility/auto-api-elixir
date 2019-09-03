@@ -2,9 +2,7 @@
     "category": "digital_key", 
     "name": "hood", 
     "name_cased": "hood", 
-    "getters": {
-        "default": {}
-    }, 
+    "getters": {}, 
     "state": "all", 
     "api": {
         "intro": 11, 

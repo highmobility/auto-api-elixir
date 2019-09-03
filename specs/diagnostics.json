@@ -2,9 +2,7 @@
     "category": "diagnostics", 
     "name": "diagnostics", 
     "name_cased": "diagnostics", 
-    "getters": {
-        "default": {}
-    }, 
+    "getters": {}, 
     "state": "all", 
     "api": {
         "intro": 3, 

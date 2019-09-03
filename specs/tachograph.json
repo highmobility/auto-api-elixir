@@ -2,9 +2,7 @@
     "category": "heavy_duty", 
     "name": "tachograph", 
     "name_cased": "tachograph", 
-    "getters": {
-        "default": {}
-    }, 
+    "getters": {}, 
     "state": "all", 
     "api": {
         "intro": 7, 

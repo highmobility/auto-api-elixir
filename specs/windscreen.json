@@ -2,9 +2,7 @@
     "category": "chassis", 
     "name": "windscreen", 
     "name_cased": "windscreen", 
-    "getters": {
-        "default": {}
-    }, 
+    "getters": {}, 
     "state": "all", 
     "api": {
         "intro": 4, 

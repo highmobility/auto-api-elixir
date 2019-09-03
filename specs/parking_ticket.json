@@ -3,9 +3,7 @@
     "name": "parking_ticket", 
     "name_cased": "parkingTicket", 
     "getters": {
-        "default": {
-            "name": "get_parking_ticket"
-        }
+        "name": "get_parking_ticket"
     }, 
     "state": "all", 
     "api": {

@@ -3,9 +3,7 @@
     "name": "firmware_version", 
     "name_cased": "firmwareVersion", 
     "getters": {
-        "default": {
-            "name": "get_firmware_version"
-        }
+        "name": "get_firmware_version"
     }, 
     "state": "all", 
     "api": {

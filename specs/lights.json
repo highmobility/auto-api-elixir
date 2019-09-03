@@ -2,9 +2,7 @@
     "category": "chassis", 
     "name": "lights", 
     "name_cased": "lights", 
-    "getters": {
-        "default": {}
-    }, 
+    "getters": {}, 
     "state": "all", 
     "api": {
         "intro": 3, 

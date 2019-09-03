@@ -3,9 +3,7 @@
     "name": "vehicle_status", 
     "name_cased": "vehicleStatus", 
     "getters": {
-        "default": {
-            "name": "get_vehicle_status"
-        }
+        "name": "get_vehicle_status"
     }, 
     "state": "all", 
     "api": {

@@ -3,9 +3,7 @@
     "name": "dashboard_lights", 
     "name_cased": "dashboardLights", 
     "getters": {
-        "default": {
-            "name": "get_dashboard_lights"
-        }
+        "name": "get_dashboard_lights"
     }, 
     "state": "all", 
     "api": {

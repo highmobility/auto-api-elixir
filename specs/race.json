@@ -2,9 +2,7 @@
     "category": "diagnostics", 
     "name": "race", 
     "name_cased": "race", 
-    "getters": {
-        "default": {}
-    }, 
+    "getters": {}, 
     "state": "all", 
     "api": {
         "intro": 5, 

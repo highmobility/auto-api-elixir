@@ -2,9 +2,7 @@
     "category": "digital_key", 
     "name": "ignition", 
     "name_cased": "ignition", 
-    "getters": {
-        "default": {}
-    }, 
+    "getters": {}, 
     "state": "all", 
     "api": {
         "intro": 3, 

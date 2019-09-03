@@ -6,10 +6,8 @@
     "name": "remote_control", 
     "name_cased": "remoteControl", 
     "getters": {
-        "default": {
-            "skip_properties_getter": true, 
-            "name": "get_control_state"
-        }
+        "skip_properties_getter": true, 
+        "name": "get_control_state"
     }, 
     "state": [
         1, 

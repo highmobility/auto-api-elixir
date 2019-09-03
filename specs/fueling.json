@@ -3,9 +3,7 @@
     "name": "fueling", 
     "name_cased": "fueling", 
     "getters": {
-        "default": {
-            "name": "get_gas_flap_state"
-        }
+        "name": "get_gas_flap_state"
     }, 
     "state": "all", 
     "api": {

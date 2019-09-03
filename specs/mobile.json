@@ -2,9 +2,7 @@
     "category": "headunit", 
     "name": "mobile", 
     "name_cased": "mobile", 
-    "getters": {
-        "default": {}
-    }, 
+    "getters": {}, 
     "pretty_name": "Mobile", 
     "state": "all", 
     "api": {

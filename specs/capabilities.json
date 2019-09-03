@@ -3,9 +3,7 @@
     "name": "capabilities", 
     "name_cased": "capabilities", 
     "getters": {
-        "default": {
-            "name": "get_capabilities"
-        }
+        "name": "get_capabilities"
     }, 
     "state": "all", 
     "api": {

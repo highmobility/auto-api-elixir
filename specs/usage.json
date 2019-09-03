@@ -3,9 +3,7 @@
     "name": "usage", 
     "name_cased": "usage", 
     "getters": {
-        "default": {
-            "name": "get_usage"
-        }
+        "name": "get_usage"
     }, 
     "state": "all", 
     "api": {

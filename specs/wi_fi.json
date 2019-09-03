@@ -2,9 +2,7 @@
     "category": "headunit", 
     "name": "wi_fi", 
     "name_cased": "wiFi", 
-    "getters": {
-        "default": {}
-    }, 
+    "getters": {}, 
     "pretty_name": "Wi-Fi", 
     "state": [
         1, 

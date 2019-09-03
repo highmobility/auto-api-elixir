@@ -2,9 +2,7 @@
     "category": "chassis", 
     "name": "charging", 
     "name_cased": "charging", 
-    "getters": {
-        "default": {}
-    }, 
+    "getters": {}, 
     "state": "all", 
     "api": {
         "intro": 2, 

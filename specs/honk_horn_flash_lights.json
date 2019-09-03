@@ -3,14 +3,7 @@
     "name": "honk_horn_flash_lights", 
     "name_cased": "honkHornFlashLights", 
     "getters": {
-        "static": [
-            {
-                "name": "get_flashers_state", 
-                "properties": [
-                    1
-                ]
-            }
-        ]
+        "name": "get_flashers_state"
     }, 
     "state": [
         1
