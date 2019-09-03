@@ -34,7 +34,7 @@ defmodule AutoApi.WiFiState do
 
   @type t :: %__MODULE__{
           status: %PropertyComponent{data: CommonData.enabled_state()} | nil,
-          network_connected: %PropertyComponent{data: CommonData.network_state()} | nil,
+          network_connected: %PropertyComponent{data: CommonData.connection_state()} | nil,
           network_ssid: %PropertyComponent{data: String.t()} | nil,
           network_security: %PropertyComponent{data: CommonData.network_security()} | nil,
           password: %PropertyComponent{data: String.t()} | nil,
