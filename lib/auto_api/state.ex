@@ -181,7 +181,6 @@ defmodule AutoApi.State do
       for prop <- spec["properties"] do
         prop_name = String.to_atom(prop["name"])
         prop_id = prop["id"]
-        prop_type = prop["type"]
         multiple = prop["multiple"] || false
 
         quote do
@@ -206,10 +205,6 @@ defmodule AutoApi.State do
 
           defp parse_bin_property(unquote(prop_id), size, bin_data) do
             value = AutoApi.PropertyComponent.to_struct(bin_data, unquote(Macro.escape(prop)))
-
-            if unquote(prop_type) == "enum" and is_nil(value) do
-              throw({:error, {:can_not_parse_enum, bin_data}})
-            end
 
             {String.to_atom(unquote(prop["name"])), unquote(multiple), value}
           end
