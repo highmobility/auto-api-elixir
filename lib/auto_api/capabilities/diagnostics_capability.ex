@@ -31,11 +31,10 @@ defmodule AutoApi.DiagnosticsCapability do
       27
   """
 
-  @spec_file "specs/diagnostics.json"
   @type command_type :: :get_diagnostics_state | :diagnostics_state
 
   @command_module AutoApi.DiagnosticsCommand
   @state_module AutoApi.DiagnosticsState
 
-  use AutoApi.Capability
+  use AutoApi.Capability, spec_file: "specs/diagnostics.json"
 end

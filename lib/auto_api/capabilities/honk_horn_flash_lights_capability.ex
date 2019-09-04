@@ -33,7 +33,6 @@ defmodule AutoApi.HonkHornFlashLightsCapability do
       {0x04, :emergency_flashers_state}
   """
 
-  @spec_file "specs/honk_horn_flash_lights.json"
   @type command_type ::
           :get_flashers_state
           | :flashers_state
@@ -42,5 +41,5 @@ defmodule AutoApi.HonkHornFlashLightsCapability do
 
   @command_module AutoApi.NotImplemented
   @state_module AutoApi.HonkHornFlashLightsState
-  use AutoApi.Capability
+  use AutoApi.Capability, spec_file: "specs/honk_horn_flash_lights.json"
 end

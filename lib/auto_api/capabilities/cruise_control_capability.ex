@@ -31,12 +31,11 @@ defmodule AutoApi.CruiseControlCapability do
       [{1, :cruise_control}, {2, :limiter}, {3, :target_speed}, {4, :adaptive_cruise_control}, {5, :acc_target_speed}]
   """
 
-  @spec_file "specs/cruise_control.json"
   @type command_type ::
           :get_cruise_control_state | :cruise_control_state | :activate_deactivate_cruise_control
 
   @command_module AutoApi.CruiseControlCommand
   @state_module AutoApi.CruiseControlState
 
-  use AutoApi.Capability
+  use AutoApi.Capability, spec_file: "specs/cruise_control.json"
 end

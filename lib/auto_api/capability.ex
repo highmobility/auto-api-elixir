@@ -31,84 +31,123 @@ defmodule AutoApi.Capability do
   @callback to_map(binary) :: list(any)
   @callback to_map(binary, integer) :: map
 
-  defmacro __using__(_opts) do
-    quote do
-      @raw_spec Poison.decode!(File.read!(@spec_file))
-      @external_resource @spec_file
-      @identifier <<@raw_spec["identifier"]["msb"], @raw_spec["identifier"]["lsb"]>>
-      @name String.to_atom(@raw_spec["name"])
-      if @raw_spec["pretty_name"] do
-        @desc @raw_spec["pretty_name"]
-      else
-        @desc @raw_spec["name"]
-              |> String.split("_")
-              |> Enum.map(&String.capitalize/1)
-              |> Enum.join(" ")
+  defmacro __using__(spec_file: spec_file) do
+    raw_spec = Poison.decode!(File.read!(spec_file))
+
+    properties =
+      (raw_spec["properties"] || [])
+      |> Enum.map(fn prop -> {prop["id"], String.to_atom(prop["name"])} end)
+
+    base_functions =
+      quote do
+        @external_resource unquote(spec_file)
+        @raw_spec unquote(Macro.escape(raw_spec))
+
+        @identifier <<@raw_spec["identifier"]["msb"], @raw_spec["identifier"]["lsb"]>>
+        @name String.to_atom(@raw_spec["name"])
+        if @raw_spec["pretty_name"] do
+          @desc @raw_spec["pretty_name"]
+        else
+          @desc @raw_spec["name"]
+                |> String.split("_")
+                |> Enum.map(&String.capitalize/1)
+                |> Enum.join(" ")
+        end
+
+        @properties unquote(properties)
+
+        setters =
+          (@raw_spec["setters"] || [])
+          |> Enum.map(fn setter -> {0x01, String.to_atom(setter["name"])} end)
+
+        @setters setters
+
+        @doc false
+        @spec raw_spec() :: map()
+        def raw_spec, do: @raw_spec
+
+        @doc """
+        Returns map of commands id and thier name
+
+          #{inspect @setters, base: :hex}
+        """
+        @spec commands :: list({integer, atom})
+        def commands, do: @setters
+
+        @doc """
+        Returns the command module related to this capability
+        """
+        @spec command :: atom
+        def command, do: @command_module
+
+        @doc """
+        Returns the command module related to this capability
+        """
+        # @spec state() :: atom
+        def state, do: @state_module
+
+        @doc """
+        Retunrs capability's identifier: #{inspect @identifier, base: :hex}
+        """
+        @spec identifier :: binary
+        def identifier, do: @identifier
+
+        @doc """
+        Returns capability's unique name: #{@name}
+        """
+        @spec name :: atom
+        def name, do: @name
+
+        @doc """
+        Returns capability's description: #{@desc}
+        """
+        @spec description :: String.t()
+        def description, do: @desc
+
+        @doc """
+        Returns properties under #{@desc}:
+        ```
+        #{inspect @properties, base: :hex}
+        ```
+        """
+        @spec properties :: list(tuple())
+        def properties, do: @properties
+
+        @first_property List.first(@properties)
+        @doc """
+        Returns the ID of a property given its name.
+
+        ## Example
+
+            iex> #{inspect __MODULE__}.property_id(#{inspect elem(@first_property, 1)})
+            #{inspect elem(@first_property, 0)}
+
+        """
+        @spec property_id(atom()) :: integer()
+        def property_id(name)
+
+        @doc """
+        Returns the name of a property given its ID.
+
+        ## Example
+
+            iex> #{inspect __MODULE__}.property_name(#{inspect elem(@first_property, 0)})
+            #{inspect elem(@first_property, 1)}
+
+        """
+        @spec property_name(integer()) :: atom()
+        def property_name(id)
       end
 
-      properties =
-        (@raw_spec["properties"] || [])
-        |> Enum.map(fn prop -> {prop["id"], String.to_atom(prop["name"])} end)
+    property_functions =
+      for {prop_id, prop_name} <- properties do
+        quote do
+          def property_id(unquote(prop_name)), do: unquote(prop_id)
+          def property_name(unquote(prop_id)), do: unquote(prop_name)
+        end
+      end
 
-      @properties properties
-
-      setters =
-        (@raw_spec["setters"] || [])
-        |> Enum.map(fn setter -> {0x01, String.to_atom(setter["name"])} end)
-
-      @setters setters
-
-      @doc false
-      @spec raw_spec() :: map()
-      def raw_spec, do: @raw_spec
-
-      @doc """
-      Returns map of commands id and thier name
-
-        #{inspect @setters, base: :hex}
-      """
-      @spec commands :: list({integer, atom})
-      def commands, do: @setters
-
-      @doc """
-      Returns the command module related to this capability
-      """
-      @spec command :: atom
-      def command, do: @command_module
-
-      @doc """
-      Returns the command module related to this capability
-      """
-      # @spec state() :: atom
-      def state, do: @state_module
-
-      @doc """
-      Retunrs capability's identifier: #{inspect @identifier, base: :hex}
-      """
-      @spec identifier :: binary
-      def identifier, do: @identifier
-
-      @doc """
-      Returns capability's unique name: #{@name}
-      """
-      @spec name :: atom
-      def name, do: @name
-
-      @doc """
-      Returns capability's description: #{@desc}
-      """
-      @spec description :: String.t()
-      def description, do: @desc
-
-      @doc """
-      Returns properties under #{@desc}:
-      ```
-      #{inspect @properties, base: :hex}
-      ```
-      """
-      @spec properties :: list(tuple())
-      def properties, do: @properties
-    end
+    [base_functions, property_functions]
   end
 
   @doc """

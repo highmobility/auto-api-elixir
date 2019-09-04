@@ -33,7 +33,6 @@ defmodule AutoApi.ChassisSettingsCapability do
       {0x0A, :minimum_chassis_position}
   """
 
-  @spec_file "specs/chassis_settings.json"
   @type command_type ::
           :get_chassis_settings
           | :chassis_settings
@@ -45,5 +44,5 @@ defmodule AutoApi.ChassisSettingsCapability do
   @command_module AutoApi.NotImplemented
   @state_module AutoApi.ChassisSettingsState
 
-  use AutoApi.Capability
+  use AutoApi.Capability, spec_file: "specs/chassis_settings.json"
 end

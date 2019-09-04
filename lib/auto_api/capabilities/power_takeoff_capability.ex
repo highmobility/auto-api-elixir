@@ -31,12 +31,11 @@ defmodule AutoApi.PowerTakeoffCapability do
       [{1, :status}, {2, :engaged}]
   """
 
-  @spec_file "specs/power_takeoff.json"
   @type command_type ::
           :get_power_takeoff_state | :power_takeoff_state | :activate_deactivate_power_takeoff
 
   @command_module AutoApi.PowerTakeoffCommand
   @state_module AutoApi.PowerTakeoffState
 
-  use AutoApi.Capability
+  use AutoApi.Capability, spec_file: "specs/power_takeoff.json"
 end

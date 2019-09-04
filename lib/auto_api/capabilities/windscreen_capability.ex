@@ -33,11 +33,10 @@ defmodule AutoApi.WindscreenCapability do
       {0x08, :windscreen_damage_detection_time}
   """
 
-  @spec_file "specs/windscreen.json"
   @type command_type :: :get_windscreen_state | :windscreen_state | :set_windscreen_damage
 
   @command_module AutoApi.NotImplemented
   @state_module AutoApi.WindscreenState
 
-  use AutoApi.Capability
+  use AutoApi.Capability, spec_file: "specs/windscreen.json"
 end

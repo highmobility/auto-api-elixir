@@ -33,7 +33,6 @@ defmodule AutoApi.RemoteControlCapability do
       [{1, :control_mode}, {2, :angle}, {3, :speed}]
   """
 
-  @spec_file "specs/remote_control.json"
   @type command_type ::
           :get_control_mode
           | :control_mode
@@ -42,5 +41,5 @@ defmodule AutoApi.RemoteControlCapability do
   @command_module AutoApi.NotImplemented
   @state_module AutoApi.RemoteControlState
 
-  use AutoApi.Capability
+  use AutoApi.Capability, spec_file: "specs/remote_control.json"
 end

@@ -33,11 +33,10 @@ defmodule AutoApi.FailureMessageCapability do
       {4, :failure_description}
   """
 
-  @spec_file "specs/failure_message.json"
   @type command_type :: :failure_message | :failure
 
   @command_module AutoApi.FailureMessageCommand
   @state_module AutoApi.FailureMessageState
 
-  use AutoApi.Capability
+  use AutoApi.Capability, spec_file: "specs/failure_message.json"
 end

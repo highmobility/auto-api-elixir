@@ -33,11 +33,10 @@ defmodule AutoApi.SeatsCapability do
       {0x03, :seatbelts_state}
   """
 
-  @spec_file "specs/seats.json"
   @type command_type :: :get_seats_state | :seats_state
 
   @command_module AutoApi.NotImplemented
   @state_module AutoApi.SeatsState
 
-  use AutoApi.Capability
+  use AutoApi.Capability, spec_file: "specs/seats.json"
 end

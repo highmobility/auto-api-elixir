@@ -31,11 +31,10 @@ defmodule AutoApi.IgnitionCapability do
       {2, :accessories_status}
   """
 
-  @spec_file "specs/ignition.json"
   @type command_type :: :engine_state | :get_ignition_state | :turn_engine_on_off
 
   @command_module AutoApi.NotImplemented
   @state_module AutoApi.IgnitionState
 
-  use AutoApi.Capability
+  use AutoApi.Capability, spec_file: "specs/ignition.json"
 end

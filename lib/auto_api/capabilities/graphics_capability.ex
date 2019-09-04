@@ -31,11 +31,10 @@ defmodule AutoApi.GraphicsCapability do
       1
   """
 
-  @spec_file "specs/graphics.json"
   @type command_type :: :display_image
 
   @command_module AutoApi.NotImplemented
   @state_module AutoApi.NotImplemented
 
-  use AutoApi.Capability
+  use AutoApi.Capability, spec_file: "specs/graphics.json"
 end

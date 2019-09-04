@@ -31,11 +31,10 @@ defmodule AutoApi.VideoHandoverCapability do
       3
   """
 
-  @spec_file "specs/video_handover.json"
   @type command_type :: :video_handover
 
   @command_module AutoApi.NotImplemented
   @state_module AutoApi.NotImplemented
 
-  use AutoApi.Capability
+  use AutoApi.Capability, spec_file: "specs/video_handover.json"
 end

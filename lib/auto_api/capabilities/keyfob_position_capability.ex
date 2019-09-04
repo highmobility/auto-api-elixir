@@ -33,11 +33,10 @@ defmodule AutoApi.KeyfobPositionCapability do
       {0x01, :location}
   """
 
-  @spec_file "specs/keyfob_position.json"
   @type command_type :: :get_keyfob_position | :keyfob_position
 
   @command_module AutoApi.NotImplemented
   @state_module AutoApi.KeyfobPositionState
 
-  use AutoApi.Capability
+  use AutoApi.Capability, spec_file: "specs/keyfob_position.json"
 end

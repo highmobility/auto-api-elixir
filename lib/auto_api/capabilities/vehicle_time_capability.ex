@@ -31,11 +31,10 @@ defmodule AutoApi.VehicleTimeCapability do
       1
   """
 
-  @spec_file "specs/vehicle_time.json"
   @type command_type :: :vehicle_time | :get_vehicle_time
 
   @command_module AutoApi.VehicleTimeCommand
   @state_module AutoApi.VehicleTimeState
 
-  use AutoApi.Capability
+  use AutoApi.Capability, spec_file: "specs/vehicle_time.json"
 end

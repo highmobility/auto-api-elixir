@@ -31,11 +31,10 @@ defmodule AutoApi.CapabilitiesCapability do
       {0x01, :capabilities}
   """
 
-  @spec_file "specs/capabilities.json"
   @type command_type :: :get_capabilities | :get_capability | :capabilities
 
   @command_module AutoApi.CapabilitiesCommand
   @state_module AutoApi.CapabilitiesState
 
-  use AutoApi.Capability
+  use AutoApi.Capability, spec_file: "specs/capabilities.json"
 end

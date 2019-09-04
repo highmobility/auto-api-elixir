@@ -33,7 +33,6 @@ defmodule AutoApi.WeatherConditionsCapability do
       [{1, :rain_intensity}]
   """
 
-  @spec_file "specs/weather_conditions.json"
   @type command_type ::
           :get_wi_fi_state
           | :wi_fi_state
@@ -44,5 +43,5 @@ defmodule AutoApi.WeatherConditionsCapability do
   @command_module AutoApi.NotImplemented
   @state_module AutoApi.WeatherConditionsState
 
-  use AutoApi.Capability
+  use AutoApi.Capability, spec_file: "specs/weather_conditions.json"
 end

@@ -31,11 +31,10 @@ defmodule AutoApi.NotificationsCapability do
       4
   """
 
-  @spec_file "specs/notifications.json"
   @type command_type :: :notification | :notification_action | :clear_notification
 
   @command_module AutoApi.NotImplemented
   @state_module AutoApi.NotificationsState
 
-  use AutoApi.Capability
+  use AutoApi.Capability, spec_file: "specs/notifications.json"
 end

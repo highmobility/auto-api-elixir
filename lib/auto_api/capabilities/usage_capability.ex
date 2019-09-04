@@ -31,11 +31,10 @@ defmodule AutoApi.UsageCapability do
       0x0E
   """
 
-  @spec_file "specs/usage.json"
   @type command_type :: :get_usage | :usage
 
   @command_module AutoApi.NotImplemented
   @state_module AutoApi.UsageState
 
-  use AutoApi.Capability
+  use AutoApi.Capability, spec_file: "specs/usage.json"
 end

@@ -31,11 +31,10 @@ defmodule AutoApi.MobileCapability do
       1
   """
 
-  @spec_file "specs/mobile.json"
   @type command_type :: :get_mobile_state | :mobile_state
 
   @command_module AutoApi.NotImplemented
   @state_module AutoApi.MobileState
 
-  use AutoApi.Capability
+  use AutoApi.Capability, spec_file: "specs/mobile.json"
 end

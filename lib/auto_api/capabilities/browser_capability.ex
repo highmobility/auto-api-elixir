@@ -31,11 +31,10 @@ defmodule AutoApi.BrowserCapability do
       1
   """
 
-  @spec_file "specs/browser.json"
   @type command_type :: :browser
 
   @command_module AutoApi.NotImplemented
   @state_module AutoApi.NotImplemented
 
-  use AutoApi.Capability
+  use AutoApi.Capability, spec_file: "specs/browser.json"
 end

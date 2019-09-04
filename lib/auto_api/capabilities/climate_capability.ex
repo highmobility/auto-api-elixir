@@ -33,7 +33,6 @@ defmodule AutoApi.ClimateCapability do
       {0x0C, :rear_temperature_setting}
   """
 
-  @spec_file "specs/climate.json"
   @type command_type ::
           :get_climate_state
           | :climate_state
@@ -47,5 +46,5 @@ defmodule AutoApi.ClimateCapability do
   @command_module AutoApi.ClimateCommand
   @state_module AutoApi.ClimateState
 
-  use AutoApi.Capability
+  use AutoApi.Capability, spec_file: "specs/climate.json"
 end

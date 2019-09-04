@@ -33,11 +33,10 @@ defmodule AutoApi.VehicleLocationCapability do
       [{4, :coordinates}, {5, :heading}, {6, :altitude}]
   """
 
-  @spec_file "specs/vehicle_location.json"
   @type command_type :: :vehicle_location | :get_vehicle_location
 
   @command_module AutoApi.VehicleLocationCommand
   @state_module AutoApi.VehicleLocationState
 
-  use AutoApi.Capability
+  use AutoApi.Capability, spec_file: "specs/vehicle_location.json"
 end

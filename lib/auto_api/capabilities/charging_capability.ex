@@ -33,7 +33,6 @@ defmodule AutoApi.ChargingCapability do
       {23, :charging_state}
   """
 
-  @spec_file "specs/charging.json"
   @type command_type ::
           :get_charge_state
           | :charge_state
@@ -46,5 +45,5 @@ defmodule AutoApi.ChargingCapability do
   @command_module AutoApi.ChargingCommand
   @state_module AutoApi.ChargingState
 
-  use AutoApi.Capability
+  use AutoApi.Capability, spec_file: "specs/charging.json"
 end

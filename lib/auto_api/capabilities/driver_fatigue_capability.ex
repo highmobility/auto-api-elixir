@@ -31,11 +31,10 @@ defmodule AutoApi.DriverFatigueCapability do
       1
   """
 
-  @spec_file "specs/driver_fatigue.json"
   @type command_type :: :driver_fatigue_detected
 
   @command_module AutoApi.NotImplemented
   @state_module AutoApi.NotImplemented
 
-  use AutoApi.Capability
+  use AutoApi.Capability, spec_file: "specs/driver_fatigue.json"
 end

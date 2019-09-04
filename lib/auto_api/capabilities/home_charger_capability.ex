@@ -33,7 +33,6 @@ defmodule AutoApi.HomeChargerCapability do
       {0x12, :price_tariffs}
   """
 
-  @spec_file "specs/home_charger.json"
   @type command_type ::
           :get_home_charger_state
           | :home_charger_state
@@ -46,5 +45,5 @@ defmodule AutoApi.HomeChargerCapability do
   @command_module AutoApi.NotImplemented
   @state_module AutoApi.HomeChargerState
 
-  use AutoApi.Capability
+  use AutoApi.Capability, spec_file: "specs/home_charger.json"
 end

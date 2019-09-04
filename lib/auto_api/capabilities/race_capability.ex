@@ -33,11 +33,10 @@ defmodule AutoApi.RaceCapability do
       {18, :vehicle_moving}
   """
 
-  @spec_file "specs/race.json"
   @type command_type :: :get_race_state | :race_state
 
   @command_module AutoApi.RaceCommand
   @state_module AutoApi.RaceState
 
-  use AutoApi.Capability
+  use AutoApi.Capability, spec_file: "specs/race.json"
 end

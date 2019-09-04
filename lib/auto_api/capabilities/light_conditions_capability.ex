@@ -33,11 +33,10 @@ defmodule AutoApi.LightConditionsCapability do
       {0x02, :inside_light}
   """
 
-  @spec_file "specs/light_conditions.json"
   @type command_type :: :get_light_conditions | :light_conditions
 
   @command_module AutoApi.NotImplemented
   @state_module AutoApi.LightConditionsState
 
-  use AutoApi.Capability
+  use AutoApi.Capability, spec_file: "specs/light_conditions.json"
 end

@@ -31,11 +31,10 @@ defmodule AutoApi.FirmwareVersionCapability do
       3
   """
 
-  @spec_file "specs/firmware_version.json"
   @type command_type :: :get_firmware_version | :firmware_version
 
   @command_module AutoApi.NotImplemented
   @state_module AutoApi.FirmwareVersionState
 
-  use AutoApi.Capability
+  use AutoApi.Capability, spec_file: "specs/firmware_version.json"
 end

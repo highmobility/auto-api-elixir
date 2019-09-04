@@ -31,12 +31,11 @@ defmodule AutoApi.StartStopCapability do
       [{1, :status}]
   """
 
-  @spec_file "specs/start_stop.json"
   @type command_type ::
           :get_start_stop_state | :start_stop_state | :activate_deactivate_start_stop
 
   @command_module AutoApi.NotImplemented
   @state_module AutoApi.StartStopState
 
-  use AutoApi.Capability
+  use AutoApi.Capability, spec_file: "specs/start_stop.json"
 end

@@ -33,11 +33,10 @@ defmodule AutoApi.WindowsCapability do
       [{2, :open_percentages}, {3, :positions}]
   """
 
-  @spec_file "specs/windows.json"
   @type command_type :: :get_windows | :windows_state | :control_windows
 
   @command_module AutoApi.WindowsCommand
   @state_module AutoApi.WindowsState
 
-  use AutoApi.Capability
+  use AutoApi.Capability, spec_file: "specs/windows.json"
 end

@@ -31,11 +31,10 @@ defmodule AutoApi.MaintenanceCapability do
       12
   """
 
-  @spec_file "specs/maintenance.json"
   @type command_type :: :get_maintenance_state | :maintenance_state
 
   @command_module AutoApi.MaintenanceCommand
   @state_module AutoApi.MaintenanceState
 
-  use AutoApi.Capability
+  use AutoApi.Capability, spec_file: "specs/maintenance.json"
 end

@@ -31,11 +31,10 @@ defmodule AutoApi.RooftopControlCapability do
       5
   """
 
-  @spec_file "specs/rooftop_control.json"
   @type command_type :: :get_rooftop_state | :rooftop_state | :control_rooftop
 
   @command_module AutoApi.RooftopControlCommand
   @state_module AutoApi.RooftopControlState
 
-  use AutoApi.Capability
+  use AutoApi.Capability, spec_file: "specs/rooftop_control.json"
 end

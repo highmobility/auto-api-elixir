@@ -33,11 +33,10 @@ defmodule AutoApi.DoorsCapability do
       {0x06, :locks_state}
   """
 
-  @spec_file "specs/doors.json"
   @type command_type :: :get_lock_state | :lock_state | :lock_unlock_doors
 
   @command_module AutoApi.DoorsCommand
   @state_module AutoApi.DoorsState
 
-  use AutoApi.Capability
+  use AutoApi.Capability, spec_file: "specs/doors.json"
 end

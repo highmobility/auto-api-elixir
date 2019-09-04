@@ -33,11 +33,10 @@ defmodule AutoApi.LightsCapability do
       {9, :interior_lights}
   """
 
-  @spec_file "specs/lights.json"
   @type command_type :: :get_lights_state | :lights_state | :control_lights
 
   @command_module AutoApi.NotImplemented
   @state_module AutoApi.LightsState
 
-  use AutoApi.Capability
+  use AutoApi.Capability, spec_file: "specs/lights.json"
 end
