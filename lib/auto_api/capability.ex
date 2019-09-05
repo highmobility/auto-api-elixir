@@ -21,15 +21,6 @@ defmodule AutoApi.Capability do
   Capability behaviour
   """
 
-  @callback name() :: atom
-  @callback command_name(integer) :: atom
-  @callback command_name(integer) :: atom
-  @callback commands :: list({integer, atom})
-  @callback description :: String.t()
-  @callback capability_size :: integer
-  @callback capabilities :: list(any)
-  @callback to_map(binary) :: list(any)
-  @callback to_map(binary, integer) :: map
 
   defmacro __using__(spec_file: spec_file) do
     raw_spec = Poison.decode!(File.read!(spec_file))
