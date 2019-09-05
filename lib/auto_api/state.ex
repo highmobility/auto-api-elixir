@@ -198,11 +198,6 @@ defmodule AutoApi.State do
             end
           end
 
-          def property_name(unquote(prop_id)), do: unquote(prop_name)
-          def property_id(unquote(prop_name)), do: unquote(prop_id)
-
-          def property_spec(unquote(prop_name)), do: unquote(Macro.escape(prop))
-
           defp parse_bin_property(unquote(prop_id), size, bin_data) do
             value = AutoApi.PropertyComponent.to_struct(bin_data, unquote(Macro.escape(prop)))
 

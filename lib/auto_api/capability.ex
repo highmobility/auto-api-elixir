@@ -34,9 +34,7 @@ defmodule AutoApi.Capability do
   defmacro __using__(spec_file: spec_file) do
     raw_spec = Poison.decode!(File.read!(spec_file))
 
-    properties =
-      (raw_spec["properties"] || [])
-      |> Enum.map(fn prop -> {prop["id"], String.to_atom(prop["name"])} end)
+    properties = raw_spec["properties"] || []
 
     base_functions =
       quote do
@@ -54,7 +52,8 @@ defmodule AutoApi.Capability do
                 |> Enum.join(" ")
         end
 
-        @properties unquote(properties)
+        @properties unquote(Macro.escape(properties))
+                    |> Enum.map(fn prop -> {prop["id"], String.to_atom(prop["name"])} end)
 
         setters =
           (@raw_spec["setters"] || [])
@@ -137,13 +136,21 @@ defmodule AutoApi.Capability do
         """
         @spec property_name(integer()) :: atom()
         def property_name(id)
+
+        @doc false
+        @spec property_spec(atom()) :: map()
+        def property_spec(name)
       end
 
     property_functions =
-      for {prop_id, prop_name} <- properties do
+      for prop <- properties do
+        prop_id = prop["id"]
+        prop_name = String.to_atom(prop["name"])
+
         quote do
           def property_id(unquote(prop_name)), do: unquote(prop_id)
           def property_name(unquote(prop_id)), do: unquote(prop_name)
+          def property_spec(unquote(prop_name)), do: unquote(Macro.escape(prop))
         end
       end
 
