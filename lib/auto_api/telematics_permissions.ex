@@ -22,70 +22,70 @@ defmodule AutoApi.TelematicsPermissions do
 
   TODO: L11 rewrite/adjustments
   """
-  @permissions_map_properties Map.new(
-                                for cap <- AutoApi.Capability.all(),
-                                    {id, prop} <- cap.properties,
-                                    do: {"#{cap.name()}.#{prop}", %{type: :property, id: id}}
-                              )
+  #@permissions_map_properties Map.new(
+                                #for cap <- AutoApi.Capability.all(),
+                                    #{id, prop} <- cap.properties,
+                                    #do: {"#{cap.name()}.#{prop}", %{type: :property, id: id}}
+                              #)
 
-  @permissions_map_message_types Map.new(
-                                   for cap <- AutoApi.Capability.all(),
-                                       {id, cmd} <- cap.commands,
-                                       do:
-                                         {"#{cap.name()}.#{cmd}", %{type: :message_type, id: id}}
-                                 )
+  #@permissions_map_message_types Map.new(
+                                   #for cap <- AutoApi.Capability.all(),
+                                       #{id, cmd} <- cap.commands,
+                                       #do:
+                                         #{"#{cap.name()}.#{cmd}", %{type: :message_type, id: id}}
+                                 #)
 
-  @permissions_map Map.merge(@permissions_map_properties, @permissions_map_message_types)
+  #@permissions_map Map.merge(@permissions_map_properties, @permissions_map_message_types)
 
-  @permissions_list Map.keys(@permissions_map)
+  #@permissions_list Map.keys(@permissions_map)
 
-  @doc """
-  Returns list of available permissions
-    iex> "home_charger.authenticate_expire" in AutoApi.TelematicsPermissions.permissions_list()
-    true
-    iex> "race.accelerations" in AutoApi.TelematicsPermissions.permissions_list()
-    true
+  #@doc """
+  #Returns list of available permissions
+    #iex> "home_charger.authenticate_expire" in AutoApi.TelematicsPermissions.permissions_list()
+    #true
+    #iex> "race.accelerations" in AutoApi.TelematicsPermissions.permissions_list()
+    #true
 
-  """
-  @spec permissions_list :: list()
-  def permissions_list do
-    @permissions_list
-  end
+  #"""
+  #@spec permissions_list :: list()
+  #def permissions_list do
+    #@permissions_list
+  #end
 
-  @doc """
-  Verifies that all permissions are valid car permissions
+  #@doc """
+  #Verifies that all permissions are valid car permissions
 
-  ## Examples
+  ### Examples
 
-    iex> AutoApi.TelematicsPermissions.verify ["race.accelerations", "home_charger.authenticate_expire"]
-    true
+    #iex> AutoApi.TelematicsPermissions.verify ["race.accelerations", "home_charger.authenticate_expire"]
+    #true
 
-    iex> AutoApi.TelematicsPermissions.verify ["charge.read", "i.dont.exist"]
-    false
+    #iex> AutoApi.TelematicsPermissions.verify ["charge.read", "i.dont.exist"]
+    #false
 
-  """
-  @spec verify(list(String.t())) :: boolean()
-  def verify(properties) do
-    Enum.empty?(properties -- permissions_list())
-  end
+  #"""
+  #@spec verify(list(String.t())) :: boolean()
+  #def verify(properties) do
+    #Enum.empty?(properties -- permissions_list())
+  #end
 
-  @doc """
+  #@doc """
 
-    iex> AutoApi.TelematicsPermissions.to_sepc("race.accelerations")
-    {:ok, %{id: 1, type: :property}}
+    #iex> AutoApi.TelematicsPermissions.to_sepc("race.accelerations")
+    #{:ok, %{id: 1, type: :property}}
 
-    ie> AutoApi.TelematicsPermissions.to_sepc("home_charger.authenticate_expire")
-    {:ok, %{id: 22, type: :message_type}}
+    #ie> AutoApi.TelematicsPermissions.to_sepc("home_charger.authenticate_expire")
+    #{:ok, %{id: 22, type: :message_type}}
 
-    iex> AutoApi.TelematicsPermissions.to_sepc("i.dont.exist")
-    :error
-  """
-  @spec to_sepc(String.t()) :: {:ok, %{type: :message_type | :property, id: integer}} | :error
-  def to_sepc(property) do
-    if spec = @permissions_map[property] do
-      {:ok, spec}
-    else
-      :error
-    end
-  end
+    #iex> AutoApi.TelematicsPermissions.to_sepc("i.dont.exist")
+    #:error
+  #"""
+  #@spec to_sepc(String.t()) :: {:ok, %{type: :message_type | :property, id: integer}} | :error
+  #def to_sepc(property) do
+    #if spec = @permissions_map[property] do
+      #{:ok, spec}
+    #else
+      #:error
+    #end
+  #end
 end

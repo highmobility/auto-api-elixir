@@ -57,14 +57,6 @@ defmodule AutoApi.Capability do
         def raw_spec, do: @raw_spec
 
         @doc """
-        Returns map of commands id and thier name
-
-          #{inspect @setters, base: :hex}
-        """
-        @spec commands :: list({integer, atom})
-        def commands, do: @setters
-
-        @doc """
         Returns the command module related to this capability
         """
         @spec command :: atom
