@@ -18,5 +18,5 @@
 # licensing@high-mobility.com
 defmodule AutoApi.CapabilityDelegate do
   @moduledoc false
-  @before_compile AutoApi.CapabilityHelper
+  @before_compile AutoApi.CapabilityMeta
 end

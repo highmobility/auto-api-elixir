@@ -16,7 +16,7 @@
 #
 # Please inquire about commercial licensing options at
 # licensing@high-mobility.com
-defmodule AutoApi.CapabilityHelper do
+defmodule AutoApi.CapabilityMeta do
   @moduledoc false
 
   # We could parse the files in `/specs` instead
