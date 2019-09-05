@@ -21,6 +21,7 @@ defmodule AutoApi.Capability do
   Capability behaviour
   """
 
+  alias AutoApi.CapabilityHelper
 
   defmacro __using__(spec_file: spec_file) do
     raw_spec = Poison.decode!(File.read!(spec_file))
@@ -46,11 +47,7 @@ defmodule AutoApi.Capability do
         @properties unquote(Macro.escape(properties))
                     |> Enum.map(fn prop -> {prop["id"], String.to_atom(prop["name"])} end)
 
-        setters =
-          (@raw_spec["setters"] || [])
-          |> Enum.map(fn setter -> {0x01, String.to_atom(setter["name"])} end)
-
-        @setters setters
+        @setters CapabilityHelper.extract_setters_data(@raw_spec)
 
         @doc false
         @spec raw_spec() :: map()
@@ -94,6 +91,18 @@ defmodule AutoApi.Capability do
         """
         @spec properties :: list(tuple())
         def properties, do: @properties
+
+        @doc """
+        Returns the list of setters defined for the capability.
+
+        ## Example
+
+            iex> #{inspect __MODULE__}.setters()
+            #{inspect @setters}
+
+        """
+        @spec setters() :: list(%{name: atom, optional: list(atom), mandatory: list(atom)})
+        def setters(), do: @setters
 
         @first_property List.first(@properties)
         @doc """
