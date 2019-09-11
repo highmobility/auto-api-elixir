@@ -21,58 +21,86 @@ defmodule AutoApi.Command do
   Command behavior for handling AutoApi commands
   """
 
-  alias AutoApi.Capability
+  alias AutoApi.{Capability, CapabilityHelper}
 
   defmacro __using__(_opts) do
-    quote do
-      @behaviour AutoApi.Command
+    capability =
+      __CALLER__.module()
+      |> Atom.to_string()
+      |> String.replace("Command", "Capability")
+      |> String.to_atom()
 
-      @capability __MODULE__
-                  |> Atom.to_string()
-                  |> String.replace("Command", "Capability")
-                  |> String.to_atom()
+    setter_names = Keyword.keys(capability.setters())
 
-      @doc """
-      Returns the capability module associated with the command
-      """
-      @spec capability() :: module()
-      def capability(), do: @capability
+    base_functions =
+      quote do
+        @behaviour AutoApi.Command
 
-      @doc """
-      Converts the command to binary format.
+        @capability unquote(capability)
+        @setter_names unquote(setter_names)
 
-      This function only supports the basic :get and :set commands.
+        @doc """
+        Returns the capability module associated with the command
+        """
+        @spec capability() :: module()
+        def capability(), do: @capability
 
-      TODO: Implement conversion of the setters and getters from specs
+        @doc """
+        Converts the command to binary format.
 
-      ## Examples
+        The command action can be `:get`, `:set` or one of the setters: `#{inspect @setter_names}`
 
-          iex> AutoApi.DiagnosticsCommand.to_bin(:get, [:mileage, :engine_rpm])
-          <<0x00, 0x33, 0x00, 0x01, 0x04>>
+        ## Examples
 
-          iex> prop = %AutoApi.PropertyComponent{data: 42, timestamp: ~U[2019-07-18 13:58:40.489250Z], failure: nil}
-          iex> AutoApi.DiagnosticsCommand.to_bin(:set, speed: prop)
-          <<0x00, 0x33, 0x01, 0x03, 1, 0, 2, 0, 42, 2, 0, 8, 0, 0, 1, 108, 5, 96, 184, 105>>
-      """
-      @spec to_bin(:get, list(:atom)) :: binary()
-      def to_bin(:get, properties) when is_list(properties) do
-        preamble = <<@capability.identifier()::binary, 0x00>>
+            iex> AutoApi.DiagnosticsCommand.to_bin(:get, [:mileage, :engine_rpm])
+            <<0x00, 0x33, 0x00, 0x01, 0x04>>
 
-        Enum.reduce(properties, preamble, &(&2 <> <<@capability.property_id(&1)::8>>))
+            iex> prop = %AutoApi.PropertyComponent{data: 42, timestamp: ~U[2019-07-18 13:58:40.489250Z], failure: nil}
+            iex> AutoApi.DiagnosticsCommand.to_bin(:set, speed: prop)
+            <<0x00, 0x33, 0x01, 0x03, 1, 0, 2, 0, 42, 2, 0, 8, 0, 0, 1, 108, 5, 96, 184, 105>>
+
+            iex> prop = %AutoApi.PropertyComponent{data: 0.8}
+            iex> AutoApi.ChargingCommand.to_bin(:set_charge_limit, charge_limit: prop)
+            <<0, 35, 1, 8, 1, 0, 8, 63, 233, 153, 153, 153, 153, 153, 154>>
+
+        """
+        @spec to_bin(atom, list(atom) | list({atom, AutoApi.PropertyComponent.t()})) ::
+                binary() | no_return()
+        def to_bin(:get, properties) when is_list(properties) do
+          preamble = <<@capability.identifier()::binary, 0x00>>
+
+          Enum.reduce(properties, preamble, &(&2 <> <<@capability.property_id(&1)::8>>))
+        end
+
+        def to_bin(:set, properties) when is_list(properties) do
+          preamble = <<@capability.identifier()::binary, 0x01>>
+
+          Enum.into(properties, preamble, fn {property_name, value} ->
+            spec = @capability.property_spec(property_name)
+            value_bin = AutoApi.PropertyComponent.to_bin(value, spec)
+
+            <<@capability.property_id(property_name)::8, value_bin::binary>>
+          end)
+        end
       end
 
-      @spec to_bin(:set, list({:atom, AutoApi.PropertyComponent.t()})) :: binary()
-      def to_bin(:set, properties) when is_list(properties) do
-        preamble = <<@capability.identifier()::binary, 0x01>>
+    setter_functions =
+      for setter <- setter_names do
+        quote do
+          def to_bin(unquote(setter), properties) when is_list(properties) do
+            {mandatory, optional} = Keyword.get(@capability.setters(), unquote(setter))
 
-        Enum.into(properties, preamble, fn {property_name, value} ->
-          spec = @capability.property_spec(property_name)
-          value_bin = AutoApi.PropertyComponent.to_bin(value, spec)
+            included_properties =
+              properties
+              |> CapabilityHelper.reject_extra_properties(mandatory ++ optional)
+              |> CapabilityHelper.raise_for_missing_properties(mandatory)
 
-          <<@capability.property_id(property_name)::8, value_bin::binary>>
-        end)
+            to_bin(:set, properties)
+          end
+        end
       end
-    end
+
+    [base_functions, setter_functions]
   end
 
   @type execute_return_atom :: :state | :state_changed

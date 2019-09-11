@@ -33,7 +33,9 @@ defmodule AutoApi.State do
 
   require Logger
 
-  defmacro __using__(opts) do
+  defmacro __using__(spec_file: spec_file) do
+    spec = Poison.decode!(File.read!(spec_file))
+
     base =
       quote do
         alias AutoApi.CommonData
@@ -163,8 +165,6 @@ defmodule AutoApi.State do
           override_property(state, property_name, value)
         end
       end
-
-    spec = Poison.decode!(File.read!(opts[:spec_file]))
 
     timestamp =
       quote do

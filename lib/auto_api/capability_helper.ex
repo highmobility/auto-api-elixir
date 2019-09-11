@@ -19,16 +19,20 @@
 defmodule AutoApi.CapabilityHelper do
   @moduledoc false
 
+  require Logger
+
   def extract_setters_data(specs) do
     properties = specs["properties"]
 
     specs
     |> Map.get("setters", [])
     |> Enum.map(fn spec ->
-      %{
-        name: String.to_atom(spec["name"]),
-        optional: parse_properties(spec["optional"], properties),
-        mandatory: parse_properties(spec["mandatory"], properties)
+      {
+        String.to_atom(spec["name"]),
+        {
+          parse_properties(spec["mandatory"], properties),
+          parse_properties(spec["optional"], properties)
+        }
       }
     end)
   end
@@ -44,5 +48,31 @@ defmodule AutoApi.CapabilityHelper do
     property_ids
     |> Enum.map(&Map.get(property_names, &1))
     |> Enum.map(&String.to_atom/1)
+  end
+
+  def reject_extra_properties(properties, allowed_properties) do
+    Enum.reject(properties, fn {name, _} ->
+      unless name in allowed_properties do
+        Logger.warn(
+          "Ignoring #{name} as it's not in the list of allowed properties for the setter: #{
+            inspect allowed_properties
+          }"
+        )
+      end
+    end)
+  end
+
+  def raise_for_missing_properties(properties, mandatory_properties) do
+    property_names = Enum.map(properties, &elem(&1, 0))
+    missing_properties = mandatory_properties -- property_names
+
+    case missing_properties do
+      [] ->
+        properties
+
+      _ ->
+        raise ArgumentError,
+          message: "Missing properties for setter: #{inspect missing_properties}"
+    end
   end
 end

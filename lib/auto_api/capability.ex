@@ -101,7 +101,7 @@ defmodule AutoApi.Capability do
             #{inspect @setters}
 
         """
-        @spec setters() :: list(%{name: atom, optional: list(atom), mandatory: list(atom)})
+        @spec setters() :: list({atom, {list(atom), list(atom)}})
         def setters(), do: @setters
 
         @first_property List.first(@properties)

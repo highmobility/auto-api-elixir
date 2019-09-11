@@ -23,7 +23,6 @@ defmodule AutoApi.FailureMessageCommand do
   use AutoApi.Command
 
   alias AutoApi.FailureMessageState
-  alias AutoApi.FailureMessageCapability
 
   @doc """
   Parses the binary command and makes changes or returns the state
@@ -44,19 +43,5 @@ defmodule AutoApi.FailureMessageCommand do
   @spec state(FailureMessageState.t()) :: binary
   def state(%FailureMessageState{} = state) do
     <<0x01, FailureMessageState.to_bin(state)::binary>>
-  end
-
-  @doc """
-  Converts command to binary format
-  """
-  @spec to_bin(FailureMessageCapability.command_type(), list(any())) :: binary
-  def to_bin(:failure, opts) do
-    state = Enum.into(opts, %{})
-
-    state =
-      %FailureMessageState{}
-      |> Map.merge(state)
-
-    <<0x01>> <> FailureMessageState.to_bin(state)
   end
 end
