@@ -38,6 +38,7 @@ defmodule AutoApi.Command do
 
         @capability unquote(capability)
         @setter_names unquote(setter_names)
+        @identifier @capability.identifier()
 
         @doc """
         Returns the capability module associated with the command
@@ -82,6 +83,59 @@ defmodule AutoApi.Command do
 
             <<@capability.property_id(property_name)::8, size::integer-16, value_bin::binary>>
           end)
+        end
+
+        @doc """
+        Parses a command binary and returns
+
+        Due to protocol restrictions, the `action` can only be `:get` or `:set`.
+
+        In case of a `:get` action, the second item in the tuple will be a list
+        of property names.
+
+        If the action is `:set`, the second item will be a Keyword list with the
+        property name as a key and a `AutoApi.PropertyComponent` as value.
+
+        ## Examples
+
+            iex> AutoApi.DiagnosticsCommand.from_bin(<<0x00, 0x33, 0x00, 0x01, 0x04>>)
+            {:get, [:mileage, :engine_rpm]}
+
+            iex> bin = <<0x00, 0x33, 0x01, 0x03, 0, 16, 1, 0, 2, 0, 42, 2, 0, 8, 0, 0, 1, 108, 5, 96, 184, 105>>
+            iex> AutoApi.DiagnosticsCommand.from_bin(bin)
+            {:set, [speed: %AutoApi.PropertyComponent{data: 42, timestamp: ~U[2019-07-18 13:58:40.489Z], failure: nil}]}
+        """
+        @spec from_bin(binary) ::
+                {:get, list(atom)} | {:set, list({atom, AutoApi.PropertyComponent.t()})}
+        def from_bin(<<@identifier::binary, 0x00, properties::binary>>) do
+          property_names =
+            properties
+            |> :binary.bin_to_list()
+            |> Enum.map(&@capability.property_name/1)
+
+          {:get, property_names}
+        end
+
+        def from_bin(<<@identifier::binary, 0x01, property_data::binary>>) do
+          properties = split_binary_properties(property_data)
+
+          {:set, properties}
+        end
+
+        defp split_binary_properties(
+               <<id, size::integer-16, data::binary-size(size), rest::binary>>
+             ) do
+          [parse_property(id, data) | split_binary_properties(rest)]
+        end
+
+        defp split_binary_properties(<<>>), do: []
+
+        defp parse_property(id, data) do
+          name = @capability.property_name(id)
+          spec = @capability.property_spec(name)
+          value = AutoApi.PropertyComponent.to_struct(data, spec)
+
+          {name, value}
         end
       end
 

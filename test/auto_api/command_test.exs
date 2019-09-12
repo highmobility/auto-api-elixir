@@ -54,7 +54,9 @@ defmodule AutoApi.CommandTest do
       properties = [inside_locks_state: %PropertyComponent{data: :unlocked, timestamp: timestamp}]
 
       bin_command = AutoApi.DoorsCommand.to_bin(:set, properties)
-      assert bin_command == <<0, 32, 1, 5, 1, 0, 1, 0, 2, 0, 8, 0, 0, 1, 108, 46, 237, 55, 75>>
+
+      assert bin_command ==
+               <<0, 32, 1, 5, 0, 15, 1, 0, 1, 0, 2, 0, 8, 0, 0, 1, 108, 46, 237, 55, 75>>
     end
   end
 end
