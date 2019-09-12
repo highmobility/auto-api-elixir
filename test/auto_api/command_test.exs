@@ -59,4 +59,25 @@ defmodule AutoApi.CommandTest do
                <<0, 32, 1, 5, 0, 15, 1, 0, 1, 0, 2, 0, 8, 0, 0, 1, 108, 46, 237, 55, 75>>
     end
   end
+
+  describe "to_bin/2 and from_bin/2 are inverse functions" do
+    test ":set" do
+      properties = [
+        speed: %PropertyComponent{data: 42, timestamp: ~U[2019-07-18 13:58:40.489Z]},
+        tire_pressures: %PropertyComponent{data: %{location: :front_left, pressure: 2.3}},
+        tire_pressures: %PropertyComponent{data: %{location: :rear_right, pressure: 2.5}},
+        engine_rpm: %PropertyComponent{failure: %{reason: :format_error, description: "Error"}}
+      ]
+
+      assert cmd_bin = AutoApi.DiagnosticsCommand.to_bin(:set, properties)
+      assert {:set, properties} == AutoApi.DiagnosticsCommand.from_bin(cmd_bin)
+    end
+
+    test ":get" do
+      properties = [:speed, :tire_pressures, :engine_rpm]
+
+      assert cmd_bin = AutoApi.DiagnosticsCommand.to_bin(:get, properties)
+      assert {:get, properties} == AutoApi.DiagnosticsCommand.from_bin(cmd_bin)
+    end
+  end
 end
