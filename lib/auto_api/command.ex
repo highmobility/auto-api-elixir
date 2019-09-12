@@ -57,11 +57,11 @@ defmodule AutoApi.Command do
 
             iex> prop = %AutoApi.PropertyComponent{data: 42, timestamp: ~U[2019-07-18 13:58:40.489250Z], failure: nil}
             iex> AutoApi.DiagnosticsCommand.to_bin(:set, speed: prop)
-            <<0x00, 0x33, 0x01, 0x03, 1, 0, 2, 0, 42, 2, 0, 8, 0, 0, 1, 108, 5, 96, 184, 105>>
+            <<0x00, 0x33, 0x01, 0x03, 0, 16, 1, 0, 2, 0, 42, 2, 0, 8, 0, 0, 1, 108, 5, 96, 184, 105>>
 
             iex> prop = %AutoApi.PropertyComponent{data: 0.8}
             iex> AutoApi.ChargingCommand.to_bin(:set_charge_limit, charge_limit: prop)
-            <<0, 35, 1, 8, 1, 0, 8, 63, 233, 153, 153, 153, 153, 153, 154>>
+            <<0, 35, 1, 8, 0, 11, 1, 0, 8, 63, 233, 153, 153, 153, 153, 153, 154>>
 
         """
         @spec to_bin(atom, list(atom) | list({atom, AutoApi.PropertyComponent.t()})) ::
@@ -78,8 +78,9 @@ defmodule AutoApi.Command do
           Enum.into(properties, preamble, fn {property_name, value} ->
             spec = @capability.property_spec(property_name)
             value_bin = AutoApi.PropertyComponent.to_bin(value, spec)
+            size = byte_size(value_bin)
 
-            <<@capability.property_id(property_name)::8, value_bin::binary>>
+            <<@capability.property_id(property_name)::8, size::integer-16, value_bin::binary>>
           end)
         end
       end
