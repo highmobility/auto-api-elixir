@@ -95,13 +95,20 @@ defmodule AutoApi.Capability do
         @doc """
         Returns the list of setters defined for the capability.
 
+        The list is a `Keyword` with the setter name as a key and as value
+        a tuple with three elements:
+
+        1. _mandatory_ properties
+        2. _optional_ properties
+        3. _constants_
+
         ## Example
 
             iex> #{inspect __MODULE__}.setters()
             #{inspect @setters}
 
         """
-        @spec setters() :: list({atom, {list(atom), list(atom)}})
+        @spec setters() :: keyword({list(atom), list(atom), keyword(binary)})
         def setters(), do: @setters
 
         @first_property List.first(@properties)

@@ -32,6 +32,8 @@ defmodule AutoApi.Command do
 
     setter_names = Keyword.keys(capability.setters())
 
+    property_ids = Enum.map(capability.properties(), fn {id, name} -> {name, id} end)
+
     base_functions =
       quote do
         @behaviour AutoApi.Command
@@ -67,6 +69,8 @@ defmodule AutoApi.Command do
         """
         @spec to_bin(atom, list(atom) | list({atom, AutoApi.PropertyComponent.t()})) ::
                 binary() | no_return()
+        def to_bin(action, properties \\ [])
+
         def to_bin(:get, properties) when is_list(properties) do
           preamble = <<@capability.identifier()::binary, 0x00>>
 
@@ -143,14 +147,16 @@ defmodule AutoApi.Command do
       for setter <- setter_names do
         quote do
           def to_bin(unquote(setter), properties) when is_list(properties) do
-            {mandatory, optional} = Keyword.get(@capability.setters(), unquote(setter))
+            {mandatory, optional, constants} = Keyword.get(@capability.setters(), unquote(setter))
 
             included_properties =
               properties
               |> CapabilityHelper.reject_extra_properties(mandatory ++ optional)
               |> CapabilityHelper.raise_for_missing_properties(mandatory)
 
-            to_bin(:set, properties)
+            :set
+            |> to_bin(properties)
+            |> CapabilityHelper.inject_constants(constants, unquote(property_ids))
           end
         end
       end

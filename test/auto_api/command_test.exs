@@ -49,7 +49,7 @@ defmodule AutoApi.CommandTest do
     end
 
     test "set works" do
-      # Generating automatically values is hard so for now I'll just test manually one
+      # Generating values automatically is hard so for now I'll just test manually one
       timestamp = ~U[2019-07-26 15:36:33.867501Z]
       properties = [inside_locks_state: %PropertyComponent{data: :unlocked, timestamp: timestamp}]
 
@@ -57,6 +57,10 @@ defmodule AutoApi.CommandTest do
 
       assert bin_command ==
                <<0, 32, 1, 5, 0, 15, 1, 0, 1, 0, 2, 0, 8, 0, 0, 1, 108, 46, 237, 55, 75>>
+    end
+
+    test "setter supports constants" do
+      assert <<0, 34, 1, 1, 0, 4, 1, 0, 1, 0>> == AutoApi.WakeUpCommand.to_bin(:wake_up)
     end
   end
 

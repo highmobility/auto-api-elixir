@@ -39,6 +39,15 @@ defmodule AutoApi.CapabilityHelperTest do
       ],
       "setters" => [
         %{
+          "name" => "foo",
+          "constants" => [
+            %{
+              "property_id" => 0x01,
+              "value" => [57, 11, 134, 11, 222, 2, 49, 17]
+            }
+          ]
+        },
+        %{
           "name" => "foo_bar",
           "mandatory" => [0x01, 0x02]
         },
@@ -50,18 +59,28 @@ defmodule AutoApi.CapabilityHelperTest do
       ]
     }
 
-    assert [foo_bar, foo_bar_baz] = CapabilityHelper.extract_setters_data(specs)
-    assert foo_bar == {:foo_bar, {[:foo, :bar], []}}
-    assert foo_bar_baz == {:foo_bar_baz, {[:foo], [:bar, :baz]}}
+    assert [foo, foo_bar, foo_bar_baz] = CapabilityHelper.extract_setters_data(specs)
+    assert foo == {:foo, {[], [], [foo: <<57, 11, 134, 11, 222, 2, 49, 17>>]}}
+    assert foo_bar == {:foo_bar, {[:foo, :bar], [], []}}
+    assert foo_bar_baz == {:foo_bar_baz, {[:foo], [:bar, :baz], []}}
+  end
+
+  test "inject_constants/2" do
+    base_data = :crypto.strong_rand_bytes(12)
+    constants = [foo: <<1, 2, 3>>, bar: <<4, 5, 6>>]
+    properties = [{:foo, 0x00}, {:bar, 0x01}]
+
+    assert <<base_data::binary, 0, 0, 6, 1, 0, 3, 1, 2, 3, 1, 0, 6, 1, 0, 3, 4, 5, 6>> ==
+             CapabilityHelper.inject_constants(base_data, constants, properties)
   end
 
   test "reject_extra_properties/2" do
     properties = [foo: %{}, bar: %{}, baz: %{}]
 
+    assert [baz: %{}] == CapabilityHelper.reject_extra_properties(properties, ~w(baz)a)
+
     assert [foo: %{}, bar: %{}] ==
              CapabilityHelper.reject_extra_properties(properties, ~w(foo bar)a)
-
-    assert [baz: %{}] == CapabilityHelper.reject_extra_properties(properties, ~w(baz)a)
   end
 
   test "raise_for_missing_properties/2" do
