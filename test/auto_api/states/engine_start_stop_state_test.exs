@@ -16,7 +16,7 @@
 #
 # Please inquire about commercial licensing options at
 # licensing@high-mobility.com
-defmodule AutoApi.StartStopStateTest do
+defmodule AutoApi.EngineStartStopStateTest do
   use ExUnit.Case
-  doctest AutoApi.StartStopState
+  doctest AutoApi.EngineStartStopState
 end

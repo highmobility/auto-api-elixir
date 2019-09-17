@@ -16,9 +16,9 @@
 #
 # Please inquire about commercial licensing options at
 # licensing@high-mobility.com
-defmodule AutoApi.StartStopState do
+defmodule AutoApi.EngineStartStopState do
   @moduledoc """
-  StartStop state
+  EngineStartStop state
   """
 
   alias AutoApi.{CommonData, PropertyComponent}
@@ -26,7 +26,7 @@ defmodule AutoApi.StartStopState do
   defstruct status: nil,
             timestamp: nil
 
-  use AutoApi.State, spec_file: "specs/start_stop.json"
+  use AutoApi.State, spec_file: "specs/engine_start_stop.json"
 
   @type t :: %__MODULE__{
           status: %PropertyComponent{data: CommonData.activity()} | nil,
@@ -37,8 +37,8 @@ defmodule AutoApi.StartStopState do
   Build state based on binary value
 
     iex> bin = <<1, 0, 4, 1, 0, 1, 1>>
-    iex> AutoApi.StartStopState.from_bin(bin)
-    %AutoApi.StartStopState{status: %AutoApi.PropertyComponent{data: :active}}
+    iex> AutoApi.EngineStartStopState.from_bin(bin)
+    %AutoApi.EngineStartStopState{status: %AutoApi.PropertyComponent{data: :active}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -48,8 +48,8 @@ defmodule AutoApi.StartStopState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.StartStopState{status: %AutoApi.PropertyComponent{data: :active}}
-    iex> AutoApi.StartStopState.to_bin(state)
+    iex> state = %AutoApi.EngineStartStopState{status: %AutoApi.PropertyComponent{data: :active}}
+    iex> AutoApi.EngineStartStopState.to_bin(state)
     <<1, 0, 4, 1, 0, 1, 1>>
   """
   @spec to_bin(__MODULE__.t()) :: binary

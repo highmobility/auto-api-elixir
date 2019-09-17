@@ -16,17 +16,17 @@
 #
 # Please inquire about commercial licensing options at
 # licensing@high-mobility.com
-defmodule AutoApi.StartStopCapability do
+defmodule AutoApi.EngineStartStopCapability do
   @moduledoc """
   Basic settings for Vehicle Status Capability
 
-      iex> alias AutoApi.StartStopCapability, as: SS
+      iex> alias AutoApi.EngineStartStopCapability, as: SS
       iex> SS.identifier
       <<0x00, 0x63>>
       iex> SS.name
-      :start_stop
+      :engine_start_stop
       iex> SS.description
-      "Start-Stop"
+      "Engine Start-Stop"
       iex> SS.properties
       [{1, :status}]
   """
@@ -35,7 +35,7 @@ defmodule AutoApi.StartStopCapability do
           :get_start_stop_state | :start_stop_state | :activate_deactivate_start_stop
 
   @command_module AutoApi.NotImplemented
-  @state_module AutoApi.StartStopState
+  @state_module AutoApi.EngineStartStopState
 
-  use AutoApi.Capability, spec_file: "specs/start_stop.json"
+  use AutoApi.Capability, spec_file: "specs/engine_start_stop.json"
 end
