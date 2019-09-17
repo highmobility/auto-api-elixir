@@ -428,8 +428,8 @@
                 {
                     "size": 1, 
                     "type": "enum", 
-                    "name": "type", 
-                    "name_cased": "type", 
+                    "name": "direction", 
+                    "name_cased": "direction", 
                     "enum_values": [
                         {
                             "id": 0, 

@@ -15,8 +15,8 @@
     }, 
     "properties": [
         {
-            "name": "wake_up", 
-            "name_cased": "wakeUp", 
+            "name": "status", 
+            "name_cased": "status", 
             "enum_values": [
                 {
                     "id": 0, 

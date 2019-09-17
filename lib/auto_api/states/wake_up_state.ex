@@ -23,13 +23,13 @@ defmodule AutoApi.WakeUpState do
 
   alias AutoApi.{CommonData, PropertyComponent}
 
-  defstruct wake_up: nil,
+  defstruct status: nil,
             timestamp: nil
 
   use AutoApi.State, spec_file: "specs/wake_up.json"
 
   @type t :: %__MODULE__{
-          wake_up: %PropertyComponent{data: :wake_up} | nil,
+          status: %PropertyComponent{data: :wake_up} | nil,
           timestamp: DateTime.t() | nil
         }
 
@@ -38,7 +38,7 @@ defmodule AutoApi.WakeUpState do
 
     iex> bin = <<1, 0, 4, 1, 0, 1, 0>>
     iex> AutoApi.WakeUpState.from_bin(bin)
-    %AutoApi.WakeUpState{wake_up: %AutoApi.PropertyComponent{data: :wake_up}}
+    %AutoApi.WakeUpState{status: %AutoApi.PropertyComponent{data: :wake_up}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -48,7 +48,7 @@ defmodule AutoApi.WakeUpState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.WakeUpState{wake_up: %AutoApi.PropertyComponent{data: :wake_up}}
+    iex> state = %AutoApi.WakeUpState{status: %AutoApi.PropertyComponent{data: :wake_up}}
     iex> AutoApi.WakeUpState.to_bin(state)
     <<1, 0, 4, 1, 0, 1, 0>>
   """

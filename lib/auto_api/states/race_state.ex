@@ -24,12 +24,12 @@ defmodule AutoApi.RaceState do
 
   alias AutoApi.{CommonData, PropertyComponent}
 
-  @type acceleration_type ::
-          :longitudinal_acceleration
-          | :lateral_acceleration
-          | :front_lateral_acceleration
-          | :rear_lateral_acceleration
-  @type acceleration :: %PropertyComponent{data: %{type: acceleration_type, g_force: float}}
+  @type direction ::
+          :longitudinal
+          | :lateral
+          | :front_lateral
+          | :rear_lateral
+  @type acceleration :: %PropertyComponent{data: %{direction: direction, g_force: float}}
   @type gear_mode :: :manual | :park | :reverse | :neutral | :drive | :low_gear | :sport
   @type axle :: :front_axle | :rear_axle
   @type brake_torque_vectoring :: %PropertyComponent{

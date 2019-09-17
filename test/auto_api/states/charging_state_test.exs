@@ -48,7 +48,7 @@ defmodule AutoApi.ChargingStateTest do
       battery_temperature: %PropertyComponent{data: 10.008},
       timers: [%PropertyComponent{data: %{timer_type: :preferred_start_time, date: date}}],
       plugged_in: %PropertyComponent{data: :disconnected},
-      charging_state: %PropertyComponent{data: :not_charging}
+      status: %PropertyComponent{data: :not_charging}
     }
 
     new_state =

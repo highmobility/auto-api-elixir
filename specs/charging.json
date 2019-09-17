@@ -219,8 +219,8 @@
             "size": 1
         }, 
         {
-            "name": "charging_state", 
-            "name_cased": "chargingState", 
+            "name": "status", 
+            "name_cased": "status", 
             "enum_values": [
                 {
                     "verb": "stop_charging", 

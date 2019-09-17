@@ -76,7 +76,7 @@ defmodule AutoApi.ChargingState do
             battery_temperature: nil,
             timers: [],
             plugged_in: nil,
-            charging_state: nil,
+            status: nil,
             timestamp: nil
 
   use AutoApi.State, spec_file: "specs/charging.json"
@@ -101,7 +101,7 @@ defmodule AutoApi.ChargingState do
           battery_temperature: %PropertyComponent{data: float} | nil,
           timers: list(timer),
           plugged_in: plugged_in | nil,
-          charging_state: charging_state | nil,
+          status: charging_state | nil,
           timestamp: DateTime.t() | nil
         }
 

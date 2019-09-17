@@ -30,7 +30,7 @@ defmodule AutoApi.ChargingCapability do
       iex> length(C.properties)
       20
       iex> List.last(C.properties)
-      {23, :charging_state}
+      {23, :status}
   """
 
   @type command_type ::
