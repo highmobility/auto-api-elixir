@@ -23,47 +23,6 @@ defmodule AutoApi.CapabilitiesCommand do
   use AutoApi.Command
 
   alias AutoApi.CapabilitiesState
-  alias AutoApi.Capability
-
-  @doc """
-  Parses the binary command and makes changes or returns the state
-
-      iex> AutoApi.CapabilitiesCommand.execute(%AutoApi.CapabilitiesState{}, <<0x00>>)
-      {:state, %AutoApi.CapabilitiesState{}}
-
-      ie> state = %AutoApi.CapabilitiesState{diagnostics: [:speed], doors: [:doors_locks]}
-      ie> AutoApi.CapabilitiesCommand.execute(state, <<0x02, 0x00, 0x33>>)
-      {:state_changed, %AutoApi.CapabilitiesState{diagnostics: [:get_diagnostics_state], door_locks: []}}
-  """
-  @spec execute(CapabilitiesState.t(), binary) :: {:state | :state_changed, CapabilitiesState.t()}
-  def execute(%CapabilitiesState{} = state, <<0x00>>) do
-    {:state, state}
-  end
-
-  def execute(%CapabilitiesState{} = state, <<0x01, cs::binary>>) do
-    new_state = CapabilitiesState.from_bin(cs)
-
-    if new_state == state do
-      {:state, state}
-    else
-      {:state_changed, new_state}
-    end
-  end
-
-  def execute(%CapabilitiesState{} = state, <<0x02, capability_id::binary-size(2)>>) do
-    capability_name =
-      capability_id
-      |> Capability.get_by_id()
-      |> apply(:name, [])
-
-    new_state = struct(%CapabilitiesState{}, [{capability_name, Map.get(state, capability_name)}])
-
-    if new_state == state do
-      {:state, state}
-    else
-      {:state_changed, new_state}
-    end
-  end
 
   @doc """
   Converts VehicleLocation state to capability's state in binary

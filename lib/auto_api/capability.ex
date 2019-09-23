@@ -49,6 +49,8 @@ defmodule AutoApi.Capability do
 
         @setters CapabilityHelper.extract_setters_data(@raw_spec)
 
+        @state_properties CapabilityHelper.extract_state_properties(@raw_spec)
+
         @doc false
         @spec raw_spec() :: map()
         def raw_spec, do: @raw_spec
@@ -60,10 +62,24 @@ defmodule AutoApi.Capability do
         def command, do: @command_module
 
         @doc """
-        Returns the command module related to this capability
+        Returns the state module related to this capability
         """
         # @spec state() :: atom
         def state, do: @state_module
+
+        @doc """
+                Returns which properties are included in the State specification.
+
+                ## Examples
+
+        iex> AutoApi.SeatsCapability.state_properties()
+        [:persons_detected, :seatbelts_state]
+
+        iex> AutoApi.WakeUpCapability.state_properties()
+        []
+        """
+        @spec state_properties() :: list(atom)
+        def state_properties(), do: @state_properties
 
         @doc """
         Retunrs capability's identifier: #{inspect @identifier, base: :hex}

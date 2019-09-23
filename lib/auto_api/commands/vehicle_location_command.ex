@@ -25,26 +25,6 @@ defmodule AutoApi.VehicleLocationCommand do
   alias AutoApi.VehicleLocationState
 
   @doc """
-  Parses the binary command and makes changes or returns the state
-
-  """
-  @spec execute(VehicleLocationState.t(), binary) ::
-          {:state | :state_changed, VehicleLocationState.t()}
-  def execute(%VehicleLocationState{} = state, <<0x00>>) do
-    {:state, state}
-  end
-
-  def execute(%VehicleLocationState{} = state, <<0x01, state_bin::binary>>) do
-    new_state = VehicleLocationState.from_bin(state_bin)
-
-    if new_state == state do
-      {:state, state}
-    else
-      {:state_changed, new_state}
-    end
-  end
-
-  @doc """
   Converts VehicleLocationState state to capability's state in binary
 
   """

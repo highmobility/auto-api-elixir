@@ -25,28 +25,6 @@ defmodule AutoApi.ChargingCommand do
   alias AutoApi.ChargingState
 
   @doc """
-  Parses the binary command and makes changes or returns the state
-  """
-  @spec execute(ChargingState.t(), binary) :: {:state | :state_changed, ChargingState.t()}
-  def execute(%ChargingState{} = state, <<0x00>>) do
-    {:state, state}
-  end
-
-  def execute(%ChargingState{} = state, <<0x01, ds::binary>>) do
-    new_state = ChargingState.from_bin(ds)
-
-    if new_state == state do
-      {:state, state}
-    else
-      {:state_changed, new_state}
-    end
-  end
-
-  def execute(%ChargingState{} = state, <<0x12, _::binary>>) do
-    {:state_changed, state}
-  end
-
-  @doc """
   Converts ChargingCommand state to capability's state in binary
   """
   @spec state(ChargingState.t()) :: binary

@@ -25,24 +25,6 @@ defmodule AutoApi.HoodCommand do
   alias AutoApi.HoodState
 
   @doc """
-  Parses the binary command and makes changes or returns the state
-  """
-  @spec execute(HoodState.t(), binary) :: {:state | :state_changed, HoodState.t()}
-  def execute(%HoodState{} = state, <<0x00>>) do
-    {:state, state}
-  end
-
-  def execute(%HoodState{} = state, <<0x01, ds::binary>>) do
-    new_state = HoodState.from_bin(ds)
-
-    if new_state == state do
-      {:state, state}
-    else
-      {:state_changed, new_state}
-    end
-  end
-
-  @doc """
   Converts HoodCommand state to capability's state in binary
   """
   @spec state(HoodState.t()) :: binary

@@ -21,6 +21,21 @@ defmodule AutoApi.CapabilityHelper do
 
   require Logger
 
+  def extract_state_properties(specs) do
+    properties = extract_property_data(specs)
+
+    case Map.get(specs, "state") do
+      nil ->
+        []
+
+      "all" ->
+        Map.values(properties)
+
+      prop_ids when is_list(prop_ids) ->
+        Enum.map(prop_ids, &Map.get(properties, &1))
+    end
+  end
+
   def extract_setters_data(specs) do
     properties = extract_property_data(specs)
 

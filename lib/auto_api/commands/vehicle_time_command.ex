@@ -25,24 +25,6 @@ defmodule AutoApi.VehicleTimeCommand do
   alias AutoApi.VehicleTimeState
 
   @doc """
-  Parses the binary command and makes changes or returns the state
-  """
-  @spec execute(VehicleTimeState.t(), binary) :: {:state | :state_changed, VehicleTimeState.t()}
-  def execute(%VehicleTimeState{} = state, <<0x00>>) do
-    {:state, state}
-  end
-
-  def execute(%VehicleTimeState{} = state, <<0x01, ds::binary>>) do
-    new_state = VehicleTimeState.from_bin(ds)
-
-    if new_state == state do
-      {:state, state}
-    else
-      {:state_changed, new_state}
-    end
-  end
-
-  @doc """
   Converts Command state to capability's state in binary
   """
   @spec state(VehicleTimeState.t()) :: binary

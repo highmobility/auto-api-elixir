@@ -25,25 +25,6 @@ defmodule AutoApi.RooftopControlCommand do
   alias AutoApi.RooftopControlState
 
   @doc """
-  Parses the binary command and makes changes or returns the state
-  """
-  @spec execute(RooftopControlState.t(), binary) ::
-          {:state | :state_changed, RooftopControlState.t()}
-  def execute(%RooftopControlState{} = state, <<0x00>>) do
-    {:state, state}
-  end
-
-  def execute(%RooftopControlState{} = state, <<0x01, ds::binary>>) do
-    new_state = RooftopControlState.from_bin(ds)
-
-    if new_state == state do
-      {:state, state}
-    else
-      {:state_changed, new_state}
-    end
-  end
-
-  @doc """
   Converts RooftopControlCommand state to capability's state in binary
   """
   @spec state(RooftopControlState.t()) :: binary

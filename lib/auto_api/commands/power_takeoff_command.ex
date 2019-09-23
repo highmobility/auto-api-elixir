@@ -25,24 +25,6 @@ defmodule AutoApi.PowerTakeoffCommand do
   alias AutoApi.PowerTakeoffState
 
   @doc """
-  Parses the binary command and makes changes or returns the state
-  """
-  @spec execute(PowerTakeoffState.t(), binary) :: {:state | :state_changed, PowerTakeoffState.t()}
-  def execute(%PowerTakeoffState{} = state, <<0x00>>) do
-    {:state, state}
-  end
-
-  def execute(%PowerTakeoffState{} = state, <<0x01, ds::binary>>) do
-    new_state = PowerTakeoffState.from_bin(ds)
-
-    if new_state == state do
-      {:state, state}
-    else
-      {:state_changed, new_state}
-    end
-  end
-
-  @doc """
   Converts PowerTakeoffCommand state to capability's state in binary
   """
   @spec state(PowerTakeoffState.t()) :: binary

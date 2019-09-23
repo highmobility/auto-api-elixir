@@ -83,5 +83,10 @@ defmodule AutoApi.CommandTest do
       assert cmd_bin = AutoApi.DiagnosticsCommand.to_bin(:get, properties)
       assert {:get, properties} == AutoApi.DiagnosticsCommand.from_bin(cmd_bin)
     end
+
+    test ":get with no properties" do
+      assert cmd_bin = AutoApi.DiagnosticsCommand.to_bin(:get)
+      assert {:get, []} == AutoApi.DiagnosticsCommand.from_bin(cmd_bin)
+    end
   end
 end

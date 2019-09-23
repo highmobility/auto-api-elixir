@@ -25,24 +25,6 @@ defmodule AutoApi.RaceCommand do
   alias AutoApi.RaceState
 
   @doc """
-  Parses the binary command and makes changes or returns the state
-  """
-  @spec execute(RaceState.t(), binary) :: {:state | :state_changed, RaceState.t()}
-  def execute(%RaceState{} = state, <<0x00>>) do
-    {:state, state}
-  end
-
-  def execute(%RaceState{} = state, <<0x01, ds::binary>>) do
-    new_state = RaceState.from_bin(ds)
-
-    if new_state == state do
-      {:state, state}
-    else
-      {:state_changed, new_state}
-    end
-  end
-
-  @doc """
   Converts RaceCommand state to capability's state in binary
   """
   @spec state(RaceState.t()) :: binary

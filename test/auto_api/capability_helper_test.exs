@@ -19,7 +19,7 @@
 defmodule AutoApi.CapabilityHelperTest do
   use ExUnit.Case
 
-  alias AutoApi.CapabilityHelper
+  alias AutoApi.CapabilityHelper, as: CH
 
   test "extract_setters_data/1" do
     specs = %{
@@ -59,7 +59,7 @@ defmodule AutoApi.CapabilityHelperTest do
       ]
     }
 
-    assert [foo, foo_bar, foo_bar_baz] = CapabilityHelper.extract_setters_data(specs)
+    assert [foo, foo_bar, foo_bar_baz] = CH.extract_setters_data(specs)
     assert foo == {:foo, {[], [], [foo: <<57, 11, 134, 11, 222, 2, 49, 17>>]}}
     assert foo_bar == {:foo_bar, {[:foo, :bar], [], []}}
     assert foo_bar_baz == {:foo_bar_baz, {[:foo], [:bar, :baz], []}}
@@ -71,25 +71,49 @@ defmodule AutoApi.CapabilityHelperTest do
     properties = [{:foo, 0x00}, {:bar, 0x01}]
 
     assert <<base_data::binary, 0, 0, 6, 1, 0, 3, 1, 2, 3, 1, 0, 6, 1, 0, 3, 4, 5, 6>> ==
-             CapabilityHelper.inject_constants(base_data, constants, properties)
+             CH.inject_constants(base_data, constants, properties)
   end
 
   test "reject_extra_properties/2" do
     properties = [foo: %{}, bar: %{}, baz: %{}]
 
-    assert [baz: %{}] == CapabilityHelper.reject_extra_properties(properties, ~w(baz)a)
+    assert [baz: %{}] == CH.reject_extra_properties(properties, ~w(baz)a)
 
     assert [foo: %{}, bar: %{}] ==
-             CapabilityHelper.reject_extra_properties(properties, ~w(foo bar)a)
+             CH.reject_extra_properties(properties, ~w(foo bar)a)
   end
 
   test "raise_for_missing_properties/2" do
     properties = [foo: %{}, bar: %{}]
 
-    assert CapabilityHelper.raise_for_missing_properties(properties, [:bar])
+    assert CH.raise_for_missing_properties(properties, [:bar])
 
     assert_raise ArgumentError, fn ->
-      CapabilityHelper.raise_for_missing_properties(properties, [:foo, :baz])
+      CH.raise_for_missing_properties(properties, [:foo, :baz])
     end
+  end
+
+  test "extract_state_properties/1" do
+    specs = %{
+      "properties" => [
+        %{
+          "id" => 0x01,
+          "name" => "foo"
+        },
+        %{
+          "id" => 0x02,
+          "name" => "bar"
+        },
+        %{
+          "id" => 0x03,
+          "name" => "baz"
+        }
+      ],
+      "state" => "all"
+    }
+
+    assert [:foo, :bar, :baz] == CH.extract_state_properties(specs)
+    assert [:foo] == CH.extract_state_properties(Map.put(specs, "state", [0x01]))
+    assert [] == CH.extract_state_properties(Map.delete(specs, "state"))
   end
 end

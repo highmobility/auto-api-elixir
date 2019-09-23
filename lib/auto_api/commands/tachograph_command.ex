@@ -25,24 +25,6 @@ defmodule AutoApi.TachographCommand do
   alias AutoApi.TachographState
 
   @doc """
-  Parses the binary command and makes changes or returns the state
-  """
-  @spec execute(TachographState.t(), binary) :: {:state | :state_changed, TachographState.t()}
-  def execute(%TachographState{} = state, <<0x00>>) do
-    {:state, state}
-  end
-
-  def execute(%TachographState{} = state, <<0x01, ds::binary>>) do
-    new_state = TachographState.from_bin(ds)
-
-    if new_state == state do
-      {:state, state}
-    else
-      {:state_changed, new_state}
-    end
-  end
-
-  @doc """
   Converts TachographCommand state to capability's state in binary
   """
   @spec state(TachographState.t()) :: binary

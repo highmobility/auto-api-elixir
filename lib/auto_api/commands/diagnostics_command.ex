@@ -25,24 +25,6 @@ defmodule AutoApi.DiagnosticsCommand do
   alias AutoApi.DiagnosticsState
 
   @doc """
-  Parses the binary command and makes changes or returns the state
-  """
-  @spec execute(DiagnosticsState.t(), binary) :: {:state | :state_changed, DiagnosticsState.t()}
-  def execute(%DiagnosticsState{} = state, <<0x00>>) do
-    {:state, state}
-  end
-
-  def execute(%DiagnosticsState{} = state, <<0x01, ds::binary>>) do
-    new_state = DiagnosticsState.from_bin(ds)
-
-    if new_state == state do
-      {:state, state}
-    else
-      {:state_changed, new_state}
-    end
-  end
-
-  @doc """
   Converts DiagnosticsCommand state to capability's state in binary
   """
   @spec state(DiagnosticsState.t()) :: binary

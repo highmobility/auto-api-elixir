@@ -25,24 +25,6 @@ defmodule AutoApi.MaintenanceCommand do
   alias AutoApi.MaintenanceState
 
   @doc """
-  Parses the binary command and makes changes or returns the state
-  """
-  @spec execute(MaintenanceState.t(), binary) :: {:state | :state_changed, MaintenanceState.t()}
-  def execute(%MaintenanceState{} = state, <<0x00>>) do
-    {:state, state}
-  end
-
-  def execute(%MaintenanceState{} = state, <<0x01, ds::binary>>) do
-    new_state = MaintenanceState.from_bin(ds)
-
-    if new_state == state do
-      {:state, state}
-    else
-      {:state_changed, new_state}
-    end
-  end
-
-  @doc """
   Converts MaintenanceCommand state to capability's state in binary
   """
   @spec state(MaintenanceState.t()) :: binary

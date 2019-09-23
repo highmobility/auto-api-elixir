@@ -25,24 +25,6 @@ defmodule AutoApi.FuelingCommand do
   alias AutoApi.FuelingState
 
   @doc """
-  Parses the binary command and makes changes or returns the state
-  """
-  @spec execute(FuelingState.t(), binary) :: {:state | :state_changed, FuelingState.t()}
-  def execute(%FuelingState{} = state, <<0x00>>) do
-    {:state, state}
-  end
-
-  def execute(%FuelingState{} = state, <<0x01, ds::binary>>) do
-    new_state = FuelingState.from_bin(ds)
-
-    if new_state == state do
-      {:state, state}
-    else
-      {:state_changed, new_state}
-    end
-  end
-
-  @doc """
   Converts Command state to capability's state in binary
   """
   @spec state(FuelingState.t()) :: binary

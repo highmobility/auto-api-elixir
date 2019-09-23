@@ -39,6 +39,7 @@ defmodule AutoApi.Command do
         @behaviour AutoApi.Command
 
         @capability unquote(capability)
+        @state @capability.state()
         @setter_names unquote(setter_names)
         @identifier @capability.identifier()
 
@@ -95,7 +96,8 @@ defmodule AutoApi.Command do
         Due to protocol restrictions, the `action` can only be `:get` or `:set`.
 
         In case of a `:get` action, the second item in the tuple will be a list
-        of property names.
+        of property names. As for protocol specifications, an empty list denotes
+        a request of getting *all* state properties.
 
         If the action is `:set`, the second item will be a Keyword list with the
         property name as a key and a `AutoApi.PropertyComponent` as value.
@@ -140,6 +142,44 @@ defmodule AutoApi.Command do
           value = AutoApi.PropertyComponent.to_struct(data, spec)
 
           {name, value}
+        end
+
+        @doc """
+        Executes a binary command on a given state.
+
+        ## Examples
+
+            iex> state = %AutoApi.DiagnosticsState{
+            ...>   mileage: %AutoApi.PropertyComponent{data: 42_567},
+            ...>   speed: %AutoApi.PropertyComponent{data: 128}
+            ...> }
+            iex> cmd = AutoApi.DiagnosticsCommand.to_bin(:get, [:speed])
+            iex> AutoApi.DiagnosticsCommand.execute(state, cmd)
+            %AutoApi.DiagnosticsState{speed: %AutoApi.PropertyComponent{data: 128}, mileage: nil}
+
+            iex> state = %AutoApi.DiagnosticsState{}
+            iex> cmd = AutoApi.DiagnosticsCommand.to_bin(:set, speed: %AutoApi.PropertyComponent{data: 128})
+            iex> AutoApi.DiagnosticsCommand.execute(state, cmd)
+            %AutoApi.DiagnosticsState{speed: %AutoApi.PropertyComponent{data: 128}}
+        """
+        @spec execute(@state.t(), binary) :: @state.t()
+        def execute(%@state{} = state, bin_cmd) do
+          case from_bin(bin_cmd) do
+            {:get, []} -> get_state_properties(state, @capability.state_properties())
+            {:get, properties} -> get_state_properties(state, properties)
+            {:set, properties} -> set_state_properties(state, properties)
+          end
+        end
+
+        defp get_state_properties(%state_module{} = state, properties) do
+          stripped_state = Map.take(state, properties)
+
+          struct(state_module, stripped_state)
+        end
+
+        defp set_state_properties(state, properties) do
+          # TODO: multiple properties must be "reset" first
+          Enum.reduce(properties, state, &struct(&2, [&1]))
         end
       end
 

@@ -25,19 +25,6 @@ defmodule AutoApi.FailureMessageCommand do
   alias AutoApi.FailureMessageState
 
   @doc """
-  Parses the binary command and makes changes or returns the state
-  """
-  def execute(%FailureMessageState{} = state, <<0x01, ds::binary>>) do
-    new_state = FailureMessageState.from_bin(ds)
-
-    if new_state == state do
-      {:state, state}
-    else
-      {:state_changed, new_state}
-    end
-  end
-
-  @doc """
   Converts AutoApi.FailureMessageCommand state to capability's state in binary
   """
   @spec state(FailureMessageState.t()) :: binary

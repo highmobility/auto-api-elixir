@@ -25,24 +25,6 @@ defmodule AutoApi.WakeUpCommand do
   alias AutoApi.WakeUpState
 
   @doc """
-  Parses the binary command and makes changes or returns the state
-  """
-  @spec execute(WakeUpState.t(), binary) :: {:state | :state_changed, WakeUpState.t()}
-  def execute(%WakeUpState{} = state, <<0x00>>) do
-    {:state, state}
-  end
-
-  def execute(%WakeUpState{} = state, <<0x01, ws::binary>>) do
-    new_state = WakeUpState.from_bin(ws)
-
-    if new_state == state do
-      {:state, state}
-    else
-      {:state_changed, new_state}
-    end
-  end
-
-  @doc """
   Converts a WakeUpCommand state to capability's state in binary
   """
   @spec state(WakeUpState.t()) :: binary

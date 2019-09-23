@@ -25,29 +25,6 @@ defmodule AutoApi.WindowsCommand do
   alias AutoApi.WindowsState
 
   @doc """
-  Parses the binary command and makes changes or returns the state
-  """
-  @spec execute(WindowsState.t(), binary) :: {:state | :state_changed, WindowsState.t()}
-  def execute(%WindowsState{} = state, <<0x00>>) do
-    {:state, state}
-  end
-
-  def execute(%WindowsState{} = state, <<0x01, ws::binary>>) do
-    new_state = WindowsState.from_bin(ws)
-
-    if new_state == state do
-      {:state, state}
-    else
-      {:state_changed, new_state}
-    end
-  end
-
-  def execute(%WindowsState{} = _state, <<0x12, _payload::binary>>) do
-    # TODO
-    raise "Not implemented!"
-  end
-
-  @doc """
   Converts a WindowsCommand state to capability's state in binary
   """
   @spec state(WindowsState.t()) :: binary
