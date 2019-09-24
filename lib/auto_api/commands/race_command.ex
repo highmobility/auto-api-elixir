@@ -21,14 +21,4 @@ defmodule AutoApi.RaceCommand do
   Handles Race commands and apply binary commands on `%AutoApi.RaceState{}`
   """
   use AutoApi.Command
-
-  alias AutoApi.RaceState
-
-  @doc """
-  Converts RaceCommand state to capability's state in binary
-  """
-  @spec state(RaceState.t()) :: binary
-  def state(%RaceState{} = state) do
-    <<0x01, RaceState.to_bin(state)::binary>>
-  end
 end

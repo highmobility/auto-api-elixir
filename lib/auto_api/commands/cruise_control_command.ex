@@ -21,14 +21,4 @@ defmodule AutoApi.CruiseControlCommand do
   Handles  commands and apply binary commands on `%AutoApi.CruiseControlState{}`
   """
   use AutoApi.Command
-
-  alias AutoApi.CruiseControlState
-
-  @doc """
-  Converts Command state to capability's state in binary
-  """
-  @spec state(CruiseControlState.t()) :: binary
-  def state(%CruiseControlState{} = state) do
-    <<0x01, CruiseControlState.to_bin(state)::binary>>
-  end
 end

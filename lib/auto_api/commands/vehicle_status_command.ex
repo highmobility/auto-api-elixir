@@ -21,14 +21,4 @@ defmodule AutoApi.VehicleStatusCommand do
   Handles  commands and apply binary commands on `%AutoApi.VehicleStatusState{}`
   """
   use AutoApi.Command
-
-  alias AutoApi.VehicleStatusState
-
-  @doc """
-  Converts Command state to capability's state in binary
-  """
-  @spec state(VehicleStatusState.t()) :: binary
-  def state(%VehicleStatusState{} = state) do
-    <<0x01, VehicleStatusState.to_bin(state)::binary>>
-  end
 end

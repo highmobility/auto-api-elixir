@@ -21,14 +21,4 @@ defmodule AutoApi.DiagnosticsCommand do
   Handles Diagnostics commands and apply binary commands on `%AutoApi.DiagnosticsState{}`
   """
   use AutoApi.Command
-
-  alias AutoApi.DiagnosticsState
-
-  @doc """
-  Converts DiagnosticsCommand state to capability's state in binary
-  """
-  @spec state(DiagnosticsState.t()) :: binary
-  def state(%DiagnosticsState{} = state) do
-    <<0x01, DiagnosticsState.to_bin(state)::binary>>
-  end
 end

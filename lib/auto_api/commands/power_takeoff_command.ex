@@ -21,14 +21,4 @@ defmodule AutoApi.PowerTakeoffCommand do
   Handles  commands and apply binary commands on `%AutoApi.PowerTakeoffState{}`
   """
   use AutoApi.Command
-
-  alias AutoApi.PowerTakeoffState
-
-  @doc """
-  Converts PowerTakeoffCommand state to capability's state in binary
-  """
-  @spec state(PowerTakeoffState.t()) :: binary
-  def state(%PowerTakeoffState{} = state) do
-    <<0x01, PowerTakeoffState.to_bin(state)::binary>>
-  end
 end

@@ -21,15 +21,4 @@ defmodule AutoApi.DashboardLightsCommand do
   Handles Dashboard Lights commands and apply binary commands on `%AutoApi.DashboardLightsState{}`
   """
   use AutoApi.Command
-
-  alias AutoApi.DashboardLightsState
-
-  @doc """
-  Converts DashboardLightsCommand state to capability's state in binary
-
-  """
-  @spec state(DashboardLightsState.t()) :: binary
-  def state(%DashboardLightsState{} = state) do
-    <<0x01, DashboardLightsState.to_bin(state)::binary>>
-  end
 end

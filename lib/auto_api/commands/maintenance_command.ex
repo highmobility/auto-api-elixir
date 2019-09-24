@@ -21,14 +21,4 @@ defmodule AutoApi.MaintenanceCommand do
   Handles  commands and apply binary commands on `%AutoApi.MaintenanceState{}`
   """
   use AutoApi.Command
-
-  alias AutoApi.MaintenanceState
-
-  @doc """
-  Converts MaintenanceCommand state to capability's state in binary
-  """
-  @spec state(MaintenanceState.t()) :: binary
-  def state(%MaintenanceState{} = state) do
-    <<0x01, MaintenanceState.to_bin(state)::binary>>
-  end
 end

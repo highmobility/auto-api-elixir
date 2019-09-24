@@ -21,14 +21,4 @@ defmodule AutoApi.ClimateCommand do
   Handles  commands and apply binary commands on `%AutoApi.ClimateState{}`
   """
   use AutoApi.Command
-
-  alias AutoApi.ClimateState
-
-  @doc """
-  Converts ClimateCommand state to capability's state in binary
-  """
-  @spec state(ClimateState.t()) :: binary
-  def state(%ClimateState{} = state) do
-    <<0x01, ClimateState.to_bin(state)::binary>>
-  end
 end

@@ -21,14 +21,4 @@ defmodule AutoApi.RooftopControlCommand do
   Handles Hood commands and apply binary commands on `%AutoApi.RooftopControlState{}`
   """
   use AutoApi.Command
-
-  alias AutoApi.RooftopControlState
-
-  @doc """
-  Converts RooftopControlCommand state to capability's state in binary
-  """
-  @spec state(RooftopControlState.t()) :: binary
-  def state(%RooftopControlState{} = state) do
-    <<0x01, RooftopControlState.to_bin(state)::binary>>
-  end
 end

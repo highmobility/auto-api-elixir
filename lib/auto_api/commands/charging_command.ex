@@ -21,14 +21,4 @@ defmodule AutoApi.ChargingCommand do
   Handles Charging commands and apply binary commands on `%AutoApi.ChargingState{}`
   """
   use AutoApi.Command
-
-  alias AutoApi.ChargingState
-
-  @doc """
-  Converts ChargingCommand state to capability's state in binary
-  """
-  @spec state(ChargingState.t()) :: binary
-  def state(%ChargingState{} = state) do
-    <<0x01, ChargingState.to_bin(state)::binary>>
-  end
 end

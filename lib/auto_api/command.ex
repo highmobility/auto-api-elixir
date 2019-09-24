@@ -181,6 +181,22 @@ defmodule AutoApi.Command do
           # TODO: multiple properties must be "reset" first
           Enum.reduce(properties, state, &struct(&2, [&1]))
         end
+
+        @doc """
+        Converts a #{inspect @state} struct to a binary state/set command.
+
+        ## Example
+
+            iex> state = %AutoApi.DiagnosticsState{
+            ...>   speed: %AutoApi.PropertyComponent{data: 130}
+            ...> }
+            iex> AutoApi.DiagnosticsCommand.state(state)
+            <<0, 51, 1, 3, 0, 5, 1, 0, 2, 0, 130>>
+        """
+        @spec state(@state.t()) :: binary
+        def state(%@state{} = state) do
+          @capability.identifier() <> <<0x01>> <> @state.to_bin(state)
+        end
       end
 
     setter_functions =

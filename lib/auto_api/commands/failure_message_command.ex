@@ -21,14 +21,4 @@ defmodule AutoApi.FailureMessageCommand do
   Handles FailureMessage commands and apply binary commands on `%AutoApi.FailureMessageState{}`
   """
   use AutoApi.Command
-
-  alias AutoApi.FailureMessageState
-
-  @doc """
-  Converts AutoApi.FailureMessageCommand state to capability's state in binary
-  """
-  @spec state(FailureMessageState.t()) :: binary
-  def state(%FailureMessageState{} = state) do
-    <<0x01, FailureMessageState.to_bin(state)::binary>>
-  end
 end

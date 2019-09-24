@@ -21,14 +21,4 @@ defmodule AutoApi.FuelingCommand do
   Handles  commands and apply binary commands on `%AutoApi.FuelingState{}`
   """
   use AutoApi.Command
-
-  alias AutoApi.FuelingState
-
-  @doc """
-  Converts Command state to capability's state in binary
-  """
-  @spec state(FuelingState.t()) :: binary
-  def state(%FuelingState{} = state) do
-    <<0x01, FuelingState.to_bin(state)::binary>>
-  end
 end

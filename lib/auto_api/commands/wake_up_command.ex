@@ -21,14 +21,4 @@ defmodule AutoApi.WakeUpCommand do
   Handles WakeUp commands and apply binary commands on `%AutoApi.WakeUpState{}`
   """
   use AutoApi.Command
-
-  alias AutoApi.WakeUpState
-
-  @doc """
-  Converts a WakeUpCommand state to capability's state in binary
-  """
-  @spec state(WakeUpState.t()) :: binary
-  def state(%WakeUpState{} = state) do
-    <<0x01, WakeUpState.to_bin(state)::binary>>
-  end
 end

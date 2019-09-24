@@ -21,17 +21,4 @@ defmodule AutoApi.DoorsCommand do
   Handles  commands and apply binary commands on `%AutoApi.DoorsState{}`
   """
   use AutoApi.Command
-
-  alias AutoApi.DoorsState
-
-  @doc """
-  Converts DoorsCommand state to capability's state in binary
-
-        iex> AutoApi.DoorsCommand.state(%AutoApi.DoorsState{positions: [%{door_location: :front_left, position: :closed}], properties: [:positions]})
-        <<1, 4, 0, 2, 0, 0>>
-  """
-  @spec state(DoorsState.t()) :: binary
-  def state(%DoorsState{} = state) do
-    <<0x01, DoorsState.to_bin(state)::binary>>
-  end
 end
