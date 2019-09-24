@@ -220,8 +220,7 @@ defmodule AutoApi.Command do
     [base_functions, setter_functions]
   end
 
-  @type execute_return_atom :: :state | :state_changed
-  @callback execute(struct, binary) :: {execute_return_atom, struct}
+  @callback execute(struct, binary) :: struct
   @callback state(struct) :: binary
 
   @type capability_name ::
