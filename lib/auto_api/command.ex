@@ -21,7 +21,7 @@ defmodule AutoApi.Command do
   Command behavior for handling AutoApi commands
   """
 
-  alias AutoApi.{Capability, CapabilityHelper}
+  alias AutoApi.{Capability, CommandHelper}
 
   defmacro __using__(_opts) do
     capability =
@@ -125,7 +125,7 @@ defmodule AutoApi.Command do
         def from_bin(<<@identifier::binary, 0x01, property_data::binary>>) do
           properties =
             property_data
-            |> CapabilityHelper.split_binary_properties()
+            |> CommandHelper.split_binary_properties()
             |> Enum.map(&parse_property/1)
 
           {:set, properties}
@@ -161,13 +161,13 @@ defmodule AutoApi.Command do
         def execute(%@state{} = state, bin_cmd) do
           case from_bin(bin_cmd) do
             {:get, []} ->
-              CapabilityHelper.get_state_properties(state, @capability.state_properties())
+              CommandHelper.get_state_properties(state, @capability.state_properties())
 
             {:get, properties} ->
-              CapabilityHelper.get_state_properties(state, properties)
+              CommandHelper.get_state_properties(state, properties)
 
             {:set, properties} ->
-              CapabilityHelper.set_state_properties(state, properties)
+              CommandHelper.set_state_properties(state, properties)
           end
         end
 
@@ -196,12 +196,12 @@ defmodule AutoApi.Command do
 
             included_properties =
               properties
-              |> CapabilityHelper.reject_extra_properties(mandatory ++ optional)
-              |> CapabilityHelper.raise_for_missing_properties(mandatory)
+              |> CommandHelper.reject_extra_properties(mandatory ++ optional)
+              |> CommandHelper.raise_for_missing_properties(mandatory)
 
             :set
             |> to_bin(properties)
-            |> CapabilityHelper.inject_constants(constants, unquote(property_ids))
+            |> CommandHelper.inject_constants(constants, unquote(property_ids))
           end
         end
       end

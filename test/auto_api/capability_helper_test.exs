@@ -65,34 +65,6 @@ defmodule AutoApi.CapabilityHelperTest do
     assert foo_bar_baz == {:foo_bar_baz, {[:foo], [:bar, :baz], []}}
   end
 
-  test "inject_constants/2" do
-    base_data = :crypto.strong_rand_bytes(12)
-    constants = [foo: <<1, 2, 3>>, bar: <<4, 5, 6>>]
-    properties = [{:foo, 0x00}, {:bar, 0x01}]
-
-    assert <<base_data::binary, 0, 0, 6, 1, 0, 3, 1, 2, 3, 1, 0, 6, 1, 0, 3, 4, 5, 6>> ==
-             CH.inject_constants(base_data, constants, properties)
-  end
-
-  test "reject_extra_properties/2" do
-    properties = [foo: %{}, bar: %{}, baz: %{}]
-
-    assert [baz: %{}] == CH.reject_extra_properties(properties, ~w(baz)a)
-
-    assert [foo: %{}, bar: %{}] ==
-             CH.reject_extra_properties(properties, ~w(foo bar)a)
-  end
-
-  test "raise_for_missing_properties/2" do
-    properties = [foo: %{}, bar: %{}]
-
-    assert CH.raise_for_missing_properties(properties, [:bar])
-
-    assert_raise ArgumentError, fn ->
-      CH.raise_for_missing_properties(properties, [:foo, :baz])
-    end
-  end
-
   test "extract_state_properties/1" do
     specs = %{
       "properties" => [

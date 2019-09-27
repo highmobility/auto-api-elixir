@@ -19,8 +19,6 @@
 defmodule AutoApi.CapabilityHelper do
   @moduledoc false
 
-  require Logger
-
   def extract_state_properties(specs) do
     properties = extract_property_data(specs)
 
@@ -88,70 +86,5 @@ defmodule AutoApi.CapabilityHelper do
       |> :binary.list_to_bin()
 
     data <> constants_data
-  end
-
-  def reject_extra_properties(properties, allowed_properties) do
-    Enum.reject(properties, fn {name, _} ->
-      unless name in allowed_properties do
-        Logger.warn(
-          "Ignoring #{name} as it's not in the list of allowed properties for the setter: #{
-            inspect allowed_properties
-          }"
-        )
-      end
-    end)
-  end
-
-  def raise_for_missing_properties(properties, mandatory_properties) do
-    property_names = Enum.map(properties, &elem(&1, 0))
-    missing_properties = mandatory_properties -- property_names
-
-    case missing_properties do
-      [] ->
-        properties
-
-      _ ->
-        raise ArgumentError,
-          message: "Missing properties for setter: #{inspect missing_properties}"
-    end
-  end
-
-  def split_binary_properties(<<id, size::integer-16, data::binary-size(size), rest::binary>>) do
-    [{id, data} | split_binary_properties(rest)]
-  end
-
-  def split_binary_properties(<<>>), do: []
-
-  def get_state_properties(%state_module{} = state, properties) do
-    stripped_state = Map.take(state, properties)
-
-    struct(state_module, stripped_state)
-  end
-
-  def set_state_properties(state, properties) do
-    # Multiple properties need to be replaced not appended
-    state
-    |> trim_multiple_properties(Keyword.keys(properties))
-    |> update_properties(properties)
-  end
-
-  defp trim_multiple_properties(%state_module{} = state, properties) do
-    properties
-    |> Enum.filter(&state_module.capability().multiple?/1)
-    |> Enum.reduce(state, &Map.put(&2, &1, []))
-  end
-
-  defp update_properties(state, properties) do
-    Enum.reduce(properties, state, &update_property/2)
-  end
-
-  defp update_property({name, value}, %state_module{} = state) do
-    Map.update!(state, name, fn existing_value ->
-      if state_module.capability().multiple?(name) do
-        existing_value ++ [value]
-      else
-        value
-      end
-    end)
   end
 end
