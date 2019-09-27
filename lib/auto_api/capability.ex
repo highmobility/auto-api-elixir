@@ -45,11 +45,19 @@ defmodule AutoApi.Capability do
         end
 
         @properties unquote(Macro.escape(properties))
-                    |> Enum.map(fn prop -> {prop["id"], String.to_atom(prop["name"])} end)
+                    |> Enum.map(fn prop ->
+                      {prop["id"], String.to_atom(prop["name"])}
+                    end)
 
         @setters CapabilityHelper.extract_setters_data(@raw_spec)
 
         @state_properties CapabilityHelper.extract_state_properties(@raw_spec)
+
+        @first_property unquote(Macro.escape(properties))
+                        |> Enum.map(fn prop ->
+                          {prop["id"], String.to_atom(prop["name"]), prop["multiple"] || false}
+                        end)
+                        |> List.first()
 
         @doc false
         @spec raw_spec() :: map()
@@ -127,7 +135,6 @@ defmodule AutoApi.Capability do
         @spec setters() :: keyword({list(atom), list(atom), keyword(binary)})
         def setters(), do: @setters
 
-        @first_property List.first(@properties)
         @doc """
         Returns the ID of a property given its name.
 
@@ -155,17 +162,30 @@ defmodule AutoApi.Capability do
         @doc false
         @spec property_spec(atom()) :: map()
         def property_spec(name)
+
+        @doc """
+        Returns whether the property is multiple, that is if it can contain multiple values.
+
+        ## Example
+
+            iex> #{inspect __MODULE__}.multiple?(#{inspect elem(@first_property, 1)})
+            #{inspect elem(@first_property, 2)}
+        """
+        @spec multiple?(atom()) :: boolean()
+        def multiple?(name)
       end
 
     property_functions =
       for prop <- properties do
         prop_id = prop["id"]
         prop_name = String.to_atom(prop["name"])
+        multiple? = prop["multiple"] || false
 
         quote do
           def property_id(unquote(prop_name)), do: unquote(prop_id)
           def property_name(unquote(prop_id)), do: unquote(prop_name)
           def property_spec(unquote(prop_name)), do: unquote(Macro.escape(prop))
+          def multiple?(unquote(prop_name)), do: unquote(multiple?)
         end
       end
 

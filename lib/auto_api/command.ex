@@ -123,20 +123,15 @@ defmodule AutoApi.Command do
         end
 
         def from_bin(<<@identifier::binary, 0x01, property_data::binary>>) do
-          properties = split_binary_properties(property_data)
+          properties =
+            property_data
+            |> CapabilityHelper.split_binary_properties()
+            |> Enum.map(&parse_property/1)
 
           {:set, properties}
         end
 
-        defp split_binary_properties(
-               <<id, size::integer-16, data::binary-size(size), rest::binary>>
-             ) do
-          [parse_property(id, data) | split_binary_properties(rest)]
-        end
-
-        defp split_binary_properties(<<>>), do: []
-
-        defp parse_property(id, data) do
+        defp parse_property({id, data}) do
           name = @capability.property_name(id)
           spec = @capability.property_spec(name)
           value = AutoApi.PropertyComponent.to_struct(data, spec)
@@ -165,21 +160,15 @@ defmodule AutoApi.Command do
         @spec execute(@state.t(), binary) :: @state.t()
         def execute(%@state{} = state, bin_cmd) do
           case from_bin(bin_cmd) do
-            {:get, []} -> get_state_properties(state, @capability.state_properties())
-            {:get, properties} -> get_state_properties(state, properties)
-            {:set, properties} -> set_state_properties(state, properties)
+            {:get, []} ->
+              CapabilityHelper.get_state_properties(state, @capability.state_properties())
+
+            {:get, properties} ->
+              CapabilityHelper.get_state_properties(state, properties)
+
+            {:set, properties} ->
+              CapabilityHelper.set_state_properties(state, properties)
           end
-        end
-
-        defp get_state_properties(%state_module{} = state, properties) do
-          stripped_state = Map.take(state, properties)
-
-          struct(state_module, stripped_state)
-        end
-
-        defp set_state_properties(state, properties) do
-          # TODO: multiple properties must be "reset" first
-          Enum.reduce(properties, state, &struct(&2, [&1]))
         end
 
         @doc """
@@ -243,25 +232,8 @@ defmodule AutoApi.Command do
       %{message_id: :diagnostics, message_type: :get, module: AutoApi.DiagnosticsCapability}
 
       iex> binary_command = <<0x00, 0x23, 0x1, 20, 0, 7, 1, 0, 4, 66, 41, 174, 20>>
-      iex> %{module: cap} = AutoApi.Command.meta_data(binary_command)
+      iex> AutoApi.Command.meta_data(binary_command)
       %{message_id: :charging, message_type: :set, module: AutoApi.ChargingCapability}
-      iex> base_state = cap.state.base
-      %AutoApi.ChargingState{}
-      iex> AutoApi.Command.execute(base_state, cap.command, binary_command)
-      {:state_changed, %AutoApi.ChargingState{battery_temperature:  %AutoApi.PropertyComponent{data: 42.419998, failure: nil, timestamp: nil}}}
-
-      ie> binary_command = <<0x00, 0x20, 0x1, 0x01, 0x00, 0x00, 0x00>>
-      ie> %{module: cap} = AutoApi.Command.meta_data(binary_command)
-      ie> base_state = cap.state.base
-      %AutoApi.DoorLocksState{}
-      ie> AutoApi.Command.execute(base_state, cap.command, binary_command)
-      {:state_changed, %AutoApi.DoorLocksState{}}
-      ie> AutoApi.Command.to_bin(:door_locks, :get_lock_state, [])
-      <<0x0, 0x20, 0x0>>
-      ie> AutoApi.Command.to_bin(:door_locks, :lock_unlock_doors, [:lock])
-      <<0x0, 0x20, 0x02, 0x01>>
-
-
   """
   @spec meta_data(binary) :: map()
   def meta_data(<<id::binary-size(2), type, _data::binary>>) do
@@ -277,12 +249,6 @@ defmodule AutoApi.Command do
 
   defp command_name(0x00), do: :get
   defp command_name(0x01), do: :set
-
-  @spec execute(map, atom, binary) :: {:state | :state_changed, map}
-  def execute(struct, command, binary_command) do
-    <<_::binary-size(2), sub_command::binary>> = binary_command
-    command.execute(struct, sub_command)
-  end
 
   @doc """
   Converts the command to the binary format.

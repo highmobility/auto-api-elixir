@@ -89,4 +89,36 @@ defmodule AutoApi.CommandTest do
       assert {:get, []} == AutoApi.DiagnosticsCommand.from_bin(cmd_bin)
     end
   end
+
+  describe "execute/2" do
+    test "set overwrites multiple properties" do
+      state = %AutoApi.DoorsState{
+        locks: [
+          %PropertyComponent{data: %{location: :front_right, lock_state: :locked}},
+          %PropertyComponent{data: %{location: :front_left, lock_state: :locked}}
+        ],
+        positions: [
+          %PropertyComponent{data: %{location: :rear_left, position: :open}}
+        ]
+      }
+
+      command_props = [
+        locks: %PropertyComponent{data: %{location: :rear_right, lock_state: :locked}},
+        locks: %PropertyComponent{data: %{location: :rear_left, lock_state: :locked}}
+      ]
+
+      command_bin = AutoApi.DoorsCommand.to_bin(:set, command_props)
+
+      assert AutoApi.DoorsCommand.execute(state, command_bin) ==
+               %AutoApi.DoorsState{
+                 locks: [
+                   %PropertyComponent{data: %{location: :rear_right, lock_state: :locked}},
+                   %PropertyComponent{data: %{location: :rear_left, lock_state: :locked}}
+                 ],
+                 positions: [
+                   %PropertyComponent{data: %{location: :rear_left, position: :open}}
+                 ]
+               }
+    end
+  end
 end

@@ -139,6 +139,7 @@ defmodule AutoApi.State do
 
         @doc """
         Appends a value into a list
+
         This function wraps the data in PropertyComponent
         """
         def append_property(state, property_name, data, timestamp \\ nil) do
@@ -185,14 +186,10 @@ defmodule AutoApi.State do
 
         quote do
           if unquote(multiple) do
-            def is_multiple?(unquote(prop_name)), do: true
-
             defp override_property(%__MODULE__{} = state, unquote(prop_name), value) do
               %{state | unquote(prop_name) => [value]}
             end
           else
-            def is_multiple?(unquote(prop_name)), do: false
-
             defp override_property(%__MODULE__{} = state, unquote(prop_name), value) do
               %{state | unquote(prop_name) => value}
             end
@@ -225,11 +222,11 @@ defmodule AutoApi.State do
   @doc """
   Update a property value in the given state.
 
-  If a property supports multiple value, appends the value to the property list
+  If a property supports multiple value, appends the value to the property list.
   """
   @spec update_property(map, atom(), any, DateTime.t() | nil) :: map
   def update_property(%state_module{} = state, key, value, timestamp \\ nil) do
-    if state_module.is_multiple?(key) do
+    if state_module.capability().multiple?(key) do
       state_module.append_property(state, key, value, timestamp)
     else
       state_module.put_property(state, key, value, timestamp)

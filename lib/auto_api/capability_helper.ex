@@ -115,4 +115,43 @@ defmodule AutoApi.CapabilityHelper do
           message: "Missing properties for setter: #{inspect missing_properties}"
     end
   end
+
+  def split_binary_properties(<<id, size::integer-16, data::binary-size(size), rest::binary>>) do
+    [{id, data} | split_binary_properties(rest)]
+  end
+
+  def split_binary_properties(<<>>), do: []
+
+  def get_state_properties(%state_module{} = state, properties) do
+    stripped_state = Map.take(state, properties)
+
+    struct(state_module, stripped_state)
+  end
+
+  def set_state_properties(state, properties) do
+    # Multiple properties need to be replaced not appended
+    state
+    |> trim_multiple_properties(Keyword.keys(properties))
+    |> update_properties(properties)
+  end
+
+  defp trim_multiple_properties(%state_module{} = state, properties) do
+    properties
+    |> Enum.filter(&state_module.capability().multiple?/1)
+    |> Enum.reduce(state, &Map.put(&2, &1, []))
+  end
+
+  defp update_properties(state, properties) do
+    Enum.reduce(properties, state, &update_property/2)
+  end
+
+  defp update_property({name, value}, %state_module{} = state) do
+    Map.update!(state, name, fn existing_value ->
+      if state_module.capability().multiple?(name) do
+        existing_value ++ [value]
+      else
+        value
+      end
+    end)
+  end
 end
