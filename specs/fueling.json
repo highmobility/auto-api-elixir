@@ -16,16 +16,30 @@
     }, 
     "properties": [
         {
+            "name": "gas_flap_lock", 
             "type": "types.lock_state", 
-            "id": 2, 
+            "examples": [
+                {
+                    "hex": "01", 
+                    "description": "Gas flap is locked", 
+                    "value": "locked"
+                }
+            ], 
             "name_cased": "gasFlapLock", 
-            "name": "gas_flap_lock"
+            "id": 2
         }, 
         {
+            "name": "gas_flap_position", 
             "type": "types.position", 
-            "id": 3, 
+            "examples": [
+                {
+                    "hex": "00", 
+                    "description": "Gas flap is closed", 
+                    "value": "closed"
+                }
+            ], 
             "name_cased": "gasFlapPosition", 
-            "name": "gas_flap_position"
+            "id": 3
         }
     ], 
     "setters": [

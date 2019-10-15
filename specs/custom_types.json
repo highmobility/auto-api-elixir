@@ -61,14 +61,14 @@
                 {
                     "size": 8, 
                     "type": "double", 
-                    "description": "Latitude in 8-bytes per IEEE 754", 
+                    "description": "Latitude", 
                     "name_cased": "latitude", 
                     "name": "latitude"
                 }, 
                 {
                     "size": 8, 
                     "type": "double", 
-                    "description": "Longitude in 8-bytes per IEEE 754", 
+                    "description": "Longitude", 
                     "name_cased": "longitude", 
                     "name": "longitude"
                 }
@@ -451,7 +451,7 @@
                 }, 
                 {
                     "pretty_name": "G-force", 
-                    "description": "The accelaration in g-force per IEEE 754", 
+                    "description": "The accelaration in g-force", 
                     "name_cased": "gForce", 
                     "name": "g_force", 
                     "type": "float", 
@@ -476,7 +476,7 @@
                     "type": "string", 
                     "name": "name", 
                     "name_cased": "name", 
-                    "description": "Name of the action, bytes in UTF8"
+                    "description": "Name of the action"
                 }
             ], 
             "type": "custom", 
@@ -521,13 +521,13 @@
                     "type": "string", 
                     "name": "text", 
                     "name_cased": "text", 
-                    "description": "CCM text bytes formatted in UTF-8"
+                    "description": "CCM text"
                 }, 
                 {
                     "type": "string", 
                     "name": "status", 
                     "name_cased": "status", 
-                    "description": "CCM status bytes formatted in UTF-8"
+                    "description": "CCM status"
                 }
             ], 
             "type": "custom", 
@@ -537,9 +537,9 @@
         {
             "items": [
                 {
-                    "size": 1, 
+                    "size": 2, 
                     "type": "uinteger", 
-                    "description": "Value between 0 and 99, which corresponds to 2000-2099", 
+                    "description": "The year", 
                     "name_cased": "year", 
                     "name": "year"
                 }, 
@@ -582,13 +582,13 @@
                     "type": "string", 
                     "name": "text", 
                     "name_cased": "text", 
-                    "description": "CBS text bytes formatted in UTF-8"
+                    "description": "CBS text"
                 }, 
                 {
                     "type": "string", 
                     "name": "description", 
                     "name_cased": "description", 
-                    "description": "Description bytes formatted in UTF-8"
+                    "description": "Description"
                 }
             ], 
             "type": "custom", 
@@ -1207,7 +1207,7 @@
                 {
                     "size": 4, 
                     "type": "float", 
-                    "description": "The price in 4-bytes per IEEE 754", 
+                    "description": "The price", 
                     "name_cased": "price", 
                     "name": "price"
                 }, 
@@ -1381,7 +1381,7 @@
                 {
                     "size": 4, 
                     "type": "float", 
-                    "description": "Tire temperature in BAR formatted in 4-bytes per IEEE 754", 
+                    "description": "Tire pressure in BAR", 
                     "name_cased": "pressure", 
                     "name": "pressure"
                 }
@@ -1401,7 +1401,7 @@
                 {
                     "size": 4, 
                     "type": "float", 
-                    "description": "Tire temperature in BAR formatted in 4-bytes per IEEE 754", 
+                    "description": "Tire temperature in Celsius", 
                     "name_cased": "temperature", 
                     "name": "temperature"
                 }
@@ -1424,20 +1424,20 @@
                     "type": "string", 
                     "name": "id", 
                     "name_cased": "ID", 
-                    "description": "ID bytes formatted in UTF-8"
+                    "description": "Identifier"
                 }, 
                 {
                     "pretty_name": "ECU ID", 
                     "type": "string", 
                     "name": "ecu_id", 
                     "name_cased": "ecuID", 
-                    "description": "ECU ID bytes formatted in UTF-8"
+                    "description": "Electronic Control Unit identifier"
                 }, 
                 {
                     "type": "string", 
                     "name": "status", 
                     "name_cased": "status", 
-                    "description": "Status bytes formatted in UTF-8"
+                    "description": "Status"
                 }
             ], 
             "type": "custom", 

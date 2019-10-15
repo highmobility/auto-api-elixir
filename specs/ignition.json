@@ -14,16 +14,30 @@
     }, 
     "properties": [
         {
+            "name": "status", 
             "type": "types.on_off_state", 
-            "id": 1, 
+            "examples": [
+                {
+                    "hex": "00", 
+                    "description": "Ignition is off", 
+                    "value": "off"
+                }
+            ], 
             "name_cased": "status", 
-            "name": "status"
+            "id": 1
         }, 
         {
+            "name": "accessories_status", 
             "type": "types.on_off_state", 
-            "id": 2, 
+            "examples": [
+                {
+                    "hex": "01", 
+                    "description": "Accessories power is on", 
+                    "value": "on"
+                }
+            ], 
             "name_cased": "accessoriesStatus", 
-            "name": "accessories_status"
+            "id": 2
         }
     ], 
     "setters": [

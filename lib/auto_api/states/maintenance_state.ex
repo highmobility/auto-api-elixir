@@ -53,7 +53,7 @@ defmodule AutoApi.MaintenanceState do
         }
 
   @type activity :: :inactive | :active
-  @type teleservice_availability :: :pending | :idle | :succesful | :error
+  @type teleservice_availability :: :pending | :idle | :successful | :error
 
   @type t :: %__MODULE__{
           days_to_next_service: %PropertyComponent{data: integer} | nil,
@@ -74,11 +74,10 @@ defmodule AutoApi.MaintenanceState do
   @doc """
   Build state based on binary value
 
-    ix> AutoApi.MaintenanceState.from_bin(<<0x02, 3::integer-16,  -1::integer-24>>)
-    %AutoApi.MaintenanceState{kilometers_to_next_service: 16777215}
+  ## Example
 
-    The above case invalid! it should convert to -1
-
+      iex> AutoApi.MaintenanceState.from_bin(<<0x02, 7::integer-16, 0x01, 4::integer-16, -42::integer-32>>)
+      %AutoApi.MaintenanceState{kilometers_to_next_service: %AutoApi.PropertyComponent{data: -42}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -87,6 +86,12 @@ defmodule AutoApi.MaintenanceState do
 
   @doc """
   Parse state to bin
+
+  ## Example
+
+      iex> state = %AutoApi.MaintenanceState{kilometers_to_next_service: %AutoApi.PropertyComponent{data: -42}}
+      iex> AutoApi.MaintenanceState.to_bin(state)
+      <<0x02, 7::integer-16, 0x01, 4::integer-16, -42::integer-32>>
   """
   @spec to_bin(__MODULE__.t()) :: binary
   def to_bin(%__MODULE__{} = state) do

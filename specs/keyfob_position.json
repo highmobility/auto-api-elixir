@@ -47,9 +47,16 @@
                     "name": "inside_car"
                 }
             ], 
+            "size": 1, 
             "type": "enum", 
             "id": 1, 
-            "size": 1
+            "examples": [
+                {
+                    "hex": "05", 
+                    "description": "Keyfob is inside the car", 
+                    "value": "inside_car"
+                }
+            ]
         }
     ]
 }

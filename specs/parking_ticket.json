@@ -30,26 +30,54 @@
                     "name": "started"
                 }
             ], 
+            "size": 1, 
             "type": "enum", 
             "id": 1, 
-            "size": 1
+            "examples": [
+                {
+                    "hex": "00", 
+                    "description": "Parking ticket has ended", 
+                    "value": "ended"
+                }
+            ]
         }, 
         {
+            "description": "Operator name", 
+            "name_cased": "operatorName", 
             "name": "operator_name", 
             "type": "string", 
-            "description": "Operator Name bytes formatted in UTF-8", 
-            "name_cased": "operatorName", 
-            "id": 2
+            "id": 2, 
+            "examples": [
+                {
+                    "hex": "4265726c696e205061726b696e67", 
+                    "description": "Operator name is 'Berlin Parking'", 
+                    "value": "Berlin Parking"
+                }
+            ]
         }, 
         {
             "pretty_name": "Operator Ticket ID", 
-            "description": "Operator Ticket ID bytes formatted in UTF-8", 
+            "description": "Operator Ticket ID", 
             "name_cased": "operatorTicketID", 
+            "name": "operator_ticket_id", 
             "type": "string", 
             "id": 3, 
-            "name": "operator_ticket_id"
+            "examples": [
+                {
+                    "hex": "3634383934323333", 
+                    "description": "Operator ticket ID is '64894233'", 
+                    "value": "64894233"
+                }
+            ]
         }, 
         {
+            "examples": [
+                {
+                    "hex": "0000015989dfca30", 
+                    "description": "Parking ticket started at 10 January 2017 at 19:34:22 GMT", 
+                    "value": "2017-01-10T19:34:22.000Z"
+                }
+            ], 
             "description": "Milliseconds since UNIX Epoch time", 
             "name_cased": "ticketStartTime", 
             "size": 8, 
@@ -58,6 +86,13 @@
             "name": "ticket_start_time"
         }, 
         {
+            "examples": [
+                {
+                    "hex": "0000016dab1a8528", 
+                    "description": "Parking ticket ended at 8. October 2019 at 11:21:45 GMT", 
+                    "value": "2019-10-08T11:21:45.000Z"
+                }
+            ], 
             "description": "Milliseconds since UNIX Epoch time", 
             "name_cased": "ticketEndTime", 
             "size": 8, 

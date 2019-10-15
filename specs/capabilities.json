@@ -16,11 +16,39 @@
     }, 
     "properties": [
         {
-            "type": "types.supported_capability", 
             "multiple": true, 
-            "id": 1, 
+            "name": "capabilities", 
             "name_cased": "capabilities", 
-            "name": "capabilities"
+            "type": "types.supported_capability", 
+            "id": 1, 
+            "examples": [
+                {
+                    "hex": "002000050203040506", 
+                    "values": {
+                        "capability_id": 32, 
+                        "supported_property_ids": [
+                            2, 
+                            3, 
+                            4, 
+                            5, 
+                            6
+                        ]
+                    }, 
+                    "description": "Doors supports inside locks, locks, positions, inside locks state and locks state properties"
+                }, 
+                {
+                    "hex": "00230003020811", 
+                    "values": {
+                        "capability_id": 35, 
+                        "supported_property_ids": [
+                            2, 
+                            8, 
+                            17
+                        ]
+                    }, 
+                    "description": "Charging supports estimated range, charge limit and departure times properties"
+                }
+            ]
         }
     ]
 }

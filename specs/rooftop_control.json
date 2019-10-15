@@ -16,18 +16,32 @@
     }, 
     "properties": [
         {
+            "description": "1.0 (100%) is opaque, 0.0 (0%) is transparent", 
+            "name_cased": "dimming", 
             "name": "dimming", 
             "type": "types.percentage", 
-            "description": "100% is opaque, 0% is transparent", 
-            "name_cased": "dimming", 
-            "id": 1
+            "id": 1, 
+            "examples": [
+                {
+                    "hex": "3ff0000000000000", 
+                    "description": "Rooftop is opaque (100%)", 
+                    "value": 1.0
+                }
+            ]
         }, 
         {
+            "description": "1.0 (100%) is fully open, 0.0 (0%) is closed", 
+            "name_cased": "position", 
             "name": "position", 
             "type": "types.percentage", 
-            "description": "100% is fully open, 0% is closed", 
-            "name_cased": "position", 
-            "id": 2
+            "id": 2, 
+            "examples": [
+                {
+                    "hex": "3fe0000000000000", 
+                    "description": "Rooftop is half-open (50%)", 
+                    "value": 0.5
+                }
+            ]
         }, 
         {
             "name": "convertible_roof_state", 
@@ -78,9 +92,16 @@
                     "name": "loading_position_immediate"
                 }
             ], 
+            "size": 1, 
             "type": "enum", 
             "id": 3, 
-            "size": 1
+            "examples": [
+                {
+                    "hex": "01", 
+                    "description": "Convertible roof is open", 
+                    "value": "open"
+                }
+            ]
         }, 
         {
             "name": "sunroof_tilt_state", 
@@ -100,9 +121,16 @@
                     "name": "half_tilted"
                 }
             ], 
+            "size": 1, 
             "type": "enum", 
             "id": 4, 
-            "size": 1
+            "examples": [
+                {
+                    "hex": "02", 
+                    "description": "Sunroof is half-tilted", 
+                    "value": "half_tilted"
+                }
+            ]
         }, 
         {
             "name": "sunroof_state", 
@@ -122,9 +150,16 @@
                     "name": "intermediate"
                 }
             ], 
+            "size": 1, 
             "type": "enum", 
             "id": 5, 
-            "size": 1
+            "examples": [
+                {
+                    "hex": "01", 
+                    "description": "Sunroof is open", 
+                    "value": "open"
+                }
+            ]
         }
     ], 
     "setters": [

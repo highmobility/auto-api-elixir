@@ -28,9 +28,9 @@ defmodule AutoApi.FailureMessageCapability do
       iex> F.description
       "Failure Message"
       iex> length(F.properties)
-      4
+      5
       iex> List.last(F.properties)
-      {4, :failure_description}
+      {5, :failed_property_ids}
   """
 
   @type command_type :: :failure_message | :failure

@@ -13,18 +13,32 @@
     "properties": [
         {
             "pretty_name": "URL", 
-            "description": "The UTF8 bytes of the URL string", 
+            "description": "URL string", 
             "name_cased": "url", 
+            "name": "url", 
             "type": "string", 
             "id": 1, 
-            "name": "url"
+            "examples": [
+                {
+                    "hex": "68747470733a2f2f6269742e6c792f326f6259374735", 
+                    "description": "Video URL is 'https://bit.ly/2obY7G5'", 
+                    "value": "https://bit.ly/2obY7G5"
+                }
+            ]
         }, 
         {
             "name": "starting_second", 
+            "name_cased": "startingSecond", 
+            "size": 2, 
             "type": "uinteger", 
             "id": 2, 
-            "name_cased": "startingSecond", 
-            "size": 2
+            "examples": [
+                {
+                    "hex": "0003", 
+                    "description": "Start from the 3rd second", 
+                    "value": 3
+                }
+            ]
         }, 
         {
             "name": "screen", 
@@ -39,9 +53,16 @@
                     "name": "rear"
                 }
             ], 
+            "size": 1, 
             "type": "enum", 
             "id": 3, 
-            "size": 1
+            "examples": [
+                {
+                    "hex": "01", 
+                    "description": "Play the video on the rear screen", 
+                    "value": "rear"
+                }
+            ]
         }
     ], 
     "setters": [

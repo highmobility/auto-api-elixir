@@ -16,13 +16,30 @@
     }, 
     "properties": [
         {
+            "name": "coordinates", 
             "type": "types.coordinates", 
-            "id": 4, 
+            "examples": [
+                {
+                    "hex": "404a428f9f44d445402acf562174c4ce", 
+                    "values": {
+                        "latitude": 52.520008, 
+                        "longitude": 13.404954
+                    }, 
+                    "description": "Vehicle coordinates are 52.520008:13.404954"
+                }
+            ], 
             "name_cased": "coordinates", 
-            "name": "coordinates"
+            "id": 4
         }, 
         {
-            "description": "Heading in 8-bytes per IEEE 754", 
+            "examples": [
+                {
+                    "hex": "402abd80c308feac", 
+                    "description": "Heading direction is 13.370123\u00b0", 
+                    "value": 13.370123
+                }
+            ], 
+            "description": "Heading in degrees", 
             "name_cased": "heading", 
             "size": 8, 
             "type": "double", 
@@ -30,7 +47,14 @@
             "name": "heading"
         }, 
         {
-            "description": "Altitude in meters above the WGS 84 reference ellipsoid per double precision IEEE 754 formatting", 
+            "examples": [
+                {
+                    "hex": "4060b00000000000", 
+                    "description": "Vehicle altitude is 133.5 m", 
+                    "value": 133.5
+                }
+            ], 
+            "description": "Altitude in meters above the WGS 84 reference ellipsoid", 
             "name_cased": "altitude", 
             "size": 8, 
             "type": "double", 

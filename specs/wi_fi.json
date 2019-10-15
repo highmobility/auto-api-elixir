@@ -20,37 +20,72 @@
     }, 
     "properties": [
         {
+            "name": "status", 
             "type": "types.enabled_state", 
-            "id": 1, 
+            "examples": [
+                {
+                    "hex": "01", 
+                    "description": "WiFi is enabled", 
+                    "value": "enabled"
+                }
+            ], 
             "name_cased": "status", 
-            "name": "status"
+            "id": 1
         }, 
         {
+            "name": "network_connected", 
             "type": "types.connection_state", 
-            "id": 2, 
+            "examples": [
+                {
+                    "hex": "01", 
+                    "description": "WiFi is connected", 
+                    "value": "connected"
+                }
+            ], 
             "name_cased": "networkConnection", 
-            "name": "network_connected"
+            "id": 2
         }, 
         {
             "pretty_name": "Network SSID", 
-            "description": "The network SSID formatted in UTF-8", 
+            "description": "The network SSID", 
             "name_cased": "networkSSID", 
+            "name": "network_ssid", 
             "type": "string", 
             "id": 3, 
-            "name": "network_ssid"
+            "examples": [
+                {
+                    "hex": "484f4d45", 
+                    "description": "WiFi network name is 'HOME'", 
+                    "value": "HOME"
+                }
+            ]
         }, 
         {
+            "name": "network_security", 
             "type": "types.network_security", 
-            "id": 4, 
+            "examples": [
+                {
+                    "hex": "03", 
+                    "description": "WiFi network uses WPA2 Personal", 
+                    "value": "wpa2_personal"
+                }
+            ], 
             "name_cased": "networkSecurity", 
-            "name": "network_security"
+            "id": 4
         }, 
         {
+            "description": "The network password", 
+            "name_cased": "password", 
             "name": "password", 
             "type": "string", 
-            "description": "The network password formatted in UTF-8", 
-            "name_cased": "password", 
-            "id": 5
+            "id": 5, 
+            "examples": [
+                {
+                    "hex": "67726561745f7365637265743132", 
+                    "description": "WiFi network password is 'great_secret12'", 
+                    "value": "great_secret12"
+                }
+            ]
         }
     ], 
     "setters": [

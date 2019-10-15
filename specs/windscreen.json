@@ -32,9 +32,16 @@
                     "name": "automatic"
                 }
             ], 
+            "size": 1, 
             "type": "enum", 
             "id": 1, 
-            "size": 1
+            "examples": [
+                {
+                    "hex": "02", 
+                    "description": "Windscreen wipers are set to automatic mode", 
+                    "value": "automatic"
+                }
+            ]
         }, 
         {
             "name": "wipers_intensity", 
@@ -58,9 +65,16 @@
                     "name": "level_3"
                 }
             ], 
+            "size": 1, 
             "type": "enum", 
             "id": 2, 
-            "size": 1
+            "examples": [
+                {
+                    "hex": "03", 
+                    "description": "Wipers are on highest intensity, indicating heavy rain", 
+                    "value": "level_3"
+                }
+            ]
         }, 
         {
             "name": "windscreen_damage", 
@@ -83,23 +97,50 @@
                     "name": "damage_larger_than_1_inch"
                 }
             ], 
+            "size": 1, 
             "type": "enum", 
             "id": 3, 
-            "size": 1
+            "examples": [
+                {
+                    "hex": "01", 
+                    "description": "Windscreen detected an impact, but no damage", 
+                    "value": "impact_but_no_damage_detected"
+                }
+            ]
         }, 
         {
-            "name": "windscreen_zone_matrix", 
-            "type": "types.zone", 
             "description": "Representing the size of the matrix, seen from the inside of the vehicle", 
             "name_cased": "windscreenZoneMatrix", 
-            "id": 4
+            "name": "windscreen_zone_matrix", 
+            "type": "types.zone", 
+            "id": 4, 
+            "examples": [
+                {
+                    "hex": "0403", 
+                    "values": {
+                        "horizontal": 4, 
+                        "vertical": 3
+                    }, 
+                    "description": "Windscreen is divided into a matrix 4 columns horizontally by 3 rows vertically"
+                }
+            ]
         }, 
         {
-            "name": "windscreen_damage_zone", 
-            "type": "types.zone", 
             "description": "Representing the position in the zone, seen from the inside of the vehicle (1-based index)", 
             "name_cased": "windscreenDamageZone", 
-            "id": 5
+            "name": "windscreen_damage_zone", 
+            "type": "types.zone", 
+            "id": 5, 
+            "examples": [
+                {
+                    "hex": "0102", 
+                    "values": {
+                        "horizontal": 1, 
+                        "vertical": 2
+                    }, 
+                    "description": "Damage is detected in the 1st column from left and the 2nd row from the top"
+                }
+            ]
         }, 
         {
             "name": "windscreen_needs_replacement", 
@@ -118,18 +159,39 @@
                     "name": "replacement_needed"
                 }
             ], 
+            "size": 1, 
             "type": "enum", 
             "id": 6, 
-            "size": 1
+            "examples": [
+                {
+                    "hex": "01", 
+                    "description": "Windscreen does not need replacement", 
+                    "value": "no_replacement_needed"
+                }
+            ]
         }, 
         {
-            "name": "windscreen_damage_confidence", 
-            "type": "types.percentage", 
             "description": "Confidence of damage detection, 0% if no impact detected", 
             "name_cased": "windscreenDamageConfidence", 
-            "id": 7
+            "name": "windscreen_damage_confidence", 
+            "type": "types.percentage", 
+            "id": 7, 
+            "examples": [
+                {
+                    "hex": "3fee666666666666", 
+                    "description": "Damage detected with 95% confidence", 
+                    "value": 0.95
+                }
+            ]
         }, 
         {
+            "examples": [
+                {
+                    "hex": "000001598938e788", 
+                    "description": "Windscreen damage detected at 10 January 2017 at 16:32:05 UTC", 
+                    "value": "2017-01-10T16:32:05.000Z"
+                }
+            ], 
             "description": "Milliseconds since UNIX Epoch time", 
             "name_cased": "windscreenDamageDetectionTime", 
             "size": 8, 

@@ -43,54 +43,147 @@
                     "name": "automatic"
                 }
             ], 
+            "size": 1, 
             "type": "enum", 
             "id": 1, 
-            "size": 1
+            "examples": [
+                {
+                    "hex": "02", 
+                    "description": "Front exterior lights are active with full beam", 
+                    "value": "active_with_full_beam"
+                }
+            ]
         }, 
         {
+            "name": "rear_exterior_light", 
             "type": "types.active_state", 
-            "id": 2, 
+            "examples": [
+                {
+                    "hex": "01", 
+                    "description": "Rear exterior lights are active", 
+                    "value": "active"
+                }
+            ], 
             "name_cased": "rearExteriorLight", 
-            "name": "rear_exterior_light"
+            "id": 2
         }, 
         {
+            "name": "ambient_light_colour", 
             "type": "types.rgb_colour", 
-            "id": 4, 
+            "examples": [
+                {
+                    "hex": "ff0000", 
+                    "values": {
+                        "blue": 0, 
+                        "green": 0, 
+                        "red": 255
+                    }, 
+                    "description": "Ambient light is red"
+                }
+            ], 
             "name_cased": "ambientLightColour", 
-            "name": "ambient_light_colour"
+            "id": 4
         }, 
         {
+            "name": "reverse_light", 
             "type": "types.active_state", 
-            "id": 5, 
+            "examples": [
+                {
+                    "hex": "00", 
+                    "description": "Reverse light is inactive", 
+                    "value": "inactive"
+                }
+            ], 
             "name_cased": "reverseLight", 
-            "name": "reverse_light"
+            "id": 5
         }, 
         {
+            "name": "emergency_brake_light", 
             "type": "types.active_state", 
-            "id": 6, 
+            "examples": [
+                {
+                    "hex": "00", 
+                    "description": "Emergency brake light is inactive", 
+                    "value": "inactive"
+                }
+            ], 
             "name_cased": "emergencyBrakeLight", 
-            "name": "emergency_brake_light"
+            "id": 6
         }, 
         {
-            "type": "types.light", 
             "multiple": true, 
-            "id": 7, 
+            "name": "fog_lights", 
             "name_cased": "fogLights", 
-            "name": "fog_lights"
-        }, 
-        {
-            "type": "types.reading_lamp", 
-            "multiple": true, 
-            "id": 8, 
-            "name_cased": "readingLamps", 
-            "name": "reading_lamps"
-        }, 
-        {
             "type": "types.light", 
+            "id": 7, 
+            "examples": [
+                {
+                    "hex": "0000", 
+                    "values": {
+                        "state": "inactive", 
+                        "location": "front"
+                    }, 
+                    "description": "Front fog lights are inactive"
+                }, 
+                {
+                    "hex": "0101", 
+                    "values": {
+                        "state": "active", 
+                        "location": "rear"
+                    }, 
+                    "description": "Rear fog lights are active"
+                }
+            ]
+        }, 
+        {
             "multiple": true, 
-            "id": 9, 
+            "name": "reading_lamps", 
+            "name_cased": "readingLamps", 
+            "type": "types.reading_lamp", 
+            "id": 8, 
+            "examples": [
+                {
+                    "hex": "0001", 
+                    "values": {
+                        "state": "active", 
+                        "location": "front_left"
+                    }, 
+                    "description": "Front reading lamps are active"
+                }, 
+                {
+                    "hex": "0200", 
+                    "values": {
+                        "state": "inactive", 
+                        "location": "rear_right"
+                    }, 
+                    "description": "Rear reading lamps are inactive"
+                }
+            ]
+        }, 
+        {
+            "multiple": true, 
+            "name": "interior_lights", 
             "name_cased": "interiorLights", 
-            "name": "interior_lights"
+            "type": "types.light", 
+            "id": 9, 
+            "examples": [
+                {
+                    "hex": "0000", 
+                    "values": {
+                        "state": "inactive", 
+                        "location": "front"
+                    }, 
+                    "description": "Front interior lights are inactive"
+                }, 
+                {
+                    "hex": "0101", 
+                    "values": {
+                        "state": "active", 
+                        "location": "rear"
+                    }, 
+                    "description": "Rear reading lights are active"
+                }
+            ]
         }
     ], 
     "setters": [

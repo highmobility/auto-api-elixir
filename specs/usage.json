@@ -16,6 +16,13 @@
     }, 
     "properties": [
         {
+            "examples": [
+                {
+                    "hex": "029a", 
+                    "description": "Average weekly distance is 666 km", 
+                    "value": 666
+                }
+            ], 
             "description": "Average weekly distance in km", 
             "name_cased": "averageWeeklyDistance", 
             "size": 2, 
@@ -24,6 +31,13 @@
             "name": "average_weekly_distance"
         }, 
         {
+            "examples": [
+                {
+                    "hex": "029c", 
+                    "description": "Average weekly distance, over long term, is 668 km", 
+                    "value": 668
+                }
+            ], 
             "description": "Average weekyl distance, over long term, in km", 
             "name_cased": "averageWeeklyDistanceLongRun", 
             "size": 2, 
@@ -32,34 +46,91 @@
             "name": "average_weekly_distance_long_run"
         }, 
         {
-            "name": "acceleration_evaluation", 
-            "type": "types.percentage", 
             "description": "Acceleration evaluation percentage", 
             "name_cased": "accelerationEvaluation", 
-            "id": 3
+            "name": "acceleration_evaluation", 
+            "type": "types.percentage", 
+            "id": 3, 
+            "examples": [
+                {
+                    "hex": "3fe6666666666666", 
+                    "description": "Acceleration is evaluated at 70%", 
+                    "value": 0.7
+                }
+            ]
         }, 
         {
-            "name": "driving_style_evaluation", 
-            "type": "types.percentage", 
             "description": "Driving style evaluation percentage", 
             "name_cased": "drivingStyleEvaluation", 
-            "id": 4
+            "name": "driving_style_evaluation", 
+            "type": "types.percentage", 
+            "id": 4, 
+            "examples": [
+                {
+                    "hex": "3fec28f5c28f5c29", 
+                    "description": "Driving style is evaluated at 88%", 
+                    "value": 0.88
+                }
+            ]
         }, 
         {
-            "type": "types.driving_mode_activation_period", 
             "multiple": true, 
-            "id": 5, 
+            "name": "driving_modes_activation_periods", 
             "name_cased": "drivingModesActivationPeriods", 
-            "name": "driving_modes_activation_periods"
+            "type": "types.driving_mode_activation_period", 
+            "id": 5, 
+            "examples": [
+                {
+                    "hex": "013fe3333333333333", 
+                    "values": {
+                        "driving_mode": "eco", 
+                        "period": 0.6
+                    }, 
+                    "description": "Driving mode 'eco' is engaged 60% of the time"
+                }, 
+                {
+                    "hex": "003fd999999999999a", 
+                    "values": {
+                        "driving_mode": "regular", 
+                        "period": 0.4
+                    }, 
+                    "description": "Driving mode 'regular' is engaged 40% of the time"
+                }
+            ]
         }, 
         {
-            "type": "types.driving_mode_energy_consumption", 
             "multiple": true, 
-            "id": 6, 
+            "name": "driving_modes_energy_consumptions", 
             "name_cased": "drivingModesEnergyConsumptions", 
-            "name": "driving_modes_energy_consumptions"
+            "type": "types.driving_mode_energy_consumption", 
+            "id": 6, 
+            "examples": [
+                {
+                    "hex": "014204cccd", 
+                    "values": {
+                        "driving_mode": "eco", 
+                        "consumption": 33.2
+                    }, 
+                    "description": "Driving mode 'eco' consumed 33.2 kWh of electric energy"
+                }, 
+                {
+                    "hex": "00425d999a", 
+                    "values": {
+                        "driving_mode": "regular", 
+                        "consumption": 55.4
+                    }, 
+                    "description": "Driving mode 'regular' consumed 55.4 kWh of electric energy"
+                }
+            ]
         }, 
         {
+            "examples": [
+                {
+                    "hex": "42ca999a", 
+                    "description": "Last trip consumed 101.3 kWh of electric energy", 
+                    "value": 101.3
+                }
+            ], 
             "description": "Energy consumption in the last trip in kWh", 
             "name_cased": "lastTripEnergyConsumption", 
             "size": 4, 
@@ -68,6 +139,13 @@
             "name": "last_trip_energy_consumption"
         }, 
         {
+            "examples": [
+                {
+                    "hex": "41b40000", 
+                    "description": "Last trip consumed 22.5 L of fuel", 
+                    "value": 22.5
+                }
+            ], 
             "description": "Fuel consumption in the last trip in L", 
             "name_cased": "lastTripFuelConsumption", 
             "size": 4, 
@@ -76,6 +154,13 @@
             "name": "last_trip_fuel_consumption"
         }, 
         {
+            "examples": [
+                {
+                    "hex": "00017590", 
+                    "description": "Mileage is 95'632 km after last trip", 
+                    "value": 95632
+                }
+            ], 
             "description": "Mileage after the last trip in km", 
             "name_cased": "mileageAfterLastTrip", 
             "size": 4, 
@@ -84,6 +169,13 @@
             "name": "mileage_after_last_trip"
         }, 
         {
+            "examples": [
+                {
+                    "hex": "3fe6666666666666", 
+                    "description": "Electric postion of the last trip is 70%", 
+                    "value": 0.7
+                }
+            ], 
             "description": "Portion of the last trip used in electric mode", 
             "name_cased": "lastTripElectricPortion", 
             "size": 8, 
@@ -92,6 +184,13 @@
             "name": "last_trip_electric_portion"
         }, 
         {
+            "examples": [
+                {
+                    "hex": "40b5c28f", 
+                    "description": "5.68 kWh / 100 km of electric energy was recuperated during last trip", 
+                    "value": 5.68
+                }
+            ], 
             "description": "Energy recuperation rate for last trip, in kWh / 100 km", 
             "name_cased": "lastTripAverageEnergyRecuperation", 
             "size": 4, 
@@ -100,6 +199,13 @@
             "name": "last_trip_average_energy_recuperation"
         }, 
         {
+            "examples": [
+                {
+                    "hex": "3fe0000000000000", 
+                    "description": "Battery is at 50% after last trip", 
+                    "value": 0.5
+                }
+            ], 
             "description": "Battery % remaining after last trip", 
             "name_cased": "lastTripBatteryRemaining", 
             "size": 8, 
@@ -108,6 +214,13 @@
             "name": "last_trip_battery_remaining"
         }, 
         {
+            "examples": [
+                {
+                    "hex": "0000016682059d50", 
+                    "description": "Last trip happened at 17 October 2018 at 12:34:58 UTC", 
+                    "value": "2018-10-17T12:34:58.000Z"
+                }
+            ], 
             "description": "Milliseconds since UNIX Epoch time", 
             "name_cased": "lastTripDate", 
             "size": 8, 
@@ -116,7 +229,14 @@
             "name": "last_trip_date"
         }, 
         {
-            "description": "Average fuel consumption for current trip in liters/100km per IEEE 754 formatting", 
+            "examples": [
+                {
+                    "hex": "40d00000", 
+                    "description": "Average fuel consumption is 6.5 L / 100 km", 
+                    "value": 6.5
+                }
+            ], 
+            "description": "Average fuel consumption for current trip in liters / 100 km", 
             "name_cased": "averageFuelConsumption", 
             "size": 4, 
             "type": "float", 
@@ -124,7 +244,14 @@
             "name": "average_fuel_consumption"
         }, 
         {
-            "description": "Current fuel consumption in liters/100km per IEEE 754 formatting", 
+            "examples": [
+                {
+                    "hex": "40f00000", 
+                    "description": "Current fuel consumption is 7.5 L / 100 km", 
+                    "value": 7.5
+                }
+            ], 
+            "description": "Current fuel consumption in liters / 100 km", 
             "name_cased": "currentFuelConsumption", 
             "size": 4, 
             "type": "float", 

@@ -30,9 +30,16 @@
                     "name": "intermediate"
                 }
             ], 
+            "size": 1, 
             "type": "enum", 
             "id": 1, 
-            "size": 1
+            "examples": [
+                {
+                    "hex": "01", 
+                    "description": "Hood is open", 
+                    "value": "open"
+                }
+            ]
         }
     ]
 }

@@ -14,7 +14,14 @@
     }, 
     "properties": [
         {
-            "description": "The inside temperature in celsius per IEEE 754 formatting", 
+            "examples": [
+                {
+                    "hex": "41980000", 
+                    "description": "Inside temperature is 19C", 
+                    "value": 19.0
+                }
+            ], 
+            "description": "The inside temperature in celsius", 
             "name_cased": "insideTemperature", 
             "size": 4, 
             "type": "float", 
@@ -22,7 +29,14 @@
             "name": "inside_temperature"
         }, 
         {
-            "description": "The outside temperature in celsius per IEEE 754 formatting", 
+            "examples": [
+                {
+                    "hex": "41400000", 
+                    "description": "Outside temperature is 12C", 
+                    "value": 12.0
+                }
+            ], 
+            "description": "The outside temperature in celsius", 
             "name_cased": "outsideTemperature", 
             "size": 4, 
             "type": "float", 
@@ -30,7 +44,14 @@
             "name": "outside_temperature"
         }, 
         {
-            "description": "The driver temperature setting in celsius per IEEE 754 formatting", 
+            "examples": [
+                {
+                    "hex": "41ac0000", 
+                    "description": "Driver temperature setting is 21.5C", 
+                    "value": 21.5
+                }
+            ], 
+            "description": "The driver temperature setting in celsius", 
             "name_cased": "driverTemperatureSetting", 
             "size": 4, 
             "type": "float", 
@@ -38,7 +59,14 @@
             "name": "driver_temperature_setting"
         }, 
         {
-            "description": "The passenger temperature setting in celsius per IEEE 754 formatting", 
+            "examples": [
+                {
+                    "hex": "41ac0000", 
+                    "description": "Passenger temperature setting is 21.5C", 
+                    "value": 21.5
+                }
+            ], 
+            "description": "The passenger temperature setting in celsius", 
             "name_cased": "passengerTemperatureSetting", 
             "size": 4, 
             "type": "float", 
@@ -46,31 +74,66 @@
             "name": "passenger_temperature_setting"
         }, 
         {
+            "name": "hvac_state", 
             "type": "types.active_state", 
-            "id": 5, 
+            "examples": [
+                {
+                    "hex": "01", 
+                    "description": "HVAC is active", 
+                    "value": "active"
+                }
+            ], 
             "name_cased": "hvacState", 
-            "name": "hvac_state"
+            "id": 5
         }, 
         {
+            "name": "defogging_state", 
             "type": "types.active_state", 
-            "id": 6, 
+            "examples": [
+                {
+                    "hex": "00", 
+                    "description": "Defogging is inactive", 
+                    "value": "inactive"
+                }
+            ], 
             "name_cased": "defoggingState", 
-            "name": "defogging_state"
+            "id": 6
         }, 
         {
+            "name": "defrosting_state", 
             "type": "types.active_state", 
-            "id": 7, 
+            "examples": [
+                {
+                    "hex": "00", 
+                    "description": "Defrosting is inactive", 
+                    "value": "inactive"
+                }
+            ], 
             "name_cased": "defrostingState", 
-            "name": "defrosting_state"
+            "id": 7
         }, 
         {
+            "name": "ionising_state", 
             "type": "types.active_state", 
-            "id": 8, 
+            "examples": [
+                {
+                    "hex": "00", 
+                    "description": "Ionising is inactive", 
+                    "value": "inactive"
+                }
+            ], 
             "name_cased": "ionisingState", 
-            "name": "ionising_state"
+            "id": 8
         }, 
         {
-            "description": "The defrosting temperature setting in celsius per IEEE 754 formatting", 
+            "examples": [
+                {
+                    "hex": "41ac0000", 
+                    "description": "Defrosting temperature setting is 21.5C", 
+                    "value": 21.5
+                }
+            ], 
+            "description": "The defrosting temperature setting in celsius", 
             "name_cased": "defrostingTemperatureSetting", 
             "size": 4, 
             "type": "float", 
@@ -83,10 +146,41 @@
             "name": "hvac_weekday_starting_times", 
             "name_cased": "hvacWeekdayStartingTimes", 
             "type": "types.hvac_weekday_starting_time", 
-            "id": 11
+            "id": 11, 
+            "examples": [
+                {
+                    "hex": "05121e", 
+                    "values": {
+                        "weekday": "saturday", 
+                        "time": {
+                            "hour": 18, 
+                            "minute": 30
+                        }
+                    }, 
+                    "description": "HVAC is started on saturday at 18:30"
+                }, 
+                {
+                    "hex": "06131f", 
+                    "values": {
+                        "weekday": "sunday", 
+                        "time": {
+                            "hour": 19, 
+                            "minute": 31
+                        }
+                    }, 
+                    "description": "HVAC is started on sunday at 19:31"
+                }
+            ]
         }, 
         {
-            "description": "The rear temperature in celsius per IEEE 754 formatting", 
+            "examples": [
+                {
+                    "hex": "41ac0000", 
+                    "description": "Rear temperature setting is 21.5C", 
+                    "value": 21.5
+                }
+            ], 
+            "description": "The rear temperature in celsius", 
             "name_cased": "rearTemperatureSetting", 
             "size": 4, 
             "type": "float", 

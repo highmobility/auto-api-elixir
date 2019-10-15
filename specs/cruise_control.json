@@ -17,10 +17,17 @@
     }, 
     "properties": [
         {
+            "name": "cruise_control", 
             "type": "types.active_state", 
-            "id": 1, 
+            "examples": [
+                {
+                    "hex": "01", 
+                    "description": "Cruise control is active", 
+                    "value": "active"
+                }
+            ], 
             "name_cased": "cruiseControl", 
-            "name": "cruise_control"
+            "id": 1
         }, 
         {
             "name": "limiter", 
@@ -43,11 +50,25 @@
                     "name": "speed_fixed"
                 }
             ], 
+            "size": 1, 
             "type": "enum", 
             "id": 2, 
-            "size": 1
+            "examples": [
+                {
+                    "hex": "01", 
+                    "description": "Higher speed requested by the limiter", 
+                    "value": "higher_speed_requested"
+                }
+            ]
         }, 
         {
+            "examples": [
+                {
+                    "hex": "003d", 
+                    "description": "The target speed is set to 61km/h", 
+                    "value": 61
+                }
+            ], 
             "description": "The target speed in km/h", 
             "name_cased": "targetSpeed", 
             "size": 2, 
@@ -57,15 +78,29 @@
         }, 
         {
             "pretty_name": "Adaptive Cruise Control", 
+            "name": "adaptive_cruise_control", 
+            "name_cased": "adaptiveCruiseControl", 
             "type": "types.active_state", 
             "id": 4, 
-            "name_cased": "adaptiveCruiseControl", 
-            "name": "adaptive_cruise_control"
+            "examples": [
+                {
+                    "hex": "00", 
+                    "description": "Adaptive Cruise Control is inactive", 
+                    "value": "inactive"
+                }
+            ]
         }, 
         {
-            "pretty_name": "Adaptive Cruise Control (ACC) target speed", 
             "name": "acc_target_speed", 
             "name_cased": "accTargetSpeed", 
+            "pretty_name": "Adaptive Cruise Control (ACC) target speed", 
+            "examples": [
+                {
+                    "hex": "0043", 
+                    "description": "The Adaptive Cruise Control target speed is set to 67km/h", 
+                    "value": 67
+                }
+            ], 
             "size": 2, 
             "type": "integer", 
             "id": 5, 

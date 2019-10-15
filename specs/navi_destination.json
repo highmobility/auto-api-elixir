@@ -16,19 +16,43 @@
     }, 
     "properties": [
         {
+            "name": "coordinates", 
             "type": "types.coordinates", 
-            "id": 1, 
+            "examples": [
+                {
+                    "hex": "404a428f9f44d445402acf562174c4ce", 
+                    "values": {
+                        "latitude": 52.520008, 
+                        "longitude": 13.404954
+                    }, 
+                    "description": "Coordinates are 52.520008:13.404954"
+                }
+            ], 
             "name_cased": "coordinates", 
-            "name": "coordinates"
+            "id": 1
         }, 
         {
+            "description": "Destination name", 
+            "name_cased": "destinationName", 
             "name": "destination_name", 
             "type": "string", 
-            "description": "Destination name bytes formatted in UTF-8", 
-            "name_cased": "destinationName", 
-            "id": 2
+            "id": 2, 
+            "examples": [
+                {
+                    "hex": "4265726c696e", 
+                    "description": "Destination name is 'Berlin'", 
+                    "value": "Berlin"
+                }
+            ]
         }, 
         {
+            "examples": [
+                {
+                    "hex": "0e", 
+                    "description": "14 available POI data slots", 
+                    "value": 14
+                }
+            ], 
             "description": "Remaining number of POI data slots available.", 
             "name_cased": "dataSlotsFree", 
             "size": 1, 
@@ -37,6 +61,13 @@
             "name": "data_slots_free"
         }, 
         {
+            "examples": [
+                {
+                    "hex": "1e", 
+                    "description": "Maximum number of POI data slots is 30", 
+                    "value": 30
+                }
+            ], 
             "description": "Maximum number of POI data slots.", 
             "name_cased": "dataSlotsMax", 
             "size": 1, 
@@ -45,13 +76,30 @@
             "name": "data_slots_max"
         }, 
         {
-            "name": "arrival_duration", 
-            "type": "types.time", 
             "description": "Remaining time until reaching the destination.", 
             "name_cased": "arrivalDuration", 
-            "id": 5
+            "name": "arrival_duration", 
+            "type": "types.time", 
+            "id": 5, 
+            "examples": [
+                {
+                    "hex": "0220", 
+                    "values": {
+                        "hour": 2, 
+                        "minute": 32
+                    }, 
+                    "description": "Remaining time to destination is 2h and 32min"
+                }
+            ]
         }, 
         {
+            "examples": [
+                {
+                    "hex": "0539", 
+                    "description": "Remaining distance to destination is 1337km", 
+                    "value": 1337
+                }
+            ], 
             "description": "Remaining distance to reach the destination.", 
             "name_cased": "distanceToDestination", 
             "size": 2, 

@@ -14,16 +14,30 @@
     }, 
     "properties": [
         {
+            "name": "lock", 
             "type": "types.lock_state", 
-            "id": 1, 
+            "examples": [
+                {
+                    "hex": "00", 
+                    "description": "Trunk is unlocked", 
+                    "value": "unlocked"
+                }
+            ], 
             "name_cased": "lock", 
-            "name": "lock"
+            "id": 1
         }, 
         {
+            "name": "position", 
             "type": "types.position", 
-            "id": 2, 
+            "examples": [
+                {
+                    "hex": "01", 
+                    "description": "Trunk is open", 
+                    "value": "open"
+                }
+            ], 
             "name_cased": "position", 
-            "name": "position"
+            "id": 2
         }
     ], 
     "setters": [

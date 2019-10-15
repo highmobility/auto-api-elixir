@@ -23,9 +23,16 @@
                     "name": "wake_up"
                 }
             ], 
+            "size": 1, 
             "type": "enum", 
             "id": 1, 
-            "size": 1
+            "examples": [
+                {
+                    "hex": "00", 
+                    "description": "Wake up", 
+                    "value": "wake_up"
+                }
+            ]
         }
     ], 
     "setters": [

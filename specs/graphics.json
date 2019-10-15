@@ -13,11 +13,18 @@
     "properties": [
         {
             "pretty_name": "Image URL", 
-            "description": "The UTF8 bytes of the image URL string", 
+            "description": "The image URL", 
             "name_cased": "imageURL", 
+            "name": "image_url", 
             "type": "string", 
             "id": 1, 
-            "name": "image_url"
+            "examples": [
+                {
+                    "hex": "68747470733a2f2f61626f75742e686967682d6d6f62696c6974792e636f6d2f6173736574732f696d616765732f686d2d6c6f676f2e737667", 
+                    "description": "Image URL is https://about.high-mobility.com/assets/images/hm-logo.svg", 
+                    "value": "https://about.high-mobility.com/assets/images/hm-logo.svg"
+                }
+            ]
         }
     ], 
     "setters": [

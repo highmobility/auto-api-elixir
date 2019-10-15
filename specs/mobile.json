@@ -15,10 +15,17 @@
     }, 
     "properties": [
         {
+            "name": "connection", 
             "type": "types.connection_state", 
-            "id": 1, 
+            "examples": [
+                {
+                    "hex": "01", 
+                    "description": "A mobile phone is connected", 
+                    "value": "connected"
+                }
+            ], 
             "name_cased": "connection", 
-            "name": "connection"
+            "id": 1
         }
     ]
 }

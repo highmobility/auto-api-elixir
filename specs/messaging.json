@@ -13,18 +13,32 @@
     }, 
     "properties": [
         {
+            "description": "The text", 
+            "name_cased": "text", 
             "name": "text", 
             "type": "string", 
-            "description": "The text bytes of UTF8", 
-            "name_cased": "text", 
-            "id": 1
+            "id": 1, 
+            "examples": [
+                {
+                    "hex": "486579206d6f6d21", 
+                    "description": "Message text says 'Hey mom!'", 
+                    "value": "Hey mom!"
+                }
+            ]
         }, 
         {
+            "description": "The optional handle of message", 
+            "name_cased": "handle", 
             "name": "handle", 
             "type": "string", 
-            "description": "The optional handle of message, bytes of UTF8", 
-            "name_cased": "handle", 
-            "id": 2
+            "id": 2, 
+            "examples": [
+                {
+                    "hex": "457070", 
+                    "description": "Name of the sender/receiver is Epp", 
+                    "value": "Epp"
+                }
+            ]
         }
     ], 
     "setters": [
@@ -35,7 +49,7 @@
             "optional": [
                 2
             ], 
-            "name": "message_recieved"
+            "name": "message_received"
         }
     ]
 }

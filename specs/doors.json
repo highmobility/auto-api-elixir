@@ -17,39 +17,107 @@
             "multiple": true, 
             "description": "Inside lock states for the given doors", 
             "name_cased": "insideLocks", 
+            "name": "inside_locks", 
             "type": "types.lock", 
             "id": 2, 
-            "name": "inside_locks"
+            "examples": [
+                {
+                    "hex": "0001", 
+                    "values": {
+                        "location": "front_left", 
+                        "lock_state": "locked"
+                    }, 
+                    "description": "Front left door is locked inside"
+                }, 
+                {
+                    "hex": "0100", 
+                    "values": {
+                        "location": "front_right", 
+                        "lock_state": "unlocked"
+                    }, 
+                    "description": "Front right door is unlocked inside"
+                }
+            ]
         }, 
         {
             "multiple": true, 
             "description": "Lock states for the given doors", 
             "name_cased": "locks", 
+            "name": "locks", 
             "type": "types.lock", 
             "id": 3, 
-            "name": "locks"
+            "examples": [
+                {
+                    "hex": "0200", 
+                    "values": {
+                        "location": "rear_right", 
+                        "lock_state": "unlocked"
+                    }, 
+                    "description": "Rear right door is unlocked"
+                }, 
+                {
+                    "hex": "0301", 
+                    "values": {
+                        "location": "rear_left", 
+                        "lock_state": "locked"
+                    }, 
+                    "description": "Rear left door is locked"
+                }
+            ]
         }, 
         {
             "multiple": true, 
             "description": "Door positions for the given doors", 
             "name_cased": "positions", 
+            "name": "positions", 
             "type": "types.door_position", 
             "id": 4, 
-            "name": "positions"
+            "examples": [
+                {
+                    "hex": "0100", 
+                    "values": {
+                        "position": "closed", 
+                        "location": "front_right"
+                    }, 
+                    "description": "Front right door is closed"
+                }, 
+                {
+                    "hex": "0001", 
+                    "values": {
+                        "position": "open", 
+                        "location": "front_left"
+                    }, 
+                    "description": "Front left door is open"
+                }
+            ]
         }, 
         {
-            "name": "inside_locks_state", 
-            "type": "types.lock_state", 
             "description": "Inside locks state for the whole car (combines all specific lock states if available)", 
             "name_cased": "insideLocksState", 
-            "id": 5
+            "name": "inside_locks_state", 
+            "type": "types.lock_state", 
+            "id": 5, 
+            "examples": [
+                {
+                    "hex": "01", 
+                    "description": "Doors are locked inside", 
+                    "value": "locked"
+                }
+            ]
         }, 
         {
-            "name": "locks_state", 
-            "type": "types.lock_state", 
             "description": "Locks state for the whole car (combines all specific lock states if available)", 
             "name_cased": "locksState", 
-            "id": 6
+            "name": "locks_state", 
+            "type": "types.lock_state", 
+            "id": 6, 
+            "examples": [
+                {
+                    "hex": "00", 
+                    "description": "Doors are unlocked", 
+                    "value": "unlocked"
+                }
+            ]
         }
     ], 
     "setters": [

@@ -16,10 +16,17 @@
     }, 
     "properties": [
         {
+            "name": "status", 
             "type": "types.active_state", 
-            "id": 1, 
+            "examples": [
+                {
+                    "hex": "01", 
+                    "description": "Valet mode is active", 
+                    "value": "active"
+                }
+            ], 
             "name_cased": "status", 
-            "name": "status"
+            "id": 1
         }
     ], 
     "setters": [

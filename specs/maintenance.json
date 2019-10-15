@@ -14,6 +14,13 @@
     }, 
     "properties": [
         {
+            "examples": [
+                {
+                    "hex": "01f5", 
+                    "description": "501 days until next service", 
+                    "value": 501
+                }
+            ], 
             "description": "Number of days until next servicing of the car, whereas negative is overdue", 
             "name_cased": "daysToNextService", 
             "size": 2, 
@@ -22,6 +29,13 @@
             "name": "days_to_next_service"
         }, 
         {
+            "examples": [
+                {
+                    "hex": "00000e61", 
+                    "description": "3'681 km until next service", 
+                    "value": 3681
+                }
+            ], 
             "description": "The amount of kilometers until next servicing of the car", 
             "name_cased": "kilometersToNextService", 
             "size": 4, 
@@ -30,6 +44,13 @@
             "name": "kilometers_to_next_service"
         }, 
         {
+            "examples": [
+                {
+                    "hex": "03", 
+                    "description": "Condition Based Service reports count is 3", 
+                    "value": 3
+                }
+            ], 
             "description": "The number of CBS reports", 
             "name_cased": "cbsReportsCount", 
             "size": 1, 
@@ -38,6 +59,13 @@
             "name": "cbs_reports_count"
         }, 
         {
+            "examples": [
+                {
+                    "hex": "05", 
+                    "description": "5 months until exhaust inspection", 
+                    "value": 5
+                }
+            ], 
             "description": "Number of months until exhaust inspection", 
             "name_cased": "monthsToExhaustInspection", 
             "size": 1, 
@@ -59,18 +87,32 @@
                 }, 
                 {
                     "id": 2, 
-                    "name": "succesful"
+                    "name": "successful"
                 }, 
                 {
                     "id": 3, 
                     "name": "error"
                 }
             ], 
+            "size": 1, 
             "type": "enum", 
             "id": 5, 
-            "size": 1
+            "examples": [
+                {
+                    "hex": "02", 
+                    "description": "Teleservice is available", 
+                    "value": "successful"
+                }
+            ]
         }, 
         {
+            "examples": [
+                {
+                    "hex": "01f4", 
+                    "description": "Service distance threshold is 500 km", 
+                    "value": 500
+                }
+            ], 
             "description": "Distance threshold for Service", 
             "name_cased": "serviceDistanceThreshold", 
             "size": 2, 
@@ -79,6 +121,13 @@
             "name": "service_distance_threshold"
         }, 
         {
+            "examples": [
+                {
+                    "hex": "04", 
+                    "description": "Service time threshold is 4 weeks", 
+                    "value": 4
+                }
+            ], 
             "description": "Time threshold, in weeks, for Service", 
             "name_cased": "serviceTimeThreshold", 
             "size": 1, 
@@ -87,6 +136,13 @@
             "name": "service_time_threshold"
         }, 
         {
+            "examples": [
+                {
+                    "hex": "000001674058f130", 
+                    "description": "Automatic teleservice call date is at 23 November 2018 at 11:33:50 UTC", 
+                    "value": "2018-11-23T11:33:50.000Z"
+                }
+            ], 
             "description": "Milliseconds since UNIX Epoch time", 
             "name_cased": "automaticTeleserviceCallDate", 
             "size": 8, 
@@ -95,6 +151,13 @@
             "name": "automatic_teleservice_call_date"
         }, 
         {
+            "examples": [
+                {
+                    "hex": "000001674024c1d0", 
+                    "description": "Teleservice battery call date is at 23 November 2018 at 10:36:50 GMT", 
+                    "value": "2018-11-23T10:36:50.000Z"
+                }
+            ], 
             "description": "Milliseconds since UNIX Epoch time", 
             "name_cased": "teleserviceBatteryCallDate", 
             "size": 8, 
@@ -103,6 +166,13 @@
             "name": "teleservice_battery_call_date"
         }, 
         {
+            "examples": [
+                {
+                    "hex": "00000166a15d20d8", 
+                    "description": "Next inspection date is at 23 October 2018 at 14:38:47 GMT", 
+                    "value": "2018-10-23T14:38:47.000Z"
+                }
+            ], 
             "description": "Milliseconds since UNIX Epoch time", 
             "name_cased": "nextInspectionDate", 
             "size": 8, 
@@ -111,13 +181,34 @@
             "name": "next_inspection_date"
         }, 
         {
-            "type": "types.condition_based_service", 
             "multiple": true, 
-            "id": 11, 
+            "name": "condition_based_services", 
             "name_cased": "conditionBasedServices", 
-            "name": "condition_based_services"
+            "type": "types.condition_based_service", 
+            "id": 11, 
+            "examples": [
+                {
+                    "hex": "07e305000300000b4272616b6520666c756964002c4e657874206368616e676520617420737065636966696564206461746520617420746865206c61746573742e", 
+                    "values": {
+                        "description": "Next change at specified date at the latest.", 
+                        "due_status": "ok", 
+                        "year": 2019, 
+                        "text": "Brake fluid", 
+                        "id": 3, 
+                        "month": 5
+                    }, 
+                    "description": "Next latest brake fluid change date is 2019 May in a CBS with ID 3 and status 'ok'"
+                }
+            ]
         }, 
         {
+            "examples": [
+                {
+                    "hex": "000001677c63d280", 
+                    "description": "Brake fluid change date is at 5 December 2018 at 03:22:56 GMT", 
+                    "value": "2018-12-05T03:22:56.000Z"
+                }
+            ], 
             "description": "Milliseconds since UNIX Epoch time", 
             "name_cased": "brakeFluidChangeDate", 
             "size": 8, 

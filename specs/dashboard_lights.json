@@ -16,11 +16,45 @@
     }, 
     "properties": [
         {
-            "type": "types.dashboard_light", 
             "multiple": true, 
-            "id": 1, 
+            "name": "dashboard_lights", 
             "name_cased": "dashboardLights", 
-            "name": "dashboard_lights"
+            "type": "types.dashboard_light", 
+            "id": 1, 
+            "examples": [
+                {
+                    "hex": "0000", 
+                    "values": {
+                        "state": "inactive", 
+                        "name": "high_beam"
+                    }, 
+                    "description": "High beam is inactive"
+                }, 
+                {
+                    "hex": "0201", 
+                    "values": {
+                        "state": "info", 
+                        "name": "hazard_warning"
+                    }, 
+                    "description": "Info light active for hazard warning"
+                }, 
+                {
+                    "hex": "0f03", 
+                    "values": {
+                        "state": "red", 
+                        "name": "transmission_fluid_temperature"
+                    }, 
+                    "description": "Red light active for transmission fluid temperature"
+                }, 
+                {
+                    "hex": "1502", 
+                    "values": {
+                        "state": "yellow", 
+                        "name": "engine_oil_level"
+                    }, 
+                    "description": "Yellow light active for engine oil temperature"
+                }
+            ]
         }
     ]
 }

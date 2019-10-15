@@ -14,6 +14,13 @@
     }, 
     "properties": [
         {
+            "examples": [
+                {
+                    "hex": "000249f0", 
+                    "description": "Odometer is showing 150'000 km", 
+                    "value": 150000
+                }
+            ], 
             "description": "The car mileage (odometer) in km", 
             "name_cased": "mileage", 
             "size": 4, 
@@ -22,6 +29,13 @@
             "name": "mileage"
         }, 
         {
+            "examples": [
+                {
+                    "hex": "0063", 
+                    "description": "Engine oil temperature is 99C", 
+                    "value": 99
+                }
+            ], 
             "description": "Engine oil temperature in Celsius, whereas can be negative", 
             "name_cased": "engineOilTemperature", 
             "size": 2, 
@@ -30,6 +44,13 @@
             "name": "engine_oil_temperature"
         }, 
         {
+            "examples": [
+                {
+                    "hex": "003c", 
+                    "description": "Vehicle speed is 60km/h", 
+                    "value": 60
+                }
+            ], 
             "description": "The vehicle speed in km/h, whereas can be negative", 
             "name_cased": "speed", 
             "size": 2, 
@@ -38,15 +59,29 @@
             "name": "speed"
         }, 
         {
-            "pretty_name": "Engine RPM", 
             "name": "engine_rpm", 
             "name_cased": "engineRPM", 
+            "pretty_name": "Engine RPM", 
+            "examples": [
+                {
+                    "hex": "09c4", 
+                    "description": "RPM is 2500", 
+                    "value": 2500
+                }
+            ], 
             "size": 2, 
             "type": "uinteger", 
             "id": 4, 
             "description": "Engine RPM (revolutions per minute)"
         }, 
         {
+            "examples": [
+                {
+                    "hex": "3feccccccccccccd", 
+                    "description": "Fuel level is at 90%", 
+                    "value": 0.9
+                }
+            ], 
             "description": "Fuel level percentage between 0.0-1.0", 
             "name_cased": "fuelLevel", 
             "size": 8, 
@@ -55,6 +90,13 @@
             "name": "fuel_level"
         }, 
         {
+            "examples": [
+                {
+                    "hex": "0109", 
+                    "description": "Estimate range is 256 km", 
+                    "value": 265
+                }
+            ], 
             "description": "Estimated range (with combustion engine)", 
             "name_cased": "estimatedRange", 
             "size": 2, 
@@ -63,13 +105,27 @@
             "name": "estimated_range"
         }, 
         {
+            "name": "washer_fluid_level", 
             "type": "types.fluid_level", 
-            "id": 9, 
+            "examples": [
+                {
+                    "hex": "01", 
+                    "description": "Washer fluid is filled", 
+                    "value": "filled"
+                }
+            ], 
             "name_cased": "washerFluidLevel", 
-            "name": "washer_fluid_level"
+            "id": 9
         }, 
         {
-            "description": "Battery voltage per IEEE 754 formatting", 
+            "examples": [
+                {
+                    "hex": "41400000", 
+                    "description": "Battery voltage is 12V", 
+                    "value": 12.0
+                }
+            ], 
+            "description": "Battery voltage", 
             "name_cased": "batteryVoltage", 
             "size": 4, 
             "type": "float", 
@@ -77,15 +133,29 @@
             "name": "battery_voltage"
         }, 
         {
-            "pretty_name": "AdBlue Level", 
             "name": "adblue_level", 
             "name_cased": "adBlueLevel", 
+            "pretty_name": "AdBlue Level", 
+            "examples": [
+                {
+                    "hex": "3f000000", 
+                    "description": "0.5 liters of AdBlue remaining", 
+                    "value": 0.5
+                }
+            ], 
             "size": 4, 
             "type": "float", 
             "id": 12, 
-            "description": "AdBlue level in liters formatted in 4-bytes per IEEE 754 formatting"
+            "description": "AdBlue level in liters"
         }, 
         {
+            "examples": [
+                {
+                    "hex": "05dc", 
+                    "description": "1'500km driven since reset", 
+                    "value": 1500
+                }
+            ], 
             "description": "The distance driven in km since reset", 
             "name_cased": "distanceSinceReset", 
             "size": 2, 
@@ -94,6 +164,13 @@
             "name": "distance_since_reset"
         }, 
         {
+            "examples": [
+                {
+                    "hex": "000a", 
+                    "description": "10km driven since the engine start", 
+                    "value": 10
+                }
+            ], 
             "description": "The distance driven in km since trip start", 
             "name_cased": "distanceSinceStart", 
             "size": 2, 
@@ -102,7 +179,14 @@
             "name": "distance_since_start"
         }, 
         {
-            "description": "The fuel volume measured in liters formatted in 4-bytes per IEEE 754 formatting", 
+            "examples": [
+                {
+                    "hex": "420e0000", 
+                    "description": "35.5 liters of fuel remaining", 
+                    "value": 35.5
+                }
+            ], 
+            "description": "The fuel volume measured in liters", 
             "name_cased": "fuelVolume", 
             "size": 4, 
             "type": "float", 
@@ -111,12 +195,26 @@
         }, 
         {
             "pretty_name": "Anti-lock braking system (ABS)", 
+            "name": "anti_lock_braking", 
+            "name_cased": "antiLockBraking", 
             "type": "types.active_state", 
             "id": 16, 
-            "name_cased": "antiLockBraking", 
-            "name": "anti_lock_braking"
+            "examples": [
+                {
+                    "hex": "01", 
+                    "description": "ABS is active", 
+                    "value": "active"
+                }
+            ]
         }, 
         {
+            "examples": [
+                {
+                    "hex": "0014", 
+                    "description": "Engine coolant temperature is 20C", 
+                    "value": 20
+                }
+            ], 
             "description": "Engine coolant temperature in Celsius, whereas can be negative", 
             "name_cased": "engineCoolantTemperature", 
             "size": 2, 
@@ -125,7 +223,14 @@
             "name": "engine_coolant_temperature"
         }, 
         {
-            "description": "The accumulated time of engine operation per IEEE 754 formatting", 
+            "examples": [
+                {
+                    "hex": "44bb94cd", 
+                    "description": "The engine has been operating 1'500.65 hours in total", 
+                    "value": 1500.65
+                }
+            ], 
+            "description": "The accumulated time of engine operation", 
             "name_cased": "engineTotalOperatingHours", 
             "size": 4, 
             "type": "float", 
@@ -133,7 +238,14 @@
             "name": "engine_total_operating_hours"
         }, 
         {
-            "description": "The accumulated lifespan fuel consumption in liters per IEEE 754 formatting", 
+            "examples": [
+                {
+                    "hex": "46d78600", 
+                    "description": "The engine has consumend 27'587.0 liters of fuel over it's lifespan", 
+                    "value": 27587.0
+                }
+            ], 
+            "description": "The accumulated lifespan fuel consumption in liters", 
             "name_cased": "engineTotalFuelConsumption", 
             "size": 4, 
             "type": "float", 
@@ -141,12 +253,26 @@
             "name": "engine_total_fuel_consumption"
         }, 
         {
+            "name": "brake_fluid_level", 
             "type": "types.fluid_level", 
-            "id": 20, 
+            "examples": [
+                {
+                    "hex": "00", 
+                    "description": "Brake fluid is low", 
+                    "value": "low"
+                }
+            ], 
             "name_cased": "brakeFluidLevel", 
-            "name": "brake_fluid_level"
+            "id": 20
         }, 
         {
+            "examples": [
+                {
+                    "hex": "3fc999999999999a", 
+                    "description": "Engine torque is currently at 20%", 
+                    "value": 0.2
+                }
+            ], 
             "description": "Current engine torque percentage between 0.0-1.0", 
             "name_cased": "engineTorque", 
             "size": 8, 
@@ -155,6 +281,13 @@
             "name": "engine_torque"
         }, 
         {
+            "examples": [
+                {
+                    "hex": "3fb999999999999a", 
+                    "description": "Engine load is currently at 10%", 
+                    "value": 0.1
+                }
+            ], 
             "description": "Current engine load percentage between 0.0-1.0", 
             "name_cased": "engineLoad", 
             "size": 8, 
@@ -163,6 +296,13 @@
             "name": "engine_load"
         }, 
         {
+            "examples": [
+                {
+                    "hex": "0041", 
+                    "description": "Wheel based speed is 65km/h", 
+                    "value": 65
+                }
+            ], 
             "description": "The vehicle speed in km/h measured at the wheel base, whereas can be negative", 
             "name_cased": "wheelBasedSpeed", 
             "size": 2, 
@@ -171,6 +311,13 @@
             "name": "wheel_based_speed"
         }, 
         {
+            "examples": [
+                {
+                    "hex": "3fe1eb851eb851ec", 
+                    "description": "Battery level is at 56%", 
+                    "value": 0.56
+                }
+            ], 
             "description": "Battery level in %, value between 0.0 and 1.0", 
             "name_cased": "batteryLevel", 
             "size": 8, 
@@ -179,25 +326,73 @@
             "name": "battery_level"
         }, 
         {
-            "type": "types.check_control_message", 
             "multiple": true, 
-            "id": 25, 
+            "name": "check_control_messages", 
             "name_cased": "checkControlMessages", 
-            "name": "check_control_messages"
+            "type": "types.check_control_message", 
+            "id": 25, 
+            "examples": [
+                {
+                    "hex": "000100019c78000c436865636b20656e67696e650005416c657274", 
+                    "values": {
+                        "status": "Alert", 
+                        "text": "Check engine", 
+                        "id": 1, 
+                        "remaining_minutes": 105592
+                    }, 
+                    "description": "105'592 minutes remaining for Check Engine Alert control message with ID 1"
+                }
+            ]
         }, 
         {
-            "type": "types.tire_pressure", 
             "multiple": true, 
-            "id": 26, 
+            "name": "tire_pressures", 
             "name_cased": "tirePressures", 
-            "name": "tire_pressures"
+            "type": "types.tire_pressure", 
+            "id": 26, 
+            "examples": [
+                {
+                    "hex": "004013d70a", 
+                    "values": {
+                        "pressure": 2.31, 
+                        "location": "front_left"
+                    }, 
+                    "description": "Front left tire pressure is 2.31 BAR"
+                }, 
+                {
+                    "hex": "014013d70a", 
+                    "values": {
+                        "pressure": 2.31, 
+                        "location": "front_right"
+                    }, 
+                    "description": "Front right tire pressure is 2.31 BAR"
+                }
+            ]
         }, 
         {
-            "type": "types.tire_temperature", 
             "multiple": true, 
-            "id": 27, 
+            "name": "tire_temperatures", 
             "name_cased": "tireTemperatures", 
-            "name": "tire_temperatures"
+            "type": "types.tire_temperature", 
+            "id": 27, 
+            "examples": [
+                {
+                    "hex": "0242200000", 
+                    "values": {
+                        "location": "rear_right", 
+                        "temperature": 40
+                    }, 
+                    "description": "Rear right tire temperature is 40C"
+                }, 
+                {
+                    "hex": "0342200000", 
+                    "values": {
+                        "location": "rear_left", 
+                        "temperature": 40
+                    }, 
+                    "description": "Rear left tire temperature is 40C"
+                }
+            ]
         }, 
         {
             "pretty_name": "Wheel RPMs", 
@@ -205,16 +400,63 @@
             "name": "wheel_rpms", 
             "name_cased": "wheelRPMs", 
             "type": "types.wheel_rpm", 
-            "id": 28
+            "id": 28, 
+            "examples": [
+                {
+                    "hex": "0102ea", 
+                    "values": {
+                        "rpm": 746, 
+                        "location": "front_right"
+                    }, 
+                    "description": "Front right wheel RPM is 746"
+                }, 
+                {
+                    "hex": "0202ea", 
+                    "values": {
+                        "rpm": 746, 
+                        "location": "rear_right"
+                    }, 
+                    "description": "Rear right wheel RPM is 746"
+                }
+            ]
         }, 
         {
-            "type": "types.trouble_code", 
             "multiple": true, 
-            "id": 29, 
+            "name": "trouble_codes", 
             "name_cased": "troubleCodes", 
-            "name": "trouble_codes"
+            "type": "types.trouble_code", 
+            "id": 29, 
+            "examples": [
+                {
+                    "hex": "0200074331313136464100095244555f3231324652000750454e44494e47", 
+                    "values": {
+                        "status": "PENDING", 
+                        "id": "C1116FA", 
+                        "occurences": 2, 
+                        "ecu_id": "RDU_212FR"
+                    }, 
+                    "description": "Trouble code C1116FA with ECU-ID RDU_212FR occured 2 times and is PENDING"
+                }, 
+                {
+                    "hex": "020007433136334146410006445452323132000750454e44494e47", 
+                    "values": {
+                        "status": "PENDING", 
+                        "id": "C163AFA", 
+                        "occurences": 2, 
+                        "ecu_id": "DTR212"
+                    }, 
+                    "description": "Trouble code C163AFA with ECU-ID DTR212 occured 2 times and is PENDING"
+                }
+            ]
         }, 
         {
+            "examples": [
+                {
+                    "hex": "000249f1", 
+                    "description": "Odometer is showing 150'001 meters", 
+                    "value": 150001
+                }
+            ], 
             "description": "The car mileage (odometer) in meters", 
             "name_cased": "mileageMeters", 
             "size": 4, 

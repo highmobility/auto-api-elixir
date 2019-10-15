@@ -16,11 +16,18 @@
     }, 
     "properties": [
         {
-            "name": "rain_intensity", 
-            "type": "types.percentage", 
             "description": "Measured raining intensity percentage, whereas 0% is no rain and 100% is maximum rain", 
             "name_cased": "rainIntensity", 
-            "id": 1
+            "name": "rain_intensity", 
+            "type": "types.percentage", 
+            "id": 1, 
+            "examples": [
+                {
+                    "hex": "3ff0000000000000", 
+                    "description": "Rain intensity is at 100% (maximum rain)", 
+                    "value": 1.0
+                }
+            ]
         }
     ]
 }

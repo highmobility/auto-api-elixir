@@ -38,11 +38,25 @@
                     "name": "right_flasher_active"
                 }
             ], 
+            "size": 1, 
             "type": "enum", 
             "id": 1, 
-            "size": 1
+            "examples": [
+                {
+                    "hex": "02", 
+                    "description": "Left flasher is active", 
+                    "value": "left_flasher_active"
+                }
+            ]
         }, 
         {
+            "examples": [
+                {
+                    "hex": "03", 
+                    "description": "Honk the horn for 3 sec", 
+                    "value": 3
+                }
+            ], 
             "description": "Number of seconds to honk the horn", 
             "name_cased": "honkSeconds", 
             "size": 1, 
@@ -51,6 +65,13 @@
             "name": "honk_seconds"
         }, 
         {
+            "examples": [
+                {
+                    "hex": "05", 
+                    "description": "Flash the lights 5 times", 
+                    "value": 5
+                }
+            ], 
             "description": "Number of times to flash the lights", 
             "name_cased": "flashTimes", 
             "size": 1, 
@@ -59,10 +80,17 @@
             "name": "flash_times"
         }, 
         {
+            "name": "emergency_flashers_state", 
             "type": "types.active_state", 
-            "id": 4, 
+            "examples": [
+                {
+                    "hex": "01", 
+                    "description": "Emergency flashers are active", 
+                    "value": "active"
+                }
+            ], 
             "name_cased": "emergencyFlashersState", 
-            "name": "emergency_flashers_state"
+            "id": 4
         }
     ], 
     "setters": [

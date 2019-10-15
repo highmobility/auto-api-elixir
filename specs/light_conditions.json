@@ -16,7 +16,14 @@
     }, 
     "properties": [
         {
-            "description": "Measured outside illuminance in lux, formatted as IEEE 754 decimal", 
+            "examples": [
+                {
+                    "hex": "47d8cc00", 
+                    "description": "Outside illuminance is 111'000.0 lux", 
+                    "value": 111000.0
+                }
+            ], 
+            "description": "Measured outside illuminance in lux", 
             "name_cased": "outsideLight", 
             "size": 4, 
             "type": "float", 
@@ -24,7 +31,14 @@
             "name": "outside_light"
         }, 
         {
-            "description": "Measured inside illuminance in lux, formatted as IEEE 754 decimal", 
+            "examples": [
+                {
+                    "hex": "3e800000", 
+                    "description": "Inside illuminance is 0.25 lux", 
+                    "value": 0.25
+                }
+            ], 
+            "description": "Measured inside illuminance in lux", 
             "name_cased": "insideLight", 
             "size": 4, 
             "type": "float", 

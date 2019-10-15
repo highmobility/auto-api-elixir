@@ -54,11 +54,25 @@
                     "name": "ended"
                 }
             ], 
+            "size": 1, 
             "type": "enum", 
             "id": 1, 
-            "size": 1
+            "examples": [
+                {
+                    "hex": "02", 
+                    "description": "Remote control is started", 
+                    "value": "started"
+                }
+            ]
         }, 
         {
+            "examples": [
+                {
+                    "hex": "0032", 
+                    "description": "Angle is 50\u00b0", 
+                    "value": 50
+                }
+            ], 
             "description": "Wheel base angle in degrees", 
             "name_cased": "angle", 
             "size": 2, 
@@ -67,6 +81,13 @@
             "name": "angle"
         }, 
         {
+            "examples": [
+                {
+                    "hex": "05", 
+                    "description": "Speed is 5 km/h", 
+                    "value": 5
+                }
+            ], 
             "description": "Speed in km/h", 
             "name_cased": "speed", 
             "size": 1, 

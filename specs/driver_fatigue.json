@@ -37,9 +37,16 @@
                     "name": "car_ready_to_take_over"
                 }
             ], 
+            "size": 1, 
             "type": "enum", 
             "id": 1, 
-            "size": 1
+            "examples": [
+                {
+                    "hex": "01", 
+                    "description": "Driver is recommended to take a pause", 
+                    "value": "pause_recommended"
+                }
+            ]
         }
     ]
 }

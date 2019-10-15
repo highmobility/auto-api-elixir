@@ -30,9 +30,16 @@
                     "name": "charging"
                 }
             ], 
+            "size": 1, 
             "type": "enum", 
             "id": 1, 
-            "size": 1
+            "examples": [
+                {
+                    "hex": "02", 
+                    "description": "Charging is active", 
+                    "value": "charging"
+                }
+            ]
         }, 
         {
             "name": "authentication_mechanism", 
@@ -48,9 +55,16 @@
                     "name": "app"
                 }
             ], 
+            "size": 1, 
             "type": "enum", 
             "id": 2, 
-            "size": 1
+            "examples": [
+                {
+                    "hex": "01", 
+                    "description": "Authentication mechanism is an app", 
+                    "value": "app"
+                }
+            ]
         }, 
         {
             "name": "plug_type", 
@@ -75,53 +89,102 @@
                     "name": "chademo"
                 }
             ], 
+            "size": 1, 
             "type": "enum", 
             "id": 3, 
-            "size": 1
+            "examples": [
+                {
+                    "hex": "01", 
+                    "description": "Type 2 plug", 
+                    "value": "type_2"
+                }
+            ]
         }, 
         {
-            "pretty_name": "Charging Power (kW)", 
             "name": "charging_power_kw", 
             "name_cased": "chargingPowerKW", 
+            "pretty_name": "Charging Power (kW)", 
+            "examples": [
+                {
+                    "hex": "41380000", 
+                    "description": "Charging power is 11.5 kW", 
+                    "value": 11.5
+                }
+            ], 
             "size": 4, 
             "type": "float", 
             "id": 4, 
-            "description": "Charging power in kW formatted in 4-bytes per IEEE 754"
+            "description": "Charging power in kW"
         }, 
         {
+            "name": "solar_charging", 
             "type": "types.active_state", 
-            "id": 5, 
+            "examples": [
+                {
+                    "hex": "01", 
+                    "description": "Solar charging is active", 
+                    "value": "active"
+                }
+            ], 
             "name_cased": "solarCharging", 
-            "name": "solar_charging"
+            "id": 5
         }, 
         {
+            "name": "wi_fi_hotspot_enabled", 
             "type": "types.enabled_state", 
-            "id": 8, 
-            "name_cased": "hotspotEnabled", 
-            "name": "hotspot_enabled"
+            "examples": [
+                {
+                    "hex": "01", 
+                    "description": "WiFi hotspot is enabled", 
+                    "value": "enabled"
+                }
+            ], 
+            "name_cased": "wifiHotspotEnabled", 
+            "id": 8
         }, 
         {
-            "pretty_name": "Hotspot SSID", 
-            "description": "The Wi-Fi Hotspot SSID formatted in UTF-8", 
-            "name_cased": "hotspotSSID", 
+            "pretty_name": "Wi-Fi Hotspot SSID", 
+            "description": "The Wi-Fi Hotspot SSID", 
+            "name_cased": "wifiHotspotSSID", 
+            "name": "wi_fi_hotspot_ssid", 
             "type": "string", 
             "id": 9, 
-            "name": "hotspot_ssid"
+            "examples": [
+                {
+                    "hex": "436861726765722037363132", 
+                    "description": "WiFi hotspot SSID is 'Charger 7612'", 
+                    "value": "Charger 7612"
+                }
+            ]
         }, 
         {
             "pretty_name": "Wi-Fi Hotspot Security", 
+            "name": "wi_fi_hotspot_security", 
+            "name_cased": "wiFiHotspotSecurity", 
             "type": "types.network_security", 
             "id": 10, 
-            "name_cased": "wiFiHotspotSecurity", 
-            "name": "wi_fi_hotspot_security"
+            "examples": [
+                {
+                    "hex": "03", 
+                    "description": "WiFi hotspot security uses WPA2-Personal", 
+                    "value": "wpa2_personal"
+                }
+            ]
         }, 
         {
             "pretty_name": "Wi-Fi Hotspot Password", 
-            "description": "The Wi-Fi Hotspot password formatted in UTF-8", 
+            "description": "The Wi-Fi Hotspot password", 
             "name_cased": "wiFiHotspotPassword", 
+            "name": "wi_fi_hotspot_password", 
             "type": "string", 
             "id": 11, 
-            "name": "wi_fi_hotspot_password"
+            "examples": [
+                {
+                    "hex": "5a57337641524e554265", 
+                    "description": "WiFi hotspot password is 'ZW3vARNUBe'", 
+                    "value": "ZW3vARNUBe"
+                }
+            ]
         }, 
         {
             "name": "authentication_state", 
@@ -138,49 +201,107 @@
                     "name": "authenticated"
                 }
             ], 
+            "size": 1, 
             "type": "enum", 
             "id": 13, 
-            "size": 1
+            "examples": [
+                {
+                    "hex": "01", 
+                    "description": "Is authenticated to the charger", 
+                    "value": "authenticated"
+                }
+            ]
         }, 
         {
-            "pretty_name": "Charge current (DC)", 
             "name": "charge_current_dc", 
             "name_cased": "chargeCurrentDC", 
+            "pretty_name": "Charge current (DC)", 
+            "examples": [
+                {
+                    "hex": "3f000000", 
+                    "description": "Charger direct current is 0.5 V", 
+                    "value": 0.5
+                }
+            ], 
             "size": 4, 
             "type": "float", 
             "id": 14, 
-            "description": "The charge current (DC) per IEEE 754"
+            "description": "The charge direct current"
         }, 
         {
-            "pretty_name": "Maximum charge current", 
             "name": "maximum_charge_current", 
             "name_cased": "maximumChargeCurrent", 
+            "pretty_name": "Maximum charge current", 
+            "examples": [
+                {
+                    "hex": "3f800000", 
+                    "description": "Maximum charger current is 1.0 V", 
+                    "value": 1.0
+                }
+            ], 
             "size": 4, 
             "type": "float", 
             "id": 15, 
-            "description": "The maximum possible charge current per IEEE 754"
+            "description": "The maximum possible charge current"
         }, 
         {
-            "pretty_name": "Minimum charge current", 
             "name": "minimum_charge_current", 
             "name_cased": "minimumChargeCurrent", 
+            "pretty_name": "Minimum charge current", 
+            "examples": [
+                {
+                    "hex": "00000000", 
+                    "description": "Minimum charger current is 0.0 V", 
+                    "value": 0.0
+                }
+            ], 
             "size": 4, 
             "type": "float", 
             "id": 16, 
-            "description": "The minimal possible charge current per IEEE 754"
+            "description": "The minimal possible charge current"
         }, 
         {
+            "name": "coordinates", 
             "type": "types.coordinates", 
-            "id": 17, 
+            "examples": [
+                {
+                    "hex": "404a428f9f44d445402acf562174c4ce", 
+                    "values": {
+                        "latitude": 52.520008, 
+                        "longitude": 13.404954
+                    }, 
+                    "description": "Charger is located at 52.520008:13.404954"
+                }
+            ], 
             "name_cased": "coordinates", 
-            "name": "coordinates"
+            "id": 17
         }, 
         {
-            "type": "types.price_tariff", 
             "multiple": true, 
-            "id": 18, 
+            "name": "price_tariffs", 
             "name_cased": "priceTariffs", 
-            "name": "price_tariffs"
+            "type": "types.price_tariff", 
+            "id": 18, 
+            "examples": [
+                {
+                    "hex": "00409000000003455552", 
+                    "values": {
+                        "currency": "EUR", 
+                        "price": 4.5, 
+                        "pricing_type": "starting_fee"
+                    }, 
+                    "description": "Charger starting fee tariff is 4.5 EUR"
+                }, 
+                {
+                    "hex": "023e99999a0006526970706c65", 
+                    "values": {
+                        "currency": "Ripple", 
+                        "price": 0.3, 
+                        "pricing_type": "per_kwh"
+                    }, 
+                    "description": "Charger per kWh tariff is 0.3 Ripple"
+                }
+            ]
         }
     ], 
     "setters": [

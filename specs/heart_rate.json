@@ -16,10 +16,17 @@
     "properties": [
         {
             "name": "heart_rate", 
+            "name_cased": "heartRate", 
+            "size": 1, 
             "type": "uinteger", 
             "id": 1, 
-            "name_cased": "heartRate", 
-            "size": 1
+            "examples": [
+                {
+                    "hex": "40", 
+                    "description": "Heart rate is 64 bpm", 
+                    "value": 64
+                }
+            ]
         }
     ], 
     "setters": [

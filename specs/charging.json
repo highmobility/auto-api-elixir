@@ -14,6 +14,13 @@
     }, 
     "properties": [
         {
+            "examples": [
+                {
+                    "hex": "01b0", 
+                    "description": "432 km estimated range", 
+                    "value": 432
+                }
+            ], 
             "description": "Estimated range in km", 
             "name_cased": "estimatedRange", 
             "size": 2, 
@@ -22,50 +29,92 @@
             "name": "estimated_range"
         }, 
         {
+            "examples": [
+                {
+                    "hex": "3fe0000000000000", 
+                    "description": "Battery level 50%", 
+                    "value": 0.5
+                }
+            ], 
             "description": "Battery level percentage between 0.0-1.0", 
-            "name_cased": "batterLevel", 
+            "name_cased": "batteryLevel", 
             "size": 8, 
             "type": "double", 
             "id": 3, 
             "name": "battery_level"
         }, 
         {
-            "pretty_name": "Battery current (AC)", 
             "name": "battery_current_ac", 
             "name_cased": "batteryCurrentAC", 
+            "pretty_name": "Battery current (AC)", 
+            "examples": [
+                {
+                    "hex": "bf19999a", 
+                    "description": "Battery current (AC) -0.6", 
+                    "value": -0.6
+                }
+            ], 
             "size": 4, 
             "type": "float", 
             "id": 4, 
-            "description": "Battery current in 4-bytes per IEEE 754"
+            "description": "Battery active current"
         }, 
         {
-            "pretty_name": "Battery current (DC)", 
             "name": "battery_current_dc", 
             "name_cased": "batteryCurrentDC", 
+            "pretty_name": "Battery current (DC)", 
+            "examples": [
+                {
+                    "hex": "bf19999a", 
+                    "description": "Battery current (DC) -0.6", 
+                    "value": -0.6
+                }
+            ], 
             "size": 4, 
             "type": "float", 
             "id": 5, 
-            "description": "Battery current in 4-bytes per IEEE 754"
+            "description": "Battery direct current"
         }, 
         {
-            "pretty_name": "Charger voltage (AC)", 
             "name": "charger_voltage_ac", 
             "name_cased": "chargerVoltageAC", 
+            "pretty_name": "Charger voltage (AC)", 
+            "examples": [
+                {
+                    "hex": "43c80000", 
+                    "description": "Charger voltage 400V", 
+                    "value": 400
+                }
+            ], 
             "size": 4, 
             "type": "float", 
             "id": 6, 
-            "description": "Charger voltage in 4-bytes per IEEE 754"
+            "description": "Charger voltage"
         }, 
         {
-            "pretty_name": "Charger voltage (DC)", 
             "name": "charger_voltage_dc", 
             "name_cased": "chargerVoltageDC", 
+            "pretty_name": "Charger voltage (DC)", 
+            "examples": [
+                {
+                    "hex": "43c80000", 
+                    "description": "Charger voltage 400V", 
+                    "value": 400
+                }
+            ], 
             "size": 4, 
             "type": "float", 
             "id": 7, 
-            "description": "Charger voltage in 4-bytes per IEEE 754"
+            "description": "Charger voltage"
         }, 
         {
+            "examples": [
+                {
+                    "hex": "3feccccccccccccd", 
+                    "description": "Charge limit 90%", 
+                    "value": 0.9
+                }
+            ], 
             "description": "Charge limit percentage between 0.0-1.0", 
             "name_cased": "chargeLimit", 
             "size": 8, 
@@ -74,6 +123,13 @@
             "name": "charge_limit"
         }, 
         {
+            "examples": [
+                {
+                    "hex": "3c", 
+                    "description": "Time to complete charge 60 minutes", 
+                    "value": 60
+                }
+            ], 
             "description": "Time until charging completed in minutes", 
             "name_cased": "timeToCompleteCharge", 
             "size": 1, 
@@ -82,19 +138,33 @@
             "name": "time_to_complete_charge"
         }, 
         {
-            "pretty_name": "Charging rate (kW)", 
             "name": "charging_rate_kw", 
             "name_cased": "chargingRateKW", 
+            "pretty_name": "Charging rate (kW)", 
+            "examples": [
+                {
+                    "hex": "40600000", 
+                    "description": "3.5 kW charge rate", 
+                    "value": 3.5
+                }
+            ], 
             "size": 4, 
             "type": "float", 
             "id": 10, 
-            "description": "Charge rate in kW represented as 4-bytes per IEEE 754, when charging"
+            "description": "Charge rate in kW when charging"
         }, 
         {
+            "name": "charge_port_state", 
             "type": "types.position", 
-            "id": 11, 
+            "examples": [
+                {
+                    "hex": "01", 
+                    "description": "Charge port open", 
+                    "value": "open"
+                }
+            ], 
             "name_cased": "chargePortState", 
-            "name": "charge_port_state"
+            "id": 11
         }, 
         {
             "name": "charge_mode", 
@@ -114,18 +184,32 @@
                     "name": "inductive"
                 }
             ], 
+            "size": 1, 
             "type": "enum", 
             "id": 12, 
-            "size": 1
+            "examples": [
+                {
+                    "hex": "01", 
+                    "description": "Timer based charging", 
+                    "value": "timer_based"
+                }
+            ]
         }, 
         {
-            "pretty_name": "Maximum charging current", 
             "name": "max_charging_current", 
             "name_cased": "maxChargingCurrent", 
+            "pretty_name": "Maximum charging current", 
+            "examples": [
+                {
+                    "hex": "41c80000", 
+                    "description": "Maximum charging current is 25.0 A", 
+                    "value": 25.0
+                }
+            ], 
             "size": 4, 
             "type": "float", 
             "id": 14, 
-            "description": "Maximum charging current in 4-bytes per IEEE 754"
+            "description": "Maximum charging current"
         }, 
         {
             "name": "plug_type", 
@@ -150,9 +234,16 @@
                     "name": "chademo"
                 }
             ], 
+            "size": 1, 
             "type": "enum", 
             "id": 15, 
-            "size": 1
+            "examples": [
+                {
+                    "hex": "01", 
+                    "description": "The socket is Type 2", 
+                    "value": "type_2"
+                }
+            ]
         }, 
         {
             "name": "charging_window_chosen", 
@@ -167,16 +258,47 @@
                     "name": "chosen"
                 }
             ], 
+            "size": 1, 
             "type": "enum", 
             "id": 16, 
-            "size": 1
+            "examples": [
+                {
+                    "hex": "00", 
+                    "description": "No charging windows has been chosen", 
+                    "value": "not_chosen"
+                }
+            ]
         }, 
         {
-            "type": "types.departure_time", 
             "multiple": true, 
-            "id": 17, 
+            "name": "departure_times", 
             "name_cased": "departureTimes", 
-            "name": "departure_times"
+            "type": "types.departure_time", 
+            "id": 17, 
+            "examples": [
+                {
+                    "hex": "011020", 
+                    "values": {
+                        "state": "active", 
+                        "time": {
+                            "hour": 16, 
+                            "minute": 32
+                        }
+                    }, 
+                    "description": "Departure time is active at 16:32"
+                }, 
+                {
+                    "hex": "000b33", 
+                    "values": {
+                        "state": "inactive", 
+                        "time": {
+                            "hour": 11, 
+                            "minute": 51
+                        }
+                    }, 
+                    "description": "Departure time is inactive at 11:51"
+                }
+            ]
         }, 
         {
             "pretty_name": "Reduction of charging-current times", 
@@ -184,10 +306,41 @@
             "name": "reduction_times", 
             "name_cased": "reductionTimes", 
             "type": "types.reduction_time", 
-            "id": 19
+            "id": 19, 
+            "examples": [
+                {
+                    "hex": "001121", 
+                    "values": {
+                        "start_stop": "start", 
+                        "time": {
+                            "hour": 17, 
+                            "minute": 33
+                        }
+                    }, 
+                    "description": "Start reduction of charging current at 17:33"
+                }, 
+                {
+                    "hex": "010c34", 
+                    "values": {
+                        "start_stop": "stop", 
+                        "time": {
+                            "hour": 12, 
+                            "minute": 52
+                        }
+                    }, 
+                    "description": "Stop reduction of charging current at 12:52"
+                }
+            ]
         }, 
         {
-            "description": "Battery temperature in Celsius in 4-bytes per IEEE 754", 
+            "examples": [
+                {
+                    "hex": "4219999a", 
+                    "description": "The battery temperature is 38.4 C\u00b0", 
+                    "value": 38.4
+                }
+            ], 
+            "description": "Battery temperature in Celsius", 
             "name_cased": "batteryTemperature", 
             "size": 4, 
             "type": "float", 
@@ -195,11 +348,29 @@
             "name": "battery_temperature"
         }, 
         {
-            "type": "types.timer", 
             "multiple": true, 
-            "id": 21, 
+            "name": "timers", 
             "name_cased": "timers", 
-            "name": "timers"
+            "type": "types.timer", 
+            "id": 21, 
+            "examples": [
+                {
+                    "hex": "00000001598938e788", 
+                    "values": {
+                        "date": "2017-01-10T16:32:05.000Z", 
+                        "timer_type": "preferred_start_time"
+                    }, 
+                    "description": "10 January 2017 at 16:32:05 UTC"
+                }, 
+                {
+                    "hex": "0100000159893c9108", 
+                    "values": {
+                        "date": "2017-01-10T16:36:05.000Z", 
+                        "timer_type": "preferred_end_time"
+                    }, 
+                    "description": "10 January 2017 at 16:36:05 GMT"
+                }
+            ]
         }, 
         {
             "name": "plugged_in", 
@@ -214,9 +385,16 @@
                     "name": "plugged_in"
                 }
             ], 
+            "size": 1, 
             "type": "enum", 
             "id": 22, 
-            "size": 1
+            "examples": [
+                {
+                    "hex": "01", 
+                    "description": "The charger is plugged in", 
+                    "value": "plugged_in"
+                }
+            ]
         }, 
         {
             "name": "status", 
@@ -253,9 +431,16 @@
                     "name": "charging_error"
                 }
             ], 
+            "size": 1, 
             "type": "enum", 
             "id": 23, 
-            "size": 1
+            "examples": [
+                {
+                    "hex": "01", 
+                    "description": "The vehicle is charging", 
+                    "value": "charging"
+                }
+            ]
         }
     ], 
     "setters": [

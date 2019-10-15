@@ -19,17 +19,62 @@
             "multiple": true, 
             "description": "The bytes of incoming capabilities (states)", 
             "name_cased": "multiStates", 
+            "name": "multi_states", 
             "type": "types.capability_state", 
             "id": 1, 
-            "name": "multi_states"
+            "examples": [
+                {
+                    "hex": "002001060004010001000400050100020001", 
+                    "values": {
+                        "doors": {
+                            "positions": {
+                                "position": "open", 
+                                "location": "front_left"
+                            }, 
+                            "locks_state": "unlocked"
+                        }
+                    }, 
+                    "description": "Doors capability's locks are unlocked"
+                }, 
+                {
+                    "hex": "0023010a0007010004406000000b000401000101", 
+                    "values": {
+                        "charging": {
+                            "charge_port_state": "open", 
+                            "charging_rate_kw": 3.5
+                        }
+                    }, 
+                    "description": "Charging capability's charging rate is 3.5 kW"
+                }
+            ]
         }, 
         {
             "multiple": true, 
             "description": "The bytes of outgoing capabilities (commands)", 
             "name_cased": "multiCommands", 
+            "name": "multi_commands", 
             "type": "types.capability_state", 
             "id": 2, 
-            "name": "multi_commands"
+            "examples": [
+                {
+                    "hex": "00200105000401000101", 
+                    "values": {
+                        "doors": {
+                            "inside_locks_state": "locked"
+                        }
+                    }, 
+                    "description": "Lock inside door locks"
+                }, 
+                {
+                    "hex": "00350101000401000100", 
+                    "values": {
+                        "ignition": {
+                            "status": "off"
+                        }
+                    }, 
+                    "description": "Turn ignition off"
+                }
+            ]
         }
     ], 
     "setters": [

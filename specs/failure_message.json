@@ -13,6 +13,13 @@
     }, 
     "properties": [
         {
+            "examples": [
+                {
+                    "hex": "0021", 
+                    "description": "Failed message is Trunk capability", 
+                    "value": 33
+                }
+            ], 
             "description": "Capability identifier of the failed message", 
             "name_cased": "failedMessageID", 
             "size": 2, 
@@ -21,6 +28,13 @@
             "name": "failed_message_id"
         }, 
         {
+            "examples": [
+                {
+                    "hex": "01", 
+                    "description": "Failed message type is Set", 
+                    "value": 1
+                }
+            ], 
             "description": "Message type of the failed message", 
             "name_cased": "failedMessageType", 
             "size": 1, 
@@ -81,16 +95,47 @@
                     "id": 7
                 }
             ], 
+            "size": 1, 
             "type": "enum", 
             "id": 3, 
-            "size": 1
+            "examples": [
+                {
+                    "hex": "01", 
+                    "description": "Failure occured because of unauthorised state", 
+                    "value": "unauthorised"
+                }
+            ]
         }, 
         {
+            "description": "Failure description", 
+            "name_cased": "failureDescription", 
             "name": "failure_description", 
             "type": "string", 
-            "description": "Failure description bytes formatted in UTF-8", 
-            "name_cased": "failureDescription", 
-            "id": 4
+            "id": 4, 
+            "examples": [
+                {
+                    "hex": "54727920616761696e", 
+                    "description": "Failure description informs to try again", 
+                    "value": "Try again"
+                }
+            ]
+        }, 
+        {
+            "description": "Array of failed property identifiers", 
+            "name_cased": "failedPropertyIDs", 
+            "name": "failed_property_ids", 
+            "type": "bytes", 
+            "id": 5, 
+            "examples": [
+                {
+                    "hex": "0102", 
+                    "description": "Trunk's lock and position failed", 
+                    "value": [
+                        1, 
+                        2
+                    ]
+                }
+            ]
         }
     ]
 }

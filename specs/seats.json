@@ -14,18 +14,54 @@
     }, 
     "properties": [
         {
-            "type": "types.person_detected", 
             "multiple": true, 
-            "id": 2, 
+            "name": "persons_detected", 
             "name_cased": "personsDetected", 
-            "name": "persons_detected"
+            "type": "types.person_detected", 
+            "id": 2, 
+            "examples": [
+                {
+                    "hex": "0001", 
+                    "values": {
+                        "detected": "detected", 
+                        "location": "front_left"
+                    }, 
+                    "description": "Person detected on the front-left seat"
+                }, 
+                {
+                    "hex": "0100", 
+                    "values": {
+                        "detected": "not_detected", 
+                        "location": "front_right"
+                    }, 
+                    "description": "No person detected on the front-right seat"
+                }
+            ]
         }, 
         {
-            "type": "types.seatbelt_state", 
             "multiple": true, 
-            "id": 3, 
+            "name": "seatbelts_state", 
             "name_cased": "seatbeltsState", 
-            "name": "seatbelts_state"
+            "type": "types.seatbelt_state", 
+            "id": 3, 
+            "examples": [
+                {
+                    "hex": "0001", 
+                    "values": {
+                        "fastened_state": "fastened", 
+                        "location": "front_left"
+                    }, 
+                    "description": "Seatbelt fastened for the front-left seat"
+                }, 
+                {
+                    "hex": "0100", 
+                    "values": {
+                        "fastened_state": "not_fastened", 
+                        "location": "front_right"
+                    }, 
+                    "description": "Seatbelt not fastened for the front-right seat"
+                }
+            ]
         }
     ]
 }

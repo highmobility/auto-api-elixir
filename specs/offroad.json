@@ -14,6 +14,13 @@
     }, 
     "properties": [
         {
+            "examples": [
+                {
+                    "hex": "000a", 
+                    "description": "Route inckine is 10\u00b0", 
+                    "value": 10
+                }
+            ], 
             "description": "The route elevation incline in degrees, which is a negative number for decline", 
             "name_cased": "routeIncline", 
             "size": 2, 
@@ -22,6 +29,13 @@
             "name": "route_incline"
         }, 
         {
+            "examples": [
+                {
+                    "hex": "3fe0000000000000", 
+                    "description": "Wheel suspension level is 50%", 
+                    "value": 0.5
+                }
+            ], 
             "description": "The wheel suspension level percentage, whereas 0.0 is no suspension and 1.0 maximum suspension", 
             "name_cased": "wheelSuspension", 
             "size": 8, 

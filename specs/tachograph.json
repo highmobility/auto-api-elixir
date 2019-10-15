@@ -14,31 +14,92 @@
     }, 
     "properties": [
         {
-            "type": "types.driver_working_state", 
             "multiple": true, 
-            "id": 1, 
+            "name": "drivers_working_states", 
             "name_cased": "driversWorkingStates", 
-            "name": "drivers_working_states"
+            "type": "types.driver_working_state", 
+            "id": 1, 
+            "examples": [
+                {
+                    "hex": "0102", 
+                    "values": {
+                        "driver_number": 1, 
+                        "working_state": "working"
+                    }, 
+                    "description": "Driver nr 1 is working"
+                }, 
+                {
+                    "hex": "0200", 
+                    "values": {
+                        "driver_number": 2, 
+                        "working_state": "resting"
+                    }, 
+                    "description": "Driver nr 2 is resting"
+                }
+            ]
         }, 
         {
-            "type": "types.driver_time_state", 
             "multiple": true, 
-            "id": 2, 
+            "name": "drivers_time_states", 
             "name_cased": "driversTimeStates", 
-            "name": "drivers_time_states"
+            "type": "types.driver_time_state", 
+            "id": 2, 
+            "examples": [
+                {
+                    "hex": "0302", 
+                    "values": {
+                        "driver_number": 3, 
+                        "time_state": "four_reached"
+                    }, 
+                    "description": "Driver nr 3 has reached 4 hours"
+                }, 
+                {
+                    "hex": "0405", 
+                    "values": {
+                        "driver_number": 4, 
+                        "time_state": "fifteen_min_before_sixteen"
+                    }, 
+                    "description": "Driver nr 4 has reached 15 hours and 45 minutes"
+                }
+            ]
         }, 
         {
-            "type": "types.driver_card_present", 
             "multiple": true, 
-            "id": 3, 
+            "name": "drivers_cards_present", 
             "name_cased": "driversCardsPresent", 
-            "name": "drivers_cards_present"
+            "type": "types.driver_card_present", 
+            "id": 3, 
+            "examples": [
+                {
+                    "hex": "0601", 
+                    "values": {
+                        "card_present": "present", 
+                        "driver_number": 6
+                    }, 
+                    "description": "Driver nr 6 has a card present"
+                }, 
+                {
+                    "hex": "0700", 
+                    "values": {
+                        "card_present": "not_present", 
+                        "driver_number": 7
+                    }, 
+                    "description": "Driver nr 7 does not have a card present"
+                }
+            ]
         }, 
         {
+            "name": "vehicle_motion", 
             "type": "types.detected", 
-            "id": 4, 
+            "examples": [
+                {
+                    "hex": "01", 
+                    "description": "Detected vehicle in motion", 
+                    "value": "detected"
+                }
+            ], 
             "name_cased": "vehicleMotion", 
-            "name": "vehicle_motion"
+            "id": 4
         }, 
         {
             "name": "vehicle_overspeed", 
@@ -53,9 +114,16 @@
                     "name": "overspeed"
                 }
             ], 
+            "size": 1, 
             "type": "enum", 
             "id": 5, 
-            "size": 1
+            "examples": [
+                {
+                    "hex": "00", 
+                    "description": "Vehicle is not overspeeding", 
+                    "value": "no_overspeed"
+                }
+            ]
         }, 
         {
             "name": "vehicle_direction", 
@@ -70,11 +138,25 @@
                     "name": "reverse"
                 }
             ], 
+            "size": 1, 
             "type": "enum", 
             "id": 6, 
-            "size": 1
+            "examples": [
+                {
+                    "hex": "00", 
+                    "description": "Vehicle is moving forward", 
+                    "value": "forward"
+                }
+            ]
         }, 
         {
+            "examples": [
+                {
+                    "hex": "0050", 
+                    "description": "Vehicle speed is 80 km/h", 
+                    "value": 80
+                }
+            ], 
             "description": "The tachograph vehicle speed in km/h", 
             "name_cased": "vehicleSpeed", 
             "size": 2, 

@@ -16,11 +16,21 @@
     }, 
     "properties": [
         {
-            "name": "vehicle_time", 
-            "type": "types.time", 
             "description": "Vehicle time in a 24h format", 
             "name_cased": "vehicleTime", 
-            "id": 1
+            "name": "vehicle_time", 
+            "type": "types.time", 
+            "id": 1, 
+            "examples": [
+                {
+                    "hex": "1337", 
+                    "values": {
+                        "hour": 19, 
+                        "minute": 55
+                    }, 
+                    "description": "Vehcile time is 19:55"
+                }
+            ]
         }
     ]
 }

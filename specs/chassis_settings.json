@@ -16,10 +16,17 @@
     }, 
     "properties": [
         {
+            "name": "driving_mode", 
             "type": "types.driving_mode", 
-            "id": 1, 
+            "examples": [
+                {
+                    "hex": "01", 
+                    "description": "ECO driving mode", 
+                    "value": "eco"
+                }
+            ], 
             "name_cased": "drivingMode", 
-            "name": "driving_mode"
+            "id": 1
         }, 
         {
             "name": "sport_chrono", 
@@ -40,35 +47,103 @@
                     "name": "reset"
                 }
             ], 
+            "size": 1, 
             "type": "enum", 
             "id": 2, 
-            "size": 1
+            "examples": [
+                {
+                    "hex": "01", 
+                    "description": "Sport Chrono active", 
+                    "value": "active"
+                }
+            ]
         }, 
         {
             "multiple": true, 
             "description": "The current values for the spring rates", 
             "name_cased": "currentSpringRates", 
+            "name": "current_spring_rates", 
             "type": "types.spring_rate", 
             "id": 5, 
-            "name": "current_spring_rates"
+            "examples": [
+                {
+                    "hex": "0015", 
+                    "values": {
+                        "axle": "front", 
+                        "spring_rate": 21
+                    }, 
+                    "description": "Front axle spring rate is 21 N/mm"
+                }, 
+                {
+                    "hex": "0117", 
+                    "values": {
+                        "axle": "rear", 
+                        "spring_rate": 23
+                    }, 
+                    "description": "Rear axle spring rate is 23 N/mm"
+                }
+            ]
         }, 
         {
             "multiple": true, 
             "description": "The maximum possible values for the spring rates", 
             "name_cased": "maximumSpringRates", 
+            "name": "maximum_spring_rates", 
             "type": "types.spring_rate", 
             "id": 6, 
-            "name": "maximum_spring_rates"
+            "examples": [
+                {
+                    "hex": "0025", 
+                    "values": {
+                        "axle": "front", 
+                        "spring_rate": 37
+                    }, 
+                    "description": "Front axle maximum spring rate is 37N/mm"
+                }, 
+                {
+                    "hex": "0127", 
+                    "values": {
+                        "axle": "rear", 
+                        "spring_rate": 39
+                    }, 
+                    "description": "Rear axle maximum spring rate is 39N/mm"
+                }
+            ]
         }, 
         {
             "multiple": true, 
             "description": "The minimum possible values for the spring rates", 
-            "name_cased": "minimumSpringRate", 
+            "name_cased": "minimumSpringRates", 
+            "name": "minimum_spring_rates", 
             "type": "types.spring_rate", 
             "id": 7, 
-            "name": "minimum_spring_rates"
+            "examples": [
+                {
+                    "hex": "0010", 
+                    "values": {
+                        "axle": "front", 
+                        "spring_rate": 16
+                    }, 
+                    "description": "Front axle minimum spring rate is 16N/mm"
+                }, 
+                {
+                    "hex": "0112", 
+                    "values": {
+                        "axle": "rear", 
+                        "spring_rate": 18
+                    }, 
+                    "description": "Rear axle minimum spring rate is 18N/mm"
+                }
+            ]
         }, 
         {
+            "examples": [
+                {
+                    "hex": "19", 
+                    "description": "Current chassis position is 25mm", 
+                    "value": 25
+                }
+            ], 
             "description": "The chassis position in mm calculated from the lowest point", 
             "name_cased": "currentChassisPosition", 
             "size": 1, 
@@ -80,11 +155,25 @@
             "descrition": "The maximum possible value for the chassis position", 
             "name": "maximum_chassis_position", 
             "name_cased": "maximumChassisPosition", 
+            "size": 1, 
             "type": "integer", 
             "id": 9, 
-            "size": 1
+            "examples": [
+                {
+                    "hex": "37", 
+                    "description": "Maximum chassis position is 55mm", 
+                    "value": 55
+                }
+            ]
         }, 
         {
+            "examples": [
+                {
+                    "hex": "e4", 
+                    "description": "Minimum chassis position is -28mm", 
+                    "value": -28
+                }
+            ], 
             "description": "The minimum possible value for the chassis position", 
             "name_cased": "minimumChassisPosition", 
             "size": 1, 
