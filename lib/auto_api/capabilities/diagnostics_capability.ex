@@ -31,8 +31,6 @@ defmodule AutoApi.DiagnosticsCapability do
       27
   """
 
-  @type command_type :: :get_diagnostics_state | :diagnostics_state
-
   @command_module AutoApi.DiagnosticsCommand
   @state_module AutoApi.DiagnosticsState
 

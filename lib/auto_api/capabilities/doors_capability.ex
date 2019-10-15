@@ -33,8 +33,6 @@ defmodule AutoApi.DoorsCapability do
       {0x06, :locks_state}
   """
 
-  @type command_type :: :get_lock_state | :lock_state | :lock_unlock_doors
-
   @command_module AutoApi.DoorsCommand
   @state_module AutoApi.DoorsState
 

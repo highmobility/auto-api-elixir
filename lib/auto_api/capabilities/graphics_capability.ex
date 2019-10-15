@@ -31,8 +31,6 @@ defmodule AutoApi.GraphicsCapability do
       1
   """
 
-  @type command_type :: :display_image
-
   @command_module AutoApi.NotImplemented
   @state_module AutoApi.NotImplemented
 

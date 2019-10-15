@@ -31,8 +31,6 @@ defmodule AutoApi.DashboardLightsCapability do
       [{0x01, :dashboard_lights}]
   """
 
-  @type command_type :: :get_dashboard_lights | :dashboard_lights
-
   @command_module AutoApi.DashboardLightsCommand
   @state_module AutoApi.DashboardLightsState
 

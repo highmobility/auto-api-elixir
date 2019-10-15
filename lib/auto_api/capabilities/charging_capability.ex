@@ -33,15 +33,6 @@ defmodule AutoApi.ChargingCapability do
       {23, :status}
   """
 
-  @type command_type ::
-          :get_charge_state
-          | :charge_state
-          | :start_stop_charging
-          | :set_charge_limit
-          | :open_close_charge_port
-          | :set_charge_mode
-          | :set_charge_timer
-
   @command_module AutoApi.ChargingCommand
   @state_module AutoApi.ChargingState
 

@@ -33,8 +33,6 @@ defmodule AutoApi.FailureMessageCapability do
       {5, :failed_property_ids}
   """
 
-  @type command_type :: :failure_message | :failure
-
   @command_module AutoApi.FailureMessageCommand
   @state_module AutoApi.FailureMessageState
 

@@ -33,9 +33,6 @@ defmodule AutoApi.FuelingCapability do
       [{2, :gas_flap_lock}, {3, :gas_flap_position}]
   """
 
-  @type command_type ::
-          :get_gas_flap_state | :gas_flap_state | :open_close_gas_flap | :control_gas_flap
-
   @command_module AutoApi.FuelingCommand
   @state_module AutoApi.FuelingState
 

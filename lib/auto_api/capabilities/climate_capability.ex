@@ -33,16 +33,6 @@ defmodule AutoApi.ClimateCapability do
       {0x0C, :rear_temperature_setting}
   """
 
-  @type command_type ::
-          :get_climate_state
-          | :climate_state
-          | :change_starting_times
-          | :start_stop_hvac
-          | :start_stop_defogging
-          | :start_stop_defrosting
-          | :start_stop_ionising
-          | :set_temperature_settings
-
   @command_module AutoApi.ClimateCommand
   @state_module AutoApi.ClimateState
 

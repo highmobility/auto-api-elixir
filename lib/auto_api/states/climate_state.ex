@@ -18,7 +18,7 @@
 # licensing@high-mobility.com
 defmodule AutoApi.ClimateState do
   @moduledoc """
-  StartStop state
+  Climate state
   """
 
   alias AutoApi.{CommonData, PropertyComponent}

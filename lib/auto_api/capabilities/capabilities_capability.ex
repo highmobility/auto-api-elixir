@@ -31,8 +31,6 @@ defmodule AutoApi.CapabilitiesCapability do
       {0x01, :capabilities}
   """
 
-  @type command_type :: :get_capabilities | :get_capability | :capabilities
-
   @command_module AutoApi.CapabilitiesCommand
   @state_module AutoApi.CapabilitiesState
 

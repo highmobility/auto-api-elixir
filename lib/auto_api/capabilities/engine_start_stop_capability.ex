@@ -31,9 +31,6 @@ defmodule AutoApi.EngineStartStopCapability do
       [{1, :status}]
   """
 
-  @type command_type ::
-          :get_start_stop_state | :start_stop_state | :activate_deactivate_start_stop
-
   @command_module AutoApi.NotImplemented
   @state_module AutoApi.EngineStartStopState
 

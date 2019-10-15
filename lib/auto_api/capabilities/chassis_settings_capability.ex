@@ -33,15 +33,7 @@ defmodule AutoApi.ChassisSettingsCapability do
       {0x0A, :minimum_chassis_position}
   """
 
-  @type command_type ::
-          :get_chassis_settings
-          | :chassis_settings
-          | :set_driving_mode
-          | :start_stop_sport_chrono
-          | :set_spring_rate
-          | :set_chassis_position
-
-  @command_module AutoApi.NotImplemented
+  @command_module AutoApi.ChassisSettingsCommand
   @state_module AutoApi.ChassisSettingsState
 
   use AutoApi.Capability, spec_file: "specs/chassis_settings.json"
