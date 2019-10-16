@@ -31,10 +31,8 @@ defmodule AutoApi.HeartRateCapability do
       1
   """
 
-  @type command_type :: :send_heart_rate
-
-  @command_module AutoApi.NotImplemented
-  @state_module AutoApi.NotImplemented
+  @command_module AutoApi.HeartRateCommand
+  @state_module AutoApi.HeartRateState
 
   use AutoApi.Capability, spec_file: "specs/heart_rate.json"
 end

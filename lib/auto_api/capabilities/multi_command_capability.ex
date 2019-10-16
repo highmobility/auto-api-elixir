@@ -16,25 +16,23 @@
 #
 # Please inquire about commercial licensing options at
 # licensing@high-mobility.com
-defmodule AutoApi.KeyfobPositionCapability do
+defmodule AutoApi.MultiCommandCapability do
   @moduledoc """
-  Basic settings for KeyfobPosition Capability
+  Basic settings for MultiCommand Capability
 
-      iex> alias AutoApi.KeyfobPositionCapability, as: K
-      iex> K.identifier
-      <<0x00, 0x48>>
-      iex> K.name
-      :keyfob_position
-      iex> K.description
-      "Keyfob Position"
-      iex> length(K.properties)
-      1
-      iex> List.last(K.properties)
-      {0x01, :location}
+      iex> alias AutoApi.MultiCommandCapability, as: M
+      iex> M.identifier
+      <<0x00, 0x13>>
+      iex> M.name
+      :multi_command
+      iex> M.description
+      "Multi Command"
+      iex> length(M.properties)
+      2
   """
 
-  @command_module AutoApi.KeyfobPositionCommand
-  @state_module AutoApi.KeyfobPositionState
+  @command_module AutoApi.MultiCommandCommand
+  @state_module AutoApi.MultiCommandState
 
-  use AutoApi.Capability, spec_file: "specs/keyfob_position.json"
+  use AutoApi.Capability, spec_file: "specs/multi_command.json"
 end

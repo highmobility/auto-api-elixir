@@ -27,7 +27,7 @@ defmodule AutoApi.Command do
     capability =
       __CALLER__.module()
       |> Atom.to_string()
-      |> String.replace("Command", "Capability")
+      |> String.replace(~r/Command$/, "Capability")
       |> String.to_atom()
 
     setter_names = Keyword.keys(capability.setters())

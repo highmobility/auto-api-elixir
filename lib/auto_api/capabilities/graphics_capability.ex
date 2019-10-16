@@ -31,8 +31,8 @@ defmodule AutoApi.GraphicsCapability do
       1
   """
 
-  @command_module AutoApi.NotImplemented
-  @state_module AutoApi.NotImplemented
+  @command_module AutoApi.GraphicsCommand
+  @state_module AutoApi.GraphicsState
 
   use AutoApi.Capability, spec_file: "specs/graphics.json"
 end

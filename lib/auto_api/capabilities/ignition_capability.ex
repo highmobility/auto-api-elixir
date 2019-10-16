@@ -31,9 +31,7 @@ defmodule AutoApi.IgnitionCapability do
       {2, :accessories_status}
   """
 
-  @type command_type :: :engine_state | :get_ignition_state | :turn_engine_on_off
-
-  @command_module AutoApi.NotImplemented
+  @command_module AutoApi.IgnitionCommand
   @state_module AutoApi.IgnitionState
 
   use AutoApi.Capability, spec_file: "specs/ignition.json"

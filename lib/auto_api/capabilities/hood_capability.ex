@@ -33,11 +33,8 @@ defmodule AutoApi.HoodCapability do
       0
   """
 
-  @type command_type ::
-          :get_hood_state
-          | :hood_state
-
   @command_module AutoApi.HoodCommand
   @state_module AutoApi.HoodState
+
   use AutoApi.Capability, spec_file: "specs/hood.json"
 end

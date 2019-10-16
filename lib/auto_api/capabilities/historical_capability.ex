@@ -16,25 +16,25 @@
 #
 # Please inquire about commercial licensing options at
 # licensing@high-mobility.com
-defmodule AutoApi.KeyfobPositionCapability do
+defmodule AutoApi.HistoricalCapability do
   @moduledoc """
-  Basic settings for KeyfobPosition Capability
+  Basic settings for Historical Capability
 
-      iex> alias AutoApi.KeyfobPositionCapability, as: K
-      iex> K.identifier
-      <<0x00, 0x48>>
-      iex> K.name
-      :keyfob_position
-      iex> K.description
-      "Keyfob Position"
-      iex> length(K.properties)
-      1
-      iex> List.last(K.properties)
-      {0x01, :location}
+      iex> alias AutoApi.HistoricalCapability, as: H
+      iex> H.identifier
+      <<0x00, 0x12>>
+      iex> H.name
+      :historical
+      iex> H.description
+      "Historical States"
+      iex> length(H.properties)
+      4
+      iex> List.last(H.properties)
+      {0x04, :end_date}
   """
 
-  @command_module AutoApi.KeyfobPositionCommand
-  @state_module AutoApi.KeyfobPositionState
+  @command_module AutoApi.HistoricalCommand
+  @state_module AutoApi.HistoricalState
 
-  use AutoApi.Capability, spec_file: "specs/keyfob_position.json"
+  use AutoApi.Capability, spec_file: "specs/historical.json"
 end

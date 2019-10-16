@@ -31,10 +31,8 @@ defmodule AutoApi.MessagingCapability do
       2
   """
 
-  @type command_type :: :message_received | :send_message
-
-  @command_module AutoApi.NotImplemented
-  @state_module AutoApi.NotImplemented
+  @command_module AutoApi.MessagingCommand
+  @state_module AutoApi.MessagingState
 
   use AutoApi.Capability, spec_file: "specs/messaging.json"
 end
