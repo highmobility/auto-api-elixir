@@ -33,9 +33,7 @@ defmodule AutoApi.TrunkCapability do
       [{1, :lock}, {2, :position}]
   """
 
-  @type command_type :: :get_trunk_state | :trunk_state | :control_trunk
-
-  @command_module AutoApi.NotImplemented
+  @command_module AutoApi.TrunkCommand
   @state_module AutoApi.TrunkState
 
   use AutoApi.Capability, spec_file: "specs/trunk.json"

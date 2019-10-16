@@ -33,8 +33,6 @@ defmodule AutoApi.WindowsCapability do
       [{2, :open_percentages}, {3, :positions}]
   """
 
-  @type command_type :: :get_windows | :windows_state | :control_windows
-
   @command_module AutoApi.WindowsCommand
   @state_module AutoApi.WindowsState
 

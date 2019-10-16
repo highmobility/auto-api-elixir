@@ -33,8 +33,6 @@ defmodule AutoApi.RaceCapability do
       {18, :vehicle_moving}
   """
 
-  @type command_type :: :get_race_state | :race_state
-
   @command_module AutoApi.RaceCommand
   @state_module AutoApi.RaceState
 

@@ -31,10 +31,8 @@ defmodule AutoApi.TextInputCapability do
       1
   """
 
-  @type command_type :: :text_input
-
-  @command_module AutoApi.NotImplemented
-  @state_module AutoApi.NotImplemented
+  @command_module AutoApi.TextInputCommand
+  @state_module AutoApi.TextInputState
 
   use AutoApi.Capability, spec_file: "specs/text_input.json"
 end

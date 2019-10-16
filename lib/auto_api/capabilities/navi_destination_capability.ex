@@ -33,9 +33,7 @@ defmodule AutoApi.NaviDestinationCapability do
       {0x06, :distance_to_destination}
   """
 
-  @type command_type :: :get_navi_destination | :navi_destination | :set_navi_destination
-
-  @command_module AutoApi.NotImplemented
+  @command_module AutoApi.NaviDestinationCommand
   @state_module AutoApi.NaviDestinationState
 
   use AutoApi.Capability, spec_file: "specs/navi_destination.json"

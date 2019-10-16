@@ -33,8 +33,6 @@ defmodule AutoApi.TachographCapability do
       {7, :vehicle_speed}
   """
 
-  @type command_type :: :get_tachograph_state | :tachograph_state
-
   @command_module AutoApi.TachographCommand
   @state_module AutoApi.TachographState
 

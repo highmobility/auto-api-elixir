@@ -33,9 +33,7 @@ defmodule AutoApi.ParkingBrakeCapability do
       [{1, :status}]
   """
 
-  @type command_type :: :get_parking_brake_state | :parking_brake_state | :set_parking_brake
-
-  @command_module AutoApi.NotImplemented
+  @command_module AutoApi.ParkingBrakeCommand
   @state_module AutoApi.ParkingBrakeState
 
   use AutoApi.Capability, spec_file: "specs/parking_brake.json"

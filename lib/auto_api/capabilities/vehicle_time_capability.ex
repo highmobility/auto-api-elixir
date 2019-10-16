@@ -1,4 +1,3 @@
-# AutoAPI
 # Copyright (C) 2018 High-Mobility GmbH
 #
 # This program is free software: you can redistribute it and/or modify
@@ -30,8 +29,6 @@ defmodule AutoApi.VehicleTimeCapability do
       iex> length(VT.properties)
       1
   """
-
-  @type command_type :: :vehicle_time | :get_vehicle_time
 
   @command_module AutoApi.VehicleTimeCommand
   @state_module AutoApi.VehicleTimeState

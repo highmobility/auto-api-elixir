@@ -33,8 +33,6 @@ defmodule AutoApi.VehicleLocationCapability do
       [{4, :coordinates}, {5, :heading}, {6, :altitude}]
   """
 
-  @type command_type :: :vehicle_location | :get_vehicle_location
-
   @command_module AutoApi.VehicleLocationCommand
   @state_module AutoApi.VehicleLocationState
 

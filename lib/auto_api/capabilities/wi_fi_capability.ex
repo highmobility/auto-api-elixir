@@ -33,14 +33,7 @@ defmodule AutoApi.WiFiCapability do
       [{1, :status}, {2, :network_connected}, {3, :network_ssid}, {4, :network_security}, {5, :password}]
   """
 
-  @type command_type ::
-          :get_wi_fi_state
-          | :wi_fi_state
-          | :connect_to_network
-          | :forget_network
-          | :enable_disable_wi_fi
-
-  @command_module AutoApi.NotImplemented
+  @command_module AutoApi.WiFiCommand
   @state_module AutoApi.WiFiState
 
   use AutoApi.Capability, spec_file: "specs/wi_fi.json"

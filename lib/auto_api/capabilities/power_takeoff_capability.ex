@@ -31,9 +31,6 @@ defmodule AutoApi.PowerTakeoffCapability do
       [{1, :status}, {2, :engaged}]
   """
 
-  @type command_type ::
-          :get_power_takeoff_state | :power_takeoff_state | :activate_deactivate_power_takeoff
-
   @command_module AutoApi.PowerTakeoffCommand
   @state_module AutoApi.PowerTakeoffState
 

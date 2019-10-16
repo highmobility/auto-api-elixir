@@ -33,9 +33,7 @@ defmodule AutoApi.OffroadCapability do
       {0x02, :wheel_suspension}
   """
 
-  @type command_type :: :get_offroad_state | :offroad_state
-
-  @command_module AutoApi.NotImplemented
+  @command_module AutoApi.OffroadCommand
   @state_module AutoApi.OffroadState
 
   use AutoApi.Capability, spec_file: "specs/offroad.json"

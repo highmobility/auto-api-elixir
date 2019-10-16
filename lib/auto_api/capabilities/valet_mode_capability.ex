@@ -33,9 +33,8 @@ defmodule AutoApi.ValetModeCapability do
       {0x01, :status}
   """
 
-  @type command_type :: :get_valet_mode | :valet_mode | :activate_deactivate_valet_mode
-
-  @command_module AutoApi.NotImplemented
+  @command_module AutoApi.ValetModeCommand
   @state_module AutoApi.ValetModeState
+
   use AutoApi.Capability, spec_file: "specs/valet_mode.json"
 end

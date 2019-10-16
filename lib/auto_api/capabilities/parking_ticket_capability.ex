@@ -33,9 +33,7 @@ defmodule AutoApi.ParkingTicketCapability do
       {5, :ticket_end_time}
   """
 
-  @type command_type :: :get_parking_ticket | :parking_ticket | :start_parking | :end_parking
-
-  @command_module AutoApi.NotImplemented
+  @command_module AutoApi.ParkingTicketCommand
   @state_module AutoApi.ParkingTicketState
 
   use AutoApi.Capability, spec_file: "specs/parking_ticket.json"

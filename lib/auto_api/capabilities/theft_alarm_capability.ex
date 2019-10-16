@@ -33,9 +33,7 @@ defmodule AutoApi.TheftAlarmCapability do
       [{1, :status}]
   """
 
-  @type command_type :: :get_theft_alarm_state | :theft_alarm_state | :set_theft_alarm
-
-  @command_module AutoApi.NotImplemented
+  @command_module AutoApi.TheftAlarmCommand
   @state_module AutoApi.TheftAlarmState
 
   use AutoApi.Capability, spec_file: "specs/theft_alarm.json"

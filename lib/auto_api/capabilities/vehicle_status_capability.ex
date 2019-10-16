@@ -33,8 +33,6 @@ defmodule AutoApi.VehicleStatusCapability do
       {153, :states}
   """
 
-  @type command_type :: :get_vehicle_status | :vehicle_status
-
   @command_module AutoApi.VehicleStatusCommand
   @state_module AutoApi.VehicleStatusState
 
