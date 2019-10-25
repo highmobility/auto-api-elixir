@@ -40,7 +40,7 @@ defmodule AutoApi.LightConditionsCapability do
   @spec_file "specs/light_conditions.json"
   @type command_type :: :get_light_conditions | :light_conditions
 
-  @command_module AutoApi.HonkHornFlashLightsCommand
+  @command_module AutoApi.NotImplemented
   @state_module AutoApi.LightConditionsState
 
   use AutoApi.Capability
