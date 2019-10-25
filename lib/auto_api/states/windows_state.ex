@@ -33,7 +33,7 @@ defmodule AutoApi.WindowsState do
   use AutoApi.State, spec_file: "specs/windows.json"
 
   @type location :: :front_left | :front_right | :rear_left | :rear_right | :hatch
-  @type position :: :close | :open | :intermediate
+  @type position :: :closed | :open | :intermediate
   @type window_position :: %PropertyComponent{
           data: %{window_location: location, window_position: position}
         }

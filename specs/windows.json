@@ -88,7 +88,7 @@
                             "type": "enum",
                             "values": [
                                 {
-                                    "name": "close",
+                                    "name": "closed",
                                     "id": 0
                                 },
                                 {
