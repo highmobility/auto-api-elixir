@@ -16,32 +16,24 @@
 #
 # Please inquire about commercial licensing options at
 # licensing@high-mobility.com
-defmodule AutoApi.LightConditionsCapability do
-  @moduledoc """
-  Basic settings for Light Conditions Capability
+defmodule AutoApi.HonkHornFlashLightsTest do
+  use ExUnit.Case
+  alias AutoApi.{HonkHornFlashLightsCommand, HonkHornFlashLightsState}
 
-      iex> alias AutoApi.LightConditionsCapability, as: L
-      iex> L.identifier
-      <<0x00, 0x54>>
-      iex> L.name
-      :light_conditions
-      iex> L.description
-      "Light Conditions"
-      iex> L.command_name(0x00)
-      :get_light_conditions
-      iex> L.command_name(0x01)
-      :light_conditions
-      iex> length(L.properties)
-      2
-      iex> List.last(L.properties)
-      {0x02, :inside_light}
-  """
+  describe "execute/2" do
+    test "get state" do
+      command = <<0>>
 
-  @spec_file "specs/light_conditions.json"
-  @type command_type :: :get_light_conditions | :light_conditions
+      state = %HonkHornFlashLightsState{}
+      assert {:state, new_state} = HonkHornFlashLightsCommand.execute(state, command)
+      assert state == new_state
+    end
 
-  @command_module AutoApi.HonkHornFlashLightsCommand
-  @state_module AutoApi.LightConditionsState
-
-  use AutoApi.Capability
+    test "turn on flash lights" do
+      state = %HonkHornFlashLightsState{}
+      command = HonkHornFlashLightsCommand.to_bin(:honk_flash, seconds: 1, flash: 2)
+      assert {:state, new_state} = HonkHornFlashLightsCommand.execute(state, command)
+      assert state == new_state
+    end
+  end
 end
