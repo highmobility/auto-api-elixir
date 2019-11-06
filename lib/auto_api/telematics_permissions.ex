@@ -59,6 +59,7 @@ defmodule AutoApi.TelematicsPermissions do
   end
 
   @doc """
+  Converts a permissions format string to property id
 
   iex> AutoApi.TelematicsPermissions.to_sepc("race.get.accelerations")
   {:ok, %{id: 1, type: :property}}
