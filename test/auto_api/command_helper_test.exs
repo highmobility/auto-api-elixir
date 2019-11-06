@@ -19,6 +19,8 @@
 defmodule AutoApi.CommandHelperTest do
   use ExUnit.Case
 
+  import ExUnit.CaptureLog
+
   alias AutoApi.CommandHelper, as: CH
 
   test "inject_constants/2" do
@@ -33,10 +35,18 @@ defmodule AutoApi.CommandHelperTest do
   test "reject_extra_properties/2" do
     properties = [foo: %{}, bar: %{}, baz: %{}]
 
-    assert [baz: %{}] == CH.reject_extra_properties(properties, ~w(baz)a)
+    foobar = fn ->
+      assert [baz: %{}] == CH.reject_extra_properties(properties, ~w(baz)a)
+    end
 
-    assert [foo: %{}, bar: %{}] ==
-             CH.reject_extra_properties(properties, ~w(foo bar)a)
+    baz = fn ->
+      assert [foo: %{}, bar: %{}] ==
+               CH.reject_extra_properties(properties, ~w(foo bar)a)
+    end
+
+    assert capture_log(foobar) =~ "Ignoring foo"
+    assert capture_log(foobar) =~ "Ignoring bar"
+    assert capture_log(baz) =~ "Ignoring baz"
   end
 
   test "raise_for_missing_properties/2" do
