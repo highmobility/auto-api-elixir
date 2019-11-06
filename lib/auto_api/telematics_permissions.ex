@@ -61,14 +61,14 @@ defmodule AutoApi.TelematicsPermissions do
   @doc """
   Converts a permissions format string to property id
 
-  iex> AutoApi.TelematicsPermissions.to_sepc("race.get.accelerations")
+  iex> AutoApi.TelematicsPermissions.to_spec("race.get.accelerations")
   {:ok, %{id: 1, type: :property}}
 
-  iex> AutoApi.TelematicsPermissions.to_sepc("i.dont.exist")
+  iex> AutoApi.TelematicsPermissions.to_spec("i.dont.exist")
   :error
   """
-  @spec to_sepc(String.t()) :: {:ok, %{type: :property, id: integer}} | :error
-  def to_sepc(property) do
+  @spec to_spec(String.t()) :: {:ok, %{type: :property, id: integer}} | :error
+  def to_spec(property) do
     if spec = @permissions_map[property] do
       {:ok, spec}
     else
