@@ -20,72 +20,59 @@ defmodule AutoApi.TelematicsPermissions do
   @moduledoc """
   Utility module for handling AutoApi telematics permissions.
 
-  TODO: L11 rewrite/adjustments
   """
-  # @permissions_map_properties Map.new(
-  # for cap <- AutoApi.Capability.all(),
-  # {id, prop} <- cap.properties,
-  # do: {"#{cap.name()}.#{prop}", %{type: :property, id: id}}
-  # )
+  @permissions_map for cap <- AutoApi.Capability.all(),
+                       {id, prop} <- cap.properties(),
+                       action <- [:set, :get],
+                       into: %{},
+                       do: {"#{cap.name()}.#{action}.#{prop}", %{type: :property, id: id}}
 
-  # @permissions_map_message_types Map.new(
-  # for cap <- AutoApi.Capability.all(),
-  # {id, cmd} <- cap.commands,
-  # do:
-  # {"#{cap.name()}.#{cmd}", %{type: :message_type, id: id}}
-  # )
+  @permissions_list Map.keys(@permissions_map)
 
-  # @permissions_map Map.merge(@permissions_map_properties, @permissions_map_message_types)
+  @doc """
+  Returns list of available permissions
+    iex> "home_charger.set.wi_fi_hotspot_password" in AutoApi.TelematicsPermissions.permissions_list()
+    true
+    iex> "home_charger.get.wi_fi_hotspot_password" in AutoApi.TelematicsPermissions.permissions_list()
+    true
+  """
+  @spec permissions_list :: list()
+  def permissions_list do
+    @permissions_list
+  end
 
-  # @permissions_list Map.keys(@permissions_map)
+  @doc """
+  Verifies that all permissions are valid car permissions
 
-  # @doc """
-  # Returns list of available permissions
-  # iex> "home_charger.authenticate_expire" in AutoApi.TelematicsPermissions.permissions_list()
-  # true
-  # iex> "race.accelerations" in AutoApi.TelematicsPermissions.permissions_list()
-  # true
+  # Examples
 
-  # """
-  # @spec permissions_list :: list()
-  # def permissions_list do
-  # @permissions_list
-  # end
+  iex> AutoApi.TelematicsPermissions.verify ["race.set.accelerations", "usage.get.average_weekly_distance_long_run"]
+  true
 
-  # @doc """
-  # Verifies that all permissions are valid car permissions
+  iex> AutoApi.TelematicsPermissions.verify ["charge.read", "i.dont.exist"]
+  false
 
-  ### Examples
+  """
+  @spec verify(list(String.t())) :: boolean()
+  def verify(properties) do
+    Enum.empty?(properties -- permissions_list())
+  end
 
-  # iex> AutoApi.TelematicsPermissions.verify ["race.accelerations", "home_charger.authenticate_expire"]
-  # true
+  @doc """
+  Converts a permissions format string to property id
 
-  # iex> AutoApi.TelematicsPermissions.verify ["charge.read", "i.dont.exist"]
-  # false
+  iex> AutoApi.TelematicsPermissions.to_spec("race.get.accelerations")
+  {:ok, %{id: 1, type: :property}}
 
-  # """
-  # @spec verify(list(String.t())) :: boolean()
-  # def verify(properties) do
-  # Enum.empty?(properties -- permissions_list())
-  # end
-
-  # @doc """
-
-  # iex> AutoApi.TelematicsPermissions.to_sepc("race.accelerations")
-  # {:ok, %{id: 1, type: :property}}
-
-  # ie> AutoApi.TelematicsPermissions.to_sepc("home_charger.authenticate_expire")
-  # {:ok, %{id: 22, type: :message_type}}
-
-  # iex> AutoApi.TelematicsPermissions.to_sepc("i.dont.exist")
-  # :error
-  # """
-  # @spec to_sepc(String.t()) :: {:ok, %{type: :message_type | :property, id: integer}} | :error
-  # def to_sepc(property) do
-  # if spec = @permissions_map[property] do
-  # {:ok, spec}
-  # else
-  # :error
-  # end
-  # end
+  iex> AutoApi.TelematicsPermissions.to_spec("i.dont.exist")
+  :error
+  """
+  @spec to_spec(String.t()) :: {:ok, %{type: :property, id: integer}} | :error
+  def to_spec(property) do
+    if spec = @permissions_map[property] do
+      {:ok, spec}
+    else
+      :error
+    end
+  end
 end
