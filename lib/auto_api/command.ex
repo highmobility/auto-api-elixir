@@ -212,18 +212,6 @@ defmodule AutoApi.Command do
   @callback execute(struct, binary) :: struct
   @callback state(struct) :: binary
 
-  @type capability_name ::
-          :door_locks
-          | :charging
-          | :diagnostics
-          | :engine
-          | :maintenance
-          | :rooftop
-          | :trunk_access
-          | :vehicle_location
-          | :hood
-          | :rooftop_control
-
   @doc """
   Extracts commands meta data  including the capability that
   the command is using and exact command that is issued
@@ -253,20 +241,28 @@ defmodule AutoApi.Command do
   @doc """
   Converts the command to the binary format.
 
-  This function only supports the basic actions `:get` and `:set`.
+  The command action can be `:get`, `:set` or one of the setters of the capability.
+
+  ## Examples
+
+      iex> AutoApi.Command.to_bin(:diagnostics, :get, [:mileage, :engine_rpm])
+      <<0x00, 0x33, 0x00, 0x01, 0x04>>
+
+      iex> prop = %AutoApi.PropertyComponent{data: 42, timestamp: ~U[2019-07-18 13:58:40.489250Z], failure: nil}
+      iex> AutoApi.Command.to_bin(:diagnostics, :set, speed: prop)
+      <<0x00, 0x33, 0x01, 0x03, 0, 16, 1, 0, 2, 0, 42, 2, 0, 8, 0, 0, 1, 108, 5, 96, 184, 105>>
+
+      iex> prop = %AutoApi.PropertyComponent{data: 0.8}
+      iex> AutoApi.Command.to_bin(:charging, :set_charge_limit, charge_limit: prop)
+      <<0, 35, 1, 8, 0, 11, 1, 0, 8, 63, 233, 153, 153, 153, 153, 153, 154>>
 
   """
-  @spec to_bin(capability_name, atom, list(any())) :: binary
-  def to_bin(capability_name, action) do
-    to_bin(capability_name, action, [])
-  end
-
+  @type capability :: atom()
+  @type property :: atom()
+  @spec to_bin(capability(), property(), list(any())) :: binary
   def to_bin(capability_name, action, args) do
-    if capability = Capability.get_by_name(capability_name) do
-      command_bin = capability.command.to_bin(action, args)
-      <<capability.identifier::binary, command_bin::binary>>
-    else
-      <<>>
-    end
+    capability = Capability.get_by_name(capability_name)
+
+    capability.command.to_bin(action, args)
   end
 end
