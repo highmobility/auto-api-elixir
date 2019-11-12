@@ -86,6 +86,15 @@ defmodule AutoApi.CommandHelper do
     |> Enum.reduce(state, &Map.put(&2, &1, []))
   end
 
+  def convert_value_to_binary(%AutoApi.PropertyComponent{} = value, spec) do
+    AutoApi.PropertyComponent.to_bin(value, spec)
+  end
+
+  def convert_value_to_binary(value, spec) do
+    wrapped_value = %AutoApi.PropertyComponent{data: value}
+    convert_value_to_binary(wrapped_value, spec)
+  end
+
   defp update_properties(state, properties) do
     Enum.reduce(properties, state, &update_property/2)
   end

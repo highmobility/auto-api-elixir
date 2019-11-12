@@ -23,6 +23,12 @@ defmodule AutoApi.Command do
 
   alias AutoApi.{Capability, CommandHelper}
 
+  @type capability_name :: atom()
+  @type action :: atom()
+  @type data :: any()
+  @type get_properties :: list(atom)
+  @type set_properties :: keyword(AutoApi.PropertyComponent.t() | data())
+
   defmacro __using__(_opts) do
     capability =
       __CALLER__.module()
@@ -38,6 +44,11 @@ defmodule AutoApi.Command do
       quote do
         @behaviour AutoApi.Command
 
+        @type action :: atom()
+        @type data :: any()
+        @type get_properties :: list(atom)
+        @type set_properties :: keyword(AutoApi.PropertyComponent.t() | data())
+
         @capability unquote(capability)
         @state @capability.state()
         @setter_names unquote(setter_names)
@@ -52,7 +63,7 @@ defmodule AutoApi.Command do
         @doc """
         Converts the command to binary format.
 
-        The command action can be `:get`, `:set` or one of the setters: `#{inspect @setter_names}`
+        See `AutoApi.PropertyComponent.to_bin/3` for an explanation of the arguments.
 
         ## Examples
 
@@ -63,13 +74,11 @@ defmodule AutoApi.Command do
             iex> AutoApi.DiagnosticsCommand.to_bin(:set, speed: prop)
             <<0x00, 0x33, 0x01, 0x03, 0, 16, 1, 0, 2, 0, 42, 2, 0, 8, 0, 0, 1, 108, 5, 96, 184, 105>>
 
-            iex> prop = %AutoApi.PropertyComponent{data: 0.8}
-            iex> AutoApi.ChargingCommand.to_bin(:set_charge_limit, charge_limit: prop)
+            iex> AutoApi.ChargingCommand.to_bin(:set_charge_limit, charge_limit: 0.8)
             <<0, 35, 1, 8, 0, 11, 1, 0, 8, 63, 233, 153, 153, 153, 153, 153, 154>>
 
         """
-        @spec to_bin(atom, list(atom) | list({atom, AutoApi.PropertyComponent.t()})) ::
-                binary() | no_return()
+        @spec to_bin(action, get_properties | set_properties) :: binary
         def to_bin(action, properties \\ [])
 
         def to_bin(:get, properties) when is_list(properties) do
@@ -83,7 +92,7 @@ defmodule AutoApi.Command do
 
           Enum.into(properties, preamble, fn {property_name, value} ->
             spec = @capability.property_spec(property_name)
-            value_bin = AutoApi.PropertyComponent.to_bin(value, spec)
+            value_bin = CommandHelper.convert_value_to_binary(value, spec)
             size = byte_size(value_bin)
 
             <<@capability.property_id(property_name)::8, size::integer-16, value_bin::binary>>
@@ -243,6 +252,14 @@ defmodule AutoApi.Command do
 
   The command action can be `:get`, `:set` or one of the setters of the capability.
 
+  In case the action is `:set` or one of the capability setter, the `properties`
+  must be a keyword list with the property name as key and a
+  `AutoApi.PropertyComponent` struct as value.
+
+  It is also permitted, as a shorthand notation, to forego the `PropertyComponent`
+  struct "wrapper" and pass directly the property value. In this case however
+  it is not possible to specify the property timestamp nor a failure.
+
   ## Examples
 
       iex> AutoApi.Command.to_bin(:diagnostics, :get, [:mileage, :engine_rpm])
@@ -252,17 +269,14 @@ defmodule AutoApi.Command do
       iex> AutoApi.Command.to_bin(:diagnostics, :set, speed: prop)
       <<0x00, 0x33, 0x01, 0x03, 0, 16, 1, 0, 2, 0, 42, 2, 0, 8, 0, 0, 1, 108, 5, 96, 184, 105>>
 
-      iex> prop = %AutoApi.PropertyComponent{data: 0.8}
-      iex> AutoApi.Command.to_bin(:charging, :set_charge_limit, charge_limit: prop)
+      iex> AutoApi.Command.to_bin(:charging, :set_charge_limit, charge_limit: 0.8)
       <<0, 35, 1, 8, 0, 11, 1, 0, 8, 63, 233, 153, 153, 153, 153, 153, 154>>
 
   """
-  @type capability :: atom()
-  @type property :: atom()
-  @spec to_bin(capability(), property(), list(any())) :: binary
-  def to_bin(capability_name, action, args) do
+  @spec to_bin(capability_name, action, get_properties | set_properties) :: binary
+  def to_bin(capability_name, action, properties) do
     capability = Capability.get_by_name(capability_name)
 
-    capability.command.to_bin(action, args)
+    capability.command.to_bin(action, properties)
   end
 end
