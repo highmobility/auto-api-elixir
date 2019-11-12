@@ -31,7 +31,7 @@ defmodule AutoApi.ClimateState do
             defogging_state: nil,
             defrosting_state: nil,
             ionising_state: nil,
-            defrosting_temperature: nil,
+            defrosting_temperature_setting: nil,
             hvac_weekday_starting_times: [],
             rear_temperature_setting: nil,
             timestamp: nil
@@ -56,7 +56,7 @@ defmodule AutoApi.ClimateState do
           defogging_state: %PropertyComponent{data: CommonData.activity()} | nil,
           defrosting_state: %PropertyComponent{data: CommonData.activity()} | nil,
           ionising_state: %PropertyComponent{data: CommonData.activity()} | nil,
-          defrosting_temperature: %PropertyComponent{data: float} | nil,
+          defrosting_temperature_setting: %PropertyComponent{data: float} | nil,
           hvac_weekday_starting_times: list(hvac_weekday_starting_time),
           rear_temperature_setting: %PropertyComponent{data: float} | nil,
           timestamp: DateTime.t() | nil
