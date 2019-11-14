@@ -42,8 +42,7 @@ defmodule AutoApi.ClimateState do
   @type hvac_weekday_starting_time :: %PropertyComponent{
           data: %{
             weekday: CommonData.weekday() | :automatic,
-            hour: integer,
-            minute: integer
+            time: %{hour: integer, minute: integer}
           }
         }
 

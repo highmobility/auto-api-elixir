@@ -238,6 +238,115 @@ defmodule AutoApi.PropertyComponentTest do
       end
     end
 
+    @days [:monday, :tuesday, :wednesday, :thursday, :friday, :saturday, :sunday, :automatic]
+    property "converts multiple custom value with complex data to bin" do
+      forall data <- [
+               hour: integer(0, 23),
+               minute: integer(0, 59),
+               weekday: oneof(@days),
+               datetime: datetime()
+             ] do
+        spec = %{
+          "id" => 11,
+          "multiple" => true,
+          "type" => "custom",
+          "items" => [
+            %{
+              "enum_values" => [
+                %{"id" => 0, "name" => "monday"},
+                %{"id" => 1, "name" => "tuesday"},
+                %{"id" => 2, "name" => "wednesday"},
+                %{"id" => 3, "name" => "thursday"},
+                %{"id" => 4, "name" => "friday"},
+                %{"id" => 5, "name" => "saturday"},
+                %{"id" => 6, "name" => "sunday"},
+                %{"id" => 7, "name" => "automatic"}
+              ],
+              "name" => "weekday",
+              "size" => 1,
+              "type" => "enum"
+            },
+            %{
+              "items" => [
+                %{
+                  "name" => "hour",
+                  "size" => 1,
+                  "type" => "uinteger"
+                },
+                %{
+                  "name" => "minute",
+                  "size" => 1,
+                  "type" => "uinteger"
+                }
+              ],
+              "name" => "time",
+              "size" => 2,
+              "type" => "custom"
+            }
+          ],
+          "size" => 3
+        }
+
+        weekday = data[:weekday]
+        weekday_bin = Enum.find_index(@days, &(&1 == weekday))
+        hour = data[:hour]
+        minute = data[:minute]
+
+        prop_comp = %PropertyComponent{
+          data: %{weekday: weekday, time: %{hour: hour, minute: minute}},
+          timestamp: data[:datetime]
+        }
+
+        bin_comp = PropertyComponent.to_bin(prop_comp, spec)
+
+        bin_data = <<weekday_bin, hour, minute>>
+        bin_data_size_org = byte_size(bin_data)
+
+        assert <<1, bin_data_size::integer-16, bin_data::binary-size(bin_data_size), _::binary>> =
+                 bin_comp
+
+        assert bin_data_size_org == bin_data_size
+
+        assert PropertyComponent.to_struct(bin_comp, spec) == prop_comp
+      end
+    end
+
+    property "converts multiple custom value with complex external data to bin" do
+      forall data <- [
+               hour: integer(0, 23),
+               minute: integer(0, 59),
+               weekday: oneof(@days),
+               datetime: datetime()
+             ] do
+        spec = %{
+          "multiple" => true,
+          "type" => "types.hvac_weekday_starting_time"
+        }
+
+        weekday = data[:weekday]
+        weekday_bin = Enum.find_index(@days, &(&1 == weekday))
+        hour = data[:hour]
+        minute = data[:minute]
+
+        prop_comp = %PropertyComponent{
+          data: %{weekday: weekday, time: %{hour: hour, minute: minute}},
+          timestamp: data[:datetime]
+        }
+
+        bin_comp = PropertyComponent.to_bin(prop_comp, spec)
+
+        bin_data = <<weekday_bin, hour, minute>>
+        bin_data_size_org = byte_size(bin_data)
+
+        assert <<1, bin_data_size::integer-16, bin_data::binary-size(bin_data_size), _::binary>> =
+                 bin_comp
+
+        assert bin_data_size_org == bin_data_size
+
+        assert PropertyComponent.to_struct(bin_comp, spec) == prop_comp
+      end
+    end
+
     property "converts failure to bin" do
       forall data <- [description: utf8(), reason: error_reason(), timestamp: datetime()] do
         spec = %{"type" => "integer", "size" => 3}
