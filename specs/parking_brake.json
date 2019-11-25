@@ -1,38 +1,42 @@
 {
-    "category": "parking", 
-    "name": "parking_brake", 
-    "name_cased": "parkingBrake", 
-    "getters": {}, 
-    "state": "all", 
-    "api": {
-        "intro": 5, 
-        "update": 11
-    }, 
+    "name": "parking_brake",
+    "name_cased": "parkingBrake",
+    "pretty_name": "Parking Brake",
+    "category": "parking",
+    "authorization": true,
     "identifier": {
-        "lsb": 88, 
-        "msb": 0
-    }, 
-    "properties": [
-        {
-            "name": "status", 
-            "type": "types.active_state", 
-            "examples": [
-                {
-                    "hex": "01", 
-                    "description": "Parking brake is active", 
-                    "value": "active"
-                }
-            ], 
-            "name_cased": "status", 
-            "id": 1
-        }
-    ], 
+        "msb": 0,
+        "lsb": 88
+    },
+    "api": {
+        "intro": 5,
+        "update": 11
+    },
+    "getters": {},
     "setters": [
         {
+            "name": "set_parking_brake",
             "mandatory": [
                 1
-            ], 
-            "name": "set_parking_brake"
+            ],
+            "description": "Turn on or off the parking brake."
+        }
+    ],
+    "state": "all",
+    "properties": [
+        {
+            "id": 1,
+            "name": "status",
+            "name_cased": "status",
+            "pretty_name": "Status",
+            "type": "types.active_state",
+            "examples": [
+                {
+                    "hex": "01",
+                    "value": "active",
+                    "description": "Parking brake is active"
+                }
+            ]
         }
     ]
 }

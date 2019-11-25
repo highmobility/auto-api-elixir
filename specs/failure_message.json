@@ -1,139 +1,146 @@
 {
-    "category": "api_structure", 
-    "state": "all", 
-    "api": {
-        "intro": 2, 
-        "update": 11
-    }, 
-    "name": "failure_message", 
-    "name_cased": "failureMessage", 
+    "name": "failure_message",
+    "name_cased": "failureMessage",
+    "pretty_name": "Failure Message",
+    "category": "api_structure",
+    "authorization": false,
     "identifier": {
-        "lsb": 2, 
-        "msb": 0
-    }, 
+        "msb": 0,
+        "lsb": 2
+    },
+    "api": {
+        "intro": 2,
+        "update": 11
+    },
+    "state": "all",
     "properties": [
         {
+            "id": 1,
+            "name": "failed_message_id",
+            "name_cased": "failedMessageID",
+            "pretty_name": "Failed message ID",
+            "type": "uinteger",
+            "size": 2,
+            "description": "Capability identifier of the failed message",
             "examples": [
                 {
-                    "hex": "0021", 
-                    "description": "Failed message is Trunk capability", 
-                    "value": 33
+                    "hex": "0021",
+                    "value": 33,
+                    "description": "Failed message is Trunk capability"
                 }
-            ], 
-            "description": "Capability identifier of the failed message", 
-            "name_cased": "failedMessageID", 
-            "size": 2, 
-            "type": "uinteger", 
-            "id": 1, 
-            "name": "failed_message_id"
-        }, 
+            ]
+        },
         {
+            "id": 2,
+            "name": "failed_message_type",
+            "name_cased": "failedMessageType",
+            "pretty_name": "Failed message type",
+            "type": "uinteger",
+            "size": 1,
+            "description": "Message type of the failed message",
             "examples": [
                 {
-                    "hex": "01", 
-                    "description": "Failed message type is Set", 
-                    "value": 1
+                    "hex": "01",
+                    "value": 1,
+                    "description": "Failed message type is Set"
                 }
-            ], 
-            "description": "Message type of the failed message", 
-            "name_cased": "failedMessageType", 
-            "size": 1, 
-            "type": "uinteger", 
-            "id": 2, 
-            "name": "failed_message_type"
-        }, 
+            ]
+        },
         {
-            "name": "failure_reason", 
-            "name_cased": "failureReason", 
+            "id": 3,
+            "name": "failure_reason",
+            "name_cased": "failureReason",
+            "pretty_name": "Failure reason",
+            "type": "enum",
+            "size": 1,
             "enum_values": [
                 {
-                    "pretty_name": "Unsupported Capability", 
-                    "description": "Car has not the capability to perform the command", 
-                    "name": "unsupported_capability", 
-                    "id": 0
-                }, 
+                    "id": 0,
+                    "name": "unsupported_capability",
+                    "pretty_name": "Unsupported Capability",
+                    "description": "Car has not the capability to perform the command"
+                },
                 {
-                    "pretty_name": "Unauthorised", 
-                    "description": "User has not been authenticated or lacks permissions", 
-                    "name": "unauthorised", 
-                    "id": 1
-                }, 
+                    "id": 1,
+                    "name": "unauthorised",
+                    "pretty_name": "Unauthorised",
+                    "description": "User has not been authenticated or lacks permissions"
+                },
                 {
-                    "pretty_name": "Incorrect State", 
-                    "description": "Command can not be executed in the current car state", 
-                    "name": "incorrect_state", 
-                    "id": 2
-                }, 
+                    "id": 2,
+                    "name": "incorrect_state",
+                    "pretty_name": "Incorrect State",
+                    "description": "Command can not be executed in the current car state"
+                },
                 {
-                    "pretty_name": "Execution Timeout", 
-                    "description": "Command failed to execute in time for an unknown reason", 
-                    "name": "execution_timeout", 
-                    "id": 3
-                }, 
+                    "id": 3,
+                    "name": "execution_timeout",
+                    "pretty_name": "Execution Timeout",
+                    "description": "Command failed to execute in time for an unknown reason"
+                },
                 {
-                    "pretty_name": "Vehicle Asleep", 
-                    "description": "Car has to be waken up before the command can be used. If this is for a virtual car, the emulator has to be loaded", 
-                    "name": "vehicle_asleep", 
-                    "id": 4
-                }, 
+                    "id": 4,
+                    "name": "vehicle_asleep",
+                    "pretty_name": "Vehicle Asleep",
+                    "description": "Car has to be waken up before the command can be used. If this is for a virtual car, the emulator has to be loaded"
+                },
                 {
-                    "pretty_name": "Invalid Command", 
-                    "description": "Command not recognised", 
-                    "name": "invalid_command", 
-                    "id": 5
-                }, 
+                    "id": 5,
+                    "name": "invalid_command",
+                    "pretty_name": "Invalid Command",
+                    "description": "Command not recognised"
+                },
                 {
-                    "pretty_name": "Pending", 
-                    "description": "Capability is being refreshed", 
-                    "name": "pending", 
-                    "id": 6
-                }, 
+                    "id": 6,
+                    "name": "pending",
+                    "pretty_name": "Pending",
+                    "description": "Capability is being refreshed"
+                },
                 {
-                    "pretty_name": "Rate Limit", 
-                    "description": "Capability rate limit has been exceeded", 
-                    "name": "rate_limit", 
-                    "id": 7
+                    "id": 7,
+                    "name": "rate_limit",
+                    "pretty_name": "Rate Limit",
+                    "description": "Capability rate limit has been exceeded"
                 }
-            ], 
-            "size": 1, 
-            "type": "enum", 
-            "id": 3, 
+            ],
             "examples": [
                 {
-                    "hex": "01", 
-                    "description": "Failure occured because of unauthorised state", 
-                    "value": "unauthorised"
+                    "hex": "01",
+                    "value": "unauthorised",
+                    "description": "Failure occured because of unauthorised state"
                 }
             ]
-        }, 
+        },
         {
-            "description": "Failure description", 
-            "name_cased": "failureDescription", 
-            "name": "failure_description", 
-            "type": "string", 
-            "id": 4, 
+            "id": 4,
+            "name": "failure_description",
+            "name_cased": "failureDescription",
+            "pretty_name": "Failure description",
+            "type": "string",
+            "description": "Failure description",
             "examples": [
                 {
-                    "hex": "54727920616761696e", 
-                    "description": "Failure description informs to try again", 
-                    "value": "Try again"
+                    "hex": "54727920616761696e",
+                    "value": "Try again",
+                    "description": "Failure description informs to try again"
                 }
             ]
-        }, 
+        },
         {
-            "description": "Array of failed property identifiers", 
-            "name_cased": "failedPropertyIDs", 
-            "name": "failed_property_ids", 
-            "type": "bytes", 
-            "id": 5, 
+            "id": 5,
+            "name": "failed_property_ids",
+            "name_cased": "failedPropertyIDs",
+            "pretty_name": "Failed property IDs",
+            "type": "bytes",
+            "description": "Array of failed property identifiers",
             "examples": [
                 {
-                    "hex": "0102", 
-                    "description": "Trunk's lock and position failed", 
+                    "hex": "0102",
                     "value": [
-                        1, 
+                        1,
                         2
-                    ]
+                    ],
+                    "description": "Trunk's lock and position failed"
                 }
             ]
         }

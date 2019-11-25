@@ -1,380 +1,401 @@
 {
-    "category": "api_structure", 
-    "name": "vehicle_status", 
-    "name_cased": "vehicleStatus", 
+    "name": "vehicle_status",
+    "name_cased": "vehicleStatus",
+    "pretty_name": "Vehicle Status",
+    "category": "api_structure",
+    "authorization": false,
+    "identifier": {
+        "msb": 0,
+        "lsb": 17
+    },
+    "api": {
+        "intro": 2,
+        "update": 11
+    },
     "getters": {
         "name": "get_vehicle_status"
-    }, 
-    "state": "all", 
-    "api": {
-        "intro": 2, 
-        "update": 11
-    }, 
-    "identifier": {
-        "lsb": 17, 
-        "msb": 0
-    }, 
+    },
+    "state": "all",
     "properties": [
         {
-            "name": "vin", 
-            "name_cased": "vin", 
-            "pretty_name": "VIN", 
+            "id": 1,
+            "name": "vin",
+            "name_cased": "vin",
+            "pretty_name": "VIN",
+            "type": "string",
+            "size": 17,
+            "description": "The unique Vehicle Identification Number",
             "examples": [
                 {
-                    "hex": "4a46325348424443374348343531383639", 
-                    "description": "VIN is 'JF2SHBDC7CH451869'", 
-                    "value": "JF2SHBDC7CH451869"
+                    "hex": "4a46325348424443374348343531383639",
+                    "value": "JF2SHBDC7CH451869",
+                    "description": "VIN is 'JF2SHBDC7CH451869'"
                 }
-            ], 
-            "size": 17, 
-            "type": "string", 
-            "id": 1, 
-            "description": "The unique Vehicle Identification Number"
-        }, 
+            ]
+        },
         {
-            "name": "powertrain", 
-            "name_cased": "powertrain", 
+            "id": 2,
+            "name": "powertrain",
+            "name_cased": "powertrain",
+            "pretty_name": "Powertrain",
+            "type": "enum",
+            "size": 1,
             "enum_values": [
                 {
-                    "id": 0, 
+                    "id": 0,
                     "name": "unknown"
-                }, 
+                },
                 {
-                    "id": 1, 
+                    "id": 1,
                     "name": "all_electric"
-                }, 
+                },
                 {
-                    "id": 2, 
+                    "id": 2,
                     "name": "combustion_engine"
-                }, 
+                },
                 {
-                    "pretty_name": "Plug-in Hybrid EV", 
-                    "id": 3, 
-                    "name": "phev"
-                }, 
+                    "id": 3,
+                    "name": "phev",
+                    "pretty_name": "Plug-in Hybrid EV"
+                },
                 {
-                    "id": 4, 
+                    "id": 4,
                     "name": "hydrogen"
-                }, 
+                },
                 {
-                    "id": 5, 
+                    "id": 5,
                     "name": "hydrogen_hybrid"
                 }
-            ], 
-            "size": 1, 
-            "type": "enum", 
-            "id": 2, 
+            ],
             "examples": [
                 {
-                    "hex": "01", 
-                    "description": "Powertrain is all electric", 
-                    "value": "all_electric"
+                    "hex": "01",
+                    "value": "all_electric",
+                    "description": "Powertrain is all electric"
                 }
             ]
-        }, 
+        },
         {
-            "description": "The car model name", 
-            "name_cased": "modelName", 
-            "name": "model_name", 
-            "type": "string", 
-            "id": 3, 
+            "id": 3,
+            "name": "model_name",
+            "name_cased": "modelName",
+            "pretty_name": "Model name",
+            "type": "string",
+            "description": "The car model name",
             "examples": [
                 {
-                    "hex": "547970652058", 
-                    "description": "Model name is 'Type X'", 
-                    "value": "Type X"
+                    "hex": "547970652058",
+                    "value": "Type X",
+                    "description": "Model name is 'Type X'"
                 }
             ]
-        }, 
+        },
         {
-            "description": "The car name (nickname)", 
-            "name_cased": "name", 
-            "name": "name", 
-            "type": "string", 
-            "id": 4, 
+            "id": 4,
+            "name": "name",
+            "name_cased": "name",
+            "pretty_name": "Name",
+            "type": "string",
+            "description": "The car name (nickname)",
             "examples": [
                 {
-                    "hex": "537065656479", 
-                    "description": "Name of the vehicle is 'Speedy'", 
-                    "value": "Speedy"
+                    "hex": "537065656479",
+                    "value": "Speedy",
+                    "description": "Name of the vehicle is 'Speedy'"
                 }
             ]
-        }, 
+        },
         {
-            "description": "The license plate number", 
-            "name_cased": "licensePlate", 
-            "name": "license_plate", 
-            "type": "string", 
-            "id": 5, 
+            "id": 5,
+            "name": "license_plate",
+            "name_cased": "licensePlate",
+            "pretty_name": "Licence plate",
+            "type": "string",
+            "description": "The license plate number",
             "examples": [
                 {
-                    "hex": "414243313233", 
-                    "description": "Licence plate number is 'ABC123'", 
-                    "value": "ABC123"
+                    "hex": "414243313233",
+                    "value": "ABC123",
+                    "description": "Licence plate number is 'ABC123'"
                 }
             ]
-        }, 
+        },
         {
-            "description": "The sales designation of the model", 
-            "name_cased": "salesDesignation", 
-            "name": "sales_designation", 
-            "type": "string", 
-            "id": 6, 
+            "id": 6,
+            "name": "sales_designation",
+            "name_cased": "salesDesignation",
+            "pretty_name": "Sales designation",
+            "type": "string",
+            "description": "The sales designation of the model",
             "examples": [
                 {
-                    "hex": "5061636b6167652b", 
-                    "description": "Sales designation is 'Package+'", 
-                    "value": "Package+"
+                    "hex": "5061636b6167652b",
+                    "value": "Package+",
+                    "description": "Sales designation is 'Package+'"
                 }
             ]
-        }, 
+        },
         {
+            "id": 7,
+            "name": "model_year",
+            "name_cased": "modelYear",
+            "pretty_name": "Model year",
+            "type": "uinteger",
+            "size": 2,
+            "description": "The car model manufacturing year number",
             "examples": [
                 {
-                    "hex": "07e3", 
-                    "description": "Vehicle manufacturing year is 2019", 
-                    "value": 2019
-                }
-            ], 
-            "description": "The car model manufacturing year number", 
-            "name_cased": "modelYear", 
-            "size": 2, 
-            "type": "uinteger", 
-            "id": 7, 
-            "name": "model_year"
-        }, 
-        {
-            "description": "The colour name", 
-            "name_cased": "colourName", 
-            "name": "colour_name", 
-            "type": "string", 
-            "id": 8, 
-            "examples": [
-                {
-                    "hex": "4573746f72696c20426c6175", 
-                    "description": "Colour is named 'Estoril Blau'", 
-                    "value": "Estoril Blau"
+                    "hex": "07e3",
+                    "value": 2019,
+                    "description": "Vehicle manufacturing year is 2019"
                 }
             ]
-        }, 
+        },
         {
-            "name": "power_in_kw", 
-            "name_cased": "powerInKW", 
-            "pretty_name": "Power in kW", 
+            "id": 8,
+            "name": "colour_name",
+            "name_cased": "colourName",
+            "pretty_name": "Colour name",
+            "type": "string",
+            "description": "The colour name",
             "examples": [
                 {
-                    "hex": "00dc", 
-                    "description": "Vehicle has 220 kW of power", 
-                    "value": 220
+                    "hex": "4573746f72696c20426c6175",
+                    "value": "Estoril Blau",
+                    "description": "Colour is named 'Estoril Blau'"
                 }
-            ], 
-            "size": 2, 
-            "type": "uinteger", 
-            "id": 9, 
-            "description": "The power of the car measured in kW"
-        }, 
+            ]
+        },
         {
+            "id": 9,
+            "name": "power_in_kw",
+            "name_cased": "powerInKW",
+            "pretty_name": "Power in kW",
+            "type": "uinteger",
+            "size": 2,
+            "description": "The power of the car measured in kW",
             "examples": [
                 {
-                    "hex": "05", 
-                    "description": "Vehicle has 5 doors", 
-                    "value": 5
+                    "hex": "00dc",
+                    "value": 220,
+                    "description": "Vehicle has 220 kW of power"
                 }
-            ], 
-            "description": "The number of doors", 
-            "name_cased": "numberOfDoors", 
-            "size": 1, 
-            "type": "uinteger", 
-            "id": 10, 
-            "name": "number_of_doors"
-        }, 
+            ]
+        },
         {
+            "id": 10,
+            "name": "number_of_doors",
+            "name_cased": "numberOfDoors",
+            "pretty_name": "Number of doors",
+            "type": "uinteger",
+            "size": 1,
+            "description": "The number of doors",
             "examples": [
                 {
-                    "hex": "05", 
-                    "description": "Vehicle has 5 seats", 
-                    "value": 5
+                    "hex": "05",
+                    "value": 5,
+                    "description": "Vehicle has 5 doors"
                 }
-            ], 
-            "description": "The number of seats", 
-            "name_cased": "numberOfSeats", 
-            "size": 1, 
-            "type": "uinteger", 
-            "id": 11, 
-            "name": "number_of_seats"
-        }, 
+            ]
+        },
         {
+            "id": 11,
+            "name": "number_of_seats",
+            "name_cased": "numberOfSeats",
+            "pretty_name": "Number of seats",
+            "type": "uinteger",
+            "size": 1,
+            "description": "The number of seats",
             "examples": [
                 {
-                    "hex": "40200000", 
-                    "description": "Engine volume is 2.5 L", 
-                    "value": 2.5
+                    "hex": "05",
+                    "value": 5,
+                    "description": "Vehicle has 5 seats"
                 }
-            ], 
-            "description": "The engine volume displacement in liters", 
-            "name_cased": "engineVolume", 
-            "size": 4, 
-            "type": "float", 
-            "id": 12, 
-            "name": "engine_volume"
-        }, 
+            ]
+        },
         {
+            "id": 12,
+            "name": "engine_volume",
+            "name_cased": "engineVolume",
+            "pretty_name": "Engine volume",
+            "type": "float",
+            "size": 4,
+            "description": "The engine volume displacement in liters",
             "examples": [
                 {
-                    "hex": "00f5", 
-                    "description": "Engine maximum torque is 245 Nm", 
-                    "value": 245
+                    "hex": "40200000",
+                    "value": 2.5,
+                    "description": "Engine volume is 2.5 L"
                 }
-            ], 
-            "description": "The maximum engine torque in Nm", 
-            "name_cased": "engineMaxTorque", 
-            "size": 2, 
-            "type": "uinteger", 
-            "id": 13, 
-            "name": "engine_max_torque"
-        }, 
+            ]
+        },
         {
-            "name": "gearbox", 
-            "name_cased": "gearbox", 
+            "id": 13,
+            "name": "engine_max_torque",
+            "name_cased": "engineMaxTorque",
+            "pretty_name": "Engine max torque",
+            "type": "uinteger",
+            "size": 2,
+            "description": "The maximum engine torque in Nm",
+            "examples": [
+                {
+                    "hex": "00f5",
+                    "value": 245,
+                    "description": "Engine maximum torque is 245 Nm"
+                }
+            ]
+        },
+        {
+            "id": 14,
+            "name": "gearbox",
+            "name_cased": "gearbox",
+            "pretty_name": "Gearbox",
+            "type": "enum",
+            "size": 1,
             "enum_values": [
                 {
-                    "id": 0, 
+                    "id": 0,
                     "name": "manual"
-                }, 
+                },
                 {
-                    "id": 1, 
+                    "id": 1,
                     "name": "automatic"
-                }, 
+                },
                 {
-                    "id": 2, 
+                    "id": 2,
                     "name": "semi_automatic"
                 }
-            ], 
-            "size": 1, 
-            "type": "enum", 
-            "id": 14, 
+            ],
             "examples": [
                 {
-                    "hex": "01", 
-                    "description": "Vehicle has an automatic gearbox", 
-                    "value": "automatic"
+                    "hex": "01",
+                    "value": "automatic",
+                    "description": "Vehicle has an automatic gearbox"
                 }
             ]
-        }, 
+        },
         {
-            "name": "display_unit", 
-            "name_cased": "displayUnit", 
+            "id": 15,
+            "name": "display_unit",
+            "name_cased": "displayUnit",
+            "pretty_name": "Display unit",
+            "type": "enum",
+            "size": 1,
             "enum_values": [
                 {
-                    "id": 0, 
+                    "id": 0,
                     "name": "km"
-                }, 
+                },
                 {
-                    "id": 1, 
+                    "id": 1,
                     "name": "miles"
                 }
-            ], 
-            "size": 1, 
-            "type": "enum", 
-            "id": 15, 
+            ],
             "examples": [
                 {
-                    "hex": "00", 
-                    "description": "Vehicle displays values in kilometers", 
-                    "value": "km"
+                    "hex": "00",
+                    "value": "km",
+                    "description": "Vehicle displays values in kilometers"
                 }
             ]
-        }, 
+        },
         {
-            "name": "driver_seat_location", 
-            "name_cased": "driverSeatLocation", 
+            "id": 16,
+            "name": "driver_seat_location",
+            "name_cased": "driverSeatLocation",
+            "pretty_name": "Driver seat location",
+            "type": "enum",
+            "size": 1,
             "enum_values": [
                 {
-                    "id": 0, 
+                    "id": 0,
                     "name": "left"
-                }, 
+                },
                 {
-                    "id": 1, 
+                    "id": 1,
                     "name": "right"
-                }, 
+                },
                 {
-                    "id": 2, 
+                    "id": 2,
                     "name": "center"
                 }
-            ], 
-            "size": 1, 
-            "type": "enum", 
-            "id": 16, 
+            ],
             "examples": [
                 {
-                    "hex": "00", 
-                    "description": "Driver seat is located on the left", 
-                    "value": "left"
+                    "hex": "00",
+                    "value": "left",
+                    "description": "Driver seat is located on the left"
                 }
             ]
-        }, 
+        },
         {
-            "multiple": true, 
-            "description": "Names of equipment the vehicle is equipped with", 
-            "name_cased": "equipments", 
-            "name": "equipments", 
-            "type": "string", 
-            "id": 17, 
+            "id": 17,
+            "name": "equipments",
+            "name_cased": "equipments",
+            "pretty_name": "Equipments",
+            "type": "string",
+            "multiple": true,
+            "name_singular": "equipment",
+            "description": "Names of equipment the vehicle is equipped with",
             "examples": [
                 {
-                    "hex": "5061726b696e672073656e736f7273", 
-                    "description": "Parking sensors are equipped (installed)", 
-                    "value": "Parking sensors"
-                }, 
+                    "hex": "5061726b696e672073656e736f7273",
+                    "value": "Parking sensors",
+                    "description": "Parking sensors are equipped (installed)"
+                },
                 {
-                    "hex": "4175746f6d6174696320776970657273", 
-                    "description": "Automatic wipers are equipped (installed)", 
-                    "value": "Automatic wipers"
+                    "hex": "4175746f6d6174696320776970657273",
+                    "value": "Automatic wipers",
+                    "description": "Automatic wipers are equipped (installed)"
                 }
             ]
-        }, 
+        },
         {
-            "description": "The car brand bytes", 
-            "name_cased": "brand", 
-            "name": "brand", 
-            "type": "string", 
-            "id": 18, 
+            "id": 18,
+            "name": "brand",
+            "name_cased": "brand",
+            "pretty_name": "Brand",
+            "type": "string",
+            "description": "The car brand bytes",
             "examples": [
                 {
-                    "hex": "5465736c61", 
-                    "description": "Vehicle brand is 'Tesla'", 
-                    "value": "Tesla"
+                    "hex": "5465736c61",
+                    "value": "Tesla",
+                    "description": "Vehicle brand is 'Tesla'"
                 }
             ]
-        }, 
+        },
         {
-            "multiple": true, 
-            "name": "states", 
-            "name_cased": "states", 
-            "type": "types.capability_state", 
-            "id": 153, 
+            "id": 153,
+            "name": "states",
+            "name_cased": "states",
+            "pretty_name": "States",
+            "type": "types.capability_state",
+            "multiple": true,
+            "name_singular": "state",
             "examples": [
                 {
-                    "hex": "002001060004010001000400050100020001", 
+                    "hex": "010b002001060004010001000400050100020001",
                     "values": {
                         "doors": {
                             "positions": {
-                                "position": "open", 
-                                "location": "front_left"
-                            }, 
+                                "location": "front_left",
+                                "position": "open"
+                            },
                             "locks_state": "unlocked"
                         }
-                    }, 
+                    },
                     "description": "Doors capability's locks are unlocked"
-                }, 
+                },
                 {
-                    "hex": "0023010a0007010004406000000b000401000101", 
+                    "hex": "010b0023010a0007010004406000000b000401000101",
                     "values": {
                         "charging": {
-                            "charge_port_state": "open", 
-                            "charging_rate_kw": 3.5
+                            "charging_rate_kw": 3.5,
+                            "charge_port_state": "open"
                         }
-                    }, 
+                    },
                     "description": "Charging capability's charging rate is 3.5 kW"
                 }
             ]

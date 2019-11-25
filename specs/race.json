@@ -1,333 +1,372 @@
 {
-    "category": "diagnostics", 
-    "name": "race", 
-    "name_cased": "race", 
-    "getters": {}, 
-    "state": "all", 
-    "api": {
-        "intro": 5, 
-        "update": 11
-    }, 
+    "name": "race",
+    "name_cased": "race",
+    "pretty_name": "Race",
+    "category": "diagnostics",
+    "authorization": true,
     "identifier": {
-        "lsb": 87, 
-        "msb": 0
-    }, 
+        "msb": 0,
+        "lsb": 87
+    },
+    "api": {
+        "intro": 5,
+        "update": 11
+    },
+    "getters": {},
+    "state": "all",
     "properties": [
         {
-            "multiple": true, 
-            "name": "accelerations", 
-            "name_cased": "accelerations", 
-            "type": "types.acceleration", 
-            "id": 1, 
+            "id": 1,
+            "name": "accelerations",
+            "name_cased": "accelerations",
+            "pretty_name": "Accelerations",
+            "type": "types.acceleration",
+            "multiple": true,
+            "name_singular": "acceleration",
             "examples": [
                 {
-                    "hex": "003f5d2f1b", 
+                    "hex": "003f5d2f1b",
                     "values": {
-                        "g_force": 0.864, 
-                        "direction": "longitudinal"
-                    }, 
+                        "direction": "longitudinal",
+                        "g_force": 0.864
+                    },
                     "description": "Longitudinal acceleration is 0.864 g"
-                }, 
+                },
                 {
-                    "hex": "01bf40c49c", 
+                    "hex": "01bf40c49c",
                     "values": {
-                        "g_force": -0.753, 
-                        "direction": "lateral"
-                    }, 
+                        "direction": "lateral",
+                        "g_force": -0.753
+                    },
                     "description": "Lateral acceleration is -0.753 g"
+                },
+                {
+                    "hex": "02bf40c49c",
+                    "values": {
+                        "direction": "front_lateral",
+                        "g_force": -0.753
+                    },
+                    "description": "Front lateral acceleration is -0.753 g"
+                },
+                {
+                    "hex": "03bf40c49c",
+                    "values": {
+                        "direction": "rear_lateral",
+                        "g_force": -0.753
+                    },
+                    "description": "Rear lateral acceleration is -0.753 g"
                 }
             ]
-        }, 
+        },
         {
+            "id": 2,
+            "name": "understeering",
+            "name_cased": "understeering",
+            "pretty_name": "Understeering",
+            "type": "types.percentage",
+            "description": "The understeering percentage between 0.0-1.0 whereas up to 0.2 (20%) is considered OK, up to 0.3 (30%) marginal, over 30% critical",
             "examples": [
                 {
-                    "hex": "3fc851eb851eb852", 
-                    "description": "Understeering is at 19%", 
-                    "value": 0.19
+                    "hex": "3fc851eb851eb852",
+                    "value": 0.19,
+                    "description": "Understeering is at 19%"
                 }
-            ], 
-            "description": "The understeering percentage between 0.0-1.0 whereas up to 0.2 (20%) is considered OK, up to 0.3 (30%) marginal, over 30% critical", 
-            "name_cased": "understeering", 
-            "size": 8, 
-            "type": "double", 
-            "id": 2, 
-            "name": "understeering"
-        }, 
+            ]
+        },
         {
+            "id": 3,
+            "name": "oversteering",
+            "name_cased": "oversteering",
+            "pretty_name": "Oversteering",
+            "type": "types.percentage",
+            "description": "The oversteering percentage between 0.0-1.0 whereas up to 0.2 (20%) is considered OK, up to 30% marginal, over 30% critical",
             "examples": [
                 {
-                    "hex": "3fa999999999999a", 
-                    "description": "Oversteering is at 5%", 
-                    "value": 0.05
+                    "hex": "3fa999999999999a",
+                    "value": 0.05,
+                    "description": "Oversteering is at 5%"
                 }
-            ], 
-            "description": "The oversteering percentage between 0.0-1.0 whereas up to 0.2 (20%) is considered OK, up to 30% marginal, over 30% critical", 
-            "name_cased": "oversteering", 
-            "size": 8, 
-            "type": "double", 
-            "id": 3, 
-            "name": "oversteering"
-        }, 
+            ]
+        },
         {
+            "id": 4,
+            "name": "gas_pedal_position",
+            "name_cased": "gasPedalPosition",
+            "pretty_name": "Gas pedal position",
+            "type": "types.percentage",
+            "description": "The gas pedal position between 0.0-1.0, whereas 1.0 (100%) is full throttle",
             "examples": [
                 {
-                    "hex": "3fef5c28f5c28f5c", 
-                    "description": "Gas pedal position is at 98%", 
-                    "value": 0.98
+                    "hex": "3fef5c28f5c28f5c",
+                    "value": 0.98,
+                    "description": "Gas pedal position is at 98%"
                 }
-            ], 
-            "description": "The gas pedal position between 0.0-1.0, whereas 1.0 (100%) is full throttle", 
-            "name_cased": "gasPedalPosition", 
-            "size": 8, 
-            "type": "double", 
-            "id": 4, 
-            "name": "gas_pedal_position"
-        }, 
+            ]
+        },
         {
+            "id": 5,
+            "name": "steering_angle",
+            "name_cased": "steeringAngle",
+            "pretty_name": "Steering angle",
+            "unit": "\u00b0",
+            "type": "integer",
+            "size": 1,
+            "description": "The steering angle in degrees, whereas 0\u00b0 is straight ahead, positive number to the right and negative number to the left",
             "examples": [
                 {
-                    "hex": "0a", 
-                    "description": "Steering angle is 10\u00b0 to right", 
-                    "value": 10
+                    "hex": "0a",
+                    "value": 10,
+                    "description": "Steering angle is 10\u00b0 to right"
                 }
-            ], 
-            "description": "The steering angle in degrees, whereas 0\u00b0 is straight ahead, positive number to the right and negative number to the left", 
-            "name_cased": "steeringAngle", 
-            "size": 1, 
-            "type": "integer", 
-            "id": 5, 
-            "name": "steering_angle"
-        }, 
+            ]
+        },
         {
+            "id": 6,
+            "name": "brake_pressure",
+            "name_cased": "brakePressure",
+            "pretty_name": "Brake pressure",
+            "unit": "BAR",
+            "type": "float",
+            "size": 4,
+            "description": "Brake pressure in bar, whereas 100 bar is max value, full brake",
             "examples": [
                 {
-                    "hex": "41a00000", 
-                    "description": "Brake pressure is 20.0 bar", 
-                    "value": 20.0
+                    "hex": "41a00000",
+                    "value": 20.0,
+                    "description": "Brake pressure is 20.0 bar"
                 }
-            ], 
-            "description": "Brake pressure in bar, whereas 100 bar is max value, full brake", 
-            "name_cased": "brakePressure", 
-            "size": 4, 
-            "type": "float", 
-            "id": 6, 
-            "name": "brake_pressure"
-        }, 
+            ]
+        },
         {
+            "id": 7,
+            "name": "yaw_rate",
+            "name_cased": "yawRate",
+            "pretty_name": "Yaw rate",
+            "unit": "\u00b0/s",
+            "type": "float",
+            "size": 4,
+            "description": "Yaw rate in degrees per second [\u00b0/s]",
             "examples": [
                 {
-                    "hex": "40d51eb8", 
-                    "description": "Yaw rate is 6.66 \u00b0/s", 
-                    "value": 6.66
+                    "hex": "40d51eb8",
+                    "value": 6.66,
+                    "description": "Yaw rate is 6.66 \u00b0/s"
                 }
-            ], 
-            "description": "Yaw rate in degrees per second [\u00b0/s]", 
-            "name_cased": "yawRate", 
-            "size": 4, 
-            "type": "float", 
-            "id": 7, 
-            "name": "yaw_rate"
-        }, 
+            ]
+        },
         {
+            "id": 8,
+            "name": "rear_suspension_steering",
+            "name_cased": "rearSuspensionSteering",
+            "pretty_name": "Rear suspension steering",
+            "unit": "\u00b0",
+            "type": "integer",
+            "size": 1,
+            "description": "Rear suspension steering in degrees",
             "examples": [
                 {
-                    "hex": "03", 
-                    "description": "Rear suspension steering is +3\u00b0", 
-                    "value": 3
+                    "hex": "03",
+                    "value": 3,
+                    "description": "Rear suspension steering is +3\u00b0"
                 }
-            ], 
-            "description": "Rear suspension steering in degrees", 
-            "name_cased": "rearSuspensionSteering", 
-            "size": 1, 
-            "type": "integer", 
-            "id": 8, 
-            "name": "rear_suspension_steering"
-        }, 
+            ]
+        },
         {
-            "name": "electronic_stability_program", 
-            "type": "types.active_state", 
+            "id": 9,
+            "name": "electronic_stability_program",
+            "name_cased": "electronicStabilityProgram",
+            "pretty_name": "Electronic stability program",
+            "type": "types.active_state",
             "examples": [
                 {
-                    "hex": "01", 
-                    "description": "ESP is active", 
-                    "value": "active"
+                    "hex": "01",
+                    "value": "active",
+                    "description": "ESP is active"
                 }
-            ], 
-            "name_cased": "electronicStabilityProgram", 
-            "id": 9
-        }, 
+            ]
+        },
         {
-            "multiple": true, 
-            "name": "brake_torque_vectorings", 
-            "name_cased": "brakeTorqueVectorings", 
-            "type": "types.brake_torque_vectoring", 
-            "id": 10, 
+            "id": 10,
+            "name": "brake_torque_vectorings",
+            "name_cased": "brakeTorqueVectorings",
+            "pretty_name": "Brake torque vectorings",
+            "type": "types.brake_torque_vectoring",
+            "multiple": true,
+            "name_singular": "brake_torque_vectoring",
             "examples": [
                 {
-                    "hex": "0001", 
+                    "hex": "0001",
                     "values": {
-                        "state": "active", 
-                        "axle": "front"
-                    }, 
+                        "axle": "front",
+                        "state": "active"
+                    },
                     "description": "Front brake torque vectoring is active"
-                }, 
+                },
                 {
-                    "hex": "0100", 
+                    "hex": "0100",
                     "values": {
-                        "state": "inactive", 
-                        "axle": "rear"
-                    }, 
+                        "axle": "rear",
+                        "state": "inactive"
+                    },
                     "description": "Rear brake torque vectoring is inactive"
                 }
             ]
-        }, 
+        },
         {
-            "name": "gear_mode", 
-            "name_cased": "gearMode", 
+            "id": 11,
+            "name": "gear_mode",
+            "name_cased": "gearMode",
+            "pretty_name": "Gear mode",
+            "type": "enum",
+            "size": 1,
             "enum_values": [
                 {
-                    "id": 0, 
+                    "id": 0,
                     "name": "manual"
-                }, 
+                },
                 {
-                    "id": 1, 
+                    "id": 1,
                     "name": "park"
-                }, 
+                },
                 {
-                    "id": 2, 
+                    "id": 2,
                     "name": "reverse"
-                }, 
+                },
                 {
-                    "id": 3, 
+                    "id": 3,
                     "name": "neutral"
-                }, 
+                },
                 {
-                    "id": 4, 
+                    "id": 4,
                     "name": "drive"
-                }, 
+                },
                 {
-                    "id": 5, 
+                    "id": 5,
                     "name": "low_gear"
-                }, 
+                },
                 {
-                    "id": 6, 
+                    "id": 6,
                     "name": "sport"
                 }
-            ], 
-            "size": 1, 
-            "type": "enum", 
-            "id": 11, 
+            ],
             "examples": [
                 {
-                    "hex": "04", 
-                    "description": "Gear is in drive", 
-                    "value": "drive"
+                    "hex": "04",
+                    "value": "drive",
+                    "description": "Gear is in drive"
                 }
             ]
-        }, 
+        },
         {
+            "id": 12,
+            "name": "selected_gear",
+            "name_cased": "selectedGear",
+            "pretty_name": "Selected gear",
+            "type": "integer",
+            "size": 1,
+            "description": "The selected gear value, if any",
             "examples": [
                 {
-                    "hex": "04", 
-                    "description": "4th gear is selected", 
-                    "value": 4
+                    "hex": "04",
+                    "value": 4,
+                    "description": "4th gear is selected"
                 }
-            ], 
-            "description": "The selected gear value, if any", 
-            "name_cased": "selectedGear", 
-            "size": 1, 
-            "type": "integer", 
-            "id": 12, 
-            "name": "selected_gear"
-        }, 
+            ]
+        },
         {
+            "id": 13,
+            "name": "brake_pedal_position",
+            "name_cased": "brakePedalPosition",
+            "pretty_name": "Brake pedal position",
+            "type": "types.percentage",
+            "description": "The brake pedal position between 0.0-1.0, wheras 1.0 (100%) is full brakes",
             "examples": [
                 {
-                    "hex": "3fbeb851eb851eb8", 
-                    "description": "Brake pedal position is at 12%", 
-                    "value": 0.12
+                    "hex": "3fbeb851eb851eb8",
+                    "value": 0.12,
+                    "description": "Brake pedal position is at 12%"
                 }
-            ], 
-            "description": "The brake pedal position between 0.0-1.0, wheras 1.0 (100%) is full brakes", 
-            "name_cased": "brakePedalPosition", 
-            "size": 8, 
-            "type": "double", 
-            "id": 13, 
-            "name": "brake_pedal_position"
-        }, 
+            ]
+        },
         {
-            "name": "brake_pedal_switch", 
-            "type": "types.active_state", 
+            "id": 14,
+            "name": "brake_pedal_switch",
+            "name_cased": "brakePedalSwitch",
+            "pretty_name": "Brake pedal switch",
+            "type": "types.active_state",
             "examples": [
                 {
-                    "hex": "01", 
-                    "description": "Brake pedal switch is active, brake lights active", 
-                    "value": "active"
+                    "hex": "01",
+                    "value": "active",
+                    "description": "Brake pedal switch is active, brake lights active"
                 }
-            ], 
-            "name_cased": "brakePedalSwitch", 
-            "id": 14
-        }, 
+            ]
+        },
         {
-            "name": "clutch_pedal_switch", 
-            "type": "types.active_state", 
+            "id": 15,
+            "name": "clutch_pedal_switch",
+            "name_cased": "clutchPedalSwitch",
+            "pretty_name": "Clutch pedal switch",
+            "type": "types.active_state",
             "examples": [
                 {
-                    "hex": "01", 
-                    "description": "Clutch pedal switch is active, clutch is fully depressed", 
-                    "value": "active"
+                    "hex": "01",
+                    "value": "active",
+                    "description": "Clutch pedal switch is active, clutch is fully depressed"
                 }
-            ], 
-            "name_cased": "clutchPedalSwitch", 
-            "id": 15
-        }, 
+            ]
+        },
         {
-            "name": "accelerator_pedal_idle_switch", 
-            "type": "types.active_state", 
+            "id": 16,
+            "name": "accelerator_pedal_idle_switch",
+            "name_cased": "acceleratorPedalIdleSwitch",
+            "pretty_name": "Accelerator pedal idle switch",
+            "type": "types.active_state",
             "examples": [
                 {
-                    "hex": "01", 
-                    "description": "Accelerator pedal idle switch is active, pedal released", 
-                    "value": "active"
+                    "hex": "01",
+                    "value": "active",
+                    "description": "Accelerator pedal idle switch is active, pedal released"
                 }
-            ], 
-            "name_cased": "acceleratorPedalIdleSwitch", 
-            "id": 16
-        }, 
+            ]
+        },
         {
-            "name": "accelerator_pedal_kickdown_switch", 
-            "type": "types.active_state", 
+            "id": 17,
+            "name": "accelerator_pedal_kickdown_switch",
+            "name_cased": "acceleratorPedalKickdownSwitch",
+            "pretty_name": "Accelerator pedal kickdown switch",
+            "type": "types.active_state",
             "examples": [
                 {
-                    "hex": "01", 
-                    "description": "Accelerator pedal kickdown switch is active, pedal fully depressed", 
-                    "value": "active"
+                    "hex": "01",
+                    "value": "active",
+                    "description": "Accelerator pedal kickdown switch is active, pedal fully depressed"
                 }
-            ], 
-            "name_cased": "acceleratorPedalKickdownSwitch", 
-            "id": 17
-        }, 
+            ]
+        },
         {
-            "name": "vehicle_moving", 
-            "name_cased": "vehicleMoving", 
+            "id": 18,
+            "name": "vehicle_moving",
+            "name_cased": "vehicleMoving",
+            "pretty_name": "Vehicle moving",
+            "type": "enum",
+            "size": 1,
+            "controls": "switch",
             "enum_values": [
                 {
-                    "id": 0, 
+                    "id": 0,
                     "name": "not_moving"
-                }, 
+                },
                 {
-                    "id": 1, 
+                    "id": 1,
                     "name": "moving"
                 }
-            ], 
-            "size": 1, 
-            "type": "enum", 
-            "id": 18, 
+            ],
             "examples": [
                 {
-                    "hex": "01", 
-                    "description": "Vehicle is moving", 
-                    "value": "moving"
+                    "hex": "01",
+                    "value": "moving",
+                    "description": "Vehicle is moving"
                 }
             ]
         }

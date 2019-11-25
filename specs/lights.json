@@ -1,202 +1,232 @@
 {
-    "category": "chassis", 
-    "name": "lights", 
-    "name_cased": "lights", 
-    "getters": {}, 
-    "state": "all", 
-    "api": {
-        "intro": 3, 
-        "update": 11
-    }, 
+    "name": "lights",
+    "name_cased": "lights",
+    "pretty_name": "Lights",
+    "category": "chassis",
+    "authorization": true,
     "identifier": {
-        "lsb": 54, 
-        "msb": 0
-    }, 
+        "msb": 0,
+        "lsb": 54
+    },
+    "api": {
+        "intro": 3,
+        "update": 11
+    },
+    "getters": {},
+    "setters": [
+        {
+            "name": "control_lights",
+            "optional": [
+                1,
+                2,
+                4,
+                7,
+                8,
+                9
+            ],
+            "description": "Set the lights state."
+        }
+    ],
+    "state": "all",
     "properties": [
         {
-            "name": "front_exterior_light", 
-            "name_cased": "frontExteriorLight", 
+            "id": 1,
+            "name": "front_exterior_light",
+            "name_cased": "frontExteriorLight",
+            "pretty_name": "Front exterior light",
+            "type": "enum",
+            "size": 1,
             "enum_values": [
                 {
-                    "verb": "deactivate", 
-                    "id": 0, 
-                    "name": "inactive"
-                }, 
+                    "id": 0,
+                    "name": "inactive",
+                    "verb": "deactivate"
+                },
                 {
-                    "verb": "activate", 
-                    "id": 1, 
-                    "name": "active"
-                }, 
+                    "id": 1,
+                    "name": "active",
+                    "verb": "activate"
+                },
                 {
-                    "verb": "activate_with_full_beam", 
-                    "id": 2, 
-                    "name": "active_with_full_beam"
-                }, 
+                    "id": 2,
+                    "name": "active_with_full_beam",
+                    "verb": "activate_with_full_beam"
+                },
                 {
-                    "pretty_name": "Daylight Running Lamps", 
-                    "verb": "activate_dlr", 
-                    "id": 3, 
-                    "name": "dlr"
-                }, 
+                    "id": 3,
+                    "name": "dlr",
+                    "verb": "activate_dlr",
+                    "pretty_name": "Daylight Running Lamps"
+                },
                 {
-                    "id": 4, 
+                    "id": 4,
                     "name": "automatic"
                 }
-            ], 
-            "size": 1, 
-            "type": "enum", 
-            "id": 1, 
+            ],
             "examples": [
                 {
-                    "hex": "02", 
-                    "description": "Front exterior lights are active with full beam", 
-                    "value": "active_with_full_beam"
+                    "hex": "02",
+                    "value": "active_with_full_beam",
+                    "description": "Front exterior lights are active with full beam"
                 }
             ]
-        }, 
+        },
         {
-            "name": "rear_exterior_light", 
-            "type": "types.active_state", 
+            "id": 2,
+            "name": "rear_exterior_light",
+            "name_cased": "rearExteriorLight",
+            "pretty_name": "Rear exterior light",
+            "type": "types.active_state",
             "examples": [
                 {
-                    "hex": "01", 
-                    "description": "Rear exterior lights are active", 
-                    "value": "active"
+                    "hex": "01",
+                    "value": "active",
+                    "description": "Rear exterior lights are active"
                 }
-            ], 
-            "name_cased": "rearExteriorLight", 
-            "id": 2
-        }, 
+            ]
+        },
         {
-            "name": "ambient_light_colour", 
-            "type": "types.rgb_colour", 
+            "id": 4,
+            "name": "ambient_light_colour",
+            "name_cased": "ambientLightColour",
+            "pretty_name": "Ambient light colour",
+            "type": "types.rgb_colour",
             "examples": [
                 {
-                    "hex": "ff0000", 
+                    "hex": "ff0000",
                     "values": {
-                        "blue": 0, 
-                        "green": 0, 
-                        "red": 255
-                    }, 
+                        "red": 255,
+                        "green": 0,
+                        "blue": 0
+                    },
                     "description": "Ambient light is red"
                 }
-            ], 
-            "name_cased": "ambientLightColour", 
-            "id": 4
-        }, 
+            ]
+        },
         {
-            "name": "reverse_light", 
-            "type": "types.active_state", 
+            "id": 5,
+            "name": "reverse_light",
+            "name_cased": "reverseLight",
+            "pretty_name": "Reverse light",
+            "type": "types.active_state",
             "examples": [
                 {
-                    "hex": "00", 
-                    "description": "Reverse light is inactive", 
-                    "value": "inactive"
+                    "hex": "00",
+                    "value": "inactive",
+                    "description": "Reverse light is inactive"
                 }
-            ], 
-            "name_cased": "reverseLight", 
-            "id": 5
-        }, 
+            ]
+        },
         {
-            "name": "emergency_brake_light", 
-            "type": "types.active_state", 
+            "id": 6,
+            "name": "emergency_brake_light",
+            "name_cased": "emergencyBrakeLight",
+            "pretty_name": "Emergency brake light",
+            "type": "types.active_state",
             "examples": [
                 {
-                    "hex": "00", 
-                    "description": "Emergency brake light is inactive", 
-                    "value": "inactive"
+                    "hex": "00",
+                    "value": "inactive",
+                    "description": "Emergency brake light is inactive"
                 }
-            ], 
-            "name_cased": "emergencyBrakeLight", 
-            "id": 6
-        }, 
+            ]
+        },
         {
-            "multiple": true, 
-            "name": "fog_lights", 
-            "name_cased": "fogLights", 
-            "type": "types.light", 
-            "id": 7, 
+            "id": 7,
+            "name": "fog_lights",
+            "name_cased": "fogLights",
+            "pretty_name": "Fog lights",
+            "type": "types.light",
+            "multiple": true,
+            "name_singular": "fog_light",
             "examples": [
                 {
-                    "hex": "0000", 
+                    "hex": "0000",
                     "values": {
-                        "state": "inactive", 
-                        "location": "front"
-                    }, 
+                        "location": "front",
+                        "state": "inactive"
+                    },
                     "description": "Front fog lights are inactive"
-                }, 
+                },
                 {
-                    "hex": "0101", 
+                    "hex": "0101",
                     "values": {
-                        "state": "active", 
-                        "location": "rear"
-                    }, 
+                        "location": "rear",
+                        "state": "active"
+                    },
                     "description": "Rear fog lights are active"
                 }
             ]
-        }, 
+        },
         {
-            "multiple": true, 
-            "name": "reading_lamps", 
-            "name_cased": "readingLamps", 
-            "type": "types.reading_lamp", 
-            "id": 8, 
+            "id": 8,
+            "name": "reading_lamps",
+            "name_cased": "readingLamps",
+            "pretty_name": "Reading lamps",
+            "type": "types.reading_lamp",
+            "multiple": true,
+            "name_singular": "reading_lamp",
             "examples": [
                 {
-                    "hex": "0001", 
+                    "hex": "0001",
                     "values": {
-                        "state": "active", 
-                        "location": "front_left"
-                    }, 
-                    "description": "Front reading lamps are active"
-                }, 
+                        "location": "front_left",
+                        "state": "active"
+                    },
+                    "description": "Front left reading lamp is active"
+                },
                 {
-                    "hex": "0200", 
+                    "hex": "0101",
                     "values": {
-                        "state": "inactive", 
-                        "location": "rear_right"
-                    }, 
-                    "description": "Rear reading lamps are inactive"
+                        "location": "front_right",
+                        "state": "active"
+                    },
+                    "description": "Front right reading lamp is active"
+                },
+                {
+                    "hex": "0200",
+                    "values": {
+                        "location": "rear_right",
+                        "state": "inactive"
+                    },
+                    "description": "Rear right reading lamp is inactive"
+                },
+                {
+                    "hex": "0300",
+                    "values": {
+                        "location": "rear_left",
+                        "state": "inactive"
+                    },
+                    "description": "Rear left reading lamp is inactive"
                 }
             ]
-        }, 
+        },
         {
-            "multiple": true, 
-            "name": "interior_lights", 
-            "name_cased": "interiorLights", 
-            "type": "types.light", 
-            "id": 9, 
+            "id": 9,
+            "name": "interior_lights",
+            "name_cased": "interiorLights",
+            "pretty_name": "Interior lights",
+            "type": "types.light",
+            "multiple": true,
+            "name_singular": "interior_light",
             "examples": [
                 {
-                    "hex": "0000", 
+                    "hex": "0000",
                     "values": {
-                        "state": "inactive", 
-                        "location": "front"
-                    }, 
+                        "location": "front",
+                        "state": "inactive"
+                    },
                     "description": "Front interior lights are inactive"
-                }, 
+                },
                 {
-                    "hex": "0101", 
+                    "hex": "0101",
                     "values": {
-                        "state": "active", 
-                        "location": "rear"
-                    }, 
+                        "location": "rear",
+                        "state": "active"
+                    },
                     "description": "Rear reading lights are active"
                 }
             ]
-        }
-    ], 
-    "setters": [
-        {
-            "optional": [
-                1, 
-                2, 
-                4, 
-                7, 
-                8, 
-                9
-            ], 
-            "name": "control_lights"
         }
     ]
 }

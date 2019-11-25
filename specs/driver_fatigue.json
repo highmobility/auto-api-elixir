@@ -1,50 +1,53 @@
 {
-    "category": "health", 
+    "name": "driver_fatigue",
+    "name_cased": "driverFatigue",
+    "pretty_name": "Driver Fatigue",
+    "category": "health",
+    "authorization": true,
+    "identifier": {
+        "msb": 0,
+        "lsb": 65
+    },
+    "api": {
+        "intro": 4,
+        "update": 11
+    },
     "disabled_in": [
         "web"
-    ], 
-    "name": "driver_fatigue", 
-    "name_cased": "driverFatigue", 
-    "getters": {}, 
-    "state": "all", 
-    "api": {
-        "intro": 4, 
-        "update": 11
-    }, 
-    "identifier": {
-        "lsb": 65, 
-        "msb": 0
-    }, 
+    ],
+    "getters": {},
+    "state": "all",
     "properties": [
         {
-            "name": "detected_fatigue_level", 
-            "name_cased": "detectedFatigueLevel", 
+            "id": 1,
+            "name": "detected_fatigue_level",
+            "name_cased": "detectedFatigueLevel",
+            "pretty_name": "Detected fatigue level",
+            "type": "enum",
+            "size": 1,
             "enum_values": [
                 {
-                    "id": 0, 
+                    "id": 0,
                     "name": "light"
-                }, 
+                },
                 {
-                    "id": 1, 
+                    "id": 1,
                     "name": "pause_recommended"
-                }, 
+                },
                 {
-                    "id": 2, 
+                    "id": 2,
                     "name": "action_needed"
-                }, 
+                },
                 {
-                    "id": 3, 
+                    "id": 3,
                     "name": "car_ready_to_take_over"
                 }
-            ], 
-            "size": 1, 
-            "type": "enum", 
-            "id": 1, 
+            ],
             "examples": [
                 {
-                    "hex": "01", 
-                    "description": "Driver is recommended to take a pause", 
-                    "value": "pause_recommended"
+                    "hex": "01",
+                    "value": "pause_recommended",
+                    "description": "Driver is recommended to take a pause"
                 }
             ]
         }

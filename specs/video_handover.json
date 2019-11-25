@@ -1,80 +1,85 @@
 {
-    "category": "headunit", 
-    "api": {
-        "intro": 4, 
-        "update": 11
-    }, 
-    "name": "video_handover", 
-    "name_cased": "videoHandover", 
+    "name": "video_handover",
+    "name_cased": "videoHandover",
+    "pretty_name": "Video Handover",
+    "category": "headunit",
+    "authorization": true,
     "identifier": {
-        "lsb": 67, 
-        "msb": 0
-    }, 
-    "properties": [
-        {
-            "pretty_name": "URL", 
-            "description": "URL string", 
-            "name_cased": "url", 
-            "name": "url", 
-            "type": "string", 
-            "id": 1, 
-            "examples": [
-                {
-                    "hex": "68747470733a2f2f6269742e6c792f326f6259374735", 
-                    "description": "Video URL is 'https://bit.ly/2obY7G5'", 
-                    "value": "https://bit.ly/2obY7G5"
-                }
-            ]
-        }, 
-        {
-            "name": "starting_second", 
-            "name_cased": "startingSecond", 
-            "size": 2, 
-            "type": "uinteger", 
-            "id": 2, 
-            "examples": [
-                {
-                    "hex": "0003", 
-                    "description": "Start from the 3rd second", 
-                    "value": 3
-                }
-            ]
-        }, 
-        {
-            "name": "screen", 
-            "name_cased": "screen", 
-            "enum_values": [
-                {
-                    "id": 0, 
-                    "name": "front"
-                }, 
-                {
-                    "id": 1, 
-                    "name": "rear"
-                }
-            ], 
-            "size": 1, 
-            "type": "enum", 
-            "id": 3, 
-            "examples": [
-                {
-                    "hex": "01", 
-                    "description": "Play the video on the rear screen", 
-                    "value": "rear"
-                }
-            ]
-        }
-    ], 
+        "msb": 0,
+        "lsb": 67
+    },
+    "api": {
+        "intro": 4,
+        "update": 11
+    },
     "setters": [
         {
+            "name": "video_handover",
             "mandatory": [
                 1
-            ], 
+            ],
             "optional": [
-                2, 
+                2,
                 3
-            ], 
-            "name": "video_handover"
+            ],
+            "description": "Hand over a video from smart device to car headunit to be shown in the car display. The emulator supports HTML5 video player formats .mp4 and .webm."
+        }
+    ],
+    "properties": [
+        {
+            "id": 1,
+            "name": "url",
+            "name_cased": "url",
+            "pretty_name": "URL",
+            "type": "string",
+            "description": "URL string",
+            "examples": [
+                {
+                    "hex": "68747470733a2f2f6269742e6c792f326f6259374735",
+                    "value": "https://bit.ly/2obY7G5",
+                    "description": "Video URL is 'https://bit.ly/2obY7G5'"
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "name": "starting_second",
+            "name_cased": "startingSecond",
+            "pretty_name": "Starting second",
+            "type": "uinteger",
+            "size": 2,
+            "examples": [
+                {
+                    "hex": "0003",
+                    "value": 3,
+                    "description": "Start from the 3rd second"
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "name": "screen",
+            "name_cased": "screen",
+            "pretty_name": "Screen",
+            "type": "enum",
+            "size": 1,
+            "enum_values": [
+                {
+                    "id": 0,
+                    "name": "front"
+                },
+                {
+                    "id": 1,
+                    "name": "rear"
+                }
+            ],
+            "examples": [
+                {
+                    "hex": "01",
+                    "value": "rear",
+                    "description": "Play the video on the rear screen"
+                }
+            ]
         }
     ]
 }

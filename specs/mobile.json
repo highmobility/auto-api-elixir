@@ -1,31 +1,33 @@
 {
-    "category": "headunit", 
-    "name": "mobile", 
-    "name_cased": "mobile", 
-    "getters": {}, 
-    "pretty_name": "Mobile", 
-    "state": "all", 
-    "api": {
-        "intro": 8, 
-        "update": 11
-    }, 
+    "name": "mobile",
+    "name_cased": "mobile",
+    "pretty_name": "Mobile",
+    "category": "headunit",
+    "authorization": true,
     "identifier": {
-        "lsb": 102, 
-        "msb": 0
-    }, 
+        "msb": 0,
+        "lsb": 102
+    },
+    "api": {
+        "intro": 8,
+        "update": 11
+    },
+    "getters": {},
+    "state": "all",
     "properties": [
         {
-            "name": "connection", 
-            "type": "types.connection_state", 
+            "id": 1,
+            "name": "connection",
+            "name_cased": "connection",
+            "pretty_name": "Connection",
+            "type": "types.connection_state",
             "examples": [
                 {
-                    "hex": "01", 
-                    "description": "A mobile phone is connected", 
-                    "value": "connected"
+                    "hex": "01",
+                    "value": "connected",
+                    "description": "A mobile phone is connected"
                 }
-            ], 
-            "name_cased": "connection", 
-            "id": 1
+            ]
         }
     ]
 }

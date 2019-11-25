@@ -1,116 +1,126 @@
 {
-    "category": "headunit", 
-    "name": "notifications", 
-    "name_cased": "notifications", 
-    "state": "all", 
-    "api": {
-        "intro": 4, 
-        "update": 11
-    }, 
+    "name": "notifications",
+    "name_cased": "notifications",
+    "pretty_name": "Notifications",
+    "category": "headunit",
+    "authorization": true,
     "identifier": {
-        "lsb": 56, 
-        "msb": 0
-    }, 
-    "properties": [
-        {
-            "description": "Text for the notification", 
-            "name_cased": "text", 
-            "name": "text", 
-            "type": "string", 
-            "id": 1, 
-            "examples": [
-                {
-                    "hex": "4f70656e20476172616765", 
-                    "description": "Notification text says 'Open Garage'", 
-                    "value": "Open Garage"
-                }
-            ]
-        }, 
-        {
-            "multiple": true, 
-            "name": "action_items", 
-            "name_cased": "actionItems", 
-            "type": "types.action_item", 
-            "id": 2, 
-            "examples": [
-                {
-                    "hex": "1b00044f70656e", 
-                    "values": {
-                        "id": 27, 
-                        "name": "Open"
-                    }, 
-                    "description": "Notification action named 'Open' with an ID 27"
-                }, 
-                {
-                    "hex": "1c000643616e63656c", 
-                    "values": {
-                        "id": 28, 
-                        "name": "Cancel"
-                    }, 
-                    "description": "Notification action named 'Cancel' with an ID 28"
-                }
-            ]
-        }, 
-        {
-            "examples": [
-                {
-                    "hex": "1b", 
-                    "description": "Activated action with ID 27", 
-                    "value": 27
-                }
-            ], 
-            "description": "Identifier of the activated action", 
-            "name_cased": "activatedAction", 
-            "size": 1, 
-            "type": "uinteger", 
-            "id": 3, 
-            "name": "activated_action"
-        }, 
-        {
-            "name": "clear", 
-            "name_cased": "clear", 
-            "enum_values": [
-                {
-                    "id": 0, 
-                    "name": "clear"
-                }
-            ], 
-            "size": 1, 
-            "type": "enum", 
-            "id": 4, 
-            "examples": [
-                {
-                    "hex": "00", 
-                    "description": "Clear notifications", 
-                    "value": "clear"
-                }
-            ]
-        }
-    ], 
+        "msb": 0,
+        "lsb": 56
+    },
+    "api": {
+        "intro": 4,
+        "update": 11
+    },
     "setters": [
         {
+            "name": "notification",
             "mandatory": [
                 1
-            ], 
+            ],
             "optional": [
                 2
-            ], 
-            "name": "notification"
-        }, 
+            ],
+            "description": "Send a notification to the car or smart device. The notification can have action items that the user can respond with."
+        },
         {
+            "name": "action",
             "mandatory": [
                 3
-            ], 
-            "name": "action"
-        }, 
+            ],
+            "description": "Activate/choose a notification action."
+        },
         {
-            "name": "clear_notification", 
+            "name": "clear_notification",
             "constants": [
                 {
-                    "property_id": 4, 
+                    "property_id": 4,
                     "value": [
                         0
                     ]
+                }
+            ],
+            "description": "Clear the Notification in either the car or device that has previously been sent, ignoring driver feedback."
+        }
+    ],
+    "state": "all",
+    "properties": [
+        {
+            "id": 1,
+            "name": "text",
+            "name_cased": "text",
+            "pretty_name": "Text",
+            "type": "string",
+            "description": "Text for the notification",
+            "examples": [
+                {
+                    "hex": "4f70656e20476172616765",
+                    "value": "Open Garage",
+                    "description": "Notification text says 'Open Garage'"
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "name": "action_items",
+            "name_cased": "actionItems",
+            "pretty_name": "Action items",
+            "type": "types.action_item",
+            "multiple": true,
+            "name_singular": "action_item",
+            "examples": [
+                {
+                    "hex": "1b00044f70656e",
+                    "values": {
+                        "id": 27,
+                        "name": "Open"
+                    },
+                    "description": "Notification action named 'Open' with an ID 27"
+                },
+                {
+                    "hex": "1c000643616e63656c",
+                    "values": {
+                        "id": 28,
+                        "name": "Cancel"
+                    },
+                    "description": "Notification action named 'Cancel' with an ID 28"
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "name": "activated_action",
+            "name_cased": "activatedAction",
+            "pretty_name": "Activate action",
+            "type": "uinteger",
+            "size": 1,
+            "description": "Identifier of the activated action",
+            "examples": [
+                {
+                    "hex": "1b",
+                    "value": 27,
+                    "description": "Activated action with ID 27"
+                }
+            ]
+        },
+        {
+            "id": 4,
+            "name": "clear",
+            "name_cased": "clear",
+            "pretty_name": "Clear",
+            "type": "enum",
+            "size": 1,
+            "enum_values": [
+                {
+                    "id": 0,
+                    "name": "clear"
+                }
+            ],
+            "examples": [
+                {
+                    "hex": "00",
+                    "value": "clear",
+                    "description": "Clear notifications"
                 }
             ]
         }

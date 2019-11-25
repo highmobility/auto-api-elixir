@@ -1,65 +1,72 @@
 {
-    "category": "poi", 
-    "name": "vehicle_location", 
-    "name_cased": "vehicleLocation", 
+    "name": "vehicle_location",
+    "name_cased": "vehicleLocation",
+    "pretty_name": "Vehicle Location",
+    "category": "poi",
+    "authorization": true,
+    "identifier": {
+        "msb": 0,
+        "lsb": 48
+    },
+    "api": {
+        "intro": 2,
+        "update": 11
+    },
     "getters": {
         "name": "get_vehicle_location"
-    }, 
-    "state": "all", 
-    "api": {
-        "intro": 2, 
-        "update": 11
-    }, 
-    "identifier": {
-        "lsb": 48, 
-        "msb": 0
-    }, 
+    },
+    "state": "all",
     "properties": [
         {
-            "name": "coordinates", 
-            "type": "types.coordinates", 
+            "id": 4,
+            "name": "coordinates",
+            "name_cased": "coordinates",
+            "pretty_name": "Coordinates",
+            "type": "types.coordinates",
             "examples": [
                 {
-                    "hex": "404a428f9f44d445402acf562174c4ce", 
+                    "hex": "404a428f9f44d445402acf562174c4ce",
                     "values": {
-                        "latitude": 52.520008, 
+                        "latitude": 52.520008,
                         "longitude": 13.404954
-                    }, 
+                    },
                     "description": "Vehicle coordinates are 52.520008:13.404954"
                 }
-            ], 
-            "name_cased": "coordinates", 
-            "id": 4
-        }, 
+            ]
+        },
         {
+            "id": 5,
+            "name": "heading",
+            "name_cased": "heading",
+            "pretty_name": "Heading",
+            "unit": "\u00b0",
+            "type": "double",
+            "size": 8,
+            "description": "Heading in degrees",
             "examples": [
                 {
-                    "hex": "402abd80c308feac", 
-                    "description": "Heading direction is 13.370123\u00b0", 
-                    "value": 13.370123
+                    "hex": "402abd80c308feac",
+                    "value": 13.370123,
+                    "description": "Heading direction is 13.370123\u00b0"
                 }
-            ], 
-            "description": "Heading in degrees", 
-            "name_cased": "heading", 
-            "size": 8, 
-            "type": "double", 
-            "id": 5, 
-            "name": "heading"
-        }, 
+            ]
+        },
         {
+            "id": 6,
+            "name": "altitude",
+            "name_cased": "altitude",
+            "pretty_name": "Altitude",
+            "unit": "m",
+            "type": "double",
+            "size": 8,
+            "description": "Altitude in meters above the WGS 84 reference ellipsoid",
             "examples": [
                 {
-                    "hex": "4060b00000000000", 
-                    "description": "Vehicle altitude is 133.5 m", 
-                    "value": 133.5
+                    "hex": "4060b00000000000",
+                    "value": 133.5,
+                    "description": "Vehicle altitude is 133.5 m"
                 }
-            ], 
-            "description": "Altitude in meters above the WGS 84 reference ellipsoid", 
-            "name_cased": "altitude", 
-            "size": 8, 
-            "type": "double", 
-            "id": 6, 
-            "name": "altitude"
+            ]
         }
     ]
 }

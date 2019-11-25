@@ -23,7 +23,7 @@ defmodule AutoApi.WindscreenState do
 
   alias AutoApi.{CommonData, PropertyComponent}
 
-  defstruct wipers: nil,
+  defstruct wipers_status: nil,
             wipers_intensity: nil,
             windscreen_damage: nil,
             windscreen_zone_matrix: nil,
@@ -35,7 +35,7 @@ defmodule AutoApi.WindscreenState do
 
   use AutoApi.State, spec_file: "specs/windscreen.json"
 
-  @type wipers :: :inactive | :active | :automatic
+  @type wipers_status :: :inactive | :active | :automatic
   @type wipers_intensity :: :level_0 | :level_1 | :level_2 | :level_3
   @type windscreen_damage ::
           :no_impact_detected
@@ -47,7 +47,7 @@ defmodule AutoApi.WindscreenState do
   @type windscreen_needs_replacement :: :unknown | :no_replacement_needed | :replacement_needed
 
   @type t :: %__MODULE__{
-          wipers: %PropertyComponent{data: wipers} | nil,
+          wipers_status: %PropertyComponent{data: wipers_status} | nil,
           wipers_intensity: %PropertyComponent{data: wipers_intensity} | nil,
           windscreen_damage: %PropertyComponent{data: windscreen_damage} | nil,
           windscreen_zone_matrix: %PropertyComponent{data: windscreen_zone_matrix} | nil,
@@ -64,7 +64,7 @@ defmodule AutoApi.WindscreenState do
 
     iex> bin = <<1, 0, 4, 1, 0, 1, 2>>
     iex> AutoApi.WindscreenState.from_bin(bin)
-    %AutoApi.WindscreenState{wipers: %AutoApi.PropertyComponent{data: :automatic}}
+    %AutoApi.WindscreenState{wipers_status: %AutoApi.PropertyComponent{data: :automatic}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -74,7 +74,7 @@ defmodule AutoApi.WindscreenState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.WindscreenState{wipers: %AutoApi.PropertyComponent{data: :automatic}}
+    iex> state = %AutoApi.WindscreenState{wipers_status: %AutoApi.PropertyComponent{data: :automatic}}
     iex> AutoApi.WindscreenState.to_bin(state)
     <<1, 0, 4, 1, 0, 1, 2>>
   """

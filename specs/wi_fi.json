@@ -1,115 +1,123 @@
 {
-    "category": "headunit", 
-    "name": "wi_fi", 
-    "name_cased": "wiFi", 
-    "getters": {}, 
-    "pretty_name": "Wi-Fi", 
-    "state": [
-        1, 
-        2, 
-        3, 
-        4
-    ], 
-    "api": {
-        "intro": 6, 
-        "update": 11
-    }, 
+    "name": "wi_fi",
+    "name_cased": "wiFi",
+    "pretty_name": "Wi-Fi",
+    "category": "headunit",
+    "authorization": true,
     "identifier": {
-        "lsb": 89, 
-        "msb": 0
-    }, 
-    "properties": [
-        {
-            "name": "status", 
-            "type": "types.enabled_state", 
-            "examples": [
-                {
-                    "hex": "01", 
-                    "description": "WiFi is enabled", 
-                    "value": "enabled"
-                }
-            ], 
-            "name_cased": "status", 
-            "id": 1
-        }, 
-        {
-            "name": "network_connected", 
-            "type": "types.connection_state", 
-            "examples": [
-                {
-                    "hex": "01", 
-                    "description": "WiFi is connected", 
-                    "value": "connected"
-                }
-            ], 
-            "name_cased": "networkConnection", 
-            "id": 2
-        }, 
-        {
-            "pretty_name": "Network SSID", 
-            "description": "The network SSID", 
-            "name_cased": "networkSSID", 
-            "name": "network_ssid", 
-            "type": "string", 
-            "id": 3, 
-            "examples": [
-                {
-                    "hex": "484f4d45", 
-                    "description": "WiFi network name is 'HOME'", 
-                    "value": "HOME"
-                }
-            ]
-        }, 
-        {
-            "name": "network_security", 
-            "type": "types.network_security", 
-            "examples": [
-                {
-                    "hex": "03", 
-                    "description": "WiFi network uses WPA2 Personal", 
-                    "value": "wpa2_personal"
-                }
-            ], 
-            "name_cased": "networkSecurity", 
-            "id": 4
-        }, 
-        {
-            "description": "The network password", 
-            "name_cased": "password", 
-            "name": "password", 
-            "type": "string", 
-            "id": 5, 
-            "examples": [
-                {
-                    "hex": "67726561745f7365637265743132", 
-                    "description": "WiFi network password is 'great_secret12'", 
-                    "value": "great_secret12"
-                }
-            ]
-        }
-    ], 
+        "msb": 0,
+        "lsb": 89
+    },
+    "api": {
+        "intro": 6,
+        "update": 11
+    },
+    "getters": {},
     "setters": [
         {
+            "name": "connect_to_network",
             "mandatory": [
-                3, 
+                3,
                 4
-            ], 
+            ],
             "optional": [
                 5
-            ], 
-            "name": "connect_to_network"
-        }, 
+            ],
+            "description": "Connect the car to a Wi-Fi network."
+        },
         {
+            "name": "forget_network",
             "mandatory": [
                 3
-            ], 
-            "name": "forget_network"
-        }, 
+            ],
+            "description": "Forget a network that the car has previously connected to."
+        },
         {
+            "name": "enable_disable_wi_fi",
             "mandatory": [
                 1
-            ], 
-            "name": "enable_disable_wi_fi"
+            ],
+            "description": "Enable or disable Wi-Fi completely."
+        }
+    ],
+    "state": [
+        1,
+        2,
+        3,
+        4
+    ],
+    "properties": [
+        {
+            "id": 1,
+            "name": "status",
+            "name_cased": "status",
+            "pretty_name": "Status",
+            "type": "types.enabled_state",
+            "examples": [
+                {
+                    "hex": "01",
+                    "value": "enabled",
+                    "description": "WiFi is enabled"
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "name": "network_connected",
+            "name_cased": "networkConnected",
+            "pretty_name": "Network connected",
+            "type": "types.connection_state",
+            "examples": [
+                {
+                    "hex": "01",
+                    "value": "connected",
+                    "description": "WiFi is connected"
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "name": "network_ssid",
+            "name_cased": "networkSSID",
+            "pretty_name": "Network SSID",
+            "type": "string",
+            "description": "The network SSID",
+            "examples": [
+                {
+                    "hex": "484f4d45",
+                    "value": "HOME",
+                    "description": "WiFi network name is 'HOME'"
+                }
+            ]
+        },
+        {
+            "id": 4,
+            "name": "network_security",
+            "name_cased": "networkSecurity",
+            "pretty_name": "Network security",
+            "type": "types.network_security",
+            "examples": [
+                {
+                    "hex": "03",
+                    "value": "wpa2_personal",
+                    "description": "WiFi network uses WPA2 Personal"
+                }
+            ]
+        },
+        {
+            "id": 5,
+            "name": "password",
+            "name_cased": "password",
+            "pretty_name": "Password",
+            "type": "string",
+            "description": "The network password",
+            "examples": [
+                {
+                    "hex": "67726561745f7365637265743132",
+                    "value": "great_secret12",
+                    "description": "WiFi network password is 'great_secret12'"
+                }
+            ]
         }
     ]
 }

@@ -1,55 +1,60 @@
 {
-    "category": "headunit", 
-    "name": "messaging", 
-    "name_cased": "messaging", 
-    "state": "all", 
-    "api": {
-        "intro": 4, 
-        "update": 11
-    }, 
+    "name": "messaging",
+    "name_cased": "messaging",
+    "pretty_name": "Messaging",
+    "category": "headunit",
+    "authorization": true,
     "identifier": {
-        "lsb": 55, 
-        "msb": 0
-    }, 
-    "properties": [
-        {
-            "description": "The text", 
-            "name_cased": "text", 
-            "name": "text", 
-            "type": "string", 
-            "id": 1, 
-            "examples": [
-                {
-                    "hex": "486579206d6f6d21", 
-                    "description": "Message text says 'Hey mom!'", 
-                    "value": "Hey mom!"
-                }
-            ]
-        }, 
-        {
-            "description": "The optional handle of message", 
-            "name_cased": "handle", 
-            "name": "handle", 
-            "type": "string", 
-            "id": 2, 
-            "examples": [
-                {
-                    "hex": "457070", 
-                    "description": "Name of the sender/receiver is Epp", 
-                    "value": "Epp"
-                }
-            ]
-        }
-    ], 
+        "msb": 0,
+        "lsb": 55
+    },
+    "api": {
+        "intro": 4,
+        "update": 11
+    },
     "setters": [
         {
+            "name": "message_received",
             "mandatory": [
                 1
-            ], 
+            ],
             "optional": [
                 2
-            ], 
-            "name": "message_received"
+            ],
+            "description": "Notify the car that a message has been received. Depending on the car system, it will display or read it loud to the driver."
+        }
+    ],
+    "state": "all",
+    "properties": [
+        {
+            "id": 1,
+            "name": "text",
+            "name_cased": "text",
+            "pretty_name": "Text",
+            "type": "string",
+            "description": "The text",
+            "examples": [
+                {
+                    "hex": "486579206d6f6d21",
+                    "value": "Hey mom!",
+                    "description": "Message text says 'Hey mom!'"
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "name": "handle",
+            "name_cased": "handle",
+            "pretty_name": "Handle",
+            "type": "string",
+            "description": "The optional handle of message",
+            "examples": [
+                {
+                    "hex": "457070",
+                    "value": "Epp",
+                    "description": "Name of the sender/receiver is Epp"
+                }
+            ]
         }
     ]
 }

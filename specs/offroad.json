@@ -1,47 +1,51 @@
 {
-    "category": "diagnostics", 
-    "name": "offroad", 
-    "name_cased": "offroad", 
-    "getters": {}, 
-    "state": "all", 
-    "api": {
-        "intro": 5, 
-        "update": 11
-    }, 
+    "name": "offroad",
+    "name_cased": "offroad",
+    "pretty_name": "Offroad",
+    "category": "diagnostics",
+    "authorization": true,
     "identifier": {
-        "lsb": 82, 
-        "msb": 0
-    }, 
+        "msb": 0,
+        "lsb": 82
+    },
+    "api": {
+        "intro": 5,
+        "update": 11
+    },
+    "getters": {},
+    "state": "all",
     "properties": [
         {
+            "id": 1,
+            "name": "route_incline",
+            "name_cased": "routeIncline",
+            "pretty_name": "Route incline",
+            "type": "integer",
+            "unit": "\u00b0",
+            "size": 2,
+            "description": "The route elevation incline in degrees, which is a negative number for decline",
             "examples": [
                 {
-                    "hex": "000a", 
-                    "description": "Route inckine is 10\u00b0", 
-                    "value": 10
+                    "hex": "000a",
+                    "value": 10,
+                    "description": "Route inckine is 10\u00b0"
                 }
-            ], 
-            "description": "The route elevation incline in degrees, which is a negative number for decline", 
-            "name_cased": "routeIncline", 
-            "size": 2, 
-            "type": "integer", 
-            "id": 1, 
-            "name": "route_incline"
-        }, 
+            ]
+        },
         {
+            "id": 2,
+            "name": "wheel_suspension",
+            "name_cased": "wheelSuspension",
+            "pretty_name": "Wheel suspension",
+            "type": "types.percentage",
+            "description": "The wheel suspension level percentage, whereas 0.0 is no suspension and 1.0 maximum suspension",
             "examples": [
                 {
-                    "hex": "3fe0000000000000", 
-                    "description": "Wheel suspension level is 50%", 
-                    "value": 0.5
+                    "hex": "3fe0000000000000",
+                    "value": 0.5,
+                    "description": "Wheel suspension level is 50%"
                 }
-            ], 
-            "description": "The wheel suspension level percentage, whereas 0.0 is no suspension and 1.0 maximum suspension", 
-            "name_cased": "wheelSuspension", 
-            "size": 8, 
-            "type": "double", 
-            "id": 2, 
-            "name": "wheel_suspension"
+            ]
         }
     ]
 }

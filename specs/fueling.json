@@ -1,54 +1,59 @@
 {
-    "category": "parking", 
-    "name": "fueling", 
-    "name_cased": "fueling", 
+    "name": "fueling",
+    "name_cased": "fueling",
+    "pretty_name": "Fueling",
+    "category": "parking",
+    "authorization": true,
+    "identifier": {
+        "msb": 0,
+        "lsb": 64
+    },
+    "api": {
+        "intro": 4,
+        "update": 11
+    },
     "getters": {
         "name": "get_gas_flap_state"
-    }, 
-    "state": "all", 
-    "api": {
-        "intro": 4, 
-        "update": 11
-    }, 
-    "identifier": {
-        "lsb": 64, 
-        "msb": 0
-    }, 
-    "properties": [
-        {
-            "name": "gas_flap_lock", 
-            "type": "types.lock_state", 
-            "examples": [
-                {
-                    "hex": "01", 
-                    "description": "Gas flap is locked", 
-                    "value": "locked"
-                }
-            ], 
-            "name_cased": "gasFlapLock", 
-            "id": 2
-        }, 
-        {
-            "name": "gas_flap_position", 
-            "type": "types.position", 
-            "examples": [
-                {
-                    "hex": "00", 
-                    "description": "Gas flap is closed", 
-                    "value": "closed"
-                }
-            ], 
-            "name_cased": "gasFlapPosition", 
-            "id": 3
-        }
-    ], 
+    },
     "setters": [
         {
+            "name": "control_gas_flap",
             "optional": [
-                2, 
+                2,
                 3
-            ], 
-            "name": "control_gas_flap"
+            ],
+            "description": "Control the gas flap of the car."
+        }
+    ],
+    "state": "all",
+    "properties": [
+        {
+            "id": 2,
+            "name": "gas_flap_lock",
+            "name_cased": "gasFlapLock",
+            "pretty_name": "Gas flap lock",
+            "type": "types.lock_state",
+            "examples": [
+                {
+                    "hex": "01",
+                    "value": "locked",
+                    "description": "Gas flap is locked"
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "name": "gas_flap_position",
+            "name_cased": "gasFlapPosition",
+            "pretty_name": "Gas flap position",
+            "type": "types.position",
+            "examples": [
+                {
+                    "hex": "00",
+                    "value": "closed",
+                    "description": "Gas flap is closed"
+                }
+            ]
         }
     ]
 }

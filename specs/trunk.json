@@ -1,52 +1,57 @@
 {
-    "category": "digital_key", 
-    "name": "trunk", 
-    "name_cased": "trunk", 
-    "getters": {}, 
-    "state": "all", 
-    "api": {
-        "intro": 1, 
-        "update": 11
-    }, 
+    "name": "trunk",
+    "name_cased": "trunk",
+    "pretty_name": "Trunk",
+    "category": "digital_key",
+    "authorization": true,
     "identifier": {
-        "lsb": 33, 
-        "msb": 0
-    }, 
-    "properties": [
-        {
-            "name": "lock", 
-            "type": "types.lock_state", 
-            "examples": [
-                {
-                    "hex": "00", 
-                    "description": "Trunk is unlocked", 
-                    "value": "unlocked"
-                }
-            ], 
-            "name_cased": "lock", 
-            "id": 1
-        }, 
-        {
-            "name": "position", 
-            "type": "types.position", 
-            "examples": [
-                {
-                    "hex": "01", 
-                    "description": "Trunk is open", 
-                    "value": "open"
-                }
-            ], 
-            "name_cased": "position", 
-            "id": 2
-        }
-    ], 
+        "msb": 0,
+        "lsb": 33
+    },
+    "api": {
+        "intro": 1,
+        "update": 11
+    },
+    "getters": {},
     "setters": [
         {
+            "name": "control_trunk",
             "optional": [
-                1, 
+                1,
                 2
-            ], 
-            "name": "control_trunk"
+            ],
+            "description": "Unlock/Lock and Open/Close the trunk."
+        }
+    ],
+    "state": "all",
+    "properties": [
+        {
+            "id": 1,
+            "name": "lock",
+            "name_cased": "lock",
+            "pretty_name": "Lock",
+            "type": "types.lock_state",
+            "examples": [
+                {
+                    "hex": "00",
+                    "value": "unlocked",
+                    "description": "Trunk is unlocked"
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "name": "position",
+            "name_cased": "position",
+            "pretty_name": "Position",
+            "type": "types.position",
+            "examples": [
+                {
+                    "hex": "01",
+                    "value": "open",
+                    "description": "Trunk is open"
+                }
+            ]
         }
     ]
 }

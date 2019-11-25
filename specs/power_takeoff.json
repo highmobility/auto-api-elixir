@@ -1,63 +1,68 @@
 {
-    "category": "heavy_duty", 
-    "name": "power_takeoff", 
-    "name_cased": "powerTakeoff", 
-    "getters": {}, 
-    "pretty_name": "Power Take-Off", 
-    "state": "all", 
-    "api": {
-        "intro": 7, 
-        "update": 11
-    }, 
+    "name": "power_takeoff",
+    "name_cased": "powerTakeoff",
+    "pretty_name": "Power Take-Off",
+    "category": "heavy_duty",
+    "authorization": true,
     "identifier": {
-        "lsb": 101, 
-        "msb": 0
-    }, 
-    "properties": [
-        {
-            "name": "status", 
-            "type": "types.active_state", 
-            "examples": [
-                {
-                    "hex": "01", 
-                    "description": "Power take-off is active", 
-                    "value": "active"
-                }
-            ], 
-            "name_cased": "status", 
-            "id": 1
-        }, 
-        {
-            "name": "engaged", 
-            "name_cased": "engaged", 
-            "enum_values": [
-                {
-                    "id": 0, 
-                    "name": "not_engaged"
-                }, 
-                {
-                    "id": 1, 
-                    "name": "engaged"
-                }
-            ], 
-            "size": 1, 
-            "type": "enum", 
-            "id": 2, 
-            "examples": [
-                {
-                    "hex": "01", 
-                    "description": "Power take-off is engaged", 
-                    "value": "engaged"
-                }
-            ]
-        }
-    ], 
+        "msb": 0,
+        "lsb": 101
+    },
+    "api": {
+        "intro": 7,
+        "update": 11
+    },
+    "getters": {},
     "setters": [
         {
+            "name": "activate_deactivate_power_takeoff",
             "mandatory": [
                 1
-            ], 
-            "name": "activate_deactivate_power_takeoff"
+            ],
+            "description": "Activate or deactivate power take-off."
+        }
+    ],
+    "state": "all",
+    "properties": [
+        {
+            "id": 1,
+            "name": "status",
+            "name_cased": "status",
+            "pretty_name": "Status",
+            "type": "types.active_state",
+            "examples": [
+                {
+                    "hex": "01",
+                    "value": "active",
+                    "description": "Power take-off is active"
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "name": "engaged",
+            "name_cased": "engaged",
+            "pretty_name": "Engaged",
+            "type": "enum",
+            "size": 1,
+            "controls": "switch",
+            "enum_values": [
+                {
+                    "id": 0,
+                    "name": "not_engaged"
+                },
+                {
+                    "id": 1,
+                    "name": "engaged"
+                }
+            ],
+            "examples": [
+                {
+                    "hex": "01",
+                    "value": "engaged",
+                    "description": "Power take-off is engaged"
+                }
+            ]
         }
     ]
 }

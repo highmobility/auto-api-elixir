@@ -1,339 +1,368 @@
 {
-    "category": "infrastructure", 
-    "name": "home_charger", 
-    "name_cased": "homeCharger", 
-    "getters": {}, 
-    "state": "all", 
-    "api": {
-        "intro": 6, 
-        "update": 11
-    }, 
+    "name": "home_charger",
+    "name_cased": "homeCharger",
+    "pretty_name": "Home Charger",
+    "category": "infrastructure",
+    "authorization": true,
     "identifier": {
-        "lsb": 96, 
-        "msb": 0
-    }, 
+        "msb": 0,
+        "lsb": 96
+    },
+    "api": {
+        "intro": 6,
+        "update": 11
+    },
+    "getters": {},
+    "setters": [
+        {
+            "name": "set_charge_current",
+            "mandatory": [
+                14
+            ],
+            "description": "Set the charge current of the home charger."
+        },
+        {
+            "name": "set_price_tariffs",
+            "mandatory": [
+                18
+            ],
+            "description": "Set the price tariffs of the home charger."
+        },
+        {
+            "name": "activate_deactivate_solar_charging",
+            "mandatory": [
+                5
+            ],
+            "description": "Activate or deactivate charging from solar power."
+        },
+        {
+            "name": "enable_disable_wi_fi_hotspot",
+            "mandatory": [
+                8
+            ],
+            "description": "Enable or disable the Wi-Fi Hotspot."
+        },
+        {
+            "name": "authenticate_expire",
+            "mandatory": [
+                13
+            ],
+            "description": "Authenticate or expire the charging session. Only if the session is authenticated can the charging be started by the vehicle."
+        }
+    ],
+    "state": "all",
     "properties": [
         {
-            "name": "charging_status", 
-            "name_cased": "chargingStatus", 
+            "id": 1,
+            "name": "charging_status",
+            "name_cased": "chargingStatus",
+            "pretty_name": "Charging status",
+            "type": "enum",
+            "size": 1,
             "enum_values": [
                 {
-                    "id": 0, 
+                    "id": 0,
                     "name": "disconnected"
-                }, 
+                },
                 {
-                    "id": 1, 
+                    "id": 1,
                     "name": "plugged_in"
-                }, 
+                },
                 {
-                    "id": 2, 
+                    "id": 2,
                     "name": "charging"
                 }
-            ], 
-            "size": 1, 
-            "type": "enum", 
-            "id": 1, 
+            ],
             "examples": [
                 {
-                    "hex": "02", 
-                    "description": "Charging is active", 
-                    "value": "charging"
+                    "hex": "02",
+                    "value": "charging",
+                    "description": "Charging is active"
                 }
             ]
-        }, 
+        },
         {
-            "name": "authentication_mechanism", 
-            "name_cased": "authenticationMechanism", 
+            "id": 2,
+            "name": "authentication_mechanism",
+            "name_cased": "authenticationMechanism",
+            "pretty_name": "Authentication mechanism",
+            "type": "enum",
+            "size": 1,
             "enum_values": [
                 {
-                    "pretty_name": "PIN", 
-                    "id": 0, 
-                    "name": "pin"
-                }, 
+                    "id": 0,
+                    "name": "pin",
+                    "pretty_name": "PIN"
+                },
                 {
-                    "id": 1, 
+                    "id": 1,
                     "name": "app"
                 }
-            ], 
-            "size": 1, 
-            "type": "enum", 
-            "id": 2, 
+            ],
             "examples": [
                 {
-                    "hex": "01", 
-                    "description": "Authentication mechanism is an app", 
-                    "value": "app"
+                    "hex": "01",
+                    "value": "app",
+                    "description": "Authentication mechanism is an app"
                 }
             ]
-        }, 
+        },
         {
-            "name": "plug_type", 
-            "name_cased": "plugType", 
+            "id": 3,
+            "name": "plug_type",
+            "name_cased": "plugType",
+            "pretty_name": "Plug type",
+            "type": "enum",
+            "size": 1,
             "enum_values": [
                 {
-                    "id": 0, 
+                    "id": 0,
                     "name": "type_1"
-                }, 
+                },
                 {
-                    "id": 1, 
+                    "id": 1,
                     "name": "type_2"
-                }, 
+                },
                 {
-                    "pretty_name": "Combined Charging System", 
-                    "id": 2, 
-                    "name": "ccs"
-                }, 
+                    "id": 2,
+                    "name": "ccs",
+                    "pretty_name": "Combined Charging System"
+                },
                 {
-                    "pretty_name": "CHAdeMO", 
-                    "id": 3, 
-                    "name": "chademo"
+                    "id": 3,
+                    "name": "chademo",
+                    "pretty_name": "CHAdeMO"
                 }
-            ], 
-            "size": 1, 
-            "type": "enum", 
-            "id": 3, 
+            ],
             "examples": [
                 {
-                    "hex": "01", 
-                    "description": "Type 2 plug", 
-                    "value": "type_2"
+                    "hex": "01",
+                    "value": "type_2",
+                    "description": "Type 2 plug"
                 }
             ]
-        }, 
+        },
         {
-            "name": "charging_power_kw", 
-            "name_cased": "chargingPowerKW", 
-            "pretty_name": "Charging Power (kW)", 
+            "id": 4,
+            "name": "charging_power_kw",
+            "name_cased": "chargingPowerKW",
+            "pretty_name": "Charging Power (kW)",
+            "unit": "kW",
+            "type": "float",
+            "size": 4,
+            "description": "Charging power in kW",
             "examples": [
                 {
-                    "hex": "41380000", 
-                    "description": "Charging power is 11.5 kW", 
-                    "value": 11.5
-                }
-            ], 
-            "size": 4, 
-            "type": "float", 
-            "id": 4, 
-            "description": "Charging power in kW"
-        }, 
-        {
-            "name": "solar_charging", 
-            "type": "types.active_state", 
-            "examples": [
-                {
-                    "hex": "01", 
-                    "description": "Solar charging is active", 
-                    "value": "active"
-                }
-            ], 
-            "name_cased": "solarCharging", 
-            "id": 5
-        }, 
-        {
-            "name": "wi_fi_hotspot_enabled", 
-            "type": "types.enabled_state", 
-            "examples": [
-                {
-                    "hex": "01", 
-                    "description": "WiFi hotspot is enabled", 
-                    "value": "enabled"
-                }
-            ], 
-            "name_cased": "wifiHotspotEnabled", 
-            "id": 8
-        }, 
-        {
-            "pretty_name": "Wi-Fi Hotspot SSID", 
-            "description": "The Wi-Fi Hotspot SSID", 
-            "name_cased": "wifiHotspotSSID", 
-            "name": "wi_fi_hotspot_ssid", 
-            "type": "string", 
-            "id": 9, 
-            "examples": [
-                {
-                    "hex": "436861726765722037363132", 
-                    "description": "WiFi hotspot SSID is 'Charger 7612'", 
-                    "value": "Charger 7612"
+                    "hex": "41380000",
+                    "value": 11.5,
+                    "description": "Charging power is 11.5 kW"
                 }
             ]
-        }, 
+        },
         {
-            "pretty_name": "Wi-Fi Hotspot Security", 
-            "name": "wi_fi_hotspot_security", 
-            "name_cased": "wiFiHotspotSecurity", 
-            "type": "types.network_security", 
-            "id": 10, 
+            "id": 5,
+            "name": "solar_charging",
+            "name_cased": "solarCharging",
+            "pretty_name": "Solar charging",
+            "type": "types.active_state",
             "examples": [
                 {
-                    "hex": "03", 
-                    "description": "WiFi hotspot security uses WPA2-Personal", 
-                    "value": "wpa2_personal"
+                    "hex": "01",
+                    "value": "active",
+                    "description": "Solar charging is active"
                 }
             ]
-        }, 
+        },
         {
-            "pretty_name": "Wi-Fi Hotspot Password", 
-            "description": "The Wi-Fi Hotspot password", 
-            "name_cased": "wiFiHotspotPassword", 
-            "name": "wi_fi_hotspot_password", 
-            "type": "string", 
-            "id": 11, 
+            "id": 8,
+            "name": "wi_fi_hotspot_enabled",
+            "name_cased": "wifiHotspotEnabled",
+            "pretty_name": "Wi-Fi hotspot enabled",
+            "type": "types.enabled_state",
             "examples": [
                 {
-                    "hex": "5a57337641524e554265", 
-                    "description": "WiFi hotspot password is 'ZW3vARNUBe'", 
-                    "value": "ZW3vARNUBe"
+                    "hex": "01",
+                    "value": "enabled",
+                    "description": "WiFi hotspot is enabled"
                 }
             ]
-        }, 
+        },
         {
-            "name": "authentication_state", 
-            "name_cased": "authenticationState", 
+            "id": 9,
+            "name": "wi_fi_hotspot_ssid",
+            "name_cased": "wifiHotspotSSID",
+            "pretty_name": "Wi-Fi hotspot SSID",
+            "type": "string",
+            "description": "The Wi-Fi Hotspot SSID",
+            "examples": [
+                {
+                    "hex": "436861726765722037363132",
+                    "value": "Charger 7612",
+                    "description": "WiFi hotspot SSID is 'Charger 7612'"
+                }
+            ]
+        },
+        {
+            "id": 10,
+            "name": "wi_fi_hotspot_security",
+            "name_cased": "wiFiHotspotSecurity",
+            "pretty_name": "Wi-Fi hotspot security",
+            "type": "types.network_security",
+            "examples": [
+                {
+                    "hex": "03",
+                    "value": "wpa2_personal",
+                    "description": "WiFi hotspot security uses WPA2-Personal"
+                }
+            ]
+        },
+        {
+            "id": 11,
+            "name": "wi_fi_hotspot_password",
+            "name_cased": "wiFiHotspotPassword",
+            "pretty_name": "Wi-Fi hotspot password",
+            "type": "string",
+            "description": "The Wi-Fi Hotspot password",
+            "examples": [
+                {
+                    "hex": "5a57337641524e554265",
+                    "value": "ZW3vARNUBe",
+                    "description": "WiFi hotspot password is 'ZW3vARNUBe'"
+                }
+            ]
+        },
+        {
+            "id": 13,
+            "name": "authentication_state",
+            "name_cased": "authenticationState",
+            "pretty_name": "Authentication state",
+            "type": "enum",
+            "size": 1,
             "enum_values": [
                 {
-                    "verb": "expire_authentication", 
-                    "id": 0, 
-                    "name": "unauthenticated"
-                }, 
+                    "id": 0,
+                    "name": "unauthenticated",
+                    "verb": "expire_authentication"
+                },
                 {
-                    "verb": "authenticate", 
-                    "id": 1, 
-                    "name": "authenticated"
+                    "id": 1,
+                    "name": "authenticated",
+                    "verb": "authenticate"
                 }
-            ], 
-            "size": 1, 
-            "type": "enum", 
-            "id": 13, 
+            ],
             "examples": [
                 {
-                    "hex": "01", 
-                    "description": "Is authenticated to the charger", 
-                    "value": "authenticated"
+                    "hex": "01",
+                    "value": "authenticated",
+                    "description": "Is authenticated to the charger"
                 }
             ]
-        }, 
+        },
         {
-            "name": "charge_current_dc", 
-            "name_cased": "chargeCurrentDC", 
-            "pretty_name": "Charge current (DC)", 
+            "id": 14,
+            "name": "charge_current_dc",
+            "name_cased": "chargeCurrentDC",
+            "pretty_name": "Charge current (DC)",
+            "unit": "V",
+            "type": "float",
+            "size": 4,
+            "description": "The charge direct current",
             "examples": [
                 {
-                    "hex": "3f000000", 
-                    "description": "Charger direct current is 0.5 V", 
-                    "value": 0.5
+                    "hex": "3f000000",
+                    "value": 0.5,
+                    "description": "Charger direct current is 0.5 V"
                 }
-            ], 
-            "size": 4, 
-            "type": "float", 
-            "id": 14, 
-            "description": "The charge direct current"
-        }, 
+            ]
+        },
         {
-            "name": "maximum_charge_current", 
-            "name_cased": "maximumChargeCurrent", 
-            "pretty_name": "Maximum charge current", 
+            "id": 15,
+            "name": "maximum_charge_current",
+            "name_cased": "maximumChargeCurrent",
+            "pretty_name": "Maximum charge current",
+            "unit": "V",
+            "type": "float",
+            "size": 4,
+            "description": "The maximum possible charge current",
             "examples": [
                 {
-                    "hex": "3f800000", 
-                    "description": "Maximum charger current is 1.0 V", 
-                    "value": 1.0
+                    "hex": "3f800000",
+                    "value": 1.0,
+                    "description": "Maximum charger current is 1.0 V"
                 }
-            ], 
-            "size": 4, 
-            "type": "float", 
-            "id": 15, 
-            "description": "The maximum possible charge current"
-        }, 
+            ]
+        },
         {
-            "name": "minimum_charge_current", 
-            "name_cased": "minimumChargeCurrent", 
-            "pretty_name": "Minimum charge current", 
+            "id": 16,
+            "name": "minimum_charge_current",
+            "name_cased": "minimumChargeCurrent",
+            "pretty_name": "Minimum charge current",
+            "unit": "V",
+            "type": "float",
+            "size": 4,
+            "description": "The minimal possible charge current",
             "examples": [
                 {
-                    "hex": "00000000", 
-                    "description": "Minimum charger current is 0.0 V", 
-                    "value": 0.0
+                    "hex": "00000000",
+                    "value": 0.0,
+                    "description": "Minimum charger current is 0.0 V"
                 }
-            ], 
-            "size": 4, 
-            "type": "float", 
-            "id": 16, 
-            "description": "The minimal possible charge current"
-        }, 
+            ]
+        },
         {
-            "name": "coordinates", 
-            "type": "types.coordinates", 
+            "id": 17,
+            "name": "coordinates",
+            "name_cased": "coordinates",
+            "pretty_name": "Coordinates",
+            "type": "types.coordinates",
             "examples": [
                 {
-                    "hex": "404a428f9f44d445402acf562174c4ce", 
+                    "hex": "404a428f9f44d445402acf562174c4ce",
                     "values": {
-                        "latitude": 52.520008, 
+                        "latitude": 52.520008,
                         "longitude": 13.404954
-                    }, 
+                    },
                     "description": "Charger is located at 52.520008:13.404954"
                 }
-            ], 
-            "name_cased": "coordinates", 
-            "id": 17
-        }, 
+            ]
+        },
         {
-            "multiple": true, 
-            "name": "price_tariffs", 
-            "name_cased": "priceTariffs", 
-            "type": "types.price_tariff", 
-            "id": 18, 
+            "id": 18,
+            "name": "price_tariffs",
+            "name_cased": "priceTariffs",
+            "pretty_name": "Price tariffs",
+            "type": "types.price_tariff",
+            "multiple": true,
+            "name_singular": "price_tariff",
             "examples": [
                 {
-                    "hex": "00409000000003455552", 
+                    "hex": "00409000000003455552",
                     "values": {
-                        "currency": "EUR", 
-                        "price": 4.5, 
-                        "pricing_type": "starting_fee"
-                    }, 
+                        "pricing_type": "starting_fee",
+                        "price": 4.5,
+                        "currency": "EUR"
+                    },
                     "description": "Charger starting fee tariff is 4.5 EUR"
-                }, 
+                },
                 {
-                    "hex": "023e99999a0006526970706c65", 
+                    "hex": "013e99999a0003455552",
                     "values": {
-                        "currency": "Ripple", 
-                        "price": 0.3, 
-                        "pricing_type": "per_kwh"
-                    }, 
+                        "pricing_type": "per_minute",
+                        "price": 0.3,
+                        "currency": "EUR"
+                    },
+                    "description": "Charger per minute fee tariff is 0.3 EUR"
+                },
+                {
+                    "hex": "023e99999a0006526970706c65",
+                    "values": {
+                        "pricing_type": "per_kwh",
+                        "price": 0.3,
+                        "currency": "Ripple"
+                    },
                     "description": "Charger per kWh tariff is 0.3 Ripple"
                 }
             ]
-        }
-    ], 
-    "setters": [
-        {
-            "mandatory": [
-                14
-            ], 
-            "name": "set_charge_current"
-        }, 
-        {
-            "mandatory": [
-                18
-            ], 
-            "name": "set_price_tariffs"
-        }, 
-        {
-            "mandatory": [
-                5
-            ], 
-            "name": "activate_deactivate_solar_charging"
-        }, 
-        {
-            "mandatory": [
-                8
-            ], 
-            "name": "enable_disable_wi_fi_hotspot"
-        }, 
-        {
-            "mandatory": [
-                13
-            ], 
-            "name": "authenticate_expire"
         }
     ]
 }

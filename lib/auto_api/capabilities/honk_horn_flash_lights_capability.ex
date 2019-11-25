@@ -26,7 +26,7 @@ defmodule AutoApi.HonkHornFlashLightsCapability do
       iex> H.name
       :honk_horn_flash_lights
       iex> H.description
-      "Honk Horn Flash Lights"
+      "Honk Horn & Flash Lights"
       iex> length(H.properties)
       4
       iex> List.last(H.properties)

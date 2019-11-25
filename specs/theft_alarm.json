@@ -1,56 +1,60 @@
 {
-    "category": "parking", 
-    "name": "theft_alarm", 
-    "name_cased": "theftAlarm", 
-    "getters": {}, 
-    "state": "all", 
-    "api": {
-        "intro": 4, 
-        "update": 11
-    }, 
+    "name": "theft_alarm",
+    "name_cased": "theftAlarm",
+    "pretty_name": "Theft Alarm",
+    "category": "parking",
+    "authorization": true,
     "identifier": {
-        "lsb": 70, 
-        "msb": 0
-    }, 
-    "properties": [
-        {
-            "name": "status", 
-            "name_cased": "status", 
-            "enum_values": [
-                {
-                    "verb": "unarm", 
-                    "id": 0, 
-                    "name": "unarmed"
-                }, 
-                {
-                    "verb": "arm", 
-                    "id": 1, 
-                    "name": "armed"
-                }, 
-                {
-                    "verb": "trigger", 
-                    "id": 2, 
-                    "name": "triggered"
-                }
-            ], 
-            "size": 1, 
-            "type": "enum", 
-            "id": 1, 
-            "examples": [
-                {
-                    "hex": "01", 
-                    "description": "Theft alarm is armed", 
-                    "value": "armed"
-                }
-            ]
-        }
-    ], 
+        "msb": 0,
+        "lsb": 70
+    },
+    "api": {
+        "intro": 4,
+        "update": 11
+    },
+    "getters": {},
     "setters": [
         {
+            "name": "set_theft_alarm",
             "mandatory": [
                 1
-            ], 
-            "name": "set_theft_alarm"
+            ],
+            "description": "Unarm or arm the theft alarm of the car."
+        }
+    ],
+    "state": "all",
+    "properties": [
+        {
+            "id": 1,
+            "name": "status",
+            "name_cased": "status",
+            "pretty_name": "Status",
+            "type": "enum",
+            "size": 1,
+            "enum_values": [
+                {
+                    "id": 0,
+                    "name": "unarmed",
+                    "verb": "unarm"
+                },
+                {
+                    "id": 1,
+                    "name": "armed",
+                    "verb": "arm"
+                },
+                {
+                    "id": 2,
+                    "name": "triggered",
+                    "verb": "trigger"
+                }
+            ],
+            "examples": [
+                {
+                    "hex": "01",
+                    "value": "armed",
+                    "description": "Theft alarm is armed"
+                }
+            ]
         }
     ]
 }

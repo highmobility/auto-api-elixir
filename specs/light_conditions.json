@@ -1,49 +1,55 @@
 {
-    "category": "environment", 
-    "name": "light_conditions", 
-    "name_cased": "lightConditions", 
+    "name": "light_conditions",
+    "name_cased": "lightConditions",
+    "pretty_name": "Light Conditions",
+    "category": "environment",
+    "authorization": true,
+    "identifier": {
+        "msb": 0,
+        "lsb": 84
+    },
+    "api": {
+        "intro": 5,
+        "update": 11
+    },
     "getters": {
         "name": "get_light_conditions"
-    }, 
-    "state": "all", 
-    "api": {
-        "intro": 5, 
-        "update": 11
-    }, 
-    "identifier": {
-        "lsb": 84, 
-        "msb": 0
-    }, 
+    },
+    "state": "all",
     "properties": [
         {
+            "id": 1,
+            "name": "outside_light",
+            "name_cased": "outsideLight",
+            "pretty_name": "Outside light",
+            "unit": "lux",
+            "type": "float",
+            "size": 4,
+            "description": "Measured outside illuminance in lux",
             "examples": [
                 {
-                    "hex": "47d8cc00", 
-                    "description": "Outside illuminance is 111'000.0 lux", 
-                    "value": 111000.0
+                    "hex": "47d8cc00",
+                    "value": 111000.0,
+                    "description": "Outside illuminance is 111'000.0 lux"
                 }
-            ], 
-            "description": "Measured outside illuminance in lux", 
-            "name_cased": "outsideLight", 
-            "size": 4, 
-            "type": "float", 
-            "id": 1, 
-            "name": "outside_light"
-        }, 
+            ]
+        },
         {
+            "id": 2,
+            "name": "inside_light",
+            "name_cased": "insideLight",
+            "pretty_name": "Inside light",
+            "unit": "lux",
+            "type": "float",
+            "size": 4,
+            "description": "Measured inside illuminance in lux",
             "examples": [
                 {
-                    "hex": "3e800000", 
-                    "description": "Inside illuminance is 0.25 lux", 
-                    "value": 0.25
+                    "hex": "3e800000",
+                    "value": 0.25,
+                    "description": "Inside illuminance is 0.25 lux"
                 }
-            ], 
-            "description": "Measured inside illuminance in lux", 
-            "name_cased": "insideLight", 
-            "size": 4, 
-            "type": "float", 
-            "id": 2, 
-            "name": "inside_light"
+            ]
         }
     ]
 }

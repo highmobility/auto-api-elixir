@@ -26,7 +26,7 @@ defmodule AutoApi.HistoricalCapability do
       iex> H.name
       :historical
       iex> H.description
-      "Historical States"
+      "Historical"
       iex> length(H.properties)
       4
       iex> List.last(H.properties)

@@ -1,88 +1,93 @@
 {
-    "category": "api_structure", 
-    "name": "multi_command", 
-    "name_cased": "multiCommand", 
-    "pretty_name": "Multi Command", 
+    "name": "multi_command",
+    "name_cased": "multiCommand",
+    "pretty_name": "Multi Command",
+    "category": "api_structure",
+    "authorization": false,
+    "identifier": {
+        "msb": 0,
+        "lsb": 19
+    },
+    "api": {
+        "intro": 8,
+        "update": 11
+    },
+    "setters": [
+        {
+            "name": "multi_command",
+            "mandatory": [
+                2
+            ]
+        }
+    ],
     "state": [
         1
-    ], 
-    "api": {
-        "intro": 8, 
-        "update": 11
-    }, 
-    "identifier": {
-        "lsb": 19, 
-        "msb": 0
-    }, 
+    ],
     "properties": [
         {
-            "multiple": true, 
-            "description": "The bytes of incoming capabilities (states)", 
-            "name_cased": "multiStates", 
-            "name": "multi_states", 
-            "type": "types.capability_state", 
-            "id": 1, 
+            "id": 1,
+            "name": "multi_states",
+            "name_cased": "multiStates",
+            "pretty_name": "Multi-states",
+            "type": "types.capability_state",
+            "multiple": true,
+            "name_singular": "multi_state",
+            "description": "The bytes of incoming capabilities (states)",
             "examples": [
                 {
-                    "hex": "002001060004010001000400050100020001", 
+                    "hex": "010b002001060004010001000400050100020001",
                     "values": {
                         "doors": {
                             "positions": {
-                                "position": "open", 
-                                "location": "front_left"
-                            }, 
+                                "location": "front_left",
+                                "position": "open"
+                            },
                             "locks_state": "unlocked"
                         }
-                    }, 
+                    },
                     "description": "Doors capability's locks are unlocked"
-                }, 
+                },
                 {
-                    "hex": "0023010a0007010004406000000b000401000101", 
+                    "hex": "010b0023010a0007010004406000000b000401000101",
                     "values": {
                         "charging": {
-                            "charge_port_state": "open", 
-                            "charging_rate_kw": 3.5
+                            "charging_rate_kw": 3.5,
+                            "charge_port_state": "open"
                         }
-                    }, 
+                    },
                     "description": "Charging capability's charging rate is 3.5 kW"
                 }
             ]
-        }, 
+        },
         {
-            "multiple": true, 
-            "description": "The bytes of outgoing capabilities (commands)", 
-            "name_cased": "multiCommands", 
-            "name": "multi_commands", 
-            "type": "types.capability_state", 
-            "id": 2, 
+            "id": 2,
+            "name": "multi_commands",
+            "name_cased": "multiCommands",
+            "pretty_name": "Multi-commands",
+            "type": "types.capability_state",
+            "multiple": true,
+            "name_singular": "multi_command",
+            "description": "The bytes of outgoing capabilities (commands)",
             "examples": [
                 {
-                    "hex": "00200105000401000101", 
+                    "hex": "010b00200105000401000101",
                     "values": {
                         "doors": {
                             "inside_locks_state": "locked"
                         }
-                    }, 
+                    },
                     "description": "Lock inside door locks"
-                }, 
+                },
                 {
-                    "hex": "00350101000401000100", 
+                    "hex": "010b00350101000401000100",
                     "values": {
                         "ignition": {
                             "status": "off"
                         }
-                    }, 
+                    },
                     "description": "Turn ignition off"
                 }
             ]
-        }
-    ], 
-    "setters": [
-        {
-            "mandatory": [
-                2
-            ], 
-            "name": "multi_command"
         }
     ]
 }
