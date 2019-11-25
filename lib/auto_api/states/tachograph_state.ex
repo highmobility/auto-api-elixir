@@ -27,9 +27,9 @@ defmodule AutoApi.TachographState do
   @doc """
   Tachograph state
   """
-  defstruct driver_working_state: [],
-            driver_time_state: [],
-            driver_card: [],
+  defstruct drivers_working_states: [],
+            drivers_time_states: [],
+            drivers_cards_present: [],
             vehicle_motion: nil,
             vehicle_overspeed: nil,
             vehicle_direction: nil,
@@ -44,25 +44,27 @@ defmodule AutoApi.TachographState do
   @type working_state :: :resting | :driver_available | :working | :driving
   @type time_state ::
           :normal
-          | :"15_min_before_4"
-          | :"4_reached"
-          | :"15_min_before_9"
-          | :"9_reached"
-          | :"15_min_before_16"
-          | :"16_reached"
-  @type card :: :not_present | :present
+          | :fifteen_min_before_four
+          | :four_reached
+          | :fifteen_min_before_nine
+          | :nine_reached
+          | :fifteen_min_before_sixteen
+          | :sixteen_reached
+  @type card_present :: :not_present | :present
   @type driver_working_state :: %PropertyComponent{
           data: %{working_state: working_state, driver_number: integer}
         }
   @type driver_time_state :: %PropertyComponent{
           data: %{time_state: time_state, driver_number: integer}
         }
-  @type driver_card :: %PropertyComponent{data: %{card: card, driver_number: integer}}
+  @type drivers_cards_present :: %PropertyComponent{
+          data: %{card_present: card_present, driver_number: integer}
+        }
 
   @type t :: %__MODULE__{
-          driver_working_state: list(driver_working_state),
-          driver_time_state: list(driver_time_state),
-          driver_card: list(driver_card),
+          drivers_working_states: list(driver_working_state),
+          drivers_time_states: list(driver_time_state),
+          drivers_cards_present: list(drivers_cards_present),
           vehicle_motion: %PropertyComponent{data: vehicle_motion} | nil,
           vehicle_overspeed: %PropertyComponent{data: vehicle_overspeed} | nil,
           vehicle_direction: %PropertyComponent{data: vehicle_direction} | nil,

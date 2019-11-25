@@ -24,27 +24,27 @@ defmodule AutoApi.FirmwareVersionState do
 
   alias AutoApi.PropertyComponent
 
-  @type car_sdk_version :: %PropertyComponent{
+  @type hmkit_version :: %PropertyComponent{
           data: %{
-            version_major: integer,
-            version_minor: integer,
-            version_patch: integer
+            major: integer,
+            minor: integer,
+            patch: integer
           }
         }
 
   @doc """
   Firmware Version state
   """
-  defstruct car_sdk_version: nil,
-            car_sdk_build_name: nil,
+  defstruct hmkit_version: nil,
+            hmkit_build_name: nil,
             application_version: nil,
             timestamp: nil
 
   use AutoApi.State, spec_file: "specs/firmware_version.json"
 
   @type t :: %__MODULE__{
-          car_sdk_version: car_sdk_version | nil,
-          car_sdk_build_name: %PropertyComponent{data: String.t()} | nil,
+          hmkit_version: hmkit_version | nil,
+          hmkit_build_name: %PropertyComponent{data: String.t()} | nil,
           application_version: %PropertyComponent{data: String.t()} | nil,
           timestamp: DateTime.t() | nil
         }

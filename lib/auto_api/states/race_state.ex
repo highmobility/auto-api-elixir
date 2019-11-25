@@ -53,6 +53,7 @@ defmodule AutoApi.RaceState do
             gear_mode: nil,
             selected_gear: nil,
             brake_pedal_position: nil,
+            brake_pedal_switch: nil,
             clutch_pedal_switch: nil,
             accelerator_pedal_idle_switch: nil,
             accelerator_pedal_kickdown_switch: nil,
@@ -75,6 +76,7 @@ defmodule AutoApi.RaceState do
           gear_mode: %PropertyComponent{data: gear_mode} | nil,
           selected_gear: %PropertyComponent{data: integer} | nil,
           brake_pedal_position: %PropertyComponent{data: float} | nil,
+          brake_pedal_switch: %PropertyComponent{data: CommonData.activity()} | nil,
           clutch_pedal_switch: %PropertyComponent{data: CommonData.activity()} | nil,
           accelerator_pedal_idle_switch: %PropertyComponent{data: CommonData.activity()} | nil,
           accelerator_pedal_kickdown_switch:

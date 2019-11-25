@@ -26,7 +26,7 @@ defmodule AutoApi.CruiseControlState do
   defstruct cruise_control: nil,
             limiter: nil,
             target_speed: nil,
-            acc: nil,
+            adaptive_cruise_control: nil,
             acc_target_speed: nil,
             timestamp: nil
 
@@ -38,7 +38,7 @@ defmodule AutoApi.CruiseControlState do
           cruise_control: %PropertyComponent{data: CommonData.activity()} | nil,
           limiter: %PropertyComponent{data: limiter} | nil,
           target_speed: %PropertyComponent{data: integer} | nil,
-          acc: %PropertyComponent{data: CommonData.activity()} | nil,
+          adaptive_cruise_control: %PropertyComponent{data: CommonData.activity()} | nil,
           acc_target_speed: %PropertyComponent{data: integer} | nil,
           timestamp: DateTime.t() | nil
         }

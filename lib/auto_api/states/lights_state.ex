@@ -25,7 +25,7 @@ defmodule AutoApi.LightsState do
 
   defstruct front_exterior_light: nil,
             rear_exterior_light: nil,
-            ambient_light: nil,
+            ambient_light_colour: nil,
             reverse_light: nil,
             emergency_brake_light: nil,
             fog_lights: [],
@@ -37,7 +37,7 @@ defmodule AutoApi.LightsState do
 
   @type front_exterior_light :: :inactive | :active | :active_with_full_beam | :dlr | :automatic
   @type light_location :: :front | :rear
-  @type ambient_light :: %{rgb_red: integer, rgb_green: integer, rgb_blue: integer}
+  @type ambient_light :: %{red: integer, green: integer, blue: integer}
   @type fog_light :: %PropertyComponent{
           data: %{location: light_location, state: CommonData.activity()}
         }
@@ -57,7 +57,7 @@ defmodule AutoApi.LightsState do
   @type t :: %__MODULE__{
           front_exterior_light: %PropertyComponent{data: front_exterior_light} | nil,
           rear_exterior_light: %PropertyComponent{data: CommonData.activity()} | nil,
-          ambient_light: %PropertyComponent{data: ambient_light} | nil,
+          ambient_light_colour: %PropertyComponent{data: ambient_light} | nil,
           reverse_light: %PropertyComponent{data: CommonData.activity()} | nil,
           emergency_brake_light: %PropertyComponent{data: CommonData.activity()} | nil,
           fog_lights: list(fog_light),

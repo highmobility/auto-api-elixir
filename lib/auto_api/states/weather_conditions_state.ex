@@ -24,7 +24,6 @@ defmodule AutoApi.WeatherConditionsState do
   alias AutoApi.{CommonData, PropertyComponent}
 
   defstruct rain_intensity: nil,
-            wheel_suspension: nil,
             timestamp: nil
 
   use AutoApi.State, spec_file: "specs/weather_conditions.json"

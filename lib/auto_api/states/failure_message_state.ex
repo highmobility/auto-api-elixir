@@ -31,6 +31,8 @@ defmodule AutoApi.FailureMessageState do
           | :execution_timeout
           | :vehicle_asleep
           | :invalid_command
+          | :pending
+          | :rate_limit
 
   @doc """
   FailureMessage state
@@ -39,6 +41,7 @@ defmodule AutoApi.FailureMessageState do
             failed_message_type: nil,
             failure_reason: nil,
             failure_description: nil,
+            failed_property_ids: nil,
             timestamp: nil
 
   use AutoApi.State, spec_file: "specs/failure_message.json"
@@ -48,6 +51,7 @@ defmodule AutoApi.FailureMessageState do
           failed_message_type: %PropertyComponent{data: integer} | nil,
           failure_reason: %PropertyComponent{data: failure_reason} | nil,
           failure_description: %PropertyComponent{data: String.t()} | nil,
+          failed_property_ids: %PropertyComponent{data: binary()} | nil,
           timestamp: DateTime.t() | nil
         }
 

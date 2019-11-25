@@ -25,17 +25,19 @@ defmodule AutoApi.NotificationsState do
 
   defstruct text: nil,
             action_items: [],
-            received_action: nil,
+            activated_action: nil,
+            clear: nil,
             timestamp: nil
 
   use AutoApi.State, spec_file: "specs/notifications.json"
 
-  @type action_item :: %PropertyComponent{data: %{identifier: integer, name: String.t()}}
+  @type action_item :: %PropertyComponent{data: %{id: integer, name: String.t()}}
 
   @type t :: %__MODULE__{
           text: %PropertyComponent{data: String.t()} | nil,
           action_items: list(action_item),
-          received_action: %PropertyComponent{data: integer} | nil,
+          activated_action: %PropertyComponent{data: integer} | nil,
+          clear: %PropertyComponent{data: :clear} | nil,
           timestamp: DateTime.t() | nil
         }
 

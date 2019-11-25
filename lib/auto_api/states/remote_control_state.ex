@@ -25,6 +25,7 @@ defmodule AutoApi.RemoteControlState do
 
   defstruct control_mode: nil,
             angle: nil,
+            speed: nil,
             timestamp: nil
 
   use AutoApi.State, spec_file: "specs/remote_control.json"
@@ -40,6 +41,7 @@ defmodule AutoApi.RemoteControlState do
   @type t :: %__MODULE__{
           control_mode: %PropertyComponent{data: modes} | nil,
           angle: %PropertyComponent{data: integer} | nil,
+          speed: %PropertyComponent{data: integer} | nil,
           timestamp: DateTime.t() | nil
         }
 

@@ -28,6 +28,10 @@ defmodule AutoApi.NaviDestinationState do
   """
   defstruct coordinates: nil,
             destination_name: nil,
+            data_slots_free: nil,
+            data_slots_max: nil,
+            arrival_duration: nil,
+            distance_to_destination: nil,
             timestamp: nil
 
   use AutoApi.State, spec_file: "specs/navi_destination.json"
@@ -35,6 +39,10 @@ defmodule AutoApi.NaviDestinationState do
   @type t :: %__MODULE__{
           coordinates: %PropertyComponent{data: CommonData.coordinates()} | nil,
           destination_name: %PropertyComponent{data: String.t()} | nil,
+          data_slots_free: %PropertyComponent{data: integer} | nil,
+          data_slots_max: %PropertyComponent{data: integer} | nil,
+          arrival_duration: %PropertyComponent{data: CommonData.time()} | nil,
+          distance_to_destination: %PropertyComponent{data: integer} | nil,
           timestamp: DateTime.t() | nil
         }
 

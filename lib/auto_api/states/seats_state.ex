@@ -24,7 +24,7 @@ defmodule AutoApi.SeatsState do
   alias AutoApi.PropertyComponent
 
   defstruct persons_detected: [],
-            seatbelts_fastened: [],
+            seatbelts_state: [],
             timestamp: nil
 
   use AutoApi.State, spec_file: "specs/seats.json"
@@ -34,14 +34,14 @@ defmodule AutoApi.SeatsState do
   @type persons_detected :: %PropertyComponent{
           data: %{location: seat_location, detected: person_detected}
         }
-  @type seatbelt_fastened :: :not_fastened | :fastened
-  @type seatbelts_fastened :: %PropertyComponent{
-          data: %{location: seat_location, fastened: seatbelt_fastened}
+  @type seatbelt_state :: :not_fastened | :fastened
+  @type seatbelts_state :: %PropertyComponent{
+          data: %{location: seat_location, fastened: seatbelt_state}
         }
 
   @type t :: %__MODULE__{
           persons_detected: list(persons_detected),
-          seatbelts_fastened: list(seatbelts_fastened),
+          seatbelts_state: list(seatbelts_state),
           timestamp: DateTime.t() | nil
         }
 

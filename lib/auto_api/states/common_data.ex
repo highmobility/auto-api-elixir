@@ -32,6 +32,7 @@ defmodule AutoApi.CommonData do
   @type network_security :: :none | :wep | :wpa | :wpa2_personal
   @type enabled_state :: :disabled | :enabled
   @type connection_state :: :disconnected | :connected
+  @type time :: %{hour: integer, minute: integer}
 
   def bin_to_ieee_754_float(<<f_value::float-32>>) do
     f_value
