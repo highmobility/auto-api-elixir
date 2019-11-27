@@ -41,6 +41,10 @@
                 {
                     "id": 0,
                     "name": "wake_up"
+                },
+                {
+                    "id": 1,
+                    "name": "sleep"
                 }
             ],
             "examples": [
