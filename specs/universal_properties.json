@@ -1,129 +1,33 @@
 {
-    "category": "universal", 
+    "name": "universal_properties",
+    "name_cased": "universalProperties",
+    "category": "universal",
     "api": {
-        "intro": 7, 
+        "intro": 7,
         "update": 11
-    }, 
-    "name": "universal_properties", 
-    "name_cased": "universalProperties", 
+    },
     "properties": [
         {
-            "name": "nonce", 
-            "name_cased": "nonce", 
-            "size": 9, 
-            "type": "bytes", 
-            "id": 160, 
-            "examples": [
-                {
-                    "hex": "0123456789abcdef01", 
-                    "description": "Nonce is 0123456789abcdef01 in hex", 
-                    "value": [
-                        1, 
-                        35, 
-                        69, 
-                        103, 
-                        137, 
-                        171, 
-                        205, 
-                        239, 
-                        1
-                    ]
-                }
-            ]
-        }, 
+            "id": 160,
+            "name": "nonce",
+            "name_cased": "nonce",
+            "type": "uinteger",
+            "size": 9
+        },
         {
-            "name": "car_signature", 
-            "name_cased": "carSignature", 
-            "size": 64, 
-            "type": "bytes", 
-            "id": 161, 
-            "examples": [
-                {
-                    "hex": "0123456789abcdef010123456789abcdef010123456789abcdef010123456789abcdef010123456789abcdef010123456789abcdef010123456789abcdef0102", 
-                    "description": "Car signature is 0123456789abcdef010123456789abcdef010123456789abcdef010123456789abcdef010123456789abcdef010123456789abcdef010123456789abcdef0102 in hex", 
-                    "value": [
-                        1, 
-                        35, 
-                        69, 
-                        103, 
-                        137, 
-                        171, 
-                        205, 
-                        239, 
-                        1, 
-                        1, 
-                        35, 
-                        69, 
-                        103, 
-                        137, 
-                        171, 
-                        205, 
-                        239, 
-                        1, 
-                        1, 
-                        35, 
-                        69, 
-                        103, 
-                        137, 
-                        171, 
-                        205, 
-                        239, 
-                        1, 
-                        1, 
-                        35, 
-                        69, 
-                        103, 
-                        137, 
-                        171, 
-                        205, 
-                        239, 
-                        1, 
-                        1, 
-                        35, 
-                        69, 
-                        103, 
-                        137, 
-                        171, 
-                        205, 
-                        239, 
-                        1, 
-                        1, 
-                        35, 
-                        69, 
-                        103, 
-                        137, 
-                        171, 
-                        205, 
-                        239, 
-                        1, 
-                        1, 
-                        35, 
-                        69, 
-                        103, 
-                        137, 
-                        171, 
-                        205, 
-                        239, 
-                        1, 
-                        2
-                    ]
-                }
-            ]
-        }, 
+            "id": 161,
+            "name": "car_signature",
+            "name_cased": "carSignature",
+            "type": "uinteger",
+            "size": 64
+        },
         {
-            "examples": [
-                {
-                    "hex": "0000016d82cebD50", 
-                    "description": "Timestamp denotes 30. September 2019 at 15:34:10 GMT", 
-                    "value": "2019-09-30T15:34:10.000Z"
-                }
-            ], 
-            "description": "Milliseconds since UNIX Epoch time", 
-            "name_cased": "timestamp", 
-            "size": 8, 
-            "type": "timestamp", 
-            "id": 162, 
-            "name": "timestamp"
+            "id": 162,
+            "name": "timestamp",
+            "name_cased": "timestamp",
+            "type": "timestamp",
+            "size": 8,
+            "description": "Milliseconds since UNIX Epoch time"
         }
     ]
 }
