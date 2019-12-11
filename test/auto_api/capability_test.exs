@@ -26,6 +26,12 @@ defmodule AutoApi.CapabilityTest do
     assert Enum.uniq(Capability.all()) == Capability.all()
   end
 
+  test "all capabilities have different IDs" do
+    ids = Enum.map(Capability.all(), &apply(&1, :identifier, []))
+
+    assert Enum.uniq(ids) == ids
+  end
+
   test "get_by_name/1 works with all capabilities" do
     capabilities = Capability.all()
 

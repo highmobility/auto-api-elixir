@@ -31,6 +31,7 @@ defmodule AutoApi.CapabilityMeta do
     AutoApi.DiagnosticsCapability,
     AutoApi.DoorsCapability,
     AutoApi.DriverFatigueCapability,
+    AutoApi.EngineCapability,
     AutoApi.IgnitionCapability,
     AutoApi.FailureMessageCapability,
     AutoApi.FirmwareVersionCapability,
