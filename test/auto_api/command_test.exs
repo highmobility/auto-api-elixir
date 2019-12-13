@@ -38,7 +38,7 @@ defmodule AutoApi.CommandTest do
     end
 
     defp assert_get_command({capability, binary_command}) do
-      preamble = <<capability.identifier()::binary, 0x00>>
+      preamble = <<0x0B, capability.identifier()::binary, 0x00>>
 
       command_bin =
         capability.properties
@@ -56,11 +56,11 @@ defmodule AutoApi.CommandTest do
       bin_command = AutoApi.DoorsCommand.to_bin(:set, properties)
 
       assert bin_command ==
-               <<0, 32, 1, 5, 0, 15, 1, 0, 1, 0, 2, 0, 8, 0, 0, 1, 108, 46, 237, 55, 75>>
+               <<0x0B, 0, 32, 1, 5, 0, 15, 1, 0, 1, 0, 2, 0, 8, 0, 0, 1, 108, 46, 237, 55, 75>>
     end
 
     test "setter supports constants" do
-      assert <<0, 34, 1, 1, 0, 4, 1, 0, 1, 0>> == AutoApi.WakeUpCommand.to_bin(:wake_up)
+      assert <<0x0B, 0, 34, 1, 1, 0, 4, 1, 0, 1, 0>> == AutoApi.WakeUpCommand.to_bin(:wake_up)
     end
   end
 
