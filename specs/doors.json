@@ -17,7 +17,7 @@
         {
             "name": "lock_unlock_doors",
             "mandatory": [
-                5
+                6
             ],
             "description": "Attempt to lock or unlock all doors of the car."
         }
