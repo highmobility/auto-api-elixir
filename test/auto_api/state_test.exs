@@ -158,6 +158,20 @@ defmodule AutoApi.StateTest do
       assert new_state.coordinates == coordinates
     end
 
+    test "converts enum with nil value to bin and back to struct" do
+      state = %RooftopControlState{
+        sunroof_state: %PropertyComponent{failure: %{reason: :unknown, description: ""}},
+        sunroof_tilt_state: %PropertyComponent{failure: %{reason: :unknown, description: ""}}
+      }
+
+      new_state =
+        state
+        |> RooftopControlState.to_bin()
+        |> RooftopControlState.from_bin()
+
+      assert state == new_state
+    end
+
     test "failure on list property" do
       pressures = %PropertyComponent{failure: %{reason: :unknown, description: "Unknown"}}
       state = %DiagnosticsState{tire_pressures: [pressures]}
