@@ -14,7 +14,8 @@ defmodule AutoApi.Mixfile do
       docs: [source_ref: "#{@version}", main: "AutoApi"],
       source_url: "https://github.com/highmobility/hm-auto-api-elixir",
       description: description(),
-      package: package()
+      package: package(),
+      dialyzer: [plt_cor_path: "_build/#{Mix.env()}"]
     ]
   end
 
