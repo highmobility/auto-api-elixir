@@ -27,7 +27,6 @@ Table of contents
    * [Install](#install)
    * [Requirements](#requirements)
    * [Getting Started](#getting-started)
-      * [Examples](#examples)
    * [Contributing](#contributing)
    * [License](#license)
 
