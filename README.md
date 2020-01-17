@@ -13,7 +13,7 @@ The package can be installed as:
 
     ```elixir
     def deps do
-      [{:auto_api, github: "highmobility/hm-auto-api-elixir"}]
+      [{:auto_api, github: "highmobility/auto-api-elixir", branch: "level11"}]
     end
     ```
 
