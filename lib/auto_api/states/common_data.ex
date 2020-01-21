@@ -32,7 +32,7 @@ defmodule AutoApi.CommonData do
   @type activity_switched :: :deactivated | :activated
   @type axle :: :front_axle | :rear_axle
   @type weekday :: :monday | :tuesday | :wednesday | :thursday | :friday | :saturday | :sunday
-  @type driving_mode :: :regular | :eco | :sport | :sport_plus
+  @type driving_mode :: :regular | :eco | :sport | :sport_plus | :ecoPlus | :comfort
   @type network_security :: :none | :wep | :wpa | :wpa2_personal
   @type enabled_state :: :disabled | :enabled
   @type connection_state :: :disconnected | :connected

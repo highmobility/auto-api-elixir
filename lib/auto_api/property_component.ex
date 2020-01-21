@@ -186,27 +186,6 @@ defmodule AutoApi.PropertyComponent do
     %__MODULE__{data: data, timestamp: timestamp, failure: failure}
   end
 
-  defp enum_to_value(nil, %{"size" => size} = spec) do
-    nil
-  end
-
-  defp enum_to_value(binary_data, %{"size" => size} = spec) do
-    size_bit = size * 8
-    <<enum_id::integer-size(size_bit)>> = binary_data
-
-    enum_name =
-      spec["values"]
-      |> Enum.find(%{}, &(&1["id"] == enum_id))
-      |> Map.get("name")
-
-    if enum_name do
-      String.to_atom(enum_name)
-    else
-      Logger.warn("enum with value `#{binary_data}` doesn't exist in #{inspect spec}")
-      nil
-    end
-  end
-
   defp to_value(nil, _) do
     nil
   end

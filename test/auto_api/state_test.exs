@@ -20,12 +20,13 @@ defmodule AutoApi.StateTest do
   use ExUnit.Case
 
   alias AutoApi.{
-    PropertyComponent,
-    State,
+    CapabilitiesState,
     DiagnosticsState,
+    PropertyComponent,
+    RooftopControlState,
+    State,
     VehicleLocationState,
-    VehicleStatusState,
-    CapabilitiesState
+    VehicleStatusState
   }
 
   describe "symmetric from_bin/1 & to_bin/1" do
