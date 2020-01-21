@@ -32,7 +32,7 @@
             "type": "types.capability_state",
             "multiple": true,
             "name_singular": "multi_state",
-            "description": "The bytes of incoming capabilities (states)",
+            "description": "The incoming states",
             "examples": [
                 {
                     "hex": "0b002001060004010001000400050100020001",
@@ -67,7 +67,7 @@
             "type": "types.capability_state",
             "multiple": true,
             "name_singular": "multi_command",
-            "description": "The bytes of outgoing capabilities (commands)",
+            "description": "The outgoing commands",
             "examples": [
                 {
                     "hex": "0b00200105000401000101",

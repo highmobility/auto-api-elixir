@@ -20,12 +20,13 @@ defmodule AutoApi.StateTest do
   use ExUnit.Case
 
   alias AutoApi.{
-    PropertyComponent,
-    State,
+    CapabilitiesState,
     DiagnosticsState,
+    PropertyComponent,
+    RooftopControlState,
+    State,
     VehicleLocationState,
-    VehicleStatusState,
-    CapabilitiesState
+    VehicleStatusState
   }
 
   describe "symmetric from_bin/1 & to_bin/1" do
@@ -156,6 +157,20 @@ defmodule AutoApi.StateTest do
         |> VehicleLocationState.from_bin()
 
       assert new_state.coordinates == coordinates
+    end
+
+    test "converts enum with nil value to bin and back to struct" do
+      state = %RooftopControlState{
+        sunroof_state: %PropertyComponent{failure: %{reason: :unknown, description: ""}},
+        sunroof_tilt_state: %PropertyComponent{failure: %{reason: :unknown, description: ""}}
+      }
+
+      new_state =
+        state
+        |> RooftopControlState.to_bin()
+        |> RooftopControlState.from_bin()
+
+      assert state == new_state
     end
 
     test "failure on list property" do
