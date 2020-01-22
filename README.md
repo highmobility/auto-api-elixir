@@ -28,7 +28,7 @@ end
 
 ## Requirements
 
-AutoAPI Elixir requires Elixir 1.9 or later and is compatible with apps targeting Erlang 20.0 or above.
+AutoAPI Elixir requires Elixir 1.9 or later and is compatible with apps targeting Erlang 22.0 or above.
 
 
 
