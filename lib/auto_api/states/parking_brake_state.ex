@@ -8,7 +8,7 @@ defmodule AutoApi.ParkingBrakeState do
   defstruct status: nil,
             timestamp: nil
 
-  use AutoApi.State, spec_file: "specs/parking_brake.json"
+  use AutoApi.State, spec_file: "parking_brake.json"
 
   @type t :: %__MODULE__{
           status: %PropertyComponent{data: CommonData.activity()} | nil,

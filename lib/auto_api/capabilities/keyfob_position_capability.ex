@@ -18,5 +18,5 @@ defmodule AutoApi.KeyfobPositionCapability do
   @command_module AutoApi.KeyfobPositionCommand
   @state_module AutoApi.KeyfobPositionState
 
-  use AutoApi.Capability, spec_file: "specs/keyfob_position.json"
+  use AutoApi.Capability, spec_file: "keyfob_position.json"
 end

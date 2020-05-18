@@ -18,5 +18,5 @@ defmodule AutoApi.WindowsCapability do
   @command_module AutoApi.WindowsCommand
   @state_module AutoApi.WindowsState
 
-  use AutoApi.Capability, spec_file: "specs/windows.json"
+  use AutoApi.Capability, spec_file: "windows.json"
 end

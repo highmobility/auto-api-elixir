@@ -16,5 +16,5 @@ defmodule AutoApi.RooftopControlCapability do
   @command_module AutoApi.RooftopControlCommand
   @state_module AutoApi.RooftopControlState
 
-  use AutoApi.Capability, spec_file: "specs/rooftop_control.json"
+  use AutoApi.Capability, spec_file: "rooftop_control.json"
 end

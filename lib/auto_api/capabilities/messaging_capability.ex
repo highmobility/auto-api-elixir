@@ -16,5 +16,5 @@ defmodule AutoApi.MessagingCapability do
   @command_module AutoApi.MessagingCommand
   @state_module AutoApi.MessagingState
 
-  use AutoApi.Capability, spec_file: "specs/messaging.json"
+  use AutoApi.Capability, spec_file: "messaging.json"
 end

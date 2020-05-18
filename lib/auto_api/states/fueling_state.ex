@@ -9,7 +9,7 @@ defmodule AutoApi.FuelingState do
             gas_flap_lock: nil,
             timestamp: nil
 
-  use AutoApi.State, spec_file: "specs/fueling.json"
+  use AutoApi.State, spec_file: "fueling.json"
 
   @type gas_flap_position :: :closed | :open
 

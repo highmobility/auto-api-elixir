@@ -16,5 +16,5 @@ defmodule AutoApi.EngineStartStopCapability do
   @command_module AutoApi.NotImplemented
   @state_module AutoApi.EngineStartStopState
 
-  use AutoApi.Capability, spec_file: "specs/engine_start_stop.json"
+  use AutoApi.Capability, spec_file: "engine_start_stop.json"
 end

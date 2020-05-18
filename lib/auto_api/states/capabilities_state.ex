@@ -12,7 +12,7 @@ defmodule AutoApi.CapabilitiesState do
   defstruct capabilities: [],
             timestamp: nil
 
-  use AutoApi.State, spec_file: "specs/capabilities.json"
+  use AutoApi.State, spec_file: "capabilities.json"
 
   @type capability :: %PropertyComponent{
           data: %{

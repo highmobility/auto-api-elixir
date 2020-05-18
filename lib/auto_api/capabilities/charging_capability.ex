@@ -18,5 +18,5 @@ defmodule AutoApi.ChargingCapability do
   @command_module AutoApi.ChargingCommand
   @state_module AutoApi.ChargingState
 
-  use AutoApi.Capability, spec_file: "specs/charging.json"
+  use AutoApi.Capability, spec_file: "charging.json"
 end

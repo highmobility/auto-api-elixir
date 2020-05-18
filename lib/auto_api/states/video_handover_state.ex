@@ -10,7 +10,7 @@ defmodule AutoApi.VideoHandoverState do
             screen: nil,
             timestamp: nil
 
-  use AutoApi.State, spec_file: "specs/video_handover.json"
+  use AutoApi.State, spec_file: "video_handover.json"
 
   @type t :: %__MODULE__{
           url: %PropertyComponent{data: String.t()} | nil,

@@ -18,5 +18,5 @@ defmodule AutoApi.ValetModeCapability do
   @command_module AutoApi.ValetModeCommand
   @state_module AutoApi.ValetModeState
 
-  use AutoApi.Capability, spec_file: "specs/valet_mode.json"
+  use AutoApi.Capability, spec_file: "valet_mode.json"
 end

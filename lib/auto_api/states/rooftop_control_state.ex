@@ -19,7 +19,7 @@ defmodule AutoApi.RooftopControlState do
             sunroof_state: nil,
             timestamp: nil
 
-  use AutoApi.State, spec_file: "specs/rooftop_control.json"
+  use AutoApi.State, spec_file: "rooftop_control.json"
 
   @type t :: %__MODULE__{
           dimming: %PropertyComponent{data: float} | nil,

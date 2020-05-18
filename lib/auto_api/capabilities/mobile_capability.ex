@@ -16,5 +16,5 @@ defmodule AutoApi.MobileCapability do
   @command_module AutoApi.MobileCommand
   @state_module AutoApi.MobileState
 
-  use AutoApi.Capability, spec_file: "specs/mobile.json"
+  use AutoApi.Capability, spec_file: "mobile.json"
 end

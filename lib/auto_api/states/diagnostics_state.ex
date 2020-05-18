@@ -39,7 +39,7 @@ defmodule AutoApi.DiagnosticsState do
             mileage_meters: nil,
             timestamp: nil
 
-  use AutoApi.State, spec_file: "specs/diagnostics.json"
+  use AutoApi.State, spec_file: "diagnostics.json"
 
   @type fluid_level :: :low | :filled
   @type position :: :front_left | :front_right | :rear_right | :rear_left

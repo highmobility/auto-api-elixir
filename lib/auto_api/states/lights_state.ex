@@ -15,7 +15,7 @@ defmodule AutoApi.LightsState do
             interior_lights: [],
             timestamp: nil
 
-  use AutoApi.State, spec_file: "specs/lights.json"
+  use AutoApi.State, spec_file: "lights.json"
 
   @type front_exterior_light :: :inactive | :active | :active_with_full_beam | :dlr | :automatic
   @type light_location :: :front | :rear

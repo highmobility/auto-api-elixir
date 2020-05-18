@@ -18,5 +18,5 @@ defmodule AutoApi.FuelingCapability do
   @command_module AutoApi.FuelingCommand
   @state_module AutoApi.FuelingState
 
-  use AutoApi.Capability, spec_file: "specs/fueling.json"
+  use AutoApi.Capability, spec_file: "fueling.json"
 end

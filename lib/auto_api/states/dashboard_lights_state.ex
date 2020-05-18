@@ -11,7 +11,7 @@ defmodule AutoApi.DashboardLightsState do
   defstruct dashboard_lights: [],
             timestamp: nil
 
-  use AutoApi.State, spec_file: "specs/dashboard_lights.json"
+  use AutoApi.State, spec_file: "dashboard_lights.json"
 
   @type light_name ::
           :high_beam

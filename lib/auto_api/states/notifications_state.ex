@@ -11,7 +11,7 @@ defmodule AutoApi.NotificationsState do
             clear: nil,
             timestamp: nil
 
-  use AutoApi.State, spec_file: "specs/notifications.json"
+  use AutoApi.State, spec_file: "notifications.json"
 
   @type action_item :: %PropertyComponent{data: %{id: integer, name: String.t()}}
 

@@ -16,5 +16,5 @@ defmodule AutoApi.DriverFatigueCapability do
   @command_module AutoApi.DriverFatigueCommand
   @state_module AutoApi.DriverFatigueState
 
-  use AutoApi.Capability, spec_file: "specs/driver_fatigue.json"
+  use AutoApi.Capability, spec_file: "driver_fatigue.json"
 end

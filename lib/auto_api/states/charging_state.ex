@@ -61,7 +61,7 @@ defmodule AutoApi.ChargingState do
             status: nil,
             timestamp: nil
 
-  use AutoApi.State, spec_file: "specs/charging.json"
+  use AutoApi.State, spec_file: "charging.json"
 
   @type t :: %__MODULE__{
           estimated_range: %PropertyComponent{data: integer} | nil,

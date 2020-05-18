@@ -16,5 +16,5 @@ defmodule AutoApi.BrowserCapability do
   @command_module AutoApi.BrowserCommand
   @state_module AutoApi.BrowserState
 
-  use AutoApi.Capability, spec_file: "specs/browser.json"
+  use AutoApi.Capability, spec_file: "browser.json"
 end

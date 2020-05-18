@@ -18,5 +18,5 @@ defmodule AutoApi.RaceCapability do
   @command_module AutoApi.RaceCommand
   @state_module AutoApi.RaceState
 
-  use AutoApi.Capability, spec_file: "specs/race.json"
+  use AutoApi.Capability, spec_file: "race.json"
 end

@@ -8,7 +8,7 @@ defmodule AutoApi.MobileState do
   defstruct connection: nil,
             timestamp: nil
 
-  use AutoApi.State, spec_file: "specs/mobile.json"
+  use AutoApi.State, spec_file: "mobile.json"
 
   @type connection :: :disconnected | :connected
 

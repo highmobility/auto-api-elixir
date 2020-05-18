@@ -10,7 +10,7 @@ defmodule AutoApi.VehicleLocationState do
             altitude: nil,
             timestamp: nil
 
-  use AutoApi.State, spec_file: "specs/vehicle_location.json"
+  use AutoApi.State, spec_file: "vehicle_location.json"
 
   @type t :: %__MODULE__{
           coordinates: %PropertyComponent{data: CommonData.coordinates()} | nil,

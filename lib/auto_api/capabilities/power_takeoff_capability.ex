@@ -16,5 +16,5 @@ defmodule AutoApi.PowerTakeoffCapability do
   @command_module AutoApi.PowerTakeoffCommand
   @state_module AutoApi.PowerTakeoffState
 
-  use AutoApi.Capability, spec_file: "specs/power_takeoff.json"
+  use AutoApi.Capability, spec_file: "power_takeoff.json"
 end

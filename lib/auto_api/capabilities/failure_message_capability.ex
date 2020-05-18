@@ -18,5 +18,5 @@ defmodule AutoApi.FailureMessageCapability do
   @command_module AutoApi.FailureMessageCommand
   @state_module AutoApi.FailureMessageState
 
-  use AutoApi.Capability, spec_file: "specs/failure_message.json"
+  use AutoApi.Capability, spec_file: "failure_message.json"
 end

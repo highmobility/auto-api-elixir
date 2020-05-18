@@ -22,7 +22,7 @@ defmodule AutoApi.HomeChargerState do
             price_tariffs: [],
             timestamp: nil
 
-  use AutoApi.State, spec_file: "specs/home_charger.json"
+  use AutoApi.State, spec_file: "home_charger.json"
 
   @type charging_status :: :disconnected | :plugged_in | :charging
   @type authentication_mechanism :: :pin | :app

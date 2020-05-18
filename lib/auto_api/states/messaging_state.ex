@@ -9,7 +9,7 @@ defmodule AutoApi.MessagingState do
             handle: nil,
             timestamp: nil
 
-  use AutoApi.State, spec_file: "specs/messaging.json"
+  use AutoApi.State, spec_file: "messaging.json"
 
   @type t :: %__MODULE__{
           text: %PropertyComponent{data: String.t()} | nil,

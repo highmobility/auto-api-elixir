@@ -18,5 +18,5 @@ defmodule AutoApi.VehicleStatusCapability do
   @command_module AutoApi.VehicleStatusCommand
   @state_module AutoApi.VehicleStatusState
 
-  use AutoApi.Capability, spec_file: "specs/vehicle_status.json"
+  use AutoApi.Capability, spec_file: "vehicle_status.json"
 end

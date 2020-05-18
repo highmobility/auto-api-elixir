@@ -9,7 +9,7 @@ defmodule AutoApi.PowerTakeoffState do
             engaged: nil,
             timestamp: nil
 
-  use AutoApi.State, spec_file: "specs/power_takeoff.json"
+  use AutoApi.State, spec_file: "power_takeoff.json"
 
   @type power_takeoff_engaged :: :not_engaged | :engaged
 

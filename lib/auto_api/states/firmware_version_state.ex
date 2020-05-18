@@ -22,7 +22,7 @@ defmodule AutoApi.FirmwareVersionState do
             application_version: nil,
             timestamp: nil
 
-  use AutoApi.State, spec_file: "specs/firmware_version.json"
+  use AutoApi.State, spec_file: "firmware_version.json"
 
   @type t :: %__MODULE__{
           hmkit_version: hmkit_version | nil,

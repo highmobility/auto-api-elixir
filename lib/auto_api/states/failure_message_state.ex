@@ -26,7 +26,7 @@ defmodule AutoApi.FailureMessageState do
             failed_property_ids: nil,
             timestamp: nil
 
-  use AutoApi.State, spec_file: "specs/failure_message.json"
+  use AutoApi.State, spec_file: "failure_message.json"
 
   @type t :: %__MODULE__{
           failed_message_id: %PropertyComponent{data: integer} | nil,

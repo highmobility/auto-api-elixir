@@ -12,7 +12,7 @@ defmodule AutoApi.ParkingTicketState do
             ticket_end_time: nil,
             timestamp: nil
 
-  use AutoApi.State, spec_file: "specs/parking_ticket.json"
+  use AutoApi.State, spec_file: "parking_ticket.json"
 
   @type parking_ticket_state :: :ended | :started
 

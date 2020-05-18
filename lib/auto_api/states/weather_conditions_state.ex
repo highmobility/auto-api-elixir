@@ -8,7 +8,7 @@ defmodule AutoApi.WeatherConditionsState do
   defstruct rain_intensity: nil,
             timestamp: nil
 
-  use AutoApi.State, spec_file: "specs/weather_conditions.json"
+  use AutoApi.State, spec_file: "weather_conditions.json"
 
   @type t :: %__MODULE__{
           rain_intensity: %PropertyComponent{data: float} | nil,

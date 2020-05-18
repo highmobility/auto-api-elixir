@@ -22,7 +22,7 @@ defmodule AutoApi.UsageState do
             current_fuel_consumption: nil,
             timestamp: nil
 
-  use AutoApi.State, spec_file: "specs/usage.json"
+  use AutoApi.State, spec_file: "usage.json"
 
   @type driving_modes_activation_period :: %PropertyComponent{
           data: %{driving_mode: CommonData.driving_mode(), period: float}

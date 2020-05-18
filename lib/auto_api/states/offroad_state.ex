@@ -9,7 +9,7 @@ defmodule AutoApi.OffroadState do
             wheel_suspension: nil,
             timestamp: nil
 
-  use AutoApi.State, spec_file: "specs/offroad.json"
+  use AutoApi.State, spec_file: "offroad.json"
 
   @type t :: %__MODULE__{
           route_incline: %PropertyComponent{data: integer} | nil,

@@ -16,5 +16,5 @@ defmodule AutoApi.VideoHandoverCapability do
   @command_module AutoApi.VideoHandoverCommand
   @state_module AutoApi.VideoHandoverState
 
-  use AutoApi.Capability, spec_file: "specs/video_handover.json"
+  use AutoApi.Capability, spec_file: "video_handover.json"
 end

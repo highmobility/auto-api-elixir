@@ -18,5 +18,5 @@ defmodule AutoApi.ParkingBrakeCapability do
   @command_module AutoApi.ParkingBrakeCommand
   @state_module AutoApi.ParkingBrakeState
 
-  use AutoApi.Capability, spec_file: "specs/parking_brake.json"
+  use AutoApi.Capability, spec_file: "parking_brake.json"
 end

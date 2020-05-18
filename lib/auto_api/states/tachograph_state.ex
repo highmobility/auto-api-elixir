@@ -18,7 +18,7 @@ defmodule AutoApi.TachographState do
             vehicle_speed: nil,
             timestamp: nil
 
-  use AutoApi.State, spec_file: "specs/tachograph.json"
+  use AutoApi.State, spec_file: "tachograph.json"
 
   @type vehicle_motion :: :not_detected | :detected
   @type vehicle_overspeed :: :no_overspeed | :overspeed

@@ -16,5 +16,5 @@ defmodule AutoApi.VehicleTimeCapability do
   @command_module AutoApi.VehicleTimeCommand
   @state_module AutoApi.VehicleTimeState
 
-  use AutoApi.Capability, spec_file: "specs/vehicle_time.json"
+  use AutoApi.Capability, spec_file: "vehicle_time.json"
 end

@@ -16,5 +16,5 @@ defmodule AutoApi.DashboardLightsCapability do
   @command_module AutoApi.DashboardLightsCommand
   @state_module AutoApi.DashboardLightsState
 
-  use AutoApi.Capability, spec_file: "specs/dashboard_lights.json"
+  use AutoApi.Capability, spec_file: "dashboard_lights.json"
 end

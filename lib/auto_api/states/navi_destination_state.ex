@@ -16,7 +16,7 @@ defmodule AutoApi.NaviDestinationState do
             distance_to_destination: nil,
             timestamp: nil
 
-  use AutoApi.State, spec_file: "specs/navi_destination.json"
+  use AutoApi.State, spec_file: "navi_destination.json"
 
   @type t :: %__MODULE__{
           coordinates: %PropertyComponent{data: CommonData.coordinates()} | nil,

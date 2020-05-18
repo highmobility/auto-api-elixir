@@ -18,7 +18,7 @@ defmodule AutoApi.EngineState do
   defstruct status: nil,
             timestamp: nil
 
-  use AutoApi.State, spec_file: "specs/engine.json"
+  use AutoApi.State, spec_file: "engine.json"
 
   @doc """
   Build state based on binary value

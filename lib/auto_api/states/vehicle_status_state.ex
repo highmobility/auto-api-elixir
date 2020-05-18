@@ -26,7 +26,7 @@ defmodule AutoApi.VehicleStatusState do
             states: [],
             timestamp: nil
 
-  use AutoApi.State, spec_file: "specs/vehicle_status.json"
+  use AutoApi.State, spec_file: "vehicle_status.json"
 
   @type powertrain ::
           :unknown | :all_electric | :combustion_engine | :phev | :hydrogen | :hydrogen_hybrid

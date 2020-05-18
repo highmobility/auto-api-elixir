@@ -17,7 +17,7 @@ defmodule AutoApi.HonkHornFlashLightsState do
             emergency_flashers_state: nil,
             timestamp: nil
 
-  use AutoApi.State, spec_file: "specs/honk_horn_flash_lights.json"
+  use AutoApi.State, spec_file: "honk_horn_flash_lights.json"
 
   @type t :: %__MODULE__{
           flashers: %PropertyComponent{data: flashers} | nil,

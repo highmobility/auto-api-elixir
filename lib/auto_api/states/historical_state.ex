@@ -11,7 +11,7 @@ defmodule AutoApi.HistoricalState do
             end_date: nil,
             timestamp: nil
 
-  use AutoApi.State, spec_file: "specs/historical.json"
+  use AutoApi.State, spec_file: "historical.json"
 
   @type t :: %__MODULE__{
           states: list(%PropertyComponent{}),

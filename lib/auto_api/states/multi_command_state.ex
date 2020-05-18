@@ -9,7 +9,7 @@ defmodule AutoApi.MultiCommandState do
             multi_commands: [],
             timestamp: nil
 
-  use AutoApi.State, spec_file: "specs/multi_command.json"
+  use AutoApi.State, spec_file: "multi_command.json"
 
   @type t :: %__MODULE__{
           multi_states: list(%PropertyComponent{}),

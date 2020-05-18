@@ -9,7 +9,7 @@ defmodule AutoApi.SeatsState do
             seatbelts_state: [],
             timestamp: nil
 
-  use AutoApi.State, spec_file: "specs/seats.json"
+  use AutoApi.State, spec_file: "seats.json"
 
   @type seat_location :: :front_left | :front_right | :rear_right | :rear_left | :rear_center
   @type person_detected :: :detected | :not_detected

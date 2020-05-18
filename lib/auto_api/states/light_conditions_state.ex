@@ -9,7 +9,7 @@ defmodule AutoApi.LightConditionsState do
             inside_light: nil,
             timestamp: nil
 
-  use AutoApi.State, spec_file: "specs/light_conditions.json"
+  use AutoApi.State, spec_file: "light_conditions.json"
 
   @type t :: %__MODULE__{
           outside_light: %PropertyComponent{data: float} | nil,

@@ -18,5 +18,5 @@ defmodule AutoApi.HonkHornFlashLightsCapability do
   @command_module AutoApi.HonkHornFlashLightsCommand
   @state_module AutoApi.HonkHornFlashLightsState
 
-  use AutoApi.Capability, spec_file: "specs/honk_horn_flash_lights.json"
+  use AutoApi.Capability, spec_file: "honk_horn_flash_lights.json"
 end

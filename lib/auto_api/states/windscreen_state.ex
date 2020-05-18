@@ -15,7 +15,7 @@ defmodule AutoApi.WindscreenState do
             windscreen_damage_detection_time: nil,
             timestamp: nil
 
-  use AutoApi.State, spec_file: "specs/windscreen.json"
+  use AutoApi.State, spec_file: "windscreen.json"
 
   @type wipers_status :: :inactive | :active | :automatic
   @type wipers_intensity :: :level_0 | :level_1 | :level_2 | :level_3

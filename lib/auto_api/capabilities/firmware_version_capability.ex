@@ -16,5 +16,5 @@ defmodule AutoApi.FirmwareVersionCapability do
   @command_module AutoApi.FirmwareVersionCommand
   @state_module AutoApi.FirmwareVersionState
 
-  use AutoApi.Capability, spec_file: "specs/firmware_version.json"
+  use AutoApi.Capability, spec_file: "firmware_version.json"
 end

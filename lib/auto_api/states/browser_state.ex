@@ -8,7 +8,7 @@ defmodule AutoApi.BrowserState do
   defstruct url: nil,
             timestamp: nil
 
-  use AutoApi.State, spec_file: "specs/browser.json"
+  use AutoApi.State, spec_file: "browser.json"
 
   @type t :: %__MODULE__{
           url: %PropertyComponent{data: String.t()} | nil,

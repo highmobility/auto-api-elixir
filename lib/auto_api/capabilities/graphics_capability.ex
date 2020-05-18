@@ -16,5 +16,5 @@ defmodule AutoApi.GraphicsCapability do
   @command_module AutoApi.GraphicsCommand
   @state_module AutoApi.GraphicsState
 
-  use AutoApi.Capability, spec_file: "specs/graphics.json"
+  use AutoApi.Capability, spec_file: "graphics.json"
 end

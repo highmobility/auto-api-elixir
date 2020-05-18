@@ -20,7 +20,7 @@ defmodule AutoApi.IgnitionState do
             accessories_status: nil,
             timestamp: nil
 
-  use AutoApi.State, spec_file: "specs/ignition.json"
+  use AutoApi.State, spec_file: "ignition.json"
 
   @doc """
   Build state based on binary value

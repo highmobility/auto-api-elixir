@@ -18,5 +18,5 @@ defmodule AutoApi.RemoteControlCapability do
   @command_module AutoApi.RemoteControlCommand
   @state_module AutoApi.RemoteControlState
 
-  use AutoApi.Capability, spec_file: "specs/remote_control.json"
+  use AutoApi.Capability, spec_file: "remote_control.json"
 end

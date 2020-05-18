@@ -12,7 +12,7 @@ defmodule AutoApi.WindowsState do
             positions: [],
             timestamp: nil
 
-  use AutoApi.State, spec_file: "specs/windows.json"
+  use AutoApi.State, spec_file: "windows.json"
 
   @type location :: :front_left | :front_right | :rear_left | :rear_right | :hatch
   @type position :: :close | :open | :intermediate

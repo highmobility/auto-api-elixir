@@ -18,5 +18,5 @@ defmodule AutoApi.WiFiCapability do
   @command_module AutoApi.WiFiCommand
   @state_module AutoApi.WiFiState
 
-  use AutoApi.Capability, spec_file: "specs/wi_fi.json"
+  use AutoApi.Capability, spec_file: "wi_fi.json"
 end

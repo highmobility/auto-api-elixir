@@ -18,5 +18,5 @@ defmodule AutoApi.SeatsCapability do
   @command_module AutoApi.SeatsCommand
   @state_module AutoApi.SeatsState
 
-  use AutoApi.Capability, spec_file: "specs/seats.json"
+  use AutoApi.Capability, spec_file: "seats.json"
 end

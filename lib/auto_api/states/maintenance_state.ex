@@ -19,7 +19,7 @@ defmodule AutoApi.MaintenanceState do
             brake_fluid_change_date: nil,
             timestamp: nil
 
-  use AutoApi.State, spec_file: "specs/maintenance.json"
+  use AutoApi.State, spec_file: "maintenance.json"
 
   @type condition_based_services :: %PropertyComponent{
           data: %{

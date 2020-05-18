@@ -42,7 +42,7 @@ defmodule AutoApi.RaceState do
             vehicle_moving: nil,
             timestamp: nil
 
-  use AutoApi.State, spec_file: "specs/race.json"
+  use AutoApi.State, spec_file: "race.json"
 
   @type t :: %__MODULE__{
           accelerations: list(acceleration),

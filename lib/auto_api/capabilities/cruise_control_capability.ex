@@ -16,5 +16,5 @@ defmodule AutoApi.CruiseControlCapability do
   @command_module AutoApi.CruiseControlCommand
   @state_module AutoApi.CruiseControlState
 
-  use AutoApi.Capability, spec_file: "specs/cruise_control.json"
+  use AutoApi.Capability, spec_file: "cruise_control.json"
 end

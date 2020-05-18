@@ -16,5 +16,5 @@ defmodule AutoApi.UsageCapability do
   @command_module AutoApi.UsageCommand
   @state_module AutoApi.UsageState
 
-  use AutoApi.Capability, spec_file: "specs/usage.json"
+  use AutoApi.Capability, spec_file: "usage.json"
 end

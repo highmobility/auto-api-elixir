@@ -8,7 +8,7 @@ defmodule AutoApi.HeartRateState do
   defstruct heart_rate: nil,
             timestamp: nil
 
-  use AutoApi.State, spec_file: "specs/heart_rate.json"
+  use AutoApi.State, spec_file: "heart_rate.json"
 
   @type t :: %__MODULE__{
           heart_rate: %PropertyComponent{data: integer} | nil,

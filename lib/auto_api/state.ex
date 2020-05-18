@@ -38,13 +38,16 @@ defmodule AutoApi.State do
   require Logger
 
   defmacro __using__(spec_file: spec_file) do
-    spec = Poison.decode!(File.read!(spec_file))
+    spec_path = Path.join(["specs", "capabilities", spec_file])
+    raw_spec = Poison.decode!(File.read!(spec_path))
 
     base =
       quote do
         alias AutoApi.CommonData
         @behaviour AutoApi.State
         @dialyzer {:nowarn_function, to_properties: 4}
+
+        @external_resource unquote(spec_path)
 
         @capability __MODULE__
                     |> Atom.to_string()
@@ -183,7 +186,7 @@ defmodule AutoApi.State do
       end
 
     prop_funs =
-      for prop <- spec["properties"] do
+      for prop <- raw_spec["properties"] do
         prop_name = String.to_atom(prop["name"])
         prop_id = prop["id"]
         multiple = prop["multiple"] || false

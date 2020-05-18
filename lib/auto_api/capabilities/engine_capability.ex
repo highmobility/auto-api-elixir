@@ -16,5 +16,5 @@ defmodule AutoApi.EngineCapability do
   @command_module AutoApi.EngineCommand
   @state_module AutoApi.EngineState
 
-  use AutoApi.Capability, spec_file: "specs/engine.json"
+  use AutoApi.Capability, spec_file: "engine.json"
 end

@@ -28,13 +28,14 @@ defmodule AutoApi.Capability do
   alias AutoApi.CapabilityHelper
 
   defmacro __using__(spec_file: spec_file) do
-    raw_spec = Poison.decode!(File.read!(spec_file))
+    spec_path = Path.join(["specs", "capabilities", spec_file])
+    raw_spec = Poison.decode!(File.read!(spec_path))
 
     properties = raw_spec["properties"] || []
 
     base_functions =
       quote do
-        @external_resource unquote(spec_file)
+        @external_resource unquote(spec_path)
         @raw_spec unquote(Macro.escape(raw_spec))
 
         @identifier <<@raw_spec["identifier"]["msb"], @raw_spec["identifier"]["lsb"]>>

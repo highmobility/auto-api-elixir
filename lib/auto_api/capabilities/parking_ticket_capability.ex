@@ -18,5 +18,5 @@ defmodule AutoApi.ParkingTicketCapability do
   @command_module AutoApi.ParkingTicketCommand
   @state_module AutoApi.ParkingTicketState
 
-  use AutoApi.Capability, spec_file: "specs/parking_ticket.json"
+  use AutoApi.Capability, spec_file: "parking_ticket.json"
 end

@@ -12,7 +12,7 @@ defmodule AutoApi.DriverFatigueState do
   defstruct detected_fatigue_level: nil,
             timestamp: nil
 
-  use AutoApi.State, spec_file: "specs/driver_fatigue.json"
+  use AutoApi.State, spec_file: "driver_fatigue.json"
 
   @type fatigue_level :: %PropertyComponent{
           data: :light | :pause_recommended | :action_needed | :car_ready_to_take_over

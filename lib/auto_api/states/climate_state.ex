@@ -18,7 +18,7 @@ defmodule AutoApi.ClimateState do
             rear_temperature_setting: nil,
             timestamp: nil
 
-  use AutoApi.State, spec_file: "specs/climate.json"
+  use AutoApi.State, spec_file: "climate.json"
 
   @type activity :: :inactive | :active
   @type hvac_weekday_starting_time :: %PropertyComponent{

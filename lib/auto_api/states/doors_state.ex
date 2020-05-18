@@ -13,7 +13,7 @@ defmodule AutoApi.DoorsState do
             locks_state: nil,
             timestamp: nil
 
-  use AutoApi.State, spec_file: "specs/doors.json"
+  use AutoApi.State, spec_file: "doors.json"
 
   @type lock :: %PropertyComponent{
           data: %{

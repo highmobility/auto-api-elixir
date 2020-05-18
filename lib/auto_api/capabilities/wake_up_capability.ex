@@ -16,5 +16,5 @@ defmodule AutoApi.WakeUpCapability do
   @command_module AutoApi.WakeUpCommand
   @state_module AutoApi.WakeUpState
 
-  use AutoApi.Capability, spec_file: "specs/wake_up.json"
+  use AutoApi.Capability, spec_file: "wake_up.json"
 end

@@ -13,7 +13,7 @@ defmodule AutoApi.HoodState do
   defstruct position: nil,
             timestamp: nil
 
-  use AutoApi.State, spec_file: "specs/hood.json"
+  use AutoApi.State, spec_file: "hood.json"
 
   @type t :: %__MODULE__{
           position: %PropertyComponent{data: position} | nil,

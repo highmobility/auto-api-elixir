@@ -15,7 +15,7 @@ defmodule AutoApi.ChassisSettingsState do
             minimum_chassis_position: nil,
             timestamp: nil
 
-  use AutoApi.State, spec_file: "specs/chassis_settings.json"
+  use AutoApi.State, spec_file: "chassis_settings.json"
 
   @type spring_rate :: %PropertyComponent{data: %{value: integer, axle: CommonData.axle()}}
 

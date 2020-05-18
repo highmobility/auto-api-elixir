@@ -8,7 +8,7 @@ defmodule AutoApi.KeyfobPositionState do
   defstruct location: nil,
             timestamp: nil
 
-  use AutoApi.State, spec_file: "specs/keyfob_position.json"
+  use AutoApi.State, spec_file: "keyfob_position.json"
 
   @type position ::
           :out_of_range

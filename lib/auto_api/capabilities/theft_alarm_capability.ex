@@ -18,5 +18,5 @@ defmodule AutoApi.TheftAlarmCapability do
   @command_module AutoApi.TheftAlarmCommand
   @state_module AutoApi.TheftAlarmState
 
-  use AutoApi.Capability, spec_file: "specs/theft_alarm.json"
+  use AutoApi.Capability, spec_file: "theft_alarm.json"
 end

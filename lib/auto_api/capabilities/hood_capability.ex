@@ -18,5 +18,5 @@ defmodule AutoApi.HoodCapability do
   @command_module AutoApi.HoodCommand
   @state_module AutoApi.HoodState
 
-  use AutoApi.Capability, spec_file: "specs/hood.json"
+  use AutoApi.Capability, spec_file: "hood.json"
 end

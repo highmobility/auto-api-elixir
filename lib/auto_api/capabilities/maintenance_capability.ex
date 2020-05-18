@@ -16,5 +16,5 @@ defmodule AutoApi.MaintenanceCapability do
   @command_module AutoApi.MaintenanceCommand
   @state_module AutoApi.MaintenanceState
 
-  use AutoApi.Capability, spec_file: "specs/maintenance.json"
+  use AutoApi.Capability, spec_file: "maintenance.json"
 end

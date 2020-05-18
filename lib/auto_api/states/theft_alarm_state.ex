@@ -8,7 +8,7 @@ defmodule AutoApi.TheftAlarmState do
   defstruct status: nil,
             timestamp: nil
 
-  use AutoApi.State, spec_file: "specs/theft_alarm.json"
+  use AutoApi.State, spec_file: "theft_alarm.json"
 
   @type alarm :: :unarmed | :armed | :triggered
 

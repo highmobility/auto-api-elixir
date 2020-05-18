@@ -18,5 +18,5 @@ defmodule AutoApi.DoorsCapability do
   @command_module AutoApi.DoorsCommand
   @state_module AutoApi.DoorsState
 
-  use AutoApi.Capability, spec_file: "specs/doors.json"
+  use AutoApi.Capability, spec_file: "doors.json"
 end

@@ -18,5 +18,5 @@ defmodule AutoApi.HomeChargerCapability do
   @command_module AutoApi.HomeChargerCommand
   @state_module AutoApi.HomeChargerState
 
-  use AutoApi.Capability, spec_file: "specs/home_charger.json"
+  use AutoApi.Capability, spec_file: "home_charger.json"
 end

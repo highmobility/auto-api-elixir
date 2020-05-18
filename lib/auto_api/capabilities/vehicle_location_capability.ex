@@ -18,5 +18,5 @@ defmodule AutoApi.VehicleLocationCapability do
   @command_module AutoApi.VehicleLocationCommand
   @state_module AutoApi.VehicleLocationState
 
-  use AutoApi.Capability, spec_file: "specs/vehicle_location.json"
+  use AutoApi.Capability, spec_file: "vehicle_location.json"
 end

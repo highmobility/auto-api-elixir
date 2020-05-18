@@ -8,7 +8,7 @@ defmodule AutoApi.EngineStartStopState do
   defstruct status: nil,
             timestamp: nil
 
-  use AutoApi.State, spec_file: "specs/engine_start_stop.json"
+  use AutoApi.State, spec_file: "engine_start_stop.json"
 
   @type t :: %__MODULE__{
           status: %PropertyComponent{data: CommonData.activity()} | nil,

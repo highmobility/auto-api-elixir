@@ -18,5 +18,5 @@ defmodule AutoApi.OffroadCapability do
   @command_module AutoApi.OffroadCommand
   @state_module AutoApi.OffroadState
 
-  use AutoApi.Capability, spec_file: "specs/offroad.json"
+  use AutoApi.Capability, spec_file: "offroad.json"
 end

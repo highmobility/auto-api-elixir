@@ -18,5 +18,5 @@ defmodule AutoApi.WindscreenCapability do
   @command_module AutoApi.WindscreenCommand
   @state_module AutoApi.WindscreenState
 
-  use AutoApi.Capability, spec_file: "specs/windscreen.json"
+  use AutoApi.Capability, spec_file: "windscreen.json"
 end

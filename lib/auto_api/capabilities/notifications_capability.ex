@@ -16,5 +16,5 @@ defmodule AutoApi.NotificationsCapability do
   @command_module AutoApi.NotificationsCommand
   @state_module AutoApi.NotificationsState
 
-  use AutoApi.Capability, spec_file: "specs/notifications.json"
+  use AutoApi.Capability, spec_file: "notifications.json"
 end

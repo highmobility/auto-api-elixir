@@ -8,7 +8,7 @@ defmodule AutoApi.GraphicsState do
   defstruct image_url: nil,
             timestamp: nil
 
-  use AutoApi.State, spec_file: "specs/graphics.json"
+  use AutoApi.State, spec_file: "graphics.json"
 
   @type t :: %__MODULE__{
           image_url: %PropertyComponent{data: String.t()} | nil,

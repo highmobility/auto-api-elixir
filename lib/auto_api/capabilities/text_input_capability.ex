@@ -16,5 +16,5 @@ defmodule AutoApi.TextInputCapability do
   @command_module AutoApi.TextInputCommand
   @state_module AutoApi.TextInputState
 
-  use AutoApi.Capability, spec_file: "specs/text_input.json"
+  use AutoApi.Capability, spec_file: "text_input.json"
 end

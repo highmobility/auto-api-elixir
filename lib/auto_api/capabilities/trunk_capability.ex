@@ -18,5 +18,5 @@ defmodule AutoApi.TrunkCapability do
   @command_module AutoApi.TrunkCommand
   @state_module AutoApi.TrunkState
 
-  use AutoApi.Capability, spec_file: "specs/trunk.json"
+  use AutoApi.Capability, spec_file: "trunk.json"
 end

@@ -18,5 +18,5 @@ defmodule AutoApi.ChassisSettingsCapability do
   @command_module AutoApi.ChassisSettingsCommand
   @state_module AutoApi.ChassisSettingsState
 
-  use AutoApi.Capability, spec_file: "specs/chassis_settings.json"
+  use AutoApi.Capability, spec_file: "chassis_settings.json"
 end

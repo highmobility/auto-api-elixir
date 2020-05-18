@@ -18,5 +18,5 @@ defmodule AutoApi.WeatherConditionsCapability do
   @command_module AutoApi.WeatherConditionsCommand
   @state_module AutoApi.WeatherConditionsState
 
-  use AutoApi.Capability, spec_file: "specs/weather_conditions.json"
+  use AutoApi.Capability, spec_file: "weather_conditions.json"
 end

@@ -16,5 +16,5 @@ defmodule AutoApi.HeartRateCapability do
   @command_module AutoApi.HeartRateCommand
   @state_module AutoApi.HeartRateState
 
-  use AutoApi.Capability, spec_file: "specs/heart_rate.json"
+  use AutoApi.Capability, spec_file: "heart_rate.json"
 end

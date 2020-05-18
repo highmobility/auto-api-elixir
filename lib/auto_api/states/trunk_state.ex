@@ -9,7 +9,7 @@ defmodule AutoApi.TrunkState do
             position: nil,
             timestamp: nil
 
-  use AutoApi.State, spec_file: "specs/trunk.json"
+  use AutoApi.State, spec_file: "trunk.json"
 
   @type t :: %__MODULE__{
           lock: %PropertyComponent{data: CommonData.lock()} | nil,

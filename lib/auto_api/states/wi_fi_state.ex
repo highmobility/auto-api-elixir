@@ -12,7 +12,7 @@ defmodule AutoApi.WiFiState do
             password: nil,
             timestamp: nil
 
-  use AutoApi.State, spec_file: "specs/wi_fi.json"
+  use AutoApi.State, spec_file: "wi_fi.json"
 
   @type t :: %__MODULE__{
           status: %PropertyComponent{data: CommonData.enabled_state()} | nil,

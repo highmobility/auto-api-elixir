@@ -12,7 +12,7 @@ defmodule AutoApi.CruiseControlState do
             acc_target_speed: nil,
             timestamp: nil
 
-  use AutoApi.State, spec_file: "specs/cruise_control.json"
+  use AutoApi.State, spec_file: "cruise_control.json"
 
   @type limiter :: :not_set | :higher_speed_requested | :lower_speed_requested | :speed_fixed
 

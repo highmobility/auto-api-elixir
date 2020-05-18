@@ -18,5 +18,5 @@ defmodule AutoApi.HistoricalCapability do
   @command_module AutoApi.HistoricalCommand
   @state_module AutoApi.HistoricalState
 
-  use AutoApi.Capability, spec_file: "specs/historical.json"
+  use AutoApi.Capability, spec_file: "historical.json"
 end

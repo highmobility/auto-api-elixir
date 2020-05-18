@@ -8,7 +8,7 @@ defmodule AutoApi.WakeUpState do
   defstruct status: nil,
             timestamp: nil
 
-  use AutoApi.State, spec_file: "specs/wake_up.json"
+  use AutoApi.State, spec_file: "wake_up.json"
 
   @type wake_up_state :: :wake_up | :sleep
   @type t :: %__MODULE__{

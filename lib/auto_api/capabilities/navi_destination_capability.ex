@@ -18,5 +18,5 @@ defmodule AutoApi.NaviDestinationCapability do
   @command_module AutoApi.NaviDestinationCommand
   @state_module AutoApi.NaviDestinationState
 
-  use AutoApi.Capability, spec_file: "specs/navi_destination.json"
+  use AutoApi.Capability, spec_file: "navi_destination.json"
 end

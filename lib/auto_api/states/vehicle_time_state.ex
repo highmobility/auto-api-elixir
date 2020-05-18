@@ -8,7 +8,7 @@ defmodule AutoApi.VehicleTimeState do
   defstruct vehicle_time: nil,
             timestamp: nil
 
-  use AutoApi.State, spec_file: "specs/vehicle_time.json"
+  use AutoApi.State, spec_file: "vehicle_time.json"
 
   @type t :: %__MODULE__{
           vehicle_time: %PropertyComponent{data: integer} | nil,

@@ -16,5 +16,5 @@ defmodule AutoApi.MultiCommandCapability do
   @command_module AutoApi.MultiCommandCommand
   @state_module AutoApi.MultiCommandState
 
-  use AutoApi.Capability, spec_file: "specs/multi_command.json"
+  use AutoApi.Capability, spec_file: "multi_command.json"
 end

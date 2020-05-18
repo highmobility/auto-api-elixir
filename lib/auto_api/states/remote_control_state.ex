@@ -10,7 +10,7 @@ defmodule AutoApi.RemoteControlState do
             speed: nil,
             timestamp: nil
 
-  use AutoApi.State, spec_file: "specs/remote_control.json"
+  use AutoApi.State, spec_file: "remote_control.json"
 
   @type modes ::
           :control_mode_unavailable

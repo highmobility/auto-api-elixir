@@ -18,5 +18,5 @@ defmodule AutoApi.LightsCapability do
   @command_module AutoApi.LightsCommand
   @state_module AutoApi.LightsState
 
-  use AutoApi.Capability, spec_file: "specs/lights.json"
+  use AutoApi.Capability, spec_file: "lights.json"
 end

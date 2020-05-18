@@ -16,5 +16,5 @@ defmodule AutoApi.IgnitionCapability do
   @command_module AutoApi.IgnitionCommand
   @state_module AutoApi.IgnitionState
 
-  use AutoApi.Capability, spec_file: "specs/ignition.json"
+  use AutoApi.Capability, spec_file: "ignition.json"
 end

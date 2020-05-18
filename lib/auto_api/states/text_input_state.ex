@@ -8,7 +8,7 @@ defmodule AutoApi.TextInputState do
   defstruct text: nil,
             timestamp: nil
 
-  use AutoApi.State, spec_file: "specs/text_input.json"
+  use AutoApi.State, spec_file: "text_input.json"
 
   @type t :: %__MODULE__{
           text: %PropertyComponent{data: String.t()} | nil,

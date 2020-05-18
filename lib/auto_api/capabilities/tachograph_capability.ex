@@ -18,5 +18,5 @@ defmodule AutoApi.TachographCapability do
   @command_module AutoApi.TachographCommand
   @state_module AutoApi.TachographState
 
-  use AutoApi.Capability, spec_file: "specs/tachograph.json"
+  use AutoApi.Capability, spec_file: "tachograph.json"
 end

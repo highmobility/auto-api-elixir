@@ -8,7 +8,7 @@ defmodule AutoApi.ValetModeState do
   defstruct status: nil,
             timestamp: nil
 
-  use AutoApi.State, spec_file: "specs/valet_mode.json"
+  use AutoApi.State, spec_file: "valet_mode.json"
 
   @type t :: %__MODULE__{
           status: %PropertyComponent{data: CommonData.activity()} | nil,

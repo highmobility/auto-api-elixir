@@ -18,5 +18,5 @@ defmodule AutoApi.LightConditionsCapability do
   @command_module AutoApi.LightConditionsCommand
   @state_module AutoApi.LightConditionsState
 
-  use AutoApi.Capability, spec_file: "specs/light_conditions.json"
+  use AutoApi.Capability, spec_file: "light_conditions.json"
 end
