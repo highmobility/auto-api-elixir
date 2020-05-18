@@ -9,6 +9,7 @@ defmodule AutoApi.EngineState do
 
   @type t :: %__MODULE__{
           status: %PropertyComponent{data: on_off} | nil,
+          start_stop_state: %PropertyComponent{data: CommonData.activity()} | nil,
           timestamp: DateTime.t() | nil
         }
 
@@ -16,6 +17,7 @@ defmodule AutoApi.EngineState do
   Engine state
   """
   defstruct status: nil,
+            start_stop_state: nil,
             timestamp: nil
 
   use AutoApi.State, spec_file: "engine.json"
