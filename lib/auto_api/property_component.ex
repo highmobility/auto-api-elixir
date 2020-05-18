@@ -44,7 +44,13 @@ defmodule AutoApi.PropertyComponent do
   @prop_name_to_id %{:data => 0x01, :timestamp => 0x02, :failure => 0x03}
 
   @type reason ::
-          :rate_limit | :execution_timeout | :format_error | :unauthorised | :unknown | :pending
+          :rate_limit
+          | :execution_timeout
+          | :format_error
+          | :unauthorised
+          | :unknown
+          | :pending
+          | :internal_oem_error
   @type failure :: %{reason: reason(), description: String.t()}
   @type t :: %__MODULE__{data: any, timestamp: nil | DateTime.t(), failure: nil | failure}
   @type spec :: map() | list()

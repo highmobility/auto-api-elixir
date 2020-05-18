@@ -8,13 +8,13 @@ defmodule AutoApi.FailureMessageState do
   @type failure_reason ::
           :unsupported_capability
           | :unauthorised
-          | :unauthorized
           | :incorrect_state
           | :execution_timeout
           | :vehicle_asleep
           | :invalid_command
           | :pending
           | :rate_limit
+          | :internal_oem_error
 
   @doc """
   FailureMessage state
