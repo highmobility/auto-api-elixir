@@ -63,7 +63,6 @@ defmodule AutoApi.CapabilityMeta do
     AutoApi.RemoteControlCapability,
     AutoApi.RooftopControlCapability,
     AutoApi.SeatsCapability,
-    AutoApi.EngineStartStopCapability,
     AutoApi.TachographCapability,
     AutoApi.TextInputCapability,
     AutoApi.TheftAlarmCapability,

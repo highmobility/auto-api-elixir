@@ -1,6 +1,6 @@
 defmodule AutoApi.LightsState do
   @moduledoc """
-  StartStop state
+  Lights state
   """
 
   alias AutoApi.{CommonData, PropertyComponent}
