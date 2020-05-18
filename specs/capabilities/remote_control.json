@@ -1,0 +1,144 @@
+{
+    "name": "remote_control",
+    "name_cased": "remoteControl",
+    "name_pretty": "Remote Control",
+    "category": "parking",
+    "authorization": true,
+    "identifier": {
+        "msb": 0,
+        "lsb": 39
+    },
+    "api": {
+        "intro": 2,
+        "update": 11
+    },
+    "disabled_in": [
+        "web"
+    ],
+    "getters": {
+        "name": "get_control_state",
+        "skip_properties_getter": true
+    },
+    "setters": [
+        {
+            "name": "control_command",
+            "optional": [
+                2,
+                3
+            ],
+            "description": "To be sent every time the controls for the vehicle wants to be changed or once a second if the controls remain the same. If the vehicle does not receive the command every second it will stop the control mode."
+        },
+        {
+            "name": "start_control",
+            "constants": [
+                {
+                    "property_id": 1,
+                    "value": [
+                        2
+                    ]
+                }
+            ],
+            "description": "Attempt to start the control mode of the vehicle."
+        },
+        {
+            "name": "stop_control",
+            "constants": [
+                {
+                    "property_id": 1,
+                    "value": [
+                        5
+                    ]
+                }
+            ],
+            "description": "Attempt to stop the control mode of the vehicle."
+        }
+    ],
+    "state": [
+        1,
+        2
+    ],
+    "properties": [
+        {
+            "id": 1,
+            "name": "control_mode",
+            "name_cased": "controlMode",
+            "name_pretty": "Control mode",
+            "type": "enum",
+            "size": 1,
+            "enum_values": [
+                {
+                    "id": 0,
+                    "name": "unavailable"
+                },
+                {
+                    "id": 1,
+                    "name": "available"
+                },
+                {
+                    "id": 2,
+                    "name": "started",
+                    "verb": "start"
+                },
+                {
+                    "id": 3,
+                    "name": "failed_to_start"
+                },
+                {
+                    "id": 4,
+                    "name": "aborted",
+                    "verb": "abort"
+                },
+                {
+                    "id": 5,
+                    "name": "ended",
+                    "verb": "stop"
+                }
+            ],
+            "examples": [
+                {
+                    "data_component": "02",
+                    "value": "started",
+                    "description": "Remote control is started"
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "name": "angle",
+            "name_cased": "angle",
+            "name_pretty": "Angle",
+            "unit": "angle",
+            "type": "double",
+            "size": 8,
+            "description": "Wheel base angle",
+            "examples": [
+                {
+                    "data_component": "4049000000000000",
+                    "unit_component": "0200",
+                    "value": 50.0,
+                    "unit": "degrees",
+                    "description": "Angle is 50.0\u00b0"
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "name": "speed",
+            "name_cased": "speed",
+            "name_pretty": "Speed",
+            "unit": "speed",
+            "type": "double",
+            "size": 8,
+            "description": "Target speed",
+            "examples": [
+                {
+                    "data_component": "4014000000000000",
+                    "unit_component": "1601",
+                    "value": 5.0,
+                    "unit": "kilometers_per_hour",
+                    "description": "Speed is 5.0km/h"
+                }
+            ]
+        }
+    ]
+}

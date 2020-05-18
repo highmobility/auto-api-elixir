@@ -1,0 +1,55 @@
+{
+    "name": "vehicle_status",
+    "name_cased": "vehicleStatus",
+    "name_pretty": "Vehicle Status",
+    "category": "api_structure",
+    "authorization": false,
+    "identifier": {
+        "msb": 0,
+        "lsb": 17
+    },
+    "api": {
+        "intro": 2,
+        "update": 11
+    },
+    "getters": {
+        "name": "get_vehicle_status"
+    },
+    "state": "all",
+    "properties": [
+        {
+            "id": 153,
+            "name": "states",
+            "name_cased": "states",
+            "name_pretty": "States",
+            "name_singular": "state",
+            "type": "types.capability_state",
+            "multiple": true,
+            "examples": [
+                {
+                    "data_component": "0b002001060004010001000400050100020001",
+                    "values": {
+                        "doors": {
+                            "positions": {
+                                "location": "front_left",
+                                "position": "open"
+                            },
+                            "locks_state": "unlocked"
+                        }
+                    },
+                    "description": "Doors capability - front left door is open and locks are unlocked"
+                },
+                {
+                    "data_component": "0b0023010a0010010008400c00000000000002000213030b000401000101",
+                    "values": {
+                        "charging": {
+                            "charge_port_state": "open",
+                            "charging_rate_kw": 3.5
+                        }
+                    },
+                    "description": "Charging capability - charging port is open and charging rate is 3.5kW"
+                }
+            ]
+        }
+    ]
+}

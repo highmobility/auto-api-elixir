@@ -1,0 +1,60 @@
+{
+    "name": "theft_alarm",
+    "name_cased": "theftAlarm",
+    "name_pretty": "Theft Alarm",
+    "category": "parking",
+    "authorization": true,
+    "identifier": {
+        "msb": 0,
+        "lsb": 70
+    },
+    "api": {
+        "intro": 4,
+        "update": 11
+    },
+    "getters": {},
+    "setters": [
+        {
+            "name": "set_theft_alarm",
+            "mandatory": [
+                1
+            ],
+            "description": "Unarm or arm the theft alarm of the vehicle."
+        }
+    ],
+    "state": "all",
+    "properties": [
+        {
+            "id": 1,
+            "name": "status",
+            "name_cased": "status",
+            "name_pretty": "Status",
+            "type": "enum",
+            "size": 1,
+            "enum_values": [
+                {
+                    "id": 0,
+                    "name": "unarmed",
+                    "verb": "unarm"
+                },
+                {
+                    "id": 1,
+                    "name": "armed",
+                    "verb": "arm"
+                },
+                {
+                    "id": 2,
+                    "name": "triggered",
+                    "verb": "trigger"
+                }
+            ],
+            "examples": [
+                {
+                    "data_component": "01",
+                    "value": "armed",
+                    "description": "Theft alarm is armed"
+                }
+            ]
+        }
+    ]
+}

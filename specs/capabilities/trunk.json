@@ -1,0 +1,57 @@
+{
+    "name": "trunk",
+    "name_cased": "trunk",
+    "name_pretty": "Trunk",
+    "category": "digital_key",
+    "authorization": true,
+    "identifier": {
+        "msb": 0,
+        "lsb": 33
+    },
+    "api": {
+        "intro": 1,
+        "update": 11
+    },
+    "getters": {},
+    "setters": [
+        {
+            "name": "control_trunk",
+            "optional": [
+                1,
+                2
+            ],
+            "description": "Unlock/Lock and Open/Close the trunk."
+        }
+    ],
+    "state": "all",
+    "properties": [
+        {
+            "id": 1,
+            "name": "lock",
+            "name_cased": "lock",
+            "name_pretty": "Lock",
+            "type": "types.lock_state",
+            "examples": [
+                {
+                    "data_component": "00",
+                    "value": "unlocked",
+                    "description": "Trunk is unlocked"
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "name": "position",
+            "name_cased": "position",
+            "name_pretty": "Position",
+            "type": "types.position",
+            "examples": [
+                {
+                    "data_component": "01",
+                    "value": "open",
+                    "description": "Trunk is open"
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,626 @@
+{
+    "measurement_types": [
+        {
+            "name": "acceleration",
+            "id": 1,
+            "unit_types": [
+                {
+                    "name": "meters_per_second_squared",
+                    "id": 0
+                },
+                {
+                    "name": "gravity",
+                    "id": 1
+                }
+            ]
+        },
+        {
+            "name": "angle",
+            "id": 2,
+            "unit_types": [
+                {
+                    "name": "degrees",
+                    "id": 0
+                },
+                {
+                    "name": "radians",
+                    "id": 3
+                },
+                {
+                    "name": "revolutions",
+                    "id": 5
+                }
+            ]
+        },
+        {
+            "name": "angular_velocity",
+            "id": 3,
+            "unit_types": [
+                {
+                    "name": "degrees_per_second",
+                    "id": 0
+                },
+                {
+                    "name": "radians_per_second",
+                    "id": 1
+                },
+                {
+                    "name": "revolutions_per_minute",
+                    "id": 2
+                }
+            ]
+        },
+        {
+            "name": "area",
+            "id": 4,
+            "unit_types": [
+                {
+                    "name": "square_kilometers",
+                    "id": 1
+                },
+                {
+                    "name": "square_meters",
+                    "id": 2
+                },
+                {
+                    "name": "square_centimeters",
+                    "id": 3
+                },
+                {
+                    "name": "square_millimeters",
+                    "id": 4
+                },
+                {
+                    "name": "square_inches",
+                    "id": 7
+                },
+                {
+                    "name": "square_feet",
+                    "id": 8
+                },
+                {
+                    "name": "square_yards",
+                    "id": 9
+                },
+                {
+                    "name": "square_miles",
+                    "id": 10
+                }
+            ]
+        },
+        {
+            "name": "concentration_mass",
+            "id": 5,
+            "unit_types": [
+                {
+                    "name": "gramsPerLiter",
+                    "id": 0
+                },
+                {
+                    "name": "milligramsPerDeciliter",
+                    "id": 1
+                }
+            ]
+        },
+        {
+            "name": "dispersion",
+            "id": 6,
+            "unit_types": [
+                {
+                    "name": "parts_per_million",
+                    "id": 0
+                }
+            ]
+        },
+        {
+            "name": "duration",
+            "id": 7,
+            "unit_types": [
+                {
+                    "name": "hours",
+                    "id": 0
+                },
+                {
+                    "name": "minutes",
+                    "id": 1
+                },
+                {
+                    "name": "seconds",
+                    "id": 2
+                },
+                {
+                    "name": "days",
+                    "id": 3
+                },
+                {
+                    "name": "weeks",
+                    "id": 4
+                },
+                {
+                    "name": "months",
+                    "id": 5
+                }
+            ]
+        },
+        {
+            "name": "electric_charge",
+            "id": 8,
+            "unit_types": [
+                {
+                    "name": "coulombs",
+                    "id": 0
+                },
+                {
+                    "name": "kiloampereHours",
+                    "id": 2
+                },
+                {
+                    "name": "ampereHours",
+                    "id": 3
+                },
+                {
+                    "name": "milliampereHours",
+                    "id": 4
+                }
+            ]
+        },
+        {
+            "name": "electric_current",
+            "id": 9,
+            "unit_types": [
+                {
+                    "name": "kiloamperes",
+                    "id": 1
+                },
+                {
+                    "name": "amperes",
+                    "id": 2
+                },
+                {
+                    "name": "milliamperes",
+                    "id": 3
+                }
+            ]
+        },
+        {
+            "name": "electric_potential_difference",
+            "id": 10,
+            "unit_types": [
+                {
+                    "name": "kilovolts",
+                    "id": 1
+                },
+                {
+                    "name": "volts",
+                    "id": 2
+                },
+                {
+                    "name": "millivolts",
+                    "id": 3
+                }
+            ]
+        },
+        {
+            "name": "electric_resistance",
+            "id": 11,
+            "unit_types": [
+                {
+                    "name": "kiloohms",
+                    "id": 1
+                },
+                {
+                    "name": "ohms",
+                    "id": 2
+                }
+            ]
+        },
+        {
+            "name": "energy",
+            "id": 12,
+            "unit_types": [
+                {
+                    "name": "kilojoules",
+                    "id": 0
+                },
+                {
+                    "name": "joules",
+                    "id": 1
+                },
+                {
+                    "name": "kilowatt_hours",
+                    "id": 4
+                }
+            ]
+        },
+        {
+            "name": "energy_efficiency",
+            "id": 13,
+            "unit_types": [
+                {
+                    "name": "kwh_per_100_kilometers",
+                    "id": 0
+                },
+                {
+                    "name": "miles_per_kwh",
+                    "id": 1
+                }
+            ]
+        },
+        {
+            "name": "frequency",
+            "id": 14,
+            "unit_types": [
+                {
+                    "name": "gigahertz",
+                    "id": 1
+                },
+                {
+                    "name": "megahertz",
+                    "id": 2
+                },
+                {
+                    "name": "kilohertz",
+                    "id": 3
+                },
+                {
+                    "name": "hertz",
+                    "id": 4
+                },
+                {
+                    "name": "millihertz",
+                    "id": 5
+                },
+                {
+                    "name": "beats_per_minute",
+                    "id": 8
+                }
+            ]
+        },
+        {
+            "name": "fuel_efficiency",
+            "id": 15,
+            "unit_types": [
+                {
+                    "name": "liters_per_100_kilometers",
+                    "id": 0
+                },
+                {
+                    "name": "miles_per_imperial_gallon",
+                    "id": 1
+                },
+                {
+                    "name": "miles_per_gallon",
+                    "id": 2
+                }
+            ]
+        },
+        {
+            "name": "information_storage",
+            "id": 16,
+            "unit_types": [
+                {
+                    "name": "bytes",
+                    "id": 0
+                },
+                {
+                    "name": "bits",
+                    "id": 1
+                },
+                {
+                    "name": "nibbles",
+                    "id": 2
+                },
+                {
+                    "name": "gigabytes",
+                    "id": 8
+                },
+                {
+                    "name": "megabytes",
+                    "id": 9
+                },
+                {
+                    "name": "kilobytes",
+                    "id": 10
+                },
+                {
+                    "name": "terabits",
+                    "id": 15
+                },
+                {
+                    "name": "gigabits",
+                    "id": 16
+                },
+                {
+                    "name": "megabits",
+                    "id": 17
+                },
+                {
+                    "name": "kilobits",
+                    "id": 18
+                }
+            ]
+        },
+        {
+            "name": "illuminance",
+            "id": 17,
+            "unit_types": [
+                {
+                    "name": "lux",
+                    "id": 0
+                }
+            ]
+        },
+        {
+            "name": "length",
+            "id": 18,
+            "unit_types": [
+                {
+                    "name": "megameters",
+                    "id": 0
+                },
+                {
+                    "name": "kilometers",
+                    "id": 1
+                },
+                {
+                    "name": "meters",
+                    "id": 4
+                },
+                {
+                    "name": "decimeters",
+                    "id": 5
+                },
+                {
+                    "name": "centimeters",
+                    "id": 6
+                },
+                {
+                    "name": "millimeters",
+                    "id": 7
+                },
+                {
+                    "name": "inches",
+                    "id": 11
+                },
+                {
+                    "name": "feet",
+                    "id": 12
+                },
+                {
+                    "name": "yards",
+                    "id": 13
+                },
+                {
+                    "name": "miles",
+                    "id": 14
+                },
+                {
+                    "name": "scandinavian_miles",
+                    "id": 15
+                },
+                {
+                    "name": "nautical_miles",
+                    "id": 17
+                }
+            ]
+        },
+        {
+            "name": "mass",
+            "id": 19,
+            "unit_types": [
+                {
+                    "name": "kilograms",
+                    "id": 0
+                },
+                {
+                    "name": "grams",
+                    "id": 1
+                },
+                {
+                    "name": "milligrams",
+                    "id": 4
+                },
+                {
+                    "name": "ounces",
+                    "id": 8
+                },
+                {
+                    "name": "pounds",
+                    "id": 9
+                },
+                {
+                    "name": "stones",
+                    "id": 10
+                },
+                {
+                    "name": "metric_tons",
+                    "id": 11
+                },
+                {
+                    "name": "short_tons",
+                    "id": 12
+                }
+            ]
+        },
+        {
+            "name": "power",
+            "id": 20,
+            "unit_types": [
+                {
+                    "name": "megawatts",
+                    "id": 2
+                },
+                {
+                    "name": "kilowatts",
+                    "id": 3
+                },
+                {
+                    "name": "watts",
+                    "id": 4
+                },
+                {
+                    "name": "milliwatts",
+                    "id": 5
+                },
+                {
+                    "name": "horsepower",
+                    "id": 10
+                }
+            ]
+        },
+        {
+            "name": "pressure",
+            "id": 21,
+            "unit_types": [
+                {
+                    "name": "newtons_per_meters_squared",
+                    "id": 0
+                },
+                {
+                    "name": "kilopascals",
+                    "id": 3
+                },
+                {
+                    "name": "inches_of_mercury",
+                    "id": 5
+                },
+                {
+                    "name": "bars",
+                    "id": 6
+                },
+                {
+                    "name": "millibars",
+                    "id": 7
+                },
+                {
+                    "name": "millimeters_of_mercury",
+                    "id": 8
+                },
+                {
+                    "name": "pounds_force_per_square_inch",
+                    "id": 9
+                }
+            ]
+        },
+        {
+            "name": "speed",
+            "id": 22,
+            "unit_types": [
+                {
+                    "name": "meters_per_second",
+                    "id": 0
+                },
+                {
+                    "name": "kilometers_per_hour",
+                    "id": 1
+                },
+                {
+                    "name": "miles_per_hour",
+                    "id": 2
+                },
+                {
+                    "name": "knots",
+                    "id": 3
+                }
+            ]
+        },
+        {
+            "name": "temperature",
+            "id": 23,
+            "unit_types": [
+                {
+                    "name": "kelvin",
+                    "id": 0
+                },
+                {
+                    "name": "celsius",
+                    "id": 1
+                },
+                {
+                    "name": "fahrenheit",
+                    "id": 2
+                }
+            ]
+        },
+        {
+            "name": "torque",
+            "id": 24,
+            "unit_types": [
+                {
+                    "name": "newton_meters",
+                    "id": 0
+                },
+                {
+                    "name": "newton_millimeters",
+                    "id": 1
+                },
+                {
+                    "name": "pound_feet",
+                    "id": 2
+                }
+            ]
+        },
+        {
+            "name": "volume",
+            "id": 25,
+            "unit_types": [
+                {
+                    "name": "liters",
+                    "id": 2
+                },
+                {
+                    "name": "deciliters",
+                    "id": 3
+                },
+                {
+                    "name": "centiliters",
+                    "id": 4
+                },
+                {
+                    "name": "milliliters",
+                    "id": 5
+                },
+                {
+                    "name": "cubic_meters",
+                    "id": 7
+                },
+                {
+                    "name": "cubic_decimeters",
+                    "id": 8
+                },
+                {
+                    "name": "cubic_centimeters",
+                    "id": 9
+                },
+                {
+                    "name": "cubic_millimeters",
+                    "id": 10
+                },
+                {
+                    "name": "cubic_inches",
+                    "id": 11
+                },
+                {
+                    "name": "cubic_feet",
+                    "id": 12
+                },
+                {
+                    "name": "fluid_ounces",
+                    "id": 19
+                },
+                {
+                    "name": "gallons",
+                    "id": 23
+                },
+                {
+                    "name": "imperial_fluid_ounces",
+                    "id": 26
+                },
+                {
+                    "name": "imperial_gallons",
+                    "id": 29
+                }
+            ]
+        }
+    ]
+}

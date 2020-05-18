@@ -1,0 +1,135 @@
+{
+    "name": "navi_destination",
+    "name_cased": "naviDestination",
+    "name_pretty": "Navi Destination",
+    "category": "poi",
+    "authorization": true,
+    "identifier": {
+        "msb": 0,
+        "lsb": 49
+    },
+    "api": {
+        "intro": 4,
+        "update": 11
+    },
+    "getters": {
+        "name": "get_navi_destination"
+    },
+    "setters": [
+        {
+            "name": "set_navi_destination",
+            "mandatory": [
+                1
+            ],
+            "optional": [
+                2
+            ],
+            "description": "Set the navigation destination. This will be forwarded to the navigation system of the vehicle."
+        }
+    ],
+    "state": "all",
+    "properties": [
+        {
+            "id": 1,
+            "name": "coordinates",
+            "name_cased": "coordinates",
+            "name_pretty": "Coordinates",
+            "type": "types.coordinates",
+            "examples": [
+                {
+                    "data_component": "404a428f9f44d445402acf562174c4ce",
+                    "values": {
+                        "latitude": 52.520008,
+                        "longitude": 13.404954
+                    },
+                    "description": "Coordinates are 52.520008:13.404954"
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "name": "destination_name",
+            "name_cased": "destinationName",
+            "name_pretty": "Destination name",
+            "type": "string",
+            "description": "Destination name",
+            "examples": [
+                {
+                    "data_component": "4265726c696e",
+                    "value": "Berlin",
+                    "description": "Destination name is 'Berlin'"
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "name": "data_slots_free",
+            "name_cased": "dataSlotsFree",
+            "name_pretty": "Data slots free",
+            "type": "uinteger",
+            "size": 1,
+            "description": "Remaining number of POI data slots available.",
+            "examples": [
+                {
+                    "data_component": "0e",
+                    "value": 14,
+                    "description": "14 available POI data slots"
+                }
+            ]
+        },
+        {
+            "id": 4,
+            "name": "data_slots_max",
+            "name_cased": "dataSlotsMax",
+            "name_pretty": "Data slots max",
+            "type": "uinteger",
+            "size": 1,
+            "description": "Maximum number of POI data slots.",
+            "examples": [
+                {
+                    "data_component": "1e",
+                    "value": 30,
+                    "description": "Maximum number of POI data slots is 30"
+                }
+            ]
+        },
+        {
+            "id": 5,
+            "name": "arrival_duration",
+            "name_cased": "arrivalDuration",
+            "name_pretty": "Arrival duration",
+            "unit": "duration",
+            "type": "double",
+            "size": 8,
+            "description": "Remaining time until reaching the destination.",
+            "examples": [
+                {
+                    "data_component": "4004cccccccccccd",
+                    "unit_component": "0700",
+                    "value": 2.6,
+                    "unit": "hours",
+                    "description": "Remaining time to destination is 2.6h"
+                }
+            ]
+        },
+        {
+            "id": 6,
+            "name": "distance_to_destination",
+            "name_cased": "distanceToDestination",
+            "name_pretty": "Distance to destination",
+            "unit": "length",
+            "type": "double",
+            "size": 8,
+            "description": "Remaining distance to reach the destination.",
+            "examples": [
+                {
+                    "data_component": "4094e40000000000",
+                    "unit_component": "1201",
+                    "value": 1337.0,
+                    "unit": "kilometers",
+                    "description": "Remaining distance to destination is 1337.0km"
+                }
+            ]
+        }
+    ]
+}

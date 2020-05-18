@@ -1,0 +1,84 @@
+{
+    "name": "capabilities",
+    "name_cased": "capabilities",
+    "name_pretty": "Capabilities",
+    "category": "api_structure",
+    "authorization": false,
+    "identifier": {
+        "msb": 0,
+        "lsb": 16
+    },
+    "api": {
+        "intro": 2,
+        "update": 11
+    },
+    "getters": {
+        "name": "get_capabilities"
+    },
+    "state": "all",
+    "properties": [
+        {
+            "id": 1,
+            "name": "capabilities",
+            "name_cased": "capabilities",
+            "name_pretty": "Capabilities",
+            "type": "types.supported_capability",
+            "multiple": true,
+            "name_singular": "capability",
+            "examples": [
+                {
+                    "data_component": "002000050203040506",
+                    "values": {
+                        "capability_id": 32,
+                        "supported_property_ids": [
+                            2,
+                            3,
+                            4,
+                            5,
+                            6
+                        ]
+                    },
+                    "description": "Doors supports inside locks, locks, positions, inside locks state and locks state properties"
+                },
+                {
+                    "data_component": "00230003020811",
+                    "values": {
+                        "capability_id": 35,
+                        "supported_property_ids": [
+                            2,
+                            8,
+                            17
+                        ]
+                    },
+                    "description": "Charging supports estimated range, charge limit and departure times properties"
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "name": "webhooks",
+            "name_cased": "webhooks",
+            "name_pretty": "Webhooks",
+            "type": "types.webhook",
+            "multiple": true,
+            "examples": [
+                {
+                    "data_component": "0101",
+                    "values": {
+                        "available": "available",
+                        "event": "trip_started"
+                    },
+                    "description": "Webhook 'trip_started' is available to use."
+                },
+                {
+                    "data_component": "0102",
+                    "values": {
+                        "available": "available",
+                        "event": "trip_ended"
+                    },
+                    "description": "Webhook 'trip_ended' is available to use."
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,93 @@
+{
+    "name": "multi_command",
+    "name_cased": "multiCommand",
+    "name_pretty": "Multi Command",
+    "category": "api_structure",
+    "authorization": false,
+    "identifier": {
+        "msb": 0,
+        "lsb": 19
+    },
+    "api": {
+        "intro": 8,
+        "update": 11
+    },
+    "setters": [
+        {
+            "name": "multi_command",
+            "mandatory": [
+                2
+            ]
+        }
+    ],
+    "state": [
+        1
+    ],
+    "properties": [
+        {
+            "id": 1,
+            "name": "multi_states",
+            "name_cased": "multiStates",
+            "name_pretty": "Multi-states",
+            "type": "types.capability_state",
+            "multiple": true,
+            "name_singular": "multi_state",
+            "description": "The incoming states",
+            "examples": [
+                {
+                    "data_component": "0b002001060004010001000400050100020001",
+                    "values": {
+                        "doors": {
+                            "positions": {
+                                "location": "front_left",
+                                "position": "open"
+                            },
+                            "locks_state": "unlocked"
+                        }
+                    },
+                    "description": "Doors capability - open front left door and unlock all locks"
+                },
+                {
+                    "data_component": "0b0023010a0010010008400c00000000000002000213030b000401000101",
+                    "values": {
+                        "charging": {
+                            "charge_port_state": "open",
+                            "charging_rate_kw": 3.5
+                        }
+                    },
+                    "description": "Charging capability - open charging port and charge with 3.5kW"
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "name": "multi_commands",
+            "name_cased": "multiCommands",
+            "name_pretty": "Multi-commands",
+            "type": "types.capability_state",
+            "multiple": true,
+            "name_singular": "multi_command",
+            "description": "The outgoing commands",
+            "examples": [
+                {
+                    "data_component": "0b00200105000401000101",
+                    "values": {
+                        "doors": {
+                            "inside_locks_state": "locked"
+                        }
+                    },
+                    "description": "Lock inside door locks"
+                },
+                {
+                    "data_component": "0b00350101000401000100",
+                    "values": {
+                        "ignition": {
+                            "status": "off"
+                        }
+                    },
+                    "description": "Turn ignition off"
+                }
+            ]
+        }
+    ]
+}
