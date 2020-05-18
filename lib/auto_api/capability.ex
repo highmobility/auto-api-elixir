@@ -40,8 +40,8 @@ defmodule AutoApi.Capability do
 
         @identifier <<@raw_spec["identifier"]["msb"], @raw_spec["identifier"]["lsb"]>>
         @name String.to_atom(@raw_spec["name"])
-        if @raw_spec["pretty_name"] do
-          @desc @raw_spec["pretty_name"]
+        if @raw_spec["name_pretty"] do
+          @desc @raw_spec["name_pretty"]
         else
           @desc @raw_spec["name"]
                 |> String.split("_")
