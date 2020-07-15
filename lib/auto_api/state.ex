@@ -39,7 +39,7 @@ defmodule AutoApi.State do
 
   defmacro __using__(spec_file: spec_file) do
     spec_path = Path.join(["specs", "capabilities", spec_file])
-    raw_spec = Poison.decode!(File.read!(spec_path))
+    raw_spec = Jason.decode!(File.read!(spec_path))
 
     base =
       quote do

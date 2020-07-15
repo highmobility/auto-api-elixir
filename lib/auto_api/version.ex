@@ -5,7 +5,7 @@ defmodule AutoApi.Version do
   @external_resource @spec_file
 
   defmacro __before_compile__(_env) do
-    specs = Poison.decode!(File.read!(@spec_file))
+    specs = Jason.decode!(File.read!(@spec_file))
     version = specs["version"]
 
     quote do
