@@ -28,7 +28,7 @@ defmodule AutoApi.Capability do
   alias AutoApi.CapabilityHelper
 
   defmacro __using__(spec_file: spec_file) do
-    raw_spec = Poison.decode!(File.read!(spec_file))
+    raw_spec = Jason.decode!(File.read!(spec_file))
 
     properties = raw_spec["properties"] || []
 

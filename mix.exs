@@ -24,13 +24,13 @@ defmodule AutoApi.Mixfile do
   # Type "mix help compile.app" for more information
   def application do
     # Specify extra applications you'll use from Erlang/Elixir
-    [extra_applications: [:logger, :public_key, :poison]]
+    [extra_applications: [:logger, :public_key]]
   end
 
   defp deps do
     [
       {:propcheck, "~> 1.1", only: :test},
-      {:poison, "~> 3.1", runtime: false},
+      {:jason, "~> 1.2", runtime: false},
       {:ex_guard, "~> 1.3", only: :dev},
       {:ex_unit_notifier, "~> 0.1", only: :test},
       {:dialyxir, "~> 1.0.0-rc.3", only: [:dev, :test], runtime: false},

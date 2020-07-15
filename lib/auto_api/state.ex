@@ -38,7 +38,7 @@ defmodule AutoApi.State do
   require Logger
 
   defmacro __using__(spec_file: spec_file) do
-    spec = Poison.decode!(File.read!(spec_file))
+    spec = Jason.decode!(File.read!(spec_file))
 
     base =
       quote do

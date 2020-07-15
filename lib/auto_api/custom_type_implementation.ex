@@ -4,7 +4,7 @@ defmodule AutoApi.CustomType.Implementation do
   @external_resource "specs/custom_types.json"
 
   defmacro __before_compile__(_env) do
-    specs = Poison.decode!(File.read!("specs/custom_types.json"))
+    specs = Jason.decode!(File.read!("specs/custom_types.json"))
 
     for type <- specs["types"] do
       name_atom = String.to_atom(type["name"])
