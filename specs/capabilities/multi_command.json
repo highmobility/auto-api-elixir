@@ -17,7 +17,8 @@
             "name": "multi_command",
             "mandatory": [
                 2
-            ]
+            ],
+            "description": "Send mutliple commands at once."
         }
     ],
     "state": [
@@ -35,27 +36,41 @@
             "description": "The incoming states",
             "examples": [
                 {
-                    "data_component": "0b002001060004010001000400050100020001",
+                    "data_component": "0c0020010600040100010004000501000200010400050100020201a2000b010008000001598938e788",
                     "values": {
                         "doors": {
-                            "positions": {
-                                "location": "front_left",
-                                "position": "open"
-                            },
-                            "locks_state": "unlocked"
+                            "locks_state": "unlocked",
+                            "positions": [
+                                {
+                                    "location": "front_left",
+                                    "position": "open"
+                                },
+                                {
+                                    "location": "rear_right",
+                                    "position": "open"
+                                }
+                            ],
+                            "timestamp": "2017-01-10T16:32:05.000Z"
                         }
                     },
-                    "description": "Doors capability - open front left door and unlock all locks"
+                    "description": "Doors capability - front left and rear right door is open while locks are unlocked, recorded at 10. January 2017 at 16:32:05 GMT"
                 },
                 {
-                    "data_component": "0b0023010a0010010008400c00000000000002000213030b000401000101",
+                    "data_component": "0c0023010b0004010001010c00040100010018000d01000a140240418000000000001c000d01000a12044081580000000000a2000b010008000001598938e788",
                     "values": {
                         "charging": {
                             "charge_port_state": "open",
-                            "charging_rate_kw": 3.5
+                            "charge_mode": "immediate",
+                            "charging_rate": {
+                                "kilowatts": 35.0
+                            },
+                            "max_range": {
+                                "kilometers": 555.0
+                            },
+                            "timestamp": "2017-01-10T16:32:05.000Z"
                         }
                     },
-                    "description": "Charging capability - open charging port and charge with 3.5kW"
+                    "description": "Charging capability - charging port is open, charge mode is immediate, charging rate is 35.0kW and max range is 555.0km, recorded at 10. January 2017 at 16:32:05 GMT"
                 }
             ]
         },
@@ -70,7 +85,7 @@
             "description": "The outgoing commands",
             "examples": [
                 {
-                    "data_component": "0b00200105000401000101",
+                    "data_component": "0c00200106000401000101",
                     "values": {
                         "doors": {
                             "inside_locks_state": "locked"
@@ -79,7 +94,7 @@
                     "description": "Lock inside door locks"
                 },
                 {
-                    "data_component": "0b00350101000401000100",
+                    "data_component": "0c00350101000401000100",
                     "values": {
                         "ignition": {
                             "status": "off"

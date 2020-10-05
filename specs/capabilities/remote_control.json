@@ -10,7 +10,7 @@
     },
     "api": {
         "intro": 2,
-        "update": 11
+        "update": 12
     },
     "disabled_in": [
         "web"
@@ -107,16 +107,15 @@
             "name": "angle",
             "name_cased": "angle",
             "name_pretty": "Angle",
-            "unit": "angle",
-            "type": "double",
-            "size": 8,
+            "type": "unit.angle",
+            "size": 10,
             "description": "Wheel base angle",
             "examples": [
                 {
-                    "data_component": "4049000000000000",
-                    "unit_component": "0200",
-                    "value": 50.0,
-                    "unit": "degrees",
+                    "data_component": "02004049000000000000",
+                    "value": {
+                        "degrees": 50.0
+                    },
                     "description": "Angle is 50.0\u00b0"
                 }
             ]
@@ -126,16 +125,15 @@
             "name": "speed",
             "name_cased": "speed",
             "name_pretty": "Speed",
-            "unit": "speed",
-            "type": "double",
-            "size": 8,
+            "type": "unit.speed",
+            "size": 10,
             "description": "Target speed",
             "examples": [
                 {
-                    "data_component": "4014000000000000",
-                    "unit_component": "1601",
-                    "value": 5.0,
-                    "unit": "kilometers_per_hour",
+                    "data_component": "16014014000000000000",
+                    "value": {
+                        "kilometers_per_hour": 5.0
+                    },
                     "description": "Speed is 5.0km/h"
                 }
             ]

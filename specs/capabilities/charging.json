@@ -10,7 +10,7 @@
     },
     "api": {
         "intro": 2,
-        "update": 11
+        "update": 12
     },
     "getters": {},
     "setters": [
@@ -64,16 +64,15 @@
             "name": "estimated_range",
             "name_cased": "estimatedRange",
             "name_pretty": "Estimated range",
-            "unit": "length",
-            "type": "double",
-            "size": 8,
+            "type": "unit.length",
+            "size": 10,
             "description": "Estimated range",
             "examples": [
                 {
-                    "data_component": "407b01999999999a",
-                    "unit_component": "1201",
-                    "value": 432.1,
-                    "unit": "kilometers",
+                    "data_component": "1204407b01999999999a",
+                    "value": {
+                        "kilometers": 432.1
+                    },
                     "description": "432.1km estimated range"
                 }
             ]
@@ -102,16 +101,15 @@
                 "new_name": "battery_current",
                 "reason": "moved AC/DC distinction into a separate property"
             },
-            "unit": "electric_current",
-            "type": "double",
-            "size": 8,
+            "type": "unit.electric_current",
+            "size": 10,
             "description": "Battery alternating current",
             "examples": [
                 {
-                    "data_component": "bfe3333333333333",
-                    "unit_component": "0902",
-                    "value": -0.6,
-                    "unit": "amperes",
+                    "data_component": "0900bfe3333333333333",
+                    "value": {
+                        "amperes": -0.6
+                    },
                     "description": "Battery alternating current is -0.6A"
                 }
             ]
@@ -125,16 +123,15 @@
                 "new_name": "battery_current",
                 "reason": "moved AC/DC distinction into a separate property"
             },
-            "unit": "electric_current",
-            "type": "double",
-            "size": 8,
+            "type": "unit.electric_current",
+            "size": 10,
             "description": "Battery direct current",
             "examples": [
                 {
-                    "data_component": "bfe3333333333333",
-                    "unit_component": "0902",
-                    "value": -0.6,
-                    "unit": "amperes",
+                    "data_component": "0900bfe3333333333333",
+                    "value": {
+                        "amperes": -0.6
+                    },
                     "description": "Battery direct current is -0.6A"
                 }
             ]
@@ -148,16 +145,15 @@
                 "new_name": "charger_voltage",
                 "reason": "moved AC/DC distinction into a separate property"
             },
-            "unit": "electric_potential_difference",
-            "type": "double",
-            "size": 8,
+            "type": "unit.electric_potential_difference",
+            "size": 10,
             "description": "Charger voltage for alternating current",
             "examples": [
                 {
-                    "data_component": "4079000000000000",
-                    "unit_component": "0a02",
-                    "value": 400,
-                    "unit": "volts",
+                    "data_component": "0a004079000000000000",
+                    "value": {
+                        "volts": 400
+                    },
                     "description": "Charger voltage is 400.0V for alternating current"
                 }
             ]
@@ -171,16 +167,15 @@
                 "new_name": "charger_voltage",
                 "reason": "moved AC/DC distinction into a separate property"
             },
-            "unit": "electric_potential_difference",
-            "type": "double",
-            "size": 8,
+            "type": "unit.electric_potential_difference",
+            "size": 10,
             "description": "Charger voltage for direct current",
             "examples": [
                 {
-                    "data_component": "43c80000",
-                    "unit_component": "0a02",
-                    "value": 400,
-                    "unit": "volts",
+                    "data_component": "0a004079000000000000",
+                    "value": {
+                        "volts": 400
+                    },
                     "description": "Charger voltage is 400.0V for direct current"
                 }
             ]
@@ -205,16 +200,15 @@
             "name": "time_to_complete_charge",
             "name_cased": "timeToCompleteCharge",
             "name_pretty": "Time to complete charge",
-            "unit": "duration",
-            "type": "double",
-            "size": 8,
+            "type": "unit.duration",
+            "size": 10,
             "description": "Time until charging completed",
             "examples": [
                 {
-                    "data_component": "404e000000000000",
-                    "unit_component": "0701",
-                    "value": 60,
-                    "unit": "minutes",
+                    "data_component": "0701404e000000000000",
+                    "value": {
+                        "minutes": 60.0
+                    },
                     "description": "Time to complete charge is 60.0 minutes"
                 }
             ]
@@ -228,16 +222,15 @@
                 "new_name": "charging_rate",
                 "reason": "removed the unit from the name"
             },
-            "unit": "power",
-            "type": "double",
-            "size": 8,
+            "type": "unit.power",
+            "size": 10,
             "description": "Charging rate",
             "examples": [
                 {
-                    "data_component": "400c000000000000",
-                    "unit_component": "1403",
-                    "value": 3.5,
-                    "unit": "kilowatts",
+                    "data_component": "1402400c000000000000",
+                    "value": {
+                        "kilowatts": 3.5
+                    },
                     "description": "Charging rate is 3.5kW"
                 }
             ]
@@ -291,16 +284,15 @@
             "name": "max_charging_current",
             "name_cased": "maxChargingCurrent",
             "name_pretty": "Maximum charging current",
-            "unit": "electric_current",
-            "type": "double",
-            "size": 8,
+            "type": "unit.electric_current",
+            "size": 10,
             "description": "Maximum charging current",
             "examples": [
                 {
-                    "data_component": "4039000000000000",
-                    "unit_component": "0902",
-                    "value": 25.0,
-                    "unit": "amperes",
+                    "data_component": "09004039000000000000",
+                    "value": {
+                        "amperes": 25.0
+                    },
                     "description": "Maximum charging current is 25.0A"
                 }
             ]
@@ -436,16 +428,15 @@
             "name": "battery_temperature",
             "name_cased": "batteryTemperature",
             "name_pretty": "Battery temperature",
-            "unit": "temperature",
-            "type": "double",
-            "size": 8,
+            "type": "unit.temperature",
+            "size": 10,
             "description": "Battery temperature",
             "examples": [
                 {
-                    "data_component": "4043333333333333",
-                    "unit_component": "1701",
-                    "value": 38.4,
-                    "unit": "celsius",
+                    "data_component": "17014043333333333333",
+                    "value": {
+                        "celsius": 38.4
+                    },
                     "description": "The battery temperature is 38.4\u00b0C"
                 }
             ]
@@ -547,6 +538,31 @@
                     "id": 5,
                     "name": "charging_error",
                     "disabled_in_setter": true
+                },
+                {
+                    "id": 6,
+                    "name": "cable_unplugged",
+                    "disabled_in_setter": true
+                },
+                {
+                    "id": 7,
+                    "name": "slow_charging",
+                    "disabled_in_setter": true
+                },
+                {
+                    "id": 8,
+                    "name": "fast_charging",
+                    "disabled_in_setter": true
+                },
+                {
+                    "id": 9,
+                    "name": "discharging",
+                    "disabled_in_setter": true
+                },
+                {
+                    "id": 10,
+                    "name": "foreign_object_detected",
+                    "disabled_in_setter": true
                 }
             ],
             "examples": [
@@ -562,16 +578,15 @@
             "name": "charging_rate",
             "name_cased": "chargingRate",
             "name_pretty": "Charging rate",
-            "unit": "power",
-            "type": "double",
-            "size": 8,
+            "type": "unit.power",
+            "size": 10,
             "description": "Charge rate when charging",
             "examples": [
                 {
-                    "data_component": "4062c00000000000",
-                    "unit_component": "1403",
-                    "value": 150.0,
-                    "unit": "kilowatts",
+                    "data_component": "14024062c00000000000",
+                    "value": {
+                        "kilowatts": 150.0
+                    },
                     "description": "Charging rate is 150.0kW"
                 }
             ]
@@ -581,16 +596,15 @@
             "name": "battery_current",
             "name_cased": "batteryCurrent",
             "name_pretty": "Battery current",
-            "unit": "electric_current",
-            "type": "double",
-            "size": 8,
+            "type": "unit.electric_current",
+            "size": 10,
             "description": "Battery current",
             "examples": [
                 {
-                    "data_component": "bfe3333333333333",
-                    "unit_component": "0902",
-                    "value": -0.6,
-                    "unit": "amperes",
+                    "data_component": "0900bfe3333333333333",
+                    "value": {
+                        "amperes": -0.6
+                    },
                     "description": "Battery current is -0.6A"
                 }
             ]
@@ -600,16 +614,15 @@
             "name": "charger_voltage",
             "name_cased": "chargerVoltage",
             "name_pretty": "Charger voltage",
-            "unit": "electric_potential_difference",
-            "type": "double",
-            "size": 8,
+            "type": "unit.electric_potential_difference",
+            "size": 10,
             "description": "Charger voltage",
             "examples": [
                 {
-                    "data_component": "4079000000000000",
-                    "unit_component": "0a02",
-                    "value": 400,
-                    "unit": "volts",
+                    "data_component": "0a004079000000000000",
+                    "value": {
+                        "volts": 400
+                    },
                     "description": "Charger voltage is 400.0V"
                 }
             ]
@@ -632,6 +645,195 @@
                     "id": 1,
                     "name": "direct_current",
                     "name_pretty": "DC"
+                }
+            ],
+            "examples": [
+                {
+                    "data_component": "00",
+                    "value": "alternating_current",
+                    "description": "Alternating current is used"
+                }
+            ]
+        },
+        {
+            "id": 28,
+            "name": "max_range",
+            "name_cased": "maxRange",
+            "name_pretty": "Max range",
+            "type": "unit.length",
+            "size": 10,
+            "description": "Maximum electric range with 100% of battery",
+            "examples": [
+                {
+                    "data_component": "12044081580000000000",
+                    "value": {
+                        "kilometers": 555.0
+                    },
+                    "description": "Maximum electric range is 555.0km"
+                }
+            ]
+        },
+        {
+            "id": 29,
+            "name": "starter_battery_state",
+            "name_cased": "starterBatteryState",
+            "name_pretty": "Starter battery state",
+            "type": "enum",
+            "size": 1,
+            "description": "State of the starter battery",
+            "enum_values": [
+                {
+                    "id": 0,
+                    "name": "red",
+                    "description": "Battery charge is greater than 0%"
+                },
+                {
+                    "id": 1,
+                    "name": "yellow",
+                    "description": "Battery charge is greater than 40%"
+                },
+                {
+                    "id": 2,
+                    "name": "green",
+                    "description": "Battery charge is greater than 70%"
+                }
+            ],
+            "examples": [
+                {
+                    "data_component": "02",
+                    "value": "green",
+                    "description": "Starter battery status is green"
+                }
+            ]
+        },
+        {
+            "id": 30,
+            "name": "smart_charging_status",
+            "name_cased": "smartChargingStatus",
+            "name_pretty": "Smart charging status",
+            "type": "enum",
+            "size": 1,
+            "description": "Status of optimized/intelligent charging",
+            "enum_values": [
+                {
+                    "id": 0,
+                    "name": "wallbox_is_active"
+                },
+                {
+                    "id": 1,
+                    "name": "scc_is_active",
+                    "description": "Smart Charge Communication is active"
+                },
+                {
+                    "id": 2,
+                    "name": "inactive"
+                }
+            ],
+            "examples": [
+                {
+                    "data_component": "01",
+                    "value": "scc_is_active",
+                    "description": "Smart Charge Communication is active"
+                }
+            ]
+        },
+        {
+            "id": 31,
+            "name": "battery_level_at_departure",
+            "name_cased": "batteryLevelAtDeparture",
+            "name_pretty": "Battery level at departure",
+            "type": "types.percentage",
+            "description": "Battery charge level expected at time of departure",
+            "examples": [
+                {
+                    "data_component": "3feccccccccccccd",
+                    "value": 0.9,
+                    "description": "Battery level is expected to be 90% at time of departure"
+                }
+            ]
+        },
+        {
+            "id": 32,
+            "name": "preconditioning_departure_status",
+            "name_cased": "preconditioningDepartureStatus",
+            "name_pretty": "Preconditioning departure status",
+            "type": "types.active_state",
+            "description": "Status of preconditioning at departure time",
+            "examples": [
+                {
+                    "data_component": "01",
+                    "value": "active",
+                    "description": "Preconditioning is active for departure time"
+                }
+            ]
+        },
+        {
+            "id": 33,
+            "name": "preconditioning_immediate_status",
+            "name_cased": "preconditioningImmediateStatus",
+            "name_pretty": "Preconditioning immediate status",
+            "type": "types.active_state",
+            "description": "Status of immediate preconditioning",
+            "examples": [
+                {
+                    "data_component": "01",
+                    "value": "active",
+                    "description": "Immediate preconditioning is active"
+                }
+            ]
+        },
+        {
+            "id": 34,
+            "name": "preconditioning_departure_enabled",
+            "name_cased": "preconditioningDepartureEnabled",
+            "name_pretty": "Preconditioning departure enabled",
+            "type": "types.enabled_state",
+            "description": "Preconditioning activation status at departure",
+            "examples": [
+                {
+                    "data_component": "01",
+                    "value": "enabled",
+                    "description": "Preconditioning is enabled for departure"
+                }
+            ]
+        },
+        {
+            "id": 35,
+            "name": "preconditioning_error",
+            "name_cased": "preconditioningError",
+            "name_pretty": "Preconditioning error",
+            "type": "enum",
+            "size": 1,
+            "description": "Preconditioning error if one is encountered",
+            "enum_values": [
+                {
+                    "id": 0,
+                    "name": "no_change"
+                },
+                {
+                    "id": 1,
+                    "name": "not_possible_low",
+                    "description": "Preconditioning not possible because battery or fuel is low"
+                },
+                {
+                    "id": 2,
+                    "name": "not_possible_finished",
+                    "description": "Preconditioning not possible because charging is not finished"
+                },
+                {
+                    "id": 3,
+                    "name": "available_after_engine_restart"
+                },
+                {
+                    "id": 4,
+                    "name": "general_error"
+                }
+            ],
+            "examples": [
+                {
+                    "data_component": "01",
+                    "value": "not_possible_low",
+                    "description": "Preconditioning not possible because battery or fuel is low"
                 }
             ]
         }

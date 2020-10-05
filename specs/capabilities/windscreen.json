@@ -229,7 +229,7 @@
             "name_pretty": "Windscreen damage detection time",
             "type": "timestamp",
             "size": 8,
-            "description": "Milliseconds since UNIX Epoch time",
+            "description": "Windscreen damage detection date",
             "examples": [
                 {
                     "data_component": "000001598938e788",

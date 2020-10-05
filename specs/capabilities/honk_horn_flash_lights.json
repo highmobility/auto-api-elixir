@@ -10,7 +10,7 @@
     },
     "api": {
         "intro": 2,
-        "update": 11
+        "update": 12
     },
     "getters": {
         "name": "get_flashers_state"
@@ -78,16 +78,15 @@
                 "new_name": "honk_time",
                 "reason": "removed the unit from the name"
             },
-            "unit": "duration",
-            "type": "double",
-            "size": 8,
+            "type": "unit.duration",
+            "size": 10,
             "description": "Time to honk the horn",
             "examples": [
                 {
-                    "data_component": "4008000000000000",
-                    "unit_component": "0702",
-                    "value": 3.0,
-                    "unit": "seconds",
+                    "data_component": "07004008000000000000",
+                    "value": {
+                        "seconds": 3.0
+                    },
                     "description": "Honk the horn for 3.0s"
                 }
             ]
@@ -127,16 +126,15 @@
             "name": "honk_time",
             "name_cased": "honkTime",
             "name_pretty": "Honk time",
-            "unit": "duration",
-            "type": "double",
-            "size": 8,
+            "type": "unit.duration",
+            "size": 10,
             "description": "Time to honk the horn",
             "examples": [
                 {
-                    "data_component": "4000000000000000",
-                    "unit_component": "0702",
-                    "value": 2.0,
-                    "unit": "seconds",
+                    "data_component": "07004000000000000000",
+                    "value": {
+                        "seconds": 2.0
+                    },
                     "description": "Honk the horn for 2.0s"
                 }
             ]

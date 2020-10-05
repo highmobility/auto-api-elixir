@@ -10,7 +10,7 @@
     },
     "api": {
         "intro": 2,
-        "update": 11
+        "update": 12
     },
     "getters": {},
     "setters": [
@@ -66,16 +66,15 @@
             "name": "inside_temperature",
             "name_cased": "insideTemperature",
             "name_pretty": "Inside temperature",
-            "unit": "temperature",
-            "type": "double",
-            "size": 8,
+            "type": "unit.temperature",
+            "size": 10,
             "description": "The inside temperature",
             "examples": [
                 {
-                    "data_component": "403319999999999a",
-                    "unit_component": "1701",
-                    "value": 19.1,
-                    "unit": "celsius",
+                    "data_component": "1701403319999999999a",
+                    "value": {
+                        "celsius": 19.1
+                    },
                     "description": "Inside temperature is 19.1\u00b0C"
                 }
             ]
@@ -85,16 +84,15 @@
             "name": "outside_temperature",
             "name_cased": "outsideTemperature",
             "name_pretty": "Outside temperature",
-            "unit": "temperature",
-            "type": "double",
-            "size": 8,
+            "type": "unit.temperature",
+            "size": 10,
             "description": "The outside temperature",
             "examples": [
                 {
-                    "data_component": "4028666666666666",
-                    "unit_component": "1701",
-                    "value": 12.2,
-                    "unit": "celsius",
+                    "data_component": "17014028666666666666",
+                    "value": {
+                        "celsius": 12.2
+                    },
                     "description": "Outside temperature is 12.2\u00b0C"
                 }
             ]
@@ -104,16 +102,15 @@
             "name": "driver_temperature_setting",
             "name_cased": "driverTemperatureSetting",
             "name_pretty": "Driver temperature setting",
-            "unit": "temperature",
-            "type": "double",
-            "size": 8,
+            "type": "unit.temperature",
+            "size": 10,
             "description": "The driver temperature setting",
             "examples": [
                 {
-                    "data_component": "4035800000000000",
-                    "unit_component": "1701",
-                    "value": 21.5,
-                    "unit": "celsius",
+                    "data_component": "17014035800000000000",
+                    "value": {
+                        "celsius": 21.5
+                    },
                     "description": "Driver temperature setting is 21.5\u00b0C"
                 }
             ]
@@ -123,16 +120,15 @@
             "name": "passenger_temperature_setting",
             "name_cased": "passengerTemperatureSetting",
             "name_pretty": "Passenger temperature setting",
-            "unit": "temperature",
-            "type": "double",
-            "size": 8,
+            "type": "unit.temperature",
+            "size": 10,
             "description": "The passenger temperature setting",
             "examples": [
                 {
-                    "data_component": "4035b33333333333",
-                    "unit_component": "1701",
-                    "value": 21.7,
-                    "unit": "celsius",
+                    "data_component": "17014035b33333333333",
+                    "value": {
+                        "celsius": 21.7
+                    },
                     "description": "Passenger temperature setting is 21.7\u00b0C"
                 }
             ]
@@ -198,16 +194,15 @@
             "name": "defrosting_temperature_setting",
             "name_cased": "defrostingTemperatureSetting",
             "name_pretty": "Defrosting temperature setting",
-            "unit": "temperature",
-            "type": "double",
-            "size": 8,
+            "type": "unit.temperature",
+            "size": 10,
             "description": "The defrosting temperature setting",
             "examples": [
                 {
-                    "data_component": "4035333333333333",
-                    "unit_component": "1701",
-                    "value": 21.2,
-                    "unit": "celsius",
+                    "data_component": "17014035333333333333",
+                    "value": {
+                        "celsius": 21.2
+                    },
                     "description": "Defrosting temperature setting is 21.2\u00b0C"
                 }
             ]
@@ -316,16 +311,15 @@
             "name": "rear_temperature_setting",
             "name_cased": "rearTemperatureSetting",
             "name_pretty": "Rear temperature setting",
-            "unit": "temperature",
-            "type": "double",
-            "size": 8,
+            "type": "unit.temperature",
+            "size": 10,
             "description": "The rear temperature",
             "examples": [
                 {
-                    "data_component": "403599999999999a",
-                    "unit_component": "1701",
-                    "value": 21.6,
-                    "unit": "celsius",
+                    "data_component": "1701403599999999999a",
+                    "value": {
+                        "celsius": 21.6
+                    },
                     "description": "Rear temperature setting is 21.6\u00b0C"
                 }
             ]

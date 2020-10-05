@@ -10,7 +10,7 @@
     },
     "api": {
         "intro": 5,
-        "update": 11
+        "update": 12
     },
     "getters": {
         "name": "get_chassis_settings"
@@ -103,23 +103,23 @@
             "description": "The current values for the spring rates",
             "examples": [
                 {
-                    "data_component": "4035000000000000",
-                    "unit_component": "1801",
+                    "data_component": "0018014035000000000000",
                     "values": {
                         "axle": "front",
-                        "spring_rate": 21.0
+                        "spring_rate": {
+                            "newton_millimeters": 21.0
+                        }
                     },
-                    "unit": "newton_millimeters",
                     "description": "Front axle spring rate is 21.0N/mm"
                 },
                 {
-                    "data_component": "4037000000000000",
-                    "unit_component": "1801",
+                    "data_component": "0118014037000000000000",
                     "values": {
                         "axle": "rear",
-                        "spring_rate": 23.0
+                        "spring_rate": {
+                            "newton_millimeters": 23.0
+                        }
                     },
-                    "unit": "newton_millimeters",
                     "description": "Rear axle spring rate is 23.0N/mm"
                 }
             ]
@@ -135,23 +135,23 @@
             "description": "The maximum possible values for the spring rates",
             "examples": [
                 {
-                    "data_component": "4042800000000000",
-                    "unit_component": "1801",
+                    "data_component": "0018014042800000000000",
                     "values": {
                         "axle": "front",
-                        "spring_rate": 37.0
+                        "spring_rate": {
+                            "newton_millimeters": 37.0
+                        }
                     },
-                    "unit": "newton_millimeters",
                     "description": "Front axle maximum spring rate is 37.0N/mm"
                 },
                 {
-                    "data_component": "4043800000000000",
-                    "unit_component": "1801",
+                    "data_component": "0118014043800000000000",
                     "values": {
                         "axle": "rear",
-                        "spring_rate": 39.0
+                        "spring_rate": {
+                            "newton_millimeters": 39.0
+                        }
                     },
-                    "unit": "newton_millimeters",
                     "description": "Rear axle maximum spring rate is 39.0N/mm"
                 }
             ]
@@ -167,23 +167,23 @@
             "description": "The minimum possible values for the spring rates",
             "examples": [
                 {
-                    "data_component": "4030000000000000",
-                    "unit_component": "1801",
+                    "data_component": "0018014030000000000000",
                     "values": {
                         "axle": "front",
-                        "spring_rate": 16.0
+                        "spring_rate": {
+                            "newton_millimeters": 16.0
+                        }
                     },
-                    "unit": "newton_millimeters",
                     "description": "Front axle minimum spring rate is 16.0N/mm"
                 },
                 {
-                    "data_component": "4032000000000000",
-                    "unit_component": "1801",
+                    "data_component": "0118014032000000000000",
                     "values": {
                         "axle": "rear",
-                        "spring_rate": 18.0
+                        "spring_rate": {
+                            "newton_millimeters": 18.0
+                        }
                     },
-                    "unit": "newton_millimeters",
                     "description": "Rear axle minimum spring rate is 18.0N/mm"
                 }
             ]
@@ -193,16 +193,15 @@
             "name": "current_chassis_position",
             "name_cased": "currentChassisPosition",
             "name_pretty": "Current chassis position",
-            "unit": "length",
-            "type": "double",
-            "size": 8,
+            "type": "unit.length",
+            "size": 10,
             "description": "The chassis position calculated from the lowest point",
             "examples": [
                 {
-                    "data_component": "4039666666666666",
-                    "unit_component": "1207",
-                    "value": 25.4,
-                    "unit": "millimeters",
+                    "data_component": "12014039666666666666",
+                    "value": {
+                        "millimeters": 25.4
+                    },
                     "description": "Current chassis position is 25.4mm"
                 }
             ]
@@ -212,16 +211,15 @@
             "name": "maximum_chassis_position",
             "name_cased": "maximumChassisPosition",
             "name_pretty": "Maximum chassis position",
-            "unit": "length",
-            "type": "double",
-            "size": 8,
+            "type": "unit.length",
+            "size": 10,
             "description": "The maximum possible value for the chassis position",
             "examples": [
                 {
-                    "data_component": "404bc00000000000",
-                    "unit_component": "1207",
-                    "value": 55.5,
-                    "unit": "millimeters",
+                    "data_component": "1201404bc00000000000",
+                    "value": {
+                        "millimeters": 55.5
+                    },
                     "description": "Maximum chassis position is 55.5mm"
                 }
             ]
@@ -231,16 +229,15 @@
             "name": "minimum_chassis_position",
             "name_cased": "minimumChassisPosition",
             "name_pretty": "Minimum chassis position",
-            "unit": "length",
-            "type": "double",
-            "size": 8,
+            "type": "unit.length",
+            "size": 10,
             "description": "The minimum possible value for the chassis position",
             "examples": [
                 {
-                    "data_component": "c03c666666666666",
-                    "unit_component": "1207",
-                    "value": -28.4,
-                    "unit": "millimeters",
+                    "data_component": "1201c03c666666666666",
+                    "value": {
+                        "millimeters": -28.4
+                    },
                     "description": "Minimum chassis position is -28.4mm"
                 }
             ]

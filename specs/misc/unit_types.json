@@ -6,11 +6,13 @@
             "unit_types": [
                 {
                     "name": "meters_per_second_squared",
-                    "id": 0
+                    "id": 0,
+                    "conversion_linear": 1.0
                 },
                 {
                     "name": "gravity",
-                    "id": 1
+                    "id": 1,
+                    "conversion_linear": 9.81
                 }
             ]
         },
@@ -20,15 +22,18 @@
             "unit_types": [
                 {
                     "name": "degrees",
-                    "id": 0
+                    "id": 0,
+                    "conversion_linear": 1.0
                 },
                 {
                     "name": "radians",
-                    "id": 3
+                    "id": 3,
+                    "conversion_linear": 57.29578
                 },
                 {
                     "name": "revolutions",
-                    "id": 5
+                    "id": 5,
+                    "conversion_linear": 360.0
                 }
             ]
         },
@@ -37,78 +42,19 @@
             "id": 3,
             "unit_types": [
                 {
+                    "name": "revolutions_per_minute",
+                    "id": 0,
+                    "conversion_linear": 1.0
+                },
+                {
                     "name": "degrees_per_second",
-                    "id": 0
+                    "id": 1,
+                    "conversion_linear": 6.0
                 },
                 {
                     "name": "radians_per_second",
-                    "id": 1
-                },
-                {
-                    "name": "revolutions_per_minute",
-                    "id": 2
-                }
-            ]
-        },
-        {
-            "name": "area",
-            "id": 4,
-            "unit_types": [
-                {
-                    "name": "square_kilometers",
-                    "id": 1
-                },
-                {
-                    "name": "square_meters",
-                    "id": 2
-                },
-                {
-                    "name": "square_centimeters",
-                    "id": 3
-                },
-                {
-                    "name": "square_millimeters",
-                    "id": 4
-                },
-                {
-                    "name": "square_inches",
-                    "id": 7
-                },
-                {
-                    "name": "square_feet",
-                    "id": 8
-                },
-                {
-                    "name": "square_yards",
-                    "id": 9
-                },
-                {
-                    "name": "square_miles",
-                    "id": 10
-                }
-            ]
-        },
-        {
-            "name": "concentration_mass",
-            "id": 5,
-            "unit_types": [
-                {
-                    "name": "gramsPerLiter",
-                    "id": 0
-                },
-                {
-                    "name": "milligramsPerDeciliter",
-                    "id": 1
-                }
-            ]
-        },
-        {
-            "name": "dispersion",
-            "id": 6,
-            "unit_types": [
-                {
-                    "name": "parts_per_million",
-                    "id": 0
+                    "id": 2,
+                    "conversion_linear": 9.549296585514
                 }
             ]
         },
@@ -117,50 +63,34 @@
             "id": 7,
             "unit_types": [
                 {
-                    "name": "hours",
-                    "id": 0
+                    "name": "seconds",
+                    "id": 0,
+                    "conversion_linear": 1.0
                 },
                 {
                     "name": "minutes",
-                    "id": 1
+                    "id": 1,
+                    "conversion_linear": 60.0
                 },
                 {
-                    "name": "seconds",
-                    "id": 2
+                    "name": "hours",
+                    "id": 2,
+                    "conversion_linear": 3600.0
                 },
                 {
                     "name": "days",
-                    "id": 3
+                    "id": 3,
+                    "conversion_linear": 86400.0
                 },
                 {
                     "name": "weeks",
-                    "id": 4
+                    "id": 4,
+                    "conversion_linear": 604800.0
                 },
                 {
                     "name": "months",
-                    "id": 5
-                }
-            ]
-        },
-        {
-            "name": "electric_charge",
-            "id": 8,
-            "unit_types": [
-                {
-                    "name": "coulombs",
-                    "id": 0
-                },
-                {
-                    "name": "kiloampereHours",
-                    "id": 2
-                },
-                {
-                    "name": "ampereHours",
-                    "id": 3
-                },
-                {
-                    "name": "milliampereHours",
-                    "id": 4
+                    "id": 5,
+                    "conversion_linear": 2629800.0
                 }
             ]
         },
@@ -169,16 +99,19 @@
             "id": 9,
             "unit_types": [
                 {
-                    "name": "kiloamperes",
-                    "id": 1
-                },
-                {
                     "name": "amperes",
-                    "id": 2
+                    "id": 0,
+                    "conversion_linear": 1.0
                 },
                 {
                     "name": "milliamperes",
-                    "id": 3
+                    "id": 1,
+                    "conversion_linear": 0.001
+                },
+                {
+                    "name": "kiloamperes",
+                    "id": 2,
+                    "conversion_linear": 1000.0
                 }
             ]
         },
@@ -187,30 +120,19 @@
             "id": 10,
             "unit_types": [
                 {
-                    "name": "kilovolts",
-                    "id": 1
-                },
-                {
                     "name": "volts",
-                    "id": 2
+                    "id": 0,
+                    "conversion_linear": 1.0
                 },
                 {
                     "name": "millivolts",
-                    "id": 3
-                }
-            ]
-        },
-        {
-            "name": "electric_resistance",
-            "id": 11,
-            "unit_types": [
-                {
-                    "name": "kiloohms",
-                    "id": 1
+                    "id": 1,
+                    "conversion_linear": 0.001
                 },
                 {
-                    "name": "ohms",
-                    "id": 2
+                    "name": "kilovolts",
+                    "id": 2,
+                    "conversion_linear": 1000.0
                 }
             ]
         },
@@ -219,16 +141,19 @@
             "id": 12,
             "unit_types": [
                 {
-                    "name": "kilojoules",
-                    "id": 0
+                    "name": "joules",
+                    "id": 0,
+                    "conversion_linear": 1.0
                 },
                 {
-                    "name": "joules",
-                    "id": 1
+                    "name": "kilojoules",
+                    "id": 1,
+                    "conversion_linear": 1000.0
                 },
                 {
                     "name": "kilowatt_hours",
-                    "id": 4
+                    "id": 4,
+                    "conversion_linear": 3600000.0
                 }
             ]
         },
@@ -238,11 +163,13 @@
             "unit_types": [
                 {
                     "name": "kwh_per_100_kilometers",
-                    "id": 0
+                    "id": 0,
+                    "conversion_inverse": 1.0
                 },
                 {
                     "name": "miles_per_kwh",
-                    "id": 1
+                    "id": 1,
+                    "conversion_inverse": 62.1371192237334
                 }
             ]
         },
@@ -251,28 +178,34 @@
             "id": 14,
             "unit_types": [
                 {
-                    "name": "gigahertz",
-                    "id": 1
-                },
-                {
-                    "name": "megahertz",
-                    "id": 2
-                },
-                {
-                    "name": "kilohertz",
-                    "id": 3
-                },
-                {
                     "name": "hertz",
-                    "id": 4
+                    "id": 0,
+                    "conversion_linear": 1.0
                 },
                 {
                     "name": "millihertz",
-                    "id": 5
+                    "id": 1,
+                    "conversion_linear": 0.001
+                },
+                {
+                    "name": "kilohertz",
+                    "id": 3,
+                    "conversion_linear": 1000.0
+                },
+                {
+                    "name": "megahertz",
+                    "id": 4,
+                    "conversion_linear": 1000000.0
+                },
+                {
+                    "name": "gigahertz",
+                    "id": 5,
+                    "conversion_linear": 1000000000.0
                 },
                 {
                     "name": "beats_per_minute",
-                    "id": 8
+                    "id": 8,
+                    "conversion_linear": 60.0
                 }
             ]
         },
@@ -282,61 +215,18 @@
             "unit_types": [
                 {
                     "name": "liters_per_100_kilometers",
-                    "id": 0
+                    "id": 0,
+                    "conversion_inverse": 1.0
                 },
                 {
                     "name": "miles_per_imperial_gallon",
-                    "id": 1
+                    "id": 1,
+                    "conversion_inverse": 282.4809363
                 },
                 {
                     "name": "miles_per_gallon",
-                    "id": 2
-                }
-            ]
-        },
-        {
-            "name": "information_storage",
-            "id": 16,
-            "unit_types": [
-                {
-                    "name": "bytes",
-                    "id": 0
-                },
-                {
-                    "name": "bits",
-                    "id": 1
-                },
-                {
-                    "name": "nibbles",
-                    "id": 2
-                },
-                {
-                    "name": "gigabytes",
-                    "id": 8
-                },
-                {
-                    "name": "megabytes",
-                    "id": 9
-                },
-                {
-                    "name": "kilobytes",
-                    "id": 10
-                },
-                {
-                    "name": "terabits",
-                    "id": 15
-                },
-                {
-                    "name": "gigabits",
-                    "id": 16
-                },
-                {
-                    "name": "megabits",
-                    "id": 17
-                },
-                {
-                    "name": "kilobits",
-                    "id": 18
+                    "id": 2,
+                    "conversion_inverse": 235.2145833
                 }
             ]
         },
@@ -346,7 +236,8 @@
             "unit_types": [
                 {
                     "name": "lux",
-                    "id": 0
+                    "id": 0,
+                    "conversion_linear": 1.0
                 }
             ]
         },
@@ -355,90 +246,64 @@
             "id": 18,
             "unit_types": [
                 {
-                    "name": "megameters",
-                    "id": 0
-                },
-                {
-                    "name": "kilometers",
-                    "id": 1
-                },
-                {
                     "name": "meters",
-                    "id": 4
-                },
-                {
-                    "name": "decimeters",
-                    "id": 5
-                },
-                {
-                    "name": "centimeters",
-                    "id": 6
+                    "id": 0,
+                    "conversion_linear": 1.0
                 },
                 {
                     "name": "millimeters",
-                    "id": 7
+                    "id": 1,
+                    "conversion_linear": 0.001
+                },
+                {
+                    "name": "centimeters",
+                    "id": 2,
+                    "conversion_linear": 0.01
+                },
+                {
+                    "name": "decimeters",
+                    "id": 3,
+                    "conversion_linear": 0.1
+                },
+                {
+                    "name": "kilometers",
+                    "id": 4,
+                    "conversion_linear": 1000.0
+                },
+                {
+                    "name": "megameters",
+                    "id": 5,
+                    "conversion_linear": 1000000.0
                 },
                 {
                     "name": "inches",
-                    "id": 11
+                    "id": 11,
+                    "conversion_linear": 0.0254
                 },
                 {
                     "name": "feet",
-                    "id": 12
+                    "id": 12,
+                    "conversion_linear": 0.3048
                 },
                 {
                     "name": "yards",
-                    "id": 13
+                    "id": 13,
+                    "conversion_linear": 0.9144
                 },
                 {
                     "name": "miles",
-                    "id": 14
+                    "id": 14,
+                    "conversion_linear": 1609.344
                 },
                 {
                     "name": "scandinavian_miles",
-                    "id": 15
+                    "id": 15,
+                    "conversion_linear": 10000.0
                 },
                 {
                     "name": "nautical_miles",
-                    "id": 17
-                }
-            ]
-        },
-        {
-            "name": "mass",
-            "id": 19,
-            "unit_types": [
-                {
-                    "name": "kilograms",
-                    "id": 0
-                },
-                {
-                    "name": "grams",
-                    "id": 1
-                },
-                {
-                    "name": "milligrams",
-                    "id": 4
-                },
-                {
-                    "name": "ounces",
-                    "id": 8
-                },
-                {
-                    "name": "pounds",
-                    "id": 9
-                },
-                {
-                    "name": "stones",
-                    "id": 10
-                },
-                {
-                    "name": "metric_tons",
-                    "id": 11
-                },
-                {
-                    "name": "short_tons",
-                    "id": 12
+                    "id": 17,
+                    "conversion_linear": 1852.0
                 }
             ]
         },
@@ -447,24 +312,29 @@
             "id": 20,
             "unit_types": [
                 {
-                    "name": "megawatts",
-                    "id": 2
-                },
-                {
-                    "name": "kilowatts",
-                    "id": 3
-                },
-                {
                     "name": "watts",
-                    "id": 4
+                    "id": 0,
+                    "conversion_linear": 1.0
                 },
                 {
                     "name": "milliwatts",
-                    "id": 5
+                    "id": 1,
+                    "conversion_linear": 0.001
+                },
+                {
+                    "name": "kilowatts",
+                    "id": 2,
+                    "conversion_linear": 1000.0
+                },
+                {
+                    "name": "megawatts",
+                    "id": 3,
+                    "conversion_linear": 1000000.0
                 },
                 {
                     "name": "horsepower",
-                    "id": 10
+                    "id": 10,
+                    "conversion_linear": 745.7
                 }
             ]
         },
@@ -474,31 +344,38 @@
             "unit_types": [
                 {
                     "name": "newtons_per_meters_squared",
-                    "id": 0
+                    "id": 0,
+                    "conversion_linear": 1.0
                 },
                 {
                     "name": "kilopascals",
-                    "id": 3
+                    "id": 3,
+                    "conversion_linear": 1000.0
                 },
                 {
                     "name": "inches_of_mercury",
-                    "id": 5
+                    "id": 5,
+                    "conversion_linear": 3386.39
                 },
                 {
                     "name": "bars",
-                    "id": 6
+                    "id": 6,
+                    "conversion_linear": 100000.0
                 },
                 {
                     "name": "millibars",
-                    "id": 7
+                    "id": 7,
+                    "conversion_linear": 100.0
                 },
                 {
                     "name": "millimeters_of_mercury",
-                    "id": 8
+                    "id": 8,
+                    "conversion_linear": 133.322
                 },
                 {
                     "name": "pounds_force_per_square_inch",
-                    "id": 9
+                    "id": 9,
+                    "conversion_linear": 6894.76
                 }
             ]
         },
@@ -508,19 +385,23 @@
             "unit_types": [
                 {
                     "name": "meters_per_second",
-                    "id": 0
+                    "id": 0,
+                    "conversion_linear": 1.0
                 },
                 {
                     "name": "kilometers_per_hour",
-                    "id": 1
+                    "id": 1,
+                    "conversion_linear": 0.27777777777778
                 },
                 {
                     "name": "miles_per_hour",
-                    "id": 2
+                    "id": 2,
+                    "conversion_linear": 0.44704
                 },
                 {
                     "name": "knots",
-                    "id": 3
+                    "id": 3,
+                    "conversion_linear": 0.51444444444
                 }
             ]
         },
@@ -530,15 +411,20 @@
             "unit_types": [
                 {
                     "name": "kelvin",
-                    "id": 0
+                    "id": 0,
+                    "conversion_linear": 1.0
                 },
                 {
                     "name": "celsius",
-                    "id": 1
+                    "id": 1,
+                    "conversion_linear": 1.0,
+                    "conversion_constant": 273.15
                 },
                 {
                     "name": "fahrenheit",
-                    "id": 2
+                    "id": 2,
+                    "conversion_linear": 0.555556,
+                    "conversion_constant": 255.372222
                 }
             ]
         },
@@ -548,15 +434,18 @@
             "unit_types": [
                 {
                     "name": "newton_meters",
-                    "id": 0
+                    "id": 0,
+                    "conversion_linear": 1.0
                 },
                 {
                     "name": "newton_millimeters",
-                    "id": 1
+                    "id": 1,
+                    "conversion_linear": 0.001
                 },
                 {
                     "name": "pound_feet",
-                    "id": 2
+                    "id": 2,
+                    "conversion_linear": 0.73756214927727
                 }
             ]
         },
@@ -566,59 +455,73 @@
             "unit_types": [
                 {
                     "name": "liters",
-                    "id": 2
-                },
-                {
-                    "name": "deciliters",
-                    "id": 3
-                },
-                {
-                    "name": "centiliters",
-                    "id": 4
+                    "id": 2,
+                    "conversion_linear": 1.0
                 },
                 {
                     "name": "milliliters",
-                    "id": 5
+                    "id": 3,
+                    "conversion_linear": 0.001
                 },
                 {
-                    "name": "cubic_meters",
-                    "id": 7
+                    "name": "centiliters",
+                    "id": 4,
+                    "conversion_linear": 0.01
                 },
                 {
-                    "name": "cubic_decimeters",
-                    "id": 8
-                },
-                {
-                    "name": "cubic_centimeters",
-                    "id": 9
+                    "name": "deciliters",
+                    "id": 5,
+                    "conversion_linear": 0.1
                 },
                 {
                     "name": "cubic_millimeters",
-                    "id": 10
+                    "id": 10,
+                    "conversion_linear": 1e-06
+                },
+                {
+                    "name": "cubic_centimeters",
+                    "id": 9,
+                    "conversion_linear": 0.001
+                },
+                {
+                    "name": "cubic_decimeters",
+                    "id": 8,
+                    "conversion_linear": 1.0
+                },
+                {
+                    "name": "cubic_meters",
+                    "id": 7,
+                    "conversion_linear": 1000.0
                 },
                 {
                     "name": "cubic_inches",
-                    "id": 11
+                    "id": 11,
+                    "conversion_linear": 0.016387064
                 },
                 {
                     "name": "cubic_feet",
-                    "id": 12
+                    "id": 12,
+                    "conversion_linear": 28.316846592
                 },
                 {
                     "name": "fluid_ounces",
-                    "id": 19
+                    "id": 19,
+                    "conversion_linear": 0.0295735296875
                 },
                 {
                     "name": "gallons",
-                    "id": 23
+                    "id": 23,
+                    "conversion_linear": 3.785411784
                 },
                 {
                     "name": "imperial_fluid_ounces",
-                    "id": 26
+                    "id": 26,
+                    "conversion_linear": 0.0284130625
                 },
                 {
                     "name": "imperial_gallons",
-                    "id": 29
+                    "id": 29,
+                    "conversion_linear": 4.54609
                 }
             ]
         }

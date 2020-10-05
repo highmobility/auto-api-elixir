@@ -10,7 +10,7 @@
     },
     "api": {
         "intro": 3,
-        "update": 11
+        "update": 12
     },
     "getters": {
         "name": "get_rooftop_state"
@@ -178,6 +178,36 @@
                     "data_component": "01",
                     "value": "open",
                     "description": "Sunroof is open"
+                }
+            ]
+        },
+        {
+            "id": 6,
+            "name": "sunroof_rain_event",
+            "name_cased": "sunroofRainEvent",
+            "name_pretty": "Sunroof rain event",
+            "type": "enum",
+            "size": 1,
+            "description": "Sunroof event happened in case of rain",
+            "enum_values": [
+                {
+                    "id": 0,
+                    "name": "no_event"
+                },
+                {
+                    "id": 1,
+                    "name": "in_stroke_position_because_of_rain"
+                },
+                {
+                    "id": 2,
+                    "name": "automatically_in_stroke_position"
+                }
+            ],
+            "examples": [
+                {
+                    "data_component": "00",
+                    "value": "no_event",
+                    "description": "Sunroof had no rain event"
                 }
             ]
         }
