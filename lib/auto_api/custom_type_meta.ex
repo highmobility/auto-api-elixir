@@ -20,11 +20,23 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.CustomType do
-  @moduledoc """
-    Handles custom types
-  """
-  require AutoApi.CustomType.Meta
+defmodule AutoApi.CustomType.Meta do
+  @moduledoc false
 
-  @before_compile AutoApi.CustomType.Meta
+  @spec_file "specs/misc/custom_types.json"
+  @external_resource @spec_file
+
+  defmacro __before_compile__(_env) do
+    specs = Jason.decode!(File.read!(@spec_file))
+
+    for type <- specs["types"] do
+      name_atom = String.to_atom(type["name"])
+      name_string = type["name"]
+
+      quote do
+        def spec(unquote(name_atom)), do: unquote(Macro.escape(type))
+        def spec(unquote(name_string)), do: unquote(Macro.escape(type))
+      end
+    end
+  end
 end
