@@ -232,7 +232,7 @@ defmodule AutoApi.Capability do
   AutoApi.BrowserCapability
   """
   @spec all() :: list(module)
-  defdelegate all(), to: AutoApi.CapabilityDelegate
+  defdelegate all(), to: AutoApi.Capability.Delegate
 
   @doc """
   Returns a capability module by its binary id.
@@ -248,7 +248,7 @@ defmodule AutoApi.Capability do
   nil
   """
   @spec get_by_id(binary) :: module | nil
-  defdelegate get_by_id(id), to: AutoApi.CapabilityDelegate
+  defdelegate get_by_id(id), to: AutoApi.Capability.Delegate
 
   @doc """
   Returns a capability module by its name.
@@ -269,7 +269,7 @@ defmodule AutoApi.Capability do
   nil
   """
   @spec get_by_name(binary | atom) :: module | nil
-  defdelegate get_by_name(name), to: AutoApi.CapabilityDelegate
+  defdelegate get_by_name(name), to: AutoApi.Capability.Delegate
 
   @doc """
   Returns a map with the capability identifiers as keys and the modules as values.
@@ -282,5 +282,5 @@ defmodule AutoApi.Capability do
   true
   """
   @deprecated "Use all/0 and AutoApi.Capability.identifier/0 instead"
-  defdelegate list_capabilities(), to: AutoApi.CapabilityDelegate
+  defdelegate list_capabilities(), to: AutoApi.Capability.Delegate
 end
