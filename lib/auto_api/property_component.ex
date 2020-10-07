@@ -52,10 +52,9 @@ defmodule AutoApi.PropertyComponent do
           | :pending
           | :internal_oem_error
   @type failure :: %{reason: reason(), description: String.t()}
-  @type t :: %__MODULE__{data: any, timestamp: nil | DateTime.t(), failure: nil | failure}
+  @type t(data) :: %__MODULE__{data: data, timestamp: nil | DateTime.t(), failure: nil | failure}
+  @type t() :: t(any())
   @type spec :: map() | list()
-  @type data_types :: :integer
-  @type size :: integer
 
   @doc """
   Converts PropertyComponent struct to binary"
@@ -158,6 +157,13 @@ defmodule AutoApi.PropertyComponent do
     type_spec = AutoApi.CustomType.spec(type)
 
     data_to_bin(data, type_spec)
+  end
+
+  defp data_to_bin({value, unit}, %{"type" => "unit." <> type}) do
+    type_id = AutoApi.UnitType.id(type)
+    unit_id = AutoApi.UnitType.unit_id(type, unit)
+
+    <<type_id, unit_id, value::float-size(64)>>
   end
 
   defp timestamp_to_bin(nil), do: <<>>
@@ -277,6 +283,12 @@ defmodule AutoApi.PropertyComponent do
     type_spec = AutoApi.CustomType.spec(type)
 
     to_value(binary_data, type_spec)
+  end
+
+  defp to_value(<<id, unit_id, value::float-64>>, %{"type" => "unit." <> _type}) do
+    unit = AutoApi.UnitType.unit_name(id, unit_id)
+
+    {value, unit}
   end
 
   defp failure_to_value(nil), do: nil

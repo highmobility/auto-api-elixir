@@ -45,7 +45,6 @@ defmodule AutoApi.PropertyComponentTest do
         spec = %{"type" => "integer", "size" => 2}
 
         prop_bin =
-          prop_bin =
           PropertyComponent.to_bin(
             %PropertyComponent{data: data[:integer], timestamp: data[:datetime]},
             spec
@@ -218,6 +217,21 @@ defmodule AutoApi.PropertyComponentTest do
       bin_comp = PropertyComponent.to_bin(prop_comp, spec)
 
       assert bin_comp == <<1, 5::integer-16, 0x00, 65, 176, 69, 162>>
+
+      assert PropertyComponent.to_struct(bin_comp, spec) == prop_comp
+    end
+
+    test "converts unit type to bin" do
+      spec = %{
+        "type" => "unit.length",
+        "size" => 10,
+        "id" => 0xFD
+      }
+
+      prop_comp = %PropertyComponent{data: {186, :centimeters}}
+      bin_comp = PropertyComponent.to_bin(prop_comp, spec)
+
+      assert bin_comp == <<0x01, 0x00, 0x0A, 0x12, 0x02, 186::float-64>>
 
       assert PropertyComponent.to_struct(bin_comp, spec) == prop_comp
     end
