@@ -20,7 +20,26 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.VehicleStatusCapabilityTest do
+defmodule AutoApi.VehicleInformationStateTest do
   use ExUnit.Case
-  doctest AutoApi.VehicleStatusCapability
+  doctest AutoApi.VehicleInformationState
+  alias AutoApi.VehicleInformationState
+
+  test "to_bin/1 & from_bin/1" do
+    state =
+      %VehicleInformationState{}
+      |> VehicleInformationState.put_property(:powertrain, :all_electric)
+      |> VehicleInformationState.put_property(:gearbox, :semi_automatic)
+      |> VehicleInformationState.put_property(:model_name, "HM Concept")
+      |> VehicleInformationState.append_property(:equipments, "eq 1")
+      |> VehicleInformationState.append_property(:equipments, "eq 2")
+      |> VehicleInformationState.put_property(:engine_volume, {750, :cubic_centimeters})
+
+    new_state =
+      state
+      |> VehicleInformationState.to_bin()
+      |> VehicleInformationState.from_bin()
+
+    assert state == new_state
+  end
 end

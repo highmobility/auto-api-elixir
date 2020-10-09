@@ -1,67 +1,47 @@
+# AutoAPI
+# The MIT License
+#
+# Copyright (c) 2018- High-Mobility GmbH (https://high-mobility.com)
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in
+# all copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+# THE SOFTWARE.
 defmodule AutoApi.VehicleStatusState do
   @moduledoc """
   VehicleStatus state
   """
 
-  alias AutoApi.PropertyComponent
+  alias AutoApi.State
 
-  defstruct vin: nil,
-            powertrain: nil,
-            model_name: nil,
-            name: nil,
-            license_plate: nil,
-            sales_designation: nil,
-            model_year: nil,
-            colour_name: nil,
-            power_in_kw: nil,
-            number_of_doors: nil,
-            number_of_seats: nil,
-            engine_volume: nil,
-            engine_max_torque: nil,
-            gearbox: nil,
-            display_unit: nil,
-            driver_seat_location: nil,
-            equipments: [],
-            brand: nil,
-            states: [],
-            timestamp: nil
+  defstruct states: []
 
   use AutoApi.State, spec_file: "vehicle_status.json"
 
-  @type powertrain ::
-          :unknown | :all_electric | :combustion_engine | :phev | :hydrogen | :hydrogen_hybrid
-
-  @type gearbox :: :manual | :automatic | :semi_automatic
-
   @type t :: %__MODULE__{
-          vin: %PropertyComponent{data: String.t()} | nil,
-          powertrain: %PropertyComponent{data: powertrain} | nil,
-          model_name: %PropertyComponent{data: String.t()} | nil,
-          name: %PropertyComponent{data: String.t()} | nil,
-          license_plate: %PropertyComponent{data: String.t()} | nil,
-          sales_designation: %PropertyComponent{data: String.t()} | nil,
-          model_year: %PropertyComponent{data: integer} | nil,
-          colour_name: %PropertyComponent{data: String.t()} | nil,
-          power_in_kw: %PropertyComponent{data: integer} | nil,
-          number_of_doors: %PropertyComponent{data: integer} | nil,
-          number_of_seats: %PropertyComponent{data: integer} | nil,
-          engine_volume: %PropertyComponent{data: float} | nil,
-          engine_max_torque: %PropertyComponent{data: integer} | nil,
-          gearbox: %PropertyComponent{data: gearbox} | nil,
-          display_unit: %PropertyComponent{data: :km | :miles} | nil,
-          driver_seat_location: %PropertyComponent{data: :left | :right | :center} | nil,
-          equipments: list(%PropertyComponent{data: String.t()}),
-          brand: %PropertyComponent{data: String.t()} | nil,
-          states: list(%PropertyComponent{}),
-          timestamp: DateTime.t() | nil
+          states: State.multiple_property(module())
         }
 
   @doc """
   Build state based on binary value
 
-    iex> bin = <<1, 0, 20, 1, 0, 17, 88, 86, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 49>>
-    iex> AutoApi.VehicleStatusState.from_bin(bin)
-    %AutoApi.VehicleStatusState{vin: %AutoApi.PropertyComponent{data: "XV000000000000001"}}
+    iex> bin = <<153, 0, 22, 1, 0, 19, 0, 106, 1, 13, 0, 13, 1, 0, 10, 18, 4, 64, 69, 0, 0, 0, 0, 0, 0>>
+    iex> state = AutoApi.VehicleStatusState.from_bin(bin)
+    iex> state.states
+    [%AutoApi.PropertyComponent{data: %AutoApi.TripsState{distance: %AutoApi.PropertyComponent{data: {42.0, :kilometers}}}}]
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -71,9 +51,10 @@ defmodule AutoApi.VehicleStatusState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.VehicleStatusState{vin: %AutoApi.PropertyComponent{data: "XV000000000000001"}}
+    iex> trip_state = %AutoApi.TripsState{distance: %AutoApi.PropertyComponent{data: {42, :kilometers}}}
+    iex> state = %AutoApi.VehicleStatusState{states: [%AutoApi.PropertyComponent{data: trip_state}]}
     iex> AutoApi.VehicleStatusState.to_bin(state)
-    <<1, 0, 20, 1, 0, 17, 88, 86, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 49>>
+    <<153, 0, 22, 1, 0, 19, 0, 106, 1, 13, 0, 13, 1, 0, 10, 18, 4, 64, 69, 0, 0, 0, 0, 0, 0>>
   """
   @spec to_bin(__MODULE__.t()) :: binary
   def to_bin(%__MODULE__{} = state) do

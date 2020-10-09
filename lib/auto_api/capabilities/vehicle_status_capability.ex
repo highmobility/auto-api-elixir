@@ -10,9 +10,9 @@ defmodule AutoApi.VehicleStatusCapability do
       iex> VS.description
       "Vehicle Status"
       iex> length(VS.properties)
-      19
+      1
       iex> List.last(VS.properties)
-      {153, :states}
+      {0x99, :states}
   """
 
   @command_module AutoApi.VehicleStatusCommand

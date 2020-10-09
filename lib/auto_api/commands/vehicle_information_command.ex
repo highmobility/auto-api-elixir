@@ -20,7 +20,9 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.VehicleStatusCapabilityTest do
-  use ExUnit.Case
-  doctest AutoApi.VehicleStatusCapability
+defmodule AutoApi.VehicleInformationCommand do
+  @moduledoc """
+  Handles  commands and apply binary commands on `%AutoApi.VehicleInformationState{}`
+  """
+  use AutoApi.Command
 end

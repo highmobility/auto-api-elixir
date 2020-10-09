@@ -1,30 +1,34 @@
+# AutoAPI
+# The MIT License
+#
+# Copyright (c) 2018- High-Mobility GmbH (https://high-mobility.com)
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in
+# all copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+# THE SOFTWARE.
 defmodule AutoApi.VehicleStatusStateTest do
   use ExUnit.Case
   doctest AutoApi.VehicleStatusState
   alias AutoApi.VehicleStatusState
 
-  test "to_bin/1 & from_bin/1" do
-    state =
-      %VehicleStatusState{}
-      |> VehicleStatusState.put_property(:vin, "JYE8GP0078A086432")
-      |> VehicleStatusState.put_property(:powertrain, :all_electric)
-      |> VehicleStatusState.put_property(:gearbox, :semi_automatic)
-      |> VehicleStatusState.put_property(:model_name, "HM Concept")
-      |> VehicleStatusState.append_property(:equipments, "eq 1")
-      |> VehicleStatusState.append_property(:equipments, "eq 2")
-
-    new_state =
-      state
-      |> VehicleStatusState.to_bin()
-      |> VehicleStatusState.from_bin()
-
-    assert state == new_state
-  end
-
   test "Correctly encodes state in to_bin/1" do
     diag_state =
       AutoApi.DiagnosticsState.base()
-      |> AutoApi.DiagnosticsState.put_property(:speed, 42, DateTime.utc_now())
+      |> AutoApi.DiagnosticsState.put_property(:speed, {88, :miles_per_hour}, DateTime.utc_now())
 
     door_state =
       AutoApi.DoorsState.base()
@@ -58,14 +62,15 @@ defmodule AutoApi.VehicleStatusStateTest do
 
   test "Correctly decodes state from_bin/1" do
     bin_state =
-      <<153, 0, 25, 1, 0, 22, 0, 51, 1, 3, 0, 16, 1, 0, 2, 0, 42, 2, 0, 8, 0, 0, 1, 105, 82, 129,
-        191, 34, 153, 0, 14, 1, 0, 11, 0, 32, 1, 4, 0, 5, 1, 0, 2, 0, 0>>
+      <<153, 0, 33, 1, 0, 30, 0, 51, 1, 3, 0, 24, 1, 0, 10, 22, 2, 64, 86, 0, 0, 0, 0, 0, 0, 2, 0,
+        8, 0, 0, 1, 105, 82, 129, 191, 34, 153, 0, 14, 1, 0, 11, 0, 32, 1, 4, 0, 5, 1, 0, 2, 0,
+        0>>
 
     state = VehicleStatusState.from_bin(bin_state)
 
     assert [diag_state, door_state] = state.states
 
-    assert diag_state.data.speed.data == 42
+    assert diag_state.data.speed.data == {88, :miles_per_hour}
     assert diag_state.data.speed.timestamp == DateTime.from_unix!(1_551_867_428_642, :millisecond)
     refute diag_state.data.speed.failure
 

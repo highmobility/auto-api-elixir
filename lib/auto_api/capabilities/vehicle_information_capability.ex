@@ -20,7 +20,25 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.VehicleStatusCapabilityTest do
-  use ExUnit.Case
-  doctest AutoApi.VehicleStatusCapability
+defmodule AutoApi.VehicleInformationCapability do
+  @moduledoc """
+  Basic settings for Vehicle Information Capability
+
+      iex> alias AutoApi.VehicleInformationCapability, as: VS
+      iex> VS.identifier
+      <<0x00, 0x14>>
+      iex> VS.name
+      :vehicle_information
+      iex> VS.description
+      "Vehicle Information"
+      iex> length(VS.properties)
+      20
+      iex> List.last(VS.properties)
+      {0x16, :drive}
+  """
+
+  @command_module AutoApi.VehicleInformationCommand
+  @state_module AutoApi.VehicleInformationState
+
+  use AutoApi.Capability, spec_file: "vehicle_information.json"
 end
