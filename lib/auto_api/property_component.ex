@@ -50,7 +50,7 @@ defmodule AutoApi.PropertyComponent do
           | :unauthorised
           | :unknown
           | :pending
-          | :internal_oem_error
+          | :oem_error
   @type failure :: %{reason: reason(), description: String.t()}
   @type t(data) :: %__MODULE__{data: data, timestamp: nil | DateTime.t(), failure: nil | failure}
   @type t() :: t(any())

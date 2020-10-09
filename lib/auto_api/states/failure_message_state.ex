@@ -14,7 +14,7 @@ defmodule AutoApi.FailureMessageState do
           | :invalid_command
           | :pending
           | :rate_limit
-          | :internal_oem_error
+          | :oem_error
 
   @doc """
   FailureMessage state
