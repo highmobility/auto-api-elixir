@@ -75,9 +75,9 @@ defmodule AutoApi.Command do
             iex> AutoApi.DiagnosticsCommand.to_bin(:get, [:mileage, :engine_rpm])
             <<0x0B, 0x00, 0x33, 0x00, 0x01, 0x04>>
 
-            iex> prop = %AutoApi.PropertyComponent{data: 42, timestamp: ~U[2019-07-18 13:58:40.489250Z], failure: nil}
+            iex> prop = %AutoApi.PropertyComponent{data: {88, :miles_per_hour}, timestamp: ~U[2019-07-18 13:58:40.489250Z]}
             iex> AutoApi.DiagnosticsCommand.to_bin(:set, speed: prop)
-            <<0x0B, 0x00, 0x33, 0x01, 0x03, 0, 16, 1, 0, 2, 0, 42, 2, 0, 8, 0, 0, 1, 108, 5, 96, 184, 105>>
+            <<11, 0, 51, 1, 3, 0, 24, 1, 0, 10, 22, 2, 64, 86, 0, 0, 0, 0, 0, 0, 2, 0, 8, 0, 0, 1, 108, 5, 96, 184, 105>>
 
             iex> AutoApi.ChargingCommand.to_bin(:set_charge_limit, charge_limit: 0.8)
             <<0x0B, 0, 35, 1, 8, 0, 11, 1, 0, 8, 63, 233, 153, 153, 153, 153, 153, 154>>
@@ -121,9 +121,9 @@ defmodule AutoApi.Command do
             iex> AutoApi.DiagnosticsCommand.from_bin(<<0x0B, 0x00, 0x33, 0x00, 0x01, 0x04>>)
             {:get, [:mileage, :engine_rpm]}
 
-            iex> bin = <<0x0B, 0x00, 0x33, 0x01, 0x03, 0, 16, 1, 0, 2, 0, 42, 2, 0, 8, 0, 0, 1, 108, 5, 96, 184, 105>>
+            iex> bin = <<0x0B, 0x00, 0x33, 0x01, 0x03, 0, 24, 1, 0, 10, 0x16, 2, 64, 86, 0, 0, 0, 0, 0, 0, 2, 0, 8, 0, 0, 1, 108, 5, 96, 184, 105>>
             iex> AutoApi.DiagnosticsCommand.from_bin(bin)
-            {:set, [speed: %AutoApi.PropertyComponent{data: 42, timestamp: ~U[2019-07-18 13:58:40.489Z], failure: nil}]}
+            {:set, [speed: %AutoApi.PropertyComponent{data: {88.0, :miles_per_hour}, timestamp: ~U[2019-07-18 13:58:40.489Z], failure: nil}]}
         """
         @spec from_bin(binary) ::
                 {:get, list(atom)} | {:set, list({atom, AutoApi.PropertyComponent.t()})}
@@ -160,16 +160,16 @@ defmodule AutoApi.Command do
 
             iex> state = %AutoApi.DiagnosticsState{
             ...>   mileage: %AutoApi.PropertyComponent{data: 42_567},
-            ...>   speed: %AutoApi.PropertyComponent{data: 128}
+            ...>   speed: %AutoApi.PropertyComponent{data: {128, :kilometers_per_hour}}
             ...> }
             iex> cmd = AutoApi.DiagnosticsCommand.to_bin(:get, [:speed])
             iex> AutoApi.DiagnosticsCommand.execute(state, cmd)
-            %AutoApi.DiagnosticsState{speed: %AutoApi.PropertyComponent{data: 128}, mileage: nil}
+            %AutoApi.DiagnosticsState{speed: %AutoApi.PropertyComponent{data: {128, :kilometers_per_hour}}, mileage: nil}
 
             iex> state = %AutoApi.DiagnosticsState{}
-            iex> cmd = AutoApi.DiagnosticsCommand.to_bin(:set, speed: %AutoApi.PropertyComponent{data: 128})
+            iex> cmd = AutoApi.DiagnosticsCommand.to_bin(:set, speed: %AutoApi.PropertyComponent{data: {128, :kilometers_per_hour}})
             iex> AutoApi.DiagnosticsCommand.execute(state, cmd)
-            %AutoApi.DiagnosticsState{speed: %AutoApi.PropertyComponent{data: 128}}
+            %AutoApi.DiagnosticsState{speed: %AutoApi.PropertyComponent{data: {128.0, :kilometers_per_hour}}}
         """
         @spec execute(@state.t(), binary) :: @state.t()
         def execute(%@state{} = state, bin_cmd) do
@@ -191,10 +191,10 @@ defmodule AutoApi.Command do
         ## Example
 
             iex> state = %AutoApi.DiagnosticsState{
-            ...>   speed: %AutoApi.PropertyComponent{data: 130}
+            ...>   speed: %AutoApi.PropertyComponent{data: {130, :kilometers_per_hour}}
             ...> }
             iex> AutoApi.DiagnosticsCommand.state(state)
-            <<0x0B, 0, 51, 1, 3, 0, 5, 1, 0, 2, 0, 130>>
+            <<11, 0, 51, 1, 3, 0, 13, 1, 0, 10, 22, 1, 64, 96, 64, 0, 0, 0, 0, 0>>
         """
         @spec state(@state.t()) :: binary
         def state(%@state{} = state) do
@@ -270,9 +270,9 @@ defmodule AutoApi.Command do
       iex> AutoApi.Command.to_bin(:diagnostics, :get, [:mileage, :engine_rpm])
       <<0x0B, 0x00, 0x33, 0x00, 0x01, 0x04>>
 
-      iex> prop = %AutoApi.PropertyComponent{data: 42, timestamp: ~U[2019-07-18 13:58:40.489250Z], failure: nil}
+      iex> prop = %AutoApi.PropertyComponent{data: {88, :miles_per_hour}, timestamp: ~U[2019-07-18 13:58:40.489250Z]}
       iex> AutoApi.Command.to_bin(:diagnostics, :set, speed: prop)
-      <<0x0B, 0x00, 0x33, 0x01, 0x03, 0, 16, 1, 0, 2, 0, 42, 2, 0, 8, 0, 0, 1, 108, 5, 96, 184, 105>>
+      <<11, 0, 51, 1, 3, 0, 24, 1, 0, 10, 22, 2, 64, 86, 0, 0, 0, 0, 0, 0, 2, 0, 8, 0, 0, 1, 108, 5, 96, 184, 105>>
 
       iex> AutoApi.Command.to_bin(:charging, :set_charge_limit, charge_limit: 0.8)
       <<0x0B, 0, 35, 1, 8, 0, 11, 1, 0, 8, 63, 233, 153, 153, 153, 153, 153, 154>>
