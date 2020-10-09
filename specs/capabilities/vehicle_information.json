@@ -403,6 +403,44 @@
                     "description": "Headunit is using a 24h timeformat"
                 }
             ]
+        },
+        {
+            "id": 22,
+            "name": "drive",
+            "name_cased": "drive",
+            "name_pretty": "Drive",
+            "type": "enum",
+            "size": 1,
+            "description": "Wheels driven by the engine",
+            "enum_values": [
+                {
+                    "id": 0,
+                    "name": "fwd",
+                    "description": "Front-wheel drive"
+                },
+                {
+                    "id": 1,
+                    "name": "rwd",
+                    "description": "Rear-wheel drive"
+                },
+                {
+                    "id": 2,
+                    "name": "four_wd",
+                    "description": "Four-wheel drive"
+                },
+                {
+                    "id": 3,
+                    "name": "awd",
+                    "description": "All-wheel drive"
+                }
+            ],
+            "examples": [
+                {
+                    "data_component": "01",
+                    "value": "rwd",
+                    "description": "Vehicle has rear-wheel drive"
+                }
+            ]
         }
     ]
 }

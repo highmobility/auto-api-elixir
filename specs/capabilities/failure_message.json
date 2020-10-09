@@ -104,9 +104,9 @@
                 },
                 {
                     "id": 8,
-                    "name": "internal_oem_error",
-                    "name_pretty": "Internal OEM error",
-                    "description": "API call to OEM returned an error"
+                    "name": "oem_error",
+                    "name_pretty": "OEM error",
+                    "description": "API call to an OEM returned an error"
                 }
             ],
             "examples": [

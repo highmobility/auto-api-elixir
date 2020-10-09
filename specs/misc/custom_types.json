@@ -1786,7 +1786,7 @@
                         },
                         {
                             "id": 6,
-                            "name": "internal_oem_error"
+                            "name": "oem_error"
                         }
                     ]
                 },
