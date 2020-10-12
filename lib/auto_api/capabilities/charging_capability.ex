@@ -10,9 +10,9 @@ defmodule AutoApi.ChargingCapability do
       iex> C.description
       "Charging"
       iex> length(C.properties)
-      20
+      32
       iex> List.last(C.properties)
-      {23, :status}
+      {0x23, :preconditioning_error}
   """
 
   @command_module AutoApi.ChargingCommand
