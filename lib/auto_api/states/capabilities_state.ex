@@ -7,23 +7,34 @@ defmodule AutoApi.CapabilitiesState do
   will translate those into modules and property names.
   """
 
-  alias AutoApi.PropertyComponent
+  alias AutoApi.State
 
   defstruct capabilities: [],
-            timestamp: nil
+            webhooks: []
 
   use AutoApi.State, spec_file: "capabilities.json"
 
-  @type capability :: %PropertyComponent{
-          data: %{
-            capability_id: integer(),
-            supported_property_ids: binary()
-          }
+  @type capability :: %{
+          capability_id: integer(),
+          supported_property_ids: binary()
+        }
+
+  @type event ::
+          :ping
+          | :trip_started
+          | :trip_ended
+          | :vehicle_location_changed
+          | :authorization_changed
+          | :tire_pressure_changed
+
+  @type webhook :: %{
+          available: :available | :unavailable,
+          event: event()
         }
 
   @type t :: %__MODULE__{
-          capabilities: list(capability()),
-          timestamp: DateTime.t() | nil
+          capabilities: State.multiple_property(capability()),
+          webhooks: State.multiple_property(webhook())
         }
 
   @doc """

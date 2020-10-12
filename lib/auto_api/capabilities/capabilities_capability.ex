@@ -9,8 +9,10 @@ defmodule AutoApi.CapabilitiesCapability do
       :capabilities
       iex> C.description
       "Capabilities"
+      iex> length(C.properties)
+      2
       iex> List.last(C.properties)
-      {0x01, :capabilities}
+      {0x02, :webhooks}
   """
 
   @command_module AutoApi.CapabilitiesCommand
