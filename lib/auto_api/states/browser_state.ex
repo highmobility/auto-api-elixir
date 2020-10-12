@@ -3,16 +3,14 @@ defmodule AutoApi.BrowserState do
   Browser state
   """
 
-  alias AutoApi.PropertyComponent
+  alias AutoApi.State
 
-  defstruct url: nil,
-            timestamp: nil
+  defstruct url: nil
 
   use AutoApi.State, spec_file: "browser.json"
 
   @type t :: %__MODULE__{
-          url: %PropertyComponent{data: String.t()} | nil,
-          timestamp: DateTime.t() | nil
+          url: State.property(String.t())
         }
 
   @doc """
