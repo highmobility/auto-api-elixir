@@ -3,7 +3,7 @@ defmodule AutoApi.ClimateState do
   Climate state
   """
 
-  alias AutoApi.{CommonData, PropertyComponent}
+  alias AutoApi.{CommonData, State, UnitType}
 
   defstruct inside_temperature: nil,
             outside_temperature: nil,
@@ -15,39 +15,37 @@ defmodule AutoApi.ClimateState do
             ionising_state: nil,
             defrosting_temperature_setting: nil,
             hvac_weekday_starting_times: [],
-            rear_temperature_setting: nil,
-            timestamp: nil
+            rear_temperature_setting: nil
 
   use AutoApi.State, spec_file: "climate.json"
 
-  @type activity :: :inactive | :active
-  @type hvac_weekday_starting_time :: %PropertyComponent{
-          data: %{
-            weekday: CommonData.weekday() | :automatic,
-            time: %{hour: integer, minute: integer}
-          }
+  @type weekday ::
+          :monday | :tuesday | :wednesday | :thursday | :friday | :saturday | :sunday | :automatic
+
+  @type hvac_weekday_starting_time :: %{
+          weekday: CommonData.weekday(),
+          time: CommonData.time()
         }
 
   @type t :: %__MODULE__{
-          inside_temperature: %PropertyComponent{data: float} | nil,
-          outside_temperature: %PropertyComponent{data: float} | nil,
-          driver_temperature_setting: %PropertyComponent{data: float} | nil,
-          passenger_temperature_setting: %PropertyComponent{data: float} | nil,
-          hvac_state: %PropertyComponent{data: CommonData.activity()} | nil,
-          defogging_state: %PropertyComponent{data: CommonData.activity()} | nil,
-          defrosting_state: %PropertyComponent{data: CommonData.activity()} | nil,
-          ionising_state: %PropertyComponent{data: CommonData.activity()} | nil,
-          defrosting_temperature_setting: %PropertyComponent{data: float} | nil,
-          hvac_weekday_starting_times: list(hvac_weekday_starting_time),
-          rear_temperature_setting: %PropertyComponent{data: float} | nil,
-          timestamp: DateTime.t() | nil
+          inside_temperature: State.property(UnitType.temperature()),
+          outside_temperature: State.property(UnitType.temperature()),
+          driver_temperature_setting: State.property(UnitType.temperature()),
+          passenger_temperature_setting: State.property(UnitType.temperature()),
+          hvac_state: State.property(CommonData.activity()),
+          defogging_state: State.property(CommonData.activity()),
+          defrosting_state: State.property(CommonData.activity()),
+          ionising_state: State.property(CommonData.activity()),
+          defrosting_temperature_setting: State.property(UnitType.temperature()),
+          hvac_weekday_starting_times: State.multiple_property(hvac_weekday_starting_time()),
+          rear_temperature_setting: State.property(UnitType.temperature())
         }
 
   @doc """
   Build state based on binary value
 
-    iex> AutoApi.ClimateState.from_bin(<<1, 7::integer-16, 1, 0, 4, 65, 224, 0, 0>>)
-    %AutoApi.ClimateState{inside_temperature: %AutoApi.PropertyComponent{data: 28.0}}
+    iex> AutoApi.ClimateState.from_bin(<<1, 0, 13, 1, 0, 10, 23, 1, 64, 60, 0, 0, 0, 0, 0, 0>>)
+    %AutoApi.ClimateState{inside_temperature: %AutoApi.PropertyComponent{data: {28.0, :celsius}}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -57,9 +55,9 @@ defmodule AutoApi.ClimateState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.ClimateState{inside_temperature: %AutoApi.PropertyComponent{data: 28.00}}
+    iex> state = %AutoApi.ClimateState{inside_temperature: %AutoApi.PropertyComponent{data: {28.00, :celsius}}}
     iex> AutoApi.ClimateState.to_bin(state)
-    <<1, 7::integer-16, 1, 0, 4, 65, 224, 0, 0>>
+    <<1, 0, 13, 1, 0, 10, 23, 1, 64, 60, 0, 0, 0, 0, 0, 0>>
   """
   @spec to_bin(__MODULE__.t()) :: binary
   def to_bin(%__MODULE__{} = state) do
