@@ -45,7 +45,7 @@ defmodule AutoApi.State do
     raw_spec = Jason.decode!(File.read!(spec_path))
 
     base =
-      quote do
+      quote location: :keep do
         alias AutoApi.CommonData
         @behaviour AutoApi.State
         @dialyzer {:nowarn_function, to_properties: 4}
@@ -194,7 +194,7 @@ defmodule AutoApi.State do
         prop_id = prop["id"]
         multiple = prop["multiple"] || false
 
-        quote do
+        quote location: :keep do
           if unquote(multiple) do
             defp override_property(%__MODULE__{} = state, unquote(prop_name), value) do
               %{state | unquote(prop_name) => [value]}

@@ -45,7 +45,7 @@ defmodule AutoApi.Command do
     property_ids = Enum.map(capability.properties(), fn {id, name} -> {name, id} end)
 
     base_functions =
-      quote do
+      quote location: :keep do
         @behaviour AutoApi.Command
 
         @type action :: atom()
@@ -204,7 +204,7 @@ defmodule AutoApi.Command do
 
     setter_functions =
       for setter <- setter_names do
-        quote do
+        quote location: :keep do
           def to_bin(unquote(setter), properties) when is_list(properties) do
             {mandatory, optional, constants} = Keyword.get(@capability.setters(), unquote(setter))
 

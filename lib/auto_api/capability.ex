@@ -34,7 +34,7 @@ defmodule AutoApi.Capability do
     properties = raw_spec["properties"] || []
 
     base_functions =
-      quote do
+      quote location: :keep do
         @external_resource unquote(spec_path)
         @raw_spec unquote(Macro.escape(raw_spec))
 
@@ -186,7 +186,7 @@ defmodule AutoApi.Capability do
         prop_name = String.to_atom(prop["name"])
         multiple? = prop["multiple"] || false
 
-        quote do
+        quote location: :keep do
           def property_id(unquote(prop_name)), do: unquote(prop_id)
           def property_name(unquote(prop_id)), do: unquote(prop_name)
           def property_spec(unquote(prop_name)), do: unquote(Macro.escape(prop))
