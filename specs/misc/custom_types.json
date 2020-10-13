@@ -1372,27 +1372,7 @@
                 {
                     "name": "state",
                     "name_cased": "state",
-                    "type": "types.active_state"
-                },
-                {
-                    "name": "colour",
-                    "name_cased": "colour",
-                    "type": "enum",
-                    "size": 1,
-                    "enum_values": [
-                        {
-                            "id": 0,
-                            "name": "info"
-                        },
-                        {
-                            "id": 1,
-                            "name": "yellow"
-                        },
-                        {
-                            "id": 2,
-                            "name": "red"
-                        }
-                    ]
+                    "type": "types.on_off_state"
                 }
             ]
         },
