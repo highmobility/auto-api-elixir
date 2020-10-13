@@ -27,28 +27,6 @@ defmodule AutoApi.VehicleInformationState do
 
   alias AutoApi.{State, UnitType}
 
-  defstruct powertrain: nil,
-            model_name: nil,
-            name: nil,
-            license_plate: nil,
-            sales_designation: nil,
-            model_year: nil,
-            colour_name: nil,
-            # Deprecated!
-            power_in_kw: nil,
-            number_of_doors: nil,
-            number_of_seats: nil,
-            engine_volume: nil,
-            engine_max_torque: nil,
-            gearbox: nil,
-            display_unit: nil,
-            driver_seat_location: nil,
-            equipments: [],
-            power: nil,
-            language: nil,
-            timeformat: nil,
-            drive: nil
-
   use AutoApi.State, spec_file: "vehicle_information.json"
 
   @type powertrain ::

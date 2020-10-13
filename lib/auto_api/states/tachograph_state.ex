@@ -1,3 +1,25 @@
+# AutoAPI
+# The MIT License
+#
+# Copyright (c) 2018- High-Mobility GmbH (https://high-mobility.com)
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in
+# all copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+# THE SOFTWARE.
 defmodule AutoApi.TachographState do
   @moduledoc """
   Keeps Tachograph state
@@ -5,18 +27,6 @@ defmodule AutoApi.TachographState do
   """
 
   alias AutoApi.PropertyComponent
-
-  @doc """
-  Tachograph state
-  """
-  defstruct drivers_working_states: [],
-            drivers_time_states: [],
-            drivers_cards_present: [],
-            vehicle_motion: nil,
-            vehicle_overspeed: nil,
-            vehicle_direction: nil,
-            vehicle_speed: nil,
-            timestamp: nil
 
   use AutoApi.State, spec_file: "tachograph.json"
 
@@ -50,8 +60,7 @@ defmodule AutoApi.TachographState do
           vehicle_motion: %PropertyComponent{data: vehicle_motion} | nil,
           vehicle_overspeed: %PropertyComponent{data: vehicle_overspeed} | nil,
           vehicle_direction: %PropertyComponent{data: vehicle_direction} | nil,
-          vehicle_speed: %PropertyComponent{data: integer} | nil,
-          timestamp: DateTime.t() | nil
+          vehicle_speed: %PropertyComponent{data: integer} | nil
         }
 
   @doc """

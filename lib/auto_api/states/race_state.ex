@@ -1,3 +1,25 @@
+# AutoAPI
+# The MIT License
+#
+# Copyright (c) 2018- High-Mobility GmbH (https://high-mobility.com)
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in
+# all copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+# THE SOFTWARE.
 defmodule AutoApi.RaceState do
   @moduledoc """
   Keeps Race state
@@ -5,6 +27,8 @@ defmodule AutoApi.RaceState do
   """
 
   alias AutoApi.{CommonData, PropertyComponent}
+
+  use AutoApi.State, spec_file: "race.json"
 
   @type direction ::
           :longitudinal
@@ -18,31 +42,6 @@ defmodule AutoApi.RaceState do
           data: %{axle: axle, vectoring: CommonData.activity()}
         }
   @type vehicle_moving :: :moving | :not_moving
-
-  @doc """
-  Race state
-  """
-  defstruct accelerations: [],
-            understeering: nil,
-            oversteering: nil,
-            gas_pedal_position: nil,
-            steering_angle: nil,
-            brake_pressure: nil,
-            yaw_rate: nil,
-            rear_suspension_steering: nil,
-            electronic_stability_program: nil,
-            brake_torque_vectorings: [],
-            gear_mode: nil,
-            selected_gear: nil,
-            brake_pedal_position: nil,
-            brake_pedal_switch: nil,
-            clutch_pedal_switch: nil,
-            accelerator_pedal_idle_switch: nil,
-            accelerator_pedal_kickdown_switch: nil,
-            vehicle_moving: nil,
-            timestamp: nil
-
-  use AutoApi.State, spec_file: "race.json"
 
   @type t :: %__MODULE__{
           accelerations: list(acceleration),
@@ -63,8 +62,7 @@ defmodule AutoApi.RaceState do
           accelerator_pedal_idle_switch: %PropertyComponent{data: CommonData.activity()} | nil,
           accelerator_pedal_kickdown_switch:
             %PropertyComponent{data: CommonData.activity()} | nil,
-          vehicle_moving: %PropertyComponent{data: vehicle_moving} | nil,
-          timestamp: DateTime.t() | nil
+          vehicle_moving: %PropertyComponent{data: vehicle_moving} | nil
         }
 
   @doc """

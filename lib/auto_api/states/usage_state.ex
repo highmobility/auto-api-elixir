@@ -1,26 +1,31 @@
+# AutoAPI
+# The MIT License
+#
+# Copyright (c) 2018- High-Mobility GmbH (https://high-mobility.com)
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in
+# all copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+# THE SOFTWARE.
 defmodule AutoApi.UsageState do
   @moduledoc """
   Usage state
   """
 
   alias AutoApi.{CommonData, PropertyComponent}
-
-  defstruct average_weekly_distance: nil,
-            average_weekly_distance_long_run: nil,
-            acceleration_evaluation: nil,
-            driving_style_evaluation: nil,
-            driving_modes_activation_periods: [],
-            driving_modes_energy_consumptions: [],
-            last_trip_energy_consumption: nil,
-            last_trip_fuel_consumption: nil,
-            mileage_after_last_trip: nil,
-            last_trip_electric_portion: nil,
-            last_trip_average_energy_recuperation: nil,
-            last_trip_battery_remaining: nil,
-            last_trip_date: nil,
-            average_fuel_consumption: nil,
-            current_fuel_consumption: nil,
-            timestamp: nil
 
   use AutoApi.State, spec_file: "usage.json"
 
@@ -46,8 +51,7 @@ defmodule AutoApi.UsageState do
           last_trip_battery_remaining: %PropertyComponent{data: float} | nil,
           last_trip_date: %PropertyComponent{data: integer} | nil,
           average_fuel_consumption: %PropertyComponent{data: float} | nil,
-          current_fuel_consumption: %PropertyComponent{data: float} | nil,
-          timestamp: DateTime.t() | nil
+          current_fuel_consumption: %PropertyComponent{data: float} | nil
         }
 
   @doc """

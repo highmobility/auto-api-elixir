@@ -20,42 +20,19 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.HoodState do
-  @moduledoc """
-  Keeps Hood state
-  """
+defmodule AutoApi.StateHelper do
+  @moduledoc false
 
-  alias AutoApi.PropertyComponent
-
-  @type position :: :closed | :open | :intermediate
-
-  use AutoApi.State, spec_file: "hood.json"
-
-  @type t :: %__MODULE__{
-          position: %PropertyComponent{data: position} | nil
-        }
-
-  @doc """
-  Build state based on binary value
-
-    iex> bin = <<1, 0, 4, 1, 0, 1, 1>>
-    iex> AutoApi.HoodState.from_bin(bin)
-    %AutoApi.HoodState{position: %AutoApi.PropertyComponent{data: :open}}
-  """
-  @spec from_bin(binary) :: __MODULE__.t()
-  def from_bin(bin) do
-    parse_bin_properties(bin, %__MODULE__{})
-  end
-
-  @spec to_bin(__MODULE__.t()) :: binary
-  @doc """
-  Parse state to bin
-
-    iex> state = %AutoApi.HoodState{position: %AutoApi.PropertyComponent{data: :open}}
-    iex> AutoApi.HoodState.to_bin(state)
-    <<1, 0, 4, 1, 0, 1, 1>>
-  """
-  def to_bin(%__MODULE__{} = state) do
-    parse_state_properties(state)
+  def generate_struct(raw_spec) do
+    raw_spec["properties"]
+    |> Enum.map(fn prop -> {String.to_atom(prop["name"]), prop["multiple"] || false} end)
+    |> Enum.map(fn {name, multiple} ->
+      {name,
+       if multiple do
+         []
+       else
+         nil
+       end}
+    end)
   end
 end

@@ -43,6 +43,7 @@ defmodule AutoApi.State do
   defmacro __using__(spec_file: spec_file) do
     spec_path = Path.join(["specs", "capabilities", spec_file])
     raw_spec = Jason.decode!(File.read!(spec_path))
+    struct_def = AutoApi.StateHelper.generate_struct(raw_spec)
 
     base =
       quote location: :keep do
@@ -56,6 +57,8 @@ defmodule AutoApi.State do
                     |> Atom.to_string()
                     |> String.replace("State", "Capability")
                     |> String.to_atom()
+
+        defstruct unquote(struct_def)
 
         @spec base() :: t
         def base, do: %__MODULE__{}

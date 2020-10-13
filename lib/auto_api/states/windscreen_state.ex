@@ -1,19 +1,31 @@
+# AutoAPI
+# The MIT License
+#
+# Copyright (c) 2018- High-Mobility GmbH (https://high-mobility.com)
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in
+# all copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+# THE SOFTWARE.
 defmodule AutoApi.WindscreenState do
   @moduledoc """
   Windscreen state
   """
 
   alias AutoApi.{CommonData, PropertyComponent}
-
-  defstruct wipers_status: nil,
-            wipers_intensity: nil,
-            windscreen_damage: nil,
-            windscreen_zone_matrix: nil,
-            windscreen_damage_zone: nil,
-            windscreen_needs_replacement: nil,
-            windscreen_damage_confidence: nil,
-            windscreen_damage_detection_time: nil,
-            timestamp: nil
 
   use AutoApi.State, spec_file: "windscreen.json"
 
@@ -37,8 +49,7 @@ defmodule AutoApi.WindscreenState do
           windscreen_needs_replacement:
             %PropertyComponent{data: windscreen_needs_replacement} | nil,
           windscreen_damage_confidence: %PropertyComponent{data: float} | nil,
-          windscreen_damage_detection_time: %PropertyComponent{data: integer} | nil,
-          timestamp: DateTime.t() | nil
+          windscreen_damage_detection_time: %PropertyComponent{data: integer} | nil
         }
 
   @doc """

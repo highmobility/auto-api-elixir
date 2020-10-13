@@ -1,3 +1,25 @@
+# AutoAPI
+# The MIT License
+#
+# Copyright (c) 2018- High-Mobility GmbH (https://high-mobility.com)
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in
+# all copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+# THE SOFTWARE.
 defmodule AutoApi.RooftopControlState do
   @moduledoc """
   Keeps RooftopControl state
@@ -9,16 +31,6 @@ defmodule AutoApi.RooftopControlState do
   @type sunroof_tilt_state :: :closed | :tilt | :half_tilt
   @type sunroof_state :: :closed | :open | :intermediate
 
-  @doc """
-  RooftopControl state
-  """
-  defstruct dimming: nil,
-            position: nil,
-            convertible_roof_state: nil,
-            sunroof_tilt_state: nil,
-            sunroof_state: nil,
-            timestamp: nil
-
   use AutoApi.State, spec_file: "rooftop_control.json"
 
   @type t :: %__MODULE__{
@@ -26,8 +38,7 @@ defmodule AutoApi.RooftopControlState do
           position: %PropertyComponent{data: float} | nil,
           convertible_roof_state: %PropertyComponent{data: convertible_roof_state} | nil,
           sunroof_tilt_state: %PropertyComponent{data: sunroof_tilt_state} | nil,
-          sunroof_state: %PropertyComponent{data: sunroof_state} | nil,
-          timestamp: DateTime.t() | nil
+          sunroof_state: %PropertyComponent{data: sunroof_state} | nil
         }
 
   @doc """

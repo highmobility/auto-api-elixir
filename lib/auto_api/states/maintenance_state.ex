@@ -1,23 +1,31 @@
+# AutoAPI
+# The MIT License
+#
+# Copyright (c) 2018- High-Mobility GmbH (https://high-mobility.com)
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in
+# all copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+# THE SOFTWARE.
 defmodule AutoApi.MaintenanceState do
   @moduledoc """
   Maintenance state
   """
 
   alias AutoApi.{CommonData, PropertyComponent}
-
-  defstruct days_to_next_service: nil,
-            kilometers_to_next_service: nil,
-            cbs_reports_count: nil,
-            months_to_exhaust_inspection: nil,
-            service_distance_threshold: nil,
-            teleservice_availability: nil,
-            service_time_threshold: nil,
-            automatic_teleservice_call_date: nil,
-            teleservice_battery_call_date: nil,
-            next_inspection_date: nil,
-            condition_based_services: [],
-            brake_fluid_change_date: nil,
-            timestamp: nil
 
   use AutoApi.State, spec_file: "maintenance.json"
 
@@ -49,8 +57,7 @@ defmodule AutoApi.MaintenanceState do
           teleservice_battery_call_date: %PropertyComponent{data: integer} | nil,
           next_inspection_date: %PropertyComponent{data: integer} | nil,
           condition_based_services: list(condition_based_services),
-          brake_fluid_change_date: %PropertyComponent{data: integer} | nil,
-          timestamp: DateTime.t() | nil
+          brake_fluid_change_date: %PropertyComponent{data: integer} | nil
         }
 
   @doc """

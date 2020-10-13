@@ -27,8 +27,6 @@ defmodule AutoApi.VehicleStatusState do
 
   alias AutoApi.State
 
-  defstruct states: []
-
   use AutoApi.State, spec_file: "vehicle_status.json"
 
   @type t :: %__MODULE__{

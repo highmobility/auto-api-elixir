@@ -1,3 +1,25 @@
+# AutoAPI
+# The MIT License
+#
+# Copyright (c) 2018- High-Mobility GmbH (https://high-mobility.com)
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in
+# all copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+# THE SOFTWARE.
 defmodule AutoApi.DiagnosticsState do
   @moduledoc """
   Keeps Diagnostics state
@@ -6,38 +28,6 @@ defmodule AutoApi.DiagnosticsState do
   """
 
   alias AutoApi.{CommonData, PropertyComponent}
-
-  @doc """
-  Diagnostics state
-  """
-  defstruct mileage: nil,
-            engine_oil_temperature: nil,
-            speed: nil,
-            engine_rpm: nil,
-            fuel_level: nil,
-            estimated_range: nil,
-            washer_fluid_level: nil,
-            battery_voltage: nil,
-            adblue_level: nil,
-            distance_since_reset: nil,
-            distance_since_start: nil,
-            fuel_volume: nil,
-            anti_lock_braking: nil,
-            engine_coolant_temperature: nil,
-            engine_total_operating_hours: nil,
-            engine_total_fuel_consumption: nil,
-            brake_fluid_level: nil,
-            engine_torque: nil,
-            engine_load: nil,
-            wheel_based_speed: nil,
-            battery_level: nil,
-            check_control_messages: [],
-            tire_temperatures: [],
-            tire_pressures: [],
-            wheel_rpms: [],
-            trouble_codes: [],
-            mileage_meters: nil,
-            timestamp: nil
 
   use AutoApi.State, spec_file: "diagnostics.json"
 
@@ -110,8 +100,7 @@ defmodule AutoApi.DiagnosticsState do
           tire_temperatures: list(tire_temperature),
           wheel_rpms: list(wheel_rpm),
           trouble_codes: list(trouble_code),
-          mileage_meters: %PropertyComponent{data: integer} | nil,
-          timestamp: DateTime.t() | nil
+          mileage_meters: %PropertyComponent{data: integer} | nil
         }
 
   @doc """
