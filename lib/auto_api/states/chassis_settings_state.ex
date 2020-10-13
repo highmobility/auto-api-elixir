@@ -3,7 +3,7 @@ defmodule AutoApi.ChassisSettingsState do
   ChassisSettings state
   """
 
-  alias AutoApi.{CommonData, PropertyComponent}
+  alias AutoApi.{CommonData, State, UnitType}
 
   defstruct driving_mode: nil,
             sport_chrono: nil,
@@ -12,23 +12,22 @@ defmodule AutoApi.ChassisSettingsState do
             minimum_spring_rates: [],
             current_chassis_position: nil,
             maximum_chassis_position: nil,
-            minimum_chassis_position: nil,
-            timestamp: nil
+            minimum_chassis_position: nil
 
   use AutoApi.State, spec_file: "chassis_settings.json"
 
-  @type spring_rate :: %PropertyComponent{data: %{value: integer, axle: CommonData.axle()}}
+  @type sport_chrono :: :inactive | :active | :reset
+  @type spring_rate :: %{value: UnitType.torque(), axle: CommonData.axle()}
 
   @type t :: %__MODULE__{
-          driving_mode: %PropertyComponent{data: CommonData.driving_mode()} | nil,
-          sport_chrono: %PropertyComponent{data: CommonData.activity()} | nil,
-          current_spring_rates: list(spring_rate),
-          maximum_spring_rates: list(spring_rate),
-          minimum_spring_rates: list(spring_rate),
-          current_chassis_position: %PropertyComponent{data: integer} | nil,
-          maximum_chassis_position: %PropertyComponent{data: integer} | nil,
-          minimum_chassis_position: %PropertyComponent{data: integer} | nil,
-          timestamp: DateTime.t() | nil
+          driving_mode: State.property(CommonData.driving_mode()),
+          sport_chrono: State.property(sport_chrono()),
+          current_spring_rates: State.multiple_property(spring_rate),
+          maximum_spring_rates: State.multiple_property(spring_rate),
+          minimum_spring_rates: State.multiple_property(spring_rate),
+          current_chassis_position: State.property(UnitType.length()),
+          maximum_chassis_position: State.property(UnitType.length()),
+          minimum_chassis_position: State.property(UnitType.length())
         }
 
   @doc """

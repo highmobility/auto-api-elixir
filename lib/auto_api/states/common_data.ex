@@ -30,7 +30,7 @@ defmodule AutoApi.CommonData do
   @type coordinates :: %{latitude: float, longitude: float}
   @type activity :: :inactive | :active
   @type activity_switched :: :deactivated | :activated
-  @type axle :: :front_axle | :rear_axle
+  @type axle :: :front | :rear
   @type weekday :: :monday | :tuesday | :wednesday | :thursday | :friday | :saturday | :sunday
   @type driving_mode :: :regular | :eco | :sport | :sport_plus | :ecoPlus | :comfort
   @type network_security :: :none | :wep | :wpa | :wpa2_personal
