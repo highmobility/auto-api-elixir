@@ -81,16 +81,16 @@ defmodule AutoApi.PropertyComponent do
 
   defp data_to_bin(nil, _), do: <<>>
 
-  defp data_to_bin(data, %{"embedded" => true, "type" => "string"}) do
-    <<byte_size(data)::integer-16, data::binary>>
-  end
-
-  defp data_to_bin(data, %{"embedded" => true, "type" => "bytes"}) do
+  defp data_to_bin(data, %{"type" => "string", "embedded" => true}) do
     <<byte_size(data)::integer-16, data::binary>>
   end
 
   defp data_to_bin(data, %{"type" => "string"}) do
     data
+  end
+
+  defp data_to_bin(data, %{"type" => "bytes", "embedded" => true}) do
+    <<byte_size(data)::integer-16, data::binary>>
   end
 
   defp data_to_bin(data, %{"type" => "bytes"}) do
@@ -137,15 +137,14 @@ defmodule AutoApi.PropertyComponent do
   end
 
   defp data_to_bin(data, %{"type" => "custom"} = specs) do
-    specs
-    |> Map.get("items")
-    |> Enum.map(&Map.put(&1, "embedded", true))
-    |> Enum.map(fn %{"name" => name} = spec ->
-      data
-      |> Map.get(String.to_atom(name))
-      |> data_to_bin(spec)
-    end)
-    |> :binary.list_to_bin()
+    bin_data = custom_type_to_bin(data, specs)
+
+    if specs["embedded"] && is_nil(specs["size"]) do
+      # Prepend with size only if embedded with no size, like string and bytes
+      <<byte_size(bin_data)::integer-16, bin_data::binary>>
+    else
+      custom_type_to_bin(data, specs)
+    end
   end
 
   # Workaround while `capability_state` type is `bytes`
@@ -164,6 +163,18 @@ defmodule AutoApi.PropertyComponent do
     unit_id = AutoApi.UnitType.unit_id(type, unit)
 
     <<type_id, unit_id, value::float-size(64)>>
+  end
+
+  defp custom_type_to_bin(data, specs) do
+    specs
+    |> Map.get("items")
+    |> Enum.map(&Map.put(&1, "embedded", true))
+    |> Enum.map(fn %{"name" => name} = spec ->
+      data
+      |> Map.get(String.to_atom(name))
+      |> data_to_bin(spec)
+    end)
+    |> :binary.list_to_bin()
   end
 
   defp timestamp_to_bin(nil), do: <<>>
@@ -258,7 +269,7 @@ defmodule AutoApi.PropertyComponent do
     |> Enum.reduce({0, []}, fn spec, {counter, acc} ->
       item_spec = fetch_item_spec(spec)
       size = fetch_item_size(binary_data, counter, item_spec)
-      counter = update_counter(item_spec, counter)
+      counter = update_counter(counter, item_spec)
 
       data_value =
         binary_data
@@ -313,24 +324,21 @@ defmodule AutoApi.PropertyComponent do
   defp split_binary_to_parts(<<>>, acc), do: acc
 
   defp fetch_item_spec(%{"type" => "types." <> type}) do
-    AutoApi.CustomType.spec(type)
+    type
+    |> AutoApi.CustomType.spec()
+    |> Map.put("embedded", "true")
   end
 
-  defp fetch_item_spec(spec), do: spec
+  defp fetch_item_spec(spec) do
+    Map.put(spec, "embedded", "true")
+  end
 
+  @sizeless_types ~w(custom string bytes)
   defp fetch_item_size(_binary_data, _counter, %{"size" => size}) do
     size
   end
 
-  defp fetch_item_size(binary_data, counter, %{"type" => "string"}) do
-    # String type without size spec has a fixed size header of 2 bytes
-    binary_data
-    |> :binary.part(counter, 2)
-    |> AutoApi.CommonData.convert_bin_to_integer()
-  end
-
-  defp fetch_item_size(binary_data, counter, %{"type" => "bytes"}) do
-    # Bytes type without size spec has a fixed size header of 2 bytes
+  defp fetch_item_size(binary_data, counter, %{"type" => type}) when type in @sizeless_types do
     binary_data
     |> :binary.part(counter, 2)
     |> AutoApi.CommonData.convert_bin_to_integer()
@@ -340,7 +348,11 @@ defmodule AutoApi.PropertyComponent do
     raise("couldn't find size for #{inspect(spec)}")
   end
 
-  defp update_counter(%{"type" => "string"}, counter), do: counter + 2
-  defp update_counter(%{"type" => "bytes"}, counter), do: counter + 2
-  defp update_counter(_, counter), do: counter
+  defp update_counter(counter, specs) do
+    if specs["type"] in @sizeless_types && is_nil(specs["size"]) do
+      counter + 2
+    else
+      counter
+    end
+  end
 end

@@ -265,6 +265,151 @@ defmodule AutoApi.PropertyComponentTest do
         bin_comp = PropertyComponent.to_bin(prop_comp, spec)
 
         bin_data = <<id::integer-16, text_size::integer-16, text::binary>>
+
+        bin_data_size_org = byte_size(bin_data)
+
+        assert <<1, bin_data_size::integer-16, bin_data::binary-size(bin_data_size), _::binary>> =
+                 bin_comp
+
+        assert bin_data_size_org == bin_data_size
+
+        assert PropertyComponent.to_struct(bin_comp, spec) == prop_comp
+      end
+    end
+
+    property "converts custom value with strings to bin" do
+      forall data <- [enum: oneof([:foo, :bar, :baz]), text: utf8(), datetime: datetime()] do
+        spec = %{
+          "type" => "custom",
+          "items" => [
+            %{
+              "name" => "enum",
+              "type" => "enum",
+              "size" => 1,
+              "enum_values" => [
+                %{"id" => 0, "name" => "foo"},
+                %{"id" => 1, "name" => "bar"},
+                %{"id" => 2, "name" => "baz"}
+              ]
+            },
+            %{
+              "name" => "key",
+              "type" => "string"
+            },
+            %{
+              "name" => "value",
+              "type" => "string"
+            }
+          ]
+        }
+
+        enum = data[:enum]
+        text = data[:text]
+        text_size = byte_size(text)
+
+        prop_comp = %PropertyComponent{
+          data: %{enum: enum, key: text, value: text},
+          timestamp: data[:datetime]
+        }
+
+        bin_comp = PropertyComponent.to_bin(prop_comp, spec)
+
+        bin_data = <<1, text_size::integer-16, text::binary, text_size::integer-16, text::binary>>
+
+        bin_data_size_org = byte_size(bin_data)
+
+        assert <<1, bin_data_size::integer-16, bin_data::binary-size(bin_data_size), _::binary>> =
+                 bin_comp
+
+        assert bin_data_size_org == bin_data_size
+
+        assert PropertyComponent.to_struct(bin_comp, spec) == prop_comp
+      end
+    end
+
+    property "converts custom value with only strings to bin" do
+      forall data <- [text: utf8(), datetime: datetime()] do
+        spec = %{
+          "type" => "custom",
+          "items" => [
+            %{
+              "name" => "key",
+              "type" => "string"
+            },
+            %{
+              "name" => "value",
+              "type" => "string"
+            }
+          ]
+        }
+
+        text = data[:text]
+        text_size = byte_size(text)
+
+        prop_comp = %PropertyComponent{
+          data: %{key: text, value: text},
+          timestamp: data[:datetime]
+        }
+
+        bin_comp = PropertyComponent.to_bin(prop_comp, spec)
+
+        bin_data = <<text_size::integer-16, text::binary, text_size::integer-16, text::binary>>
+
+        bin_data_size_org = byte_size(bin_data)
+
+        assert <<1, bin_data_size::integer-16, bin_data::binary-size(bin_data_size), _::binary>> =
+                 bin_comp
+
+        assert bin_data_size_org == bin_data_size
+
+        assert PropertyComponent.to_struct(bin_comp, spec) == prop_comp
+      end
+    end
+
+    property "converts embedded custom value with strings to bin" do
+      forall data <- [id: integer_2(), text: utf8(), datetime: datetime()] do
+        spec = %{
+          "type" => "custom",
+          "items" => [
+            %{
+              "name" => "id",
+              "size" => 2,
+              "type" => "integer"
+            },
+            %{
+              "name" => "map",
+              "type" => "custom",
+              "items" => [
+                %{
+                  "name" => "key",
+                  "type" => "string"
+                },
+                %{
+                  "name" => "value",
+                  "type" => "string"
+                }
+              ]
+            }
+          ]
+        }
+
+        text = data[:text]
+        text_size = byte_size(text)
+        id = data[:id]
+
+        prop_comp = %PropertyComponent{
+          data: %{id: id, map: %{key: text, value: text}},
+          timestamp: data[:datetime]
+        }
+
+        bin_comp = PropertyComponent.to_bin(prop_comp, spec)
+
+        map_data_size = (text_size + 2) * 2 + 2
+
+        bin_data =
+          <<id::integer-16, map_data_size::integer-16, text_size::integer-16, text::binary,
+            text_size::integer-16, text::binary>>
+
         bin_data_size_org = byte_size(bin_data)
 
         assert <<1, bin_data_size::integer-16, bin_data::binary-size(bin_data_size), _::binary>> =
