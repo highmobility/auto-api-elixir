@@ -143,7 +143,7 @@ defmodule AutoApi.PropertyComponent do
       # Prepend with size only if embedded with no size, like string and bytes
       <<byte_size(bin_data)::integer-16, bin_data::binary>>
     else
-      custom_type_to_bin(data, specs)
+      bin_data
     end
   end
 
@@ -152,8 +152,8 @@ defmodule AutoApi.PropertyComponent do
     state_mod.identifier <> <<0x01>> <> state_mod.to_bin(state)
   end
 
-  defp data_to_bin(data, %{"type" => "types." <> type}) do
-    type_spec = AutoApi.CustomType.spec(type)
+  defp data_to_bin(data, %{"type" => "types." <> type} = spec) do
+    type_spec = type |> AutoApi.CustomType.spec() |> Map.put("embedded", spec["embedded"])
 
     data_to_bin(data, type_spec)
   end
