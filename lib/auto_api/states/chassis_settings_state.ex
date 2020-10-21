@@ -30,7 +30,10 @@ defmodule AutoApi.ChassisSettingsState do
   use AutoApi.State, spec_file: "chassis_settings.json"
 
   @type sport_chrono :: :inactive | :active | :reset
-  @type spring_rate :: %{value: UnitType.torque(), axle: CommonData.axle()}
+  @type spring_rate :: %{
+          value: UnitType.torque(),
+          axle: CommonData.location_longitudinal()
+        }
 
   @type t :: %__MODULE__{
           driving_mode: State.property(CommonData.driving_mode()),

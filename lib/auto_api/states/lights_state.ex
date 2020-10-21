@@ -25,38 +25,41 @@ defmodule AutoApi.LightsState do
   Lights state
   """
 
-  alias AutoApi.{CommonData, PropertyComponent}
+  alias AutoApi.{CommonData, State}
 
   use AutoApi.State, spec_file: "lights.json"
 
   @type front_exterior_light :: :inactive | :active | :active_with_full_beam | :dlr | :automatic
-  @type light_location :: :front | :rear
-  @type ambient_light :: %{red: integer, green: integer, blue: integer}
-  @type fog_light :: %PropertyComponent{
-          data: %{location: light_location, state: CommonData.activity()}
+  @type ambient_light :: %{
+          red: integer,
+          green: integer,
+          blue: integer
         }
-  @type reading_lamp :: %PropertyComponent{
-          data: %{
-            location: CommonData.location(),
-            state: CommonData.activity()
-          }
+  @type light :: %{
+          location: CommonData.location_longitudinal(),
+          state: CommonData.activity()
         }
-  @type interior_lights :: %PropertyComponent{
-          data: %{
-            location: light_location,
-            state: CommonData.activity()
-          }
+  @type reading_lamp :: %{
+          location: CommonData.location(),
+          state: CommonData.activity()
         }
+  @type switch_position ::
+          :automatic
+          | :dipped_headlights
+          | :parking_light_right
+          | :parking_light_left
+          | :sidelights
 
   @type t :: %__MODULE__{
-          front_exterior_light: %PropertyComponent{data: front_exterior_light} | nil,
-          rear_exterior_light: %PropertyComponent{data: CommonData.activity()} | nil,
-          ambient_light_colour: %PropertyComponent{data: ambient_light} | nil,
-          reverse_light: %PropertyComponent{data: CommonData.activity()} | nil,
-          emergency_brake_light: %PropertyComponent{data: CommonData.activity()} | nil,
-          fog_lights: list(fog_light),
-          reading_lamps: list(reading_lamp),
-          interior_lights: list(interior_lights)
+          front_exterior_light: State.property(front_exterior_light),
+          rear_exterior_light: State.property(CommonData.activity()),
+          ambient_light_colour: State.property(ambient_light),
+          reverse_light: State.property(CommonData.activity()),
+          emergency_brake_light: State.property(CommonData.activity()),
+          fog_lights: State.multiple_property(light),
+          reading_lamps: State.multiple_property(reading_lamp),
+          interior_lights: State.multiple_property(light),
+          switch_position: State.property(switch_position())
         }
 
   @doc """

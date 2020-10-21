@@ -25,12 +25,12 @@ defmodule AutoApi.CommonData do
 
   @type activity :: :inactive | :active
   @type activity_switched :: :deactivated | :activated
-  @type axle :: :front | :rear
   @type connection_state :: :disconnected | :connected
   @type coordinates :: %{latitude: float, longitude: float}
   @type driving_mode :: :regular | :eco | :sport | :sport_plus | :ecoPlus | :comfort
   @type enabled_state :: :disabled | :enabled
   @type location :: :front_left | :front_right | :rear_right | :rear_left
+  @type location_longitudinal :: :front | :rear
   @type lock :: :unlocked | :locked
   @type network_security :: :none | :wep | :wpa | :wpa2_personal
   @type on_off :: :on | :off
