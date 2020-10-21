@@ -20,23 +20,7 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.HoodCapability do
-  @moduledoc """
-  Basic settings for HoodCapability
-
-      iex> alias AutoApi.HoodCapability, as: H
-      iex> H.identifier
-      <<0x00, 0x67>>
-      iex> H.name
-      :hood
-      iex> H.description
-      "Hood"
-      iex> H.properties
-      [{0x01, :position}]
-  """
-
-  @command_module AutoApi.HoodCommand
-  @state_module AutoApi.HoodState
-
-  use AutoApi.Capability, spec_file: "hood.json"
+defmodule AutoApi.HoodCapabilityTest do
+  use ExUnit.Case
+  doctest AutoApi.HoodCapability
 end

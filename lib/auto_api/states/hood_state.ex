@@ -25,14 +25,14 @@ defmodule AutoApi.HoodState do
   Keeps Hood state
   """
 
-  alias AutoApi.PropertyComponent
+  alias AutoApi.State
 
   @type position :: :closed | :open | :intermediate
 
   use AutoApi.State, spec_file: "hood.json"
 
   @type t :: %__MODULE__{
-          position: %PropertyComponent{data: position} | nil
+          position: State.property(position)
         }
 
   @doc """
