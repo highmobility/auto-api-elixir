@@ -29,16 +29,14 @@ defmodule AutoApi.DriverFatigueState do
   will translate those into modules and property names.
   """
 
-  alias AutoApi.PropertyComponent
+  alias AutoApi.State
 
   use AutoApi.State, spec_file: "driver_fatigue.json"
 
-  @type fatigue_level :: %PropertyComponent{
-          data: :light | :pause_recommended | :action_needed | :car_ready_to_take_over
-        }
+  @type fatigue_level :: :light | :pause_recommended | :action_needed | :car_ready_to_take_over
 
   @type t :: %__MODULE__{
-          detected_fatigue_level: fatigue_level | nil
+          detected_fatigue_level: State.property(fatigue_level)
         }
 
   @doc """
