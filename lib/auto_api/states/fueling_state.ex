@@ -25,15 +25,13 @@ defmodule AutoApi.FuelingState do
   Fueling state
   """
 
-  alias AutoApi.{CommonData, PropertyComponent}
+  alias AutoApi.{CommonData, State}
 
   use AutoApi.State, spec_file: "fueling.json"
 
-  @type gas_flap_position :: :closed | :open
-
   @type t :: %__MODULE__{
-          gas_flap_position: %PropertyComponent{data: gas_flap_position} | nil,
-          gas_flap_lock: %PropertyComponent{data: CommonData.lock()} | nil
+          gas_flap_position: State.property(CommonData.position()),
+          gas_flap_lock: State.property(CommonData.lock())
         }
 
   @doc """
