@@ -25,15 +25,13 @@ defmodule AutoApi.EngineState do
   Keeps Engine state
   """
 
-  alias AutoApi.PropertyComponent
+  alias AutoApi.{CommonData, State}
 
   use AutoApi.State, spec_file: "engine.json"
 
-  @type on_off :: :on | :off
-
   @type t :: %__MODULE__{
-          status: %PropertyComponent{data: on_off} | nil,
-          start_stop_state: %PropertyComponent{data: CommonData.activity()} | nil
+          status: State.property(CommonData.on_off()),
+          start_stop_state: State.property(CommonData.activity())
         }
 
   @doc """

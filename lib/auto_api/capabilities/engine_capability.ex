@@ -10,7 +10,7 @@ defmodule AutoApi.EngineCapability do
       iex> E.description
       "Engine"
       iex> E.properties
-      [{1, :status}]
+      [{1, :status}, {2, :start_stop_state}]
   """
 
   @command_module AutoApi.EngineCommand
