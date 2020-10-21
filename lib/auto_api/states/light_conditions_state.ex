@@ -25,21 +25,21 @@ defmodule AutoApi.LightConditionsState do
   LightConditions state
   """
 
-  alias AutoApi.PropertyComponent
+  alias AutoApi.{State, UnitType}
 
   use AutoApi.State, spec_file: "light_conditions.json"
 
   @type t :: %__MODULE__{
-          outside_light: %PropertyComponent{data: float} | nil,
-          inside_light: %PropertyComponent{data: float} | nil
+          outside_light: State.property(UnitType.illuminance()),
+          inside_light: State.property(UnitType.illuminance())
         }
 
   @doc """
   Build state based on binary value
 
-    iex> bin = <<1, 7::integer-16, 1, 0, 4, 65, 201, 92, 41>>
+    iex> bin = <<1, 0, 13, 1, 0, 10, 17, 0, 64, 57, 43, 133, 30, 184, 81, 236>>
     iex> AutoApi.LightConditionsState.from_bin(bin)
-    %AutoApi.LightConditionsState{outside_light: %AutoApi.PropertyComponent{data: 25.17}}
+    %AutoApi.LightConditionsState{outside_light: %AutoApi.PropertyComponent{data: {25.17, :lux}}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -49,9 +49,9 @@ defmodule AutoApi.LightConditionsState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.LightConditionsState{outside_light: %AutoApi.PropertyComponent{data: 25.17}}
+    iex> state = %AutoApi.LightConditionsState{outside_light: %AutoApi.PropertyComponent{data: {25.17, :lux}}}
     iex> AutoApi.LightConditionsState.to_bin(state)
-    <<1, 7::integer-16, 1, 0, 4, 65, 201, 92, 41>>
+    <<1, 0, 13, 1, 0, 10, 17, 0, 64, 57, 43, 133, 30, 184, 81, 236>>
   """
   @spec to_bin(__MODULE__.t()) :: binary
   def to_bin(%__MODULE__{} = state) do
