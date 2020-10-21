@@ -25,7 +25,7 @@ defmodule AutoApi.KeyfobPositionState do
   KeyfobPosition state
   """
 
-  alias AutoApi.PropertyComponent
+  alias AutoApi.State
 
   use AutoApi.State, spec_file: "keyfob_position.json"
 
@@ -38,7 +38,7 @@ defmodule AutoApi.KeyfobPositionState do
           | :inside_car
 
   @type t :: %__MODULE__{
-          location: %PropertyComponent{data: position} | nil
+          location: State.property(position)
         }
 
   @doc """
