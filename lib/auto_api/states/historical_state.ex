@@ -25,15 +25,15 @@ defmodule AutoApi.HistoricalState do
   Historical state
   """
 
-  alias AutoApi.{CommonData, PropertyComponent}
+  alias AutoApi.{CommonData, State}
 
   use AutoApi.State, spec_file: "historical.json"
 
   @type t :: %__MODULE__{
-          states: list(%PropertyComponent{}),
-          capability_id: %PropertyComponent{data: integer} | nil,
-          start_date: %PropertyComponent{data: DateTime.t()} | nil,
-          end_date: %PropertyComponent{data: DateTime.t()} | nil
+          states: State.multiple_property(struct()),
+          capability_id: State.property(integer),
+          start_date: State.property(DateTime.t()),
+          end_date: State.property(DateTime.t())
         }
 
   @doc """
