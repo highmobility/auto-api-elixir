@@ -25,12 +25,12 @@ defmodule AutoApi.GraphicsState do
   Graphics state
   """
 
-  alias AutoApi.{CommonData, PropertyComponent}
+  alias AutoApi.{CommonData, State}
 
   use AutoApi.State, spec_file: "graphics.json"
 
   @type t :: %__MODULE__{
-          image_url: %PropertyComponent{data: String.t()} | nil
+          image_url: State.property(String.t())
         }
 
   @doc """
