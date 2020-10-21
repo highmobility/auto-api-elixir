@@ -25,19 +25,19 @@ defmodule AutoApi.HeartRateState do
   HeartRate state
   """
 
-  alias AutoApi.{CommonData, PropertyComponent}
+  alias AutoApi.{State, UnitType}
 
   use AutoApi.State, spec_file: "heart_rate.json"
 
   @type t :: %__MODULE__{
-          heart_rate: %PropertyComponent{data: integer} | nil
+          heart_rate: State.property(UnitType.frequency())
         }
 
   @doc """
   Build state based on binary value
 
-    iex> AutoApi.HeartRateState.from_bin(<<1, 4::integer-16, 1, 1::integer-16, 80>>)
-    %AutoApi.HeartRateState{heart_rate: %AutoApi.PropertyComponent{data: 80}}
+    iex> AutoApi.HeartRateState.from_bin(<<1, 13::integer-16, 1, 0, 10, 14, 8, 64, 84, 0, 0, 0, 0, 0, 0>>)
+    %AutoApi.HeartRateState{heart_rate: %AutoApi.PropertyComponent{data: {80.0, :beats_per_minute}}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -47,9 +47,9 @@ defmodule AutoApi.HeartRateState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.HeartRateState{heart_rate: %AutoApi.PropertyComponent{data: 80}}
+    iex> state = %AutoApi.HeartRateState{heart_rate: %AutoApi.PropertyComponent{data: {80.0, :beats_per_minute}}}
     iex> AutoApi.HeartRateState.to_bin(state)
-    <<1, 4::integer-16, 1, 1::integer-16, 80>>
+    <<1, 13::integer-16, 1, 0, 10, 14, 8, 64, 84, 0, 0, 0, 0, 0, 0>>
   """
   @spec to_bin(__MODULE__.t()) :: binary
   def to_bin(%__MODULE__{} = state) do
