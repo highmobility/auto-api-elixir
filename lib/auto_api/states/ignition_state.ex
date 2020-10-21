@@ -25,13 +25,14 @@ defmodule AutoApi.IgnitionState do
   Keeps Ignition state
   """
 
-  alias AutoApi.PropertyComponent
+  alias AutoApi.{CommonData, State}
 
-  @type on_off :: :on | :off
+  @type state :: :lock | :off | :accessory | :on | :start
 
   @type t :: %__MODULE__{
-          status: %PropertyComponent{data: on_off} | nil,
-          accessories_status: %PropertyComponent{data: on_off} | nil
+          status: State.property(CommonData.on_off()),
+          accessories_status: State.property(CommonData.on_off()),
+          state: State.property(state())
         }
 
   use AutoApi.State, spec_file: "ignition.json"
