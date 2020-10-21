@@ -25,7 +25,7 @@ defmodule AutoApi.FailureMessageState do
   Keeps Failure Message state
   """
 
-  alias AutoApi.PropertyComponent
+  alias AutoApi.State
 
   use AutoApi.State, spec_file: "failure_message.json"
 
@@ -41,11 +41,11 @@ defmodule AutoApi.FailureMessageState do
           | :oem_error
 
   @type t :: %__MODULE__{
-          failed_message_id: %PropertyComponent{data: integer} | nil,
-          failed_message_type: %PropertyComponent{data: integer} | nil,
-          failure_reason: %PropertyComponent{data: failure_reason} | nil,
-          failure_description: %PropertyComponent{data: String.t()} | nil,
-          failed_property_ids: %PropertyComponent{data: binary()} | nil
+          failed_message_id: State.property(integer()),
+          failed_message_type: State.property(integer()),
+          failure_reason: State.property(failure_reason()),
+          failure_description: State.property(String.t()),
+          failed_property_ids: State.property(binary())
         }
 
   @doc """
