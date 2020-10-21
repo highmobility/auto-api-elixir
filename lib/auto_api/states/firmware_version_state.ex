@@ -26,22 +26,20 @@ defmodule AutoApi.FirmwareVersionState do
 
   """
 
-  alias AutoApi.PropertyComponent
+  alias AutoApi.State
 
   use AutoApi.State, spec_file: "firmware_version.json"
 
-  @type hmkit_version :: %PropertyComponent{
-          data: %{
-            major: integer,
-            minor: integer,
-            patch: integer
-          }
+  @type hmkit_version :: %{
+          major: integer,
+          minor: integer,
+          patch: integer
         }
 
   @type t :: %__MODULE__{
-          hmkit_version: hmkit_version | nil,
-          hmkit_build_name: %PropertyComponent{data: String.t()} | nil,
-          application_version: %PropertyComponent{data: String.t()} | nil
+          hmkit_version: State.property(hmkit_version()),
+          hmkit_build_name: State.property(String.t()),
+          application_version: State.property(String.t())
         }
 
   @doc """
