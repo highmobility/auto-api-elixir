@@ -25,7 +25,7 @@ defmodule AutoApi.WindscreenState do
   Windscreen state
   """
 
-  alias AutoApi.{CommonData, PropertyComponent}
+  alias AutoApi.{CommonData, State}
 
   use AutoApi.State, spec_file: "windscreen.json"
 
@@ -36,20 +36,21 @@ defmodule AutoApi.WindscreenState do
           | :impact_but_no_damage_detected
           | :damage_smaller_than_1_inch
           | :damage_larger_than_1_inch
-  @type windscreen_zone_matrix :: :unavailable | :horizontal_size | :vertical_size
-  @type windscreen_damage_zone :: :unknown | :horizontal_position | :vertical_position
+  @type zone :: %{
+          horizontal: integer(),
+          vertical: integer()
+        }
   @type windscreen_needs_replacement :: :unknown | :no_replacement_needed | :replacement_needed
 
   @type t :: %__MODULE__{
-          wipers_status: %PropertyComponent{data: wipers_status} | nil,
-          wipers_intensity: %PropertyComponent{data: wipers_intensity} | nil,
-          windscreen_damage: %PropertyComponent{data: windscreen_damage} | nil,
-          windscreen_zone_matrix: %PropertyComponent{data: windscreen_zone_matrix} | nil,
-          windscreen_damage_zone: %PropertyComponent{data: windscreen_damage_zone} | nil,
-          windscreen_needs_replacement:
-            %PropertyComponent{data: windscreen_needs_replacement} | nil,
-          windscreen_damage_confidence: %PropertyComponent{data: float} | nil,
-          windscreen_damage_detection_time: %PropertyComponent{data: integer} | nil
+          wipers_status: State.property(wipers_status),
+          wipers_intensity: State.property(wipers_intensity),
+          windscreen_damage: State.property(windscreen_damage),
+          windscreen_zone_matrix: State.property(zone()),
+          windscreen_damage_zone: State.property(zone()),
+          windscreen_needs_replacement: State.property(windscreen_needs_replacement),
+          windscreen_damage_confidence: State.property(float),
+          windscreen_damage_detection_time: State.property(DateTime.t())
         }
 
   @doc """
