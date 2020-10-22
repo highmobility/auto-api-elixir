@@ -20,23 +20,7 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.MobileCapability do
-  @moduledoc """
-  Basic settings for Mobile Capability
-
-      iex> alias AutoApi.MobileCapability, as: M
-      iex> M.identifier
-      <<0x00, 0x66>>
-      iex> M.name
-      :mobile
-      iex> M.description
-      "Mobile"
-      iex> M.properties
-      [{0x01, :connection}]
-  """
-
-  @command_module AutoApi.MobileCommand
-  @state_module AutoApi.MobileState
-
-  use AutoApi.Capability, spec_file: "mobile.json"
+defmodule AutoApi.MobileCapabilityTest do
+  use ExUnit.Case, async: true
+  doctest AutoApi.MobileCapability
 end

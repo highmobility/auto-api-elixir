@@ -25,14 +25,14 @@ defmodule AutoApi.MobileState do
   Browser state
   """
 
-  alias AutoApi.PropertyComponent
+  alias AutoApi.State
 
   use AutoApi.State, spec_file: "mobile.json"
 
   @type connection :: :disconnected | :connected
 
   @type t :: %__MODULE__{
-          connection: %PropertyComponent{data: connection} | nil
+          connection: State.property(connection)
         }
 
   @doc """
