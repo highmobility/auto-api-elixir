@@ -25,13 +25,14 @@ defmodule AutoApi.WakeUpState do
   WakeUp state
   """
 
-  alias AutoApi.{CommonData, PropertyComponent}
+  alias AutoApi.State
 
   use AutoApi.State, spec_file: "wake_up.json"
 
   @type wake_up_state :: :wake_up | :sleep
+
   @type t :: %__MODULE__{
-          status: %PropertyComponent{data: wake_up_state} | nil
+          status: State.property(wake_up_state)
         }
 
   @doc """
