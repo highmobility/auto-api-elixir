@@ -25,15 +25,15 @@ defmodule AutoApi.PowerTakeoffState do
   PowerTakeoff state
   """
 
-  alias AutoApi.{CommonData, PropertyComponent}
+  alias AutoApi.{CommonData, State}
 
   use AutoApi.State, spec_file: "power_takeoff.json"
 
   @type power_takeoff_engaged :: :not_engaged | :engaged
 
   @type t :: %__MODULE__{
-          status: %PropertyComponent{data: CommonData.activity()} | nil,
-          engaged: %PropertyComponent{data: power_takeoff_engaged} | nil
+          status: State.property(CommonData.activity()),
+          engaged: State.property(power_takeoff_engaged)
         }
 
   @doc """
