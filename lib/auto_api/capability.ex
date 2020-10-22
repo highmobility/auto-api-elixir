@@ -227,7 +227,7 @@ defmodule AutoApi.Capability do
 
   iex> capabilities = AutoApi.Capability.all()
   iex> length(capabilities)
-  54
+  55
   iex> List.first(capabilities)
   AutoApi.BrowserCapability
   """
