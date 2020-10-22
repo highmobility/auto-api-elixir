@@ -25,13 +25,13 @@ defmodule AutoApi.MultiCommandState do
   MultiCommand state
   """
 
-  alias AutoApi.{CommonData, PropertyComponent}
+  alias AutoApi.{CommonData, State}
 
   use AutoApi.State, spec_file: "multi_command.json"
 
   @type t :: %__MODULE__{
-          multi_states: list(%PropertyComponent{}),
-          multi_commands: list(%PropertyComponent{})
+          multi_states: State.multiple_property(struct()),
+          multi_commands: State.multiple_property(struct())
         }
 
   @doc """
