@@ -20,25 +20,7 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.UsageCapability do
-  @moduledoc """
-  Basic settings for usage Capability
-
-      iex> alias AutoApi.UsageCapability, as: U
-      iex> U.identifier
-      <<0x00, 0x68>>
-      iex> U.name
-      :usage
-      iex> U.description
-      "Usage"
-      iex> length(U.properties)
-      39
-      iex> List.last(U.properties)
-      {0x27, :eco_score_bonus_range}
-  """
-
-  @command_module AutoApi.UsageCommand
-  @state_module AutoApi.UsageState
-
-  use AutoApi.Capability, spec_file: "usage.json"
+defmodule AutoApi.UsageCapabilityTest do
+  use ExUnit.Case
+  doctest AutoApi.UsageCapability
 end
