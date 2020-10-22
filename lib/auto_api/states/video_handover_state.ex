@@ -25,14 +25,18 @@ defmodule AutoApi.VideoHandoverState do
   VideoHandover state
   """
 
-  alias AutoApi.PropertyComponent
+  alias AutoApi.{State, UnitType}
 
   use AutoApi.State, spec_file: "video_handover.json"
 
+  @type screen :: :front | :rear
+
   @type t :: %__MODULE__{
-          url: %PropertyComponent{data: String.t()} | nil,
-          starting_second: %PropertyComponent{data: String.t()} | nil,
-          screen: %PropertyComponent{data: String.t()} | nil
+          url: State.property(String.t()),
+          # Deprecated
+          starting_second: State.property(UnitType.duration()),
+          screen: State.property(String.t()),
+          starting_time: State.property(UnitType.duration())
         }
 
   @doc """
