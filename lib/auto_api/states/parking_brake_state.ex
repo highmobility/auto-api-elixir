@@ -25,12 +25,12 @@ defmodule AutoApi.ParkingBrakeState do
   ParkingBrake state
   """
 
-  alias AutoApi.{CommonData, PropertyComponent}
+  alias AutoApi.{CommonData, State}
 
   use AutoApi.State, spec_file: "parking_brake.json"
 
   @type t :: %__MODULE__{
-          status: %PropertyComponent{data: CommonData.activity()} | nil
+          status: State.property(CommonData.activity())
         }
 
   @doc """
