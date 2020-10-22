@@ -25,13 +25,13 @@ defmodule AutoApi.TrunkState do
   Trunk state
   """
 
-  alias AutoApi.{CommonData, PropertyComponent}
+  alias AutoApi.{CommonData, State}
 
   use AutoApi.State, spec_file: "trunk.json"
 
   @type t :: %__MODULE__{
-          lock: %PropertyComponent{data: CommonData.lock()} | nil,
-          position: %PropertyComponent{data: CommonData.position()} | nil
+          lock: State.property(CommonData.lock()),
+          position: State.property(CommonData.position())
         }
 
   @doc """
