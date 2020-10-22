@@ -20,23 +20,7 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.WindowsCapability do
-  @moduledoc """
-  Basic settings for Windows Capability
-
-      iex> alias AutoApi.WindowsCapability, as: W
-      iex> W.identifier
-      <<0x00, 0x45>>
-      iex> W.name
-      :windows
-      iex> W.description
-      "Windows"
-      iex> W.properties
-      [{2, :open_percentages}, {3, :positions}]
-  """
-
-  @command_module AutoApi.WindowsCommand
-  @state_module AutoApi.WindowsState
-
-  use AutoApi.Capability, spec_file: "windows.json"
+defmodule AutoApi.WindowsCommandTest do
+  use ExUnit.Case
+  doctest AutoApi.WindowsCommand
 end
