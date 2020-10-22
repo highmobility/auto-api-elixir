@@ -25,12 +25,12 @@ defmodule AutoApi.ValetModeState do
   ValetMode state
   """
 
-  alias AutoApi.{CommonData, PropertyComponent}
+  alias AutoApi.{CommonData, State}
 
   use AutoApi.State, spec_file: "valet_mode.json"
 
   @type t :: %__MODULE__{
-          status: %PropertyComponent{data: CommonData.activity()} | nil
+          status: State.property(CommonData.activity())
         }
 
   @doc """
