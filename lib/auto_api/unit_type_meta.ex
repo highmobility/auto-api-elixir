@@ -23,6 +23,8 @@
 defmodule AutoApi.UnitType.Meta do
   @moduledoc false
 
+  # credo:disable-for-this-file Credo.Check.Refactor.CyclomaticComplexity
+
   @spec_file "specs/misc/unit_types.json"
   @external_resource @spec_file
 
