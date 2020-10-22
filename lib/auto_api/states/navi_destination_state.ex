@@ -25,17 +25,17 @@ defmodule AutoApi.NaviDestinationState do
   Keeps Navigation Destination state
   """
 
-  alias AutoApi.{CommonData, PropertyComponent}
+  alias AutoApi.{CommonData, State}
 
   use AutoApi.State, spec_file: "navi_destination.json"
 
   @type t :: %__MODULE__{
-          coordinates: %PropertyComponent{data: CommonData.coordinates()} | nil,
-          destination_name: %PropertyComponent{data: String.t()} | nil,
-          data_slots_free: %PropertyComponent{data: integer} | nil,
-          data_slots_max: %PropertyComponent{data: integer} | nil,
-          arrival_duration: %PropertyComponent{data: CommonData.time()} | nil,
-          distance_to_destination: %PropertyComponent{data: integer} | nil
+          coordinates: State.property(CommonData.coordinates()),
+          destination_name: State.property(String.t()),
+          data_slots_free: State.property(integer),
+          data_slots_max: State.property(integer),
+          arrival_duration: State.property(UnitType.duration()),
+          distance_to_destination: State.property(UnitType.length())
         }
 
   @doc """
