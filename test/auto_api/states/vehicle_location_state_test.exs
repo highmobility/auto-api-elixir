@@ -6,8 +6,8 @@ defmodule AutoApi.VehicleLocationStateTest do
   test "to_bin/1 & from_bin" do
     state =
       %VehicleLocationState{}
-      |> VehicleLocationState.put_property(:altitude, 133.5)
-      |> VehicleLocationState.put_property(:heading, 0.5)
+      |> VehicleLocationState.put_property(:altitude, {133.5, :meters})
+      |> VehicleLocationState.put_property(:heading, {0.5, :degrees})
       |> VehicleLocationState.put_property(:coordinates, %{
         latitude: 52.516506,
         longitude: 13.381815
