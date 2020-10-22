@@ -25,18 +25,18 @@ defmodule AutoApi.ParkingTicketState do
   ParkingTicket state
   """
 
-  alias AutoApi.{CommonData, PropertyComponent}
+  alias AutoApi.State
 
   use AutoApi.State, spec_file: "parking_ticket.json"
 
   @type parking_ticket_state :: :ended | :started
 
   @type t :: %__MODULE__{
-          status: %PropertyComponent{data: parking_ticket_state} | nil,
-          operator_name: %PropertyComponent{data: String.t()} | nil,
-          operator_ticket_id: %PropertyComponent{data: String.t()} | nil,
-          ticket_start_time: %PropertyComponent{data: DateTime.t()} | nil,
-          ticket_end_time: %PropertyComponent{data: DateTime.t()} | nil
+          status: State.property(parking_ticket_state),
+          operator_name: State.property(String.t()),
+          operator_ticket_id: State.property(String.t()),
+          ticket_start_time: State.property(DateTime.t()),
+          ticket_end_time: State.property(DateTime.t())
         }
 
   @doc """
