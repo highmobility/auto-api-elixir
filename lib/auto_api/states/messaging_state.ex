@@ -25,13 +25,13 @@ defmodule AutoApi.MessagingState do
   Messaging state
   """
 
-  alias AutoApi.PropertyComponent
+  alias AutoApi.State
 
   use AutoApi.State, spec_file: "messaging.json"
 
   @type t :: %__MODULE__{
-          text: %PropertyComponent{data: String.t()} | nil,
-          handle: %PropertyComponent{data: String.t()} | nil
+          text: State.property(String.t()),
+          handle: State.property(String.t())
         }
 
   @doc """
