@@ -25,17 +25,17 @@ defmodule AutoApi.NotificationsState do
   Notifications state
   """
 
-  alias AutoApi.PropertyComponent
+  alias AutoApi.State
 
   use AutoApi.State, spec_file: "notifications.json"
 
-  @type action_item :: %PropertyComponent{data: %{id: integer, name: String.t()}}
+  @type action_item :: %{id: integer, name: String.t()}
 
   @type t :: %__MODULE__{
-          text: %PropertyComponent{data: String.t()} | nil,
-          action_items: list(action_item),
-          activated_action: %PropertyComponent{data: integer} | nil,
-          clear: %PropertyComponent{data: :clear} | nil
+          text: State.property(String.t()),
+          action_items: State.multiple_property(action_item),
+          activated_action: State.property(integer),
+          clear: State.property(:clear)
         }
 
   @doc """
