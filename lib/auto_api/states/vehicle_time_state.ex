@@ -25,12 +25,12 @@ defmodule AutoApi.VehicleTimeState do
   VehicleTime state
   """
 
-  alias AutoApi.{CommonData, PropertyComponent}
+  alias AutoApi.{CommonData, State}
 
   use AutoApi.State, spec_file: "vehicle_time.json"
 
   @type t :: %__MODULE__{
-          vehicle_time: %PropertyComponent{data: integer} | nil
+          vehicle_time: State.property(integer)
         }
 
   @doc """
