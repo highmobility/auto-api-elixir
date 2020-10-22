@@ -25,22 +25,22 @@ defmodule AutoApi.RemoteControlState do
   RemoteControl state
   """
 
-  alias AutoApi.PropertyComponent
+  alias AutoApi.{State, UnitType}
 
   use AutoApi.State, spec_file: "remote_control.json"
 
   @type modes ::
-          :control_mode_unavailable
-          | :control_mode_available
-          | :control_started
-          | :control_failed_to_start
-          | :control_aborted
-          | :control_ended
+          :unavailable
+          | :available
+          | :started
+          | :failed_to_start
+          | :aborted
+          | :ended
 
   @type t :: %__MODULE__{
-          control_mode: %PropertyComponent{data: modes} | nil,
-          angle: %PropertyComponent{data: integer} | nil,
-          speed: %PropertyComponent{data: integer} | nil
+          control_mode: State.property(modes),
+          angle: State.property(UnitType.angle()),
+          speed: State.property(UnitType.speed())
         }
 
   @doc """
