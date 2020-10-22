@@ -25,16 +25,16 @@ defmodule AutoApi.WiFiState do
   WiFi state
   """
 
-  alias AutoApi.{CommonData, PropertyComponent}
+  alias AutoApi.{CommonData, State}
 
   use AutoApi.State, spec_file: "wi_fi.json"
 
   @type t :: %__MODULE__{
-          status: %PropertyComponent{data: CommonData.enabled_state()} | nil,
-          network_connected: %PropertyComponent{data: CommonData.connection_state()} | nil,
-          network_ssid: %PropertyComponent{data: String.t()} | nil,
-          network_security: %PropertyComponent{data: CommonData.network_security()} | nil,
-          password: %PropertyComponent{data: String.t()} | nil
+          status: State.property(CommonData.enabled_state()),
+          network_connected: State.property(CommonData.connection_state()),
+          network_ssid: State.property(String.t()),
+          network_security: State.property(CommonData.network_security()),
+          password: State.property(String.t())
         }
 
   @doc """
