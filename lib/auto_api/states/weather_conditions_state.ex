@@ -25,12 +25,12 @@ defmodule AutoApi.WeatherConditionsState do
   WeatherConditions state
   """
 
-  alias AutoApi.{CommonData, PropertyComponent}
+  alias AutoApi.State
 
   use AutoApi.State, spec_file: "weather_conditions.json"
 
   @type t :: %__MODULE__{
-          rain_intensity: %PropertyComponent{data: float} | nil
+          rain_intensity: State.property(float)
         }
 
   @doc """
