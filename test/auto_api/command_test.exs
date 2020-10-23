@@ -27,7 +27,6 @@ defmodule AutoApi.CommandTest do
       results =
         Capability.all()
         |> Enum.map(&{&1, &1.command})
-        |> Enum.reject(fn {_cap, command} -> command == AutoApi.NotImplemented end)
         |> Enum.map(fn {cap, command} ->
           prop_names = Enum.map(cap.properties, &elem(&1, 1))
 
