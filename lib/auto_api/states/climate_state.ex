@@ -33,7 +33,7 @@ defmodule AutoApi.ClimateState do
           :monday | :tuesday | :wednesday | :thursday | :friday | :saturday | :sunday | :automatic
 
   @type hvac_weekday_starting_time :: %{
-          weekday: CommonData.weekday(),
+          weekday: weekday(),
           time: CommonData.time()
         }
 

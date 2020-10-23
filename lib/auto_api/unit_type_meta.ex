@@ -35,7 +35,7 @@ defmodule AutoApi.UnitType.Meta do
 
     base_functions =
       quote do
-        @type id :: <<_::8>>
+        @type id :: 1..255
 
         @doc """
         Returns all measurement types

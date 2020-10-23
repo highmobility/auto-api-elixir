@@ -25,7 +25,7 @@ defmodule AutoApi.HomeChargerState do
   HomeCharger state
   """
 
-  alias AutoApi.{CommonData, State}
+  alias AutoApi.{CommonData, State, UnitType}
 
   use AutoApi.State, spec_file: "home_charger.json"
 

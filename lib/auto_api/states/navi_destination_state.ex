@@ -25,7 +25,7 @@ defmodule AutoApi.NaviDestinationState do
   Keeps Navigation Destination state
   """
 
-  alias AutoApi.{CommonData, State}
+  alias AutoApi.{CommonData, State, UnitType}
 
   use AutoApi.State, spec_file: "navi_destination.json"
 
