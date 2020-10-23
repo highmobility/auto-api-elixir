@@ -17,7 +17,7 @@
 # Please inquire about commercial licensing options at
 # licensing@high-mobility.com
 defmodule AutoApi.CapabilityTest do
-  use ExUnit.Case
+  use ExUnit.Case, async: true
   doctest AutoApi.Capability
 
   alias AutoApi.Capability

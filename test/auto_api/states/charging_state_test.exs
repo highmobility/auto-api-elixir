@@ -1,5 +1,5 @@
 defmodule AutoApi.ChargingStateTest do
-  use ExUnit.Case
+  use ExUnit.Case, async: true
   doctest AutoApi.ChargingState
   alias AutoApi.{PropertyComponent, ChargingState}
 

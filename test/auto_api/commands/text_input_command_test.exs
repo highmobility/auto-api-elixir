@@ -1,4 +1,4 @@
 defmodule AutoApi.TextInputCommandTest do
-  use ExUnit.Case
+  use ExUnit.Case, async: true
   doctest AutoApi.TextInputCommand
 end

@@ -1,4 +1,4 @@
 defmodule AutoApi.MessagingStateTest do
-  use ExUnit.Case
+  use ExUnit.Case, async: true
   doctest AutoApi.MessagingState
 end

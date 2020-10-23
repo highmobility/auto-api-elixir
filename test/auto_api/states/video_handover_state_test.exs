@@ -1,4 +1,4 @@
 defmodule AutoApi.VideoHandoverStateTest do
-  use ExUnit.Case
+  use ExUnit.Case, async: true
   doctest AutoApi.VideoHandoverState
 end

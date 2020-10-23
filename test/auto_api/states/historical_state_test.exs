@@ -1,5 +1,5 @@
 defmodule AutoApi.HistoricalStateTest do
-  use ExUnit.Case
+  use ExUnit.Case, async: true
   doctest AutoApi.HistoricalState
 
   alias AutoApi.{ChargingState, HistoricalState, PropertyComponent}

@@ -1,4 +1,4 @@
 defmodule AutoApi.FirmwareVersionCommandTest do
-  use ExUnit.Case
+  use ExUnit.Case, async: true
   doctest AutoApi.FirmwareVersionCommand
 end

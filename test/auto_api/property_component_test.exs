@@ -17,7 +17,7 @@
 # Please inquire about commercial licensing options at
 # licensing@high-mobility.com
 defmodule AutoApi.PropertyComponentTest do
-  use ExUnit.Case
+  use ExUnit.Case, async: true
   use PropCheck
 
   alias AutoApi.PropertyComponent

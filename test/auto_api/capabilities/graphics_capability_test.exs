@@ -1,4 +1,4 @@
 defmodule AutoApi.GraphicsCapabilityTest do
-  use ExUnit.Case
+  use ExUnit.Case, async: true
   doctest AutoApi.GraphicsCapability
 end

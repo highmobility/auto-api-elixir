@@ -1,4 +1,4 @@
 defmodule AutoApi.LightConditionsCommandTest do
-  use ExUnit.Case
+  use ExUnit.Case, async: true
   doctest AutoApi.LightConditionsCommand
 end

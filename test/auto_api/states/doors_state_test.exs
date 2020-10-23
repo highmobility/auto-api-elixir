@@ -1,5 +1,5 @@
 defmodule AutoApi.DoorsStateTest do
-  use ExUnit.Case
+  use ExUnit.Case, async: true
   doctest AutoApi.DoorsState
   alias AutoApi.DoorsState
 

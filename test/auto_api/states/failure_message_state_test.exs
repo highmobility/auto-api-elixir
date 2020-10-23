@@ -21,7 +21,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 defmodule AutoApi.FailureMessageStateTest do
-  use ExUnit.Case
+  use ExUnit.Case, async: true
   doctest AutoApi.FailureMessageState
   alias AutoApi.FailureMessageState
 

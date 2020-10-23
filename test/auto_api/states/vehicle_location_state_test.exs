@@ -1,5 +1,5 @@
 defmodule AutoApi.VehicleLocationStateTest do
-  use ExUnit.Case
+  use ExUnit.Case, async: true
   doctest AutoApi.VehicleLocationState
   alias AutoApi.VehicleLocationState
 

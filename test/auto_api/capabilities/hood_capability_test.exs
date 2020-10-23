@@ -21,6 +21,6 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 defmodule AutoApi.HoodCapabilityTest do
-  use ExUnit.Case
+  use ExUnit.Case, async: true
   doctest AutoApi.HoodCapability
 end

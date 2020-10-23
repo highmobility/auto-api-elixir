@@ -1,4 +1,4 @@
 defmodule AutoApi.ParkingTicketStateTest do
-  use ExUnit.Case
+  use ExUnit.Case, async: true
   doctest AutoApi.ParkingTicketState
 end

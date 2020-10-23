@@ -21,7 +21,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 defmodule AutoApi.VehicleInformationStateTest do
-  use ExUnit.Case
+  use ExUnit.Case, async: true
   doctest AutoApi.VehicleInformationState
   alias AutoApi.VehicleInformationState
 

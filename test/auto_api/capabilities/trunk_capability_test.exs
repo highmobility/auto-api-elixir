@@ -1,4 +1,4 @@
 defmodule AutoApi.TrunkCapabilityTest do
-  use ExUnit.Case
+  use ExUnit.Case, async: true
   doctest AutoApi.TrunkCapability
 end

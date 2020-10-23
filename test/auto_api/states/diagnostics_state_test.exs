@@ -21,7 +21,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 defmodule AutoApi.DiagnosticsStateTest do
-  use ExUnit.Case
+  use ExUnit.Case, async: true
   alias AutoApi.{PropertyComponent, DiagnosticsState}
   doctest DiagnosticsState
 

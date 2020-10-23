@@ -1,4 +1,4 @@
 defmodule AutoApi.WindscreenCapabilityTest do
-  use ExUnit.Case
+  use ExUnit.Case, async: true
   doctest AutoApi.WindscreenCapability
 end

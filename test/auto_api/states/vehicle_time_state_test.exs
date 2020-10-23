@@ -1,4 +1,4 @@
 defmodule AutoApi.VehicleTimeStateTest do
-  use ExUnit.Case
+  use ExUnit.Case, async: true
   doctest AutoApi.VehicleTimeState
 end

@@ -1,4 +1,4 @@
 defmodule AutoApi.DriverFatigueCommandTest do
-  use ExUnit.Case
+  use ExUnit.Case, async: true
   doctest AutoApi.DriverFatigueCommand
 end

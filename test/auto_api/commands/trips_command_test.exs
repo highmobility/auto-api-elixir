@@ -1,4 +1,4 @@
 defmodule AutoApi.TripsCommandTest do
-  use ExUnit.Case
+  use ExUnit.Case, async: true
   doctest AutoApi.TripsCommand
 end

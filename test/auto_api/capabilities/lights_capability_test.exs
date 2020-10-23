@@ -1,4 +1,4 @@
 defmodule AutoApi.LightsCapabilityTest do
-  use ExUnit.Case
+  use ExUnit.Case, async: true
   doctest AutoApi.LightsCapability
 end
