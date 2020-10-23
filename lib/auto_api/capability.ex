@@ -270,17 +270,4 @@ defmodule AutoApi.Capability do
   """
   @spec get_by_name(binary | atom) :: module | nil
   defdelegate get_by_name(name), to: AutoApi.Capability.Delegate
-
-  @doc """
-  Returns a map with the capability identifiers as keys and the modules as values.
-
-  ## Examples
-
-  iex> capabilities = AutoApi.Capability.all()
-  iex> list = Enum.into(capabilities, %{}, &{&1.identifier, &1})
-  iex> AutoApi.Capability.list_capabilities == list
-  true
-  """
-  @deprecated "Use all/0 and AutoApi.Capability.identifier/0 instead"
-  defdelegate list_capabilities(), to: AutoApi.Capability.Delegate
 end

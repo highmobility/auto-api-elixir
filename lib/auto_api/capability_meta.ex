@@ -113,10 +113,6 @@ defmodule AutoApi.Capability.Meta do
       end
 
       def get_by_name(name), do: @capability_names_to_modules[name]
-
-      def list_capabilities() do
-        Enum.into(all(), %{}, &{&1.identifier, &1})
-      end
     end
   end
 end

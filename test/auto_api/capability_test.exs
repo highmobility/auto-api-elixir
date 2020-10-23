@@ -47,10 +47,4 @@ defmodule AutoApi.CapabilityTest do
              Capability.get_by_id(cap.identifier) == cap
            end)
   end
-
-  test "list_capabilities/0 returns legacy format" do
-    cap_ids = Enum.into(Capability.all(), %{}, &{&1.identifier, &1})
-
-    assert cap_ids == Capability.list_capabilities()
-  end
 end
