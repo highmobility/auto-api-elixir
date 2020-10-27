@@ -34,14 +34,20 @@ defmodule AutoApi.PropertyComponent do
 
   The `failure` is set if there was an error that prevented retrieving the
   property data.
+
+  The `availability` fields indicates how often the data is updated, and any
+  limitation on how many times the property can receive updates in a specific
+  time frame.
   """
 
   require Logger
 
-  defstruct [:data, :timestamp, :failure]
+  alias AutoApi.UnitType
 
-  @prop_id_to_name %{0x01 => :data, 0x02 => :timestamp, 0x03 => :failure}
-  @prop_name_to_id %{:data => 0x01, :timestamp => 0x02, :failure => 0x03}
+  defstruct [:data, :timestamp, :failure, :availability]
+
+  @prop_id_to_name %{0x01 => :data, 0x02 => :timestamp, 0x03 => :failure, 0x05 => :availability}
+  @prop_name_to_id %{data: 0x01, timestamp: 0x02, failure: 0x03, availability: 0x05}
 
   @type reason ::
           :rate_limit
@@ -51,9 +57,34 @@ defmodule AutoApi.PropertyComponent do
           | :unknown
           | :pending
           | :oem_error
+
   @type failure :: %{reason: reason(), description: String.t()}
-  @type t(data) :: %__MODULE__{data: data, timestamp: nil | DateTime.t(), failure: nil | failure}
+
+  @type update_rate ::
+          :trip_high
+          | :trip
+          | :trip_start_end
+          | :trip_end
+          | :unknown
+          | :not_available
+          | :on_change
+
+  @type applies_per :: :app | :vehicle
+
+  @type availability :: %{
+          update_rate: update_rate(),
+          rate_limit: UnitType.frequency(),
+          applies_per: applies_per()
+        }
+
+  @type t(data) :: %__MODULE__{
+          data: data,
+          timestamp: nil | DateTime.t(),
+          failure: nil | failure,
+          availability: nil | availability
+        }
   @type t() :: t(any())
+
   @type spec :: map() | list()
 
   @doc """
@@ -63,7 +94,8 @@ defmodule AutoApi.PropertyComponent do
   def to_bin(%__MODULE__{} = prop, spec) do
     wrap_with_size(prop, :data, &data_to_bin(&1, spec)) <>
       wrap_with_size(prop, :timestamp, &timestamp_to_bin/1) <>
-      wrap_with_size(prop, :failure, &failure_to_bin/1)
+      wrap_with_size(prop, :failure, &failure_to_bin/1) <>
+      wrap_with_size(prop, :availability, &availability_to_bin/1)
   end
 
   defp wrap_with_size(prop, field, conversion_fun) do
@@ -193,6 +225,13 @@ defmodule AutoApi.PropertyComponent do
     <<reason_bin, description_size::integer-16, description::binary>>
   end
 
+  defp availability_to_bin(nil), do: <<>>
+
+  defp availability_to_bin(availability) do
+    # Availability type is "types.availability"
+    data_to_bin(availability, %{"type" => "types.availability"})
+  end
+
   @doc """
   Converts PropertyComponent binary to struct
   """
@@ -206,7 +245,8 @@ defmodule AutoApi.PropertyComponent do
   defp common_components_to_struct(prop_in_binary, data) do
     timestamp = to_value(prop_in_binary.timestamp, %{"type" => "timestamp"})
     failure = failure_to_value(prop_in_binary.failure)
-    %__MODULE__{data: data, timestamp: timestamp, failure: failure}
+    availability = availability_to_value(prop_in_binary.availability)
+    %__MODULE__{data: data, timestamp: timestamp, failure: failure, availability: availability}
   end
 
   defp to_value(nil, _) do
@@ -311,6 +351,13 @@ defmodule AutoApi.PropertyComponent do
       reason: AutoApi.CommonData.convert_bin_to_state_failure_reason(reason),
       description: description
     }
+  end
+
+  defp availability_to_value(nil), do: nil
+
+  defp availability_to_value(availability_bin) do
+    # Availability type is "types.availability"
+    to_value(availability_bin, %{"type" => "types.availability"})
   end
 
   defp split_binary_to_parts(

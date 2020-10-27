@@ -584,6 +584,80 @@ defmodule AutoApi.PropertyComponentTest do
         assert prop_comp.failure.description == component.failure.description
       end
     end
+
+    property "converts availability to bin" do
+      forall data <- [
+               update_rate: update_rate(),
+               rate_limit: rate_limit(),
+               applies_per: applies_per(),
+               timestamp: datetime()
+             ] do
+        spec = %{"type" => "integer", "size" => 3}
+
+        component = %PropertyComponent{
+          timestamp: data[:timestamp],
+          availability: %{
+            update_rate: data[:update_rate],
+            rate_limit: data[:rate_limit],
+            applies_per: data[:applies_per]
+          }
+        }
+
+        prop_bin = PropertyComponent.to_bin(component, spec)
+        prop_comp = PropertyComponent.to_struct(prop_bin, spec)
+
+        assert prop_comp.data == component.data
+        assert prop_comp.timestamp == component.timestamp
+        assert prop_comp.failure == component.failure
+        assert prop_comp.availability == component.availability
+      end
+    end
+
+    property "converts availability to bin when spec is map" do
+      forall data <- [
+               update_rate: update_rate(),
+               rate_limit: rate_limit(),
+               applies_per: applies_per(),
+               timestamp: datetime()
+             ] do
+        spec = [
+          %{
+            "name" => "location",
+            "size" => 1,
+            "type" => "enum",
+            "enum_values" => [
+              %{"id" => 0, "name" => "front_left"},
+              %{"id" => 1, "name" => "front_right"},
+              %{"id" => 2, "name" => "rear_right"},
+              %{"id" => 3, "name" => "rear_left"}
+            ]
+          },
+          %{
+            "description" => "Tire pressure in BAR formatted in 4-bytes per IEEE 754",
+            "name" => "pressure",
+            "size" => 4,
+            "type" => "float"
+          }
+        ]
+
+        component = %PropertyComponent{
+          timestamp: data[:timestamp],
+          availability: %{
+            update_rate: data[:update_rate],
+            rate_limit: data[:rate_limit],
+            applies_per: data[:applies_per]
+          }
+        }
+
+        prop_bin = PropertyComponent.to_bin(component, spec)
+        prop_comp = PropertyComponent.to_struct(prop_bin, spec)
+
+        assert prop_comp.data == component.data
+        assert prop_comp.timestamp == component.timestamp
+        assert prop_comp.failure == component.failure
+        assert prop_comp.availability == component.availability
+      end
+    end
   end
 
   def error_reason do
@@ -616,5 +690,19 @@ defmodule AutoApi.PropertyComponentTest do
         _ -> nil
       end
     end
+  end
+
+  def update_rate do
+    oneof([:trip_high, :trip, :trip_start_end, :trip_end, :unknown, :not_available, :on_change])
+  end
+
+  def rate_limit do
+    let [value <- float(), unit <- oneof(AutoApi.UnitType.units(:frequency))] do
+      {value, unit}
+    end
+  end
+
+  def applies_per do
+    oneof([:app, :vehicle])
   end
 end
