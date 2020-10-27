@@ -130,7 +130,7 @@ defmodule AutoApi.UnitTypeStateTest do
       assert List.first(units) == :kwh_per_100_kilometers
 
       assert units = UnitType.units(:frequency)
-      assert length(units) == 6
+      assert length(units) == 8
       assert List.first(units) == :hertz
 
       assert units = UnitType.units(:fuel_efficiency)

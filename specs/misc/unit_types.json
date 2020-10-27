@@ -203,9 +203,19 @@
                     "conversion_linear": 1000000000.0
                 },
                 {
-                    "name": "beats_per_minute",
+                    "name": "times_per_minute",
                     "id": 8,
                     "conversion_linear": 60.0
+                },
+                {
+                    "name": "times_per_hour",
+                    "id": 9,
+                    "conversion_linear": 3600.0
+                },
+                {
+                    "name": "times_per_day",
+                    "id": 10,
+                    "conversion_linear": 86400.0
                 }
             ]
         },

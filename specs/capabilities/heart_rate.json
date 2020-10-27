@@ -36,9 +36,9 @@
                 {
                     "data_component": "0e084050000000000000",
                     "value": {
-                        "beats_per_minute": 64.0
+                        "times_per_minute": 64.0
                     },
-                    "description": "Heart rate is 64.0bpm"
+                    "description": "Heart rate is 64.0tpm (bpm)"
                 }
             ]
         }
