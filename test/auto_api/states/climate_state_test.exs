@@ -24,7 +24,7 @@ defmodule AutoApi.ClimateStateTest do
   use ExUnit.Case, async: true
   doctest AutoApi.ClimateState
 
-  alias AutoApi.ClimateState
+  alias AutoApi.{ClimateState, State}
 
   describe "regressions" do
     test "hvac_weekday_starting_time is (de)serialized correctly" do
@@ -35,8 +35,7 @@ defmodule AutoApi.ClimateStateTest do
 
       state_base = ClimateState.base()
 
-      state =
-        ClimateState.append_property(state_base, :hvac_weekday_starting_times, starting_time)
+      state = State.put(state_base, :hvac_weekday_starting_times, data: starting_time)
 
       assert state ==
                state

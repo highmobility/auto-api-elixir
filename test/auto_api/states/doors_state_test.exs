@@ -23,27 +23,35 @@
 defmodule AutoApi.DoorsStateTest do
   use ExUnit.Case, async: true
   doctest AutoApi.DoorsState
-  alias AutoApi.DoorsState
+  alias AutoApi.{DoorsState, State}
 
   test "to_bin & from_bin" do
     state =
       %DoorsState{}
-      |> DoorsState.append_property(:positions, %{
-        location: :front_left,
-        position: :closed
-      })
-      |> DoorsState.append_property(:positions, %{
-        location: :front_right,
-        position: :open
-      })
-      |> DoorsState.append_property(:inside_locks, %{
-        location: :front_right,
-        lock_state: :unlocked
-      })
-      |> DoorsState.append_property(:locks, %{
-        location: :front_right,
-        lock_state: :unlocked
-      })
+      |> State.put(:positions,
+        data: %{
+          location: :front_left,
+          position: :closed
+        }
+      )
+      |> State.put(:positions,
+        data: %{
+          location: :front_right,
+          position: :open
+        }
+      )
+      |> State.put(:inside_locks,
+        data: %{
+          location: :front_right,
+          lock_state: :unlocked
+        }
+      )
+      |> State.put(:locks,
+        data: %{
+          location: :front_right,
+          lock_state: :unlocked
+        }
+      )
 
     new_state =
       state

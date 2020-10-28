@@ -25,7 +25,7 @@ defmodule AutoApi.GraphicsState do
   Graphics state
   """
 
-  alias AutoApi.{CommonData, State}
+  alias AutoApi.State
 
   use AutoApi.State, spec_file: "graphics.json"
 

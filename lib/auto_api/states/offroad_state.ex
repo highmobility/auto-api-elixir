@@ -25,7 +25,7 @@ defmodule AutoApi.OffroadState do
   Offroad state
   """
 
-  alias AutoApi.{CommonData, State, UnitType}
+  alias AutoApi.{State, UnitType}
 
   use AutoApi.State, spec_file: "offroad.json"
 

@@ -25,7 +25,7 @@ defmodule AutoApi.HistoricalState do
   Historical state
   """
 
-  alias AutoApi.{CommonData, State}
+  alias AutoApi.State
 
   use AutoApi.State, spec_file: "historical.json"
 

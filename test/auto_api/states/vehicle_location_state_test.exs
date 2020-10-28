@@ -23,17 +23,19 @@
 defmodule AutoApi.VehicleLocationStateTest do
   use ExUnit.Case, async: true
   doctest AutoApi.VehicleLocationState
-  alias AutoApi.VehicleLocationState
+  alias AutoApi.{VehicleLocationState, State}
 
   test "to_bin/1 & from_bin" do
     state =
       %VehicleLocationState{}
-      |> VehicleLocationState.put_property(:altitude, {133.5, :meters})
-      |> VehicleLocationState.put_property(:heading, {0.5, :degrees})
-      |> VehicleLocationState.put_property(:coordinates, %{
-        latitude: 52.516506,
-        longitude: 13.381815
-      })
+      |> State.put(:altitude, data: {133.5, :meters})
+      |> State.put(:heading, data: {0.5, :degrees})
+      |> State.put(:coordinates,
+        data: %{
+          latitude: 52.516506,
+          longitude: 13.381815
+        }
+      )
 
     new_state =
       state

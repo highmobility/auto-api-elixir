@@ -25,7 +25,7 @@ defmodule AutoApi.MultiCommandState do
   MultiCommand state
   """
 
-  alias AutoApi.{CommonData, State}
+  alias AutoApi.State
 
   use AutoApi.State, spec_file: "multi_command.json"
 

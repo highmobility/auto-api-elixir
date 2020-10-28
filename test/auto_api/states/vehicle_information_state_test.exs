@@ -23,17 +23,17 @@
 defmodule AutoApi.VehicleInformationStateTest do
   use ExUnit.Case, async: true
   doctest AutoApi.VehicleInformationState
-  alias AutoApi.VehicleInformationState
+  alias AutoApi.{VehicleInformationState, State}
 
   test "to_bin/1 & from_bin/1" do
     state =
       %VehicleInformationState{}
-      |> VehicleInformationState.put_property(:powertrain, :all_electric)
-      |> VehicleInformationState.put_property(:gearbox, :semi_automatic)
-      |> VehicleInformationState.put_property(:model_name, "HM Concept")
-      |> VehicleInformationState.append_property(:equipments, "eq 1")
-      |> VehicleInformationState.append_property(:equipments, "eq 2")
-      |> VehicleInformationState.put_property(:engine_volume, {750, :cubic_centimeters})
+      |> State.put(:powertrain, data: :all_electric)
+      |> State.put(:gearbox, data: :semi_automatic)
+      |> State.put(:model_name, data: "HM Concept")
+      |> State.put(:equipments, data: "eq 1")
+      |> State.put(:equipments, data: "eq 2")
+      |> State.put(:engine_volume, data: {750, :cubic_centimeters})
 
     new_state =
       state

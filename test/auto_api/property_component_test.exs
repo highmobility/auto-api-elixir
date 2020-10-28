@@ -20,7 +20,7 @@ defmodule AutoApi.PropertyComponentTest do
   use ExUnit.Case, async: true
   use PropCheck
 
-  alias AutoApi.PropertyComponent
+  alias AutoApi.{PropertyComponent, State}
 
   describe "to_bin/3 & to_struct/3" do
     property "converts uint24 to bin" do
@@ -169,10 +169,12 @@ defmodule AutoApi.PropertyComponentTest do
 
       state =
         AutoApi.DoorsState.base()
-        |> AutoApi.DoorsState.append_property(:positions, %{
-          location: :front_left,
-          position: :closed
-        })
+        |> State.put(:positions,
+          data: %{
+            location: :front_left,
+            position: :closed
+          }
+        )
 
       prop_bin =
         PropertyComponent.to_bin(

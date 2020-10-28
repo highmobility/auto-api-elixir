@@ -23,14 +23,14 @@
 defmodule AutoApi.MaintenanceStateTest do
   use ExUnit.Case, async: true
   doctest AutoApi.MaintenanceState
-  alias AutoApi.MaintenanceState
+  alias AutoApi.{MaintenanceState, State}
 
   test "to_bin/1 & from_bin/1" do
     state =
       %MaintenanceState{}
-      |> MaintenanceState.put_property(
+      |> State.put(
         :next_inspection_date,
-        DateTime.truncate(DateTime.utc_now(), :millisecond)
+        data: DateTime.truncate(DateTime.utc_now(), :millisecond)
       )
 
     new_state =

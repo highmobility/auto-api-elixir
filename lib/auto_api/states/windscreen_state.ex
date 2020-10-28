@@ -25,7 +25,7 @@ defmodule AutoApi.WindscreenState do
   Windscreen state
   """
 
-  alias AutoApi.{CommonData, State}
+  alias AutoApi.State
 
   use AutoApi.State, spec_file: "windscreen.json"
 

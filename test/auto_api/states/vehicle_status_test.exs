@@ -23,19 +23,21 @@
 defmodule AutoApi.VehicleStatusStateTest do
   use ExUnit.Case, async: true
   doctest AutoApi.VehicleStatusState
-  alias AutoApi.VehicleStatusState
+  alias AutoApi.{VehicleStatusState, State}
 
   test "Correctly encodes state in to_bin/1" do
     diag_state =
       AutoApi.DiagnosticsState.base()
-      |> AutoApi.DiagnosticsState.put_property(:speed, {88, :miles_per_hour}, DateTime.utc_now())
+      |> AutoApi.State.put(:speed, data: {88, :miles_per_hour}, timestamp: DateTime.utc_now())
 
     door_state =
       AutoApi.DoorsState.base()
-      |> AutoApi.DoorsState.append_property(:positions, %{
-        door_location: :front_left,
-        position: :closed
-      })
+      |> AutoApi.State.put(:positions,
+        data: %{
+          door_location: :front_left,
+          position: :closed
+        }
+      )
 
     diag_state_bin =
       AutoApi.DiagnosticsState.identifier() <>
@@ -50,8 +52,8 @@ defmodule AutoApi.VehicleStatusStateTest do
 
     state =
       VehicleStatusState.base()
-      |> VehicleStatusState.append_property(:states, diag_state)
-      |> VehicleStatusState.append_property(:states, door_state)
+      |> State.put(:states, data: diag_state)
+      |> State.put(:states, data: door_state)
       |> VehicleStatusState.to_bin()
 
     assert state ==

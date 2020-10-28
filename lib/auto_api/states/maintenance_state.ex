@@ -25,7 +25,7 @@ defmodule AutoApi.MaintenanceState do
   Maintenance state
   """
 
-  alias AutoApi.{CommonData, State, UnitType}
+  alias AutoApi.{State, UnitType}
 
   use AutoApi.State, spec_file: "maintenance.json"
 
