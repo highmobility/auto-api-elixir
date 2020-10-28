@@ -44,7 +44,6 @@ defmodule AutoApi.State do
         require Logger
 
         @behaviour AutoApi.State
-        @dialyzer {:nowarn_function, to_properties: 4}
 
         @external_resource unquote(spec_path)
 

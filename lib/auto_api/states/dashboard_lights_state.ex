@@ -26,7 +26,7 @@ defmodule AutoApi.DashboardLightsState do
   Keeps Dashboard Lights state
   """
 
-  alias AutoApi.State
+  alias AutoApi.{CommonData, State}
 
   use AutoApi.State, spec_file: "dashboard_lights.json"
 
