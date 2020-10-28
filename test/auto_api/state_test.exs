@@ -18,6 +18,7 @@
 # licensing@high-mobility.com
 defmodule AutoApi.StateTest do
   use ExUnit.Case, async: true
+  doctest AutoApi.State
 
   alias AutoApi.{
     CapabilitiesState,
