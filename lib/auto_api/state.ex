@@ -216,4 +216,29 @@ defmodule AutoApi.State do
 
     put(state, property, value)
   end
+
+  @doc """
+  Clears a property from a state.
+
+  If the property is multiple, all of its values will be removed.
+
+  # Examples
+
+      iex> locks = [%AutoApi.PropertyComponent{data: %{location: :front_left, lock_state: :locked}}]
+      iex> state = %AutoApi.DoorsState{locks: locks}
+      iex> AutoApi.State.clear(state, :locks)
+      %AutoApi.DoorsState{locks: []}
+
+      iex> state = %AutoApi.HoodState{position: %AutoApi.PropertyComponent{data: :intermediate}}
+      iex> AutoApi.State.clear(state, :position)
+      %AutoApi.HoodState{position: nil}
+  """
+  @spec clear(struct(), atom()) :: struct()
+  def clear(%state_module{} = state, property) do
+    if state_module.capability().multiple?(property) do
+      Map.put(state, property, [])
+    else
+      Map.put(state, property, nil)
+    end
+  end
 end
