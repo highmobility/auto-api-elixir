@@ -190,7 +190,7 @@ defmodule AutoApi.PropertyComponent do
     data_to_bin(data, type_spec)
   end
 
-  defp data_to_bin({value, unit}, %{"type" => "unit." <> type}) do
+  defp data_to_bin(%{value: value, unit: unit}, %{"type" => "unit." <> type}) do
     type_id = AutoApi.UnitType.id(type)
     unit_id = AutoApi.UnitType.unit_id(type, unit)
 
@@ -339,7 +339,7 @@ defmodule AutoApi.PropertyComponent do
   defp to_value(<<id, unit_id, value::float-64>>, %{"type" => "unit." <> _type}) do
     unit = AutoApi.UnitType.unit_name(id, unit_id)
 
-    {value, unit}
+    %{value: value, unit: unit}
   end
 
   defp failure_to_value(nil), do: nil

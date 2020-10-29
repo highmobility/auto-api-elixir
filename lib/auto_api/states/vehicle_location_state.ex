@@ -41,7 +41,7 @@ defmodule AutoApi.VehicleLocationState do
 
     iex> bin = <<5, 0, 13, 1, 0, 10, 2, 0, 64, 101, 249, 235, 133, 30, 184, 82>>
     iex> AutoApi.VehicleLocationState.from_bin(bin)
-    %AutoApi.VehicleLocationState{heading: %AutoApi.PropertyComponent{data: {175.81, :degrees}}}
+    %AutoApi.VehicleLocationState{heading: %AutoApi.PropertyComponent{data: %{value: 175.81, unit: :degrees}}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -51,7 +51,7 @@ defmodule AutoApi.VehicleLocationState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.VehicleLocationState{heading: %AutoApi.PropertyComponent{data: {175.81, :degrees}}}
+    iex> state = %AutoApi.VehicleLocationState{heading: %AutoApi.PropertyComponent{data: %{value: 175.81, unit: :degrees}}}
     iex> AutoApi.VehicleLocationState.to_bin(state)
     <<5, 0, 13, 1, 0, 10, 2, 0, 64, 101, 249, 235, 133, 30, 184, 82>>
   """

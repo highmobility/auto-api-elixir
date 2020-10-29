@@ -27,45 +27,49 @@ defmodule AutoApi.DiagnosticsStateTest do
 
   test "to_bin & from_bin" do
     state = %DiagnosticsState{
-      mileage: %PropertyComponent{data: {10.0, :miles}},
-      engine_oil_temperature: %PropertyComponent{data: {2, :kelvin}},
-      speed: %PropertyComponent{data: {3, :meters_per_second}},
-      engine_rpm: %PropertyComponent{data: {4, :degrees_per_second}},
+      mileage: %PropertyComponent{data: %{value: 10.0, unit: :miles}},
+      engine_oil_temperature: %PropertyComponent{data: %{value: 2, unit: :kelvin}},
+      speed: %PropertyComponent{data: %{value: 3, unit: :meters_per_second}},
+      engine_rpm: %PropertyComponent{data: %{value: 4, unit: :degrees_per_second}},
       fuel_level: %PropertyComponent{data: 1.0001},
-      estimated_range: %PropertyComponent{data: {5, :kilometers}},
+      estimated_range: %PropertyComponent{data: %{value: 5, unit: :kilometers}},
       washer_fluid_level: %PropertyComponent{data: :filled},
-      battery_voltage: %PropertyComponent{data: {1.003, :volts}},
-      adblue_level: %PropertyComponent{data: {1.003, :liters}},
-      distance_since_reset: %PropertyComponent{data: {6, :kilometers}},
-      distance_since_start: %PropertyComponent{data: {7, :nautical_miles}},
-      fuel_volume: %PropertyComponent{data: {1.004, :gallons}},
+      battery_voltage: %PropertyComponent{data: %{value: 1.003, unit: :volts}},
+      adblue_level: %PropertyComponent{data: %{value: 1.003, unit: :liters}},
+      distance_since_reset: %PropertyComponent{data: %{value: 6, unit: :kilometers}},
+      distance_since_start: %PropertyComponent{data: %{value: 7, unit: :nautical_miles}},
+      fuel_volume: %PropertyComponent{data: %{value: 1.004, unit: :gallons}},
       anti_lock_braking: %PropertyComponent{data: :inactive},
-      engine_coolant_temperature: %PropertyComponent{data: {8, :fahrenheit}},
-      engine_total_operating_hours: %PropertyComponent{data: {1.005, :months}},
-      engine_total_fuel_consumption: %PropertyComponent{data: {1.006, :liters}},
+      engine_coolant_temperature: %PropertyComponent{data: %{value: 8, unit: :fahrenheit}},
+      engine_total_operating_hours: %PropertyComponent{data: %{value: 1.005, unit: :months}},
+      engine_total_fuel_consumption: %PropertyComponent{data: %{value: 1.006, unit: :liters}},
       brake_fluid_level: %PropertyComponent{data: :low},
       engine_torque: %PropertyComponent{data: 1.007},
       engine_load: %PropertyComponent{data: 1.008},
-      wheel_based_speed: %PropertyComponent{data: {9, :miles_per_hour}},
+      wheel_based_speed: %PropertyComponent{data: %{value: 9, unit: :miles_per_hour}},
       battery_level: %PropertyComponent{data: 1.009},
       check_control_messages: [
         %PropertyComponent{
           data: %{
             id: 1,
-            remaining_time: {300, :minutes},
+            remaining_time: %{value: 300, unit: :minutes},
             text: "text",
             status: "status"
           }
         }
       ],
       tire_pressures: [
-        %PropertyComponent{data: %{location: :rear_left, pressure: {1.009, :bars}}}
+        %PropertyComponent{data: %{location: :rear_left, pressure: %{value: 1.009, unit: :bars}}}
       ],
       tire_temperatures: [
-        %PropertyComponent{data: %{location: :rear_left_outer, temperature: {1.010, :kelvin}}}
+        %PropertyComponent{
+          data: %{location: :rear_left_outer, temperature: %{value: 1.010, unit: :kelvin}}
+        }
       ],
       wheel_rpms: [
-        %PropertyComponent{data: %{location: :rear_right, rpm: {10, :revolutions_per_minute}}}
+        %PropertyComponent{
+          data: %{location: :rear_right, rpm: %{value: 10, unit: :revolutions_per_minute}}
+        }
       ],
       trouble_codes: [
         %PropertyComponent{
@@ -78,9 +82,9 @@ defmodule AutoApi.DiagnosticsStateTest do
           }
         }
       ],
-      mileage_meters: %PropertyComponent{data: {11, :meters}},
-      odometer: %PropertyComponent{data: {11, :meters}},
-      engine_total_operating_time: %PropertyComponent{data: {11, :hours}},
+      mileage_meters: %PropertyComponent{data: %{value: 11, unit: :meters}},
+      odometer: %PropertyComponent{data: %{value: 11, unit: :meters}},
+      engine_total_operating_time: %PropertyComponent{data: %{value: 11, unit: :hours}},
       tire_pressure_statuses: [
         %PropertyComponent{data: %{location: :rear_left, status: :alert}}
       ],
@@ -94,7 +98,7 @@ defmodule AutoApi.DiagnosticsStateTest do
           }
         }
       ],
-      diesel_exhaust_fluid_range: %PropertyComponent{data: {11, :meters}},
+      diesel_exhaust_fluid_range: %PropertyComponent{data: %{value: 11, unit: :meters}},
       diesel_particulate_filter_soot_level: %PropertyComponent{data: 11.78},
       confirmed_trouble_codes: [
         %PropertyComponent{

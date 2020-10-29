@@ -67,11 +67,15 @@ defmodule AutoApi.CommandTest do
     test ":set" do
       properties = [
         speed: %PropertyComponent{
-          data: {88, :miles_per_hour},
+          data: %{value: 88, unit: :miles_per_hour},
           timestamp: ~U[2019-07-18 13:58:40.489Z]
         },
-        tire_pressures: %PropertyComponent{data: %{location: :front_left, pressure: {2.3, :bars}}},
-        tire_pressures: %PropertyComponent{data: %{location: :rear_right, pressure: {2.5, :bars}}},
+        tire_pressures: %PropertyComponent{
+          data: %{location: :front_left, pressure: %{value: 2.3, unit: :bars}}
+        },
+        tire_pressures: %PropertyComponent{
+          data: %{location: :rear_right, pressure: %{value: 2.5, unit: :bars}}
+        },
         engine_rpm: %PropertyComponent{failure: %{reason: :format_error, description: "Error"}}
       ]
 

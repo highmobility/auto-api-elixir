@@ -177,8 +177,8 @@ defmodule AutoApi.State do
   # Examples
 
       iex> state = %AutoApi.DiagnosticsState{}
-      iex> AutoApi.State.put(state, :odometer, data: {4325.4, :miles}, timestamp: ~U[2020-10-28 13:45:56Z])
-      %AutoApi.DiagnosticsState{odometer: %AutoApi.PropertyComponent{data:  {4325.4, :miles}, timestamp: ~U[2020-10-28 13:45:56Z]}}
+      iex> AutoApi.State.put(state, :odometer, data: %{value: 4325.4, unit: :miles}, timestamp: ~U[2020-10-28 13:45:56Z])
+      %AutoApi.DiagnosticsState{odometer: %AutoApi.PropertyComponent{data: %{value: 4325.4, unit: :miles}, timestamp: ~U[2020-10-28 13:45:56Z]}}
 
       iex> locks = [%AutoApi.PropertyComponent{data: %{location: :front_left, lock_state: :locked}}]
       iex> state = %AutoApi.DoorsState{locks: locks}
@@ -190,12 +190,12 @@ defmodule AutoApi.State do
       ]}
 
       iex> failure = %{reason: :rate_limit, description: "Try again tomorrow"}
-      iex> availability = %{update_rate: :trip, rate_limit: {2, :times_per_day}, applies_per: :app}
+      iex> availability = %{update_rate: :trip, rate_limit: %{value: 2, unit: :times_per_day}, applies_per: :app}
       iex> state = %AutoApi.HoodState{}
       iex> AutoApi.State.put(state, :position, %{failure: failure, availability: availability})
       %AutoApi.HoodState{position: %AutoApi.PropertyComponent{
         failure: %{reason: :rate_limit, description: "Try again tomorrow"},
-        availability: %{update_rate: :trip, rate_limit: {2, :times_per_day}, applies_per: :app}
+        availability: %{update_rate: :trip, rate_limit: %{value: 2, unit: :times_per_day}, applies_per: :app}
       }}
 
   """

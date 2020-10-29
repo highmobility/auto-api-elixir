@@ -37,7 +37,7 @@ defmodule AutoApi.HeartRateState do
   Build state based on binary value
 
     iex> AutoApi.HeartRateState.from_bin(<<1, 13::integer-16, 1, 0, 10, 14, 8, 64, 84, 0, 0, 0, 0, 0, 0>>)
-    %AutoApi.HeartRateState{heart_rate: %AutoApi.PropertyComponent{data: {80.0, :times_per_minute}}}
+    %AutoApi.HeartRateState{heart_rate: %AutoApi.PropertyComponent{data: %{value: 80.0, unit: :times_per_minute}}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -47,7 +47,7 @@ defmodule AutoApi.HeartRateState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.HeartRateState{heart_rate: %AutoApi.PropertyComponent{data: {80.0, :times_per_minute}}}
+    iex> state = %AutoApi.HeartRateState{heart_rate: %AutoApi.PropertyComponent{data: %{value: 80.0, unit: :times_per_minute}}}
     iex> AutoApi.HeartRateState.to_bin(state)
     <<1, 13::integer-16, 1, 0, 10, 14, 8, 64, 84, 0, 0, 0, 0, 0, 0>>
   """

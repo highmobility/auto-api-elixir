@@ -230,7 +230,7 @@ defmodule AutoApi.PropertyComponentTest do
         "id" => 0xFD
       }
 
-      prop_comp = %PropertyComponent{data: {186, :centimeters}}
+      prop_comp = %PropertyComponent{data: %{value: 186, unit: :centimeters}}
       bin_comp = PropertyComponent.to_bin(prop_comp, spec)
 
       assert bin_comp == <<0x01, 0x00, 0x0A, 0x12, 0x02, 186::float-64>>
@@ -700,7 +700,7 @@ defmodule AutoApi.PropertyComponentTest do
 
   def rate_limit do
     let [value <- float(), unit <- oneof(AutoApi.UnitType.units(:frequency))] do
-      {value, unit}
+      %{value: value, unit: unit}
     end
   end
 

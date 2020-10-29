@@ -33,7 +33,7 @@ defmodule AutoApi.VehicleInformationStateTest do
       |> State.put(:model_name, data: "HM Concept")
       |> State.put(:equipments, data: "eq 1")
       |> State.put(:equipments, data: "eq 2")
-      |> State.put(:engine_volume, data: {750, :cubic_centimeters})
+      |> State.put(:engine_volume, data: %{value: 750, unit: :cubic_centimeters})
 
     new_state =
       state

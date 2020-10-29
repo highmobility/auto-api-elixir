@@ -130,7 +130,7 @@ defmodule AutoApi.StateTest do
 
     test "list of map" do
       tire_pressures = %PropertyComponent{
-        data: %{location: :front_left, pressure: {22.034, :kilopascals}}
+        data: %{location: :front_left, pressure: %{value: 22.034, unit: :kilopascals}}
       }
 
       state =
@@ -143,7 +143,7 @@ defmodule AutoApi.StateTest do
 
     test "unit" do
       state = %DiagnosticsState{
-        speed: %PropertyComponent{data: {299_792_458, :meters_per_second}}
+        speed: %PropertyComponent{data: %{value: 299_792_458, unit: :meters_per_second}}
       }
 
       new_state =
@@ -151,7 +151,7 @@ defmodule AutoApi.StateTest do
         |> DiagnosticsState.to_bin()
         |> DiagnosticsState.from_bin()
 
-      assert new_state.speed.data == {299_792_458, :meters_per_second}
+      assert new_state.speed.data == %{value: 299_792_458, unit: :meters_per_second}
     end
 
     test "failure" do

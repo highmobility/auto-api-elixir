@@ -39,7 +39,7 @@ defmodule AutoApi.VehicleStatusState do
     iex> bin = <<153, 0, 22, 1, 0, 19, 0, 106, 1, 13, 0, 13, 1, 0, 10, 18, 4, 64, 69, 0, 0, 0, 0, 0, 0>>
     iex> state = AutoApi.VehicleStatusState.from_bin(bin)
     iex> state.states
-    [%AutoApi.PropertyComponent{data: %AutoApi.TripsState{distance: %AutoApi.PropertyComponent{data: {42.0, :kilometers}}}}]
+    [%AutoApi.PropertyComponent{data: %AutoApi.TripsState{distance: %AutoApi.PropertyComponent{data: %{value: 42.0, unit: :kilometers}}}}]
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -49,7 +49,7 @@ defmodule AutoApi.VehicleStatusState do
   @doc """
   Parse state to bin
 
-    iex> trip_state = %AutoApi.TripsState{distance: %AutoApi.PropertyComponent{data: {42, :kilometers}}}
+    iex> trip_state = %AutoApi.TripsState{distance: %AutoApi.PropertyComponent{data: %{value: 42, unit: :kilometers}}}
     iex> state = %AutoApi.VehicleStatusState{states: [%AutoApi.PropertyComponent{data: trip_state}]}
     iex> AutoApi.VehicleStatusState.to_bin(state)
     <<153, 0, 22, 1, 0, 19, 0, 106, 1, 13, 0, 13, 1, 0, 10, 18, 4, 64, 69, 0, 0, 0, 0, 0, 0>>

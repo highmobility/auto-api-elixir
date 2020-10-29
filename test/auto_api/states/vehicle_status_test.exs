@@ -28,7 +28,10 @@ defmodule AutoApi.VehicleStatusStateTest do
   test "Correctly encodes state in to_bin/1" do
     diag_state =
       AutoApi.DiagnosticsState.base()
-      |> AutoApi.State.put(:speed, data: {88, :miles_per_hour}, timestamp: DateTime.utc_now())
+      |> AutoApi.State.put(:speed,
+        data: %{value: 88, unit: :miles_per_hour},
+        timestamp: DateTime.utc_now()
+      )
 
     door_state =
       AutoApi.DoorsState.base()
@@ -72,7 +75,7 @@ defmodule AutoApi.VehicleStatusStateTest do
 
     assert [diag_state, door_state] = state.states
 
-    assert diag_state.data.speed.data == {88, :miles_per_hour}
+    assert diag_state.data.speed.data == %{value: 88, unit: :miles_per_hour}
     assert diag_state.data.speed.timestamp == DateTime.from_unix!(1_551_867_428_642, :millisecond)
     refute diag_state.data.speed.failure
 

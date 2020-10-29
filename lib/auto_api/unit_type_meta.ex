@@ -143,7 +143,7 @@ defmodule AutoApi.UnitType.Meta do
 
         quote do
           # Here we could expand atom() to the actual values instead
-          @type unquote(name_atom)() :: {float(), atom()}
+          @type unquote(name_atom)() :: %{value: float(), unit: atom()}
 
           @units unquote(Macro.escape(units))
           @unit_names unquote(Macro.escape(unit_names))
