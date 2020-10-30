@@ -51,7 +51,7 @@ defmodule AutoApi.UniversalProperties.Meta do
             iex> List.last(properties)
             {0xA4, :brand}
         """
-        @spec all() :: list(atom())
+        @spec all() :: list({0..255, atom()})
         def all(), do: @properties
 
         @doc false
