@@ -23,8 +23,8 @@
 defmodule AutoApi.StateHelper do
   @moduledoc false
 
-  def generate_struct(raw_spec) do
-    raw_spec["properties"]
+  def generate_struct(properties) do
+    properties
     |> Enum.map(fn prop -> {String.to_atom(prop["name"]), prop["multiple"] || false} end)
     |> Enum.map(fn {name, multiple} ->
       {name,

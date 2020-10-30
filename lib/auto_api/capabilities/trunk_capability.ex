@@ -32,9 +32,9 @@ defmodule AutoApi.TrunkCapability do
       iex> T.description
       "Trunk"
       iex> length(T.properties)
-      2
-      iex> T.properties
-      [{1, :lock}, {2, :position}]
+      7
+      iex> List.first(T.properties)
+      {1, :lock}
   """
 
   @command_module AutoApi.TrunkCommand

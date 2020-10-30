@@ -32,9 +32,9 @@ defmodule AutoApi.NotificationsCapability do
       iex> N.description
       "Notifications"
       iex> length(N.properties)
-      4
-      iex> List.last(N.properties)
-      {0x04, :clear}
+      9
+      iex> List.first(N.properties)
+      {0x01, :text}
   """
 
   @command_module AutoApi.NotificationsCommand

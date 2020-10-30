@@ -31,8 +31,10 @@ defmodule AutoApi.CruiseControlCapability do
       :cruise_control
       iex> CC.description
       "Cruise Control"
-      iex> CC.properties
-      [{1, :cruise_control}, {2, :limiter}, {3, :target_speed}, {4, :adaptive_cruise_control}, {5, :acc_target_speed}]
+      iex> length(CC.properties)
+      10
+      iex> List.first(CC.properties)
+      {1, :cruise_control}
   """
 
   @command_module AutoApi.CruiseControlCommand

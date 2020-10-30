@@ -20,23 +20,13 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.MultiCommandCapability do
+defmodule AutoApi.UniversalProperties do
   @moduledoc """
-  Basic settings for MultiCommand Capability
+  Utility functions for Universal Properties.
 
-      iex> alias AutoApi.MultiCommandCapability, as: M
-      iex> M.identifier
-      <<0x00, 0x13>>
-      iex> M.name
-      :multi_command
-      iex> M.description
-      "Multi Command"
-      iex> length(M.properties)
-      7
+  Universal properties are properties that can be included in any State.
   """
+  require AutoApi.UniversalProperties.Meta
 
-  @command_module AutoApi.MultiCommandCommand
-  @state_module AutoApi.MultiCommandState
-
-  use AutoApi.Capability, spec_file: "multi_command.json"
+  @before_compile AutoApi.UniversalProperties.Meta
 end

@@ -25,13 +25,14 @@ defmodule AutoApi.Capability do
   Capability behaviour
   """
 
-  alias AutoApi.CapabilityHelper
+  alias AutoApi.{CapabilityHelper, UniversalProperties}
 
   defmacro __using__(spec_file: spec_file) do
     spec_path = Path.join(["specs", "capabilities", spec_file])
     raw_spec = Jason.decode!(File.read!(spec_path))
 
-    properties = raw_spec["properties"] || []
+    properties =
+      (raw_spec["properties"] || []) ++ UniversalProperties.raw_spec()["universal_properties"]
 
     base_functions =
       quote location: :keep do

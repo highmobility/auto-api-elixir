@@ -31,8 +31,10 @@ defmodule AutoApi.MobileCapability do
       :mobile
       iex> M.description
       "Mobile"
-      iex> M.properties
-      [{0x01, :connection}]
+      iex> length(M.properties)
+      6
+      iex> List.first(M.properties)
+      {0x01, :connection}
   """
 
   @command_module AutoApi.MobileCommand

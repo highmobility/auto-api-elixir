@@ -32,9 +32,9 @@ defmodule AutoApi.RemoteControlCapability do
       iex> R.description
       "Remote Control"
       iex> length(R.properties)
-      3
-      iex> R.properties
-      [{1, :control_mode}, {2, :angle}, {3, :speed}]
+      8
+      iex> List.first(R.properties)
+      {1, :control_mode}
   """
 
   @command_module AutoApi.RemoteControlCommand

@@ -32,9 +32,9 @@ defmodule AutoApi.ParkingTicketCapability do
       iex> P.description
       "Parking Ticket"
       iex> length(P.properties)
-      5
-      iex> List.last(P.properties)
-      {5, :ticket_end_time}
+      10
+      iex> List.first(P.properties)
+      {1, :status}
   """
 
   @command_module AutoApi.ParkingTicketCommand

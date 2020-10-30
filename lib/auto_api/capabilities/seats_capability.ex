@@ -32,9 +32,9 @@ defmodule AutoApi.SeatsCapability do
       iex> S.description
       "Seats"
       iex> length(S.properties)
-      2
-      iex> List.last(S.properties)
-      {0x03, :seatbelts_state}
+      7
+      iex> List.first(S.properties)
+      {0x02, :persons_detected}
   """
 
   @command_module AutoApi.SeatsCommand

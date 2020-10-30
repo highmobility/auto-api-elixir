@@ -32,9 +32,9 @@ defmodule AutoApi.ParkingBrakeCapability do
       iex> P.description
       "Parking Brake"
       iex> length(P.properties)
-      1
-      iex> P.properties
-      [{1, :status}]
+      6
+      iex> List.first(P.properties)
+      {1, :status}
   """
 
   @command_module AutoApi.ParkingBrakeCommand

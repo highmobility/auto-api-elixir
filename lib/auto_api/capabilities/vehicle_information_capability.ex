@@ -32,9 +32,9 @@ defmodule AutoApi.VehicleInformationCapability do
       iex> VS.description
       "Vehicle Information"
       iex> length(VS.properties)
-      20
-      iex> List.last(VS.properties)
-      {0x16, :drive}
+      25
+      iex> List.first(VS.properties)
+      {0x02, :powertrain}
   """
 
   @command_module AutoApi.VehicleInformationCommand

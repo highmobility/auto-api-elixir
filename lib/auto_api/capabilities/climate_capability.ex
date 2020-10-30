@@ -32,9 +32,9 @@ defmodule AutoApi.ClimateCapability do
       iex> C.description
       "Climate"
       iex> length(C.properties)
-      11
-      iex> List.last(C.properties)
-      {0x0C, :rear_temperature_setting}
+      16
+      iex> List.first(C.properties)
+      {0x01, :inside_temperature}
   """
 
   @command_module AutoApi.ClimateCommand

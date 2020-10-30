@@ -32,9 +32,9 @@ defmodule AutoApi.ChassisSettingsCapability do
       iex> C.description
       "Chassis Settings"
       iex> length(C.properties)
-      8
-      iex> List.last(C.properties)
-      {0x0A, :minimum_chassis_position}
+      13
+      iex> List.first(C.properties)
+      {0x01, :driving_mode}
   """
 
   @command_module AutoApi.ChassisSettingsCommand

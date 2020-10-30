@@ -32,7 +32,7 @@ defmodule AutoApi.TextInputCapability do
       iex> T.description
       "Text Input"
       iex> length(T.properties)
-      1
+      6
   """
 
   @command_module AutoApi.TextInputCommand

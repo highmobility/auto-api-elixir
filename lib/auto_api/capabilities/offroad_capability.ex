@@ -32,9 +32,9 @@ defmodule AutoApi.OffroadCapability do
       iex> O.description
       "Offroad"
       iex> length(O.properties)
-      2
-      iex> List.last(O.properties)
-      {0x02, :wheel_suspension}
+      7
+      iex> List.first(O.properties)
+      {0x01, :route_incline}
   """
 
   @command_module AutoApi.OffroadCommand

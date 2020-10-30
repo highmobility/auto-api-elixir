@@ -32,9 +32,9 @@ defmodule AutoApi.VideoHandoverCapability do
       iex> VH.description
       "Video Handover"
       iex> length(VH.properties)
-      4
-      iex> List.last(VH.properties)
-      {0x04, :starting_time}
+      9
+      iex> List.first(VH.properties)
+      {0x01, :url}
   """
 
   @command_module AutoApi.VideoHandoverCommand

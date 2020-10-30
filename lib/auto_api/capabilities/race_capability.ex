@@ -32,9 +32,9 @@ defmodule AutoApi.RaceCapability do
       iex> R.description
       "Race"
       iex> length(R.properties)
-      18
-      iex> List.last(R.properties)
-      {18, :vehicle_moving}
+      23
+      iex> List.first(R.properties)
+      {1, :accelerations}
   """
 
   @command_module AutoApi.RaceCommand

@@ -32,9 +32,9 @@ defmodule AutoApi.HistoricalCapability do
       iex> H.description
       "Historical"
       iex> length(H.properties)
-      4
-      iex> List.last(H.properties)
-      {0x04, :end_date}
+      9
+      iex> List.first(H.properties)
+      {0x01, :states}
   """
 
   @command_module AutoApi.HistoricalCommand

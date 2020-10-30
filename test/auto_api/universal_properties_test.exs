@@ -1,5 +1,6 @@
 defmodule AutoApi.UniversalPropertiesTest do
   use ExUnit.Case, async: true
+  doctest AutoApi.UniversalProperties
   alias AutoApi.DoorsState
 
   @tag :skip

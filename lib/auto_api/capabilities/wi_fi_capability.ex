@@ -32,9 +32,9 @@ defmodule AutoApi.WiFiCapability do
       iex> W.description
       "Wi-Fi"
       iex> length(W.properties)
-      5
-      iex> W.properties
-      [{1, :status}, {2, :network_connected}, {3, :network_ssid}, {4, :network_security}, {5, :password}]
+      10
+      iex> List.first(W.properties)
+      {1, :status}
   """
 
   @command_module AutoApi.WiFiCommand

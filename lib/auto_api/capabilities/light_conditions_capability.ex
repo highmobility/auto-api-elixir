@@ -32,9 +32,9 @@ defmodule AutoApi.LightConditionsCapability do
       iex> L.description
       "Light Conditions"
       iex> length(L.properties)
-      2
-      iex> List.last(L.properties)
-      {0x02, :inside_light}
+      7
+      iex> List.first(L.properties)
+      {0x01, :outside_light}
   """
 
   @command_module AutoApi.LightConditionsCommand

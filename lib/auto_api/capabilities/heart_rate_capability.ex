@@ -32,7 +32,7 @@ defmodule AutoApi.HeartRateCapability do
       iex> H.description
       "Heart Rate"
       iex> length(H.properties)
-      1
+      6
   """
 
   @command_module AutoApi.HeartRateCommand

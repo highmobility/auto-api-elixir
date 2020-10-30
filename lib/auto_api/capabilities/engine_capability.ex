@@ -31,8 +31,10 @@ defmodule AutoApi.EngineCapability do
       :engine
       iex> E.description
       "Engine"
-      iex> E.properties
-      [{1, :status}, {2, :start_stop_state}]
+      iex> length(E.properties)
+      7
+      iex> List.first(E.properties)
+      {1, :status}
   """
 
   @command_module AutoApi.EngineCommand

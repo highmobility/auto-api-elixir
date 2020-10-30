@@ -31,8 +31,10 @@ defmodule AutoApi.HoodCapability do
       :hood
       iex> H.description
       "Hood"
-      iex> H.properties
-      [{0x01, :position}]
+      iex> length(H.properties)
+      6
+      iex> List.first(H.properties)
+      {0x01, :position}
   """
 
   @command_module AutoApi.HoodCommand

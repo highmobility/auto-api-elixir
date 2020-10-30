@@ -32,9 +32,9 @@ defmodule AutoApi.TheftAlarmCapability do
       iex> T.description
       "Theft Alarm"
       iex> length(T.properties)
-      7
-      iex> List.last(T.properties)
-      {7, :event_type}
+      12
+      iex> List.first(T.properties)
+      {1, :status}
   """
 
   @command_module AutoApi.TheftAlarmCommand

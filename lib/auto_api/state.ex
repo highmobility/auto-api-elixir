@@ -25,7 +25,7 @@ defmodule AutoApi.State do
   State behaviour
   """
 
-  alias AutoApi.PropertyComponent
+  alias AutoApi.{PropertyComponent, UniversalProperties}
 
   @callback from_bin(binary) :: struct
   @callback to_bin(struct) :: binary
@@ -37,7 +37,11 @@ defmodule AutoApi.State do
   defmacro __using__(spec_file: spec_file) do
     spec_path = Path.join(["specs", "capabilities", spec_file])
     raw_spec = Jason.decode!(File.read!(spec_path))
-    struct_def = AutoApi.StateHelper.generate_struct(raw_spec)
+
+    properties =
+      (raw_spec["properties"] || []) ++ UniversalProperties.raw_spec()["universal_properties"]
+
+    struct_def = AutoApi.StateHelper.generate_struct(properties)
 
     base =
       quote location: :keep do
@@ -116,19 +120,8 @@ defmodule AutoApi.State do
         end
       end
 
-    timestamp =
-      quote do
-        defp parse_bin_property(
-               0xA2,
-               _size,
-               value
-             ) do
-          {:timestamp, false, DateTime.utc_now()}
-        end
-      end
-
     prop_funs =
-      for prop <- raw_spec["properties"] do
+      for prop <- properties do
         prop_name = String.to_atom(prop["name"])
         prop_id = prop["id"]
 
@@ -154,7 +147,7 @@ defmodule AutoApi.State do
         end
       end
 
-    [timestamp, base, prop_funs]
+    [base, prop_funs]
   end
 
   @doc """

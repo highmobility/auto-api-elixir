@@ -31,8 +31,8 @@ defmodule AutoApi.WakeUpCapability do
       :wake_up
       iex> W.description
       "Wake Up"
-      iex> W.properties
-      [{1, :status}]
+      iex> List.first(W.properties)
+      {1, :status}
   """
 
   @command_module AutoApi.WakeUpCommand

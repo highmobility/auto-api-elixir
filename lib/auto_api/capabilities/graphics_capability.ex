@@ -32,7 +32,7 @@ defmodule AutoApi.GraphicsCapability do
       iex> G.description
       "Graphics"
       iex> length(G.properties)
-      1
+      6
   """
 
   @command_module AutoApi.GraphicsCommand

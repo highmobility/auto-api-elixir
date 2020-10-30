@@ -32,7 +32,7 @@ defmodule AutoApi.BrowserCapability do
       iex> B.description
       "Browser"
       iex> length(B.properties)
-      1
+      6
   """
 
   @command_module AutoApi.BrowserCommand

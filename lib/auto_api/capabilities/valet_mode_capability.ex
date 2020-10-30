@@ -32,8 +32,8 @@ defmodule AutoApi.ValetModeCapability do
       iex> V.description
       "Valet Mode"
       iex> length(V.properties)
-      1
-      iex> List.last(V.properties)
+      6
+      iex> List.first(V.properties)
       {0x01, :status}
   """
 

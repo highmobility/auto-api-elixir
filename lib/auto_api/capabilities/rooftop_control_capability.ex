@@ -32,9 +32,9 @@ defmodule AutoApi.RooftopControlCapability do
       iex> R.description
       "Rooftop Control"
       iex> length(R.properties)
-      6
-      iex> List.last(R.properties)
-      {0x06, :sunroof_rain_event}
+      11
+      iex> List.first(R.properties)
+      {0x01, :dimming}
   """
 
   @command_module AutoApi.RooftopControlCommand

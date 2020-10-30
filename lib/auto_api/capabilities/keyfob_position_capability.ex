@@ -32,8 +32,8 @@ defmodule AutoApi.KeyfobPositionCapability do
       iex> K.description
       "Keyfob Position"
       iex> length(K.properties)
-      1
-      iex> List.last(K.properties)
+      6
+      iex> List.first(K.properties)
       {0x01, :location}
   """
 

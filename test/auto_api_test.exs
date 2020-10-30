@@ -31,7 +31,7 @@ defmodule AutoApiTest do
     AutoApi.Capability.all()
     |> Enum.map(fn cap -> {cap.state.base, cap.properties} end)
     |> Enum.all?(fn {state, properties} ->
-      state_properties = Map.keys(state) -- [:__struct__, :timestamp]
+      state_properties = Map.keys(state) -- [:__struct__]
       spec_properties = Enum.map(properties, &elem(&1, 1))
 
       assert_lists_equal(state_properties, spec_properties)

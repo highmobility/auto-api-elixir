@@ -22,22 +22,20 @@ defmodule AutoApi.StateHelperTest do
   alias AutoApi.StateHelper, as: SUT
 
   test "generate_struct/1" do
-    raw_spec = %{
-      "properties" => [
-        %{
-          "name" => "foo",
-          "multiple" => true
-        },
-        %{
-          "name" => "bar"
-        },
-        %{
-          "name" => "baz",
-          "multiple" => false
-        }
-      ]
-    }
+    properties = [
+      %{
+        "name" => "foo",
+        "multiple" => true
+      },
+      %{
+        "name" => "bar"
+      },
+      %{
+        "name" => "baz",
+        "multiple" => false
+      }
+    ]
 
-    assert SUT.generate_struct(raw_spec) == [foo: [], bar: nil, baz: nil]
+    assert SUT.generate_struct(properties) == [foo: [], bar: nil, baz: nil]
   end
 end

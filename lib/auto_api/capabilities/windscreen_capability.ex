@@ -32,9 +32,9 @@ defmodule AutoApi.WindscreenCapability do
       iex> W.description
       "Windscreen"
       iex> length(W.properties)
-      8
-      iex> List.last(W.properties)
-      {0x08, :windscreen_damage_detection_time}
+      13
+      iex> List.first(W.properties)
+      {0x01, :wipers_status}
   """
 
   @command_module AutoApi.WindscreenCommand

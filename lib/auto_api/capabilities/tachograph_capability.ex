@@ -32,9 +32,9 @@ defmodule AutoApi.TachographCapability do
       iex> T.description
       "Tachograph"
       iex> length(T.properties)
-      7
-      iex> List.last(T.properties)
-      {7, :vehicle_speed}
+      12
+      iex> List.first(T.properties)
+      {1, :drivers_working_states}
   """
 
   @command_module AutoApi.TachographCommand

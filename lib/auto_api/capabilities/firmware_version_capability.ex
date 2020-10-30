@@ -32,7 +32,7 @@ defmodule AutoApi.FirmwareVersionCapability do
       iex> F.description
       "Firmware Version"
       iex> length(F.properties)
-      3
+      8
   """
 
   @command_module AutoApi.FirmwareVersionCommand

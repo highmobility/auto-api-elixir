@@ -32,9 +32,9 @@ defmodule AutoApi.IgnitionCapability do
       iex> E.description
       "Ignition"
       iex> length(E.properties)
-      3
-      iex> List.last(E.properties)
-      {3, :state}
+      8
+      iex> List.first(E.properties)
+      {1, :status}
   """
 
   @command_module AutoApi.IgnitionCommand

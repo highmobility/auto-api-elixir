@@ -31,8 +31,10 @@ defmodule AutoApi.PowerTakeoffCapability do
       :power_takeoff
       iex> PT.description
       "Power Take-Off"
-      iex> PT.properties
-      [{1, :status}, {2, :engaged}]
+      iex> length(PT.properties)
+      7
+      iex> List.first(PT.properties)
+      {1, :status}
   """
 
   @command_module AutoApi.PowerTakeoffCommand

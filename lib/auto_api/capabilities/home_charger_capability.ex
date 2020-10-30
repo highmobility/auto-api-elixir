@@ -32,9 +32,9 @@ defmodule AutoApi.HomeChargerCapability do
       iex> H.description
       "Home Charger"
       iex> length(H.properties)
-      16
-      iex> List.last(H.properties)
-      {0x13, :charging_power}
+      21
+      iex> List.first(H.properties)
+      {0x1, :charging_status}
   """
 
   @command_module AutoApi.HomeChargerCommand

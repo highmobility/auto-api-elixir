@@ -31,8 +31,8 @@ defmodule AutoApi.WeatherConditionsCapability do
       :weather_conditions
       iex> W.description
       "Weather Conditions"
-      iex> W.properties
-      [{1, :rain_intensity}]
+      iex> List.first(W.properties)
+      {1, :rain_intensity}
   """
 
   @command_module AutoApi.WeatherConditionsCommand

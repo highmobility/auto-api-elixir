@@ -32,9 +32,9 @@ defmodule AutoApi.FuelingCapability do
       iex> F.description
       "Fueling"
       iex> length(F.properties)
-      2
-      iex> F.properties
-      [{2, :gas_flap_lock}, {3, :gas_flap_position}]
+      7
+      iex> List.first(F.properties)
+      {2, :gas_flap_lock}
   """
 
   @command_module AutoApi.FuelingCommand

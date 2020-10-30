@@ -32,9 +32,9 @@ defmodule AutoApi.HonkHornFlashLightsCapability do
       iex> H.description
       "Honk Horn & Flash Lights"
       iex> length(H.properties)
-      5
-      iex> List.last(H.properties)
-      {0x05, :honk_time}
+      10
+      iex> List.first(H.properties)
+      {0x01, :flashers}
   """
 
   @command_module AutoApi.HonkHornFlashLightsCommand

@@ -32,9 +32,9 @@ defmodule AutoApi.UsageCapability do
       iex> U.description
       "Usage"
       iex> length(U.properties)
-      39
-      iex> List.last(U.properties)
-      {0x27, :eco_score_bonus_range}
+      44
+      iex> List.first(U.properties)
+      {0x01, :average_weekly_distance}
   """
 
   @command_module AutoApi.UsageCommand

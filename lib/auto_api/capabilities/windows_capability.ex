@@ -31,8 +31,8 @@ defmodule AutoApi.WindowsCapability do
       :windows
       iex> W.description
       "Windows"
-      iex> W.properties
-      [{2, :open_percentages}, {3, :positions}]
+      iex> List.first(W.properties)
+      {2, :open_percentages}
   """
 
   @command_module AutoApi.WindowsCommand

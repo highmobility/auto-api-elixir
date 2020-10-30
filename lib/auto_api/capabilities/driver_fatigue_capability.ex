@@ -32,7 +32,9 @@ defmodule AutoApi.DriverFatigueCapability do
       iex> D.description
       "Driver Fatigue"
       iex> length(D.properties)
-      1
+      6
+      iex> List.first(D.properties)
+      {0x01, :detected_fatigue_level}
   """
 
   @command_module AutoApi.DriverFatigueCommand

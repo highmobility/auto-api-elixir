@@ -31,8 +31,10 @@ defmodule AutoApi.VehicleTimeCapability do
       :vehicle_time
       iex> VT.description
       "Vehicle Time"
-      iex> VT.properties
-      [{1, :vehicle_time}]
+      iex> length(VT.properties)
+      6
+      iex> List.first(VT.properties)
+      {1, :vehicle_time}
   """
 
   @command_module AutoApi.VehicleTimeCommand

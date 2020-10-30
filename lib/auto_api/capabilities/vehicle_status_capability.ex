@@ -32,8 +32,8 @@ defmodule AutoApi.VehicleStatusCapability do
       iex> VS.description
       "Vehicle Status"
       iex> length(VS.properties)
-      1
-      iex> List.last(VS.properties)
+      6
+      iex> List.first(VS.properties)
       {0x99, :states}
   """
 

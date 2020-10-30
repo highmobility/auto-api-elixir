@@ -31,8 +31,10 @@ defmodule AutoApi.MessagingCapability do
       :messaging
       iex> M.description
       "Messaging"
-      iex> M.properties
-      [{0x01, :text}, {0x02, :handle}]
+      iex> length(M.properties)
+      7
+      iex> List.first(M.properties)
+      {0x01, :text}
   """
 
   @command_module AutoApi.MessagingCommand

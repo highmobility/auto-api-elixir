@@ -32,9 +32,9 @@ defmodule AutoApi.DoorsCapability do
       iex> D.description
       "Doors"
       iex> length(D.properties)
-      5
-      iex> List.last(D.properties)
-      {0x06, :locks_state}
+      10
+      iex> List.first(D.properties)
+      {0x02, :inside_locks}
   """
 
   @command_module AutoApi.DoorsCommand
