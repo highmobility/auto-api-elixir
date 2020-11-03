@@ -67,6 +67,23 @@ defmodule AutoApi.State do
 
         def name, do: apply(@capability, :name, [])
 
+        @doc """
+        Convenience function to build the State properties.
+
+        See `AutoApi.State.put/3`.
+
+        ## Examples
+
+            iex> state_base = AutoApi.DiagnosticsState.base()
+            iex> odometer = %{value: 10_921, unit: :kilometers}
+            iex> state_1 = AutoApi.DiagnosticsState.put(state_base, :odometer, data: odometer)
+            iex> state_2 = AutoApi.State.put(state_base, :odometer, data: odometer)
+            iex> state_1 === state_2
+            true
+        """
+        @spec put(struct(), atom(), PropertyComponent.t() | keyword() | map()) :: struct()
+        defdelegate put(state, property, property_component_or_params), to: AutoApi.State
+
         defp parse_bin_properties(<<id, size::integer-16, data::binary-size(size)>>, state) do
           do_parse_bin_properties(id, size, data, state)
         end
