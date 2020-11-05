@@ -1,8 +1,8 @@
-defmodule AutoApi.UsageCapability do
+defmodule AutoApiL11.UsageCapability do
   @moduledoc """
   Basic settings for usage Capability
 
-      iex> alias AutoApi.UsageCapability, as: U
+      iex> alias AutoApiL11.UsageCapability, as: U
       iex> U.identifier
       <<0x00, 0x68>>
       iex> U.name
@@ -13,8 +13,8 @@ defmodule AutoApi.UsageCapability do
       0x0E
   """
 
-  @command_module AutoApi.UsageCommand
-  @state_module AutoApi.UsageState
+  @command_module AutoApiL11.UsageCommand
+  @state_module AutoApiL11.UsageState
 
-  use AutoApi.Capability, spec_file: "specs/usage.json"
+  use AutoApiL11.Capability, spec_file: "specs/usage.json"
 end

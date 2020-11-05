@@ -1,6 +1,6 @@
-defmodule AutoApi.VehicleStatusCommand do
+defmodule AutoApiL11.VehicleStatusCommand do
   @moduledoc """
-  Handles  commands and apply binary commands on `%AutoApi.VehicleStatusState{}`
+  Handles  commands and apply binary commands on `%AutoApiL11.VehicleStatusState{}`
   """
-  use AutoApi.Command
+  use AutoApiL11.Command
 end

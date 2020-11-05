@@ -1,4 +1,4 @@
-defmodule AutoApi.ValetModeCapabilityTest do
+defmodule AutoApiL11.ValetModeCapabilityTest do
   use ExUnit.Case
-  doctest AutoApi.ValetModeCapability
+  doctest AutoApiL11.ValetModeCapability
 end

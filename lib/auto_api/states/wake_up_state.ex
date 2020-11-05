@@ -1,14 +1,14 @@
-defmodule AutoApi.WakeUpState do
+defmodule AutoApiL11.WakeUpState do
   @moduledoc """
   WakeUp state
   """
 
-  alias AutoApi.{CommonData, PropertyComponent}
+  alias AutoApiL11.{CommonData, PropertyComponent}
 
   defstruct status: nil,
             timestamp: nil
 
-  use AutoApi.State, spec_file: "specs/wake_up.json"
+  use AutoApiL11.State, spec_file: "specs/wake_up.json"
 
   @type wake_up_state :: :wake_up | :sleep
   @type t :: %__MODULE__{
@@ -20,8 +20,8 @@ defmodule AutoApi.WakeUpState do
   Build state based on binary value
 
     iex> bin = <<1, 0, 4, 1, 0, 1, 0>>
-    iex> AutoApi.WakeUpState.from_bin(bin)
-    %AutoApi.WakeUpState{status: %AutoApi.PropertyComponent{data: :wake_up}}
+    iex> AutoApiL11.WakeUpState.from_bin(bin)
+    %AutoApiL11.WakeUpState{status: %AutoApiL11.PropertyComponent{data: :wake_up}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -31,8 +31,8 @@ defmodule AutoApi.WakeUpState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.WakeUpState{status: %AutoApi.PropertyComponent{data: :sleep}}
-    iex> AutoApi.WakeUpState.to_bin(state)
+    iex> state = %AutoApiL11.WakeUpState{status: %AutoApiL11.PropertyComponent{data: :sleep}}
+    iex> AutoApiL11.WakeUpState.to_bin(state)
     <<1, 0, 4, 1, 0, 1, 1>>
   """
   @spec to_bin(__MODULE__.t()) :: binary

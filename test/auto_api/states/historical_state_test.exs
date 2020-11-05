@@ -1,8 +1,8 @@
-defmodule AutoApi.HistoricalStateTest do
+defmodule AutoApiL11.HistoricalStateTest do
   use ExUnit.Case
-  doctest AutoApi.HistoricalState
+  doctest AutoApiL11.HistoricalState
 
-  alias AutoApi.{ChargingState, HistoricalState, PropertyComponent}
+  alias AutoApiL11.{ChargingState, HistoricalState, PropertyComponent}
 
   test "from_bin/1 and to_bin/1" do
     states = [

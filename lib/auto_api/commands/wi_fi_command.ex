@@ -1,6 +1,6 @@
-defmodule AutoApi.WiFiCommand do
+defmodule AutoApiL11.WiFiCommand do
   @moduledoc """
-  Handles WiFi commands and apply binary commands on `%AutoApi.WiFiState{}`
+  Handles WiFi commands and apply binary commands on `%AutoApiL11.WiFiState{}`
   """
-  use AutoApi.Command
+  use AutoApiL11.Command
 end

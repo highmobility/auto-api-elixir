@@ -1,4 +1,4 @@
-defmodule AutoApi.DriverFatigueCapabilityTest do
+defmodule AutoApiL11.DriverFatigueCapabilityTest do
   use ExUnit.Case
-  doctest AutoApi.DriverFatigueCapability
+  doctest AutoApiL11.DriverFatigueCapability
 end

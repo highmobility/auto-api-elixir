@@ -1,8 +1,8 @@
-defmodule AutoApi.ChargingCapability do
+defmodule AutoApiL11.ChargingCapability do
   @moduledoc """
   Basic settings for Charging Capability
 
-      iex> alias AutoApi.ChargingCapability, as: C
+      iex> alias AutoApiL11.ChargingCapability, as: C
       iex> C.identifier
       <<0x00, 0x23>>
       iex> C.name
@@ -15,8 +15,8 @@ defmodule AutoApi.ChargingCapability do
       {23, :status}
   """
 
-  @command_module AutoApi.ChargingCommand
-  @state_module AutoApi.ChargingState
+  @command_module AutoApiL11.ChargingCommand
+  @state_module AutoApiL11.ChargingState
 
-  use AutoApi.Capability, spec_file: "specs/charging.json"
+  use AutoApiL11.Capability, spec_file: "specs/charging.json"
 end

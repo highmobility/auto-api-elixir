@@ -1,6 +1,6 @@
-defmodule AutoApi.DiagnosticsCommand do
+defmodule AutoApiL11.DiagnosticsCommand do
   @moduledoc """
-  Handles Diagnostics commands and apply binary commands on `%AutoApi.DiagnosticsState{}`
+  Handles Diagnostics commands and apply binary commands on `%AutoApiL11.DiagnosticsState{}`
   """
-  use AutoApi.Command
+  use AutoApiL11.Command
 end

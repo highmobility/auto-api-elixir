@@ -1,8 +1,8 @@
-defmodule AutoApi.ValetModeCapability do
+defmodule AutoApiL11.ValetModeCapability do
   @moduledoc """
   Basic settings for ValetMode Capability
 
-      iex> alias AutoApi.ValetModeCapability, as: V
+      iex> alias AutoApiL11.ValetModeCapability, as: V
       iex> V.identifier
       <<0x00, 0x28>>
       iex> V.name
@@ -15,8 +15,8 @@ defmodule AutoApi.ValetModeCapability do
       {0x01, :status}
   """
 
-  @command_module AutoApi.ValetModeCommand
-  @state_module AutoApi.ValetModeState
+  @command_module AutoApiL11.ValetModeCommand
+  @state_module AutoApiL11.ValetModeState
 
-  use AutoApi.Capability, spec_file: "specs/valet_mode.json"
+  use AutoApiL11.Capability, spec_file: "specs/valet_mode.json"
 end

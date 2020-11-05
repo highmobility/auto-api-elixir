@@ -1,7 +1,7 @@
-defmodule AutoApi.ChargingStateTest do
+defmodule AutoApiL11.ChargingStateTest do
   use ExUnit.Case
-  doctest AutoApi.ChargingState
-  alias AutoApi.{PropertyComponent, ChargingState}
+  doctest AutoApiL11.ChargingState
+  alias AutoApiL11.{PropertyComponent, ChargingState}
 
   test "to_bin & from_bin" do
     date = ~U[2019-07-29 10:15:09.654Z]

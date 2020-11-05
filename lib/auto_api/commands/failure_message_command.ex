@@ -1,6 +1,6 @@
-defmodule AutoApi.FailureMessageCommand do
+defmodule AutoApiL11.FailureMessageCommand do
   @moduledoc """
-  Handles FailureMessage commands and apply binary commands on `%AutoApi.FailureMessageState{}`
+  Handles FailureMessage commands and apply binary commands on `%AutoApiL11.FailureMessageState{}`
   """
-  use AutoApi.Command
+  use AutoApiL11.Command
 end

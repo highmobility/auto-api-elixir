@@ -1,9 +1,9 @@
-defmodule AutoApi.IgnitionState do
+defmodule AutoApiL11.IgnitionState do
   @moduledoc """
   Keeps Ignition state
   """
 
-  alias AutoApi.PropertyComponent
+  alias AutoApiL11.PropertyComponent
 
   @type on_off :: :on | :off
 
@@ -20,14 +20,14 @@ defmodule AutoApi.IgnitionState do
             accessories_status: nil,
             timestamp: nil
 
-  use AutoApi.State, spec_file: "specs/ignition.json"
+  use AutoApiL11.State, spec_file: "specs/ignition.json"
 
   @doc """
   Build state based on binary value
 
     iex> bin = <<1, 0, 4, 1, 0, 1, 0>>
-    iex> AutoApi.IgnitionState.from_bin(bin)
-    %AutoApi.IgnitionState{status: %AutoApi.PropertyComponent{data: :off}}
+    iex> AutoApiL11.IgnitionState.from_bin(bin)
+    %AutoApiL11.IgnitionState{status: %AutoApiL11.PropertyComponent{data: :off}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -38,8 +38,8 @@ defmodule AutoApi.IgnitionState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.IgnitionState{status: %AutoApi.PropertyComponent{data: :off}}
-    iex> AutoApi.IgnitionState.to_bin(state)
+    iex> state = %AutoApiL11.IgnitionState{status: %AutoApiL11.PropertyComponent{data: :off}}
+    iex> AutoApiL11.IgnitionState.to_bin(state)
     <<1, 0, 4, 1, 0, 1, 0>>
   """
   def to_bin(%__MODULE__{} = state) do

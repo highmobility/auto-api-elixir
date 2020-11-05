@@ -1,4 +1,4 @@
-defmodule AutoApi.CruiseControlCommandTest do
+defmodule AutoApiL11.CruiseControlCommandTest do
   use ExUnit.Case
-  doctest AutoApi.CruiseControlCommand
+  doctest AutoApiL11.CruiseControlCommand
 end

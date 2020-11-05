@@ -1,6 +1,6 @@
-defmodule AutoApi.ParkingTicketCommand do
+defmodule AutoApiL11.ParkingTicketCommand do
   @moduledoc """
-  Handles ParkingTicket commands and apply binary commands on `%AutoApi.ParkingTicketState{}`
+  Handles ParkingTicket commands and apply binary commands on `%AutoApiL11.ParkingTicketState{}`
   """
-  use AutoApi.Command
+  use AutoApiL11.Command
 end

@@ -20,7 +20,7 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.State do
+defmodule AutoApiL11.State do
   @moduledoc """
   State behaviour
 
@@ -28,7 +28,7 @@ defmodule AutoApi.State do
 
       defmodule XxxState do
         defstruct x: nil
-        use AutoApi.State
+        use AutoApiL11.State
       end
   """
   @callback from_bin(binary) :: struct
@@ -42,8 +42,8 @@ defmodule AutoApi.State do
 
     base =
       quote do
-        alias AutoApi.CommonData
-        @behaviour AutoApi.State
+        alias AutoApiL11.CommonData
+        @behaviour AutoApiL11.State
         @dialyzer {:nowarn_function, to_properties: 4}
 
         @capability __MODULE__
@@ -136,7 +136,7 @@ defmodule AutoApi.State do
           to_properties(
             state,
             property_name,
-            %AutoApi.PropertyComponent{data: data, timestamp: timestamp},
+            %AutoApiL11.PropertyComponent{data: data, timestamp: timestamp},
             false
           )
         end
@@ -150,7 +150,7 @@ defmodule AutoApi.State do
           to_properties(
             state,
             property_name,
-            %AutoApi.PropertyComponent{data: data, timestamp: timestamp},
+            %AutoApiL11.PropertyComponent{data: data, timestamp: timestamp},
             true
           )
         end
@@ -162,7 +162,7 @@ defmodule AutoApi.State do
         """
         @spec put_failure(struct(), atom(), atom(), String.t(), DateTime.t() | nil) :: struct()
         def put_failure(state, property_name, reason, description, timestamp \\ nil) do
-          value = %AutoApi.PropertyComponent{
+          value = %AutoApiL11.PropertyComponent{
             failure: %{reason: reason, description: description},
             timestamp: timestamp
           }
@@ -200,7 +200,7 @@ defmodule AutoApi.State do
           end
 
           defp parse_bin_property(unquote(prop_id), size, bin_data) do
-            value = AutoApi.PropertyComponent.to_struct(bin_data, unquote(Macro.escape(prop)))
+            value = AutoApiL11.PropertyComponent.to_struct(bin_data, unquote(Macro.escape(prop)))
 
             {String.to_atom(unquote(prop["name"])), unquote(multiple), value}
           end
@@ -212,7 +212,7 @@ defmodule AutoApi.State do
           end
 
           defp parse_state_property(unquote(prop_name), data) do
-            data_bin = AutoApi.PropertyComponent.to_bin(data, unquote(Macro.escape(prop)))
+            data_bin = AutoApiL11.PropertyComponent.to_bin(data, unquote(Macro.escape(prop)))
 
             head = <<unquote(prop_id), byte_size(data_bin)::integer-16>>
             head <> data_bin

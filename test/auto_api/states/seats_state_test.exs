@@ -1,4 +1,4 @@
-defmodule AutoApi.SeatsStateTest do
+defmodule AutoApiL11.SeatsStateTest do
   use ExUnit.Case
-  doctest AutoApi.SeatsState
+  doctest AutoApiL11.SeatsState
 end

@@ -20,7 +20,7 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.CommandHelper do
+defmodule AutoApiL11.CommandHelper do
   @moduledoc false
 
   require Logger
@@ -90,12 +90,12 @@ defmodule AutoApi.CommandHelper do
     |> Enum.reduce(state, &Map.put(&2, &1, []))
   end
 
-  def convert_value_to_binary(%AutoApi.PropertyComponent{} = value, spec) do
-    AutoApi.PropertyComponent.to_bin(value, spec)
+  def convert_value_to_binary(%AutoApiL11.PropertyComponent{} = value, spec) do
+    AutoApiL11.PropertyComponent.to_bin(value, spec)
   end
 
   def convert_value_to_binary(value, spec) do
-    wrapped_value = %AutoApi.PropertyComponent{data: value}
+    wrapped_value = %AutoApiL11.PropertyComponent{data: value}
     convert_value_to_binary(wrapped_value, spec)
   end
 

@@ -1,8 +1,8 @@
-defmodule AutoApi.IgnitionCapability do
+defmodule AutoApiL11.IgnitionCapability do
   @moduledoc """
   Basic settings for Ignition Capability
 
-      iex> alias AutoApi.IgnitionCapability, as: E
+      iex> alias AutoApiL11.IgnitionCapability, as: E
       iex> E.identifier
       <<0x00, 0x35>>
       iex> E.name
@@ -13,8 +13,8 @@ defmodule AutoApi.IgnitionCapability do
       {2, :accessories_status}
   """
 
-  @command_module AutoApi.IgnitionCommand
-  @state_module AutoApi.IgnitionState
+  @command_module AutoApiL11.IgnitionCommand
+  @state_module AutoApiL11.IgnitionState
 
-  use AutoApi.Capability, spec_file: "specs/ignition.json"
+  use AutoApiL11.Capability, spec_file: "specs/ignition.json"
 end

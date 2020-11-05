@@ -1,6 +1,6 @@
-defmodule AutoApi.UsageCommand do
+defmodule AutoApiL11.UsageCommand do
   @moduledoc """
-  Handles Usage commands and apply binary commands on `%AutoApi.UsageState{}`
+  Handles Usage commands and apply binary commands on `%AutoApiL11.UsageState{}`
   """
-  use AutoApi.Command
+  use AutoApiL11.Command
 end

@@ -1,15 +1,15 @@
-defmodule AutoApi.MessagingState do
+defmodule AutoApiL11.MessagingState do
   @moduledoc """
   Messaging state
   """
 
-  alias AutoApi.PropertyComponent
+  alias AutoApiL11.PropertyComponent
 
   defstruct text: nil,
             handle: nil,
             timestamp: nil
 
-  use AutoApi.State, spec_file: "specs/messaging.json"
+  use AutoApiL11.State, spec_file: "specs/messaging.json"
 
   @type t :: %__MODULE__{
           text: %PropertyComponent{data: String.t()} | nil,
@@ -22,8 +22,8 @@ defmodule AutoApi.MessagingState do
 
     iex> text = "Hey mom!"
     iex> size = byte_size(text)
-    iex> AutoApi.MessagingState.from_bin(<<1, size + 3::integer-16, 1, size::integer-16, text::binary>>)
-    %AutoApi.MessagingState{text: %AutoApi.PropertyComponent{data: "Hey mom!"}}
+    iex> AutoApiL11.MessagingState.from_bin(<<1, size + 3::integer-16, 1, size::integer-16, text::binary>>)
+    %AutoApiL11.MessagingState{text: %AutoApiL11.PropertyComponent{data: "Hey mom!"}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -34,8 +34,8 @@ defmodule AutoApi.MessagingState do
   Parse state to bin
 
     iex> text = "Hey mom!"
-    iex> state = %AutoApi.MessagingState{text: %AutoApi.PropertyComponent{data: text}}
-    iex> AutoApi.MessagingState.to_bin(state)
+    iex> state = %AutoApiL11.MessagingState{text: %AutoApiL11.PropertyComponent{data: text}}
+    iex> AutoApiL11.MessagingState.to_bin(state)
     <<1, 11::integer-16, 1, 8::integer-16, 0x48, 0x65, 0x79, 0x20, 0x6D, 0x6F, 0x6D, 0x21>>
   """
   @spec to_bin(__MODULE__.t()) :: binary

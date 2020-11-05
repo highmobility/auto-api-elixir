@@ -1,4 +1,4 @@
-defmodule AutoApi.RooftopControlCommandTest do
+defmodule AutoApiL11.RooftopControlCommandTest do
   use ExUnit.Case
-  doctest AutoApi.RooftopControlCommand
+  doctest AutoApiL11.RooftopControlCommand
 end

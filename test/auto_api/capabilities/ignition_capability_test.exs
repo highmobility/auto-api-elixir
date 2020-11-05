@@ -1,4 +1,4 @@
-defmodule AutoApi.IgnitionCapabilityTest do
+defmodule AutoApiL11.IgnitionCapabilityTest do
   use ExUnit.Case
-  doctest AutoApi.IgnitionCapability
+  doctest AutoApiL11.IgnitionCapability
 end

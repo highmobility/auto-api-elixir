@@ -1,4 +1,4 @@
-defmodule AutoApi.ChassisSettingsCommandTest do
+defmodule AutoApiL11.ChassisSettingsCommandTest do
   use ExUnit.Case
-  doctest AutoApi.ChassisSettingsCommand
+  doctest AutoApiL11.ChassisSettingsCommand
 end

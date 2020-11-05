@@ -1,8 +1,8 @@
-defmodule AutoApi.DoorsCapability do
+defmodule AutoApiL11.DoorsCapability do
   @moduledoc """
   Basic settings for Door Locks Capability
 
-      iex> alias AutoApi.DoorsCapability, as: D
+      iex> alias AutoApiL11.DoorsCapability, as: D
       iex> D.identifier
       <<0x00, 0x20>>
       iex> D.name
@@ -15,8 +15,8 @@ defmodule AutoApi.DoorsCapability do
       {0x06, :locks_state}
   """
 
-  @command_module AutoApi.DoorsCommand
-  @state_module AutoApi.DoorsState
+  @command_module AutoApiL11.DoorsCommand
+  @state_module AutoApiL11.DoorsState
 
-  use AutoApi.Capability, spec_file: "specs/doors.json"
+  use AutoApiL11.Capability, spec_file: "specs/doors.json"
 end

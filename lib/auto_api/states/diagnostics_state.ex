@@ -1,11 +1,11 @@
-defmodule AutoApi.DiagnosticsState do
+defmodule AutoApiL11.DiagnosticsState do
   @moduledoc """
   Keeps Diagnostics state
 
   engine_oil_temperature: Engine oil temperature in Celsius, whereas can be negative
   """
 
-  alias AutoApi.{CommonData, PropertyComponent}
+  alias AutoApiL11.{CommonData, PropertyComponent}
 
   @doc """
   Diagnostics state
@@ -39,7 +39,7 @@ defmodule AutoApi.DiagnosticsState do
             mileage_meters: nil,
             timestamp: nil
 
-  use AutoApi.State, spec_file: "specs/diagnostics.json"
+  use AutoApiL11.State, spec_file: "specs/diagnostics.json"
 
   @type fluid_level :: :low | :filled
   @type position :: :front_left | :front_right | :rear_right | :rear_left
@@ -118,8 +118,8 @@ defmodule AutoApi.DiagnosticsState do
   Build state based on binary value
 
     iex> bin = <<1, 0, 7, 1, 0, 4, 0, 0, 0, 12>>
-    iex> AutoApi.DiagnosticsState.from_bin(bin)
-    %AutoApi.DiagnosticsState{mileage: %AutoApi.PropertyComponent{data: 12}}
+    iex> AutoApiL11.DiagnosticsState.from_bin(bin)
+    %AutoApiL11.DiagnosticsState{mileage: %AutoApiL11.PropertyComponent{data: 12}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -130,8 +130,8 @@ defmodule AutoApi.DiagnosticsState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.DiagnosticsState{mileage: %AutoApi.PropertyComponent{data: 12}}
-    iex> AutoApi.DiagnosticsState.to_bin(state)
+    iex> state = %AutoApiL11.DiagnosticsState{mileage: %AutoApiL11.PropertyComponent{data: 12}}
+    iex> AutoApiL11.DiagnosticsState.to_bin(state)
     <<1, 0, 7, 1, 0, 4, 0, 0, 0, 12>>
   """
   def to_bin(%__MODULE__{} = state) do

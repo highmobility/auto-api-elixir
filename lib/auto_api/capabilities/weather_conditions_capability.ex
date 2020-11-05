@@ -1,8 +1,8 @@
-defmodule AutoApi.WeatherConditionsCapability do
+defmodule AutoApiL11.WeatherConditionsCapability do
   @moduledoc """
   Basic settings for WeatherConditions Capability
 
-      iex> alias AutoApi.WeatherConditionsCapability, as: W
+      iex> alias AutoApiL11.WeatherConditionsCapability, as: W
       iex> W.identifier
       <<0x00, 0x55>>
       iex> W.name
@@ -15,8 +15,8 @@ defmodule AutoApi.WeatherConditionsCapability do
       [{1, :rain_intensity}]
   """
 
-  @command_module AutoApi.WeatherConditionsCommand
-  @state_module AutoApi.WeatherConditionsState
+  @command_module AutoApiL11.WeatherConditionsCommand
+  @state_module AutoApiL11.WeatherConditionsState
 
-  use AutoApi.Capability, spec_file: "specs/weather_conditions.json"
+  use AutoApiL11.Capability, spec_file: "specs/weather_conditions.json"
 end

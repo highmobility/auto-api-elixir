@@ -1,9 +1,9 @@
-defmodule AutoApi.HomeChargerState do
+defmodule AutoApiL11.HomeChargerState do
   @moduledoc """
   HomeCharger state
   """
 
-  alias AutoApi.{CommonData, PropertyComponent}
+  alias AutoApiL11.{CommonData, PropertyComponent}
 
   defstruct charging_status: nil,
             authentication_mechanism: nil,
@@ -22,7 +22,7 @@ defmodule AutoApi.HomeChargerState do
             price_tariffs: [],
             timestamp: nil
 
-  use AutoApi.State, spec_file: "specs/home_charger.json"
+  use AutoApiL11.State, spec_file: "specs/home_charger.json"
 
   @type charging_status :: :disconnected | :plugged_in | :charging
   @type authentication_mechanism :: :pin | :app
@@ -60,8 +60,8 @@ defmodule AutoApi.HomeChargerState do
   @doc """
   Build state based on binary value
 
-    iex> AutoApi.HomeChargerState.from_bin(<<1, 4::integer-16, 1, 0, 1, 1>>)
-    %AutoApi.HomeChargerState{charging_status: %AutoApi.PropertyComponent{data: :plugged_in}}
+    iex> AutoApiL11.HomeChargerState.from_bin(<<1, 4::integer-16, 1, 0, 1, 1>>)
+    %AutoApiL11.HomeChargerState{charging_status: %AutoApiL11.PropertyComponent{data: :plugged_in}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -71,8 +71,8 @@ defmodule AutoApi.HomeChargerState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.HomeChargerState{charging_status: %AutoApi.PropertyComponent{data: :plugged_in}}
-    iex> AutoApi.HomeChargerState.to_bin(state)
+    iex> state = %AutoApiL11.HomeChargerState{charging_status: %AutoApiL11.PropertyComponent{data: :plugged_in}}
+    iex> AutoApiL11.HomeChargerState.to_bin(state)
     <<1, 4::integer-16, 1, 0, 1, 1>>
   """
   @spec to_bin(__MODULE__.t()) :: binary

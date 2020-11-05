@@ -1,6 +1,6 @@
-defmodule AutoApi.EngineStartStopCommand do
+defmodule AutoApiL11.EngineStartStopCommand do
   @moduledoc """
-  Handles EngineStartStop commands and apply binary commands on `%AutoApi.EngineStartStopState{}`
+  Handles EngineStartStop commands and apply binary commands on `%AutoApiL11.EngineStartStopState{}`
   """
-  use AutoApi.Command
+  use AutoApiL11.Command
 end

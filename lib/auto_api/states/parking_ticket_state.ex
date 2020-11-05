@@ -1,9 +1,9 @@
-defmodule AutoApi.ParkingTicketState do
+defmodule AutoApiL11.ParkingTicketState do
   @moduledoc """
   ParkingTicket state
   """
 
-  alias AutoApi.{CommonData, PropertyComponent}
+  alias AutoApiL11.{CommonData, PropertyComponent}
 
   defstruct status: nil,
             operator_name: nil,
@@ -12,7 +12,7 @@ defmodule AutoApi.ParkingTicketState do
             ticket_end_time: nil,
             timestamp: nil
 
-  use AutoApi.State, spec_file: "specs/parking_ticket.json"
+  use AutoApiL11.State, spec_file: "specs/parking_ticket.json"
 
   @type parking_ticket_state :: :ended | :started
 
@@ -29,8 +29,8 @@ defmodule AutoApi.ParkingTicketState do
   Build state based on binary value
 
     iex> bin = <<1, 0, 4, 1, 0, 1, 1>>
-    iex> AutoApi.ParkingTicketState.from_bin(bin)
-    %AutoApi.ParkingTicketState{status: %AutoApi.PropertyComponent{data: :started}}
+    iex> AutoApiL11.ParkingTicketState.from_bin(bin)
+    %AutoApiL11.ParkingTicketState{status: %AutoApiL11.PropertyComponent{data: :started}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -40,8 +40,8 @@ defmodule AutoApi.ParkingTicketState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.ParkingTicketState{status: %AutoApi.PropertyComponent{data: :started}}
-    iex> AutoApi.ParkingTicketState.to_bin(state)
+    iex> state = %AutoApiL11.ParkingTicketState{status: %AutoApiL11.PropertyComponent{data: :started}}
+    iex> AutoApiL11.ParkingTicketState.to_bin(state)
     <<1, 0, 4, 1, 0, 1, 1>>
   """
   @spec to_bin(__MODULE__.t()) :: binary

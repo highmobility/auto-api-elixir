@@ -1,4 +1,4 @@
-defmodule AutoApi.FirmwareVersionStateTest do
+defmodule AutoApiL11.FirmwareVersionStateTest do
   use ExUnit.Case
-  doctest AutoApi.FirmwareVersionState
+  doctest AutoApiL11.FirmwareVersionState
 end

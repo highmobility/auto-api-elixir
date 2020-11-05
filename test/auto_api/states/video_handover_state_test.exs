@@ -1,4 +1,4 @@
-defmodule AutoApi.VideoHandoverStateTest do
+defmodule AutoApiL11.VideoHandoverStateTest do
   use ExUnit.Case
-  doctest AutoApi.VideoHandoverState
+  doctest AutoApiL11.VideoHandoverState
 end

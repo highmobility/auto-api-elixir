@@ -1,9 +1,9 @@
-defmodule AutoApi.WiFiState do
+defmodule AutoApiL11.WiFiState do
   @moduledoc """
   WiFi state
   """
 
-  alias AutoApi.{CommonData, PropertyComponent}
+  alias AutoApiL11.{CommonData, PropertyComponent}
 
   defstruct status: nil,
             network_connected: nil,
@@ -12,7 +12,7 @@ defmodule AutoApi.WiFiState do
             password: nil,
             timestamp: nil
 
-  use AutoApi.State, spec_file: "specs/wi_fi.json"
+  use AutoApiL11.State, spec_file: "specs/wi_fi.json"
 
   @type t :: %__MODULE__{
           status: %PropertyComponent{data: CommonData.enabled_state()} | nil,
@@ -27,8 +27,8 @@ defmodule AutoApi.WiFiState do
   Build state based on binary value
 
     iex> bin = <<1, 0, 4, 1, 0, 1, 1>>
-    iex> AutoApi.WiFiState.from_bin(bin)
-    %AutoApi.WiFiState{status: %AutoApi.PropertyComponent{data: :enabled}}
+    iex> AutoApiL11.WiFiState.from_bin(bin)
+    %AutoApiL11.WiFiState{status: %AutoApiL11.PropertyComponent{data: :enabled}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -38,8 +38,8 @@ defmodule AutoApi.WiFiState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.WiFiState{status: %AutoApi.PropertyComponent{data: :enabled}}
-    iex> AutoApi.WiFiState.to_bin(state)
+    iex> state = %AutoApiL11.WiFiState{status: %AutoApiL11.PropertyComponent{data: :enabled}}
+    iex> AutoApiL11.WiFiState.to_bin(state)
     <<1, 0, 4, 1, 0, 1, 1>>
   """
   @spec to_bin(__MODULE__.t()) :: binary

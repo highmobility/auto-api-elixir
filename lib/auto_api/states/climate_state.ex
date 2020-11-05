@@ -1,9 +1,9 @@
-defmodule AutoApi.ClimateState do
+defmodule AutoApiL11.ClimateState do
   @moduledoc """
   Climate state
   """
 
-  alias AutoApi.{CommonData, PropertyComponent}
+  alias AutoApiL11.{CommonData, PropertyComponent}
 
   defstruct inside_temperature: nil,
             outside_temperature: nil,
@@ -18,7 +18,7 @@ defmodule AutoApi.ClimateState do
             rear_temperature_setting: nil,
             timestamp: nil
 
-  use AutoApi.State, spec_file: "specs/climate.json"
+  use AutoApiL11.State, spec_file: "specs/climate.json"
 
   @type activity :: :inactive | :active
   @type hvac_weekday_starting_time :: %PropertyComponent{
@@ -46,8 +46,8 @@ defmodule AutoApi.ClimateState do
   @doc """
   Build state based on binary value
 
-    iex> AutoApi.ClimateState.from_bin(<<1, 7::integer-16, 1, 0, 4, 65, 224, 0, 0>>)
-    %AutoApi.ClimateState{inside_temperature: %AutoApi.PropertyComponent{data: 28.0}}
+    iex> AutoApiL11.ClimateState.from_bin(<<1, 7::integer-16, 1, 0, 4, 65, 224, 0, 0>>)
+    %AutoApiL11.ClimateState{inside_temperature: %AutoApiL11.PropertyComponent{data: 28.0}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -57,8 +57,8 @@ defmodule AutoApi.ClimateState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.ClimateState{inside_temperature: %AutoApi.PropertyComponent{data: 28.00}}
-    iex> AutoApi.ClimateState.to_bin(state)
+    iex> state = %AutoApiL11.ClimateState{inside_temperature: %AutoApiL11.PropertyComponent{data: 28.00}}
+    iex> AutoApiL11.ClimateState.to_bin(state)
     <<1, 7::integer-16, 1, 0, 4, 65, 224, 0, 0>>
   """
   @spec to_bin(__MODULE__.t()) :: binary

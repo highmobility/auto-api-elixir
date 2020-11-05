@@ -1,4 +1,4 @@
-defmodule AutoApi.RemoteControlStateTest do
+defmodule AutoApiL11.RemoteControlStateTest do
   use ExUnit.Case
-  doctest AutoApi.RemoteControlState
+  doctest AutoApiL11.RemoteControlState
 end

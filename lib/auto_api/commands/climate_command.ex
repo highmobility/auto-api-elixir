@@ -1,6 +1,6 @@
-defmodule AutoApi.ClimateCommand do
+defmodule AutoApiL11.ClimateCommand do
   @moduledoc """
-  Handles  commands and apply binary commands on `%AutoApi.ClimateState{}`
+  Handles  commands and apply binary commands on `%AutoApiL11.ClimateState{}`
   """
-  use AutoApi.Command
+  use AutoApiL11.Command
 end

@@ -1,10 +1,10 @@
-defmodule AutoApi.FirmwareVersionState do
+defmodule AutoApiL11.FirmwareVersionState do
   @moduledoc """
   Keeps Firmware Version state
 
   """
 
-  alias AutoApi.PropertyComponent
+  alias AutoApiL11.PropertyComponent
 
   @type hmkit_version :: %PropertyComponent{
           data: %{
@@ -22,7 +22,7 @@ defmodule AutoApi.FirmwareVersionState do
             application_version: nil,
             timestamp: nil
 
-  use AutoApi.State, spec_file: "specs/firmware_version.json"
+  use AutoApiL11.State, spec_file: "specs/firmware_version.json"
 
   @type t :: %__MODULE__{
           hmkit_version: hmkit_version | nil,
@@ -35,8 +35,8 @@ defmodule AutoApi.FirmwareVersionState do
   Build state based on binary value
 
     iex> bin = <<3, 0, 8, 1, 0, 5, 51, 46, 49, 46, 55>>
-    iex> AutoApi.FirmwareVersionState.from_bin(bin)
-    %AutoApi.FirmwareVersionState{application_version: %AutoApi.PropertyComponent{data: "3.1.7"}}
+    iex> AutoApiL11.FirmwareVersionState.from_bin(bin)
+    %AutoApiL11.FirmwareVersionState{application_version: %AutoApiL11.PropertyComponent{data: "3.1.7"}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -47,8 +47,8 @@ defmodule AutoApi.FirmwareVersionState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.FirmwareVersionState{application_version: %AutoApi.PropertyComponent{data: "3.1.7"}}
-    iex> AutoApi.FirmwareVersionState.to_bin(state)
+    iex> state = %AutoApiL11.FirmwareVersionState{application_version: %AutoApiL11.PropertyComponent{data: "3.1.7"}}
+    iex> AutoApiL11.FirmwareVersionState.to_bin(state)
     <<3, 0, 8, 1, 0, 5, 51, 46, 49, 46, 55>>
   """
   def to_bin(%__MODULE__{} = state) do

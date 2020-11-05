@@ -1,4 +1,4 @@
-defmodule AutoApi.DriverFatigueState do
+defmodule AutoApiL11.DriverFatigueState do
   @moduledoc """
   Capabilities state
 
@@ -7,12 +7,12 @@ defmodule AutoApi.DriverFatigueState do
   will translate those into modules and property names.
   """
 
-  alias AutoApi.PropertyComponent
+  alias AutoApiL11.PropertyComponent
 
   defstruct detected_fatigue_level: nil,
             timestamp: nil
 
-  use AutoApi.State, spec_file: "specs/driver_fatigue.json"
+  use AutoApiL11.State, spec_file: "specs/driver_fatigue.json"
 
   @type fatigue_level :: %PropertyComponent{
           data: :light | :pause_recommended | :action_needed | :car_ready_to_take_over
@@ -29,8 +29,8 @@ defmodule AutoApi.DriverFatigueState do
   ## Examples
 
       iex> bin = <<1, 0, 4, 1, 0, 1, 1>>
-      iex> AutoApi.DriverFatigueState.from_bin(bin)
-      %AutoApi.DriverFatigueState{detected_fatigue_level: %AutoApi.PropertyComponent{data: :pause_recommended}}
+      iex> AutoApiL11.DriverFatigueState.from_bin(bin)
+      %AutoApiL11.DriverFatigueState{detected_fatigue_level: %AutoApiL11.PropertyComponent{data: :pause_recommended}}
 
   """
   @spec from_bin(binary) :: __MODULE__.t()
@@ -43,8 +43,8 @@ defmodule AutoApi.DriverFatigueState do
 
   ## Examples
 
-      iex> state = %AutoApi.DriverFatigueState{detected_fatigue_level: %AutoApi.PropertyComponent{data: :pause_recommended}}
-      iex> AutoApi.DriverFatigueState.to_bin(state)
+      iex> state = %AutoApiL11.DriverFatigueState{detected_fatigue_level: %AutoApiL11.PropertyComponent{data: :pause_recommended}}
+      iex> AutoApiL11.DriverFatigueState.to_bin(state)
       <<1, 0, 4, 1, 0, 1, 1>>
 
   """

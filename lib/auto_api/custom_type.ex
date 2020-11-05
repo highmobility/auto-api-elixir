@@ -1,8 +1,8 @@
-defmodule AutoApi.CustomType do
+defmodule AutoApiL11.CustomType do
   @moduledoc """
     Handles custom types
   """
-  require AutoApi.CustomType.Implementation
+  require AutoApiL11.CustomType.Implementation
 
-  @before_compile AutoApi.CustomType.Implementation
+  @before_compile AutoApiL11.CustomType.Implementation
 end

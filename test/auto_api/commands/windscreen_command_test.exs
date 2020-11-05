@@ -1,4 +1,4 @@
-defmodule AutoApi.WindscreenCommandTest do
+defmodule AutoApiL11.WindscreenCommandTest do
   use ExUnit.Case
-  doctest AutoApi.WindscreenCommand
+  doctest AutoApiL11.WindscreenCommand
 end

@@ -1,4 +1,4 @@
-defmodule AutoApi.DoorsCapabilityTest do
+defmodule AutoApiL11.DoorsCapabilityTest do
   use ExUnit.Case
-  doctest AutoApi.DoorsCapability
+  doctest AutoApiL11.DoorsCapability
 end

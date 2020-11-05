@@ -1,6 +1,6 @@
-defmodule AutoApi.VehicleTimeCommand do
+defmodule AutoApiL11.VehicleTimeCommand do
   @moduledoc """
-  Handles  commands and apply binary commands on `%AutoApi.VehicleTimeState{}`
+  Handles  commands and apply binary commands on `%AutoApiL11.VehicleTimeState{}`
   """
-  use AutoApi.Command
+  use AutoApiL11.Command
 end

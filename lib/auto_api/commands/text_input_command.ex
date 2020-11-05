@@ -1,6 +1,6 @@
-defmodule AutoApi.TextInputCommand do
+defmodule AutoApiL11.TextInputCommand do
   @moduledoc """
-  Handles TextInput commands and apply binary commands on `%AutoApi.TextInputState{}`
+  Handles TextInput commands and apply binary commands on `%AutoApiL11.TextInputState{}`
   """
-  use AutoApi.Command
+  use AutoApiL11.Command
 end

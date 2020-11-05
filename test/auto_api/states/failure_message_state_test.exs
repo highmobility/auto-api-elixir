@@ -1,6 +1,6 @@
-defmodule AutoApi.FailureMessageStateTest do
+defmodule AutoApiL11.FailureMessageStateTest do
   use ExUnit.Case
-  alias AutoApi.FailureMessageState
+  alias AutoApiL11.FailureMessageState
 
   test "to_bin & from_bin" do
     state =

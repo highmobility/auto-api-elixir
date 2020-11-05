@@ -1,15 +1,15 @@
-defmodule AutoApi.PowerTakeoffState do
+defmodule AutoApiL11.PowerTakeoffState do
   @moduledoc """
   PowerTakeoff state
   """
 
-  alias AutoApi.{CommonData, PropertyComponent}
+  alias AutoApiL11.{CommonData, PropertyComponent}
 
   defstruct status: nil,
             engaged: nil,
             timestamp: nil
 
-  use AutoApi.State, spec_file: "specs/power_takeoff.json"
+  use AutoApiL11.State, spec_file: "specs/power_takeoff.json"
 
   @type power_takeoff_engaged :: :not_engaged | :engaged
 
@@ -23,8 +23,8 @@ defmodule AutoApi.PowerTakeoffState do
   Build state based on binary value
 
     iex> bin = <<1, 0, 4, 1, 0, 1, 1>>
-    iex> AutoApi.PowerTakeoffState.from_bin(bin)
-    %AutoApi.PowerTakeoffState{status: %AutoApi.PropertyComponent{data: :active}}
+    iex> AutoApiL11.PowerTakeoffState.from_bin(bin)
+    %AutoApiL11.PowerTakeoffState{status: %AutoApiL11.PropertyComponent{data: :active}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -34,8 +34,8 @@ defmodule AutoApi.PowerTakeoffState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.PowerTakeoffState{status: %AutoApi.PropertyComponent{data: :active}}
-    iex> AutoApi.PowerTakeoffState.to_bin(state)
+    iex> state = %AutoApiL11.PowerTakeoffState{status: %AutoApiL11.PropertyComponent{data: :active}}
+    iex> AutoApiL11.PowerTakeoffState.to_bin(state)
     <<1, 0, 4, 1, 0, 1, 1>>
   """
   @spec to_bin(__MODULE__.t()) :: binary

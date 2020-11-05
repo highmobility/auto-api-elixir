@@ -1,4 +1,4 @@
-defmodule AutoApi.VehicleTimeCapabilityTest do
+defmodule AutoApiL11.VehicleTimeCapabilityTest do
   use ExUnit.Case
-  doctest AutoApi.VehicleTimeCapability
+  doctest AutoApiL11.VehicleTimeCapability
 end

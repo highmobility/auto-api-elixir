@@ -1,4 +1,4 @@
-defmodule AutoApi.MultiCommandCapabilityTest do
+defmodule AutoApiL11.MultiCommandCapabilityTest do
   use ExUnit.Case
-  doctest AutoApi.MultiCommandCapability
+  doctest AutoApiL11.MultiCommandCapability
 end

@@ -1,8 +1,8 @@
-defmodule AutoApi.TextInputCapability do
+defmodule AutoApiL11.TextInputCapability do
   @moduledoc """
   Basic settings for TextInput Capability
 
-      iex> alias AutoApi.TextInputCapability, as: T
+      iex> alias AutoApiL11.TextInputCapability, as: T
       iex> T.identifier
       <<0x00, 0x44>>
       iex> T.name
@@ -13,8 +13,8 @@ defmodule AutoApi.TextInputCapability do
       1
   """
 
-  @command_module AutoApi.TextInputCommand
-  @state_module AutoApi.TextInputState
+  @command_module AutoApiL11.TextInputCommand
+  @state_module AutoApiL11.TextInputState
 
-  use AutoApi.Capability, spec_file: "specs/text_input.json"
+  use AutoApiL11.Capability, spec_file: "specs/text_input.json"
 end

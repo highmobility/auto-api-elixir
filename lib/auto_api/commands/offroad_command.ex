@@ -1,6 +1,6 @@
-defmodule AutoApi.OffroadCommand do
+defmodule AutoApiL11.OffroadCommand do
   @moduledoc """
-  Handles Offroad commands and apply binary commands on `%AutoApi.OffroadState{}`
+  Handles Offroad commands and apply binary commands on `%AutoApiL11.OffroadState{}`
   """
-  use AutoApi.Command
+  use AutoApiL11.Command
 end

@@ -1,8 +1,8 @@
-defmodule AutoApi.HoodCapability do
+defmodule AutoApiL11.HoodCapability do
   @moduledoc """
   Basic settings for HoodCapability
 
-      iex> alias AutoApi.HoodCapability, as: H
+      iex> alias AutoApiL11.HoodCapability, as: H
       iex> H.identifier
       <<0x00, 0x67>>
       iex> H.capability_size
@@ -15,8 +15,8 @@ defmodule AutoApi.HoodCapability do
       0
   """
 
-  @command_module AutoApi.HoodCommand
-  @state_module AutoApi.HoodState
+  @command_module AutoApiL11.HoodCommand
+  @state_module AutoApiL11.HoodState
 
-  use AutoApi.Capability, spec_file: "specs/hood.json"
+  use AutoApiL11.Capability, spec_file: "specs/hood.json"
 end

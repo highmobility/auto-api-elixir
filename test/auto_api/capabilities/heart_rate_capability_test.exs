@@ -1,4 +1,4 @@
-defmodule AutoApi.HeartRateCapabilityTest do
+defmodule AutoApiL11.HeartRateCapabilityTest do
   use ExUnit.Case
-  doctest AutoApi.HeartRateCapability
+  doctest AutoApiL11.HeartRateCapability
 end

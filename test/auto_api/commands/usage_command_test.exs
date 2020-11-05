@@ -1,4 +1,4 @@
-defmodule AutoApi.UsageCommandTest do
+defmodule AutoApiL11.UsageCommandTest do
   use ExUnit.Case
-  doctest AutoApi.UsageCommand
+  doctest AutoApiL11.UsageCommand
 end

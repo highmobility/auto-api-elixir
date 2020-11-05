@@ -1,4 +1,4 @@
-defmodule AutoApi.CustomType.Implementation do
+defmodule AutoApiL11.CustomType.Implementation do
   @moduledoc false
 
   @external_resource "specs/custom_types.json"

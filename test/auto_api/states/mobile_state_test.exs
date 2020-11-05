@@ -1,4 +1,4 @@
-defmodule AutoApi.MobileStateTest do
+defmodule AutoApiL11.MobileStateTest do
   use ExUnit.Case
-  doctest AutoApi.MobileState
+  doctest AutoApiL11.MobileState
 end

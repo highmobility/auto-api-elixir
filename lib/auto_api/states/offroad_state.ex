@@ -1,15 +1,15 @@
-defmodule AutoApi.OffroadState do
+defmodule AutoApiL11.OffroadState do
   @moduledoc """
   Offroad state
   """
 
-  alias AutoApi.{CommonData, PropertyComponent}
+  alias AutoApiL11.{CommonData, PropertyComponent}
 
   defstruct route_incline: nil,
             wheel_suspension: nil,
             timestamp: nil
 
-  use AutoApi.State, spec_file: "specs/offroad.json"
+  use AutoApiL11.State, spec_file: "specs/offroad.json"
 
   @type t :: %__MODULE__{
           route_incline: %PropertyComponent{data: integer} | nil,
@@ -21,8 +21,8 @@ defmodule AutoApi.OffroadState do
   Build state based on binary value
 
     iex> bin = <<1, 0, 5, 1, 0, 2, 0, 22>>
-    iex> AutoApi.OffroadState.from_bin(bin)
-    %AutoApi.OffroadState{route_incline: %AutoApi.PropertyComponent{data: 22}}
+    iex> AutoApiL11.OffroadState.from_bin(bin)
+    %AutoApiL11.OffroadState{route_incline: %AutoApiL11.PropertyComponent{data: 22}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -32,8 +32,8 @@ defmodule AutoApi.OffroadState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.OffroadState{route_incline: %AutoApi.PropertyComponent{data: 22}}
-    iex> AutoApi.OffroadState.to_bin(state)
+    iex> state = %AutoApiL11.OffroadState{route_incline: %AutoApiL11.PropertyComponent{data: 22}}
+    iex> AutoApiL11.OffroadState.to_bin(state)
     <<1, 0, 5, 1, 0, 2, 0, 22>>
   """
   @spec to_bin(__MODULE__.t()) :: binary

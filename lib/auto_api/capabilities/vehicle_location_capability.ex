@@ -1,8 +1,8 @@
-defmodule AutoApi.VehicleLocationCapability do
+defmodule AutoApiL11.VehicleLocationCapability do
   @moduledoc """
   Basic settings for Vehicle Location Capability
 
-      iex> alias AutoApi.VehicleLocationCapability, as: VL
+      iex> alias AutoApiL11.VehicleLocationCapability, as: VL
       iex> VL.identifier
       <<0x00, 0x30>>
       iex> VL.name
@@ -15,8 +15,8 @@ defmodule AutoApi.VehicleLocationCapability do
       [{4, :coordinates}, {5, :heading}, {6, :altitude}]
   """
 
-  @command_module AutoApi.VehicleLocationCommand
-  @state_module AutoApi.VehicleLocationState
+  @command_module AutoApiL11.VehicleLocationCommand
+  @state_module AutoApiL11.VehicleLocationState
 
-  use AutoApi.Capability, spec_file: "specs/vehicle_location.json"
+  use AutoApiL11.Capability, spec_file: "specs/vehicle_location.json"
 end

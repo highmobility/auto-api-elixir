@@ -1,4 +1,4 @@
-defmodule AutoApi.KeyfobPositionStateTest do
+defmodule AutoApiL11.KeyfobPositionStateTest do
   use ExUnit.Case
-  doctest AutoApi.KeyfobPositionState
+  doctest AutoApiL11.KeyfobPositionState
 end

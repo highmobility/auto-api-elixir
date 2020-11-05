@@ -1,8 +1,8 @@
-defmodule AutoApi.CapabilitiesCapability do
+defmodule AutoApiL11.CapabilitiesCapability do
   @moduledoc """
   Basic settings for Capabilities "Capability".
 
-      iex> alias AutoApi.CapabilitiesCapability, as: C
+      iex> alias AutoApiL11.CapabilitiesCapability, as: C
       iex> C.identifier
       <<0x00, 0x10>>
       iex> C.name
@@ -13,8 +13,8 @@ defmodule AutoApi.CapabilitiesCapability do
       {0x01, :capabilities}
   """
 
-  @command_module AutoApi.CapabilitiesCommand
-  @state_module AutoApi.CapabilitiesState
+  @command_module AutoApiL11.CapabilitiesCommand
+  @state_module AutoApiL11.CapabilitiesState
 
-  use AutoApi.Capability, spec_file: "specs/capabilities.json"
+  use AutoApiL11.Capability, spec_file: "specs/capabilities.json"
 end

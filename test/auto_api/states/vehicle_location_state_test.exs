@@ -1,7 +1,7 @@
-defmodule AutoApi.VehicleLocationStateTest do
+defmodule AutoApiL11.VehicleLocationStateTest do
   use ExUnit.Case
-  doctest AutoApi.VehicleLocationState
-  alias AutoApi.VehicleLocationState
+  doctest AutoApiL11.VehicleLocationState
+  alias AutoApiL11.VehicleLocationState
 
   test "to_bin/1 & from_bin" do
     state =

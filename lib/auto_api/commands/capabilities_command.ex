@@ -1,6 +1,6 @@
-defmodule AutoApi.CapabilitiesCommand do
+defmodule AutoApiL11.CapabilitiesCommand do
   @moduledoc """
-  Handles Capabilities commands and apply binary commands on `%AutoApi.CapabilitiesState{}`
+  Handles Capabilities commands and apply binary commands on `%AutoApiL11.CapabilitiesState{}`
   """
-  use AutoApi.Command
+  use AutoApiL11.Command
 end

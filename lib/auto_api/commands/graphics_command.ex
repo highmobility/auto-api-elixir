@@ -1,6 +1,6 @@
-defmodule AutoApi.GraphicsCommand do
+defmodule AutoApiL11.GraphicsCommand do
   @moduledoc """
-  Handles Graphics commands and apply binary commands on `%AutoApi.GraphicsState{}`
+  Handles Graphics commands and apply binary commands on `%AutoApiL11.GraphicsState{}`
   """
-  use AutoApi.Command
+  use AutoApiL11.Command
 end

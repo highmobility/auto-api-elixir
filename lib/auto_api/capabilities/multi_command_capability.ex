@@ -1,8 +1,8 @@
-defmodule AutoApi.MultiCommandCapability do
+defmodule AutoApiL11.MultiCommandCapability do
   @moduledoc """
   Basic settings for MultiCommand Capability
 
-      iex> alias AutoApi.MultiCommandCapability, as: M
+      iex> alias AutoApiL11.MultiCommandCapability, as: M
       iex> M.identifier
       <<0x00, 0x13>>
       iex> M.name
@@ -13,8 +13,8 @@ defmodule AutoApi.MultiCommandCapability do
       2
   """
 
-  @command_module AutoApi.MultiCommandCommand
-  @state_module AutoApi.MultiCommandState
+  @command_module AutoApiL11.MultiCommandCommand
+  @state_module AutoApiL11.MultiCommandState
 
-  use AutoApi.Capability, spec_file: "specs/multi_command.json"
+  use AutoApiL11.Capability, spec_file: "specs/multi_command.json"
 end

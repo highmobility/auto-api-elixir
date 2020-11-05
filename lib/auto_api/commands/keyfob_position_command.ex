@@ -1,6 +1,6 @@
-defmodule AutoApi.KeyfobPositionCommand do
+defmodule AutoApiL11.KeyfobPositionCommand do
   @moduledoc """
-  Handles KeyfobPosition commands and apply binary commands on `%AutoApi.KeyfobPositionState{}`
+  Handles KeyfobPosition commands and apply binary commands on `%AutoApiL11.KeyfobPositionState{}`
   """
-  use AutoApi.Command
+  use AutoApiL11.Command
 end

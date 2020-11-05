@@ -1,6 +1,6 @@
-defmodule AutoApi.DoorsCommandTest do
+defmodule AutoApiL11.DoorsCommandTest do
   use ExUnit.Case
-  alias AutoApi.{DoorsCommand, DoorsState, PropertyComponent}
+  alias AutoApiL11.{DoorsCommand, DoorsState, PropertyComponent}
 
   describe "execute/2" do
     # TODO

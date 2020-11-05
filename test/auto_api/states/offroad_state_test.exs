@@ -1,4 +1,4 @@
-defmodule AutoApi.OffroadStateTest do
+defmodule AutoApiL11.OffroadStateTest do
   use ExUnit.Case
-  doctest AutoApi.OffroadState
+  doctest AutoApiL11.OffroadState
 end

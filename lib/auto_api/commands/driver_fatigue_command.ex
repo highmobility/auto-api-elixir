@@ -1,6 +1,6 @@
-defmodule AutoApi.DriverFatigueCommand do
+defmodule AutoApiL11.DriverFatigueCommand do
   @moduledoc """
-  Handles Capabilities commands and apply binary commands on `%AutoApi.CapabilitiesState{}`
+  Handles Capabilities commands and apply binary commands on `%AutoApiL11.CapabilitiesState{}`
   """
-  use AutoApi.Command
+  use AutoApiL11.Command
 end

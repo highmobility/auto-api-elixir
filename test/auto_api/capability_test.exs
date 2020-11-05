@@ -16,11 +16,11 @@
 #
 # Please inquire about commercial licensing options at
 # licensing@high-mobility.com
-defmodule AutoApi.CapabilityTest do
+defmodule AutoApiL11.CapabilityTest do
   use ExUnit.Case
-  doctest AutoApi.Capability
+  doctest AutoApiL11.Capability
 
-  alias AutoApi.Capability
+  alias AutoApiL11.Capability
 
   test "all/0 does not contain duplicates" do
     assert Enum.uniq(Capability.all()) == Capability.all()

@@ -1,8 +1,8 @@
-defmodule AutoApi.ParkingTicketCapability do
+defmodule AutoApiL11.ParkingTicketCapability do
   @moduledoc """
   Basic settings for ParkingTicket Capability
 
-      iex> alias AutoApi.ParkingTicketCapability, as: P
+      iex> alias AutoApiL11.ParkingTicketCapability, as: P
       iex> P.identifier
       <<0x00, 0x47>>
       iex> P.name
@@ -15,8 +15,8 @@ defmodule AutoApi.ParkingTicketCapability do
       {5, :ticket_end_time}
   """
 
-  @command_module AutoApi.ParkingTicketCommand
-  @state_module AutoApi.ParkingTicketState
+  @command_module AutoApiL11.ParkingTicketCommand
+  @state_module AutoApiL11.ParkingTicketState
 
-  use AutoApi.Capability, spec_file: "specs/parking_ticket.json"
+  use AutoApiL11.Capability, spec_file: "specs/parking_ticket.json"
 end

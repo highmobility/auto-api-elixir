@@ -1,6 +1,6 @@
-defmodule AutoApi.ValetModeCommand do
+defmodule AutoApiL11.ValetModeCommand do
   @moduledoc """
-  Handles ValetMode commands and apply binary commands on `%AutoApi.ValetModeState{}`
+  Handles ValetMode commands and apply binary commands on `%AutoApiL11.ValetModeState{}`
   """
-  use AutoApi.Command
+  use AutoApiL11.Command
 end

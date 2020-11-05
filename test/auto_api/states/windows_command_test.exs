@@ -1,4 +1,4 @@
-defmodule AutoApi.WindowsCommandTest do
+defmodule AutoApiL11.WindowsCommandTest do
   use ExUnit.Case
-  doctest AutoApi.WindowsCommand
+  doctest AutoApiL11.WindowsCommand
 end

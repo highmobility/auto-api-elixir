@@ -1,9 +1,9 @@
-defmodule AutoApi.RooftopControlState do
+defmodule AutoApiL11.RooftopControlState do
   @moduledoc """
   Keeps RooftopControl state
   """
 
-  alias AutoApi.PropertyComponent
+  alias AutoApiL11.PropertyComponent
 
   @type convertible_roof_state :: :closed | :open
   @type sunroof_tilt_state :: :closed | :tilt | :half_tilt
@@ -19,7 +19,7 @@ defmodule AutoApi.RooftopControlState do
             sunroof_state: nil,
             timestamp: nil
 
-  use AutoApi.State, spec_file: "specs/rooftop_control.json"
+  use AutoApiL11.State, spec_file: "specs/rooftop_control.json"
 
   @type t :: %__MODULE__{
           dimming: %PropertyComponent{data: float} | nil,
@@ -34,8 +34,8 @@ defmodule AutoApi.RooftopControlState do
   Build state based on binary value
 
     iex> bin = <<1, 0, 11, 1, 0, 8, 63, 197, 194, 143, 92, 40, 245, 195>>
-    iex> AutoApi.RooftopControlState.from_bin(bin)
-    %AutoApi.RooftopControlState{dimming: %AutoApi.PropertyComponent{data: 0.17}}
+    iex> AutoApiL11.RooftopControlState.from_bin(bin)
+    %AutoApiL11.RooftopControlState{dimming: %AutoApiL11.PropertyComponent{data: 0.17}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -46,8 +46,8 @@ defmodule AutoApi.RooftopControlState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.RooftopControlState{dimming: %AutoApi.PropertyComponent{data: 0.17}}
-    iex> AutoApi.RooftopControlState.to_bin(state)
+    iex> state = %AutoApiL11.RooftopControlState{dimming: %AutoApiL11.PropertyComponent{data: 0.17}}
+    iex> AutoApiL11.RooftopControlState.to_bin(state)
     <<1, 0, 11, 1, 0, 8, 63, 197, 194, 143, 92, 40, 245, 195>>
   """
   def to_bin(%__MODULE__{} = state) do

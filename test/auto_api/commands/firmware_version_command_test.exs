@@ -1,4 +1,4 @@
-defmodule AutoApi.FirmwareVersionCommandTest do
+defmodule AutoApiL11.FirmwareVersionCommandTest do
   use ExUnit.Case
-  doctest AutoApi.FirmwareVersionCommand
+  doctest AutoApiL11.FirmwareVersionCommand
 end

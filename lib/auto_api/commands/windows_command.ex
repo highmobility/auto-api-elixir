@@ -1,6 +1,6 @@
-defmodule AutoApi.WindowsCommand do
+defmodule AutoApiL11.WindowsCommand do
   @moduledoc """
-  Handles Windows commands and apply binary commands on `%AutoApi.WindowsState{}`
+  Handles Windows commands and apply binary commands on `%AutoApiL11.WindowsState{}`
   """
-  use AutoApi.Command
+  use AutoApiL11.Command
 end

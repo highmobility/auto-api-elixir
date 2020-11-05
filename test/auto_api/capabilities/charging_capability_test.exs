@@ -1,4 +1,4 @@
-defmodule AutoApi.ChargingCapabilityTest do
+defmodule AutoApiL11.ChargingCapabilityTest do
   use ExUnit.Case
-  doctest AutoApi.ChargingCapability
+  doctest AutoApiL11.ChargingCapability
 end

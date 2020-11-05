@@ -1,8 +1,8 @@
-defmodule AutoApi.EngineStartStopCapability do
+defmodule AutoApiL11.EngineStartStopCapability do
   @moduledoc """
   Basic settings for Vehicle Status Capability
 
-      iex> alias AutoApi.EngineStartStopCapability, as: SS
+      iex> alias AutoApiL11.EngineStartStopCapability, as: SS
       iex> SS.identifier
       <<0x00, 0x63>>
       iex> SS.name
@@ -13,8 +13,8 @@ defmodule AutoApi.EngineStartStopCapability do
       [{1, :status}]
   """
 
-  @command_module AutoApi.NotImplemented
-  @state_module AutoApi.EngineStartStopState
+  @command_module AutoApiL11.NotImplemented
+  @state_module AutoApiL11.EngineStartStopState
 
-  use AutoApi.Capability, spec_file: "specs/engine_start_stop.json"
+  use AutoApiL11.Capability, spec_file: "specs/engine_start_stop.json"
 end

@@ -1,6 +1,6 @@
-defmodule AutoApi.TachographCommand do
+defmodule AutoApiL11.TachographCommand do
   @moduledoc """
-  Handles Tachograph commands and apply binary commands on `%AutoApi.TachographState{}`
+  Handles Tachograph commands and apply binary commands on `%AutoApiL11.TachographState{}`
   """
-  use AutoApi.Command
+  use AutoApiL11.Command
 end

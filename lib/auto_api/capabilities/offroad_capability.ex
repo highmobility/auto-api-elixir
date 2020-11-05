@@ -1,8 +1,8 @@
-defmodule AutoApi.OffroadCapability do
+defmodule AutoApiL11.OffroadCapability do
   @moduledoc """
   Basic settings for Offroad Capability
 
-      iex> alias AutoApi.OffroadCapability, as: O
+      iex> alias AutoApiL11.OffroadCapability, as: O
       iex> O.identifier
       <<0x00, 0x52>>
       iex> O.name
@@ -15,8 +15,8 @@ defmodule AutoApi.OffroadCapability do
       {0x02, :wheel_suspension}
   """
 
-  @command_module AutoApi.OffroadCommand
-  @state_module AutoApi.OffroadState
+  @command_module AutoApiL11.OffroadCommand
+  @state_module AutoApiL11.OffroadState
 
-  use AutoApi.Capability, spec_file: "specs/offroad.json"
+  use AutoApiL11.Capability, spec_file: "specs/offroad.json"
 end

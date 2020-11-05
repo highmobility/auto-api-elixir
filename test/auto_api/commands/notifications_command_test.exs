@@ -1,4 +1,4 @@
-defmodule AutoApi.NotificationsCommandTest do
+defmodule AutoApiL11.NotificationsCommandTest do
   use ExUnit.Case
-  doctest AutoApi.NotificationsCommand
+  doctest AutoApiL11.NotificationsCommand
 end

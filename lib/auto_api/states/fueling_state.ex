@@ -1,15 +1,15 @@
-defmodule AutoApi.FuelingState do
+defmodule AutoApiL11.FuelingState do
   @moduledoc """
   Fueling state
   """
 
-  alias AutoApi.{CommonData, PropertyComponent}
+  alias AutoApiL11.{CommonData, PropertyComponent}
 
   defstruct gas_flap_position: nil,
             gas_flap_lock: nil,
             timestamp: nil
 
-  use AutoApi.State, spec_file: "specs/fueling.json"
+  use AutoApiL11.State, spec_file: "specs/fueling.json"
 
   @type gas_flap_position :: :closed | :open
 
@@ -23,8 +23,8 @@ defmodule AutoApi.FuelingState do
   Build state based on binary value
 
     iex> bin = <<3, 0, 4, 1, 0, 1, 0>>
-    iex> AutoApi.FuelingState.from_bin(bin)
-    %AutoApi.FuelingState{gas_flap_position: %AutoApi.PropertyComponent{data: :closed}}
+    iex> AutoApiL11.FuelingState.from_bin(bin)
+    %AutoApiL11.FuelingState{gas_flap_position: %AutoApiL11.PropertyComponent{data: :closed}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -34,8 +34,8 @@ defmodule AutoApi.FuelingState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.FuelingState{gas_flap_position: %AutoApi.PropertyComponent{data: :closed}}
-    iex> AutoApi.FuelingState.to_bin(state)
+    iex> state = %AutoApiL11.FuelingState{gas_flap_position: %AutoApiL11.PropertyComponent{data: :closed}}
+    iex> AutoApiL11.FuelingState.to_bin(state)
     <<3, 0, 4, 1, 0, 1, 0>>
   """
   @spec to_bin(__MODULE__.t()) :: binary

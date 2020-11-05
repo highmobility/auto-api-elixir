@@ -1,4 +1,4 @@
-defmodule AutoApi.BrowserCapabilityTest do
+defmodule AutoApiL11.BrowserCapabilityTest do
   use ExUnit.Case
-  doctest AutoApi.BrowserCapability
+  doctest AutoApiL11.BrowserCapability
 end

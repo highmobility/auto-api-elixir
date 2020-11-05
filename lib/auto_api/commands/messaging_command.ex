@@ -1,6 +1,6 @@
-defmodule AutoApi.MessagingCommand do
+defmodule AutoApiL11.MessagingCommand do
   @moduledoc """
-  Handles Messaging commands and apply binary commands on `%AutoApi.MessagingState{}`
+  Handles Messaging commands and apply binary commands on `%AutoApiL11.MessagingState{}`
   """
-  use AutoApi.Command
+  use AutoApiL11.Command
 end

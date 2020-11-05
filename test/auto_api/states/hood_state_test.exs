@@ -1,4 +1,4 @@
-defmodule AutoApi.HoodStateTest do
+defmodule AutoApiL11.HoodStateTest do
   use ExUnit.Case
-  doctest AutoApi.HoodState
+  doctest AutoApiL11.HoodState
 end

@@ -1,4 +1,4 @@
-defmodule AutoApi.EngineStartStopCommandTest do
+defmodule AutoApiL11.EngineStartStopCommandTest do
   use ExUnit.Case
-  doctest AutoApi.EngineStartStopCommand
+  doctest AutoApiL11.EngineStartStopCommand
 end

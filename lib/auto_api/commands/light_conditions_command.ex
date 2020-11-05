@@ -1,6 +1,6 @@
-defmodule AutoApi.LightConditionsCommand do
+defmodule AutoApiL11.LightConditionsCommand do
   @moduledoc """
-  Handles LightConditions commands and apply binary commands on `%AutoApi.LightConditionsState{}`
+  Handles LightConditions commands and apply binary commands on `%AutoApiL11.LightConditionsState{}`
   """
-  use AutoApi.Command
+  use AutoApiL11.Command
 end

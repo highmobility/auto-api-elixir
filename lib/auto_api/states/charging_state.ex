@@ -1,9 +1,9 @@
-defmodule AutoApi.ChargingState do
+defmodule AutoApiL11.ChargingState do
   @moduledoc """
   Keeps Charging state
   """
 
-  alias AutoApi.PropertyComponent
+  alias AutoApiL11.PropertyComponent
 
   @type charging :: %PropertyComponent{
           data: :disconnected | :plugged_in | :charging | :charging_complete
@@ -61,7 +61,7 @@ defmodule AutoApi.ChargingState do
             status: nil,
             timestamp: nil
 
-  use AutoApi.State, spec_file: "specs/charging.json"
+  use AutoApiL11.State, spec_file: "specs/charging.json"
 
   @type t :: %__MODULE__{
           estimated_range: %PropertyComponent{data: integer} | nil,
@@ -91,8 +91,8 @@ defmodule AutoApi.ChargingState do
   Build state based on binary value
 
     iex> bin = <<2, 0, 5, 1, 0, 2, 1, 44>>
-    iex> AutoApi.ChargingState.from_bin(bin)
-    %AutoApi.ChargingState{estimated_range: %AutoApi.PropertyComponent{data: 300}}
+    iex> AutoApiL11.ChargingState.from_bin(bin)
+    %AutoApiL11.ChargingState{estimated_range: %AutoApiL11.PropertyComponent{data: 300}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -103,8 +103,8 @@ defmodule AutoApi.ChargingState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.ChargingState{estimated_range: %AutoApi.PropertyComponent{data: 300}}
-    iex> AutoApi.ChargingState.to_bin(state)
+    iex> state = %AutoApiL11.ChargingState{estimated_range: %AutoApiL11.PropertyComponent{data: 300}}
+    iex> AutoApiL11.ChargingState.to_bin(state)
     <<2, 0, 5, 1, 0, 2, 1, 44>>
   """
   def to_bin(%__MODULE__{} = state) do

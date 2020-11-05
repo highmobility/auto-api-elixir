@@ -1,6 +1,6 @@
-defmodule AutoApi.HeartRateCommand do
+defmodule AutoApiL11.HeartRateCommand do
   @moduledoc """
-  Handles HeartRate commands and apply binary commands on `%AutoApi.HeartRateState{}`
+  Handles HeartRate commands and apply binary commands on `%AutoApiL11.HeartRateState{}`
   """
-  use AutoApi.Command
+  use AutoApiL11.Command
 end

@@ -1,4 +1,4 @@
-defmodule AutoApi.WiFiCommandTest do
+defmodule AutoApiL11.WiFiCommandTest do
   use ExUnit.Case
-  doctest AutoApi.WiFiCommand
+  doctest AutoApiL11.WiFiCommand
 end

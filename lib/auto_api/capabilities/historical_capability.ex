@@ -1,8 +1,8 @@
-defmodule AutoApi.HistoricalCapability do
+defmodule AutoApiL11.HistoricalCapability do
   @moduledoc """
   Basic settings for Historical Capability
 
-      iex> alias AutoApi.HistoricalCapability, as: H
+      iex> alias AutoApiL11.HistoricalCapability, as: H
       iex> H.identifier
       <<0x00, 0x12>>
       iex> H.name
@@ -15,8 +15,8 @@ defmodule AutoApi.HistoricalCapability do
       {0x04, :end_date}
   """
 
-  @command_module AutoApi.HistoricalCommand
-  @state_module AutoApi.HistoricalState
+  @command_module AutoApiL11.HistoricalCommand
+  @state_module AutoApiL11.HistoricalState
 
-  use AutoApi.Capability, spec_file: "specs/historical.json"
+  use AutoApiL11.Capability, spec_file: "specs/historical.json"
 end

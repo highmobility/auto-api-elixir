@@ -1,4 +1,4 @@
-defmodule AutoApi.FuelingStateTest do
+defmodule AutoApiL11.FuelingStateTest do
   use ExUnit.Case
-  doctest AutoApi.FuelingState
+  doctest AutoApiL11.FuelingState
 end

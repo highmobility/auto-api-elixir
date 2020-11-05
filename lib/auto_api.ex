@@ -1,5 +1,5 @@
 defmodule AutoApi do
   @moduledoc """
-  Documentation for AutoApi.
+  Documentation for AutoApiL11.
   """
 end

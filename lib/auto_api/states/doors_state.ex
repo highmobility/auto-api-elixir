@@ -1,10 +1,10 @@
-defmodule AutoApi.DoorsState do
+defmodule AutoApiL11.DoorsState do
   @moduledoc """
   Door position possible values: :closed, :open
   Door lock possible values: :unlocked, :locked
   """
 
-  alias AutoApi.{CommonData, PropertyComponent}
+  alias AutoApiL11.{CommonData, PropertyComponent}
 
   defstruct inside_locks: [],
             locks: [],
@@ -13,7 +13,7 @@ defmodule AutoApi.DoorsState do
             locks_state: nil,
             timestamp: nil
 
-  use AutoApi.State, spec_file: "specs/doors.json"
+  use AutoApiL11.State, spec_file: "specs/doors.json"
 
   @type lock :: %PropertyComponent{
           data: %{
@@ -48,11 +48,11 @@ defmodule AutoApi.DoorsState do
   @doc """
   Build state based on binary value
 
-    iex> AutoApi.DoorsState.from_bin(<<0x03, 5::integer-16, 0x01, 2::integer-16, 0x00, 0x01>>)
-    %AutoApi.DoorsState{locks: [%AutoApi.PropertyComponent{data: %{location: :front_left, lock_state: :locked}}]}
+    iex> AutoApiL11.DoorsState.from_bin(<<0x03, 5::integer-16, 0x01, 2::integer-16, 0x00, 0x01>>)
+    %AutoApiL11.DoorsState{locks: [%AutoApiL11.PropertyComponent{data: %{location: :front_left, lock_state: :locked}}]}
 
-    iex> AutoApi.DoorsState.from_bin(<<0x04, 5::integer-16,  0x01, 2::integer-16, 0x05, 0x00>>)
-    %AutoApi.DoorsState{positions: [%AutoApi.PropertyComponent{data: %{location: :all, position: :closed}}]}
+    iex> AutoApiL11.DoorsState.from_bin(<<0x04, 5::integer-16,  0x01, 2::integer-16, 0x05, 0x00>>)
+    %AutoApiL11.DoorsState{positions: [%AutoApiL11.PropertyComponent{data: %{location: :all, position: :closed}}]}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -61,7 +61,7 @@ defmodule AutoApi.DoorsState do
 
   @doc """
   Parse state to bin
-    iex> AutoApi.DoorsState.to_bin(%AutoApi.DoorsState{positions: [%AutoApi.PropertyComponent{data: %{location: :front_left, position: :open}}]})
+    iex> AutoApiL11.DoorsState.to_bin(%AutoApiL11.DoorsState{positions: [%AutoApiL11.PropertyComponent{data: %{location: :front_left, position: :open}}]})
     <<0x04, 5::integer-16, 0x01, 2::integer-16, 0x00, 0x01>>
   """
   @spec to_bin(__MODULE__.t()) :: binary

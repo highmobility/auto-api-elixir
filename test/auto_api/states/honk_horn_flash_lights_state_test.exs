@@ -1,4 +1,4 @@
-defmodule AutoApi.HonkHornFlashLightsStateTest do
+defmodule AutoApiL11.HonkHornFlashLightsStateTest do
   use ExUnit.Case
-  doctest AutoApi.HonkHornFlashLightsState
+  doctest AutoApiL11.HonkHornFlashLightsState
 end

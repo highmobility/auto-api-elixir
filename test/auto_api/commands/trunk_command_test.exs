@@ -1,4 +1,4 @@
-defmodule AutoApi.TrunkCommandTest do
+defmodule AutoApiL11.TrunkCommandTest do
   use ExUnit.Case
-  doctest AutoApi.TrunkCommand
+  doctest AutoApiL11.TrunkCommand
 end

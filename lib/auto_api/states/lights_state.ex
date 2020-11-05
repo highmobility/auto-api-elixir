@@ -1,9 +1,9 @@
-defmodule AutoApi.LightsState do
+defmodule AutoApiL11.LightsState do
   @moduledoc """
   StartStop state
   """
 
-  alias AutoApi.{CommonData, PropertyComponent}
+  alias AutoApiL11.{CommonData, PropertyComponent}
 
   defstruct front_exterior_light: nil,
             rear_exterior_light: nil,
@@ -15,7 +15,7 @@ defmodule AutoApi.LightsState do
             interior_lights: [],
             timestamp: nil
 
-  use AutoApi.State, spec_file: "specs/lights.json"
+  use AutoApiL11.State, spec_file: "specs/lights.json"
 
   @type front_exterior_light :: :inactive | :active | :active_with_full_beam | :dlr | :automatic
   @type light_location :: :front | :rear
@@ -52,8 +52,8 @@ defmodule AutoApi.LightsState do
   Build state based on binary value
 
     iex> bin = <<5, 0, 4, 1, 0, 1, 1>>
-    iex> AutoApi.LightsState.from_bin(bin)
-    %AutoApi.LightsState{reverse_light: %AutoApi.PropertyComponent{data: :active}}
+    iex> AutoApiL11.LightsState.from_bin(bin)
+    %AutoApiL11.LightsState{reverse_light: %AutoApiL11.PropertyComponent{data: :active}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -63,8 +63,8 @@ defmodule AutoApi.LightsState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.LightsState{reverse_light: %AutoApi.PropertyComponent{data: :active}}
-    iex> AutoApi.LightsState.to_bin(state)
+    iex> state = %AutoApiL11.LightsState{reverse_light: %AutoApiL11.PropertyComponent{data: :active}}
+    iex> AutoApiL11.LightsState.to_bin(state)
     <<5, 0, 4, 1, 0, 1, 1>>
   """
   @spec to_bin(__MODULE__.t()) :: binary

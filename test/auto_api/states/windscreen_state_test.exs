@@ -1,4 +1,4 @@
-defmodule AutoApi.WindscreenStateTest do
+defmodule AutoApiL11.WindscreenStateTest do
   use ExUnit.Case
-  doctest AutoApi.WindscreenState
+  doctest AutoApiL11.WindscreenState
 end

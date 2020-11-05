@@ -1,8 +1,8 @@
-defmodule AutoApi.FuelingCapability do
+defmodule AutoApiL11.FuelingCapability do
   @moduledoc """
   Basic settings for Fueling Capability
 
-      iex> alias AutoApi.FuelingCapability, as: F
+      iex> alias AutoApiL11.FuelingCapability, as: F
       iex> F.identifier
       <<0x00, 0x40>>
       iex> F.name
@@ -15,8 +15,8 @@ defmodule AutoApi.FuelingCapability do
       [{2, :gas_flap_lock}, {3, :gas_flap_position}]
   """
 
-  @command_module AutoApi.FuelingCommand
-  @state_module AutoApi.FuelingState
+  @command_module AutoApiL11.FuelingCommand
+  @state_module AutoApiL11.FuelingState
 
-  use AutoApi.Capability, spec_file: "specs/fueling.json"
+  use AutoApiL11.Capability, spec_file: "specs/fueling.json"
 end

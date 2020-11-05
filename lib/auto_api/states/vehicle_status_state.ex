@@ -1,9 +1,9 @@
-defmodule AutoApi.VehicleStatusState do
+defmodule AutoApiL11.VehicleStatusState do
   @moduledoc """
   VehicleStatus state
   """
 
-  alias AutoApi.PropertyComponent
+  alias AutoApiL11.PropertyComponent
 
   defstruct vin: nil,
             powertrain: nil,
@@ -26,7 +26,7 @@ defmodule AutoApi.VehicleStatusState do
             states: [],
             timestamp: nil
 
-  use AutoApi.State, spec_file: "specs/vehicle_status.json"
+  use AutoApiL11.State, spec_file: "specs/vehicle_status.json"
 
   @type powertrain ::
           :unknown | :all_electric | :combustion_engine | :phev | :hydrogen | :hydrogen_hybrid
@@ -60,8 +60,8 @@ defmodule AutoApi.VehicleStatusState do
   Build state based on binary value
 
     iex> bin = <<1, 0, 20, 1, 0, 17, 88, 86, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 49>>
-    iex> AutoApi.VehicleStatusState.from_bin(bin)
-    %AutoApi.VehicleStatusState{vin: %AutoApi.PropertyComponent{data: "XV000000000000001"}}
+    iex> AutoApiL11.VehicleStatusState.from_bin(bin)
+    %AutoApiL11.VehicleStatusState{vin: %AutoApiL11.PropertyComponent{data: "XV000000000000001"}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -71,8 +71,8 @@ defmodule AutoApi.VehicleStatusState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.VehicleStatusState{vin: %AutoApi.PropertyComponent{data: "XV000000000000001"}}
-    iex> AutoApi.VehicleStatusState.to_bin(state)
+    iex> state = %AutoApiL11.VehicleStatusState{vin: %AutoApiL11.PropertyComponent{data: "XV000000000000001"}}
+    iex> AutoApiL11.VehicleStatusState.to_bin(state)
     <<1, 0, 20, 1, 0, 17, 88, 86, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 49>>
   """
   @spec to_bin(__MODULE__.t()) :: binary

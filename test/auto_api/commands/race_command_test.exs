@@ -1,4 +1,4 @@
-defmodule AutoApi.RaceCommandTest do
+defmodule AutoApiL11.RaceCommandTest do
   use ExUnit.Case
-  doctest AutoApi.RaceCommand
+  doctest AutoApiL11.RaceCommand
 end

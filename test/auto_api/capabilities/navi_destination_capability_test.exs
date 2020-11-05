@@ -1,4 +1,4 @@
-defmodule AutoApi.NaviDestinationCapabilityTest do
+defmodule AutoApiL11.NaviDestinationCapabilityTest do
   use ExUnit.Case
-  doctest AutoApi.NaviDestinationCapability
+  doctest AutoApiL11.NaviDestinationCapability
 end

@@ -1,4 +1,4 @@
-defmodule AutoApi.DashboardLightsStateTest do
+defmodule AutoApiL11.DashboardLightsStateTest do
   use ExUnit.Case
-  doctest AutoApi.DashboardLightsState
+  doctest AutoApiL11.DashboardLightsState
 end

@@ -1,6 +1,6 @@
-defmodule AutoApi.ChassisSettingsCommand do
+defmodule AutoApiL11.ChassisSettingsCommand do
   @moduledoc """
-  Handles Chassis Settings commands and apply binary commands on `%AutoApi.ChassisSettingsState{}`
+  Handles Chassis Settings commands and apply binary commands on `%AutoApiL11.ChassisSettingsState{}`
   """
-  use AutoApi.Command
+  use AutoApiL11.Command
 end

@@ -1,8 +1,8 @@
-defmodule AutoApi.VehicleTimeCapability do
+defmodule AutoApiL11.VehicleTimeCapability do
   @moduledoc """
   Basic settings for Vehicle Time Capability
 
-      iex> alias AutoApi.VehicleTimeCapability, as: VT
+      iex> alias AutoApiL11.VehicleTimeCapability, as: VT
       iex> VT.identifier
       <<0x00, 0x50>>
       iex> VT.name
@@ -13,8 +13,8 @@ defmodule AutoApi.VehicleTimeCapability do
       1
   """
 
-  @command_module AutoApi.VehicleTimeCommand
-  @state_module AutoApi.VehicleTimeState
+  @command_module AutoApiL11.VehicleTimeCommand
+  @state_module AutoApiL11.VehicleTimeState
 
-  use AutoApi.Capability, spec_file: "specs/vehicle_time.json"
+  use AutoApiL11.Capability, spec_file: "specs/vehicle_time.json"
 end

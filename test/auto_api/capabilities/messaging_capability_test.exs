@@ -1,4 +1,4 @@
-defmodule AutoApi.MessagingCapabilityTest do
+defmodule AutoApiL11.MessagingCapabilityTest do
   use ExUnit.Case
-  doctest AutoApi.MessagingCapability
+  doctest AutoApiL11.MessagingCapability
 end

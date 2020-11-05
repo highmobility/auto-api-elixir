@@ -1,8 +1,8 @@
-defmodule AutoApi.MobileCapability do
+defmodule AutoApiL11.MobileCapability do
   @moduledoc """
   Basic settings for Mobile Capability
 
-      iex> alias AutoApi.MobileCapability, as: M
+      iex> alias AutoApiL11.MobileCapability, as: M
       iex> M.identifier
       <<0x00, 0x66>>
       iex> M.name
@@ -13,8 +13,8 @@ defmodule AutoApi.MobileCapability do
       1
   """
 
-  @command_module AutoApi.MobileCommand
-  @state_module AutoApi.MobileState
+  @command_module AutoApiL11.MobileCommand
+  @state_module AutoApiL11.MobileState
 
-  use AutoApi.Capability, spec_file: "specs/mobile.json"
+  use AutoApiL11.Capability, spec_file: "specs/mobile.json"
 end

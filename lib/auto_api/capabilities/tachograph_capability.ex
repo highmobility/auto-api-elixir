@@ -1,8 +1,8 @@
-defmodule AutoApi.TachographCapability do
+defmodule AutoApiL11.TachographCapability do
   @moduledoc """
   Basic settings for Tachograph Capability
 
-      iex> alias AutoApi.TachographCapability, as: T
+      iex> alias AutoApiL11.TachographCapability, as: T
       iex> T.identifier
       <<0x00, 0x64>>
       iex> T.name
@@ -15,8 +15,8 @@ defmodule AutoApi.TachographCapability do
       {7, :vehicle_speed}
   """
 
-  @command_module AutoApi.TachographCommand
-  @state_module AutoApi.TachographState
+  @command_module AutoApiL11.TachographCommand
+  @state_module AutoApiL11.TachographState
 
-  use AutoApi.Capability, spec_file: "specs/tachograph.json"
+  use AutoApiL11.Capability, spec_file: "specs/tachograph.json"
 end

@@ -1,14 +1,14 @@
-defmodule AutoApi.ValetModeState do
+defmodule AutoApiL11.ValetModeState do
   @moduledoc """
   ValetMode state
   """
 
-  alias AutoApi.{CommonData, PropertyComponent}
+  alias AutoApiL11.{CommonData, PropertyComponent}
 
   defstruct status: nil,
             timestamp: nil
 
-  use AutoApi.State, spec_file: "specs/valet_mode.json"
+  use AutoApiL11.State, spec_file: "specs/valet_mode.json"
 
   @type t :: %__MODULE__{
           status: %PropertyComponent{data: CommonData.activity()} | nil,
@@ -19,8 +19,8 @@ defmodule AutoApi.ValetModeState do
   Build state based on binary value
 
     iex> bin = <<1, 0, 4, 1, 0, 1, 1>>
-    iex> AutoApi.ValetModeState.from_bin(bin)
-    %AutoApi.ValetModeState{status: %AutoApi.PropertyComponent{data: :active}}
+    iex> AutoApiL11.ValetModeState.from_bin(bin)
+    %AutoApiL11.ValetModeState{status: %AutoApiL11.PropertyComponent{data: :active}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -30,8 +30,8 @@ defmodule AutoApi.ValetModeState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.ValetModeState{status: %AutoApi.PropertyComponent{data: :active}}
-    iex> AutoApi.ValetModeState.to_bin(state)
+    iex> state = %AutoApiL11.ValetModeState{status: %AutoApiL11.PropertyComponent{data: :active}}
+    iex> AutoApiL11.ValetModeState.to_bin(state)
     <<1, 0, 4, 1, 0, 1, 1>>
   """
   @spec to_bin(__MODULE__.t()) :: binary

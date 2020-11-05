@@ -20,12 +20,12 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.TelematicsPermissions do
+defmodule AutoApiL11.TelematicsPermissions do
   @moduledoc """
   Utility module for handling AutoApi telematics permissions.
 
   """
-  @permissions_map for cap <- AutoApi.Capability.all(),
+  @permissions_map for cap <- AutoApiL11.Capability.all(),
                        {id, prop} <- cap.properties(),
                        action <- [:set, :get],
                        into: %{},
@@ -35,9 +35,9 @@ defmodule AutoApi.TelematicsPermissions do
 
   @doc """
   Returns list of available permissions
-    iex> "home_charger.set.wi_fi_hotspot_password" in AutoApi.TelematicsPermissions.permissions_list()
+    iex> "home_charger.set.wi_fi_hotspot_password" in AutoApiL11.TelematicsPermissions.permissions_list()
     true
-    iex> "home_charger.get.wi_fi_hotspot_password" in AutoApi.TelematicsPermissions.permissions_list()
+    iex> "home_charger.get.wi_fi_hotspot_password" in AutoApiL11.TelematicsPermissions.permissions_list()
     true
   """
   @spec permissions_list :: list()
@@ -50,10 +50,10 @@ defmodule AutoApi.TelematicsPermissions do
 
   # Examples
 
-  iex> AutoApi.TelematicsPermissions.verify ["race.set.accelerations", "usage.get.average_weekly_distance_long_run"]
+  iex> AutoApiL11.TelematicsPermissions.verify ["race.set.accelerations", "usage.get.average_weekly_distance_long_run"]
   true
 
-  iex> AutoApi.TelematicsPermissions.verify ["charge.read", "i.dont.exist"]
+  iex> AutoApiL11.TelematicsPermissions.verify ["charge.read", "i.dont.exist"]
   false
 
   """
@@ -65,10 +65,10 @@ defmodule AutoApi.TelematicsPermissions do
   @doc """
   Converts a permissions format string to property id
 
-  iex> AutoApi.TelematicsPermissions.to_spec("race.get.accelerations")
+  iex> AutoApiL11.TelematicsPermissions.to_spec("race.get.accelerations")
   {:ok, %{id: 1, type: :property}}
 
-  iex> AutoApi.TelematicsPermissions.to_spec("i.dont.exist")
+  iex> AutoApiL11.TelematicsPermissions.to_spec("i.dont.exist")
   :error
   """
   @spec to_spec(String.t()) :: {:ok, %{type: :property, id: integer}} | :error

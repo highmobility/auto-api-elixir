@@ -1,6 +1,6 @@
-defmodule AutoApi.FirmwareVersionCommand do
+defmodule AutoApiL11.FirmwareVersionCommand do
   @moduledoc """
-  Handles FirmwareVersion commands and apply binary commands on `%AutoApi.FirmwareVersionState{}`
+  Handles FirmwareVersion commands and apply binary commands on `%AutoApiL11.FirmwareVersionState{}`
   """
-  use AutoApi.Command
+  use AutoApiL11.Command
 end

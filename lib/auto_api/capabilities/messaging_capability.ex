@@ -1,8 +1,8 @@
-defmodule AutoApi.MessagingCapability do
+defmodule AutoApiL11.MessagingCapability do
   @moduledoc """
   Basic settings for Messaging Capability
 
-      iex> alias AutoApi.MessagingCapability, as: M
+      iex> alias AutoApiL11.MessagingCapability, as: M
       iex> M.identifier
       <<0x00, 0x37>>
       iex> M.name
@@ -13,8 +13,8 @@ defmodule AutoApi.MessagingCapability do
       2
   """
 
-  @command_module AutoApi.MessagingCommand
-  @state_module AutoApi.MessagingState
+  @command_module AutoApiL11.MessagingCommand
+  @state_module AutoApiL11.MessagingState
 
-  use AutoApi.Capability, spec_file: "specs/messaging.json"
+  use AutoApiL11.Capability, spec_file: "specs/messaging.json"
 end

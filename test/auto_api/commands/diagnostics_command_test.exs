@@ -1,13 +1,13 @@
-defmodule AutoApi.DiagnosticsCommandTest do
+defmodule AutoApiL11.DiagnosticsCommandTest do
   use ExUnit.Case
-  alias AutoApi.{DiagnosticsCommand, DiagnosticsState, PropertyComponent}
+  alias AutoApiL11.{DiagnosticsCommand, DiagnosticsState, PropertyComponent}
 
   describe "execute/2" do
     # TODO
     @tag :skip
     test "get_diagnostics_state" do
       assert DiagnosticsCommand.execute(%DiagnosticsState{}, <<0x00>>) ==
-               {:state, %AutoApi.DiagnosticsState{}}
+               {:state, %AutoApiL11.DiagnosticsState{}}
     end
 
     # TODO
@@ -18,7 +18,7 @@ defmodule AutoApi.DiagnosticsCommandTest do
       binary_state = DiagnosticsState.to_bin(%DiagnosticsState{mileage: mileage_prop})
 
       assert DiagnosticsCommand.execute(%DiagnosticsState{}, <<0x01, binary_state::binary>>) ==
-               {:state_changed, %AutoApi.DiagnosticsState{mileage: mileage_prop}}
+               {:state_changed, %AutoApiL11.DiagnosticsState{mileage: mileage_prop}}
     end
   end
 

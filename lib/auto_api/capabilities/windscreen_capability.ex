@@ -1,8 +1,8 @@
-defmodule AutoApi.WindscreenCapability do
+defmodule AutoApiL11.WindscreenCapability do
   @moduledoc """
   Basic settings for Windscreen Capability
 
-      iex> alias AutoApi.WindscreenCapability, as: W
+      iex> alias AutoApiL11.WindscreenCapability, as: W
       iex> W.identifier
       <<0x00, 0x42>>
       iex> W.name
@@ -15,8 +15,8 @@ defmodule AutoApi.WindscreenCapability do
       {0x08, :windscreen_damage_detection_time}
   """
 
-  @command_module AutoApi.WindscreenCommand
-  @state_module AutoApi.WindscreenState
+  @command_module AutoApiL11.WindscreenCommand
+  @state_module AutoApiL11.WindscreenState
 
-  use AutoApi.Capability, spec_file: "specs/windscreen.json"
+  use AutoApiL11.Capability, spec_file: "specs/windscreen.json"
 end

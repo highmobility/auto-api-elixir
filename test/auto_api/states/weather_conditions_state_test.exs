@@ -1,4 +1,4 @@
-defmodule AutoApi.WeatherConditionsStateTest do
+defmodule AutoApiL11.WeatherConditionsStateTest do
   use ExUnit.Case
-  doctest AutoApi.WeatherConditionsState
+  doctest AutoApiL11.WeatherConditionsState
 end

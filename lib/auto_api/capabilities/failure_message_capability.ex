@@ -1,8 +1,8 @@
-defmodule AutoApi.FailureMessageCapability do
+defmodule AutoApiL11.FailureMessageCapability do
   @moduledoc """
   Basic settings for FailureMessage Capability
 
-      iex> alias AutoApi.FailureMessageCapability, as: F
+      iex> alias AutoApiL11.FailureMessageCapability, as: F
       iex> F.identifier
       <<0x00, 0x2>>
       iex> F.name
@@ -15,8 +15,8 @@ defmodule AutoApi.FailureMessageCapability do
       {5, :failed_property_ids}
   """
 
-  @command_module AutoApi.FailureMessageCommand
-  @state_module AutoApi.FailureMessageState
+  @command_module AutoApiL11.FailureMessageCommand
+  @state_module AutoApiL11.FailureMessageState
 
-  use AutoApi.Capability, spec_file: "specs/failure_message.json"
+  use AutoApiL11.Capability, spec_file: "specs/failure_message.json"
 end

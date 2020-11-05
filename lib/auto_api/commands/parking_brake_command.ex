@@ -1,6 +1,6 @@
-defmodule AutoApi.ParkingBrakeCommand do
+defmodule AutoApiL11.ParkingBrakeCommand do
   @moduledoc """
-  Handles ParkingBrake commands and apply binary commands on `%AutoApi.ParkingBrakeState{}`
+  Handles ParkingBrake commands and apply binary commands on `%AutoApiL11.ParkingBrakeState{}`
   """
-  use AutoApi.Command
+  use AutoApiL11.Command
 end

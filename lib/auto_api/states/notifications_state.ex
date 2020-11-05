@@ -1,9 +1,9 @@
-defmodule AutoApi.NotificationsState do
+defmodule AutoApiL11.NotificationsState do
   @moduledoc """
   Notifications state
   """
 
-  alias AutoApi.PropertyComponent
+  alias AutoApiL11.PropertyComponent
 
   defstruct text: nil,
             action_items: [],
@@ -11,7 +11,7 @@ defmodule AutoApi.NotificationsState do
             clear: nil,
             timestamp: nil
 
-  use AutoApi.State, spec_file: "specs/notifications.json"
+  use AutoApiL11.State, spec_file: "specs/notifications.json"
 
   @type action_item :: %PropertyComponent{data: %{id: integer, name: String.t()}}
 
@@ -27,8 +27,8 @@ defmodule AutoApi.NotificationsState do
   Build state based on binary value
 
     iex> bin = <<1, 0, 20, 1, 0, 17, 110, 111, 116, 105, 102, 105, 99, 97, 116, 105, 111, 110, 32, 116, 101, 120, 116>>
-    iex> AutoApi.NotificationsState.from_bin(bin)
-    %AutoApi.NotificationsState{text: %AutoApi.PropertyComponent{data: "notification text"}}
+    iex> AutoApiL11.NotificationsState.from_bin(bin)
+    %AutoApiL11.NotificationsState{text: %AutoApiL11.PropertyComponent{data: "notification text"}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -38,8 +38,8 @@ defmodule AutoApi.NotificationsState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.NotificationsState{text: %AutoApi.PropertyComponent{data: "notification text"}}
-    iex> AutoApi.NotificationsState.to_bin(state)
+    iex> state = %AutoApiL11.NotificationsState{text: %AutoApiL11.PropertyComponent{data: "notification text"}}
+    iex> AutoApiL11.NotificationsState.to_bin(state)
     <<1, 0, 20, 1, 0, 17, 110, 111, 116, 105, 102, 105, 99, 97, 116, 105, 111, 110, 32, 116, 101, 120, 116>>
   """
   @spec to_bin(__MODULE__.t()) :: binary

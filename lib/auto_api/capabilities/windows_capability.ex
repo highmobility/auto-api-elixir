@@ -1,8 +1,8 @@
-defmodule AutoApi.WindowsCapability do
+defmodule AutoApiL11.WindowsCapability do
   @moduledoc """
   Basic settings for Windows Capability
 
-      iex> alias AutoApi.WindowsCapability, as: W
+      iex> alias AutoApiL11.WindowsCapability, as: W
       iex> W.identifier
       <<0x00, 0x45>>
       iex> W.name
@@ -15,8 +15,8 @@ defmodule AutoApi.WindowsCapability do
       [{2, :open_percentages}, {3, :positions}]
   """
 
-  @command_module AutoApi.WindowsCommand
-  @state_module AutoApi.WindowsState
+  @command_module AutoApiL11.WindowsCommand
+  @state_module AutoApiL11.WindowsState
 
-  use AutoApi.Capability, spec_file: "specs/windows.json"
+  use AutoApiL11.Capability, spec_file: "specs/windows.json"
 end

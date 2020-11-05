@@ -1,8 +1,8 @@
-defmodule AutoApi.RooftopControlCapability do
+defmodule AutoApiL11.RooftopControlCapability do
   @moduledoc """
   Basic settings for RooftopControl Capability
 
-      iex> alias AutoApi.RooftopControlCapability, as: R
+      iex> alias AutoApiL11.RooftopControlCapability, as: R
       iex> R.identifier
       <<0x00, 0x25>>
       iex> R.name
@@ -13,8 +13,8 @@ defmodule AutoApi.RooftopControlCapability do
       5
   """
 
-  @command_module AutoApi.RooftopControlCommand
-  @state_module AutoApi.RooftopControlState
+  @command_module AutoApiL11.RooftopControlCommand
+  @state_module AutoApiL11.RooftopControlState
 
-  use AutoApi.Capability, spec_file: "specs/rooftop_control.json"
+  use AutoApiL11.Capability, spec_file: "specs/rooftop_control.json"
 end

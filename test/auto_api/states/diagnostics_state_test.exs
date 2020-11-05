@@ -1,6 +1,6 @@
-defmodule AutoApi.DiagnosticsStateTest do
+defmodule AutoApiL11.DiagnosticsStateTest do
   use ExUnit.Case
-  alias AutoApi.{PropertyComponent, DiagnosticsState}
+  alias AutoApiL11.{PropertyComponent, DiagnosticsState}
   doctest DiagnosticsState
 
   test "to_bin & from_bin" do

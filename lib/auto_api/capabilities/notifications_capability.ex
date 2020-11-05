@@ -1,8 +1,8 @@
-defmodule AutoApi.NotificationsCapability do
+defmodule AutoApiL11.NotificationsCapability do
   @moduledoc """
   Basic settings for Notifications Capability
 
-      iex> alias AutoApi.NotificationsCapability, as: N
+      iex> alias AutoApiL11.NotificationsCapability, as: N
       iex> N.identifier
       <<0x00, 0x38>>
       iex> N.name
@@ -13,8 +13,8 @@ defmodule AutoApi.NotificationsCapability do
       4
   """
 
-  @command_module AutoApi.NotificationsCommand
-  @state_module AutoApi.NotificationsState
+  @command_module AutoApiL11.NotificationsCommand
+  @state_module AutoApiL11.NotificationsState
 
-  use AutoApi.Capability, spec_file: "specs/notifications.json"
+  use AutoApiL11.Capability, spec_file: "specs/notifications.json"
 end

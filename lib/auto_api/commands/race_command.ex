@@ -1,6 +1,6 @@
-defmodule AutoApi.RaceCommand do
+defmodule AutoApiL11.RaceCommand do
   @moduledoc """
-  Handles Race commands and apply binary commands on `%AutoApi.RaceState{}`
+  Handles Race commands and apply binary commands on `%AutoApiL11.RaceState{}`
   """
-  use AutoApi.Command
+  use AutoApiL11.Command
 end

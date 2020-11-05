@@ -1,5 +1,5 @@
-defmodule AutoApi.TrunkStateTest do
+defmodule AutoApiL11.TrunkStateTest do
   use ExUnit.Case
-  alias AutoApi.TrunkState
+  alias AutoApiL11.TrunkState
   doctest TrunkState
 end

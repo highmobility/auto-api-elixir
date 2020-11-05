@@ -1,8 +1,8 @@
-defmodule AutoApi.WakeUpCapability do
+defmodule AutoApiL11.WakeUpCapability do
   @moduledoc """
   Basic settings for Wake Up Capability
 
-      iex> alias AutoApi.WakeUpCapability, as: W
+      iex> alias AutoApiL11.WakeUpCapability, as: W
       iex> W.identifier
       <<0x00, 0x22>>
       iex> W.name
@@ -13,8 +13,8 @@ defmodule AutoApi.WakeUpCapability do
       1
   """
 
-  @command_module AutoApi.WakeUpCommand
-  @state_module AutoApi.WakeUpState
+  @command_module AutoApiL11.WakeUpCommand
+  @state_module AutoApiL11.WakeUpState
 
-  use AutoApi.Capability, spec_file: "specs/wake_up.json"
+  use AutoApiL11.Capability, spec_file: "specs/wake_up.json"
 end

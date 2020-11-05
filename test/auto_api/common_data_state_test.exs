@@ -16,10 +16,10 @@
 #
 # Please inquire about commercial licensing options at
 # licensing@high-mobility.com
-defmodule AutoApi.CommonDataStateTest do
+defmodule AutoApiL11.CommonDataStateTest do
   use ExUnit.Case
 
-  alias AutoApi.CommonData
+  alias AutoApiL11.CommonData
 
   test "convert binary to IEEE 754" do
     assert CommonData.bin_to_ieee_754_float(<<20.79::float-32>>) == 20.79

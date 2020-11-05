@@ -1,7 +1,7 @@
-defmodule AutoApi.VehicleStatusStateTest do
+defmodule AutoApiL11.VehicleStatusStateTest do
   use ExUnit.Case
-  doctest AutoApi.VehicleStatusState
-  alias AutoApi.VehicleStatusState
+  doctest AutoApiL11.VehicleStatusState
+  alias AutoApiL11.VehicleStatusState
 
   test "to_bin/1 & from_bin/1" do
     state =
@@ -23,24 +23,24 @@ defmodule AutoApi.VehicleStatusStateTest do
 
   test "Correctly encodes state in to_bin/1" do
     diag_state =
-      AutoApi.DiagnosticsState.base()
-      |> AutoApi.DiagnosticsState.put_property(:speed, 42, DateTime.utc_now())
+      AutoApiL11.DiagnosticsState.base()
+      |> AutoApiL11.DiagnosticsState.put_property(:speed, 42, DateTime.utc_now())
 
     door_state =
-      AutoApi.DoorsState.base()
-      |> AutoApi.DoorsState.append_property(:positions, %{
+      AutoApiL11.DoorsState.base()
+      |> AutoApiL11.DoorsState.append_property(:positions, %{
         door_location: :front_left,
         position: :closed
       })
 
     diag_state_bin =
-      AutoApi.DiagnosticsState.identifier() <>
-        <<0x01>> <> AutoApi.DiagnosticsState.to_bin(diag_state)
+      AutoApiL11.DiagnosticsState.identifier() <>
+        <<0x01>> <> AutoApiL11.DiagnosticsState.to_bin(diag_state)
 
     diag_state_bin_size = byte_size(diag_state_bin)
 
     door_state_bin =
-      AutoApi.DoorsState.identifier() <> <<0x01>> <> AutoApi.DoorsState.to_bin(door_state)
+      AutoApiL11.DoorsState.identifier() <> <<0x01>> <> AutoApiL11.DoorsState.to_bin(door_state)
 
     door_state_bin_size = byte_size(door_state_bin)
 

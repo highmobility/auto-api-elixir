@@ -1,9 +1,9 @@
-defmodule AutoApi.MaintenanceState do
+defmodule AutoApiL11.MaintenanceState do
   @moduledoc """
   Maintenance state
   """
 
-  alias AutoApi.{CommonData, PropertyComponent}
+  alias AutoApiL11.{CommonData, PropertyComponent}
 
   defstruct days_to_next_service: nil,
             kilometers_to_next_service: nil,
@@ -19,7 +19,7 @@ defmodule AutoApi.MaintenanceState do
             brake_fluid_change_date: nil,
             timestamp: nil
 
-  use AutoApi.State, spec_file: "specs/maintenance.json"
+  use AutoApiL11.State, spec_file: "specs/maintenance.json"
 
   @type condition_based_services :: %PropertyComponent{
           data: %{
@@ -58,8 +58,8 @@ defmodule AutoApi.MaintenanceState do
 
   ## Example
 
-      iex> AutoApi.MaintenanceState.from_bin(<<0x02, 7::integer-16, 0x01, 4::integer-16, -42::integer-32>>)
-      %AutoApi.MaintenanceState{kilometers_to_next_service: %AutoApi.PropertyComponent{data: -42}}
+      iex> AutoApiL11.MaintenanceState.from_bin(<<0x02, 7::integer-16, 0x01, 4::integer-16, -42::integer-32>>)
+      %AutoApiL11.MaintenanceState{kilometers_to_next_service: %AutoApiL11.PropertyComponent{data: -42}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -71,8 +71,8 @@ defmodule AutoApi.MaintenanceState do
 
   ## Example
 
-      iex> state = %AutoApi.MaintenanceState{kilometers_to_next_service: %AutoApi.PropertyComponent{data: -42}}
-      iex> AutoApi.MaintenanceState.to_bin(state)
+      iex> state = %AutoApiL11.MaintenanceState{kilometers_to_next_service: %AutoApiL11.PropertyComponent{data: -42}}
+      iex> AutoApiL11.MaintenanceState.to_bin(state)
       <<0x02, 7::integer-16, 0x01, 4::integer-16, -42::integer-32>>
   """
   @spec to_bin(__MODULE__.t()) :: binary

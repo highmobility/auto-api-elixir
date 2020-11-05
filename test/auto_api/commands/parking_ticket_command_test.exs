@@ -1,4 +1,4 @@
-defmodule AutoApi.ParkingTicketCommandTest do
+defmodule AutoApiL11.ParkingTicketCommandTest do
   use ExUnit.Case
-  doctest AutoApi.ParkingTicketCommand
+  doctest AutoApiL11.ParkingTicketCommand
 end

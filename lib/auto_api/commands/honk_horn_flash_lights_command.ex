@@ -1,6 +1,6 @@
-defmodule AutoApi.HonkHornFlashLightsCommand do
+defmodule AutoApiL11.HonkHornFlashLightsCommand do
   @moduledoc """
-  Handles HonkHornFlashLights commands and apply binary commands on `%AutoApi.HonkHornFlashLightsState{}`
+  Handles HonkHornFlashLights commands and apply binary commands on `%AutoApiL11.HonkHornFlashLightsState{}`
   """
-  use AutoApi.Command
+  use AutoApiL11.Command
 end

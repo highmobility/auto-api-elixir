@@ -1,4 +1,4 @@
-defmodule AutoApi.PowerTakeoffCommandTest do
+defmodule AutoApiL11.PowerTakeoffCommandTest do
   use ExUnit.Case
-  doctest AutoApi.PowerTakeoffCommand
+  doctest AutoApiL11.PowerTakeoffCommand
 end

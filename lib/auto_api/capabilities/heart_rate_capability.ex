@@ -1,8 +1,8 @@
-defmodule AutoApi.HeartRateCapability do
+defmodule AutoApiL11.HeartRateCapability do
   @moduledoc """
   Basic settings for Heart Rate Capability
 
-      iex> alias AutoApi.HeartRateCapability, as: H
+      iex> alias AutoApiL11.HeartRateCapability, as: H
       iex> H.identifier
       <<0x00, 0x29>>
       iex> H.name
@@ -13,8 +13,8 @@ defmodule AutoApi.HeartRateCapability do
       1
   """
 
-  @command_module AutoApi.HeartRateCommand
-  @state_module AutoApi.HeartRateState
+  @command_module AutoApiL11.HeartRateCommand
+  @state_module AutoApiL11.HeartRateState
 
-  use AutoApi.Capability, spec_file: "specs/heart_rate.json"
+  use AutoApiL11.Capability, spec_file: "specs/heart_rate.json"
 end

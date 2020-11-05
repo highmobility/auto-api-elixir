@@ -1,4 +1,4 @@
-defmodule AutoApi.CruiseControlStateTest do
+defmodule AutoApiL11.CruiseControlStateTest do
   use ExUnit.Case
-  doctest AutoApi.CruiseControlState
+  doctest AutoApiL11.CruiseControlState
 end

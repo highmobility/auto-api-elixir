@@ -1,8 +1,8 @@
-defmodule AutoApi.DashboardLightsCapability do
+defmodule AutoApiL11.DashboardLightsCapability do
   @moduledoc """
   Basic settings for Browser Capability
 
-      iex> alias AutoApi.DashboardLightsCapability, as: F
+      iex> alias AutoApiL11.DashboardLightsCapability, as: F
       iex> F.identifier
       <<0x00, 0x61>>
       iex> F.name
@@ -13,8 +13,8 @@ defmodule AutoApi.DashboardLightsCapability do
       [{0x01, :dashboard_lights}]
   """
 
-  @command_module AutoApi.DashboardLightsCommand
-  @state_module AutoApi.DashboardLightsState
+  @command_module AutoApiL11.DashboardLightsCommand
+  @state_module AutoApiL11.DashboardLightsState
 
-  use AutoApi.Capability, spec_file: "specs/dashboard_lights.json"
+  use AutoApiL11.Capability, spec_file: "specs/dashboard_lights.json"
 end

@@ -1,4 +1,4 @@
-defmodule AutoApi.Mixfile do
+defmodule AutoApiL11.Mixfile do
   use Mix.Project
 
   @version "0.2.0"

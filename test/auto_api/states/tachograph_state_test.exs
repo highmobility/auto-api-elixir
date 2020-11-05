@@ -1,4 +1,4 @@
-defmodule AutoApi.TachographStateTest do
+defmodule AutoApiL11.TachographStateTest do
   use ExUnit.Case
-  doctest AutoApi.TachographState
+  doctest AutoApiL11.TachographState
 end

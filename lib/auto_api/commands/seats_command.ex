@@ -1,6 +1,6 @@
-defmodule AutoApi.SeatsCommand do
+defmodule AutoApiL11.SeatsCommand do
   @moduledoc """
-  Handles Seats commands and apply binary commands on `%AutoApi.SeatsState{}`
+  Handles Seats commands and apply binary commands on `%AutoApiL11.SeatsState{}`
   """
-  use AutoApi.Command
+  use AutoApiL11.Command
 end

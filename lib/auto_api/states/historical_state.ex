@@ -1,9 +1,9 @@
-defmodule AutoApi.HistoricalState do
+defmodule AutoApiL11.HistoricalState do
   @moduledoc """
   Historical state
   """
 
-  alias AutoApi.{CommonData, PropertyComponent}
+  alias AutoApiL11.{CommonData, PropertyComponent}
 
   defstruct states: [],
             capability_id: nil,
@@ -11,7 +11,7 @@ defmodule AutoApi.HistoricalState do
             end_date: nil,
             timestamp: nil
 
-  use AutoApi.State, spec_file: "specs/historical.json"
+  use AutoApiL11.State, spec_file: "specs/historical.json"
 
   @type t :: %__MODULE__{
           states: list(%PropertyComponent{}),
@@ -24,8 +24,8 @@ defmodule AutoApi.HistoricalState do
   @doc """
   Build state based on binary value
 
-    iex> AutoApi.HistoricalState.from_bin(<<2, 5::integer-16, 1, 2::integer-16, 0x00, 0x60>>)
-    %AutoApi.HistoricalState{capability_id: %AutoApi.PropertyComponent{data: 0x60}}
+    iex> AutoApiL11.HistoricalState.from_bin(<<2, 5::integer-16, 1, 2::integer-16, 0x00, 0x60>>)
+    %AutoApiL11.HistoricalState{capability_id: %AutoApiL11.PropertyComponent{data: 0x60}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -35,8 +35,8 @@ defmodule AutoApi.HistoricalState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.HistoricalState{capability_id: %AutoApi.PropertyComponent{data: 0x60}}
-    iex> AutoApi.HistoricalState.to_bin(state)
+    iex> state = %AutoApiL11.HistoricalState{capability_id: %AutoApiL11.PropertyComponent{data: 0x60}}
+    iex> AutoApiL11.HistoricalState.to_bin(state)
     <<2, 5::integer-16, 1, 2::integer-16, 0x00, 0x60>>
   """
   @spec to_bin(__MODULE__.t()) :: binary

@@ -1,16 +1,16 @@
-defmodule AutoApi.RemoteControlState do
+defmodule AutoApiL11.RemoteControlState do
   @moduledoc """
   RemoteControl state
   """
 
-  alias AutoApi.PropertyComponent
+  alias AutoApiL11.PropertyComponent
 
   defstruct control_mode: nil,
             angle: nil,
             speed: nil,
             timestamp: nil
 
-  use AutoApi.State, spec_file: "specs/remote_control.json"
+  use AutoApiL11.State, spec_file: "specs/remote_control.json"
 
   @type modes ::
           :control_mode_unavailable
@@ -31,8 +31,8 @@ defmodule AutoApi.RemoteControlState do
   Build state based on binary value
 
     iex> bin = <<1, 0, 4, 1, 0, 1, 2>>
-    iex> AutoApi.RemoteControlState.from_bin(bin)
-    %AutoApi.RemoteControlState{control_mode: %AutoApi.PropertyComponent{data: :started}}
+    iex> AutoApiL11.RemoteControlState.from_bin(bin)
+    %AutoApiL11.RemoteControlState{control_mode: %AutoApiL11.PropertyComponent{data: :started}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -42,8 +42,8 @@ defmodule AutoApi.RemoteControlState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.RemoteControlState{control_mode: %AutoApi.PropertyComponent{data: :started}}
-    iex> AutoApi.RemoteControlState.to_bin(state)
+    iex> state = %AutoApiL11.RemoteControlState{control_mode: %AutoApiL11.PropertyComponent{data: :started}}
+    iex> AutoApiL11.RemoteControlState.to_bin(state)
     <<1, 0, 4, 1, 0, 1, 2>>
   """
   @spec to_bin(__MODULE__.t()) :: binary

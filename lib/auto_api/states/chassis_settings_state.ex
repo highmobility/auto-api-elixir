@@ -1,9 +1,9 @@
-defmodule AutoApi.ChassisSettingsState do
+defmodule AutoApiL11.ChassisSettingsState do
   @moduledoc """
   ChassisSettings state
   """
 
-  alias AutoApi.{CommonData, PropertyComponent}
+  alias AutoApiL11.{CommonData, PropertyComponent}
 
   defstruct driving_mode: nil,
             sport_chrono: nil,
@@ -15,7 +15,7 @@ defmodule AutoApi.ChassisSettingsState do
             minimum_chassis_position: nil,
             timestamp: nil
 
-  use AutoApi.State, spec_file: "specs/chassis_settings.json"
+  use AutoApiL11.State, spec_file: "specs/chassis_settings.json"
 
   @type spring_rate :: %PropertyComponent{data: %{value: integer, axle: CommonData.axle()}}
 
@@ -34,8 +34,8 @@ defmodule AutoApi.ChassisSettingsState do
   @doc """
   Build state based on binary value
 
-    iex> AutoApi.ChassisSettingsState.from_bin(<<1, 4::integer-16, 1, 0, 1, 0>>)
-    %AutoApi.ChassisSettingsState{driving_mode: %AutoApi.PropertyComponent{data: :regular}}
+    iex> AutoApiL11.ChassisSettingsState.from_bin(<<1, 4::integer-16, 1, 0, 1, 0>>)
+    %AutoApiL11.ChassisSettingsState{driving_mode: %AutoApiL11.PropertyComponent{data: :regular}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -45,8 +45,8 @@ defmodule AutoApi.ChassisSettingsState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.ChassisSettingsState{driving_mode: %AutoApi.PropertyComponent{data: :regular}}
-    iex> AutoApi.ChassisSettingsState.to_bin(state)
+    iex> state = %AutoApiL11.ChassisSettingsState{driving_mode: %AutoApiL11.PropertyComponent{data: :regular}}
+    iex> AutoApiL11.ChassisSettingsState.to_bin(state)
     <<1, 4::integer-16, 1, 0, 1, 0>>
   """
   @spec to_bin(__MODULE__.t()) :: binary

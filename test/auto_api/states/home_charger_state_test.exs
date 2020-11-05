@@ -1,4 +1,4 @@
-defmodule AutoApi.HomeChargerStateTest do
+defmodule AutoApiL11.HomeChargerStateTest do
   use ExUnit.Case
-  doctest AutoApi.HomeChargerState
+  doctest AutoApiL11.HomeChargerState
 end

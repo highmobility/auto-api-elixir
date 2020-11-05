@@ -1,8 +1,8 @@
-defmodule AutoApi.TrunkCapability do
+defmodule AutoApiL11.TrunkCapability do
   @moduledoc """
   Basic settings for Trunk Capability
 
-      iex> alias AutoApi.TrunkCapability, as: T
+      iex> alias AutoApiL11.TrunkCapability, as: T
       iex> T.identifier
       <<0x00, 0x21>>
       iex> T.name
@@ -15,8 +15,8 @@ defmodule AutoApi.TrunkCapability do
       [{1, :lock}, {2, :position}]
   """
 
-  @command_module AutoApi.TrunkCommand
-  @state_module AutoApi.TrunkState
+  @command_module AutoApiL11.TrunkCommand
+  @state_module AutoApiL11.TrunkState
 
-  use AutoApi.Capability, spec_file: "specs/trunk.json"
+  use AutoApiL11.Capability, spec_file: "specs/trunk.json"
 end

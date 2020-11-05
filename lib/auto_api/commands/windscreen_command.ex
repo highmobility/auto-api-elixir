@@ -1,6 +1,6 @@
-defmodule AutoApi.WindscreenCommand do
+defmodule AutoApiL11.WindscreenCommand do
   @moduledoc """
-  Handles Windscreen commands and apply binary commands on `%AutoApi.WindscreenState{}`
+  Handles Windscreen commands and apply binary commands on `%AutoApiL11.WindscreenState{}`
   """
-  use AutoApi.Command
+  use AutoApiL11.Command
 end

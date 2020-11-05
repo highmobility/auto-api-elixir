@@ -1,6 +1,6 @@
-defmodule AutoApi.ChargingCommandTest do
+defmodule AutoApiL11.ChargingCommandTest do
   use ExUnit.Case
-  alias AutoApi.{ChargingCommand, ChargingState, PropertyComponent}
+  alias AutoApiL11.{ChargingCommand, ChargingState, PropertyComponent}
 
   describe "execute/2" do
     # TODO

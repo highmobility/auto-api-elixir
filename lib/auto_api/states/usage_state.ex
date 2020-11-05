@@ -1,9 +1,9 @@
-defmodule AutoApi.UsageState do
+defmodule AutoApiL11.UsageState do
   @moduledoc """
   Usage state
   """
 
-  alias AutoApi.{CommonData, PropertyComponent}
+  alias AutoApiL11.{CommonData, PropertyComponent}
 
   defstruct average_weekly_distance: nil,
             average_weekly_distance_long_run: nil,
@@ -22,7 +22,7 @@ defmodule AutoApi.UsageState do
             current_fuel_consumption: nil,
             timestamp: nil
 
-  use AutoApi.State, spec_file: "specs/usage.json"
+  use AutoApiL11.State, spec_file: "specs/usage.json"
 
   @type driving_modes_activation_period :: %PropertyComponent{
           data: %{driving_mode: CommonData.driving_mode(), period: float}
@@ -54,8 +54,8 @@ defmodule AutoApi.UsageState do
   Build state based on binary value
 
     iex> bin = <<1, 0, 5, 1, 0, 2, 0, 203>>
-    iex> AutoApi.UsageState.from_bin(bin)
-    %AutoApi.UsageState{average_weekly_distance: %AutoApi.PropertyComponent{data: 203}}
+    iex> AutoApiL11.UsageState.from_bin(bin)
+    %AutoApiL11.UsageState{average_weekly_distance: %AutoApiL11.PropertyComponent{data: 203}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -65,8 +65,8 @@ defmodule AutoApi.UsageState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.UsageState{average_weekly_distance: %AutoApi.PropertyComponent{data: 203}}
-    iex> AutoApi.UsageState.to_bin(state)
+    iex> state = %AutoApiL11.UsageState{average_weekly_distance: %AutoApiL11.PropertyComponent{data: 203}}
+    iex> AutoApiL11.UsageState.to_bin(state)
     <<1, 0, 5, 1, 0, 2, 0, 203>>
   """
   @spec to_bin(__MODULE__.t()) :: binary

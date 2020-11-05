@@ -1,4 +1,4 @@
-defmodule AutoApi.FailureMessageCapabilityTest do
+defmodule AutoApiL11.FailureMessageCapabilityTest do
   use ExUnit.Case
-  doctest AutoApi.FailureMessageCapability
+  doctest AutoApiL11.FailureMessageCapability
 end

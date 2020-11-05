@@ -1,10 +1,10 @@
-defmodule AutoApi.TachographState do
+defmodule AutoApiL11.TachographState do
   @moduledoc """
   Keeps Tachograph state
 
   """
 
-  alias AutoApi.PropertyComponent
+  alias AutoApiL11.PropertyComponent
 
   @doc """
   Tachograph state
@@ -18,7 +18,7 @@ defmodule AutoApi.TachographState do
             vehicle_speed: nil,
             timestamp: nil
 
-  use AutoApi.State, spec_file: "specs/tachograph.json"
+  use AutoApiL11.State, spec_file: "specs/tachograph.json"
 
   @type vehicle_motion :: :not_detected | :detected
   @type vehicle_overspeed :: :no_overspeed | :overspeed
@@ -58,8 +58,8 @@ defmodule AutoApi.TachographState do
   Build state based on binary value
 
     iex> bin = <<4, 0, 4, 1, 0, 1, 1>>
-    iex> AutoApi.TachographState.from_bin(bin)
-    %AutoApi.TachographState{vehicle_motion: %AutoApi.PropertyComponent{data: :detected}}
+    iex> AutoApiL11.TachographState.from_bin(bin)
+    %AutoApiL11.TachographState{vehicle_motion: %AutoApiL11.PropertyComponent{data: :detected}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -70,8 +70,8 @@ defmodule AutoApi.TachographState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.TachographState{vehicle_motion: %AutoApi.PropertyComponent{data: :detected}}
-    iex> AutoApi.TachographState.to_bin(state)
+    iex> state = %AutoApiL11.TachographState{vehicle_motion: %AutoApiL11.PropertyComponent{data: :detected}}
+    iex> AutoApiL11.TachographState.to_bin(state)
     <<4, 0, 4, 1, 0, 1, 1>>
   """
   def to_bin(%__MODULE__{} = state) do

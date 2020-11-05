@@ -1,14 +1,14 @@
-defmodule AutoApi.MobileState do
+defmodule AutoApiL11.MobileState do
   @moduledoc """
   Browser state
   """
 
-  alias AutoApi.PropertyComponent
+  alias AutoApiL11.PropertyComponent
 
   defstruct connection: nil,
             timestamp: nil
 
-  use AutoApi.State, spec_file: "specs/mobile.json"
+  use AutoApiL11.State, spec_file: "specs/mobile.json"
 
   @type connection :: :disconnected | :connected
 
@@ -20,8 +20,8 @@ defmodule AutoApi.MobileState do
   @doc """
   Build state based on binary value
 
-    iex> AutoApi.MobileState.from_bin(<<1, 4::integer-16, 1, 0, 1, 1>>)
-    %AutoApi.MobileState{connection: %AutoApi.PropertyComponent{data: :connected}}
+    iex> AutoApiL11.MobileState.from_bin(<<1, 4::integer-16, 1, 0, 1, 1>>)
+    %AutoApiL11.MobileState{connection: %AutoApiL11.PropertyComponent{data: :connected}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -31,8 +31,8 @@ defmodule AutoApi.MobileState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.MobileState{connection: %AutoApi.PropertyComponent{data: :connected}}
-    iex> AutoApi.MobileState.to_bin(state)
+    iex> state = %AutoApiL11.MobileState{connection: %AutoApiL11.PropertyComponent{data: :connected}}
+    iex> AutoApiL11.MobileState.to_bin(state)
     <<1, 4::integer-16, 1, 0, 1, 1>>
   """
   @spec to_bin(__MODULE__.t()) :: binary

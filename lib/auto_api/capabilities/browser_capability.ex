@@ -1,8 +1,8 @@
-defmodule AutoApi.BrowserCapability do
+defmodule AutoApiL11.BrowserCapability do
   @moduledoc """
   Basic settings for Browser Capability
 
-      iex> alias AutoApi.BrowserCapability, as: B
+      iex> alias AutoApiL11.BrowserCapability, as: B
       iex> B.identifier
       <<0x00, 0x49>>
       iex> B.name
@@ -13,8 +13,8 @@ defmodule AutoApi.BrowserCapability do
       1
   """
 
-  @command_module AutoApi.BrowserCommand
-  @state_module AutoApi.BrowserState
+  @command_module AutoApiL11.BrowserCommand
+  @state_module AutoApiL11.BrowserState
 
-  use AutoApi.Capability, spec_file: "specs/browser.json"
+  use AutoApiL11.Capability, spec_file: "specs/browser.json"
 end

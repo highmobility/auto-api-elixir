@@ -1,9 +1,9 @@
-defmodule AutoApi.DashboardLightsState do
+defmodule AutoApiL11.DashboardLightsState do
   @moduledoc """
   Keeps Charging state
   """
 
-  alias AutoApi.PropertyComponent
+  alias AutoApiL11.PropertyComponent
 
   @doc """
   Dashboard Lights state
@@ -11,7 +11,7 @@ defmodule AutoApi.DashboardLightsState do
   defstruct dashboard_lights: [],
             timestamp: nil
 
-  use AutoApi.State, spec_file: "specs/dashboard_lights.json"
+  use AutoApiL11.State, spec_file: "specs/dashboard_lights.json"
 
   @type light_name ::
           :high_beam
@@ -61,8 +61,8 @@ defmodule AutoApi.DashboardLightsState do
   Build state based on binary value
 
     iex> bin = <<1, 0, 5, 1, 0, 2, 1, 1>>
-    iex> AutoApi.DashboardLightsState.from_bin(bin)
-    %AutoApi.DashboardLightsState{dashboard_lights: [%AutoApi.PropertyComponent{data: %{name: :low_beam, state: :info}}]}
+    iex> AutoApiL11.DashboardLightsState.from_bin(bin)
+    %AutoApiL11.DashboardLightsState{dashboard_lights: [%AutoApiL11.PropertyComponent{data: %{name: :low_beam, state: :info}}]}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -73,8 +73,8 @@ defmodule AutoApi.DashboardLightsState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.DashboardLightsState{dashboard_lights: [%AutoApi.PropertyComponent{data: %{name: :low_beam, state: :info}}]}
-    iex> AutoApi.DashboardLightsState.to_bin(state)
+    iex> state = %AutoApiL11.DashboardLightsState{dashboard_lights: [%AutoApiL11.PropertyComponent{data: %{name: :low_beam, state: :info}}]}
+    iex> AutoApiL11.DashboardLightsState.to_bin(state)
     <<1, 0, 5, 1, 0, 2, 1, 1>>
   """
   def to_bin(%__MODULE__{} = state) do

@@ -1,4 +1,4 @@
-defmodule AutoApi.CapabilityDelegate do
+defmodule AutoApiL11.CapabilityDelegate do
   @moduledoc false
-  @before_compile AutoApi.CapabilityMeta
+  @before_compile AutoApiL11.CapabilityMeta
 end

@@ -1,8 +1,8 @@
-defmodule AutoApi.KeyfobPositionCapability do
+defmodule AutoApiL11.KeyfobPositionCapability do
   @moduledoc """
   Basic settings for KeyfobPosition Capability
 
-      iex> alias AutoApi.KeyfobPositionCapability, as: K
+      iex> alias AutoApiL11.KeyfobPositionCapability, as: K
       iex> K.identifier
       <<0x00, 0x48>>
       iex> K.name
@@ -15,8 +15,8 @@ defmodule AutoApi.KeyfobPositionCapability do
       {0x01, :location}
   """
 
-  @command_module AutoApi.KeyfobPositionCommand
-  @state_module AutoApi.KeyfobPositionState
+  @command_module AutoApiL11.KeyfobPositionCommand
+  @state_module AutoApiL11.KeyfobPositionState
 
-  use AutoApi.Capability, spec_file: "specs/keyfob_position.json"
+  use AutoApiL11.Capability, spec_file: "specs/keyfob_position.json"
 end

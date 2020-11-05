@@ -16,11 +16,11 @@
 #
 # Please inquire about commercial licensing options at
 # licensing@high-mobility.com
-defmodule AutoApi.PropertyComponentTest do
+defmodule AutoApiL11.PropertyComponentTest do
   use ExUnit.Case
   use PropCheck
 
-  alias AutoApi.PropertyComponent
+  alias AutoApiL11.PropertyComponent
 
   describe "to_bin/3 & to_struct/3" do
     property "converts uint24 to bin" do
@@ -169,8 +169,8 @@ defmodule AutoApi.PropertyComponentTest do
       }
 
       state =
-        AutoApi.DoorsState.base()
-        |> AutoApi.DoorsState.append_property(:positions, %{
+        AutoApiL11.DoorsState.base()
+        |> AutoApiL11.DoorsState.append_property(:positions, %{
           location: :front_left,
           position: :closed
         })

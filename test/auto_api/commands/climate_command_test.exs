@@ -1,4 +1,4 @@
-defmodule AutoApi.ClimateCommandTest do
+defmodule AutoApiL11.ClimateCommandTest do
   use ExUnit.Case
-  doctest AutoApi.ClimateCommand
+  doctest AutoApiL11.ClimateCommand
 end

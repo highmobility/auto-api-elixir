@@ -1,6 +1,6 @@
-defmodule AutoApi.VideoHandoverCommand do
+defmodule AutoApiL11.VideoHandoverCommand do
   @moduledoc """
-  Handles VideoHandover commands and apply binary commands on `%AutoApi.VideoHandoverState{}`
+  Handles VideoHandover commands and apply binary commands on `%AutoApiL11.VideoHandoverState{}`
   """
-  use AutoApi.Command
+  use AutoApiL11.Command
 end

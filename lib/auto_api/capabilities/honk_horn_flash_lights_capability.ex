@@ -1,8 +1,8 @@
-defmodule AutoApi.HonkHornFlashLightsCapability do
+defmodule AutoApiL11.HonkHornFlashLightsCapability do
   @moduledoc """
   Basic settings for HonkHornFlashLights Capability
 
-      iex> alias AutoApi.HonkHornFlashLightsCapability, as: H
+      iex> alias AutoApiL11.HonkHornFlashLightsCapability, as: H
       iex> H.identifier
       <<0x00, 0x26>>
       iex> H.name
@@ -15,8 +15,8 @@ defmodule AutoApi.HonkHornFlashLightsCapability do
       {0x04, :emergency_flashers_state}
   """
 
-  @command_module AutoApi.HonkHornFlashLightsCommand
-  @state_module AutoApi.HonkHornFlashLightsState
+  @command_module AutoApiL11.HonkHornFlashLightsCommand
+  @state_module AutoApiL11.HonkHornFlashLightsState
 
-  use AutoApi.Capability, spec_file: "specs/honk_horn_flash_lights.json"
+  use AutoApiL11.Capability, spec_file: "specs/honk_horn_flash_lights.json"
 end

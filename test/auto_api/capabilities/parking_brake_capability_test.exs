@@ -1,4 +1,4 @@
-defmodule AutoApi.ParkingBrakeCapabilityTest do
+defmodule AutoApiL11.ParkingBrakeCapabilityTest do
   use ExUnit.Case
-  doctest AutoApi.ParkingBrakeCapability
+  doctest AutoApiL11.ParkingBrakeCapability
 end

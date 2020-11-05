@@ -1,8 +1,8 @@
-defmodule AutoApi.FirmwareVersionCapability do
+defmodule AutoApiL11.FirmwareVersionCapability do
   @moduledoc """
   Basic settings for Browser Capability
 
-      iex> alias AutoApi.FirmwareVersionCapability, as: F
+      iex> alias AutoApiL11.FirmwareVersionCapability, as: F
       iex> F.identifier
       <<0x00, 0x03>>
       iex> F.name
@@ -13,8 +13,8 @@ defmodule AutoApi.FirmwareVersionCapability do
       3
   """
 
-  @command_module AutoApi.FirmwareVersionCommand
-  @state_module AutoApi.FirmwareVersionState
+  @command_module AutoApiL11.FirmwareVersionCommand
+  @state_module AutoApiL11.FirmwareVersionState
 
-  use AutoApi.Capability, spec_file: "specs/firmware_version.json"
+  use AutoApiL11.Capability, spec_file: "specs/firmware_version.json"
 end

@@ -1,6 +1,6 @@
-defmodule AutoApi.FuelingCommand do
+defmodule AutoApiL11.FuelingCommand do
   @moduledoc """
-  Handles  commands and apply binary commands on `%AutoApi.FuelingState{}`
+  Handles  commands and apply binary commands on `%AutoApiL11.FuelingState{}`
   """
-  use AutoApi.Command
+  use AutoApiL11.Command
 end

@@ -1,6 +1,6 @@
-defmodule AutoApi.CruiseControlCommand do
+defmodule AutoApiL11.CruiseControlCommand do
   @moduledoc """
-  Handles  commands and apply binary commands on `%AutoApi.CruiseControlState{}`
+  Handles  commands and apply binary commands on `%AutoApiL11.CruiseControlState{}`
   """
-  use AutoApi.Command
+  use AutoApiL11.Command
 end

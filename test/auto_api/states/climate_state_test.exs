@@ -1,8 +1,8 @@
-defmodule AutoApi.ClimateStateTest do
+defmodule AutoApiL11.ClimateStateTest do
   use ExUnit.Case
-  doctest AutoApi.ClimateState
+  doctest AutoApiL11.ClimateState
 
-  alias AutoApi.ClimateState
+  alias AutoApiL11.ClimateState
 
   describe "regressions" do
     test "hvac_weekday_starting_time is (de)serialized correctly" do

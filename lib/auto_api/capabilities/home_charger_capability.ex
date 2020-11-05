@@ -1,8 +1,8 @@
-defmodule AutoApi.HomeChargerCapability do
+defmodule AutoApiL11.HomeChargerCapability do
   @moduledoc """
   Basic settings for HomeCharger Capability
 
-      iex> alias AutoApi.HomeChargerCapability, as: H
+      iex> alias AutoApiL11.HomeChargerCapability, as: H
       iex> H.identifier
       <<0x00, 0x60>>
       iex> H.name
@@ -15,8 +15,8 @@ defmodule AutoApi.HomeChargerCapability do
       {0x12, :price_tariffs}
   """
 
-  @command_module AutoApi.HomeChargerCommand
-  @state_module AutoApi.HomeChargerState
+  @command_module AutoApiL11.HomeChargerCommand
+  @state_module AutoApiL11.HomeChargerState
 
-  use AutoApi.Capability, spec_file: "specs/home_charger.json"
+  use AutoApiL11.Capability, spec_file: "specs/home_charger.json"
 end

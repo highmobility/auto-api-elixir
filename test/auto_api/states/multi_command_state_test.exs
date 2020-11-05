@@ -1,4 +1,4 @@
-defmodule AutoApi.MultiCommandStateTest do
+defmodule AutoApiL11.MultiCommandStateTest do
   use ExUnit.Case
-  doctest AutoApi.MultiCommandState
+  doctest AutoApiL11.MultiCommandState
 end

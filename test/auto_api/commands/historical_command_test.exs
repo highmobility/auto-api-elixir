@@ -1,4 +1,4 @@
-defmodule AutoApi.HistoricalCommandTest do
+defmodule AutoApiL11.HistoricalCommandTest do
   use ExUnit.Case
-  doctest AutoApi.HistoricalCommand
+  doctest AutoApiL11.HistoricalCommand
 end

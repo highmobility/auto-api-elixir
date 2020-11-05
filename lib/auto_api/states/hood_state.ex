@@ -1,9 +1,9 @@
-defmodule AutoApi.HoodState do
+defmodule AutoApiL11.HoodState do
   @moduledoc """
   Keeps Hood state
   """
 
-  alias AutoApi.PropertyComponent
+  alias AutoApiL11.PropertyComponent
 
   @type position :: :closed | :open | :intermediate
 
@@ -13,7 +13,7 @@ defmodule AutoApi.HoodState do
   defstruct position: nil,
             timestamp: nil
 
-  use AutoApi.State, spec_file: "specs/hood.json"
+  use AutoApiL11.State, spec_file: "specs/hood.json"
 
   @type t :: %__MODULE__{
           position: %PropertyComponent{data: position} | nil,
@@ -24,8 +24,8 @@ defmodule AutoApi.HoodState do
   Build state based on binary value
 
     iex> bin = <<1, 0, 4, 1, 0, 1, 1>>
-    iex> AutoApi.HoodState.from_bin(bin)
-    %AutoApi.HoodState{position: %AutoApi.PropertyComponent{data: :open}}
+    iex> AutoApiL11.HoodState.from_bin(bin)
+    %AutoApiL11.HoodState{position: %AutoApiL11.PropertyComponent{data: :open}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -36,8 +36,8 @@ defmodule AutoApi.HoodState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.HoodState{position: %AutoApi.PropertyComponent{data: :open}}
-    iex> AutoApi.HoodState.to_bin(state)
+    iex> state = %AutoApiL11.HoodState{position: %AutoApiL11.PropertyComponent{data: :open}}
+    iex> AutoApiL11.HoodState.to_bin(state)
     <<1, 0, 4, 1, 0, 1, 1>>
   """
   def to_bin(%__MODULE__{} = state) do

@@ -1,4 +1,4 @@
-defmodule AutoApi.IgnitionStateTest do
+defmodule AutoApiL11.IgnitionStateTest do
   use ExUnit.Case
-  doctest AutoApi.IgnitionState
+  doctest AutoApiL11.IgnitionState
 end

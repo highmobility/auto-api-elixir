@@ -1,6 +1,6 @@
-defmodule AutoApi.DoorsCommand do
+defmodule AutoApiL11.DoorsCommand do
   @moduledoc """
-  Handles  commands and apply binary commands on `%AutoApi.DoorsState{}`
+  Handles  commands and apply binary commands on `%AutoApiL11.DoorsState{}`
   """
-  use AutoApi.Command
+  use AutoApiL11.Command
 end

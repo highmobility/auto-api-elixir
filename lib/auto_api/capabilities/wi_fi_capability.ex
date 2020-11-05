@@ -1,8 +1,8 @@
-defmodule AutoApi.WiFiCapability do
+defmodule AutoApiL11.WiFiCapability do
   @moduledoc """
   Basic settings for WiFi Capability
 
-      iex> alias AutoApi.WiFiCapability, as: W
+      iex> alias AutoApiL11.WiFiCapability, as: W
       iex> W.identifier
       <<0x00, 0x59>>
       iex> W.name
@@ -15,8 +15,8 @@ defmodule AutoApi.WiFiCapability do
       [{1, :status}, {2, :network_connected}, {3, :network_ssid}, {4, :network_security}, {5, :password}]
   """
 
-  @command_module AutoApi.WiFiCommand
-  @state_module AutoApi.WiFiState
+  @command_module AutoApiL11.WiFiCommand
+  @state_module AutoApiL11.WiFiState
 
-  use AutoApi.Capability, spec_file: "specs/wi_fi.json"
+  use AutoApiL11.Capability, spec_file: "specs/wi_fi.json"
 end

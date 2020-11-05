@@ -1,4 +1,4 @@
-defmodule AutoApi.VehicleLocationCapabilityTest do
+defmodule AutoApiL11.VehicleLocationCapabilityTest do
   use ExUnit.Case
-  doctest AutoApi.VehicleLocationCapability
+  doctest AutoApiL11.VehicleLocationCapability
 end

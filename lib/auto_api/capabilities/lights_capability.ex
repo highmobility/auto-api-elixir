@@ -1,8 +1,8 @@
-defmodule AutoApi.LightsCapability do
+defmodule AutoApiL11.LightsCapability do
   @moduledoc """
   Basic settings for Lights Capability
 
-      iex> alias AutoApi.LightsCapability, as: L
+      iex> alias AutoApiL11.LightsCapability, as: L
       iex> L.identifier
       <<0x00, 0x36>>
       iex> L.name
@@ -15,8 +15,8 @@ defmodule AutoApi.LightsCapability do
       {9, :interior_lights}
   """
 
-  @command_module AutoApi.LightsCommand
-  @state_module AutoApi.LightsState
+  @command_module AutoApiL11.LightsCommand
+  @state_module AutoApiL11.LightsState
 
-  use AutoApi.Capability, spec_file: "specs/lights.json"
+  use AutoApiL11.Capability, spec_file: "specs/lights.json"
 end

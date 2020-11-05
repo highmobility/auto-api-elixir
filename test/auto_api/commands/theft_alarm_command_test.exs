@@ -1,4 +1,4 @@
-defmodule AutoApi.TheftAlarmCommandTest do
+defmodule AutoApiL11.TheftAlarmCommandTest do
   use ExUnit.Case
-  doctest AutoApi.TheftAlarmCommand
+  doctest AutoApiL11.TheftAlarmCommand
 end

@@ -1,6 +1,6 @@
-defmodule AutoApi.BrowserCommand do
+defmodule AutoApiL11.BrowserCommand do
   @moduledoc """
-  Handles Browser commands and apply binary commands on `%AutoApi.BrowserState{}`
+  Handles Browser commands and apply binary commands on `%AutoApiL11.BrowserState{}`
   """
-  use AutoApi.Command
+  use AutoApiL11.Command
 end

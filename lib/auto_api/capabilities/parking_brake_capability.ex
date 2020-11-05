@@ -1,8 +1,8 @@
-defmodule AutoApi.ParkingBrakeCapability do
+defmodule AutoApiL11.ParkingBrakeCapability do
   @moduledoc """
   Basic settings for ParkingBrake Capability
 
-      iex> alias AutoApi.ParkingBrakeCapability, as: P
+      iex> alias AutoApiL11.ParkingBrakeCapability, as: P
       iex> P.identifier
       <<0x00, 0x58>>
       iex> P.name
@@ -15,8 +15,8 @@ defmodule AutoApi.ParkingBrakeCapability do
       [{1, :status}]
   """
 
-  @command_module AutoApi.ParkingBrakeCommand
-  @state_module AutoApi.ParkingBrakeState
+  @command_module AutoApiL11.ParkingBrakeCommand
+  @state_module AutoApiL11.ParkingBrakeState
 
-  use AutoApi.Capability, spec_file: "specs/parking_brake.json"
+  use AutoApiL11.Capability, spec_file: "specs/parking_brake.json"
 end

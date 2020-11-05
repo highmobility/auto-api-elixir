@@ -1,8 +1,8 @@
-defmodule AutoApi.DriverFatigueCapability do
+defmodule AutoApiL11.DriverFatigueCapability do
   @moduledoc """
   Basic settings for Driver Fatigue Capability
 
-      iex> alias AutoApi.DriverFatigueCapability, as: D
+      iex> alias AutoApiL11.DriverFatigueCapability, as: D
       iex> D.identifier
       <<0x00, 0x41>>
       iex> D.name
@@ -13,8 +13,8 @@ defmodule AutoApi.DriverFatigueCapability do
       1
   """
 
-  @command_module AutoApi.DriverFatigueCommand
-  @state_module AutoApi.DriverFatigueState
+  @command_module AutoApiL11.DriverFatigueCommand
+  @state_module AutoApiL11.DriverFatigueState
 
-  use AutoApi.Capability, spec_file: "specs/driver_fatigue.json"
+  use AutoApiL11.Capability, spec_file: "specs/driver_fatigue.json"
 end

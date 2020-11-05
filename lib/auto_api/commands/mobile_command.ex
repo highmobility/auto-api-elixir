@@ -1,6 +1,6 @@
-defmodule AutoApi.MobileCommand do
+defmodule AutoApiL11.MobileCommand do
   @moduledoc """
-  Handles Mobile commands and apply binary commands on `%AutoApi.MobileState{}`
+  Handles Mobile commands and apply binary commands on `%AutoApiL11.MobileState{}`
   """
-  use AutoApi.Command
+  use AutoApiL11.Command
 end

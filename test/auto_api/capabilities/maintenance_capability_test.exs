@@ -1,4 +1,4 @@
-defmodule AutoApi.MaintenanceCapabilityTest do
+defmodule AutoApiL11.MaintenanceCapabilityTest do
   use ExUnit.Case
-  doctest AutoApi.MaintenanceCapability
+  doctest AutoApiL11.MaintenanceCapability
 end

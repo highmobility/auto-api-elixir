@@ -16,10 +16,10 @@
 #
 # Please inquire about commercial licensing options at
 # licensing@high-mobility.com
-defmodule AutoApi.StateTest do
+defmodule AutoApiL11.StateTest do
   use ExUnit.Case
 
-  alias AutoApi.{
+  alias AutoApiL11.{
     CapabilitiesState,
     DiagnosticsState,
     PropertyComponent,
@@ -232,7 +232,7 @@ defmodule AutoApi.StateTest do
     test "update a property with single value" do
       now = DateTime.utc_now()
       state = %DiagnosticsState{}
-      new_state = AutoApi.State.update_property(state, :mileage, 1000, now)
+      new_state = AutoApiL11.State.update_property(state, :mileage, 1000, now)
 
       assert new_state.mileage.data == 1000
       assert new_state.mileage.timestamp == now
@@ -244,7 +244,7 @@ defmodule AutoApi.StateTest do
       assert state.tire_pressures == []
 
       new_state =
-        AutoApi.State.update_property(
+        AutoApiL11.State.update_property(
           state,
           :tire_pressures,
           %{location: :front_right, pressure: 1.938},

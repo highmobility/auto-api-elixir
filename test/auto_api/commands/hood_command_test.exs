@@ -1,4 +1,4 @@
-defmodule AutoApi.HoodCommandTest do
+defmodule AutoApiL11.HoodCommandTest do
   use ExUnit.Case
-  doctest AutoApi.HoodCommand
+  doctest AutoApiL11.HoodCommand
 end

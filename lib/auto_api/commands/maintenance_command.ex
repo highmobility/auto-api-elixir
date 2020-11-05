@@ -1,6 +1,6 @@
-defmodule AutoApi.MaintenanceCommand do
+defmodule AutoApiL11.MaintenanceCommand do
   @moduledoc """
-  Handles  commands and apply binary commands on `%AutoApi.MaintenanceState{}`
+  Handles  commands and apply binary commands on `%AutoApiL11.MaintenanceState{}`
   """
-  use AutoApi.Command
+  use AutoApiL11.Command
 end

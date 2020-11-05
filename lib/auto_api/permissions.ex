@@ -20,7 +20,7 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.Permissions do
+defmodule AutoApiL11.Permissions do
   @moduledoc """
   Handles the conversion of AutoApi permissions between text and binary format
   """
@@ -310,11 +310,11 @@ defmodule AutoApi.Permissions do
 
   ## Examples
 
-    iex> AutoApi.Permissions.format ["car.full_control"]
+    iex> AutoApiL11.Permissions.format ["car.full_control"]
     ["full control of the car"]
 
-    iex> AutoApi.Permissions.parse("charge.read,lights.read,climate.write")
-    ...> |> AutoApi.Permissions.format
+    iex> AutoApiL11.Permissions.parse("charge.read,lights.read,climate.write")
+    ...> |> AutoApiL11.Permissions.format
     ["Allowed to get the charge state", "Allowed to get the lights state", "Allowed to set climate profile and start/stop HVAC"]
 
   """
@@ -329,7 +329,7 @@ defmodule AutoApi.Permissions do
 
   ## Examples
 
-    iex> AutoApi.Permissions.parse "charge.read,lights.read,climate.write"
+    iex> AutoApiL11.Permissions.parse "charge.read,lights.read,climate.write"
     ["charge.read", "lights.read", "climate.write"]
 
   """
@@ -344,18 +344,18 @@ defmodule AutoApi.Permissions do
 
   ## Examples
 
-    iex> AutoApi.Permissions.to_binary ["charge.read", "lights.read", "climate.write"]
+    iex> AutoApiL11.Permissions.to_binary ["charge.read", "lights.read", "climate.write"]
     0x100000C8000000000000000000000000
 
-    iex> AutoApi.Permissions.to_binary ["car.full_control"]
+    iex> AutoApiL11.Permissions.to_binary ["car.full_control"]
     0x1007FFFDFFEFFFFFFFFF1F0000000000
 
-    iex> AutoApi.Permissions.parse("charge.read,lights.read,climate.write")
-    ...> |> AutoApi.Permissions.to_binary
+    iex> AutoApiL11.Permissions.parse("charge.read,lights.read,climate.write")
+    ...> |> AutoApiL11.Permissions.to_binary
     0x100000C8000000000000000000000000
 
-    iex> AutoApi.Permissions.parse("power-takeoff.read,tachograph.read")
-    ...> |> AutoApi.Permissions.to_binary
+    iex> AutoApiL11.Permissions.parse("power-takeoff.read,tachograph.read")
+    ...> |> AutoApiL11.Permissions.to_binary
     0x10000000000000000080010000000000
 
 
@@ -392,10 +392,10 @@ defmodule AutoApi.Permissions do
 
   ## Examples
 
-    iex> AutoApi.Permissions.verify ["charge.read", "lights.read", "climate.write"]
+    iex> AutoApiL11.Permissions.verify ["charge.read", "lights.read", "climate.write"]
     true
 
-    iex> AutoApi.Permissions.verify ["charge.read", "i.dont.exist"]
+    iex> AutoApiL11.Permissions.verify ["charge.read", "i.dont.exist"]
     false
 
   """

@@ -1,8 +1,8 @@
-defmodule AutoApi.DiagnosticsCapability do
+defmodule AutoApiL11.DiagnosticsCapability do
   @moduledoc """
   Basic settings for Diagnostics Capability
 
-      iex> alias AutoApi.DiagnosticsCapability, as: D
+      iex> alias AutoApiL11.DiagnosticsCapability, as: D
       iex> D.identifier
       <<0x00, 0x33>>
       iex> D.name
@@ -13,8 +13,8 @@ defmodule AutoApi.DiagnosticsCapability do
       27
   """
 
-  @command_module AutoApi.DiagnosticsCommand
-  @state_module AutoApi.DiagnosticsState
+  @command_module AutoApiL11.DiagnosticsCommand
+  @state_module AutoApiL11.DiagnosticsState
 
-  use AutoApi.Capability, spec_file: "specs/diagnostics.json"
+  use AutoApiL11.Capability, spec_file: "specs/diagnostics.json"
 end

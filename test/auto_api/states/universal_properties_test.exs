@@ -1,6 +1,6 @@
-defmodule AutoApi.UniversalPropertiesTest do
+defmodule AutoApiL11.UniversalPropertiesTest do
   use ExUnit.Case
-  alias AutoApi.DoorsState
+  alias AutoApiL11.DoorsState
 
   @tag :skip
   test "converts the state properties and the universal properties" do

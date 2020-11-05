@@ -1,6 +1,6 @@
-defmodule AutoApi.TheftAlarmCommand do
+defmodule AutoApiL11.TheftAlarmCommand do
   @moduledoc """
-  Handles TheftAlarm commands and apply binary commands on `%AutoApi.TheftAlarmState{}`
+  Handles TheftAlarm commands and apply binary commands on `%AutoApiL11.TheftAlarmState{}`
   """
-  use AutoApi.Command
+  use AutoApiL11.Command
 end

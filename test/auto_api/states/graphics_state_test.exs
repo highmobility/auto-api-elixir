@@ -1,4 +1,4 @@
-defmodule AutoApi.GraphicsStateTest do
+defmodule AutoApiL11.GraphicsStateTest do
   use ExUnit.Case
-  doctest AutoApi.GraphicsState
+  doctest AutoApiL11.GraphicsState
 end

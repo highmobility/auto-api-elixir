@@ -1,4 +1,4 @@
-defmodule AutoApi.TextInputCommandTest do
+defmodule AutoApiL11.TextInputCommandTest do
   use ExUnit.Case
-  doctest AutoApi.TextInputCommand
+  doctest AutoApiL11.TextInputCommand
 end

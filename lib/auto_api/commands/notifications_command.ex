@@ -1,6 +1,6 @@
-defmodule AutoApi.NotificationsCommand do
+defmodule AutoApiL11.NotificationsCommand do
   @moduledoc """
-  Handles Notifications commands and apply binary commands on `%AutoApi.NotificationsState{}`
+  Handles Notifications commands and apply binary commands on `%AutoApiL11.NotificationsState{}`
   """
-  use AutoApi.Command
+  use AutoApiL11.Command
 end

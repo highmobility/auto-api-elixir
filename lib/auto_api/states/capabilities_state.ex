@@ -1,4 +1,4 @@
-defmodule AutoApi.CapabilitiesState do
+defmodule AutoApiL11.CapabilitiesState do
   @moduledoc """
   Capabilities state
 
@@ -7,12 +7,12 @@ defmodule AutoApi.CapabilitiesState do
   will translate those into modules and property names.
   """
 
-  alias AutoApi.PropertyComponent
+  alias AutoApiL11.PropertyComponent
 
   defstruct capabilities: [],
             timestamp: nil
 
-  use AutoApi.State, spec_file: "specs/capabilities.json"
+  use AutoApiL11.State, spec_file: "specs/capabilities.json"
 
   @type capability :: %PropertyComponent{
           data: %{
@@ -32,8 +32,8 @@ defmodule AutoApi.CapabilitiesState do
   ## Examples
 
       iex> bin = <<1, 0, 9, 1, 0, 6, 0, 51, 0, 2, 4, 13>>
-      iex> AutoApi.CapabilitiesState.from_bin(bin)
-      %AutoApi.CapabilitiesState{capabilities: [%AutoApi.PropertyComponent{data: %{capability_id: 0x33, supported_property_ids: <<0x04, 0x0D>>}}]}
+      iex> AutoApiL11.CapabilitiesState.from_bin(bin)
+      %AutoApiL11.CapabilitiesState{capabilities: [%AutoApiL11.PropertyComponent{data: %{capability_id: 0x33, supported_property_ids: <<0x04, 0x0D>>}}]}
 
   """
   @spec from_bin(binary) :: __MODULE__.t()
@@ -46,8 +46,8 @@ defmodule AutoApi.CapabilitiesState do
 
   ## Examples
 
-      iex> state = %AutoApi.CapabilitiesState{capabilities: [%AutoApi.PropertyComponent{data: %{capability_id: 0x33, supported_property_ids: <<0x04, 0x0D>>}}]}
-      iex> AutoApi.CapabilitiesState.to_bin(state)
+      iex> state = %AutoApiL11.CapabilitiesState{capabilities: [%AutoApiL11.PropertyComponent{data: %{capability_id: 0x33, supported_property_ids: <<0x04, 0x0D>>}}]}
+      iex> AutoApiL11.CapabilitiesState.to_bin(state)
       <<1, 0, 9, 1, 0, 6, 0, 51, 0, 2, 4, 13>>
 
   """

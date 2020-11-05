@@ -1,9 +1,9 @@
-defmodule AutoApi.NaviDestinationState do
+defmodule AutoApiL11.NaviDestinationState do
   @moduledoc """
   Keeps Navigation Destination state
   """
 
-  alias AutoApi.{CommonData, PropertyComponent}
+  alias AutoApiL11.{CommonData, PropertyComponent}
 
   @doc """
   Navigation destination state
@@ -16,7 +16,7 @@ defmodule AutoApi.NaviDestinationState do
             distance_to_destination: nil,
             timestamp: nil
 
-  use AutoApi.State, spec_file: "specs/navi_destination.json"
+  use AutoApiL11.State, spec_file: "specs/navi_destination.json"
 
   @type t :: %__MODULE__{
           coordinates: %PropertyComponent{data: CommonData.coordinates()} | nil,
@@ -32,8 +32,8 @@ defmodule AutoApi.NaviDestinationState do
   Build state based on binary value
 
     iex> bin = <<2, 0, 7, 1, 0, 4, 72, 111, 109, 101>>
-    iex> AutoApi.NaviDestinationState.from_bin(bin)
-    %AutoApi.NaviDestinationState{destination_name: %AutoApi.PropertyComponent{data: "Home"}}
+    iex> AutoApiL11.NaviDestinationState.from_bin(bin)
+    %AutoApiL11.NaviDestinationState{destination_name: %AutoApiL11.PropertyComponent{data: "Home"}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -43,8 +43,8 @@ defmodule AutoApi.NaviDestinationState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.NaviDestinationState{destination_name: %AutoApi.PropertyComponent{data: "Home"}}
-    iex> AutoApi.NaviDestinationState.to_bin(state)
+    iex> state = %AutoApiL11.NaviDestinationState{destination_name: %AutoApiL11.PropertyComponent{data: "Home"}}
+    iex> AutoApiL11.NaviDestinationState.to_bin(state)
     <<2, 0, 7, 1, 0, 4, 72, 111, 109, 101>>
   """
   @spec to_bin(__MODULE__.t()) :: binary

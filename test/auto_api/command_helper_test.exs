@@ -16,12 +16,12 @@
 #
 # Please inquire about commercial licensing options at
 # licensing@high-mobility.com
-defmodule AutoApi.CommandHelperTest do
+defmodule AutoApiL11.CommandHelperTest do
   use ExUnit.Case
 
   import ExUnit.CaptureLog
 
-  alias AutoApi.CommandHelper, as: CH
+  alias AutoApiL11.CommandHelper, as: CH
 
   test "inject_constants/2" do
     base_data = :crypto.strong_rand_bytes(12)

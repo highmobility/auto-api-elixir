@@ -1,4 +1,4 @@
-defmodule AutoApi.EngineStateTest do
+defmodule AutoApiL11.EngineStateTest do
   use ExUnit.Case
-  doctest AutoApi.EngineState
+  doctest AutoApiL11.EngineState
 end

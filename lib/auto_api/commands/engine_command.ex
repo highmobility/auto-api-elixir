@@ -1,6 +1,6 @@
-defmodule AutoApi.EngineCommand do
+defmodule AutoApiL11.EngineCommand do
   @moduledoc """
-  Handles Engine commands and apply binary commands on `%AutoApi.EngineState{}`
+  Handles Engine commands and apply binary commands on `%AutoApiL11.EngineState{}`
   """
-  use AutoApi.Command
+  use AutoApiL11.Command
 end

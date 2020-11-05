@@ -1,6 +1,6 @@
-defmodule AutoApi.DashboardLightsCommand do
+defmodule AutoApiL11.DashboardLightsCommand do
   @moduledoc """
-  Handles Dashboard Lights commands and apply binary commands on `%AutoApi.DashboardLightsState{}`
+  Handles Dashboard Lights commands and apply binary commands on `%AutoApiL11.DashboardLightsState{}`
   """
-  use AutoApi.Command
+  use AutoApiL11.Command
 end

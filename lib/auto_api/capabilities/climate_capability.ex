@@ -1,8 +1,8 @@
-defmodule AutoApi.ClimateCapability do
+defmodule AutoApiL11.ClimateCapability do
   @moduledoc """
   Basic settings for Climate Capability
 
-      iex> alias AutoApi.ClimateCapability, as: C
+      iex> alias AutoApiL11.ClimateCapability, as: C
       iex> C.identifier
       <<0x00, 0x24>>
       iex> C.name
@@ -15,8 +15,8 @@ defmodule AutoApi.ClimateCapability do
       {0x0C, :rear_temperature_setting}
   """
 
-  @command_module AutoApi.ClimateCommand
-  @state_module AutoApi.ClimateState
+  @command_module AutoApiL11.ClimateCommand
+  @state_module AutoApiL11.ClimateState
 
-  use AutoApi.Capability, spec_file: "specs/climate.json"
+  use AutoApiL11.Capability, spec_file: "specs/climate.json"
 end

@@ -1,6 +1,6 @@
-defmodule AutoApi.WeatherConditionsCommand do
+defmodule AutoApiL11.WeatherConditionsCommand do
   @moduledoc """
-  Handles WeatherConditions commands and apply binary commands on `%AutoApi.WeatherConditionsState{}`
+  Handles WeatherConditions commands and apply binary commands on `%AutoApiL11.WeatherConditionsState{}`
   """
-  use AutoApi.Command
+  use AutoApiL11.Command
 end

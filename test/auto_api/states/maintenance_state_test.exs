@@ -1,6 +1,6 @@
-defmodule AutoApi.MaintenanceStateTest do
+defmodule AutoApiL11.MaintenanceStateTest do
   use ExUnit.Case
-  alias AutoApi.MaintenanceState
+  alias AutoApiL11.MaintenanceState
 
   describe "to_bin/1 & from_bin/1" do
     test "simple property" do

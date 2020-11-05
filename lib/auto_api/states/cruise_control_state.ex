@@ -1,9 +1,9 @@
-defmodule AutoApi.CruiseControlState do
+defmodule AutoApiL11.CruiseControlState do
   @moduledoc """
   CruiseControl state
   """
 
-  alias AutoApi.{CommonData, PropertyComponent}
+  alias AutoApiL11.{CommonData, PropertyComponent}
 
   defstruct cruise_control: nil,
             limiter: nil,
@@ -12,7 +12,7 @@ defmodule AutoApi.CruiseControlState do
             acc_target_speed: nil,
             timestamp: nil
 
-  use AutoApi.State, spec_file: "specs/cruise_control.json"
+  use AutoApiL11.State, spec_file: "specs/cruise_control.json"
 
   @type limiter :: :not_set | :higher_speed_requested | :lower_speed_requested | :speed_fixed
 
@@ -29,8 +29,8 @@ defmodule AutoApi.CruiseControlState do
   Build state based on binary value
 
     iex> bin = <<1, 0, 4, 1, 0, 1, 1>>
-    iex> AutoApi.CruiseControlState.from_bin(bin)
-    %AutoApi.CruiseControlState{cruise_control: %AutoApi.PropertyComponent{data: :active}}
+    iex> AutoApiL11.CruiseControlState.from_bin(bin)
+    %AutoApiL11.CruiseControlState{cruise_control: %AutoApiL11.PropertyComponent{data: :active}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -40,8 +40,8 @@ defmodule AutoApi.CruiseControlState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.CruiseControlState{cruise_control: %AutoApi.PropertyComponent{data: :active}}
-    iex> AutoApi.CruiseControlState.to_bin(state)
+    iex> state = %AutoApiL11.CruiseControlState{cruise_control: %AutoApiL11.PropertyComponent{data: :active}}
+    iex> AutoApiL11.CruiseControlState.to_bin(state)
     <<1, 0, 4, 1, 0, 1, 1>>
   """
   @spec to_bin(__MODULE__.t()) :: binary

@@ -1,4 +1,4 @@
-defmodule AutoApi.BrowserStateTest do
+defmodule AutoApiL11.BrowserStateTest do
   use ExUnit.Case
-  doctest AutoApi.BrowserState
+  doctest AutoApiL11.BrowserState
 end

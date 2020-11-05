@@ -1,8 +1,8 @@
-defmodule AutoApi.VideoHandoverCapability do
+defmodule AutoApiL11.VideoHandoverCapability do
   @moduledoc """
   Basic settings for Video Handover Capability
 
-      iex> alias AutoApi.VideoHandoverCapability, as: VH
+      iex> alias AutoApiL11.VideoHandoverCapability, as: VH
       iex> VH.identifier
       <<0x00, 0x43>>
       iex> VH.name
@@ -13,8 +13,8 @@ defmodule AutoApi.VideoHandoverCapability do
       3
   """
 
-  @command_module AutoApi.VideoHandoverCommand
-  @state_module AutoApi.VideoHandoverState
+  @command_module AutoApiL11.VideoHandoverCommand
+  @state_module AutoApiL11.VideoHandoverState
 
-  use AutoApi.Capability, spec_file: "specs/video_handover.json"
+  use AutoApiL11.Capability, spec_file: "specs/video_handover.json"
 end

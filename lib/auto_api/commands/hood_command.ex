@@ -1,6 +1,6 @@
-defmodule AutoApi.HoodCommand do
+defmodule AutoApiL11.HoodCommand do
   @moduledoc """
-  Handles Hood commands and apply binary commands on `%AutoApi.HoodState{}`
+  Handles Hood commands and apply binary commands on `%AutoApiL11.HoodState{}`
   """
-  use AutoApi.Command
+  use AutoApiL11.Command
 end

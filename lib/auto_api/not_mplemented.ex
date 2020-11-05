@@ -1,11 +1,11 @@
-defmodule AutoApi.NotImplemented do
+defmodule AutoApiL11.NotImplemented do
   @moduledoc """
-  A dummy implementation for `AutoApi.Command` and `AutoApi.State`
+  A dummy implementation for `AutoApiL11.Command` and `AutoApiL11.State`
   behaviours that throws an error for any method.
   """
 
-  @behaviour AutoApi.Command
-  @behaviour AutoApi.State
+  @behaviour AutoApiL11.Command
+  @behaviour AutoApiL11.State
   def execute(_, _), do: throw(:not_implemented)
   def state(_), do: throw(:not_implemented)
   def base, do: throw(:not_implemented)

@@ -1,7 +1,7 @@
-defmodule AutoApi.DoorsStateTest do
+defmodule AutoApiL11.DoorsStateTest do
   use ExUnit.Case
-  doctest AutoApi.DoorsState
-  alias AutoApi.DoorsState
+  doctest AutoApiL11.DoorsState
+  alias AutoApiL11.DoorsState
 
   test "to_bin & from_bin" do
     state =

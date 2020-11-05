@@ -20,7 +20,7 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.PropertyComponent do
+defmodule AutoApiL11.PropertyComponent do
   @moduledoc """
   Data wrapper for state properties.
 
@@ -149,7 +149,7 @@ defmodule AutoApi.PropertyComponent do
   end
 
   defp data_to_bin(data, %{"type" => "types." <> type}) do
-    type_spec = AutoApi.CustomType.spec(type)
+    type_spec = AutoApiL11.CustomType.spec(type)
 
     data_to_bin(data, type_spec)
   end
@@ -164,7 +164,7 @@ defmodule AutoApi.PropertyComponent do
   defp failure_to_bin(nil), do: <<>>
 
   defp failure_to_bin(%{reason: reason, description: description}) do
-    reason_bin = AutoApi.CommonData.convert_state_to_bin_failure_reason(reason)
+    reason_bin = AutoApiL11.CommonData.convert_state_to_bin_failure_reason(reason)
     description_size = byte_size(description)
 
     <<reason_bin, description_size::integer-16, description::binary>>
@@ -199,23 +199,23 @@ defmodule AutoApi.PropertyComponent do
   end
 
   defp to_value(binary_data, %{"type" => "float"}) do
-    AutoApi.CommonData.convert_bin_to_float(binary_data)
+    AutoApiL11.CommonData.convert_bin_to_float(binary_data)
   end
 
   defp to_value(binary_data, %{"type" => "double"}) do
-    AutoApi.CommonData.convert_bin_to_double(binary_data)
+    AutoApiL11.CommonData.convert_bin_to_double(binary_data)
   end
 
   defp to_value(binary_data, %{"type" => "integer"}) do
-    AutoApi.CommonData.convert_bin_to_integer(binary_data)
+    AutoApiL11.CommonData.convert_bin_to_integer(binary_data)
   end
 
   defp to_value(binary_data, %{"type" => "uinteger"}) do
-    AutoApi.CommonData.convert_bin_to_integer(binary_data)
+    AutoApiL11.CommonData.convert_bin_to_integer(binary_data)
   end
 
   defp to_value(binary_data, %{"type" => "timestamp"}) do
-    timestamp_in_milisec = AutoApi.CommonData.convert_bin_to_integer(binary_data)
+    timestamp_in_milisec = AutoApiL11.CommonData.convert_bin_to_integer(binary_data)
 
     case DateTime.from_unix(timestamp_in_milisec, :millisecond) do
       {:ok, datetime} -> datetime
@@ -262,13 +262,13 @@ defmodule AutoApi.PropertyComponent do
   # Workaround while `capability_state` type is `bytes`
   defp to_value(binary_data, %{"type" => "types.capability_state"}) do
     <<cap_id::binary-size(2), 0x01, bin_state::binary>> = binary_data
-    cap_mod = AutoApi.Capability.get_by_id(cap_id)
+    cap_mod = AutoApiL11.Capability.get_by_id(cap_id)
 
     cap_mod.state.from_bin(bin_state)
   end
 
   defp to_value(binary_data, %{"type" => "types." <> type}) do
-    type_spec = AutoApi.CustomType.spec(type)
+    type_spec = AutoApiL11.CustomType.spec(type)
 
     to_value(binary_data, type_spec)
   end
@@ -279,7 +279,7 @@ defmodule AutoApi.PropertyComponent do
     <<reason, size::integer-16, description::binary-size(size)>> = failure
 
     %{
-      reason: AutoApi.CommonData.convert_bin_to_state_failure_reason(reason),
+      reason: AutoApiL11.CommonData.convert_bin_to_state_failure_reason(reason),
       description: description
     }
   end
@@ -295,7 +295,7 @@ defmodule AutoApi.PropertyComponent do
   defp split_binary_to_parts(<<>>, acc), do: acc
 
   defp fetch_item_spec(%{"type" => "types." <> type}) do
-    AutoApi.CustomType.spec(type)
+    AutoApiL11.CustomType.spec(type)
   end
 
   defp fetch_item_spec(spec), do: spec
@@ -308,14 +308,14 @@ defmodule AutoApi.PropertyComponent do
     # String type without size spec has a fixed size header of 2 bytes
     binary_data
     |> :binary.part(counter, 2)
-    |> AutoApi.CommonData.convert_bin_to_integer()
+    |> AutoApiL11.CommonData.convert_bin_to_integer()
   end
 
   defp fetch_item_size(binary_data, counter, %{"type" => "bytes"}) do
     # Bytes type without size spec has a fixed size header of 2 bytes
     binary_data
     |> :binary.part(counter, 2)
-    |> AutoApi.CommonData.convert_bin_to_integer()
+    |> AutoApiL11.CommonData.convert_bin_to_integer()
   end
 
   defp fetch_item_size(_, _, spec) do

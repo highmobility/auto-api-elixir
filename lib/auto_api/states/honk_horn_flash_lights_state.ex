@@ -1,10 +1,10 @@
-defmodule AutoApi.HonkHornFlashLightsState do
+defmodule AutoApiL11.HonkHornFlashLightsState do
   @moduledoc """
   Keeps HonkHornFlashLights state
   """
 
-  alias AutoApi.CommonData
-  alias AutoApi.PropertyComponent
+  alias AutoApiL11.CommonData
+  alias AutoApiL11.PropertyComponent
 
   @type flashers ::
           :inactive | :emergency_flasher_active | :left_flasher_active | :right_flasher_active
@@ -17,7 +17,7 @@ defmodule AutoApi.HonkHornFlashLightsState do
             emergency_flashers_state: nil,
             timestamp: nil
 
-  use AutoApi.State, spec_file: "specs/honk_horn_flash_lights.json"
+  use AutoApiL11.State, spec_file: "specs/honk_horn_flash_lights.json"
 
   @type t :: %__MODULE__{
           flashers: %PropertyComponent{data: flashers} | nil,
@@ -31,8 +31,8 @@ defmodule AutoApi.HonkHornFlashLightsState do
   Build state based on binary value
 
     iex> bin = <<1, 0, 4, 1, 0, 1, 0>>
-    iex> AutoApi.HonkHornFlashLightsState.from_bin(bin)
-    %AutoApi.HonkHornFlashLightsState{flashers: %AutoApi.PropertyComponent{data: :inactive}}
+    iex> AutoApiL11.HonkHornFlashLightsState.from_bin(bin)
+    %AutoApiL11.HonkHornFlashLightsState{flashers: %AutoApiL11.PropertyComponent{data: :inactive}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -43,8 +43,8 @@ defmodule AutoApi.HonkHornFlashLightsState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.HonkHornFlashLightsState{flashers: %AutoApi.PropertyComponent{data: :inactive}}
-    iex> AutoApi.HonkHornFlashLightsState.to_bin(state)
+    iex> state = %AutoApiL11.HonkHornFlashLightsState{flashers: %AutoApiL11.PropertyComponent{data: :inactive}}
+    iex> AutoApiL11.HonkHornFlashLightsState.to_bin(state)
     <<1, 0, 4, 1, 0, 1, 0>>
   """
   def to_bin(%__MODULE__{} = state) do

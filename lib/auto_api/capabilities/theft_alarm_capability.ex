@@ -1,8 +1,8 @@
-defmodule AutoApi.TheftAlarmCapability do
+defmodule AutoApiL11.TheftAlarmCapability do
   @moduledoc """
   Basic settings for TheftAlarm Capability
 
-      iex> alias AutoApi.TheftAlarmCapability, as: T
+      iex> alias AutoApiL11.TheftAlarmCapability, as: T
       iex> T.identifier
       <<0x00, 0x46>>
       iex> T.name
@@ -15,8 +15,8 @@ defmodule AutoApi.TheftAlarmCapability do
       [{1, :status}]
   """
 
-  @command_module AutoApi.TheftAlarmCommand
-  @state_module AutoApi.TheftAlarmState
+  @command_module AutoApiL11.TheftAlarmCommand
+  @state_module AutoApiL11.TheftAlarmState
 
-  use AutoApi.Capability, spec_file: "specs/theft_alarm.json"
+  use AutoApiL11.Capability, spec_file: "specs/theft_alarm.json"
 end

@@ -1,15 +1,15 @@
-defmodule AutoApi.SeatsState do
+defmodule AutoApiL11.SeatsState do
   @moduledoc """
   Seats state
   """
 
-  alias AutoApi.PropertyComponent
+  alias AutoApiL11.PropertyComponent
 
   defstruct persons_detected: [],
             seatbelts_state: [],
             timestamp: nil
 
-  use AutoApi.State, spec_file: "specs/seats.json"
+  use AutoApiL11.State, spec_file: "specs/seats.json"
 
   @type seat_location :: :front_left | :front_right | :rear_right | :rear_left | :rear_center
   @type person_detected :: :detected | :not_detected
@@ -31,8 +31,8 @@ defmodule AutoApi.SeatsState do
   Build state based on binary value
 
     iex> bin = <<2, 0, 5, 1, 0, 2, 4, 1>>
-    iex> AutoApi.SeatsState.from_bin(bin)
-    %AutoApi.SeatsState{persons_detected: [%AutoApi.PropertyComponent{data: %{location: :rear_center, detected: :detected}}]}
+    iex> AutoApiL11.SeatsState.from_bin(bin)
+    %AutoApiL11.SeatsState{persons_detected: [%AutoApiL11.PropertyComponent{data: %{location: :rear_center, detected: :detected}}]}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -42,8 +42,8 @@ defmodule AutoApi.SeatsState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.SeatsState{persons_detected: [%AutoApi.PropertyComponent{data: %{location: :rear_center, detected: :detected}}]}
-    iex> AutoApi.SeatsState.to_bin(state)
+    iex> state = %AutoApiL11.SeatsState{persons_detected: [%AutoApiL11.PropertyComponent{data: %{location: :rear_center, detected: :detected}}]}
+    iex> AutoApiL11.SeatsState.to_bin(state)
     <<2, 0, 5, 1, 0, 2, 4, 1>>
   """
   @spec to_bin(__MODULE__.t()) :: binary

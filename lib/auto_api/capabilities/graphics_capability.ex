@@ -1,8 +1,8 @@
-defmodule AutoApi.GraphicsCapability do
+defmodule AutoApiL11.GraphicsCapability do
   @moduledoc """
   Basic settings for Graphics Capability
 
-      iex> alias AutoApi.GraphicsCapability, as: G
+      iex> alias AutoApiL11.GraphicsCapability, as: G
       iex> G.identifier
       <<0x00, 0x51>>
       iex> G.name
@@ -13,8 +13,8 @@ defmodule AutoApi.GraphicsCapability do
       1
   """
 
-  @command_module AutoApi.GraphicsCommand
-  @state_module AutoApi.GraphicsState
+  @command_module AutoApiL11.GraphicsCommand
+  @state_module AutoApiL11.GraphicsState
 
-  use AutoApi.Capability, spec_file: "specs/graphics.json"
+  use AutoApiL11.Capability, spec_file: "specs/graphics.json"
 end

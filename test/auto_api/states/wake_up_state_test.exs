@@ -1,4 +1,4 @@
-defmodule AutoApi.WakeUpStateTest do
+defmodule AutoApiL11.WakeUpStateTest do
   use ExUnit.Case
-  doctest AutoApi.WakeUpState
+  doctest AutoApiL11.WakeUpState
 end

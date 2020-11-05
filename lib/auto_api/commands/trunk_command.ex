@@ -1,6 +1,6 @@
-defmodule AutoApi.TrunkCommand do
+defmodule AutoApiL11.TrunkCommand do
   @moduledoc """
-  Handles Trunk commands and apply binary commands on `%AutoApi.TrunkState{}`
+  Handles Trunk commands and apply binary commands on `%AutoApiL11.TrunkState{}`
   """
-  use AutoApi.Command
+  use AutoApiL11.Command
 end
