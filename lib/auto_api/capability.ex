@@ -31,8 +31,8 @@ defmodule AutoApi.Capability do
     spec_path = Path.join(["specs", "capabilities", spec_file])
     raw_spec = Jason.decode!(File.read!(spec_path))
 
-    properties =
-      (raw_spec["properties"] || []) ++ UniversalProperties.raw_spec()["universal_properties"]
+    universal_properties = UniversalProperties.raw_spec()["universal_properties"]
+    properties = (raw_spec["properties"] || []) ++ universal_properties
 
     base_functions =
       quote location: :keep do
@@ -82,15 +82,17 @@ defmodule AutoApi.Capability do
         def state, do: @state_module
 
         @doc """
-                Returns which properties are included in the State specification.
+        Returns which properties are included in the State specification.
 
-                ## Examples
+        Universal properties are always included
 
-        iex> AutoApi.SeatsCapability.state_properties()
-        [:persons_detected, :seatbelts_state]
+        ## Examples
 
-        iex> AutoApi.WakeUpCapability.state_properties()
-        []
+            iex> AutoApi.SeatsCapability.state_properties()
+            [:persons_detected, :seatbelts_state, :nonce, :vehicle_signature, :timestamp, :vin, :brand]
+
+            iex> AutoApi.WakeUpCapability.state_properties()
+            [:nonce, :vehicle_signature, :timestamp, :vin, :brand]
         """
         @spec state_properties() :: list(atom)
         def state_properties(), do: @state_properties
