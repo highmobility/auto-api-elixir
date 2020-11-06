@@ -5,7 +5,7 @@ defmodule AutoApiL11.Mixfile do
 
   def project do
     [
-      app: :auto_api,
+      app: :auto_api_l11,
       version: @version,
       elixir: "~> 1.6",
       build_embedded: Mix.env() == :prod,
