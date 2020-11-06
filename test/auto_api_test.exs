@@ -1,6 +1,6 @@
 defmodule AutoApiTest do
   use ExUnit.Case
-  doctest AutoApi
+  doctest AutoApiL11
 
   require Assertions
   import Assertions, only: [assert_lists_equal: 2]
