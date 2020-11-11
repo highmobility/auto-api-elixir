@@ -57,7 +57,7 @@ defmodule AutoApi.Command do
         @state @capability.state()
         @setter_names unquote(setter_names)
         @identifier @capability.identifier()
-        @version 0x0B
+        @version AutoApi.version()
 
         @doc """
         Returns the capability module associated with the command
@@ -73,14 +73,14 @@ defmodule AutoApi.Command do
         ## Examples
 
             iex> AutoApi.DiagnosticsCommand.to_bin(:get, [:mileage, :engine_rpm])
-            <<0x0B, 0x00, 0x33, 0x00, 0x01, 0x04>>
+            <<0x0C, 0x00, 0x33, 0x00, 0x01, 0x04>>
 
             iex> prop = %AutoApi.PropertyComponent{data: %{value: 88, unit: :miles_per_hour}, timestamp: ~U[2019-07-18 13:58:40.489250Z]}
             iex> AutoApi.DiagnosticsCommand.to_bin(:set, speed: prop)
-            <<11, 0, 51, 1, 3, 0, 24, 1, 0, 10, 22, 2, 64, 86, 0, 0, 0, 0, 0, 0, 2, 0, 8, 0, 0, 1, 108, 5, 96, 184, 105>>
+            <<12, 0, 51, 1, 3, 0, 24, 1, 0, 10, 22, 2, 64, 86, 0, 0, 0, 0, 0, 0, 2, 0, 8, 0, 0, 1, 108, 5, 96, 184, 105>>
 
             iex> AutoApi.ChargingCommand.to_bin(:set_charge_limit, charge_limit: 0.8)
-            <<0x0B, 0, 35, 1, 8, 0, 11, 1, 0, 8, 63, 233, 153, 153, 153, 153, 153, 154>>
+            <<0x0C, 0, 35, 1, 8, 0, 11, 1, 0, 8, 63, 233, 153, 153, 153, 153, 153, 154>>
 
         """
         @spec to_bin(action, get_properties | set_properties) :: binary
@@ -118,10 +118,10 @@ defmodule AutoApi.Command do
 
         ## Examples
 
-            iex> AutoApi.DiagnosticsCommand.from_bin(<<0x0B, 0x00, 0x33, 0x00, 0x01, 0x04>>)
+            iex> AutoApi.DiagnosticsCommand.from_bin(<<0x0C, 0x00, 0x33, 0x00, 0x01, 0x04>>)
             {:get, [:mileage, :engine_rpm]}
 
-            iex> bin = <<0x0B, 0x00, 0x33, 0x01, 0x03, 0, 24, 1, 0, 10, 0x16, 2, 64, 86, 0, 0, 0, 0, 0, 0, 2, 0, 8, 0, 0, 1, 108, 5, 96, 184, 105>>
+            iex> bin = <<0x0C, 0x00, 0x33, 0x01, 0x03, 0, 24, 1, 0, 10, 0x16, 2, 64, 86, 0, 0, 0, 0, 0, 0, 2, 0, 8, 0, 0, 1, 108, 5, 96, 184, 105>>
             iex> AutoApi.DiagnosticsCommand.from_bin(bin)
             {:set, [speed: %AutoApi.PropertyComponent{data: %{value: 88.0, unit: :miles_per_hour}, timestamp: ~U[2019-07-18 13:58:40.489Z], failure: nil}]}
         """
@@ -194,7 +194,7 @@ defmodule AutoApi.Command do
             ...>   speed: %AutoApi.PropertyComponent{data: %{value: 130, unit: :kilometers_per_hour}}
             ...> }
             iex> AutoApi.DiagnosticsCommand.state(state)
-            <<11, 0, 51, 1, 3, 0, 13, 1, 0, 10, 22, 1, 64, 96, 64, 0, 0, 0, 0, 0>>
+            <<12, 0, 51, 1, 3, 0, 13, 1, 0, 10, 22, 1, 64, 96, 64, 0, 0, 0, 0, 0>>
         """
         @spec state(@state.t()) :: binary
         def state(%@state{} = state) do
@@ -230,15 +230,15 @@ defmodule AutoApi.Command do
   Extracts commands meta data  including the capability that
   the command is using and exact command that is issued
 
-      iex> AutoApi.Command.meta_data(<<0x0B, 0x00, 0x33, 0x00>>)
+      iex> AutoApi.Command.meta_data(<<0x0C, 0x00, 0x33, 0x00>>)
       %{message_id: :diagnostics, message_type: :get, module: AutoApi.DiagnosticsCapability}
 
-      iex> binary_command = <<0x0B, 0x00, 0x23, 0x1, 20, 0, 7, 1, 0, 4, 66, 41, 174, 20>>
+      iex> binary_command = <<0x0C, 0x00, 0x23, 0x1, 20, 0, 7, 1, 0, 4, 66, 41, 174, 20>>
       iex> AutoApi.Command.meta_data(binary_command)
       %{message_id: :charging, message_type: :set, module: AutoApi.ChargingCapability}
   """
   @spec meta_data(binary) :: map()
-  def meta_data(<<0x0B, id::binary-size(2), type, _data::binary>>) do
+  def meta_data(<<0x0C, id::binary-size(2), type, _data::binary>>) do
     with capability_module when not is_nil(capability_module) <- Capability.get_by_id(id),
          capability_name <- apply(capability_module, :name, []),
          command_name <- command_name(type) do
@@ -268,14 +268,14 @@ defmodule AutoApi.Command do
   ## Examples
 
       iex> AutoApi.Command.to_bin(:diagnostics, :get, [:mileage, :engine_rpm])
-      <<0x0B, 0x00, 0x33, 0x00, 0x01, 0x04>>
+      <<0x0C, 0x00, 0x33, 0x00, 0x01, 0x04>>
 
       iex> prop = %AutoApi.PropertyComponent{data: %{value: 88, unit: :miles_per_hour}, timestamp: ~U[2019-07-18 13:58:40.489250Z]}
       iex> AutoApi.Command.to_bin(:diagnostics, :set, speed: prop)
-      <<11, 0, 51, 1, 3, 0, 24, 1, 0, 10, 22, 2, 64, 86, 0, 0, 0, 0, 0, 0, 2, 0, 8, 0, 0, 1, 108, 5, 96, 184, 105>>
+      <<12, 0, 51, 1, 3, 0, 24, 1, 0, 10, 22, 2, 64, 86, 0, 0, 0, 0, 0, 0, 2, 0, 8, 0, 0, 1, 108, 5, 96, 184, 105>>
 
       iex> AutoApi.Command.to_bin(:charging, :set_charge_limit, charge_limit: 0.8)
-      <<0x0B, 0, 35, 1, 8, 0, 11, 1, 0, 8, 63, 233, 153, 153, 153, 153, 153, 154>>
+      <<0x0C, 0, 35, 1, 8, 0, 11, 1, 0, 8, 63, 233, 153, 153, 153, 153, 153, 154>>
 
   """
   @spec to_bin(capability_name, action, get_properties | set_properties) :: binary
