@@ -57,6 +57,7 @@ defmodule AutoApi.MaintenanceState do
           next_inspection_date: State.property(DateTime.t()),
           condition_based_services: State.multiple_property(condition_based_services),
           brake_fluid_change_date: State.property(DateTime.t()),
+          time_to_next_service: State.property(UnitType.duration()),
           distance_to_next_service: State.property(UnitType.length()),
           time_to_exhaust_inspection: State.property(UnitType.duration()),
           last_ecall: State.property(DateTime.t())
