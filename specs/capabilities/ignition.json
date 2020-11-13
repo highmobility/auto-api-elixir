@@ -66,7 +66,7 @@
                 },
                 {
                     "id": 1,
-                    "name": false
+                    "name": "off"
                 },
                 {
                     "id": 2,
@@ -74,7 +74,7 @@
                 },
                 {
                     "id": 3,
-                    "name": true
+                    "name": "on"
                 },
                 {
                     "id": 4,
