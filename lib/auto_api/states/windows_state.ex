@@ -31,7 +31,7 @@ defmodule AutoApi.WindowsState do
 
   @type location :: CommonData.location() | :hatch
   @type position :: :closed | :open | :intermediate
-  @type positions :: %{location: location, window_position: position}
+  @type positions :: %{location: location, position: position}
   @type open_percentages :: %{location: location, open_percentage: float}
 
   @type t :: %__MODULE__{
