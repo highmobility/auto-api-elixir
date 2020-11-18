@@ -155,7 +155,7 @@ defmodule AutoApi.UnitTypeStateTest do
 
       assert units = UnitType.units(:pressure)
       assert length(units) == 7
-      assert List.first(units) == :newtons_per_meters_squared
+      assert List.first(units) == :pascals
 
       assert units = UnitType.units(:speed)
       assert length(units) == 4

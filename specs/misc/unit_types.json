@@ -353,7 +353,7 @@
             "id": 21,
             "unit_types": [
                 {
-                    "name": "newtons_per_meters_squared",
+                    "name": "pascals",
                     "id": 0,
                     "conversion_linear": 1.0
                 },
