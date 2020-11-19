@@ -90,7 +90,7 @@ defmodule AutoApi.DiagnosticsState do
         }
 
   @type trouble_code :: %{
-          occurences: integer,
+          occurrences: integer,
           id: String.t(),
           ecu_id: String.t(),
           status: String.t(),
