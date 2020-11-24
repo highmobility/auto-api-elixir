@@ -231,18 +231,23 @@ defmodule AutoApiL11.Command do
   the command is using and exact command that is issued
 
       iex> AutoApiL11.Command.meta_data(<<0x0B, 0x00, 0x33, 0x00>>)
-      %{message_id: :diagnostics, message_type: :get, module: AutoApiL11.DiagnosticsCapability}
+      %{message_id: :diagnostics, message_type: :get, module: AutoApiL11.DiagnosticsCapability, version: 0x0B}
 
       iex> binary_command = <<0x0B, 0x00, 0x23, 0x1, 20, 0, 7, 1, 0, 4, 66, 41, 174, 20>>
       iex> AutoApiL11.Command.meta_data(binary_command)
-      %{message_id: :charging, message_type: :set, module: AutoApiL11.ChargingCapability}
+      %{message_id: :charging, message_type: :set, module: AutoApiL11.ChargingCapability, version: 0x0B}
   """
   @spec meta_data(binary) :: map()
   def meta_data(<<0x0B, id::binary-size(2), type, _data::binary>>) do
     with capability_module when not is_nil(capability_module) <- Capability.get_by_id(id),
          capability_name <- apply(capability_module, :name, []),
          command_name <- command_name(type) do
-      %{message_id: capability_name, message_type: command_name, module: capability_module}
+      %{
+        message_id: capability_name,
+        message_type: command_name,
+        module: capability_module,
+        version: 0x0B
+      }
     else
       nil ->
         %{}
