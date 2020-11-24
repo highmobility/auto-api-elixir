@@ -45,7 +45,6 @@ defmodule AutoApi.PropertyComponentTest do
         spec = %{"type" => "integer", "size" => 2}
 
         prop_bin =
-          prop_bin =
           PropertyComponent.to_bin(
             %PropertyComponent{data: data[:integer], timestamp: data[:datetime]},
             spec
