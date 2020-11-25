@@ -231,31 +231,32 @@ defmodule AutoApi.Command do
   the command is using and exact command that is issued
 
       iex> AutoApi.Command.meta_data(<<0x0B, 0x00, 0x33, 0x00>>)
-      %{message_id: :diagnostics, message_type: :get, module: AutoApi.DiagnosticsCapability, version: 0x0B}
+      %{message_id: :diagnostics, message_type: :get, module: AutoApi.DiagnosticsCapability, version: 0x0B, properties: []}
 
-      iex> binary_command = <<0x0B, 0x00, 0x23, 0x1, 20, 0, 7, 1, 0, 4, 66, 41, 174, 20>>
+      iex> AutoApi.Command.meta_data(<<0x0B, 0x00, 0x57, 0x00, 0x0B, 0x0C>>)
+      %{message_id: :race, message_type: :get, module: AutoApi.RaceCapability, version: 0x0B, properties: [:gear_mode, :selected_gear]}
+
+      iex> binary_command = <<0x0B, 0x00, 0x23, 0x1, 0x17, 0x00, 0x04, 0x01, 0x00, 0x01, 0x01>>
       iex> AutoApi.Command.meta_data(binary_command)
-      %{message_id: :charging, message_type: :set, module: AutoApi.ChargingCapability, version: 0x0B}
+      %{message_id: :charging, message_type: :set, module: AutoApi.ChargingCapability, version: 0x0B, properties: [status: %AutoApi.PropertyComponent{data: :charging}]}
   """
   @spec meta_data(binary) :: map()
-  def meta_data(<<0x0B, id::binary-size(2), type, _data::binary>>) do
+  def meta_data(<<0x0B, id::binary-size(2), _::binary>> = command_bin) do
     with capability_module when not is_nil(capability_module) <- Capability.get_by_id(id),
-         capability_name <- apply(capability_module, :name, []),
-         command_name <- command_name(type) do
+         capability_name <- capability_module.name(),
+         {command_name, properties} <- capability_module.command.from_bin(command_bin) do
       %{
         message_id: capability_name,
         message_type: command_name,
         module: capability_module,
-        version: 0x0B
+        version: 0x0B,
+        properties: properties
       }
     else
       nil ->
         %{}
     end
   end
-
-  defp command_name(0x00), do: :get
-  defp command_name(0x01), do: :set
 
   @doc """
   Converts the command to the binary format.
