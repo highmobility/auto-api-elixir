@@ -57,7 +57,7 @@ defmodule AutoApiL11.Command do
         @state @capability.state()
         @setter_names unquote(setter_names)
         @identifier @capability.identifier()
-        @version 0x0B
+        @version AutoApiL11.version()
 
         @doc """
         Returns the capability module associated with the command

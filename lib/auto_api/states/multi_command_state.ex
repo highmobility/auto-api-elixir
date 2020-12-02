@@ -20,7 +20,7 @@ defmodule AutoApiL11.MultiCommandState do
   @doc """
   Build state based on binary value
 
-    iex> AutoApiL11.MultiCommandState.from_bin(<<1, 0, 13, 1, 0, 10, 0, 103, 1, 1, 0, 4, 1, 0, 1, 0>>)
+    iex> AutoApiL11.MultiCommandState.from_bin(<<1, 0, 14, 1, 0, 11, 11, 0, 103, 1, 1, 0, 4, 1, 0, 1, 0>>)
     %AutoApiL11.MultiCommandState{multi_states: [%AutoApiL11.PropertyComponent{data: %AutoApiL11.HoodState{position: %AutoApiL11.PropertyComponent{data: :closed}}}]}
   """
   @spec from_bin(binary) :: __MODULE__.t()
@@ -33,7 +33,7 @@ defmodule AutoApiL11.MultiCommandState do
 
     iex> state = %AutoApiL11.PropertyComponent{data: %AutoApiL11.HoodState{position: %AutoApiL11.PropertyComponent{data: :closed}}}
     iex> AutoApiL11.MultiCommandState.to_bin(%AutoApiL11.MultiCommandState{multi_states: [state]})
-    <<1, 0, 13, 1, 0, 10, 0, 103, 1, 1, 0, 4, 1, 0, 1, 0>>
+    <<1, 0, 14, 1, 0, 11, 11, 0, 103, 1, 1, 0, 4, 1, 0, 1, 0>>
   """
   @spec to_bin(__MODULE__.t()) :: binary
   def to_bin(%__MODULE__{} = state) do
