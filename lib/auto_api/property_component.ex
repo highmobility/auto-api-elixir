@@ -51,6 +51,8 @@ defmodule AutoApi.PropertyComponent do
   @type data_types :: :integer
   @type size :: integer
 
+  @version AutoApi.version()
+
   @doc """
   Converts PropertyComponent struct to binary"
   """
@@ -145,7 +147,10 @@ defmodule AutoApi.PropertyComponent do
 
   # Workaround while `capability_state` type is `bytes`
   defp data_to_bin(%state_mod{} = state, %{"type" => "types.capability_state"}) do
-    state_mod.identifier <> <<0x01>> <> state_mod.to_bin(state)
+    cap_id = state_mod.identifier()
+    state_bin = state_mod.to_bin(state)
+
+    <<@version, cap_id::binary-size(2), 0x01, state_bin::binary()>>
   end
 
   defp data_to_bin(data, %{"type" => "types." <> type}) do
@@ -261,7 +266,7 @@ defmodule AutoApi.PropertyComponent do
 
   # Workaround while `capability_state` type is `bytes`
   defp to_value(binary_data, %{"type" => "types.capability_state"}) do
-    <<cap_id::binary-size(2), 0x01, bin_state::binary>> = binary_data
+    <<@version, cap_id::binary-size(2), 0x01, bin_state::binary>> = binary_data
     cap_mod = AutoApi.Capability.get_by_id(cap_id)
 
     cap_mod.state.from_bin(bin_state)
