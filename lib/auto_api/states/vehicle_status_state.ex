@@ -36,10 +36,11 @@ defmodule AutoApi.VehicleStatusState do
   @doc """
   Build state based on binary value
 
-    iex> bin = <<153, 0, 22, 1, 0, 19, 0, 106, 1, 13, 0, 13, 1, 0, 10, 18, 4, 64, 69, 0, 0, 0, 0, 0, 0>>
+    iex> bin = <<153, 0, 14, 1, 0, 11, 12, 0, 103, 1, 1, 0, 4, 1, 0, 1, 2>>
     iex> state = AutoApi.VehicleStatusState.from_bin(bin)
-    iex> state.states
-    [%AutoApi.PropertyComponent{data: %AutoApi.TripsState{distance: %AutoApi.PropertyComponent{data: %{value: 42.0, unit: :kilometers}}}}]
+    iex> [%AutoApi.PropertyComponent{data: hood_state}] = state.states
+    iex> hood_state
+    %AutoApi.HoodState{position: %AutoApi.PropertyComponent{data: :intermediate}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -49,10 +50,10 @@ defmodule AutoApi.VehicleStatusState do
   @doc """
   Parse state to bin
 
-    iex> trip_state = %AutoApi.TripsState{distance: %AutoApi.PropertyComponent{data: %{value: 42, unit: :kilometers}}}
-    iex> state = %AutoApi.VehicleStatusState{states: [%AutoApi.PropertyComponent{data: trip_state}]}
+    iex> hood_state = %AutoApi.HoodState{position: %AutoApi.PropertyComponent{data: :intermediate}}
+    iex> state = %AutoApi.VehicleStatusState{states: [%AutoApi.PropertyComponent{data: hood_state}]}
     iex> AutoApi.VehicleStatusState.to_bin(state)
-    <<153, 0, 22, 1, 0, 19, 0, 106, 1, 13, 0, 13, 1, 0, 10, 18, 4, 64, 69, 0, 0, 0, 0, 0, 0>>
+    <<153, 0, 14, 1, 0, 11, 12, 0, 103, 1, 1, 0, 4, 1, 0, 1, 2>>
   """
   @spec to_bin(__MODULE__.t()) :: binary
   def to_bin(%__MODULE__{} = state) do

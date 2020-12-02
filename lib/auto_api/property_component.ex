@@ -48,6 +48,7 @@ defmodule AutoApi.PropertyComponent do
 
   @prop_id_to_name %{0x01 => :data, 0x02 => :timestamp, 0x03 => :failure, 0x05 => :availability}
   @prop_name_to_id %{data: 0x01, timestamp: 0x02, failure: 0x03, availability: 0x05}
+  @version AutoApi.version()
 
   @type reason ::
           :rate_limit
@@ -181,7 +182,10 @@ defmodule AutoApi.PropertyComponent do
 
   # Workaround while `capability_state` type is `bytes`
   defp data_to_bin(%state_mod{} = state, %{"type" => "types.capability_state"}) do
-    state_mod.identifier <> <<0x01>> <> state_mod.to_bin(state)
+    cap_id = state_mod.identifier()
+    state_bin = state_mod.to_bin(state)
+
+    <<@version, cap_id::binary-size(2), 0x01, state_bin::binary()>>
   end
 
   defp data_to_bin(data, %{"type" => "types." <> type} = spec) do
@@ -324,7 +328,7 @@ defmodule AutoApi.PropertyComponent do
 
   # Workaround while `capability_state` type is `bytes`
   defp to_value(binary_data, %{"type" => "types.capability_state"}) do
-    <<cap_id::binary-size(2), 0x01, bin_state::binary>> = binary_data
+    <<@version, cap_id::binary-size(2), 0x01, bin_state::binary()>> = binary_data
     cap_mod = AutoApi.Capability.get_by_id(cap_id)
 
     cap_mod.state.from_bin(bin_state)
