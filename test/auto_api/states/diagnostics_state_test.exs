@@ -35,7 +35,7 @@ defmodule AutoApi.DiagnosticsStateTest do
       estimated_range: %PropertyComponent{data: %{value: 5, unit: :kilometers}},
       washer_fluid_level: %PropertyComponent{data: :filled},
       battery_voltage: %PropertyComponent{data: %{value: 1.003, unit: :volts}},
-      adblue_level: %PropertyComponent{data: %{value: 1.003, unit: :liters}},
+      adblue_level: %PropertyComponent{data: 0.95},
       distance_since_reset: %PropertyComponent{data: %{value: 6, unit: :kilometers}},
       distance_since_start: %PropertyComponent{data: %{value: 7, unit: :nautical_miles}},
       fuel_volume: %PropertyComponent{data: %{value: 1.004, unit: :gallons}},
