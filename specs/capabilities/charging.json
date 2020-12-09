@@ -726,7 +726,8 @@
                 },
                 {
                     "id": 2,
-                    "name": "inactive"
+                    "name": "peak_setting_active",
+                    "description": "On/Off-peak setting is active (charges when electricity is cheaper)"
                 }
             ],
             "examples": [

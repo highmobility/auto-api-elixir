@@ -57,7 +57,7 @@ defmodule AutoApi.ChargingState do
           | :general_error
   @type reduction_time ::
           %{start_stop: :start | :stop, time: %{hour: integer, minute: integer}}
-  @type smart_charging_status :: :wallbox_is_active | :scc_is_active | :inactive
+  @type smart_charging_status :: :wallbox_is_active | :scc_is_active | :peak_setting_active
   @type starter_battery_state :: :red | :yellow | :green
   @type timer_type :: :preferred_start_time | :preferred_end_time | :departure_date
   @type timer ::
