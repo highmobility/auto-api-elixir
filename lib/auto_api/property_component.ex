@@ -315,6 +315,10 @@ defmodule AutoApi.PropertyComponent do
       size = fetch_item_size(binary_data, counter, item_spec)
       counter = update_counter(counter, item_spec)
 
+      if size - counter > byte_size(binary_data) do
+        Logger.warn("not able to parse binary_data for #{inspect(specs)}")
+      end
+
       data_value =
         binary_data
         |> :binary.part(counter, size)
