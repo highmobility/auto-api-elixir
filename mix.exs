@@ -58,7 +58,7 @@ defmodule AutoApi.Mixfile do
       {:dialyxir, "~> 1.0.0-rc.3", only: [:dev, :test], runtime: false},
       {:ex_doc, "~> 0.18.1", only: :dev},
       {:earmark, "~> 1.2", only: :dev},
-      {:credo, "~> 1.1.0", only: [:dev, :test], runtime: false},
+      {:credo, "~> 1.5", only: [:dev, :test], runtime: false},
       {:assertions, "~> 0.10", only: :test}
     ]
   end

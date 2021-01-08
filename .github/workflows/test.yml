@@ -38,6 +38,8 @@ jobs:
        run: mix test
      - name: Run formatter
        run: mix format --check-formatted
+     - name: Run credo
+       run: mix credo
      - name: Run dialyzer
        env:
            MIX_ENV: test
