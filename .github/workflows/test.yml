@@ -25,7 +25,7 @@ jobs:
      - uses: actions/cache@v1
        with:
          path: _build
-         key: build-${{ hashFiles('mix.lock') }}
+         key: build-elixir-${{ matrix.elixir }}-otp-${{ matrix.otp }}-mix-${{ hashFiles('mix.lock') }}
      - uses: actions/setup-elixir@v1.0.0
        with:
          otp-version: ${{ matrix.otp }}
