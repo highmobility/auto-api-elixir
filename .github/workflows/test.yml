@@ -26,6 +26,8 @@ jobs:
        with:
          path: _build
          key: build-elixir-${{ matrix.elixir }}-otp-${{ matrix.otp }}-mix-${{ hashFiles('mix.lock') }}
+         restore-keys: |
+           build-elixir-${{ matrix.elixir }}-otp-${{ matrix.otp }}-mix-
      - uses: actions/setup-elixir@v1.0.0
        with:
          otp-version: ${{ matrix.otp }}
