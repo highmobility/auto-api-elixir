@@ -35,7 +35,7 @@ defmodule AutoApi.Command do
 
   defmacro __using__(_opts) do
     capability =
-      __CALLER__.module()
+      __CALLER__.module
       |> Atom.to_string()
       |> String.replace(~r/Command$/, "Capability")
       |> String.to_atom()
@@ -246,7 +246,7 @@ defmodule AutoApi.Command do
   def meta_data(<<@version, id::binary-size(2), _::binary>> = command_bin) do
     with capability_module when not is_nil(capability_module) <- Capability.get_by_id(id),
          capability_name <- capability_module.name(),
-         {command_name, properties} <- capability_module.command.from_bin(command_bin) do
+         {command_name, properties} <- capability_module.command().from_bin(command_bin) do
       %{
         message_id: capability_name,
         message_type: command_name,

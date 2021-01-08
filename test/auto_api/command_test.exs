@@ -40,7 +40,7 @@ defmodule AutoApi.CommandTest do
       preamble = <<0x0C, capability.identifier()::binary, 0x00>>
 
       command_bin =
-        capability.properties
+        capability.properties()
         |> Enum.map(&elem(&1, 0))
         |> Enum.reduce(<<>>, &(&2 <> <<&1>>))
 
