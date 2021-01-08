@@ -267,13 +267,10 @@ defmodule AutoApi.PropertyComponentTest do
         bin_comp = PropertyComponent.to_bin(prop_comp, spec)
 
         bin_data = <<id::integer-16, text_size::integer-16, text::binary>>
+        bin_data_size = byte_size(bin_data)
 
-        bin_data_size_org = byte_size(bin_data)
-
-        assert <<1, bin_data_size::integer-16, bin_data::binary-size(bin_data_size), _::binary>> =
+        assert <<1, ^bin_data_size::integer-16, ^bin_data::binary-size(bin_data_size), _::binary>> =
                  bin_comp
-
-        assert bin_data_size_org == bin_data_size
 
         assert PropertyComponent.to_struct(bin_comp, spec) == prop_comp
       end
@@ -306,6 +303,7 @@ defmodule AutoApi.PropertyComponentTest do
         }
 
         enum = data[:enum]
+        enum_bin = Enum.find_index([:foo, :bar, :baz], &(&1 == enum))
         text = data[:text]
         text_size = byte_size(text)
 
@@ -316,14 +314,13 @@ defmodule AutoApi.PropertyComponentTest do
 
         bin_comp = PropertyComponent.to_bin(prop_comp, spec)
 
-        bin_data = <<1, text_size::integer-16, text::binary, text_size::integer-16, text::binary>>
+        bin_data =
+          <<enum_bin, text_size::integer-16, text::binary, text_size::integer-16, text::binary>>
 
-        bin_data_size_org = byte_size(bin_data)
+        bin_data_size = byte_size(bin_data)
 
-        assert <<1, bin_data_size::integer-16, bin_data::binary-size(bin_data_size), _::binary>> =
+        assert <<1, ^bin_data_size::integer-16, ^bin_data::binary-size(bin_data_size), _::binary>> =
                  bin_comp
-
-        assert bin_data_size_org == bin_data_size
 
         assert PropertyComponent.to_struct(bin_comp, spec) == prop_comp
       end
@@ -356,13 +353,10 @@ defmodule AutoApi.PropertyComponentTest do
         bin_comp = PropertyComponent.to_bin(prop_comp, spec)
 
         bin_data = <<text_size::integer-16, text::binary, text_size::integer-16, text::binary>>
+        bin_data_size = byte_size(bin_data)
 
-        bin_data_size_org = byte_size(bin_data)
-
-        assert <<1, bin_data_size::integer-16, bin_data::binary-size(bin_data_size), _::binary>> =
+        assert <<1, ^bin_data_size::integer-16, ^bin_data::binary-size(bin_data_size), _::binary>> =
                  bin_comp
-
-        assert bin_data_size_org == bin_data_size
 
         assert PropertyComponent.to_struct(bin_comp, spec) == prop_comp
       end
@@ -406,18 +400,17 @@ defmodule AutoApi.PropertyComponentTest do
 
         bin_comp = PropertyComponent.to_bin(prop_comp, spec)
 
-        map_data_size = (text_size + 2) * 2 + 2
+        # map_data_size = (text_size + 2) * 2 + 2
+        map_data_size = (text_size + 2) * 2
 
         bin_data =
           <<id::integer-16, map_data_size::integer-16, text_size::integer-16, text::binary,
             text_size::integer-16, text::binary>>
 
-        bin_data_size_org = byte_size(bin_data)
+        bin_data_size = byte_size(bin_data)
 
-        assert <<1, bin_data_size::integer-16, bin_data::binary-size(bin_data_size), _::binary>> =
+        assert <<1, ^bin_data_size::integer-16, ^bin_data::binary-size(bin_data_size), _::binary>> =
                  bin_comp
-
-        assert bin_data_size_org == bin_data_size
 
         assert PropertyComponent.to_struct(bin_comp, spec) == prop_comp
       end
@@ -485,12 +478,10 @@ defmodule AutoApi.PropertyComponentTest do
         bin_comp = PropertyComponent.to_bin(prop_comp, spec)
 
         bin_data = <<weekday_bin, hour, minute>>
-        bin_data_size_org = byte_size(bin_data)
+        bin_data_size = byte_size(bin_data)
 
-        assert <<1, bin_data_size::integer-16, bin_data::binary-size(bin_data_size), _::binary>> =
+        assert <<1, ^bin_data_size::integer-16, ^bin_data::binary-size(bin_data_size), _::binary>> =
                  bin_comp
-
-        assert bin_data_size_org == bin_data_size
 
         assert PropertyComponent.to_struct(bin_comp, spec) == prop_comp
       end
@@ -521,12 +512,10 @@ defmodule AutoApi.PropertyComponentTest do
         bin_comp = PropertyComponent.to_bin(prop_comp, spec)
 
         bin_data = <<weekday_bin, hour, minute>>
-        bin_data_size_org = byte_size(bin_data)
+        bin_data_size = byte_size(bin_data)
 
-        assert <<1, bin_data_size::integer-16, bin_data::binary-size(bin_data_size), _::binary>> =
+        assert <<1, ^bin_data_size::integer-16, ^bin_data::binary-size(bin_data_size), _::binary>> =
                  bin_comp
-
-        assert bin_data_size_org == bin_data_size
 
         assert PropertyComponent.to_struct(bin_comp, spec) == prop_comp
       end
