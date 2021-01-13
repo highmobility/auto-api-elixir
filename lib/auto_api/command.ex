@@ -48,7 +48,7 @@ defmodule AutoApi.Command do
       quote location: :keep do
         @behaviour AutoApi.Command
 
-        @type action :: atom()
+        @type action :: :get | :set | :get_availability
         @type data :: any()
         @type get_properties :: list(atom)
         @type set_properties :: keyword(AutoApi.PropertyComponent.t() | data())
@@ -75,6 +75,9 @@ defmodule AutoApi.Command do
             iex> AutoApi.DiagnosticsCommand.to_bin(:get, [:mileage, :engine_rpm])
             <<0x0C, 0x00, 0x33, 0x00, 0x01, 0x04>>
 
+            iex> AutoApi.DiagnosticsCommand.to_bin(:get_availability, [:mileage, :engine_rpm])
+            <<0x0C, 0x00, 0x33, 0x02, 0x01, 0x04>>
+
             iex> prop = %AutoApi.PropertyComponent{data: %{value: 88, unit: :miles_per_hour}, timestamp: ~U[2019-07-18 13:58:40.489250Z]}
             iex> AutoApi.DiagnosticsCommand.to_bin(:set, speed: prop)
             <<12, 0, 51, 1, 3, 0, 24, 1, 0, 10, 22, 2, 64, 86, 0, 0, 0, 0, 0, 0, 2, 0, 8, 0, 0, 1, 108, 5, 96, 184, 105>>
@@ -88,6 +91,12 @@ defmodule AutoApi.Command do
 
         def to_bin(:get, properties) when is_list(properties) do
           preamble = <<@version, @capability.identifier()::binary, 0x00>>
+
+          Enum.reduce(properties, preamble, &(&2 <> <<@capability.property_id(&1)::8>>))
+        end
+
+        def to_bin(:get_availability, properties) when is_list(properties) do
+          preamble = <<@version, @capability.identifier()::binary, 0x02>>
 
           Enum.reduce(properties, preamble, &(&2 <> <<@capability.property_id(&1)::8>>))
         end
@@ -107,7 +116,8 @@ defmodule AutoApi.Command do
         @doc """
         Parses a command binary and returns
 
-        Due to protocol restrictions, the `action` can only be `:get` or `:set`.
+        Due to protocol restrictions, the `action` can only be `:get`, `:set` or
+        `:get_availability`.
 
         In case of a `:get` action, the second item in the tuple will be a list
         of property names. As for protocol specifications, an empty list denotes
@@ -121,12 +131,17 @@ defmodule AutoApi.Command do
             iex> AutoApi.DiagnosticsCommand.from_bin(<<0x0C, 0x00, 0x33, 0x00, 0x01, 0x04>>)
             {:get, [:mileage, :engine_rpm]}
 
+            iex> AutoApi.DiagnosticsCommand.from_bin(<<0x0C, 0x00, 0x33, 0x02, 0x01, 0x04>>)
+            {:get_availability, [:mileage, :engine_rpm]}
+
             iex> bin = <<0x0C, 0x00, 0x33, 0x01, 0x03, 0, 24, 1, 0, 10, 0x16, 2, 64, 86, 0, 0, 0, 0, 0, 0, 2, 0, 8, 0, 0, 1, 108, 5, 96, 184, 105>>
             iex> AutoApi.DiagnosticsCommand.from_bin(bin)
             {:set, [speed: %AutoApi.PropertyComponent{data: %{value: 88.0, unit: :miles_per_hour}, timestamp: ~U[2019-07-18 13:58:40.489Z], failure: nil}]}
         """
         @spec from_bin(binary) ::
-                {:get, list(atom)} | {:set, list({atom, AutoApi.PropertyComponent.t()})}
+                {:get, list(atom)}
+                | {:get_availability, list(atom)}
+                | {:set, list({atom, AutoApi.PropertyComponent.t()})}
         def from_bin(<<@version, @identifier::binary, 0x00, properties::binary>>) do
           property_names =
             properties
@@ -143,6 +158,15 @@ defmodule AutoApi.Command do
             |> Enum.map(&parse_property/1)
 
           {:set, properties}
+        end
+
+        def from_bin(<<@version, @identifier::binary, 0x02, properties::binary>>) do
+          property_names =
+            properties
+            |> :binary.bin_to_list()
+            |> Enum.map(&@capability.property_name/1)
+
+          {:get_availability, property_names}
         end
 
         defp parse_property({id, data}) do
@@ -178,6 +202,12 @@ defmodule AutoApi.Command do
               CommandHelper.get_state_properties(state, @capability.state_properties())
 
             {:get, properties} ->
+              CommandHelper.get_state_properties(state, properties)
+
+            {:get_availability, []} ->
+              CommandHelper.get_state_properties(state, @capability.state_properties())
+
+            {:get_availability, properties} ->
               CommandHelper.get_state_properties(state, properties)
 
             {:set, properties} ->
@@ -235,6 +265,9 @@ defmodule AutoApi.Command do
       iex> AutoApi.Command.meta_data(<<0x0C, 0x00, 0x33, 0x00>>)
       %{message_id: :diagnostics, message_type: :get, module: AutoApi.DiagnosticsCapability, version: 0x0C, properties: []}
 
+      iex> AutoApi.Command.meta_data(<<0x0C, 0x00, 0x33, 0x02>>)
+      %{message_id: :diagnostics, message_type: :get_availability, module: AutoApi.DiagnosticsCapability, version: 0x0C, properties: []}
+
       iex> AutoApi.Command.meta_data(<<0x0C, 0x00, 0x57, 0x00, 0x0B, 0x0C>>)
       %{message_id: :race, message_type: :get, module: AutoApi.RaceCapability, version: 0x0C, properties: [:gear_mode, :selected_gear]}
 
@@ -263,7 +296,7 @@ defmodule AutoApi.Command do
   @doc """
   Converts the command to the binary format.
 
-  The command action can be `:get`, `:set` or one of the setters of the capability.
+  The command action can be `:get`, ':get_availability', `:set` or one of the setters of the capability.
 
   In case the action is `:set` or one of the capability setter, the `properties`
   must be a keyword list with the property name as key and a
@@ -277,6 +310,9 @@ defmodule AutoApi.Command do
 
       iex> AutoApi.Command.to_bin(:diagnostics, :get, [:mileage, :engine_rpm])
       <<0x0C, 0x00, 0x33, 0x00, 0x01, 0x04>>
+
+      iex> AutoApi.Command.to_bin(:diagnostics, :get_availability, [:mileage, :engine_rpm])
+      <<0x0C, 0x00, 0x33, 0x02, 0x01, 0x04>>
 
       iex> prop = %AutoApi.PropertyComponent{data: %{value: 88, unit: :miles_per_hour}, timestamp: ~U[2019-07-18 13:58:40.489250Z]}
       iex> AutoApi.Command.to_bin(:diagnostics, :set, speed: prop)
