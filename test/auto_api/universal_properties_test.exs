@@ -43,6 +43,12 @@ defmodule AutoApi.UniversalPropertiesTest do
     end
   end
 
+  property "brands() contains all values" do
+    forall data <- [brand: brand()] do
+      assert data[:brand] in UniversalProperties.brands()
+    end
+  end
+
   defp brand() do
     brands =
       UniversalProperties.raw_spec()

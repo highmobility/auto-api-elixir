@@ -29,4 +29,15 @@ defmodule AutoApi.UniversalProperties do
   require AutoApi.UniversalProperties.Meta
 
   @before_compile AutoApi.UniversalProperties.Meta
+
+  @doc """
+  Returns all possible values for `brand` property
+  """
+  @spec brands() :: list(atom())
+  def brands() do
+    property_spec(:brand)
+    |> Map.get("enum_values")
+    |> Enum.map(& &1["name"])
+    |> Enum.map(&String.to_atom/1)
+  end
 end
