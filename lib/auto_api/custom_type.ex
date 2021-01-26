@@ -22,7 +22,7 @@
 # THE SOFTWARE.
 defmodule AutoApi.CustomType do
   @moduledoc """
-    Handles custom types
+    Retrieves custom types specifications
   """
   require AutoApi.CustomType.Meta
 
