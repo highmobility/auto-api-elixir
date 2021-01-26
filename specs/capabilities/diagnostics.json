@@ -672,14 +672,14 @@
             "name_pretty": "Odometer",
             "type": "unit.length",
             "size": 10,
-            "description": "The vehicle odometer value in a given units.",
+            "description": "The vehicle odometer value in a given units",
             "examples": [
                 {
-                    "data_component": "1205401999999999999a",
+                    "data_component": "120440a0040000000000",
                     "value": {
-                        "megameters": 6.4
+                        "kilometers": 2050.0
                     },
-                    "description": "Odometer is showing 6.4Mm \u2013 length of the Great Wall."
+                    "description": "Odometer is showing 2050.0km"
                 }
             ]
         },
@@ -741,6 +741,22 @@
                         "status": "normal"
                     },
                     "description": "Rear left tire pressure is normal"
+                },
+                {
+                    "data_component": "0400",
+                    "values": {
+                        "location": "rear_right_outer",
+                        "status": "normal"
+                    },
+                    "description": "Rear right outer tire pressure is normal"
+                },
+                {
+                    "data_component": "0500",
+                    "values": {
+                        "location": "rear_left_outer",
+                        "status": "normal"
+                    },
+                    "description": "Rear left outer tire pressure is normal"
                 }
             ]
         },
@@ -881,13 +897,49 @@
             "type": "types.diesel_exhaust_filter_status",
             "examples": [
                 {
+                    "data_component": "000100",
+                    "values": {
+                        "status": "unknown",
+                        "component": "exhaust_filter",
+                        "cleaning": "unknown"
+                    },
+                    "description": "Diesel 'exhaust filter' is in 'unknown' status and unknown cleaning state"
+                },
+                {
                     "data_component": "010100",
                     "values": {
                         "status": "normal_operation",
                         "component": "exhaust_filter",
                         "cleaning": "unknown"
                     },
-                    "description": "Diesel 'exhaust filter' is in 'normal operation' and not cleaning"
+                    "description": "Diesel 'exhaust filter' is in 'normal operation' status unknown cleaning state"
+                },
+                {
+                    "data_component": "020100",
+                    "values": {
+                        "status": "overloaded",
+                        "component": "exhaust_filter",
+                        "cleaning": "unknown"
+                    },
+                    "description": "Diesel 'exhaust filter' is in 'overloaded' status and unknown cleaning state"
+                },
+                {
+                    "data_component": "030100",
+                    "values": {
+                        "status": "at_limit",
+                        "component": "exhaust_filter",
+                        "cleaning": "unknown"
+                    },
+                    "description": "Diesel 'exhaust filter' is in 'at_limit' status and unknown cleaning state"
+                },
+                {
+                    "data_component": "040100",
+                    "values": {
+                        "status": "over_limit",
+                        "component": "exhaust_filter",
+                        "cleaning": "unknown"
+                    },
+                    "description": "Diesel 'exhaust filter' is in 'over_limit' status and unknown cleaning state"
                 }
             ]
         }
