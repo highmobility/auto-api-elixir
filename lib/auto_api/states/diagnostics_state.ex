@@ -112,7 +112,7 @@ defmodule AutoApi.DiagnosticsState do
           estimated_range: State.property(UnitType.length()),
           washer_fluid_level: State.property(fluid_level()),
           battery_voltage: State.property(UnitType.electric_potential_difference()),
-          adblue_level: State.property(UnitType.volume()),
+          adblue_level: State.property(float),
           distance_since_reset: State.property(UnitType.length()),
           distance_since_start: State.property(UnitType.length()),
           fuel_volume: State.property(UnitType.volume()),
