@@ -31,7 +31,7 @@ defmodule AutoApi.Command do
   @type action :: atom()
   @type data :: any()
   @type get_properties :: list(atom)
-  @type set_properties :: keyword(AutoApi.PropertyComponent.t() | data())
+  @type set_properties :: keyword(AutoApi.Property.t() | data())
 
   defmacro __using__(_opts) do
     capability =
@@ -63,7 +63,7 @@ defmodule AutoApi.Command do
 
       iex> binary_command = <<0x0C, 0x00, 0x23, 0x1, 0x17, 0x00, 0x04, 0x01, 0x00, 0x01, 0x08>>
       iex> AutoApi.Command.meta_data(binary_command)
-      %{message_id: :charging, message_type: :set, module: AutoApi.ChargingCapability, version: 0x0C, properties: [status: %AutoApi.PropertyComponent{data: :fast_charging}]}
+      %{message_id: :charging, message_type: :set, module: AutoApi.ChargingCapability, version: 0x0C, properties: [status: %AutoApi.Property{data: :fast_charging}]}
   """
   @spec meta_data(binary) :: map()
   def meta_data(<<@version, id::binary-size(2), _::binary>> = command_bin) do
@@ -90,9 +90,9 @@ defmodule AutoApi.Command do
 
   In case the action is `:set` or one of the capability setter, the `properties`
   must be a keyword list with the property name as key and a
-  `AutoApi.PropertyComponent` struct as value.
+  `AutoApi.Property` struct as value.
 
-  It is also permitted, as a shorthand notation, to forego the `PropertyComponent`
+  It is also permitted, as a shorthand notation, to forego the `Property`
   struct "wrapper" and pass directly the property value. In this case however
   it is not possible to specify the property timestamp nor a failure.
 
@@ -104,7 +104,7 @@ defmodule AutoApi.Command do
       iex> AutoApi.Command.to_bin(:diagnostics, :get_availability, [:mileage, :engine_rpm])
       <<0x0C, 0x00, 0x33, 0x02, 0x01, 0x04>>
 
-      iex> prop = %AutoApi.PropertyComponent{data: %{value: 88, unit: :miles_per_hour}, timestamp: ~U[2019-07-18 13:58:40.489250Z]}
+      iex> prop = %AutoApi.Property{data: %{value: 88, unit: :miles_per_hour}, timestamp: ~U[2019-07-18 13:58:40.489250Z]}
       iex> AutoApi.Command.to_bin(:diagnostics, :set, speed: prop)
       <<12, 0, 51, 1, 3, 0, 24, 1, 0, 10, 22, 2, 64, 86, 0, 0, 0, 0, 0, 0, 2, 0, 8, 0, 0, 1, 108, 5, 96, 184, 105>>
 

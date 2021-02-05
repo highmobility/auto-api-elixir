@@ -39,7 +39,7 @@ defmodule AutoApi.MobileState do
   Build state based on binary value
 
     iex> AutoApi.MobileState.from_bin(<<1, 4::integer-16, 1, 0, 1, 1>>)
-    %AutoApi.MobileState{connection: %AutoApi.PropertyComponent{data: :connected}}
+    %AutoApi.MobileState{connection: %AutoApi.Property{data: :connected}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -49,7 +49,7 @@ defmodule AutoApi.MobileState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.MobileState{connection: %AutoApi.PropertyComponent{data: :connected}}
+    iex> state = %AutoApi.MobileState{connection: %AutoApi.Property{data: :connected}}
     iex> AutoApi.MobileState.to_bin(state)
     <<1, 4::integer-16, 1, 0, 1, 1>>
   """

@@ -69,7 +69,7 @@ defmodule AutoApi.MaintenanceState do
   ## Example
 
       iex> AutoApi.MaintenanceState.from_bin(<<3, 0, 4, 1, 0, 1, 42>>)
-      %AutoApi.MaintenanceState{cbs_reports_count: %AutoApi.PropertyComponent{data: 42}}
+      %AutoApi.MaintenanceState{cbs_reports_count: %AutoApi.Property{data: 42}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -81,7 +81,7 @@ defmodule AutoApi.MaintenanceState do
 
   ## Example
 
-      iex> state = %AutoApi.MaintenanceState{cbs_reports_count: %AutoApi.PropertyComponent{data: 42}}
+      iex> state = %AutoApi.MaintenanceState{cbs_reports_count: %AutoApi.Property{data: 42}}
       iex> AutoApi.MaintenanceState.to_bin(state)
       <<3, 0, 4, 1, 0, 1, 42>>
   """

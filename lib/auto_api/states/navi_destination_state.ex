@@ -43,7 +43,7 @@ defmodule AutoApi.NaviDestinationState do
 
     iex> bin = <<2, 0, 7, 1, 0, 4, 72, 111, 109, 101>>
     iex> AutoApi.NaviDestinationState.from_bin(bin)
-    %AutoApi.NaviDestinationState{destination_name: %AutoApi.PropertyComponent{data: "Home"}}
+    %AutoApi.NaviDestinationState{destination_name: %AutoApi.Property{data: "Home"}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -53,7 +53,7 @@ defmodule AutoApi.NaviDestinationState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.NaviDestinationState{destination_name: %AutoApi.PropertyComponent{data: "Home"}}
+    iex> state = %AutoApi.NaviDestinationState{destination_name: %AutoApi.Property{data: "Home"}}
     iex> AutoApi.NaviDestinationState.to_bin(state)
     <<2, 0, 7, 1, 0, 4, 72, 111, 109, 101>>
   """

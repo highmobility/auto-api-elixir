@@ -44,7 +44,7 @@ defmodule AutoApi.ParkingTicketState do
 
     iex> bin = <<1, 0, 4, 1, 0, 1, 1>>
     iex> AutoApi.ParkingTicketState.from_bin(bin)
-    %AutoApi.ParkingTicketState{status: %AutoApi.PropertyComponent{data: :started}}
+    %AutoApi.ParkingTicketState{status: %AutoApi.Property{data: :started}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -54,7 +54,7 @@ defmodule AutoApi.ParkingTicketState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.ParkingTicketState{status: %AutoApi.PropertyComponent{data: :started}}
+    iex> state = %AutoApi.ParkingTicketState{status: %AutoApi.Property{data: :started}}
     iex> AutoApi.ParkingTicketState.to_bin(state)
     <<1, 0, 4, 1, 0, 1, 1>>
   """

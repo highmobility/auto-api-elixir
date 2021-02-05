@@ -23,7 +23,7 @@ defmodule AutoApi.StateTest do
   alias AutoApi.{
     CapabilitiesState,
     DiagnosticsState,
-    PropertyComponent,
+    Property,
     RaceState,
     RooftopControlState,
     State,
@@ -34,7 +34,7 @@ defmodule AutoApi.StateTest do
 
   describe "symmetric from_bin/1 & to_bin/1" do
     test "integer size 1" do
-      state = %RaceState{selected_gear: %PropertyComponent{data: 12}}
+      state = %RaceState{selected_gear: %Property{data: 12}}
 
       new_state =
         state
@@ -45,7 +45,7 @@ defmodule AutoApi.StateTest do
     end
 
     test "integer size 2" do
-      state = %VehicleInformationState{model_year: %PropertyComponent{data: 2009}}
+      state = %VehicleInformationState{model_year: %Property{data: 2009}}
 
       new_state =
         state
@@ -56,7 +56,7 @@ defmodule AutoApi.StateTest do
     end
 
     test "double size 8" do
-      state = %RaceState{understeering: %PropertyComponent{data: 1.1002}}
+      state = %RaceState{understeering: %Property{data: 1.1002}}
 
       new_state =
         state
@@ -67,7 +67,7 @@ defmodule AutoApi.StateTest do
     end
 
     test "string" do
-      state = %VehicleInformationState{name: %PropertyComponent{data: "HM Concept 2020"}}
+      state = %VehicleInformationState{name: %Property{data: "HM Concept 2020"}}
 
       new_state =
         state
@@ -80,7 +80,7 @@ defmodule AutoApi.StateTest do
     test "bytes" do
       state = %CapabilitiesState{
         capabilities: [
-          %PropertyComponent{data: %{capability_id: 0x33, supported_property_ids: <<0x04, 0x0D>>}}
+          %Property{data: %{capability_id: 0x33, supported_property_ids: <<0x04, 0x0D>>}}
         ]
       }
 
@@ -94,7 +94,7 @@ defmodule AutoApi.StateTest do
     end
 
     test "enum" do
-      state = %DiagnosticsState{brake_fluid_level: %PropertyComponent{data: :low}}
+      state = %DiagnosticsState{brake_fluid_level: %Property{data: :low}}
 
       new_state =
         state
@@ -105,19 +105,19 @@ defmodule AutoApi.StateTest do
     end
 
     test "capability_state" do
-      inner_state = %DiagnosticsState{brake_fluid_level: %PropertyComponent{data: :low}}
-      state = %VehicleStatusState{states: [%PropertyComponent{data: inner_state}]}
+      inner_state = %DiagnosticsState{brake_fluid_level: %Property{data: :low}}
+      state = %VehicleStatusState{states: [%Property{data: inner_state}]}
 
       new_state =
         state
         |> VehicleStatusState.to_bin()
         |> VehicleStatusState.from_bin()
 
-      assert new_state.states == [%PropertyComponent{data: inner_state}]
+      assert new_state.states == [%Property{data: inner_state}]
     end
 
     test "map" do
-      coordinates = %PropertyComponent{data: %{latitude: 52.442292, longitude: 13.176732}}
+      coordinates = %Property{data: %{latitude: 52.442292, longitude: 13.176732}}
       state = %VehicleLocationState{coordinates: coordinates}
 
       new_state =
@@ -129,7 +129,7 @@ defmodule AutoApi.StateTest do
     end
 
     test "list of map" do
-      tire_pressures = %PropertyComponent{
+      tire_pressures = %Property{
         data: %{location: :front_left, pressure: %{value: 22.034, unit: :kilopascals}}
       }
 
@@ -143,7 +143,7 @@ defmodule AutoApi.StateTest do
 
     test "unit" do
       state = %DiagnosticsState{
-        speed: %PropertyComponent{data: %{value: 299_792_458, unit: :meters_per_second}}
+        speed: %Property{data: %{value: 299_792_458, unit: :meters_per_second}}
       }
 
       new_state =
@@ -155,7 +155,7 @@ defmodule AutoApi.StateTest do
     end
 
     test "failure" do
-      coordinates = %PropertyComponent{failure: %{reason: :unknown, description: "Unknown"}}
+      coordinates = %Property{failure: %{reason: :unknown, description: "Unknown"}}
       state = %VehicleLocationState{coordinates: coordinates}
 
       new_state =
@@ -168,8 +168,8 @@ defmodule AutoApi.StateTest do
 
     test "converts enum with nil value to bin and back to struct" do
       state = %RooftopControlState{
-        sunroof_state: %PropertyComponent{failure: %{reason: :unknown, description: ""}},
-        sunroof_tilt_state: %PropertyComponent{failure: %{reason: :unknown, description: ""}}
+        sunroof_state: %Property{failure: %{reason: :unknown, description: ""}},
+        sunroof_tilt_state: %Property{failure: %{reason: :unknown, description: ""}}
       }
 
       new_state =
@@ -181,7 +181,7 @@ defmodule AutoApi.StateTest do
     end
 
     test "failure on list property" do
-      pressures = %PropertyComponent{failure: %{reason: :unknown, description: "Unknown"}}
+      pressures = %Property{failure: %{reason: :unknown, description: "Unknown"}}
       state = %DiagnosticsState{tire_pressures: [pressures]}
 
       new_state =
@@ -195,7 +195,7 @@ defmodule AutoApi.StateTest do
 
   describe "put/3" do
     test "only failure" do
-      state = %DiagnosticsState{mileage: %PropertyComponent{data: 16_777_215}}
+      state = %DiagnosticsState{mileage: %Property{data: 16_777_215}}
 
       new_state =
         State.put(state, :speed, failure: %{reason: :unknown, description: "Unknown speed"})
@@ -208,7 +208,7 @@ defmodule AutoApi.StateTest do
 
     test "failure with timestamp" do
       timestamp = DateTime.utc_now()
-      state = %DiagnosticsState{mileage: %PropertyComponent{data: 16_777_215}}
+      state = %DiagnosticsState{mileage: %Property{data: 16_777_215}}
       failure = %{reason: :unknown, description: "Unknown speed"}
 
       new_state = State.put(state, :speed, failure: failure, timestamp: timestamp)

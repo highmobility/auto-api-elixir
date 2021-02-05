@@ -40,7 +40,7 @@ defmodule AutoApi.WakeUpState do
 
     iex> bin = <<1, 0, 4, 1, 0, 1, 0>>
     iex> AutoApi.WakeUpState.from_bin(bin)
-    %AutoApi.WakeUpState{status: %AutoApi.PropertyComponent{data: :wake_up}}
+    %AutoApi.WakeUpState{status: %AutoApi.Property{data: :wake_up}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -50,7 +50,7 @@ defmodule AutoApi.WakeUpState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.WakeUpState{status: %AutoApi.PropertyComponent{data: :sleep}}
+    iex> state = %AutoApi.WakeUpState{status: %AutoApi.Property{data: :sleep}}
     iex> AutoApi.WakeUpState.to_bin(state)
     <<1, 0, 4, 1, 0, 1, 1>>
   """

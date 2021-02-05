@@ -20,7 +20,7 @@ defmodule AutoApi.CommandTest do
   use ExUnit.Case, async: true
   doctest AutoApi.Command
 
-  alias AutoApi.{Capability, PropertyComponent}
+  alias AutoApi.{Capability, Property}
 
   describe "to_bin/2" do
     test "get works with all properties and all capabilities" do
@@ -39,7 +39,7 @@ defmodule AutoApi.CommandTest do
     test "set works" do
       # Generating values automatically is hard so for now I'll just test manually one
       timestamp = ~U[2019-07-26 15:36:33.867501Z]
-      properties = [inside_locks_state: %PropertyComponent{data: :unlocked, timestamp: timestamp}]
+      properties = [inside_locks_state: %Property{data: :unlocked, timestamp: timestamp}]
 
       bin_command = AutoApi.DoorsCommand.to_bin(:set, properties)
 
@@ -89,17 +89,17 @@ defmodule AutoApi.CommandTest do
   describe "to_bin/2 and from_bin/2 are inverse functions" do
     test ":set" do
       properties = [
-        speed: %PropertyComponent{
+        speed: %Property{
           data: %{value: 88, unit: :miles_per_hour},
           timestamp: ~U[2019-07-18 13:58:40.489Z]
         },
-        tire_pressures: %PropertyComponent{
+        tire_pressures: %Property{
           data: %{location: :front_left, pressure: %{value: 2.3, unit: :bars}}
         },
-        tire_pressures: %PropertyComponent{
+        tire_pressures: %Property{
           data: %{location: :rear_right, pressure: %{value: 2.5, unit: :bars}}
         },
-        engine_rpm: %PropertyComponent{failure: %{reason: :format_error, description: "Error"}}
+        engine_rpm: %Property{failure: %{reason: :format_error, description: "Error"}}
       ]
 
       assert cmd_bin = AutoApi.DiagnosticsCommand.to_bin(:set, properties)
@@ -135,17 +135,17 @@ defmodule AutoApi.CommandTest do
     test "set overwrites multiple properties" do
       state = %AutoApi.DoorsState{
         locks: [
-          %PropertyComponent{data: %{location: :front_right, lock_state: :locked}},
-          %PropertyComponent{data: %{location: :front_left, lock_state: :locked}}
+          %Property{data: %{location: :front_right, lock_state: :locked}},
+          %Property{data: %{location: :front_left, lock_state: :locked}}
         ],
         positions: [
-          %PropertyComponent{data: %{location: :rear_left, position: :open}}
+          %Property{data: %{location: :rear_left, position: :open}}
         ]
       }
 
       command_props = [
-        locks: %PropertyComponent{data: %{location: :rear_right, lock_state: :locked}},
-        locks: %PropertyComponent{data: %{location: :rear_left, lock_state: :locked}}
+        locks: %Property{data: %{location: :rear_right, lock_state: :locked}},
+        locks: %Property{data: %{location: :rear_left, lock_state: :locked}}
       ]
 
       command_bin = AutoApi.DoorsCommand.to_bin(:set, command_props)
@@ -153,11 +153,11 @@ defmodule AutoApi.CommandTest do
       assert AutoApi.DoorsCommand.execute(state, command_bin) ==
                %AutoApi.DoorsState{
                  locks: [
-                   %PropertyComponent{data: %{location: :rear_right, lock_state: :locked}},
-                   %PropertyComponent{data: %{location: :rear_left, lock_state: :locked}}
+                   %Property{data: %{location: :rear_right, lock_state: :locked}},
+                   %Property{data: %{location: :rear_left, lock_state: :locked}}
                  ],
                  positions: [
-                   %PropertyComponent{data: %{location: :rear_left, position: :open}}
+                   %Property{data: %{location: :rear_left, position: :open}}
                  ]
                }
     end
@@ -176,15 +176,15 @@ defmodule AutoApi.CommandTest do
       }
 
       state = %AutoApi.DiagnosticsState{
-        mileage: %AutoApi.PropertyComponent{availability: mileage_availability},
-        speed: %AutoApi.PropertyComponent{availability: speed_availability}
+        mileage: %AutoApi.Property{availability: mileage_availability},
+        speed: %AutoApi.Property{availability: speed_availability}
       }
 
       command_bin = AutoApi.DiagnosticsCommand.to_bin(:get_availability, [:speed])
 
       assert AutoApi.DiagnosticsCommand.execute(state, command_bin) ==
                %AutoApi.DiagnosticsState{
-                 speed: %AutoApi.PropertyComponent{availability: speed_availability}
+                 speed: %AutoApi.Property{availability: speed_availability}
                }
     end
   end

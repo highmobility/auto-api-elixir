@@ -50,7 +50,7 @@ defmodule AutoApi.ChassisSettingsState do
   Build state based on binary value
 
     iex> AutoApi.ChassisSettingsState.from_bin(<<1, 4::integer-16, 1, 0, 1, 0>>)
-    %AutoApi.ChassisSettingsState{driving_mode: %AutoApi.PropertyComponent{data: :regular}}
+    %AutoApi.ChassisSettingsState{driving_mode: %AutoApi.Property{data: :regular}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -60,7 +60,7 @@ defmodule AutoApi.ChassisSettingsState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.ChassisSettingsState{driving_mode: %AutoApi.PropertyComponent{data: :regular}}
+    iex> state = %AutoApi.ChassisSettingsState{driving_mode: %AutoApi.Property{data: :regular}}
     iex> AutoApi.ChassisSettingsState.to_bin(state)
     <<1, 4::integer-16, 1, 0, 1, 0>>
   """

@@ -45,7 +45,7 @@ defmodule AutoApi.SeatsState do
 
     iex> bin = <<2, 0, 5, 1, 0, 2, 4, 1>>
     iex> AutoApi.SeatsState.from_bin(bin)
-    %AutoApi.SeatsState{persons_detected: [%AutoApi.PropertyComponent{data: %{location: :rear_center, detected: :detected}}]}
+    %AutoApi.SeatsState{persons_detected: [%AutoApi.Property{data: %{location: :rear_center, detected: :detected}}]}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -55,7 +55,7 @@ defmodule AutoApi.SeatsState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.SeatsState{persons_detected: [%AutoApi.PropertyComponent{data: %{location: :rear_center, detected: :detected}}]}
+    iex> state = %AutoApi.SeatsState{persons_detected: [%AutoApi.Property{data: %{location: :rear_center, detected: :detected}}]}
     iex> AutoApi.SeatsState.to_bin(state)
     <<2, 0, 5, 1, 0, 2, 4, 1>>
   """

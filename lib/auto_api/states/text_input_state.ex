@@ -39,7 +39,7 @@ defmodule AutoApi.TextInputState do
     iex> text = "Rendezvous with Rama"
     iex> size = byte_size(text)
     iex> AutoApi.TextInputState.from_bin(<<1, size + 3::integer-16, 1, size::integer-16, text::binary>>)
-    %AutoApi.TextInputState{text: %AutoApi.PropertyComponent{data: "Rendezvous with Rama"}}
+    %AutoApi.TextInputState{text: %AutoApi.Property{data: "Rendezvous with Rama"}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -50,7 +50,7 @@ defmodule AutoApi.TextInputState do
   Parse state to bin
 
     iex> text = "Rendezvous with Rama"
-    iex> state = %AutoApi.TextInputState{text: %AutoApi.PropertyComponent{data: text}}
+    iex> state = %AutoApi.TextInputState{text: %AutoApi.Property{data: text}}
     iex> AutoApi.TextInputState.to_bin(state)
     <<1, 23::integer-16, 1, 20::integer-16, 0x52, 0x65, 0x6E, 0x64, 0x65, 0x7A, 0x76, 0x6F, 0x75, 0x73, 0x20, 0x77, 0x69,  0x74, 0x68, 0x20, 0x52, 0x61, 0x6D, 0x61>>
   """

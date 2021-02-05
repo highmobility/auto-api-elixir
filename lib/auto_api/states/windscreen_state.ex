@@ -58,7 +58,7 @@ defmodule AutoApi.WindscreenState do
 
     iex> bin = <<1, 0, 4, 1, 0, 1, 2>>
     iex> AutoApi.WindscreenState.from_bin(bin)
-    %AutoApi.WindscreenState{wipers_status: %AutoApi.PropertyComponent{data: :automatic}}
+    %AutoApi.WindscreenState{wipers_status: %AutoApi.Property{data: :automatic}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -68,7 +68,7 @@ defmodule AutoApi.WindscreenState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.WindscreenState{wipers_status: %AutoApi.PropertyComponent{data: :automatic}}
+    iex> state = %AutoApi.WindscreenState{wipers_status: %AutoApi.Property{data: :automatic}}
     iex> AutoApi.WindscreenState.to_bin(state)
     <<1, 0, 4, 1, 0, 1, 2>>
   """

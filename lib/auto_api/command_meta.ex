@@ -38,7 +38,7 @@ defmodule AutoApi.Command.Meta do
         @type action :: :get | :set | :get_availability
         @type data :: any()
         @type get_properties :: list(atom)
-        @type set_properties :: keyword(AutoApi.PropertyComponent.t() | data())
+        @type set_properties :: keyword(AutoApi.Property.t() | data())
 
         @capability unquote(capability)
         @state @capability.state()
@@ -55,7 +55,7 @@ defmodule AutoApi.Command.Meta do
         @doc """
         Converts the command to binary format.
 
-        See `AutoApi.PropertyComponent.to_bin/3` for an explanation of the arguments.
+        See `AutoApi.Property.to_bin/3` for an explanation of the arguments.
 
         ## Examples
 
@@ -65,7 +65,7 @@ defmodule AutoApi.Command.Meta do
             iex> AutoApi.DiagnosticsCommand.to_bin(:get_availability, [:mileage, :engine_rpm])
             <<0x0C, 0x00, 0x33, 0x02, 0x01, 0x04>>
 
-            iex> prop = %AutoApi.PropertyComponent{data: %{value: 88, unit: :miles_per_hour}, timestamp: ~U[2019-07-18 13:58:40.489250Z]}
+            iex> prop = %AutoApi.Property{data: %{value: 88, unit: :miles_per_hour}, timestamp: ~U[2019-07-18 13:58:40.489250Z]}
             iex> AutoApi.DiagnosticsCommand.to_bin(:set, speed: prop)
             <<12, 0, 51, 1, 3, 0, 24, 1, 0, 10, 22, 2, 64, 86, 0, 0, 0, 0, 0, 0, 2, 0, 8, 0, 0, 1, 108, 5, 96, 184, 105>>
 
@@ -111,7 +111,7 @@ defmodule AutoApi.Command.Meta do
         a request of getting *all* state properties.
 
         If the action is `:set`, the second item will be a Keyword list with the
-        property name as a key and a `AutoApi.PropertyComponent` as value.
+        property name as a key and a `AutoApi.Property` as value.
 
         ## Examples
 
@@ -123,12 +123,12 @@ defmodule AutoApi.Command.Meta do
 
             iex> bin = <<0x0C, 0x00, 0x33, 0x01, 0x03, 0, 24, 1, 0, 10, 0x16, 2, 64, 86, 0, 0, 0, 0, 0, 0, 2, 0, 8, 0, 0, 1, 108, 5, 96, 184, 105>>
             iex> AutoApi.DiagnosticsCommand.from_bin(bin)
-            {:set, [speed: %AutoApi.PropertyComponent{data: %{value: 88.0, unit: :miles_per_hour}, timestamp: ~U[2019-07-18 13:58:40.489Z], failure: nil}]}
+            {:set, [speed: %AutoApi.Property{data: %{value: 88.0, unit: :miles_per_hour}, timestamp: ~U[2019-07-18 13:58:40.489Z], failure: nil}]}
         """
         @spec from_bin(binary) ::
                 {:get, list(atom)}
                 | {:get_availability, list(atom)}
-                | {:set, list({atom, AutoApi.PropertyComponent.t()})}
+                | {:set, list({atom, AutoApi.Property.t()})}
         def from_bin(<<@version, @identifier::binary, 0x00, properties::binary>>) do
           property_names =
             properties
@@ -159,7 +159,7 @@ defmodule AutoApi.Command.Meta do
         defp parse_property({id, data}) do
           name = @capability.property_name(id)
           spec = @capability.property_spec(name)
-          value = AutoApi.PropertyComponent.to_struct(data, spec)
+          value = AutoApi.Property.to_struct(data, spec)
 
           {name, value}
         end
@@ -170,17 +170,17 @@ defmodule AutoApi.Command.Meta do
         ## Examples
 
             iex> state = %AutoApi.DiagnosticsState{
-            ...>   mileage: %AutoApi.PropertyComponent{data: 42_567},
-            ...>   speed: %AutoApi.PropertyComponent{data: %{value: 128, unit: :kilometers_per_hour}}
+            ...>   mileage: %AutoApi.Property{data: 42_567},
+            ...>   speed: %AutoApi.Property{data: %{value: 128, unit: :kilometers_per_hour}}
             ...> }
             iex> cmd = AutoApi.DiagnosticsCommand.to_bin(:get, [:speed])
             iex> AutoApi.DiagnosticsCommand.execute(state, cmd)
-            %AutoApi.DiagnosticsState{speed: %AutoApi.PropertyComponent{data: %{value: 128, unit: :kilometers_per_hour}}, mileage: nil}
+            %AutoApi.DiagnosticsState{speed: %AutoApi.Property{data: %{value: 128, unit: :kilometers_per_hour}}, mileage: nil}
 
             iex> state = %AutoApi.DiagnosticsState{}
-            iex> cmd = AutoApi.DiagnosticsCommand.to_bin(:set, speed: %AutoApi.PropertyComponent{data: %{value: 128, unit: :kilometers_per_hour}})
+            iex> cmd = AutoApi.DiagnosticsCommand.to_bin(:set, speed: %AutoApi.Property{data: %{value: 128, unit: :kilometers_per_hour}})
             iex> AutoApi.DiagnosticsCommand.execute(state, cmd)
-            %AutoApi.DiagnosticsState{speed: %AutoApi.PropertyComponent{data: %{value: 128.0, unit: :kilometers_per_hour}}}
+            %AutoApi.DiagnosticsState{speed: %AutoApi.Property{data: %{value: 128.0, unit: :kilometers_per_hour}}}
         """
         @spec execute(@state.t(), binary) :: @state.t()
         def execute(%@state{} = state, bin_cmd) do
@@ -208,7 +208,7 @@ defmodule AutoApi.Command.Meta do
         ## Example
 
             iex> state = %AutoApi.DiagnosticsState{
-            ...>   speed: %AutoApi.PropertyComponent{data: %{value: 130, unit: :kilometers_per_hour}}
+            ...>   speed: %AutoApi.Property{data: %{value: 130, unit: :kilometers_per_hour}}
             ...> }
             iex> AutoApi.DiagnosticsCommand.state(state)
             <<12, 0, 51, 1, 3, 0, 13, 1, 0, 10, 22, 1, 64, 96, 64, 0, 0, 0, 0, 0>>

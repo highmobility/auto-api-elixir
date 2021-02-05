@@ -47,7 +47,7 @@ defmodule AutoApi.FirmwareVersionState do
 
     iex> bin = <<3, 0, 8, 1, 0, 5, 51, 46, 49, 46, 55>>
     iex> AutoApi.FirmwareVersionState.from_bin(bin)
-    %AutoApi.FirmwareVersionState{application_version: %AutoApi.PropertyComponent{data: "3.1.7"}}
+    %AutoApi.FirmwareVersionState{application_version: %AutoApi.Property{data: "3.1.7"}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -58,7 +58,7 @@ defmodule AutoApi.FirmwareVersionState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.FirmwareVersionState{application_version: %AutoApi.PropertyComponent{data: "3.1.7"}}
+    iex> state = %AutoApi.FirmwareVersionState{application_version: %AutoApi.Property{data: "3.1.7"}}
     iex> AutoApi.FirmwareVersionState.to_bin(state)
     <<3, 0, 8, 1, 0, 5, 51, 46, 49, 46, 55>>
   """

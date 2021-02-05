@@ -20,7 +20,7 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.PropertyComponent do
+defmodule AutoApi.Property do
   @moduledoc """
   Data wrapper for state properties.
 
@@ -89,7 +89,7 @@ defmodule AutoApi.PropertyComponent do
   @type spec :: map() | list()
 
   @doc """
-  Converts PropertyComponent struct to binary"
+  Converts Property struct to binary"
   """
   @spec to_bin(__MODULE__.t(), spec()) :: binary()
   def to_bin(%__MODULE__{} = prop, spec) do
@@ -237,7 +237,7 @@ defmodule AutoApi.PropertyComponent do
   end
 
   @doc """
-  Converts PropertyComponent binary to struct
+  Converts Property binary to struct
   """
   @spec to_struct(binary(), spec()) :: __MODULE__.t()
   def to_struct(binary, specs) do

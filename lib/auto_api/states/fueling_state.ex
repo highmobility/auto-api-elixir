@@ -39,7 +39,7 @@ defmodule AutoApi.FuelingState do
 
     iex> bin = <<3, 0, 4, 1, 0, 1, 0>>
     iex> AutoApi.FuelingState.from_bin(bin)
-    %AutoApi.FuelingState{gas_flap_position: %AutoApi.PropertyComponent{data: :closed}}
+    %AutoApi.FuelingState{gas_flap_position: %AutoApi.Property{data: :closed}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -49,7 +49,7 @@ defmodule AutoApi.FuelingState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.FuelingState{gas_flap_position: %AutoApi.PropertyComponent{data: :closed}}
+    iex> state = %AutoApi.FuelingState{gas_flap_position: %AutoApi.Property{data: :closed}}
     iex> AutoApi.FuelingState.to_bin(state)
     <<3, 0, 4, 1, 0, 1, 0>>
   """

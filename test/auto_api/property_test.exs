@@ -16,11 +16,11 @@
 #
 # Please inquire about commercial licensing options at
 # licensing@high-mobility.com
-defmodule AutoApi.PropertyComponentTest do
+defmodule AutoApi.PropertyTest do
   use ExUnit.Case, async: true
   use PropCheck
 
-  alias AutoApi.{PropertyComponent, State}
+  alias AutoApi.{Property, State}
 
   describe "to_bin/3 & to_struct/3" do
     property "converts uint24 to bin" do
@@ -28,12 +28,12 @@ defmodule AutoApi.PropertyComponentTest do
         spec = %{"type" => "integer", "size" => 3}
 
         prop_bin =
-          PropertyComponent.to_bin(
-            %PropertyComponent{data: data[:integer], timestamp: data[:datetime]},
+          Property.to_bin(
+            %Property{data: data[:integer], timestamp: data[:datetime]},
             spec
           )
 
-        prop_comp = PropertyComponent.to_struct(prop_bin, spec)
+        prop_comp = Property.to_struct(prop_bin, spec)
         assert prop_comp.data == data[:integer]
         assert prop_comp.timestamp == data[:datetime]
         assert prop_comp.failure == nil
@@ -45,12 +45,12 @@ defmodule AutoApi.PropertyComponentTest do
         spec = %{"type" => "integer", "size" => 2}
 
         prop_bin =
-          PropertyComponent.to_bin(
-            %PropertyComponent{data: data[:integer], timestamp: data[:datetime]},
+          Property.to_bin(
+            %Property{data: data[:integer], timestamp: data[:datetime]},
             spec
           )
 
-        prop_comp = PropertyComponent.to_struct(prop_bin, spec)
+        prop_comp = Property.to_struct(prop_bin, spec)
         assert prop_comp.data == data[:integer]
         assert prop_comp.timestamp == data[:datetime]
         assert prop_comp.failure == nil
@@ -62,12 +62,12 @@ defmodule AutoApi.PropertyComponentTest do
         spec = %{"type" => "double", "size" => 8}
 
         prop_bin =
-          PropertyComponent.to_bin(
-            %PropertyComponent{data: data[:double], timestamp: data[:datetime]},
+          Property.to_bin(
+            %Property{data: data[:double], timestamp: data[:datetime]},
             spec
           )
 
-        prop_comp = PropertyComponent.to_struct(prop_bin, spec)
+        prop_comp = Property.to_struct(prop_bin, spec)
         assert prop_comp.data == data[:double]
         assert prop_comp.timestamp == data[:datetime]
         assert prop_comp.failure == nil
@@ -79,12 +79,12 @@ defmodule AutoApi.PropertyComponentTest do
         spec = %{"type" => "string"}
 
         prop_bin =
-          PropertyComponent.to_bin(
-            %PropertyComponent{data: data[:string], timestamp: data[:datetime]},
+          Property.to_bin(
+            %Property{data: data[:string], timestamp: data[:datetime]},
             spec
           )
 
-        prop_comp = PropertyComponent.to_struct(prop_bin, spec)
+        prop_comp = Property.to_struct(prop_bin, spec)
 
         assert prop_comp.data == data[:string]
         assert prop_comp.timestamp == data[:datetime]
@@ -97,12 +97,12 @@ defmodule AutoApi.PropertyComponentTest do
         spec = %{"type" => "timestamp"}
 
         prop_bin =
-          PropertyComponent.to_bin(
-            %PropertyComponent{data: data[:timestamp], timestamp: data[:datetime]},
+          Property.to_bin(
+            %Property{data: data[:timestamp], timestamp: data[:datetime]},
             spec
           )
 
-        prop_comp = PropertyComponent.to_struct(prop_bin, spec)
+        prop_comp = Property.to_struct(prop_bin, spec)
 
         assert prop_comp.data == data[:timestamp]
         assert prop_comp.timestamp == data[:datetime]
@@ -124,12 +124,12 @@ defmodule AutoApi.PropertyComponentTest do
       }
 
       prop_bin =
-        PropertyComponent.to_bin(
-          %PropertyComponent{data: :low, timestamp: datetime},
+        Property.to_bin(
+          %Property{data: :low, timestamp: datetime},
           spec
         )
 
-      prop_comp = PropertyComponent.to_struct(prop_bin, spec)
+      prop_comp = Property.to_struct(prop_bin, spec)
 
       assert prop_comp.data == :low
       assert DateTime.to_unix(prop_comp.timestamp) == DateTime.to_unix(datetime)
@@ -148,12 +148,12 @@ defmodule AutoApi.PropertyComponentTest do
       }
 
       prop_bin =
-        PropertyComponent.to_bin(
-          %PropertyComponent{failure: %{reason: :unknown, description: ""}},
+        Property.to_bin(
+          %Property{failure: %{reason: :unknown, description: ""}},
           spec
         )
 
-      prop_comp = PropertyComponent.to_struct(prop_bin, spec)
+      prop_comp = Property.to_struct(prop_bin, spec)
 
       refute prop_comp.data
       refute prop_comp.timestamp
@@ -177,12 +177,12 @@ defmodule AutoApi.PropertyComponentTest do
         )
 
       prop_bin =
-        PropertyComponent.to_bin(
-          %PropertyComponent{data: state, timestamp: datetime},
+        Property.to_bin(
+          %Property{data: state, timestamp: datetime},
           spec
         )
 
-      prop_comp = PropertyComponent.to_struct(prop_bin, spec)
+      prop_comp = Property.to_struct(prop_bin, spec)
 
       assert prop_comp.data == state
       assert DateTime.to_unix(prop_comp.timestamp) == DateTime.to_unix(datetime)
@@ -215,12 +215,12 @@ defmodule AutoApi.PropertyComponentTest do
         ]
       }
 
-      prop_comp = %PropertyComponent{data: %{location: :front_left, pressure: 22.034}}
-      bin_comp = PropertyComponent.to_bin(prop_comp, spec)
+      prop_comp = %Property{data: %{location: :front_left, pressure: 22.034}}
+      bin_comp = Property.to_bin(prop_comp, spec)
 
       assert bin_comp == <<1, 5::integer-16, 0x00, 65, 176, 69, 162>>
 
-      assert PropertyComponent.to_struct(bin_comp, spec) == prop_comp
+      assert Property.to_struct(bin_comp, spec) == prop_comp
     end
 
     test "converts unit type to bin" do
@@ -230,12 +230,12 @@ defmodule AutoApi.PropertyComponentTest do
         "id" => 0xFD
       }
 
-      prop_comp = %PropertyComponent{data: %{value: 186, unit: :centimeters}}
-      bin_comp = PropertyComponent.to_bin(prop_comp, spec)
+      prop_comp = %Property{data: %{value: 186, unit: :centimeters}}
+      bin_comp = Property.to_bin(prop_comp, spec)
 
       assert bin_comp == <<0x01, 0x00, 0x0A, 0x12, 0x02, 186::float-64>>
 
-      assert PropertyComponent.to_struct(bin_comp, spec) == prop_comp
+      assert Property.to_struct(bin_comp, spec) == prop_comp
     end
 
     property "converts custom value with string to bin" do
@@ -259,12 +259,12 @@ defmodule AutoApi.PropertyComponentTest do
         text_size = byte_size(text)
         id = data[:id]
 
-        prop_comp = %PropertyComponent{
+        prop_comp = %Property{
           data: %{id: id, text: text},
           timestamp: data[:datetime]
         }
 
-        bin_comp = PropertyComponent.to_bin(prop_comp, spec)
+        bin_comp = Property.to_bin(prop_comp, spec)
 
         bin_data = <<id::integer-16, text_size::integer-16, text::binary>>
         bin_data_size = byte_size(bin_data)
@@ -272,7 +272,7 @@ defmodule AutoApi.PropertyComponentTest do
         assert <<1, ^bin_data_size::integer-16, ^bin_data::binary-size(bin_data_size), _::binary>> =
                  bin_comp
 
-        assert PropertyComponent.to_struct(bin_comp, spec) == prop_comp
+        assert Property.to_struct(bin_comp, spec) == prop_comp
       end
     end
 
@@ -307,12 +307,12 @@ defmodule AutoApi.PropertyComponentTest do
         text = data[:text]
         text_size = byte_size(text)
 
-        prop_comp = %PropertyComponent{
+        prop_comp = %Property{
           data: %{enum: enum, key: text, value: text},
           timestamp: data[:datetime]
         }
 
-        bin_comp = PropertyComponent.to_bin(prop_comp, spec)
+        bin_comp = Property.to_bin(prop_comp, spec)
 
         bin_data =
           <<enum_bin, text_size::integer-16, text::binary, text_size::integer-16, text::binary>>
@@ -322,7 +322,7 @@ defmodule AutoApi.PropertyComponentTest do
         assert <<1, ^bin_data_size::integer-16, ^bin_data::binary-size(bin_data_size), _::binary>> =
                  bin_comp
 
-        assert PropertyComponent.to_struct(bin_comp, spec) == prop_comp
+        assert Property.to_struct(bin_comp, spec) == prop_comp
       end
     end
 
@@ -345,12 +345,12 @@ defmodule AutoApi.PropertyComponentTest do
         text = data[:text]
         text_size = byte_size(text)
 
-        prop_comp = %PropertyComponent{
+        prop_comp = %Property{
           data: %{key: text, value: text},
           timestamp: data[:datetime]
         }
 
-        bin_comp = PropertyComponent.to_bin(prop_comp, spec)
+        bin_comp = Property.to_bin(prop_comp, spec)
 
         bin_data = <<text_size::integer-16, text::binary, text_size::integer-16, text::binary>>
         bin_data_size = byte_size(bin_data)
@@ -358,7 +358,7 @@ defmodule AutoApi.PropertyComponentTest do
         assert <<1, ^bin_data_size::integer-16, ^bin_data::binary-size(bin_data_size), _::binary>> =
                  bin_comp
 
-        assert PropertyComponent.to_struct(bin_comp, spec) == prop_comp
+        assert Property.to_struct(bin_comp, spec) == prop_comp
       end
     end
 
@@ -393,12 +393,12 @@ defmodule AutoApi.PropertyComponentTest do
         text_size = byte_size(text)
         id = data[:id]
 
-        prop_comp = %PropertyComponent{
+        prop_comp = %Property{
           data: %{id: id, map: %{key: text, value: text}},
           timestamp: data[:datetime]
         }
 
-        bin_comp = PropertyComponent.to_bin(prop_comp, spec)
+        bin_comp = Property.to_bin(prop_comp, spec)
 
         # map_data_size = (text_size + 2) * 2 + 2
         map_data_size = (text_size + 2) * 2
@@ -412,7 +412,7 @@ defmodule AutoApi.PropertyComponentTest do
         assert <<1, ^bin_data_size::integer-16, ^bin_data::binary-size(bin_data_size), _::binary>> =
                  bin_comp
 
-        assert PropertyComponent.to_struct(bin_comp, spec) == prop_comp
+        assert Property.to_struct(bin_comp, spec) == prop_comp
       end
     end
 
@@ -470,12 +470,12 @@ defmodule AutoApi.PropertyComponentTest do
         hour = data[:hour]
         minute = data[:minute]
 
-        prop_comp = %PropertyComponent{
+        prop_comp = %Property{
           data: %{weekday: weekday, time: %{hour: hour, minute: minute}},
           timestamp: data[:datetime]
         }
 
-        bin_comp = PropertyComponent.to_bin(prop_comp, spec)
+        bin_comp = Property.to_bin(prop_comp, spec)
 
         bin_data = <<weekday_bin, hour, minute>>
         bin_data_size = byte_size(bin_data)
@@ -483,7 +483,7 @@ defmodule AutoApi.PropertyComponentTest do
         assert <<1, ^bin_data_size::integer-16, ^bin_data::binary-size(bin_data_size), _::binary>> =
                  bin_comp
 
-        assert PropertyComponent.to_struct(bin_comp, spec) == prop_comp
+        assert Property.to_struct(bin_comp, spec) == prop_comp
       end
     end
 
@@ -504,12 +504,12 @@ defmodule AutoApi.PropertyComponentTest do
         hour = data[:hour]
         minute = data[:minute]
 
-        prop_comp = %PropertyComponent{
+        prop_comp = %Property{
           data: %{weekday: weekday, time: %{hour: hour, minute: minute}},
           timestamp: data[:datetime]
         }
 
-        bin_comp = PropertyComponent.to_bin(prop_comp, spec)
+        bin_comp = Property.to_bin(prop_comp, spec)
 
         bin_data = <<weekday_bin, hour, minute>>
         bin_data_size = byte_size(bin_data)
@@ -517,7 +517,7 @@ defmodule AutoApi.PropertyComponentTest do
         assert <<1, ^bin_data_size::integer-16, ^bin_data::binary-size(bin_data_size), _::binary>> =
                  bin_comp
 
-        assert PropertyComponent.to_struct(bin_comp, spec) == prop_comp
+        assert Property.to_struct(bin_comp, spec) == prop_comp
       end
     end
 
@@ -525,13 +525,13 @@ defmodule AutoApi.PropertyComponentTest do
       forall data <- [description: utf8(), reason: error_reason(), timestamp: datetime()] do
         spec = %{"type" => "integer", "size" => 3}
 
-        component = %PropertyComponent{
+        component = %Property{
           timestamp: data[:timestamp],
           failure: %{reason: data[:reason], description: data[:description]}
         }
 
-        prop_bin = PropertyComponent.to_bin(component, spec)
-        prop_comp = PropertyComponent.to_struct(prop_bin, spec)
+        prop_bin = Property.to_bin(component, spec)
+        prop_comp = Property.to_struct(prop_bin, spec)
 
         assert prop_comp.data == component.data
         assert prop_comp.timestamp == component.timestamp
@@ -561,13 +561,13 @@ defmodule AutoApi.PropertyComponentTest do
           }
         ]
 
-        component = %PropertyComponent{
+        component = %Property{
           timestamp: data[:timestamp],
           failure: %{reason: data[:reason], description: data[:description]}
         }
 
-        prop_bin = PropertyComponent.to_bin(component, spec)
-        prop_comp = PropertyComponent.to_struct(prop_bin, spec)
+        prop_bin = Property.to_bin(component, spec)
+        prop_comp = Property.to_struct(prop_bin, spec)
 
         assert prop_comp.data == component.data
         assert prop_comp.timestamp == component.timestamp
@@ -585,7 +585,7 @@ defmodule AutoApi.PropertyComponentTest do
              ] do
         spec = %{"type" => "integer", "size" => 3}
 
-        component = %PropertyComponent{
+        component = %Property{
           timestamp: data[:timestamp],
           availability: %{
             update_rate: data[:update_rate],
@@ -594,8 +594,8 @@ defmodule AutoApi.PropertyComponentTest do
           }
         }
 
-        prop_bin = PropertyComponent.to_bin(component, spec)
-        prop_comp = PropertyComponent.to_struct(prop_bin, spec)
+        prop_bin = Property.to_bin(component, spec)
+        prop_comp = Property.to_struct(prop_bin, spec)
 
         assert prop_comp.data == component.data
         assert prop_comp.timestamp == component.timestamp
@@ -631,7 +631,7 @@ defmodule AutoApi.PropertyComponentTest do
           }
         ]
 
-        component = %PropertyComponent{
+        component = %Property{
           timestamp: data[:timestamp],
           availability: %{
             update_rate: data[:update_rate],
@@ -640,8 +640,8 @@ defmodule AutoApi.PropertyComponentTest do
           }
         }
 
-        prop_bin = PropertyComponent.to_bin(component, spec)
-        prop_comp = PropertyComponent.to_struct(prop_bin, spec)
+        prop_bin = Property.to_bin(component, spec)
+        prop_comp = Property.to_struct(prop_bin, spec)
 
         assert prop_comp.data == component.data
         assert prop_comp.timestamp == component.timestamp

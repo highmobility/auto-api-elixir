@@ -93,7 +93,7 @@ defmodule AutoApi.UsageState do
 
     iex> bin = <<17, 0, 11, 1, 0, 8, 63, 229, 112, 163, 215, 10, 61, 113>>
     iex> AutoApi.UsageState.from_bin(bin)
-    %AutoApi.UsageState{safety_driving_score: %AutoApi.PropertyComponent{data: 0.67}}
+    %AutoApi.UsageState{safety_driving_score: %AutoApi.Property{data: 0.67}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -103,7 +103,7 @@ defmodule AutoApi.UsageState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.UsageState{safety_driving_score: %AutoApi.PropertyComponent{data: 0.67}}
+    iex> state = %AutoApi.UsageState{safety_driving_score: %AutoApi.Property{data: 0.67}}
     iex> AutoApi.UsageState.to_bin(state)
     <<17, 0, 11, 1, 0, 8, 63, 229, 112, 163, 215, 10, 61, 113>>
   """

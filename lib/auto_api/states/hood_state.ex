@@ -40,7 +40,7 @@ defmodule AutoApi.HoodState do
 
     iex> bin = <<1, 0, 4, 1, 0, 1, 1>>
     iex> AutoApi.HoodState.from_bin(bin)
-    %AutoApi.HoodState{position: %AutoApi.PropertyComponent{data: :open}}
+    %AutoApi.HoodState{position: %AutoApi.Property{data: :open}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -51,7 +51,7 @@ defmodule AutoApi.HoodState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.HoodState{position: %AutoApi.PropertyComponent{data: :open}}
+    iex> state = %AutoApi.HoodState{position: %AutoApi.Property{data: :open}}
     iex> AutoApi.HoodState.to_bin(state)
     <<1, 0, 4, 1, 0, 1, 1>>
   """

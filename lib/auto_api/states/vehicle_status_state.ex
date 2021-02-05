@@ -38,9 +38,9 @@ defmodule AutoApi.VehicleStatusState do
 
     iex> bin = <<153, 0, 14, 1, 0, 11, 12, 0, 103, 1, 1, 0, 4, 1, 0, 1, 2>>
     iex> state = AutoApi.VehicleStatusState.from_bin(bin)
-    iex> [%AutoApi.PropertyComponent{data: hood_state}] = state.states
+    iex> [%AutoApi.Property{data: hood_state}] = state.states
     iex> hood_state
-    %AutoApi.HoodState{position: %AutoApi.PropertyComponent{data: :intermediate}}
+    %AutoApi.HoodState{position: %AutoApi.Property{data: :intermediate}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -50,8 +50,8 @@ defmodule AutoApi.VehicleStatusState do
   @doc """
   Parse state to bin
 
-    iex> hood_state = %AutoApi.HoodState{position: %AutoApi.PropertyComponent{data: :intermediate}}
-    iex> state = %AutoApi.VehicleStatusState{states: [%AutoApi.PropertyComponent{data: hood_state}]}
+    iex> hood_state = %AutoApi.HoodState{position: %AutoApi.Property{data: :intermediate}}
+    iex> state = %AutoApi.VehicleStatusState{states: [%AutoApi.Property{data: hood_state}]}
     iex> AutoApi.VehicleStatusState.to_bin(state)
     <<153, 0, 14, 1, 0, 11, 12, 0, 103, 1, 1, 0, 4, 1, 0, 1, 2>>
   """

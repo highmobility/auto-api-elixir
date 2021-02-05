@@ -23,48 +23,48 @@
 defmodule AutoApi.ChargingStateTest do
   use ExUnit.Case, async: true
   doctest AutoApi.ChargingState
-  alias AutoApi.{PropertyComponent, ChargingState}
+  alias AutoApi.{Property, ChargingState}
 
   test "to_bin & from_bin" do
     date = ~U[2019-07-29 10:15:09.654Z]
 
     state = %ChargingState{
-      estimated_range: %PropertyComponent{data: %{value: 1000, unit: :kilometers}},
-      battery_level: %PropertyComponent{data: 10.001},
-      battery_current_ac: %PropertyComponent{data: %{value: 10.001, unit: :amperes}},
-      battery_current_dc: %PropertyComponent{data: %{value: 10.002, unit: :amperes}},
-      charger_voltage_ac: %PropertyComponent{data: %{value: 10.003, unit: :volts}},
-      charger_voltage_dc: %PropertyComponent{data: %{value: 10.004, unit: :volts}},
-      charge_limit: %PropertyComponent{data: 10.005},
-      time_to_complete_charge: %PropertyComponent{data: %{value: 10, unit: :hours}},
-      charging_rate_kw: %PropertyComponent{data: %{value: 10.006, unit: :kilowatts}},
-      charge_port_state: %PropertyComponent{data: :closed},
-      charge_mode: %PropertyComponent{data: :timer_based},
-      max_charging_current: %PropertyComponent{data: %{value: 10.007, unit: :amperes}},
-      plug_type: %PropertyComponent{data: :type_2},
-      charging_window_chosen: %PropertyComponent{data: :chosen},
+      estimated_range: %Property{data: %{value: 1000, unit: :kilometers}},
+      battery_level: %Property{data: 10.001},
+      battery_current_ac: %Property{data: %{value: 10.001, unit: :amperes}},
+      battery_current_dc: %Property{data: %{value: 10.002, unit: :amperes}},
+      charger_voltage_ac: %Property{data: %{value: 10.003, unit: :volts}},
+      charger_voltage_dc: %Property{data: %{value: 10.004, unit: :volts}},
+      charge_limit: %Property{data: 10.005},
+      time_to_complete_charge: %Property{data: %{value: 10, unit: :hours}},
+      charging_rate_kw: %Property{data: %{value: 10.006, unit: :kilowatts}},
+      charge_port_state: %Property{data: :closed},
+      charge_mode: %Property{data: :timer_based},
+      max_charging_current: %Property{data: %{value: 10.007, unit: :amperes}},
+      plug_type: %Property{data: :type_2},
+      charging_window_chosen: %Property{data: :chosen},
       departure_times: [
-        %PropertyComponent{data: %{state: :inactive, time: %{hour: 1, minute: 2}}}
+        %Property{data: %{state: :inactive, time: %{hour: 1, minute: 2}}}
       ],
       reduction_times: [
-        %PropertyComponent{data: %{start_stop: :start, time: %{hour: 1, minute: 2}}}
+        %Property{data: %{start_stop: :start, time: %{hour: 1, minute: 2}}}
       ],
-      battery_temperature: %PropertyComponent{data: %{value: 10.008, unit: :celsius}},
-      timers: [%PropertyComponent{data: %{timer_type: :preferred_start_time, date: date}}],
-      plugged_in: %PropertyComponent{data: :disconnected},
-      status: %PropertyComponent{data: :not_charging},
-      charging_rate: %PropertyComponent{data: %{value: 10.009, unit: :kilowatts}},
-      battery_current: %PropertyComponent{data: %{value: 10.010, unit: :milliamperes}},
-      charger_voltage: %PropertyComponent{data: %{value: 10.011, unit: :millivolts}},
-      current_type: %PropertyComponent{data: :alternating_current},
-      max_range: %PropertyComponent{data: %{value: 40_075, unit: :kilometers}},
-      starter_battery_state: %PropertyComponent{data: :yellow},
-      smart_charging_status: %PropertyComponent{data: :scc_is_active},
-      battery_level_at_departure: %PropertyComponent{data: 0.345},
-      preconditioning_departure_status: %PropertyComponent{data: :inactive},
-      preconditioning_immediate_status: %PropertyComponent{data: :active},
-      preconditioning_departure_enabled: %PropertyComponent{data: :enabled},
-      preconditioning_error: %PropertyComponent{data: :available_after_engine_restart}
+      battery_temperature: %Property{data: %{value: 10.008, unit: :celsius}},
+      timers: [%Property{data: %{timer_type: :preferred_start_time, date: date}}],
+      plugged_in: %Property{data: :disconnected},
+      status: %Property{data: :not_charging},
+      charging_rate: %Property{data: %{value: 10.009, unit: :kilowatts}},
+      battery_current: %Property{data: %{value: 10.010, unit: :milliamperes}},
+      charger_voltage: %Property{data: %{value: 10.011, unit: :millivolts}},
+      current_type: %Property{data: :alternating_current},
+      max_range: %Property{data: %{value: 40_075, unit: :kilometers}},
+      starter_battery_state: %Property{data: :yellow},
+      smart_charging_status: %Property{data: :scc_is_active},
+      battery_level_at_departure: %Property{data: 0.345},
+      preconditioning_departure_status: %Property{data: :inactive},
+      preconditioning_immediate_status: %Property{data: :active},
+      preconditioning_departure_enabled: %Property{data: :enabled},
+      preconditioning_error: %Property{data: :available_after_engine_restart}
     }
 
     new_state =

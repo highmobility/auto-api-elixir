@@ -111,7 +111,7 @@ defmodule AutoApi.ChargingState do
 
     iex> bin = <<23, 0, 4, 1, 0, 1, 8>>
     iex> AutoApi.ChargingState.from_bin(bin)
-    %AutoApi.ChargingState{status: %AutoApi.PropertyComponent{data: :fast_charging}}
+    %AutoApi.ChargingState{status: %AutoApi.Property{data: :fast_charging}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -122,7 +122,7 @@ defmodule AutoApi.ChargingState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.ChargingState{status: %AutoApi.PropertyComponent{data: :fast_charging}}
+    iex> state = %AutoApi.ChargingState{status: %AutoApi.Property{data: :fast_charging}}
     iex> AutoApi.ChargingState.to_bin(state)
     <<23, 0, 4, 1, 0, 1, 8>>
   """

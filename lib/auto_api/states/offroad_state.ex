@@ -39,7 +39,7 @@ defmodule AutoApi.OffroadState do
 
     iex> bin = <<2, 0, 11, 1, 0, 8, 63, 204, 40, 245, 194, 143, 92, 41>>
     iex> AutoApi.OffroadState.from_bin(bin)
-    %AutoApi.OffroadState{wheel_suspension: %AutoApi.PropertyComponent{data: 0.22}}
+    %AutoApi.OffroadState{wheel_suspension: %AutoApi.Property{data: 0.22}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -49,7 +49,7 @@ defmodule AutoApi.OffroadState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.OffroadState{wheel_suspension: %AutoApi.PropertyComponent{data: 0.22}}
+    iex> state = %AutoApi.OffroadState{wheel_suspension: %AutoApi.Property{data: 0.22}}
     iex> AutoApi.OffroadState.to_bin(state)
     <<2, 0, 11, 1, 0, 8, 63, 204, 40, 245, 194, 143, 92, 41>>
   """

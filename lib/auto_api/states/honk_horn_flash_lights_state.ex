@@ -46,7 +46,7 @@ defmodule AutoApi.HonkHornFlashLightsState do
 
     iex> bin = <<1, 0, 4, 1, 0, 1, 0>>
     iex> AutoApi.HonkHornFlashLightsState.from_bin(bin)
-    %AutoApi.HonkHornFlashLightsState{flashers: %AutoApi.PropertyComponent{data: :inactive}}
+    %AutoApi.HonkHornFlashLightsState{flashers: %AutoApi.Property{data: :inactive}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -57,7 +57,7 @@ defmodule AutoApi.HonkHornFlashLightsState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.HonkHornFlashLightsState{flashers: %AutoApi.PropertyComponent{data: :inactive}}
+    iex> state = %AutoApi.HonkHornFlashLightsState{flashers: %AutoApi.Property{data: :inactive}}
     iex> AutoApi.HonkHornFlashLightsState.to_bin(state)
     <<1, 0, 4, 1, 0, 1, 0>>
   """

@@ -48,7 +48,7 @@ defmodule AutoApi.RemoteControlState do
 
     iex> bin = <<1, 0, 4, 1, 0, 1, 2>>
     iex> AutoApi.RemoteControlState.from_bin(bin)
-    %AutoApi.RemoteControlState{control_mode: %AutoApi.PropertyComponent{data: :started}}
+    %AutoApi.RemoteControlState{control_mode: %AutoApi.Property{data: :started}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -58,7 +58,7 @@ defmodule AutoApi.RemoteControlState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.RemoteControlState{control_mode: %AutoApi.PropertyComponent{data: :started}}
+    iex> state = %AutoApi.RemoteControlState{control_mode: %AutoApi.Property{data: :started}}
     iex> AutoApi.RemoteControlState.to_bin(state)
     <<1, 0, 4, 1, 0, 1, 2>>
   """

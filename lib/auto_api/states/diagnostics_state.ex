@@ -150,7 +150,7 @@ defmodule AutoApi.DiagnosticsState do
 
     iex> bin = <<22, 0, 11, 1, 0, 8, 64, 40, 0, 0, 0, 0, 0, 0>>
     iex> AutoApi.DiagnosticsState.from_bin(bin)
-    %AutoApi.DiagnosticsState{engine_load: %AutoApi.PropertyComponent{data: 12.0}}
+    %AutoApi.DiagnosticsState{engine_load: %AutoApi.Property{data: 12.0}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -161,7 +161,7 @@ defmodule AutoApi.DiagnosticsState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.DiagnosticsState{engine_load: %AutoApi.PropertyComponent{data: 12}}
+    iex> state = %AutoApi.DiagnosticsState{engine_load: %AutoApi.Property{data: 12}}
     iex> AutoApi.DiagnosticsState.to_bin(state)
     <<22, 0, 11, 1, 0, 8, 64, 40, 0, 0, 0, 0, 0, 0>>
   """
