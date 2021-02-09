@@ -25,9 +25,9 @@ defmodule AutoApi.Command do
   Command behavior for handling AutoApi commands
   """
 
-  alias AutoApi.{GetCommand, GetAvailabilityCommand}
+  alias AutoApi.{GetCommand, GetAvailabilityCommand, SetCommand}
 
-  @type command :: GetCommand.t() | GetAvailabilityCommand.t()
+  @type command :: GetCommand.t() | GetAvailabilityCommand.t() | SetCommand.t()
 
   @callback identifier :: byte()
   @callback to_bin(command()) :: binary()

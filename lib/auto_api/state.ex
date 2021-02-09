@@ -31,6 +31,7 @@ defmodule AutoApi.State do
   @callback to_bin(struct) :: binary
   @callback base() :: struct
 
+  @type t() :: struct()
   @type property(type) :: AutoApi.Property.t(type) | nil
   @type multiple_property(type) :: list(AutoApi.Property.t(type))
 
