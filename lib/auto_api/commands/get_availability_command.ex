@@ -23,6 +23,18 @@ defmodule AutoApi.GetAvailabilityCommand do
   @identifier 0x02
 
   @doc """
+  Returns the identifier of the command.
+
+  # Example
+
+  iex> #{__MODULE__}.identifier()
+  0x02
+  """
+  @impl true
+  @spec identifier() :: byte()
+  def identifier(), do: @identifier
+
+  @doc """
   Transforms a GetAvailabilityCommand struct into a binary format.
 
   If the command is somehow invalid, it returns an error.

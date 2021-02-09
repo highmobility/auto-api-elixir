@@ -28,6 +28,8 @@ defmodule AutoApi.Command do
   alias AutoApi.{GetCommand, GetAvailabilityCommand}
 
   @type command :: GetCommand.t() | GetAvailabilityCommand.t()
+
+  @callback identifier :: byte()
   @callback to_bin(command()) :: binary()
   @callback from_bin(binary()) :: command()
 end

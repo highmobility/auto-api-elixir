@@ -22,6 +22,18 @@ defmodule AutoApi.GetCommand do
   @identifier 0x00
 
   @doc """
+  Returns the identifier of the command.
+
+  # Example
+
+  iex> #{__MODULE__}.identifier()
+  0x00
+  """
+  @impl true
+  @spec identifier() :: byte()
+  def identifier(), do: @identifier
+
+  @doc """
   Transforms a GetCommand struct into a binary format.
 
   If the command is somehow invalid, it returns an error.
