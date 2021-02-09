@@ -27,6 +27,9 @@ defmodule AutoApi.Capability do
 
   alias AutoApi.{CapabilityHelper, UniversalProperties}
 
+  @type t :: module()
+  @type property :: atom()
+
   defmacro __using__(spec_file: spec_file) do
     spec_path = Path.join(["specs", "capabilities", spec_file])
     raw_spec = Jason.decode!(File.read!(spec_path))
