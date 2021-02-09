@@ -25,6 +25,8 @@ defmodule AutoApi.VehicleStatusStateTest do
   doctest AutoApi.VehicleStatusState
   alias AutoApi.{VehicleStatusState, State}
 
+  # TODO: Replace with set commands when implemented
+  @tag :skip
   test "Correctly encodes state in to_bin/1" do
     diag_state =
       AutoApi.DiagnosticsState.base()
