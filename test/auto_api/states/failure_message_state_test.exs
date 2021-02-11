@@ -30,7 +30,8 @@ defmodule AutoApi.FailureMessageStateTest do
       %FailureMessageState{}
       |> State.put(:failed_message_id, data: 0x35)
       |> State.put(:failed_message_type, data: 0x00)
-      |> State.put(:failure_reason, data: :unauthorized)
+      #      |> State.put(:failure_reason, data: :unauthorized)
+      |> State.put(:failure_reason, data: :unauthorised)
       |> State.put(
         :failure_description,
         data: "Access to this capability was not granted"

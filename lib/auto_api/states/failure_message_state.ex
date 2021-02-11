@@ -76,19 +76,19 @@ defmodule AutoApi.FailureMessageState do
     |> parse_state_properties()
   end
 
-  defp unify_unauthorized_from_bin(
-         %{failure_reason: %{data: :unauthorised} = failure_reason} = state
-       ) do
-    %{state | failure_reason: %{failure_reason | data: :unauthorized}}
-  end
+  #  defp unify_unauthorized_from_bin(
+  #         %{failure_reason: %{data: :unauthorised} = failure_reason} = state
+  #       ) do
+  #    %{state | failure_reason: %{failure_reason | data: :unauthorized}}
+  #  end
 
   defp unify_unauthorized_from_bin(value), do: value
 
-  defp unify_unauthorized_to_bin(
-         %{failure_reason: %{data: :unauthorized} = failure_reason} = state
-       ) do
-    %{state | failure_reason: %{failure_reason | data: :unauthorised}}
-  end
+  #  defp unify_unauthorized_to_bin(
+  #         %{failure_reason: %{data: :unauthorized} = failure_reason} = state
+  #       ) do
+  #    %{state | failure_reason: %{failure_reason | data: :unauthorised}}
+  #  end
 
   defp unify_unauthorized_to_bin(value), do: value
 end
