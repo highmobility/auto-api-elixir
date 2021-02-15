@@ -23,4 +23,16 @@
 defmodule AutoApi.RaceStateTest do
   use ExUnit.Case, async: true
   doctest AutoApi.RaceState
+
+  test "selected gear can be negative" do
+    state =
+      AutoApi.RaceState.base()
+      |> AutoApi.State.put(:selected_gear, data: -7)
+
+    state_bin = AutoApi.RaceState.to_bin(state)
+    parsed_state = AutoApi.RaceState.from_bin(state_bin)
+
+    assert parsed_state.selected_gear.data == -7
+    assert parsed_state == state
+  end
 end
