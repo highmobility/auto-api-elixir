@@ -43,14 +43,24 @@ defmodule AutoApi.CommonData do
     |> Float.round(2)
   end
 
-  def convert_bin_to_integer(<<i_value::integer-8>>), do: i_value
-  def convert_bin_to_integer(<<i_value::integer-16>>), do: i_value
-  def convert_bin_to_integer(<<i_value::integer-24>>), do: i_value
-  def convert_bin_to_integer(<<i_value::integer-32>>), do: i_value
-  def convert_bin_to_integer(<<i_value::integer-64>>), do: i_value
+  def convert_bin_to_integer(<<i_value::integer-signed-8>>), do: i_value
+  def convert_bin_to_integer(<<i_value::integer-signed-16>>), do: i_value
+  def convert_bin_to_integer(<<i_value::integer-signed-24>>), do: i_value
+  def convert_bin_to_integer(<<i_value::integer-signed-32>>), do: i_value
+  def convert_bin_to_integer(<<i_value::integer-signed-64>>), do: i_value
 
   def convert_bin_to_integer(o) do
     throw({:can_not_parse_integer, o})
+  end
+
+  def convert_bin_to_uinteger(<<i_value::integer-unsigned-8>>), do: i_value
+  def convert_bin_to_uinteger(<<i_value::integer-unsigned-16>>), do: i_value
+  def convert_bin_to_uinteger(<<i_value::integer-unsigned-24>>), do: i_value
+  def convert_bin_to_uinteger(<<i_value::integer-unsigned-32>>), do: i_value
+  def convert_bin_to_uinteger(<<i_value::integer-unsigned-64>>), do: i_value
+
+  def convert_bin_to_uinteger(o) do
+    throw({:can_not_parse_uinteger, o})
   end
 
   def convert_bin_to_float(<<f_value::float-32>>) do

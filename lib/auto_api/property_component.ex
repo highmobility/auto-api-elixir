@@ -156,13 +156,13 @@ defmodule AutoApi.PropertyComponent do
   defp data_to_bin(data, %{"type" => "integer", "size" => size}) do
     size_bit = size * 8
 
-    <<data::integer-size(size_bit)>>
+    <<data::integer-signed-size(size_bit)>>
   end
 
   defp data_to_bin(data, %{"type" => "uinteger", "size" => size}) do
     size_bit = size * 8
 
-    <<data::integer-size(size_bit)>>
+    <<data::integer-unsigned-size(size_bit)>>
   end
 
   defp data_to_bin(data, %{"type" => "timestamp"}) do
@@ -278,11 +278,11 @@ defmodule AutoApi.PropertyComponent do
   end
 
   defp to_value(binary_data, %{"type" => "uinteger"}) do
-    AutoApi.CommonData.convert_bin_to_integer(binary_data)
+    AutoApi.CommonData.convert_bin_to_uinteger(binary_data)
   end
 
   defp to_value(binary_data, %{"type" => "timestamp"}) do
-    timestamp_in_milisec = AutoApi.CommonData.convert_bin_to_integer(binary_data)
+    timestamp_in_milisec = AutoApi.CommonData.convert_bin_to_uinteger(binary_data)
 
     case DateTime.from_unix(timestamp_in_milisec, :millisecond) do
       {:ok, datetime} -> datetime
@@ -396,7 +396,7 @@ defmodule AutoApi.PropertyComponent do
   defp fetch_item_size(binary_data, counter, %{"type" => type}) when type in @sizeless_types do
     binary_data
     |> :binary.part(counter, 2)
-    |> AutoApi.CommonData.convert_bin_to_integer()
+    |> AutoApi.CommonData.convert_bin_to_uinteger()
   end
 
   defp fetch_item_size(_, _, spec) do

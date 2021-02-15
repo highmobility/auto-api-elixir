@@ -24,8 +24,8 @@ defmodule AutoApi.PropertyComponentTest do
 
   describe "to_bin/3 & to_struct/3" do
     property "converts uint24 to bin" do
-      forall data <- [integer: integer_3(), datetime: datetime()] do
-        spec = %{"type" => "integer", "size" => 3}
+      forall data <- [integer: uinteger_3(), datetime: datetime()] do
+        spec = %{"type" => "uinteger", "size" => 3}
 
         prop_bin =
           PropertyComponent.to_bin(
@@ -41,8 +41,59 @@ defmodule AutoApi.PropertyComponentTest do
     end
 
     property "converts uint16 to bin" do
+      forall data <- [integer: uinteger_2(), datetime: datetime()] do
+        spec = %{"type" => "uinteger", "size" => 2}
+
+        prop_bin =
+          PropertyComponent.to_bin(
+            %PropertyComponent{data: data[:integer], timestamp: data[:datetime]},
+            spec
+          )
+
+        prop_comp = PropertyComponent.to_struct(prop_bin, spec)
+        assert prop_comp.data == data[:integer]
+        assert prop_comp.timestamp == data[:datetime]
+        assert prop_comp.failure == nil
+      end
+    end
+
+    property "converts uint8 to bin" do
+      forall data <- [integer: uinteger_1(), datetime: datetime()] do
+        spec = %{"type" => "uinteger", "size" => 1}
+
+        prop_bin =
+          PropertyComponent.to_bin(
+            %PropertyComponent{data: data[:integer], timestamp: data[:datetime]},
+            spec
+          )
+
+        prop_comp = PropertyComponent.to_struct(prop_bin, spec)
+        assert prop_comp.data == data[:integer]
+        assert prop_comp.timestamp == data[:datetime]
+        assert prop_comp.failure == nil
+      end
+    end
+
+    property "converts int16 to bin" do
       forall data <- [integer: integer_2(), datetime: datetime()] do
         spec = %{"type" => "integer", "size" => 2}
+
+        prop_bin =
+          PropertyComponent.to_bin(
+            %PropertyComponent{data: data[:integer], timestamp: data[:datetime]},
+            spec
+          )
+
+        prop_comp = PropertyComponent.to_struct(prop_bin, spec)
+        assert prop_comp.data == data[:integer]
+        assert prop_comp.timestamp == data[:datetime]
+        assert prop_comp.failure == nil
+      end
+    end
+
+    property "converts int8 to bin" do
+      forall data <- [integer: integer_1(), datetime: datetime()] do
+        spec = %{"type" => "integer", "size" => 1}
 
         prop_bin =
           PropertyComponent.to_bin(
@@ -655,13 +706,11 @@ defmodule AutoApi.PropertyComponentTest do
     oneof([:rate_limit, :execution_timeout, :format_error, :unauthorised, :unknown, :pending])
   end
 
-  def integer_3 do
-    oneof([0, range(10_000, 100_000), range(16_770_215, 16_777_215), 16_777_215])
-  end
-
-  def integer_2 do
-    oneof([0, range(1000, 10_000), range(60_535, 65_535), 65_535])
-  end
+  def uinteger_3, do: integer(0, 16_777_215)
+  def uinteger_2, do: integer(0, 65_535)
+  def uinteger_1, do: integer(0, 255)
+  def integer_2, do: integer(-32_768, 32_767)
+  def integer_1, do: integer(-128, 127)
 
   def double_8 do
     oneof([0.0, float()])
