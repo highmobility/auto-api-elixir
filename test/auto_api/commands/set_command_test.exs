@@ -49,13 +49,13 @@ defmodule AutoApi.SetCommandTest do
   defp populate_property(capability, property_name) do
     spec = capability.property_spec(property_name)
 
-    # Skip multiple properties for now
     data =
       case spec["type"] do
         "string" -> utf8()
         "timestamp" -> datetime()
         "bytes" -> binary()
-        "uinteger" -> pos_integer()
+        "integer" -> int(spec["size"])
+        "uinteger" -> uint(spec["size"])
         "double" -> float()
         "enum" -> enum(spec)
         _ -> nil
@@ -104,5 +104,19 @@ defmodule AutoApi.SetCommandTest do
       |> Enum.map(&String.to_atom/1)
 
     oneof(values)
+  end
+
+  defp int(size) do
+    case size do
+      1 -> integer(-128, 127)
+      2 -> integer(-32_768, 32_767)
+    end
+  end
+
+  defp uint(size) do
+    case size do
+      1 -> integer(0, 255)
+      2 -> integer(0, 65_535)
+    end
   end
 end
