@@ -23,19 +23,26 @@
 defmodule AutoApi.CapabilityHelper do
   @moduledoc false
 
+  alias AutoApi.UniversalProperties
+
   def extract_state_properties(specs) do
     properties = extract_property_data(specs)
 
-    case Map.get(specs, "state") do
-      nil ->
-        []
+    capability_properties =
+      case Map.get(specs, "state") do
+        nil ->
+          []
 
-      "all" ->
-        Map.values(properties)
+        "all" ->
+          Map.values(properties)
 
-      prop_ids when is_list(prop_ids) ->
-        Enum.map(prop_ids, &Map.get(properties, &1))
-    end
+        prop_ids when is_list(prop_ids) ->
+          Enum.map(prop_ids, &Map.get(properties, &1))
+      end
+
+    universal_properties = Enum.map(UniversalProperties.all(), &elem(&1, 1))
+
+    capability_properties ++ universal_properties
   end
 
   def extract_setters_data(specs) do

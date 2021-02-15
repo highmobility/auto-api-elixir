@@ -1,0 +1,539 @@
+{
+    "measurement_types": [
+        {
+            "name": "acceleration",
+            "id": 1,
+            "unit_types": [
+                {
+                    "name": "meters_per_second_squared",
+                    "id": 0,
+                    "conversion_linear": 1.0
+                },
+                {
+                    "name": "gravity",
+                    "id": 1,
+                    "conversion_linear": 9.81
+                }
+            ]
+        },
+        {
+            "name": "angle",
+            "id": 2,
+            "unit_types": [
+                {
+                    "name": "degrees",
+                    "id": 0,
+                    "conversion_linear": 1.0
+                },
+                {
+                    "name": "radians",
+                    "id": 3,
+                    "conversion_linear": 57.29578
+                },
+                {
+                    "name": "revolutions",
+                    "id": 5,
+                    "conversion_linear": 360.0
+                }
+            ]
+        },
+        {
+            "name": "angular_velocity",
+            "id": 3,
+            "unit_types": [
+                {
+                    "name": "revolutions_per_minute",
+                    "id": 0,
+                    "conversion_linear": 1.0
+                },
+                {
+                    "name": "degrees_per_second",
+                    "id": 1,
+                    "conversion_linear": 6.0
+                },
+                {
+                    "name": "radians_per_second",
+                    "id": 2,
+                    "conversion_linear": 9.549296585514
+                }
+            ]
+        },
+        {
+            "name": "duration",
+            "id": 7,
+            "unit_types": [
+                {
+                    "name": "seconds",
+                    "id": 0,
+                    "conversion_linear": 1.0
+                },
+                {
+                    "name": "minutes",
+                    "id": 1,
+                    "conversion_linear": 60.0
+                },
+                {
+                    "name": "hours",
+                    "id": 2,
+                    "conversion_linear": 3600.0
+                },
+                {
+                    "name": "days",
+                    "id": 3,
+                    "conversion_linear": 86400.0
+                },
+                {
+                    "name": "weeks",
+                    "id": 4,
+                    "conversion_linear": 604800.0
+                },
+                {
+                    "name": "months",
+                    "id": 5,
+                    "conversion_linear": 2629800.0
+                }
+            ]
+        },
+        {
+            "name": "electric_current",
+            "id": 9,
+            "unit_types": [
+                {
+                    "name": "amperes",
+                    "id": 0,
+                    "conversion_linear": 1.0
+                },
+                {
+                    "name": "milliamperes",
+                    "id": 1,
+                    "conversion_linear": 0.001
+                },
+                {
+                    "name": "kiloamperes",
+                    "id": 2,
+                    "conversion_linear": 1000.0
+                }
+            ]
+        },
+        {
+            "name": "electric_potential_difference",
+            "id": 10,
+            "unit_types": [
+                {
+                    "name": "volts",
+                    "id": 0,
+                    "conversion_linear": 1.0
+                },
+                {
+                    "name": "millivolts",
+                    "id": 1,
+                    "conversion_linear": 0.001
+                },
+                {
+                    "name": "kilovolts",
+                    "id": 2,
+                    "conversion_linear": 1000.0
+                }
+            ]
+        },
+        {
+            "name": "energy",
+            "id": 12,
+            "unit_types": [
+                {
+                    "name": "joules",
+                    "id": 0,
+                    "conversion_linear": 1.0
+                },
+                {
+                    "name": "kilojoules",
+                    "id": 1,
+                    "conversion_linear": 1000.0
+                },
+                {
+                    "name": "kilowatt_hours",
+                    "id": 4,
+                    "conversion_linear": 3600000.0
+                }
+            ]
+        },
+        {
+            "name": "energy_efficiency",
+            "id": 13,
+            "unit_types": [
+                {
+                    "name": "kwh_per_100_kilometers",
+                    "id": 0,
+                    "conversion_inverse": 1.0
+                },
+                {
+                    "name": "miles_per_kwh",
+                    "id": 1,
+                    "conversion_inverse": 62.1371192237334
+                }
+            ]
+        },
+        {
+            "name": "frequency",
+            "id": 14,
+            "unit_types": [
+                {
+                    "name": "hertz",
+                    "id": 0,
+                    "conversion_linear": 1.0
+                },
+                {
+                    "name": "millihertz",
+                    "id": 1,
+                    "conversion_linear": 0.001
+                },
+                {
+                    "name": "kilohertz",
+                    "id": 3,
+                    "conversion_linear": 1000.0
+                },
+                {
+                    "name": "megahertz",
+                    "id": 4,
+                    "conversion_linear": 1000000.0
+                },
+                {
+                    "name": "gigahertz",
+                    "id": 5,
+                    "conversion_linear": 1000000000.0
+                },
+                {
+                    "name": "times_per_minute",
+                    "id": 8,
+                    "conversion_linear": 60.0
+                },
+                {
+                    "name": "times_per_hour",
+                    "id": 9,
+                    "conversion_linear": 3600.0
+                },
+                {
+                    "name": "times_per_day",
+                    "id": 10,
+                    "conversion_linear": 86400.0
+                }
+            ]
+        },
+        {
+            "name": "fuel_efficiency",
+            "id": 15,
+            "unit_types": [
+                {
+                    "name": "liters_per_100_kilometers",
+                    "id": 0,
+                    "conversion_inverse": 1.0
+                },
+                {
+                    "name": "miles_per_imperial_gallon",
+                    "id": 1,
+                    "conversion_inverse": 282.4809363
+                },
+                {
+                    "name": "miles_per_gallon",
+                    "id": 2,
+                    "conversion_inverse": 235.2145833
+                }
+            ]
+        },
+        {
+            "name": "illuminance",
+            "id": 17,
+            "unit_types": [
+                {
+                    "name": "lux",
+                    "id": 0,
+                    "conversion_linear": 1.0
+                }
+            ]
+        },
+        {
+            "name": "length",
+            "id": 18,
+            "unit_types": [
+                {
+                    "name": "meters",
+                    "id": 0,
+                    "conversion_linear": 1.0
+                },
+                {
+                    "name": "millimeters",
+                    "id": 1,
+                    "conversion_linear": 0.001
+                },
+                {
+                    "name": "centimeters",
+                    "id": 2,
+                    "conversion_linear": 0.01
+                },
+                {
+                    "name": "decimeters",
+                    "id": 3,
+                    "conversion_linear": 0.1
+                },
+                {
+                    "name": "kilometers",
+                    "id": 4,
+                    "conversion_linear": 1000.0
+                },
+                {
+                    "name": "megameters",
+                    "id": 5,
+                    "conversion_linear": 1000000.0
+                },
+                {
+                    "name": "inches",
+                    "id": 11,
+                    "conversion_linear": 0.0254
+                },
+                {
+                    "name": "feet",
+                    "id": 12,
+                    "conversion_linear": 0.3048
+                },
+                {
+                    "name": "yards",
+                    "id": 13,
+                    "conversion_linear": 0.9144
+                },
+                {
+                    "name": "miles",
+                    "id": 14,
+                    "conversion_linear": 1609.344
+                },
+                {
+                    "name": "scandinavian_miles",
+                    "id": 15,
+                    "conversion_linear": 10000.0
+                },
+                {
+                    "name": "nautical_miles",
+                    "id": 17,
+                    "conversion_linear": 1852.0
+                }
+            ]
+        },
+        {
+            "name": "power",
+            "id": 20,
+            "unit_types": [
+                {
+                    "name": "watts",
+                    "id": 0,
+                    "conversion_linear": 1.0
+                },
+                {
+                    "name": "milliwatts",
+                    "id": 1,
+                    "conversion_linear": 0.001
+                },
+                {
+                    "name": "kilowatts",
+                    "id": 2,
+                    "conversion_linear": 1000.0
+                },
+                {
+                    "name": "megawatts",
+                    "id": 3,
+                    "conversion_linear": 1000000.0
+                },
+                {
+                    "name": "horsepower",
+                    "id": 10,
+                    "conversion_linear": 745.7
+                }
+            ]
+        },
+        {
+            "name": "pressure",
+            "id": 21,
+            "unit_types": [
+                {
+                    "name": "pascals",
+                    "id": 0,
+                    "conversion_linear": 1.0
+                },
+                {
+                    "name": "kilopascals",
+                    "id": 3,
+                    "conversion_linear": 1000.0
+                },
+                {
+                    "name": "inches_of_mercury",
+                    "id": 5,
+                    "conversion_linear": 3386.39
+                },
+                {
+                    "name": "bars",
+                    "id": 6,
+                    "conversion_linear": 100000.0
+                },
+                {
+                    "name": "millibars",
+                    "id": 7,
+                    "conversion_linear": 100.0
+                },
+                {
+                    "name": "millimeters_of_mercury",
+                    "id": 8,
+                    "conversion_linear": 133.322
+                },
+                {
+                    "name": "pounds_force_per_square_inch",
+                    "id": 9,
+                    "conversion_linear": 6894.76
+                }
+            ]
+        },
+        {
+            "name": "speed",
+            "id": 22,
+            "unit_types": [
+                {
+                    "name": "meters_per_second",
+                    "id": 0,
+                    "conversion_linear": 1.0
+                },
+                {
+                    "name": "kilometers_per_hour",
+                    "id": 1,
+                    "conversion_linear": 0.27777777777778
+                },
+                {
+                    "name": "miles_per_hour",
+                    "id": 2,
+                    "conversion_linear": 0.44704
+                },
+                {
+                    "name": "knots",
+                    "id": 3,
+                    "conversion_linear": 0.51444444444
+                }
+            ]
+        },
+        {
+            "name": "temperature",
+            "id": 23,
+            "unit_types": [
+                {
+                    "name": "kelvin",
+                    "id": 0,
+                    "conversion_linear": 1.0
+                },
+                {
+                    "name": "celsius",
+                    "id": 1,
+                    "conversion_linear": 1.0,
+                    "conversion_constant": 273.15
+                },
+                {
+                    "name": "fahrenheit",
+                    "id": 2,
+                    "conversion_linear": 0.555556,
+                    "conversion_constant": 255.372222
+                }
+            ]
+        },
+        {
+            "name": "torque",
+            "id": 24,
+            "unit_types": [
+                {
+                    "name": "newton_meters",
+                    "id": 0,
+                    "conversion_linear": 1.0
+                },
+                {
+                    "name": "newton_millimeters",
+                    "id": 1,
+                    "conversion_linear": 0.001
+                },
+                {
+                    "name": "pound_feet",
+                    "id": 2,
+                    "conversion_linear": 0.73756214927727
+                }
+            ]
+        },
+        {
+            "name": "volume",
+            "id": 25,
+            "unit_types": [
+                {
+                    "name": "liters",
+                    "id": 2,
+                    "conversion_linear": 1.0
+                },
+                {
+                    "name": "milliliters",
+                    "id": 3,
+                    "conversion_linear": 0.001
+                },
+                {
+                    "name": "centiliters",
+                    "id": 4,
+                    "conversion_linear": 0.01
+                },
+                {
+                    "name": "deciliters",
+                    "id": 5,
+                    "conversion_linear": 0.1
+                },
+                {
+                    "name": "cubic_millimeters",
+                    "id": 10,
+                    "conversion_linear": 1e-06
+                },
+                {
+                    "name": "cubic_centimeters",
+                    "id": 9,
+                    "conversion_linear": 0.001
+                },
+                {
+                    "name": "cubic_decimeters",
+                    "id": 8,
+                    "conversion_linear": 1.0
+                },
+                {
+                    "name": "cubic_meters",
+                    "id": 7,
+                    "conversion_linear": 1000.0
+                },
+                {
+                    "name": "cubic_inches",
+                    "id": 11,
+                    "conversion_linear": 0.016387064
+                },
+                {
+                    "name": "cubic_feet",
+                    "id": 12,
+                    "conversion_linear": 28.316846592
+                },
+                {
+                    "name": "fluid_ounces",
+                    "id": 19,
+                    "conversion_linear": 0.0295735296875
+                },
+                {
+                    "name": "gallons",
+                    "id": 23,
+                    "conversion_linear": 3.785411784
+                },
+                {
+                    "name": "imperial_fluid_ounces",
+                    "id": 26,
+                    "conversion_linear": 0.0284130625
+                },
+                {
+                    "name": "imperial_gallons",
+                    "id": 29,
+                    "conversion_linear": 4.54609
+                }
+            ]
+        }
+    ]
+}

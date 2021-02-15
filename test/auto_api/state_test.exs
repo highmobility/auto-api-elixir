@@ -17,72 +17,64 @@
 # Please inquire about commercial licensing options at
 # licensing@high-mobility.com
 defmodule AutoApi.StateTest do
-  use ExUnit.Case
+  use ExUnit.Case, async: true
+  doctest AutoApi.State
 
   alias AutoApi.{
     CapabilitiesState,
     DiagnosticsState,
     PropertyComponent,
+    RaceState,
     RooftopControlState,
     State,
+    VehicleInformationState,
     VehicleLocationState,
     VehicleStatusState
   }
 
   describe "symmetric from_bin/1 & to_bin/1" do
-    test "integer size 4" do
-      state = %DiagnosticsState{mileage: %PropertyComponent{data: 16_777_215}}
+    test "integer size 1" do
+      state = %RaceState{selected_gear: %PropertyComponent{data: 12}}
 
       new_state =
         state
-        |> DiagnosticsState.to_bin()
-        |> DiagnosticsState.from_bin()
+        |> RaceState.to_bin()
+        |> RaceState.from_bin()
 
-      assert new_state.mileage.data == 16_777_215
+      assert new_state.selected_gear.data == 12
     end
 
     test "integer size 2" do
-      state = %DiagnosticsState{speed: %PropertyComponent{data: 65_535}}
+      state = %VehicleInformationState{model_year: %PropertyComponent{data: 2009}}
 
       new_state =
         state
-        |> DiagnosticsState.to_bin()
-        |> DiagnosticsState.from_bin()
+        |> VehicleInformationState.to_bin()
+        |> VehicleInformationState.from_bin()
 
-      assert new_state.speed.data == 65_535
+      assert new_state.model_year.data == 2009
     end
 
     test "double size 8" do
-      state = %DiagnosticsState{fuel_level: %PropertyComponent{data: 1.1002}}
+      state = %RaceState{understeering: %PropertyComponent{data: 1.1002}}
 
       new_state =
         state
-        |> DiagnosticsState.to_bin()
-        |> DiagnosticsState.from_bin()
+        |> RaceState.to_bin()
+        |> RaceState.from_bin()
 
-      assert new_state.fuel_level.data == 1.1002
-    end
-
-    test "float size 4" do
-      state = %DiagnosticsState{engine_total_fuel_consumption: %PropertyComponent{data: 1.1003}}
-
-      new_state =
-        state
-        |> DiagnosticsState.to_bin()
-        |> DiagnosticsState.from_bin()
-
-      assert new_state.engine_total_fuel_consumption.data == 1.1003
+      assert new_state.understeering.data == 1.1002
     end
 
     test "string" do
-      state = %VehicleStatusState{vin: %PropertyComponent{data: "XV000000000000001"}}
+      state = %VehicleInformationState{name: %PropertyComponent{data: "HM Concept 2020"}}
 
       new_state =
         state
-        |> VehicleStatusState.to_bin()
-        |> VehicleStatusState.from_bin()
+        |> VehicleInformationState.to_bin()
+        |> VehicleInformationState.from_bin()
 
-      assert new_state.vin.data == "XV000000000000001"
+      assert new_state.name.data == "HM Concept 2020"
     end
 
     test "bytes" do
@@ -137,7 +129,9 @@ defmodule AutoApi.StateTest do
     end
 
     test "list of map" do
-      tire_pressures = %PropertyComponent{data: %{location: :front_left, pressure: 22.034}}
+      tire_pressures = %PropertyComponent{
+        data: %{location: :front_left, pressure: %{value: 22.034, unit: :kilopascals}}
+      }
 
       state =
         %DiagnosticsState{tire_pressures: [tire_pressures]}
@@ -145,6 +139,19 @@ defmodule AutoApi.StateTest do
         |> DiagnosticsState.from_bin()
 
       assert state.tire_pressures == [tire_pressures]
+    end
+
+    test "unit" do
+      state = %DiagnosticsState{
+        speed: %PropertyComponent{data: %{value: 299_792_458, unit: :meters_per_second}}
+      }
+
+      new_state =
+        state
+        |> DiagnosticsState.to_bin()
+        |> DiagnosticsState.from_bin()
+
+      assert new_state.speed.data == %{value: 299_792_458, unit: :meters_per_second}
     end
 
     test "failure" do
@@ -186,10 +193,12 @@ defmodule AutoApi.StateTest do
     end
   end
 
-  describe "put_failure/5" do
+  describe "put/3" do
     test "only failure" do
       state = %DiagnosticsState{mileage: %PropertyComponent{data: 16_777_215}}
-      new_state = State.put_failure(state, :speed, :unknown, "Unknown speed")
+
+      new_state =
+        State.put(state, :speed, failure: %{reason: :unknown, description: "Unknown speed"})
 
       assert new_state.mileage.data == 16_777_215
       assert new_state.speed.failure.reason == :unknown
@@ -200,8 +209,9 @@ defmodule AutoApi.StateTest do
     test "failure with timestamp" do
       timestamp = DateTime.utc_now()
       state = %DiagnosticsState{mileage: %PropertyComponent{data: 16_777_215}}
+      failure = %{reason: :unknown, description: "Unknown speed"}
 
-      new_state = State.put_failure(state, :speed, :unknown, "Unknown speed", timestamp)
+      new_state = State.put(state, :speed, failure: failure, timestamp: timestamp)
 
       assert new_state.mileage.data == 16_777_215
       assert new_state.speed.failure.reason == :unknown
@@ -209,30 +219,10 @@ defmodule AutoApi.StateTest do
       assert new_state.speed.timestamp == timestamp
     end
 
-    test "failure on maps property overrides data" do
-      timestamp = DateTime.utc_now()
-
-      state =
-        DiagnosticsState.base()
-        |> DiagnosticsState.append_property(:tire_pressures, %{
-          location: :front_left,
-          pressure: 22.034
-        })
-        |> State.put_failure(:tire_pressures, :unknown, "Unknown pressure", timestamp)
-
-      assert [pressures] = state.tire_pressures
-      refute pressures.data
-      assert pressures.failure.reason == :unknown
-      assert pressures.failure.description == "Unknown pressure"
-      assert pressures.timestamp == timestamp
-    end
-  end
-
-  describe "update_property/4" do
     test "update a property with single value" do
       now = DateTime.utc_now()
       state = %DiagnosticsState{}
-      new_state = AutoApi.State.update_property(state, :mileage, 1000, now)
+      new_state = AutoApi.State.put(state, :mileage, data: 1000, timestamp: now)
 
       assert new_state.mileage.data == 1000
       assert new_state.mileage.timestamp == now
@@ -244,11 +234,11 @@ defmodule AutoApi.StateTest do
       assert state.tire_pressures == []
 
       new_state =
-        AutoApi.State.update_property(
+        State.put(
           state,
           :tire_pressures,
-          %{location: :front_right, pressure: 1.938},
-          now
+          data: %{location: :front_right, pressure: 1.938},
+          timestamp: now
         )
 
       assert tire_info = List.first(new_state.tire_pressures)

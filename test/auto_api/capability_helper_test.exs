@@ -17,9 +17,10 @@
 # Please inquire about commercial licensing options at
 # licensing@high-mobility.com
 defmodule AutoApi.CapabilityHelperTest do
-  use ExUnit.Case
+  use ExUnit.Case, async: true
 
   alias AutoApi.CapabilityHelper, as: CH
+  alias AutoApi.UniversalProperties
 
   test "extract_setters_data/1" do
     specs = %{
@@ -84,8 +85,14 @@ defmodule AutoApi.CapabilityHelperTest do
       "state" => "all"
     }
 
-    assert [:foo, :bar, :baz] == CH.extract_state_properties(specs)
-    assert [:foo] == CH.extract_state_properties(Map.put(specs, "state", [0x01]))
-    assert [] == CH.extract_state_properties(Map.delete(specs, "state"))
+    assert expected([:foo, :bar, :baz]) == CH.extract_state_properties(specs)
+    assert expected([:foo]) == CH.extract_state_properties(Map.put(specs, "state", [0x01]))
+    assert expected([]) == CH.extract_state_properties(Map.delete(specs, "state"))
+  end
+
+  defp expected(properties) do
+    universal_properties = Enum.map(UniversalProperties.all(), &elem(&1, 1))
+
+    properties ++ universal_properties
   end
 end

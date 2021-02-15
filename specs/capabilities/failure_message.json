@@ -1,0 +1,154 @@
+{
+    "name": "failure_message",
+    "name_cased": "failureMessage",
+    "name_pretty": "Failure Message",
+    "category": "api_structure",
+    "authorization": false,
+    "identifier": {
+        "msb": 0,
+        "lsb": 2
+    },
+    "api": {
+        "intro": 2,
+        "update": 11
+    },
+    "state": "all",
+    "properties": [
+        {
+            "id": 1,
+            "name": "failed_message_id",
+            "name_cased": "failedMessageID",
+            "name_pretty": "Failed message ID",
+            "type": "uinteger",
+            "size": 2,
+            "description": "Capability identifier of the failed message",
+            "examples": [
+                {
+                    "data_component": "0021",
+                    "value": 33,
+                    "description": "Failed message is the 'Trunk' capability"
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "name": "failed_message_type",
+            "name_cased": "failedMessageType",
+            "name_pretty": "Failed message type",
+            "type": "uinteger",
+            "size": 1,
+            "description": "Message type of the failed message",
+            "examples": [
+                {
+                    "data_component": "01",
+                    "value": 1,
+                    "description": "Failed message type is 'set'"
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "name": "failure_reason",
+            "name_cased": "failureReason",
+            "name_pretty": "Failure reason",
+            "type": "enum",
+            "size": 1,
+            "enum_values": [
+                {
+                    "id": 0,
+                    "name": "unsupported_capability",
+                    "name_pretty": "Unsupported Capability",
+                    "description": "Vehicle has not the capability to perform the command"
+                },
+                {
+                    "id": 1,
+                    "name": "unauthorised",
+                    "name_pretty": "Unauthorised",
+                    "description": "User has not been authenticated or lacks permissions"
+                },
+                {
+                    "id": 2,
+                    "name": "incorrect_state",
+                    "name_pretty": "Incorrect State",
+                    "description": "Command can not be executed in the current vehicle state"
+                },
+                {
+                    "id": 3,
+                    "name": "execution_timeout",
+                    "name_pretty": "Execution Timeout",
+                    "description": "Command failed to execute in time for an unknown reason"
+                },
+                {
+                    "id": 4,
+                    "name": "vehicle_asleep",
+                    "name_pretty": "Vehicle Asleep",
+                    "description": "Vehicle has to be waken up before the command can be used. If this is for a virtual vehicle, the emulator has to be loaded"
+                },
+                {
+                    "id": 5,
+                    "name": "invalid_command",
+                    "name_pretty": "Invalid Command",
+                    "description": "Command not recognised"
+                },
+                {
+                    "id": 6,
+                    "name": "pending",
+                    "name_pretty": "Pending",
+                    "description": "Capability is being refreshed"
+                },
+                {
+                    "id": 7,
+                    "name": "rate_limit",
+                    "name_pretty": "Rate Limit",
+                    "description": "Capability rate limit has been exceeded"
+                },
+                {
+                    "id": 8,
+                    "name": "oem_error",
+                    "name_pretty": "OEM error",
+                    "description": "API call to an OEM returned an error"
+                }
+            ],
+            "examples": [
+                {
+                    "data_component": "01",
+                    "value": "unauthorised",
+                    "description": "Failure occured because of unauthorised state"
+                }
+            ]
+        },
+        {
+            "id": 4,
+            "name": "failure_description",
+            "name_cased": "failureDescription",
+            "name_pretty": "Failure description",
+            "type": "string",
+            "description": "Failure description",
+            "examples": [
+                {
+                    "data_component": "54727920616761696e",
+                    "value": "Try again",
+                    "description": "Failure description informs to 'Try again'"
+                }
+            ]
+        },
+        {
+            "id": 5,
+            "name": "failed_property_ids",
+            "name_cased": "failedPropertyIDs",
+            "name_pretty": "Failed property IDs",
+            "type": "bytes",
+            "description": "Array of failed property identifiers",
+            "examples": [
+                {
+                    "data_component": "0102",
+                    "value": [
+                        1,
+                        2
+                    ],
+                    "description": "Trunk's lock and position properties failed"
+                }
+            ]
+        }
+    ]
+}

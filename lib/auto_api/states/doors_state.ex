@@ -1,48 +1,51 @@
+# AutoAPI
+# The MIT License
+#
+# Copyright (c) 2018- High-Mobility GmbH (https://high-mobility.com)
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in
+# all copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+# THE SOFTWARE.
 defmodule AutoApi.DoorsState do
   @moduledoc """
   Door position possible values: :closed, :open
   Door lock possible values: :unlocked, :locked
   """
 
-  alias AutoApi.{CommonData, PropertyComponent}
+  alias AutoApi.{CommonData, State}
 
-  defstruct inside_locks: [],
-            locks: [],
-            positions: [],
-            inside_locks_state: nil,
-            locks_state: nil,
-            timestamp: nil
+  use AutoApi.State, spec_file: "doors.json"
 
-  use AutoApi.State, spec_file: "specs/doors.json"
-
-  @type lock :: %PropertyComponent{
-          data: %{
-            location: CommonData.location() | :all,
-            lock_state: CommonData.lock()
-          }
+  @type lock :: %{
+          location: CommonData.location(),
+          lock_state: CommonData.lock()
         }
 
-  @type inside_lock :: %PropertyComponent{
-          data: %{
-            location: CommonData.location() | :all,
-            lock_state: CommonData.lock()
-          }
-        }
-
-  @type position :: %PropertyComponent{
-          data: %{
-            location: CommonData.location() | :all,
-            position: CommonData.position()
-          }
+  @type position :: %{
+          location: CommonData.location() | :all,
+          position: CommonData.position()
         }
 
   @type t :: %__MODULE__{
-          inside_locks: list(inside_lock),
-          locks: list(lock),
-          positions: list(position),
-          inside_locks_state: CommonData.lock() | nil,
-          locks_state: CommonData.lock() | nil,
-          timestamp: DateTime.t() | nil
+          inside_locks: State.multiple_property(lock),
+          locks: State.multiple_property(lock),
+          positions: State.multiple_property(position),
+          inside_locks_state: State.property(CommonData.lock()),
+          locks_state: State.property(CommonData.lock())
         }
 
   @doc """

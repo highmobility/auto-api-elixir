@@ -1,32 +1,42 @@
+# AutoAPI
+# The MIT License
+#
+# Copyright (c) 2018- High-Mobility GmbH (https://high-mobility.com)
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in
+# all copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+# THE SOFTWARE.
 defmodule AutoApi.WindowsState do
   @moduledoc """
   Keeps Windows state
   """
 
-  alias AutoApi.PropertyComponent
+  alias AutoApi.{CommonData, State}
 
-  @doc """
-  Windows state
-  """
-  defstruct open_percentages: [],
-            positions: [],
-            timestamp: nil
+  use AutoApi.State, spec_file: "windows.json"
 
-  use AutoApi.State, spec_file: "specs/windows.json"
-
-  @type location :: :front_left | :front_right | :rear_left | :rear_right | :hatch
-  @type position :: :close | :open | :intermediate
-  @type positions :: %PropertyComponent{
-          data: %{location: location, window_position: position}
-        }
-  @type open_percentages :: %PropertyComponent{
-          data: %{location: location, open_percentage: float}
-        }
+  @type location :: CommonData.location() | :hatch
+  @type position :: :closed | :open | :intermediate
+  @type positions :: %{location: location, position: position}
+  @type open_percentages :: %{location: location, open_percentage: float}
 
   @type t :: %__MODULE__{
-          open_percentages: list(open_percentages),
-          positions: list(positions),
-          timestamp: DateTime.t() | nil
+          open_percentages: State.multiple_property(open_percentages),
+          positions: State.multiple_property(positions)
         }
 
   @doc """

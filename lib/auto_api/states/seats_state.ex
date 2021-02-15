@@ -1,30 +1,43 @@
+# AutoAPI
+# The MIT License
+#
+# Copyright (c) 2018- High-Mobility GmbH (https://high-mobility.com)
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in
+# all copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+# THE SOFTWARE.
 defmodule AutoApi.SeatsState do
   @moduledoc """
   Seats state
   """
 
-  alias AutoApi.PropertyComponent
+  alias AutoApi.State
 
-  defstruct persons_detected: [],
-            seatbelts_state: [],
-            timestamp: nil
-
-  use AutoApi.State, spec_file: "specs/seats.json"
+  use AutoApi.State, spec_file: "seats.json"
 
   @type seat_location :: :front_left | :front_right | :rear_right | :rear_left | :rear_center
-  @type person_detected :: :detected | :not_detected
-  @type persons_detected :: %PropertyComponent{
-          data: %{location: seat_location, detected: person_detected}
-        }
+  @type detected :: :detected | :not_detected
+  @type persons_detected :: %{location: seat_location, detected: detected}
   @type seatbelt_state :: :not_fastened | :fastened
-  @type seatbelts_state :: %PropertyComponent{
-          data: %{location: seat_location, fastened: seatbelt_state}
-        }
+  @type seatbelts_state :: %{location: seat_location, fastened_state: seatbelt_state}
 
   @type t :: %__MODULE__{
-          persons_detected: list(persons_detected),
-          seatbelts_state: list(seatbelts_state),
-          timestamp: DateTime.t() | nil
+          persons_detected: State.multiple_property(persons_detected),
+          seatbelts_state: State.multiple_property(seatbelts_state)
         }
 
   @doc """

@@ -17,7 +17,7 @@
 # Please inquire about commercial licensing options at
 # licensing@high-mobility.com
 defmodule AutoApi.CommandTest do
-  use ExUnit.Case
+  use ExUnit.Case, async: true
   doctest AutoApi.Command
 
   alias AutoApi.{Capability, PropertyComponent}
@@ -27,7 +27,6 @@ defmodule AutoApi.CommandTest do
       results =
         Capability.all()
         |> Enum.map(&{&1, &1.command})
-        |> Enum.reject(fn {_cap, command} -> command == AutoApi.NotImplemented end)
         |> Enum.map(fn {cap, command} ->
           prop_names = Enum.map(cap.properties, &elem(&1, 1))
 
@@ -35,17 +34,6 @@ defmodule AutoApi.CommandTest do
         end)
 
       assert Enum.all?(results, &assert_get_command/1)
-    end
-
-    defp assert_get_command({capability, binary_command}) do
-      preamble = <<0x0B, capability.identifier()::binary, 0x00>>
-
-      command_bin =
-        capability.properties
-        |> Enum.map(&elem(&1, 0))
-        |> Enum.reduce(<<>>, &(&2 <> <<&1>>))
-
-      assert <<preamble::binary, command_bin::binary>> == binary_command
     end
 
     test "set works" do
@@ -56,20 +44,61 @@ defmodule AutoApi.CommandTest do
       bin_command = AutoApi.DoorsCommand.to_bin(:set, properties)
 
       assert bin_command ==
-               <<0x0B, 0, 32, 1, 5, 0, 15, 1, 0, 1, 0, 2, 0, 8, 0, 0, 1, 108, 46, 237, 55, 75>>
+               <<0x0C, 0, 32, 1, 5, 0, 15, 1, 0, 1, 0, 2, 0, 8, 0, 0, 1, 108, 46, 237, 55, 75>>
     end
 
     test "setter supports constants" do
-      assert <<0x0B, 0, 34, 1, 1, 0, 4, 1, 0, 1, 0>> == AutoApi.WakeUpCommand.to_bin(:wake_up)
+      assert <<0x0C, 0, 34, 1, 1, 0, 4, 1, 0, 1, 0>> == AutoApi.WakeUpCommand.to_bin(:wake_up)
+    end
+
+    test "get_availability works with all properties and all capabilities" do
+      results =
+        Capability.all()
+        |> Enum.map(&{&1, &1.command})
+        |> Enum.map(fn {cap, command} ->
+          prop_names = Enum.map(cap.properties, &elem(&1, 1))
+
+          {cap, apply(command, :to_bin, [:get_availability, prop_names])}
+        end)
+
+      assert Enum.all?(results, &assert_get_availability_command/1)
+    end
+
+    defp assert_get_command({capability, binary_command}) do
+      preamble = <<0x0C, capability.identifier()::binary, 0x00>>
+
+      assert_binary_command(preamble, capability, binary_command)
+    end
+
+    defp assert_get_availability_command({capability, binary_command}) do
+      preamble = <<0x0C, capability.identifier()::binary, 0x02>>
+
+      assert_binary_command(preamble, capability, binary_command)
+    end
+
+    defp assert_binary_command(preamble, capability, binary_command) do
+      command_bin =
+        capability.properties()
+        |> Enum.map(&elem(&1, 0))
+        |> Enum.reduce(<<>>, &(&2 <> <<&1>>))
+
+      assert <<preamble::binary, command_bin::binary>> == binary_command
     end
   end
 
   describe "to_bin/2 and from_bin/2 are inverse functions" do
     test ":set" do
       properties = [
-        speed: %PropertyComponent{data: 42, timestamp: ~U[2019-07-18 13:58:40.489Z]},
-        tire_pressures: %PropertyComponent{data: %{location: :front_left, pressure: 2.3}},
-        tire_pressures: %PropertyComponent{data: %{location: :rear_right, pressure: 2.5}},
+        speed: %PropertyComponent{
+          data: %{value: 88, unit: :miles_per_hour},
+          timestamp: ~U[2019-07-18 13:58:40.489Z]
+        },
+        tire_pressures: %PropertyComponent{
+          data: %{location: :front_left, pressure: %{value: 2.3, unit: :bars}}
+        },
+        tire_pressures: %PropertyComponent{
+          data: %{location: :rear_right, pressure: %{value: 2.5, unit: :bars}}
+        },
         engine_rpm: %PropertyComponent{failure: %{reason: :format_error, description: "Error"}}
       ]
 
@@ -87,6 +116,18 @@ defmodule AutoApi.CommandTest do
     test ":get with no properties" do
       assert cmd_bin = AutoApi.DiagnosticsCommand.to_bin(:get)
       assert {:get, []} == AutoApi.DiagnosticsCommand.from_bin(cmd_bin)
+    end
+
+    test ":get_availability" do
+      properties = [:speed, :tire_pressures, :engine_rpm]
+
+      assert cmd_bin = AutoApi.DiagnosticsCommand.to_bin(:get_availability, properties)
+      assert {:get_availability, properties} == AutoApi.DiagnosticsCommand.from_bin(cmd_bin)
+    end
+
+    test ":get_availability with no properties" do
+      assert cmd_bin = AutoApi.DiagnosticsCommand.to_bin(:get_availability)
+      assert {:get_availability, []} == AutoApi.DiagnosticsCommand.from_bin(cmd_bin)
     end
   end
 
@@ -118,6 +159,32 @@ defmodule AutoApi.CommandTest do
                  positions: [
                    %PropertyComponent{data: %{location: :rear_left, position: :open}}
                  ]
+               }
+    end
+
+    test "get_availability works" do
+      mileage_availability = %{
+        update_rate: :trip,
+        rate_limit: %{value: 2, unit: :times_per_day},
+        applies_per: :app
+      }
+
+      speed_availability = %{
+        update_rate: :on_change,
+        rate_limit: %{value: 1, unit: :hertz},
+        applies_per: :vehicle
+      }
+
+      state = %AutoApi.DiagnosticsState{
+        mileage: %AutoApi.PropertyComponent{availability: mileage_availability},
+        speed: %AutoApi.PropertyComponent{availability: speed_availability}
+      }
+
+      command_bin = AutoApi.DiagnosticsCommand.to_bin(:get_availability, [:speed])
+
+      assert AutoApi.DiagnosticsCommand.execute(state, command_bin) ==
+               %AutoApi.DiagnosticsState{
+                 speed: %AutoApi.PropertyComponent{availability: speed_availability}
                }
     end
   end

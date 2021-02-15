@@ -1,34 +1,49 @@
+# AutoAPI
+# The MIT License
+#
+# Copyright (c) 2018- High-Mobility GmbH (https://high-mobility.com)
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in
+# all copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+# THE SOFTWARE.
 defmodule AutoApi.ChassisSettingsState do
   @moduledoc """
   ChassisSettings state
   """
 
-  alias AutoApi.{CommonData, PropertyComponent}
+  alias AutoApi.{CommonData, State, UnitType}
 
-  defstruct driving_mode: nil,
-            sport_chrono: nil,
-            current_spring_rates: [],
-            maximum_spring_rates: [],
-            minimum_spring_rates: [],
-            current_chassis_position: nil,
-            maximum_chassis_position: nil,
-            minimum_chassis_position: nil,
-            timestamp: nil
+  use AutoApi.State, spec_file: "chassis_settings.json"
 
-  use AutoApi.State, spec_file: "specs/chassis_settings.json"
-
-  @type spring_rate :: %PropertyComponent{data: %{value: integer, axle: CommonData.axle()}}
+  @type sport_chrono :: :inactive | :active | :reset
+  @type spring_rate :: %{
+          value: UnitType.torque(),
+          axle: CommonData.location_longitudinal()
+        }
 
   @type t :: %__MODULE__{
-          driving_mode: %PropertyComponent{data: CommonData.driving_mode()} | nil,
-          sport_chrono: %PropertyComponent{data: CommonData.activity()} | nil,
-          current_spring_rates: list(spring_rate),
-          maximum_spring_rates: list(spring_rate),
-          minimum_spring_rates: list(spring_rate),
-          current_chassis_position: %PropertyComponent{data: integer} | nil,
-          maximum_chassis_position: %PropertyComponent{data: integer} | nil,
-          minimum_chassis_position: %PropertyComponent{data: integer} | nil,
-          timestamp: DateTime.t() | nil
+          driving_mode: State.property(CommonData.driving_mode()),
+          sport_chrono: State.property(sport_chrono()),
+          current_spring_rates: State.multiple_property(spring_rate),
+          maximum_spring_rates: State.multiple_property(spring_rate),
+          minimum_spring_rates: State.multiple_property(spring_rate),
+          current_chassis_position: State.property(UnitType.length()),
+          maximum_chassis_position: State.property(UnitType.length()),
+          minimum_chassis_position: State.property(UnitType.length())
         }
 
   @doc """

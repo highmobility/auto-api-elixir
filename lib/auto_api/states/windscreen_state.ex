@@ -1,21 +1,33 @@
+# AutoAPI
+# The MIT License
+#
+# Copyright (c) 2018- High-Mobility GmbH (https://high-mobility.com)
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in
+# all copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+# THE SOFTWARE.
 defmodule AutoApi.WindscreenState do
   @moduledoc """
   Windscreen state
   """
 
-  alias AutoApi.{CommonData, PropertyComponent}
+  alias AutoApi.State
 
-  defstruct wipers_status: nil,
-            wipers_intensity: nil,
-            windscreen_damage: nil,
-            windscreen_zone_matrix: nil,
-            windscreen_damage_zone: nil,
-            windscreen_needs_replacement: nil,
-            windscreen_damage_confidence: nil,
-            windscreen_damage_detection_time: nil,
-            timestamp: nil
-
-  use AutoApi.State, spec_file: "specs/windscreen.json"
+  use AutoApi.State, spec_file: "windscreen.json"
 
   @type wipers_status :: :inactive | :active | :automatic
   @type wipers_intensity :: :level_0 | :level_1 | :level_2 | :level_3
@@ -24,21 +36,21 @@ defmodule AutoApi.WindscreenState do
           | :impact_but_no_damage_detected
           | :damage_smaller_than_1_inch
           | :damage_larger_than_1_inch
-  @type windscreen_zone_matrix :: :unavailable | :horizontal_size | :vertical_size
-  @type windscreen_damage_zone :: :unknown | :horizontal_position | :vertical_position
+  @type zone :: %{
+          horizontal: integer(),
+          vertical: integer()
+        }
   @type windscreen_needs_replacement :: :unknown | :no_replacement_needed | :replacement_needed
 
   @type t :: %__MODULE__{
-          wipers_status: %PropertyComponent{data: wipers_status} | nil,
-          wipers_intensity: %PropertyComponent{data: wipers_intensity} | nil,
-          windscreen_damage: %PropertyComponent{data: windscreen_damage} | nil,
-          windscreen_zone_matrix: %PropertyComponent{data: windscreen_zone_matrix} | nil,
-          windscreen_damage_zone: %PropertyComponent{data: windscreen_damage_zone} | nil,
-          windscreen_needs_replacement:
-            %PropertyComponent{data: windscreen_needs_replacement} | nil,
-          windscreen_damage_confidence: %PropertyComponent{data: float} | nil,
-          windscreen_damage_detection_time: %PropertyComponent{data: integer} | nil,
-          timestamp: DateTime.t() | nil
+          wipers_status: State.property(wipers_status),
+          wipers_intensity: State.property(wipers_intensity),
+          windscreen_damage: State.property(windscreen_damage),
+          windscreen_zone_matrix: State.property(zone()),
+          windscreen_damage_zone: State.property(zone()),
+          windscreen_needs_replacement: State.property(windscreen_needs_replacement),
+          windscreen_damage_confidence: State.property(float),
+          windscreen_damage_detection_time: State.property(DateTime.t())
         }
 
   @doc """

@@ -1,0 +1,93 @@
+{
+    "name": "ignition",
+    "name_cased": "ignition",
+    "name_pretty": "Ignition",
+    "category": "digital_key",
+    "authorization": true,
+    "identifier": {
+        "msb": 0,
+        "lsb": 53
+    },
+    "api": {
+        "intro": 3,
+        "update": 12
+    },
+    "getters": {},
+    "setters": [
+        {
+            "name": "turn_ignition_on_off",
+            "mandatory": [
+                1
+            ],
+            "description": "Attempt to turn the vehicle engine ignition on or off. When the engine ignition is on, it is possible for the driver to turn on the engine and drive the vehicle."
+        }
+    ],
+    "state": "all",
+    "properties": [
+        {
+            "id": 1,
+            "name": "status",
+            "name_cased": "status",
+            "name_pretty": "Status",
+            "type": "types.on_off_state",
+            "examples": [
+                {
+                    "data_component": "00",
+                    "value": "off",
+                    "description": "Ignition is off"
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "name": "accessories_status",
+            "name_cased": "accessoriesStatus",
+            "name_pretty": "Accessories status",
+            "type": "types.on_off_state",
+            "examples": [
+                {
+                    "data_component": "01",
+                    "value": "on",
+                    "description": "Accessories power is on"
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "name": "state",
+            "name_cased": "state",
+            "name_pretty": "State",
+            "type": "enum",
+            "size": 1,
+            "enum_values": [
+                {
+                    "id": 0,
+                    "name": "lock"
+                },
+                {
+                    "id": 1,
+                    "name": "off"
+                },
+                {
+                    "id": 2,
+                    "name": "accessory"
+                },
+                {
+                    "id": 3,
+                    "name": "on"
+                },
+                {
+                    "id": 4,
+                    "name": "start"
+                }
+            ],
+            "examples": [
+                {
+                    "data_component": "02",
+                    "value": "accessory",
+                    "description": "Ignition state is in accessory"
+                }
+            ]
+        }
+    ]
+}

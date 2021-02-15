@@ -17,7 +17,7 @@
 # Please inquire about commercial licensing options at
 # licensing@high-mobility.com
 defmodule AutoApi.CapabilityTest do
-  use ExUnit.Case
+  use ExUnit.Case, async: true
   doctest AutoApi.Capability
 
   alias AutoApi.Capability
@@ -46,11 +46,5 @@ defmodule AutoApi.CapabilityTest do
     assert Enum.all?(capabilities, fn cap ->
              Capability.get_by_id(cap.identifier) == cap
            end)
-  end
-
-  test "list_capabilities/0 returns legacy format" do
-    cap_ids = Enum.into(Capability.all(), %{}, &{&1.identifier, &1})
-
-    assert cap_ids == Capability.list_capabilities()
   end
 end

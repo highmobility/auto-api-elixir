@@ -20,7 +20,7 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.CapabilityMeta do
+defmodule AutoApi.Capability.Meta do
   @moduledoc false
 
   # We could parse the files in `/specs` instead
@@ -63,15 +63,16 @@ defmodule AutoApi.CapabilityMeta do
     AutoApi.RemoteControlCapability,
     AutoApi.RooftopControlCapability,
     AutoApi.SeatsCapability,
-    AutoApi.EngineStartStopCapability,
     AutoApi.TachographCapability,
     AutoApi.TextInputCapability,
     AutoApi.TheftAlarmCapability,
+    AutoApi.TripsCapability,
     AutoApi.TrunkCapability,
     AutoApi.UsageCapability,
     AutoApi.ValetModeCapability,
     AutoApi.VehicleLocationCapability,
     AutoApi.VehicleStatusCapability,
+    AutoApi.VehicleInformationCapability,
     AutoApi.VehicleTimeCapability,
     AutoApi.VideoHandoverCapability,
     AutoApi.WakeUpCapability,
@@ -112,10 +113,6 @@ defmodule AutoApi.CapabilityMeta do
       end
 
       def get_by_name(name), do: @capability_names_to_modules[name]
-
-      def list_capabilities() do
-        Enum.into(all(), %{}, &{&1.identifier, &1})
-      end
     end
   end
 end

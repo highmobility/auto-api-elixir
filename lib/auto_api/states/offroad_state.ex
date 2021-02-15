@@ -1,28 +1,45 @@
+# AutoAPI
+# The MIT License
+#
+# Copyright (c) 2018- High-Mobility GmbH (https://high-mobility.com)
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in
+# all copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+# THE SOFTWARE.
 defmodule AutoApi.OffroadState do
   @moduledoc """
   Offroad state
   """
 
-  alias AutoApi.{CommonData, PropertyComponent}
+  alias AutoApi.{State, UnitType}
 
-  defstruct route_incline: nil,
-            wheel_suspension: nil,
-            timestamp: nil
-
-  use AutoApi.State, spec_file: "specs/offroad.json"
+  use AutoApi.State, spec_file: "offroad.json"
 
   @type t :: %__MODULE__{
-          route_incline: %PropertyComponent{data: integer} | nil,
-          wheel_suspension: %PropertyComponent{data: float} | nil,
-          timestamp: DateTime.t() | nil
+          route_incline: State.property(UnitType.angle()),
+          wheel_suspension: State.property(float)
         }
 
   @doc """
   Build state based on binary value
 
-    iex> bin = <<1, 0, 5, 1, 0, 2, 0, 22>>
+    iex> bin = <<2, 0, 11, 1, 0, 8, 63, 204, 40, 245, 194, 143, 92, 41>>
     iex> AutoApi.OffroadState.from_bin(bin)
-    %AutoApi.OffroadState{route_incline: %AutoApi.PropertyComponent{data: 22}}
+    %AutoApi.OffroadState{wheel_suspension: %AutoApi.PropertyComponent{data: 0.22}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -32,9 +49,9 @@ defmodule AutoApi.OffroadState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.OffroadState{route_incline: %AutoApi.PropertyComponent{data: 22}}
+    iex> state = %AutoApi.OffroadState{wheel_suspension: %AutoApi.PropertyComponent{data: 0.22}}
     iex> AutoApi.OffroadState.to_bin(state)
-    <<1, 0, 5, 1, 0, 2, 0, 22>>
+    <<2, 0, 11, 1, 0, 8, 63, 204, 40, 245, 194, 143, 92, 41>>
   """
   @spec to_bin(__MODULE__.t()) :: binary
   def to_bin(%__MODULE__{} = state) do

@@ -1,40 +1,51 @@
+# AutoAPI
+# The MIT License
+#
+# Copyright (c) 2018- High-Mobility GmbH (https://high-mobility.com)
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in
+# all copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+# THE SOFTWARE.
 defmodule AutoApi.FailureMessageState do
   @moduledoc """
   Keeps Failure Message state
   """
 
-  alias AutoApi.PropertyComponent
+  alias AutoApi.State
+
+  use AutoApi.State, spec_file: "failure_message.json"
 
   @type failure_reason ::
           :unsupported_capability
           | :unauthorised
-          | :unauthorized
           | :incorrect_state
           | :execution_timeout
           | :vehicle_asleep
           | :invalid_command
           | :pending
           | :rate_limit
-
-  @doc """
-  FailureMessage state
-  """
-  defstruct failed_message_id: nil,
-            failed_message_type: nil,
-            failure_reason: nil,
-            failure_description: nil,
-            failed_property_ids: nil,
-            timestamp: nil
-
-  use AutoApi.State, spec_file: "specs/failure_message.json"
+          | :oem_error
 
   @type t :: %__MODULE__{
-          failed_message_id: %PropertyComponent{data: integer} | nil,
-          failed_message_type: %PropertyComponent{data: integer} | nil,
-          failure_reason: %PropertyComponent{data: failure_reason} | nil,
-          failure_description: %PropertyComponent{data: String.t()} | nil,
-          failed_property_ids: %PropertyComponent{data: binary()} | nil,
-          timestamp: DateTime.t() | nil
+          failed_message_id: State.property(integer()),
+          failed_message_type: State.property(integer()),
+          failure_reason: State.property(failure_reason()),
+          failure_description: State.property(String.t()),
+          failed_property_ids: State.property(binary())
         }
 
   @doc """

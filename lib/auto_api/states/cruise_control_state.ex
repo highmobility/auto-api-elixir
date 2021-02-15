@@ -1,28 +1,42 @@
+# AutoAPI
+# The MIT License
+#
+# Copyright (c) 2018- High-Mobility GmbH (https://high-mobility.com)
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in
+# all copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+# THE SOFTWARE.
 defmodule AutoApi.CruiseControlState do
   @moduledoc """
   CruiseControl state
   """
 
-  alias AutoApi.{CommonData, PropertyComponent}
+  alias AutoApi.{CommonData, State, UnitType}
 
-  defstruct cruise_control: nil,
-            limiter: nil,
-            target_speed: nil,
-            adaptive_cruise_control: nil,
-            acc_target_speed: nil,
-            timestamp: nil
-
-  use AutoApi.State, spec_file: "specs/cruise_control.json"
+  use AutoApi.State, spec_file: "cruise_control.json"
 
   @type limiter :: :not_set | :higher_speed_requested | :lower_speed_requested | :speed_fixed
 
   @type t :: %__MODULE__{
-          cruise_control: %PropertyComponent{data: CommonData.activity()} | nil,
-          limiter: %PropertyComponent{data: limiter} | nil,
-          target_speed: %PropertyComponent{data: integer} | nil,
-          adaptive_cruise_control: %PropertyComponent{data: CommonData.activity()} | nil,
-          acc_target_speed: %PropertyComponent{data: integer} | nil,
-          timestamp: DateTime.t() | nil
+          cruise_control: State.property(CommonData.activity()),
+          limiter: State.property(limiter),
+          target_speed: State.property(UnitType.speed()),
+          adaptive_cruise_control: State.property(CommonData.activity()),
+          acc_target_speed: State.property(UnitType.speed())
         }
 
   @doc """

@@ -34,22 +34,59 @@ defmodule AutoApi.PropertyComponent do
 
   The `failure` is set if there was an error that prevented retrieving the
   property data.
+
+  The `availability` fields indicates how often the data is updated, and any
+  limitation on how many times the property can receive updates in a specific
+  time frame.
   """
 
   require Logger
 
-  defstruct [:data, :timestamp, :failure]
+  alias AutoApi.UnitType
 
-  @prop_id_to_name %{0x01 => :data, 0x02 => :timestamp, 0x03 => :failure}
-  @prop_name_to_id %{:data => 0x01, :timestamp => 0x02, :failure => 0x03}
+  defstruct [:data, :timestamp, :failure, :availability]
+
+  @prop_id_to_name %{0x01 => :data, 0x02 => :timestamp, 0x03 => :failure, 0x05 => :availability}
+  @prop_name_to_id %{data: 0x01, timestamp: 0x02, failure: 0x03, availability: 0x05}
+  @version AutoApi.version()
 
   @type reason ::
-          :rate_limit | :execution_timeout | :format_error | :unauthorised | :unknown | :pending
+          :rate_limit
+          | :execution_timeout
+          | :format_error
+          | :unauthorised
+          | :unknown
+          | :pending
+          | :oem_error
+
   @type failure :: %{reason: reason(), description: String.t()}
-  @type t :: %__MODULE__{data: any, timestamp: nil | DateTime.t(), failure: nil | failure}
+
+  @type update_rate ::
+          :trip_high
+          | :trip
+          | :trip_start_end
+          | :trip_end
+          | :unknown
+          | :not_available
+          | :on_change
+
+  @type applies_per :: :app | :vehicle
+
+  @type availability :: %{
+          update_rate: update_rate(),
+          rate_limit: UnitType.frequency(),
+          applies_per: applies_per()
+        }
+
+  @type t(data) :: %__MODULE__{
+          data: data,
+          timestamp: nil | DateTime.t(),
+          failure: nil | failure,
+          availability: nil | availability
+        }
+  @type t() :: t(any())
+
   @type spec :: map() | list()
-  @type data_types :: :integer
-  @type size :: integer
 
   @doc """
   Converts PropertyComponent struct to binary"
@@ -58,7 +95,8 @@ defmodule AutoApi.PropertyComponent do
   def to_bin(%__MODULE__{} = prop, spec) do
     wrap_with_size(prop, :data, &data_to_bin(&1, spec)) <>
       wrap_with_size(prop, :timestamp, &timestamp_to_bin/1) <>
-      wrap_with_size(prop, :failure, &failure_to_bin/1)
+      wrap_with_size(prop, :failure, &failure_to_bin/1) <>
+      wrap_with_size(prop, :availability, &availability_to_bin/1)
   end
 
   defp wrap_with_size(prop, field, conversion_fun) do
@@ -76,16 +114,16 @@ defmodule AutoApi.PropertyComponent do
 
   defp data_to_bin(nil, _), do: <<>>
 
-  defp data_to_bin(data, %{"embedded" => true, "type" => "string"}) do
-    <<byte_size(data)::integer-16, data::binary>>
-  end
-
-  defp data_to_bin(data, %{"embedded" => true, "type" => "bytes"}) do
+  defp data_to_bin(data, %{"type" => "string", "embedded" => true}) do
     <<byte_size(data)::integer-16, data::binary>>
   end
 
   defp data_to_bin(data, %{"type" => "string"}) do
     data
+  end
+
+  defp data_to_bin(data, %{"type" => "bytes", "embedded" => true}) do
+    <<byte_size(data)::integer-16, data::binary>>
   end
 
   defp data_to_bin(data, %{"type" => "bytes"}) do
@@ -118,13 +156,13 @@ defmodule AutoApi.PropertyComponent do
   defp data_to_bin(data, %{"type" => "integer", "size" => size}) do
     size_bit = size * 8
 
-    <<data::integer-size(size_bit)>>
+    <<data::integer-signed-size(size_bit)>>
   end
 
   defp data_to_bin(data, %{"type" => "uinteger", "size" => size}) do
     size_bit = size * 8
 
-    <<data::integer-size(size_bit)>>
+    <<data::integer-unsigned-size(size_bit)>>
   end
 
   defp data_to_bin(data, %{"type" => "timestamp"}) do
@@ -132,6 +170,38 @@ defmodule AutoApi.PropertyComponent do
   end
 
   defp data_to_bin(data, %{"type" => "custom"} = specs) do
+    bin_data = custom_type_to_bin(data, specs)
+
+    if specs["embedded"] && is_nil(specs["size"]) do
+      # Prepend with size only if embedded with no size, like string and bytes
+      <<byte_size(bin_data)::integer-16, bin_data::binary>>
+    else
+      bin_data
+    end
+  end
+
+  # Workaround while `capability_state` type is `bytes`
+  defp data_to_bin(%state_mod{} = state, %{"type" => "types.capability_state"}) do
+    cap_id = state_mod.identifier()
+    state_bin = state_mod.to_bin(state)
+
+    <<@version, cap_id::binary-size(2), 0x01, state_bin::binary()>>
+  end
+
+  defp data_to_bin(data, %{"type" => "types." <> type} = spec) do
+    type_spec = type |> AutoApi.CustomType.spec() |> Map.put("embedded", spec["embedded"])
+
+    data_to_bin(data, type_spec)
+  end
+
+  defp data_to_bin(%{value: value, unit: unit}, %{"type" => "unit." <> type}) do
+    type_id = AutoApi.UnitType.id(type)
+    unit_id = AutoApi.UnitType.unit_id(type, unit)
+
+    <<type_id, unit_id, value::float-size(64)>>
+  end
+
+  defp custom_type_to_bin(data, specs) do
     specs
     |> Map.get("items")
     |> Enum.map(&Map.put(&1, "embedded", true))
@@ -141,17 +211,6 @@ defmodule AutoApi.PropertyComponent do
       |> data_to_bin(spec)
     end)
     |> :binary.list_to_bin()
-  end
-
-  # Workaround while `capability_state` type is `bytes`
-  defp data_to_bin(%state_mod{} = state, %{"type" => "types.capability_state"}) do
-    state_mod.identifier <> <<0x01>> <> state_mod.to_bin(state)
-  end
-
-  defp data_to_bin(data, %{"type" => "types." <> type}) do
-    type_spec = AutoApi.CustomType.spec(type)
-
-    data_to_bin(data, type_spec)
   end
 
   defp timestamp_to_bin(nil), do: <<>>
@@ -170,6 +229,13 @@ defmodule AutoApi.PropertyComponent do
     <<reason_bin, description_size::integer-16, description::binary>>
   end
 
+  defp availability_to_bin(nil), do: <<>>
+
+  defp availability_to_bin(availability) do
+    # Availability type is "types.availability"
+    data_to_bin(availability, %{"type" => "types.availability"})
+  end
+
   @doc """
   Converts PropertyComponent binary to struct
   """
@@ -183,7 +249,8 @@ defmodule AutoApi.PropertyComponent do
   defp common_components_to_struct(prop_in_binary, data) do
     timestamp = to_value(prop_in_binary.timestamp, %{"type" => "timestamp"})
     failure = failure_to_value(prop_in_binary.failure)
-    %__MODULE__{data: data, timestamp: timestamp, failure: failure}
+    availability = availability_to_value(prop_in_binary.availability)
+    %__MODULE__{data: data, timestamp: timestamp, failure: failure, availability: availability}
   end
 
   defp to_value(nil, _) do
@@ -211,11 +278,11 @@ defmodule AutoApi.PropertyComponent do
   end
 
   defp to_value(binary_data, %{"type" => "uinteger"}) do
-    AutoApi.CommonData.convert_bin_to_integer(binary_data)
+    AutoApi.CommonData.convert_bin_to_uinteger(binary_data)
   end
 
   defp to_value(binary_data, %{"type" => "timestamp"}) do
-    timestamp_in_milisec = AutoApi.CommonData.convert_bin_to_integer(binary_data)
+    timestamp_in_milisec = AutoApi.CommonData.convert_bin_to_uinteger(binary_data)
 
     case DateTime.from_unix(timestamp_in_milisec, :millisecond) do
       {:ok, datetime} -> datetime
@@ -246,7 +313,11 @@ defmodule AutoApi.PropertyComponent do
     |> Enum.reduce({0, []}, fn spec, {counter, acc} ->
       item_spec = fetch_item_spec(spec)
       size = fetch_item_size(binary_data, counter, item_spec)
-      counter = update_counter(item_spec, counter)
+      counter = update_counter(counter, item_spec)
+
+      if size - counter > byte_size(binary_data) do
+        Logger.warn("not able to parse binary_data for #{inspect(specs)}")
+      end
 
       data_value =
         binary_data
@@ -261,7 +332,7 @@ defmodule AutoApi.PropertyComponent do
 
   # Workaround while `capability_state` type is `bytes`
   defp to_value(binary_data, %{"type" => "types.capability_state"}) do
-    <<cap_id::binary-size(2), 0x01, bin_state::binary>> = binary_data
+    <<@version, cap_id::binary-size(2), 0x01, bin_state::binary()>> = binary_data
     cap_mod = AutoApi.Capability.get_by_id(cap_id)
 
     cap_mod.state.from_bin(bin_state)
@@ -271,6 +342,12 @@ defmodule AutoApi.PropertyComponent do
     type_spec = AutoApi.CustomType.spec(type)
 
     to_value(binary_data, type_spec)
+  end
+
+  defp to_value(<<id, unit_id, value::float-64>>, %{"type" => "unit." <> _type}) do
+    unit = AutoApi.UnitType.unit_name(id, unit_id)
+
+    %{value: value, unit: unit}
   end
 
   defp failure_to_value(nil), do: nil
@@ -284,6 +361,13 @@ defmodule AutoApi.PropertyComponent do
     }
   end
 
+  defp availability_to_value(nil), do: nil
+
+  defp availability_to_value(availability_bin) do
+    # Availability type is "types.availability"
+    to_value(availability_bin, %{"type" => "types.availability"})
+  end
+
   defp split_binary_to_parts(
          <<prop_comp_id, prop_size::integer-16, prop_data::binary-size(prop_size), rest::binary>>,
          acc
@@ -295,34 +379,35 @@ defmodule AutoApi.PropertyComponent do
   defp split_binary_to_parts(<<>>, acc), do: acc
 
   defp fetch_item_spec(%{"type" => "types." <> type}) do
-    AutoApi.CustomType.spec(type)
+    type
+    |> AutoApi.CustomType.spec()
+    |> Map.put("embedded", "true")
   end
 
-  defp fetch_item_spec(spec), do: spec
+  defp fetch_item_spec(spec) do
+    Map.put(spec, "embedded", "true")
+  end
 
+  @sizeless_types ~w(custom string bytes)
   defp fetch_item_size(_binary_data, _counter, %{"size" => size}) do
     size
   end
 
-  defp fetch_item_size(binary_data, counter, %{"type" => "string"}) do
-    # String type without size spec has a fixed size header of 2 bytes
+  defp fetch_item_size(binary_data, counter, %{"type" => type}) when type in @sizeless_types do
     binary_data
     |> :binary.part(counter, 2)
-    |> AutoApi.CommonData.convert_bin_to_integer()
-  end
-
-  defp fetch_item_size(binary_data, counter, %{"type" => "bytes"}) do
-    # Bytes type without size spec has a fixed size header of 2 bytes
-    binary_data
-    |> :binary.part(counter, 2)
-    |> AutoApi.CommonData.convert_bin_to_integer()
+    |> AutoApi.CommonData.convert_bin_to_uinteger()
   end
 
   defp fetch_item_size(_, _, spec) do
     raise("couldn't find size for #{inspect(spec)}")
   end
 
-  defp update_counter(%{"type" => "string"}, counter), do: counter + 2
-  defp update_counter(%{"type" => "bytes"}, counter), do: counter + 2
-  defp update_counter(_, counter), do: counter
+  defp update_counter(counter, specs) do
+    if specs["type"] in @sizeless_types && is_nil(specs["size"]) do
+      counter + 2
+    else
+      counter
+    end
+  end
 end

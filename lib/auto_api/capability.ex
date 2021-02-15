@@ -25,22 +25,24 @@ defmodule AutoApi.Capability do
   Capability behaviour
   """
 
-  alias AutoApi.CapabilityHelper
+  alias AutoApi.{CapabilityHelper, UniversalProperties}
 
   defmacro __using__(spec_file: spec_file) do
-    raw_spec = Poison.decode!(File.read!(spec_file))
+    spec_path = Path.join(["specs", "capabilities", spec_file])
+    raw_spec = Jason.decode!(File.read!(spec_path))
 
-    properties = raw_spec["properties"] || []
+    universal_properties = UniversalProperties.raw_spec()["universal_properties"]
+    properties = (raw_spec["properties"] || []) ++ universal_properties
 
     base_functions =
-      quote do
-        @external_resource unquote(spec_file)
+      quote location: :keep do
+        @external_resource unquote(spec_path)
         @raw_spec unquote(Macro.escape(raw_spec))
 
         @identifier <<@raw_spec["identifier"]["msb"], @raw_spec["identifier"]["lsb"]>>
         @name String.to_atom(@raw_spec["name"])
-        if @raw_spec["pretty_name"] do
-          @desc @raw_spec["pretty_name"]
+        if @raw_spec["name_pretty"] do
+          @desc @raw_spec["name_pretty"]
         else
           @desc @raw_spec["name"]
                 |> String.split("_")
@@ -80,15 +82,17 @@ defmodule AutoApi.Capability do
         def state, do: @state_module
 
         @doc """
-                Returns which properties are included in the State specification.
+        Returns which properties are included in the State specification.
 
-                ## Examples
+        Universal properties are always included
 
-        iex> AutoApi.SeatsCapability.state_properties()
-        [:persons_detected, :seatbelts_state]
+        ## Examples
 
-        iex> AutoApi.WakeUpCapability.state_properties()
-        []
+            iex> AutoApi.SeatsCapability.state_properties()
+            [:persons_detected, :seatbelts_state, :nonce, :vehicle_signature, :timestamp, :vin, :brand]
+
+            iex> AutoApi.WakeUpCapability.state_properties()
+            [:nonce, :vehicle_signature, :timestamp, :vin, :brand]
         """
         @spec state_properties() :: list(atom)
         def state_properties(), do: @state_properties
@@ -185,7 +189,7 @@ defmodule AutoApi.Capability do
         prop_name = String.to_atom(prop["name"])
         multiple? = prop["multiple"] || false
 
-        quote do
+        quote location: :keep do
           def property_id(unquote(prop_name)), do: unquote(prop_id)
           def property_name(unquote(prop_id)), do: unquote(prop_name)
           def property_spec(unquote(prop_name)), do: unquote(Macro.escape(prop))
@@ -226,12 +230,12 @@ defmodule AutoApi.Capability do
 
   iex> capabilities = AutoApi.Capability.all()
   iex> length(capabilities)
-  54
+  55
   iex> List.first(capabilities)
   AutoApi.BrowserCapability
   """
   @spec all() :: list(module)
-  defdelegate all(), to: AutoApi.CapabilityDelegate
+  defdelegate all(), to: AutoApi.Capability.Delegate
 
   @doc """
   Returns a capability module by its binary id.
@@ -247,7 +251,7 @@ defmodule AutoApi.Capability do
   nil
   """
   @spec get_by_id(binary) :: module | nil
-  defdelegate get_by_id(id), to: AutoApi.CapabilityDelegate
+  defdelegate get_by_id(id), to: AutoApi.Capability.Delegate
 
   @doc """
   Returns a capability module by its name.
@@ -268,18 +272,5 @@ defmodule AutoApi.Capability do
   nil
   """
   @spec get_by_name(binary | atom) :: module | nil
-  defdelegate get_by_name(name), to: AutoApi.CapabilityDelegate
-
-  @doc """
-  Returns a map with the capability identifiers as keys and the modules as values.
-
-  ## Examples
-
-  iex> capabilities = AutoApi.Capability.all()
-  iex> list = Enum.into(capabilities, %{}, &{&1.identifier, &1})
-  iex> AutoApi.Capability.list_capabilities == list
-  true
-  """
-  @deprecated "Use all/0 and AutoApi.Capability.identifier/0 instead"
-  defdelegate list_capabilities(), to: AutoApi.CapabilityDelegate
+  defdelegate get_by_name(name), to: AutoApi.Capability.Delegate
 end

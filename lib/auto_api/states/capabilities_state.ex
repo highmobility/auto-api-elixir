@@ -1,3 +1,25 @@
+# AutoAPI
+# The MIT License
+#
+# Copyright (c) 2018- High-Mobility GmbH (https://high-mobility.com)
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in
+# all copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+# THE SOFTWARE.
 defmodule AutoApi.CapabilitiesState do
   @moduledoc """
   Capabilities state
@@ -7,23 +29,31 @@ defmodule AutoApi.CapabilitiesState do
   will translate those into modules and property names.
   """
 
-  alias AutoApi.PropertyComponent
+  alias AutoApi.State
 
-  defstruct capabilities: [],
-            timestamp: nil
+  use AutoApi.State, spec_file: "capabilities.json"
 
-  use AutoApi.State, spec_file: "specs/capabilities.json"
+  @type capability :: %{
+          capability_id: integer(),
+          supported_property_ids: binary()
+        }
 
-  @type capability :: %PropertyComponent{
-          data: %{
-            capability_id: integer(),
-            supported_property_ids: binary()
-          }
+  @type event ::
+          :ping
+          | :trip_started
+          | :trip_ended
+          | :vehicle_location_changed
+          | :authorization_changed
+          | :tire_pressure_changed
+
+  @type webhook :: %{
+          available: :available | :unavailable,
+          event: event()
         }
 
   @type t :: %__MODULE__{
-          capabilities: list(capability()),
-          timestamp: DateTime.t() | nil
+          capabilities: State.multiple_property(capability()),
+          webhooks: State.multiple_property(webhook())
         }
 
   @doc """

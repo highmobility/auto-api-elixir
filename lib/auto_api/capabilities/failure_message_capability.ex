@@ -1,3 +1,25 @@
+# AutoAPI
+# The MIT License
+#
+# Copyright (c) 2018- High-Mobility GmbH (https://high-mobility.com)
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in
+# all copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+# THE SOFTWARE.
 defmodule AutoApi.FailureMessageCapability do
   @moduledoc """
   Basic settings for FailureMessage Capability
@@ -10,13 +32,13 @@ defmodule AutoApi.FailureMessageCapability do
       iex> F.description
       "Failure Message"
       iex> length(F.properties)
-      5
-      iex> List.last(F.properties)
-      {5, :failed_property_ids}
+      10
+      iex> List.first(F.properties)
+      {1, :failed_message_id}
   """
 
   @command_module AutoApi.FailureMessageCommand
   @state_module AutoApi.FailureMessageState
 
-  use AutoApi.Capability, spec_file: "specs/failure_message.json"
+  use AutoApi.Capability, spec_file: "failure_message.json"
 end
