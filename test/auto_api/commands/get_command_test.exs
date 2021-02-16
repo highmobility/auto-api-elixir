@@ -1,6 +1,8 @@
 defmodule AutoApi.GetCommandTest do
   use ExUnit.Case, async: true
   use PropCheck
+  import AutoApi.PropCheckFixtures
+
   doctest AutoApi.GetCommand
 
   alias AutoApi.GetCommand, as: SUT
@@ -12,26 +14,5 @@ defmodule AutoApi.GetCommandTest do
       assert cmd_bin = SUT.to_bin(command)
       assert command == SUT.from_bin(cmd_bin)
     end
-  end
-
-  defp capability_with_properties() do
-    let [
-      capability <- capability(),
-      properties <- properties(^capability)
-    ] do
-      {capability, properties}
-    end
-  end
-
-  defp capability() do
-    oneof(AutoApi.Capability.all())
-  end
-
-  defp properties(capability) do
-    properties =
-      capability.properties()
-      |> Enum.map(&elem(&1, 1))
-
-    shrink_list(properties)
   end
 end
