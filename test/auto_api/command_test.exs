@@ -55,4 +55,62 @@ defmodule AutoApi.CommandTest do
       end
     end
   end
+
+  describe "to_bin/1" do
+    property "works with get_availability commands" do
+      forall {capability, properties} <- capability_with_properties() do
+        command = %GetAvailabilityCommand{capability: capability, properties: properties}
+
+        assert command_bin = SUT.to_bin(command)
+        assert command == GetAvailabilityCommand.from_bin(command_bin)
+      end
+    end
+
+    property "works with get commands" do
+      forall {capability, properties} <- capability_with_properties() do
+        command = %GetCommand{capability: capability, properties: properties}
+
+        assert command_bin = SUT.to_bin(command)
+        assert command == GetCommand.from_bin(command_bin)
+      end
+    end
+
+    property "works with set commands" do
+      forall {capability, state} <- capability_with_state() do
+        command = %SetCommand{capability: capability, state: state}
+
+        assert command_bin = SUT.to_bin(command)
+        assert command == SetCommand.from_bin(command_bin)
+      end
+    end
+  end
+
+  describe "to_bin and from_bin are inverse/1" do
+    property "works with get_availability commands" do
+      forall {capability, properties} <- capability_with_properties() do
+        command = %GetAvailabilityCommand{capability: capability, properties: properties}
+
+        assert command_bin = SUT.to_bin(command)
+        assert command == SUT.from_bin(command_bin)
+      end
+    end
+
+    property "works with get commands" do
+      forall {capability, properties} <- capability_with_properties() do
+        command = %GetCommand{capability: capability, properties: properties}
+
+        assert command_bin = SUT.to_bin(command)
+        assert command == SUT.from_bin(command_bin)
+      end
+    end
+
+    property "works with set commands" do
+      forall {capability, state} <- capability_with_state() do
+        command = %SetCommand{capability: capability, state: state}
+
+        assert command_bin = SUT.to_bin(command)
+        assert command == SUT.from_bin(command_bin)
+      end
+    end
+  end
 end

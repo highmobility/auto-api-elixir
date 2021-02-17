@@ -33,6 +33,7 @@ defmodule AutoApi.Command do
   @callback to_bin(command()) :: binary()
   @callback from_bin(binary()) :: command()
 
+  @commands [GetAvailabilityCommand, GetCommand, SetCommand]
   @version AutoApi.version()
 
   @doc """
@@ -71,5 +72,35 @@ defmodule AutoApi.Command do
       ^get_command_id -> AutoApi.GetCommand.from_bin(bin_command)
       ^set_command_id -> AutoApi.SetCommand.from_bin(bin_command)
     end
+  end
+
+  @doc """
+  Parses a command and returns it in binary format.
+
+  This is a convenience function that only delegates to the `to_bin/1` function of the command module.
+
+  ## Examples
+
+  iex> # Request all properties for race state
+  iex> command = %AutoApi.GetAvailabilityCommand{capability: AutoApi.RaceCapability, properties: []}
+  iex> #{__MODULE__}.to_bin(command)
+  <<12, 0, 87, 2>>
+
+  iex> # Request the door locks state
+  iex> command = %AutoApi.GetCommand{capability: AutoApi.DoorsCapability, properties: [:locks_state]}
+  iex> #{__MODULE__}.to_bin(command)
+  <<12, 0, 32, 0, 6>>
+
+  iex> # Request to honk the horn for 2.5 seconds
+  iex> capability = AutoApi.HonkHornFlashLightsCapability
+  iex> honk_time = %{value: 2.5, unit: :seconds}
+  iex> state = AutoApi.State.put(capability.state().base(), :honk_time, data: honk_time)
+  iex> command = %AutoApi.SetCommand{capability: capability, state: state}
+  iex> #{__MODULE__}.to_bin(command)
+  <<12, 0, 38, 1, 5, 0, 13, 1, 0, 10, 7, 0, 64, 4, 0, 0, 0, 0, 0, 0>>
+  """
+  @spec to_bin(command()) :: binary()
+  def to_bin(%command_mod{} = command) when command_mod in @commands do
+    command_mod.to_bin(command)
   end
 end
