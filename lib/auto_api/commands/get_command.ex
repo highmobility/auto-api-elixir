@@ -10,9 +10,11 @@ defmodule AutoApi.GetCommand do
 
   @behaviour AutoApi.Command
 
+  @type properties :: list(AutoApi.Capability.property())
+
   @type t :: %__MODULE__{
           capability: AutoApi.Capability.t(),
-          properties: list(AutoApi.Capability.property())
+          properties: properties
         }
 
   @enforce_keys [:capability, :properties]
@@ -32,6 +34,21 @@ defmodule AutoApi.GetCommand do
   @impl true
   @spec identifier() :: byte()
   def identifier(), do: @identifier
+
+  @doc """
+  Creates a new GetCommand structure with the given `capability` and `properties`.
+
+  # Example
+
+      iex> capability = AutoApi.ClimateCapability
+      iex> properties = [:hvac_state, :defogging_state]
+      iex> #{__MODULE__}.new(capability, properties)
+      %#{__MODULE__}{capability: AutoApi.ClimateCapability, properties: [:hvac_state, :defogging_state]}
+  """
+  @spec new(AutoApi.Capability.t(), properties()) :: t()
+  def new(capability, properties) do
+    %__MODULE__{capability: capability, properties: properties}
+  end
 
   @doc """
   Transforms a GetCommand struct into a binary format.

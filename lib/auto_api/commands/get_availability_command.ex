@@ -11,9 +11,11 @@ defmodule AutoApi.GetAvailabilityCommand do
 
   @behaviour AutoApi.Command
 
+  @type properties :: list(AutoApi.Capability.property())
+
   @type t :: %__MODULE__{
           capability: AutoApi.Capability.t(),
-          properties: list(AutoApi.Capability.property())
+          properties: properties()
         }
 
   @enforce_keys [:capability, :properties]
@@ -35,18 +37,33 @@ defmodule AutoApi.GetAvailabilityCommand do
   def identifier(), do: @identifier
 
   @doc """
+  Creates a new GetAvailabilityCommand structure with the given `capability` and `properties`.
+
+  # Example
+
+      iex> capability = AutoApi.SeatsCapability
+      iex> properties = [:persons_detected]
+      iex> #{__MODULE__}.new(capability, properties)
+      %#{__MODULE__}{capability: AutoApi.SeatsCapability, properties: [:persons_detected]}
+  """
+  @spec new(AutoApi.Capability.t(), properties()) :: t()
+  def new(capability, properties) do
+    %__MODULE__{capability: capability, properties: properties}
+  end
+
+  @doc """
   Transforms a GetAvailabilityCommand struct into a binary format.
 
   If the command is somehow invalid, it returns an error.
 
   # Examples
 
-  iex> # Request the door locks state
+  iex> # Request the door locks state availability
   iex> command = %#{__MODULE__}{capability: AutoApi.DoorsCapability, properties: [:locks_state]}
   iex> #{__MODULE__}.to_bin(command)
   <<12, 0, 32, 2, 6>>
 
-  iex> # Request all properties for race state
+  iex> # Request all properties availability for race state
   iex> command = %#{__MODULE__}{capability: AutoApi.RaceCapability, properties: []}
   iex> #{__MODULE__}.to_bin(command)
   <<12, 0, 87, 2>>

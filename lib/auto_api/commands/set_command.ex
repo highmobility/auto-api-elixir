@@ -24,6 +24,38 @@ defmodule AutoApi.SetCommand do
   @identifier 0x01
 
   @doc """
+  Creates a new SetCommand structure with the given `state`.
+
+  The `capability` module is derived from the given state structure.
+
+  # Example
+
+      iex> state = %AutoApi.TrunkState{lock: %AutoApi.Property{data: :locked}}
+      iex> #{__MODULE__}.new(state)
+      %#{__MODULE__}{capability: AutoApi.TrunkCapability, state: %AutoApi.TrunkState{lock: %AutoApi.Property{data: :locked}}}
+  """
+
+  @spec new(AutoApi.State.t()) :: t()
+  def new(%state_mod{} = state) do
+    new(state_mod.capability(), state)
+  end
+
+  @doc """
+  Creates a new SetCommand structure with the given `capability` and `state`.
+
+  # Example
+
+      iex> capability = AutoApi.TrunkCapability
+      iex> state = %AutoApi.TrunkState{lock: %AutoApi.Property{data: :locked}}
+      iex> #{__MODULE__}.new(capability, state)
+      %#{__MODULE__}{capability: AutoApi.TrunkCapability, state: %AutoApi.TrunkState{lock: %AutoApi.Property{data: :locked}}}
+  """
+  @spec new(AutoApi.Capability.t(), AutoApi.State.t()) :: t()
+  def new(capability, state) do
+    %__MODULE__{capability: capability, state: state}
+  end
+
+  @doc """
   Returns the identifier of the command.
 
   # Example
@@ -42,20 +74,20 @@ defmodule AutoApi.SetCommand do
 
   # Examples
 
-  iex> # Request to unlock the doors of the vehicle
-  iex> locks_state = %AutoApi.Property{data: :unlocked}
-  iex> state = AutoApi.State.put(%AutoApi.DoorsState{}, :locks_state, locks_state)
-  iex> command = %#{__MODULE__}{capability: AutoApi.DoorsCapability, state: state}
-  iex> #{__MODULE__}.to_bin(command)
-  <<12, 0, 32, 1, 6, 0, 4, 1, 0, 1, 0>>
+      iex> # Request to unlock the doors of the vehicle
+      iex> locks_state = %AutoApi.Property{data: :unlocked}
+      iex> state = AutoApi.State.put(%AutoApi.DoorsState{}, :locks_state, locks_state)
+      iex> command = %#{__MODULE__}{capability: AutoApi.DoorsCapability, state: state}
+      iex> #{__MODULE__}.to_bin(command)
+      <<12, 0, 32, 1, 6, 0, 4, 1, 0, 1, 0>>
 
-  iex> # Request to honk the horn for 2.5 seconds
-  iex> capability = AutoApi.HonkHornFlashLightsCapability
-  iex> honk_time = %{value: 2.5, unit: :seconds}
-  iex> state = AutoApi.State.put(capability.state().base(), :honk_time, data: honk_time)
-  iex> command = %#{__MODULE__}{capability: capability, state: state}
-  iex> #{__MODULE__}.to_bin(command)
-  <<12, 0, 38, 1, 5, 0, 13, 1, 0, 10, 7, 0, 64, 4, 0, 0, 0, 0, 0, 0>>
+      iex> # Request to honk the horn for 2.5 seconds
+      iex> capability = AutoApi.HonkHornFlashLightsCapability
+      iex> honk_time = %{value: 2.5, unit: :seconds}
+      iex> state = AutoApi.State.put(capability.state().base(), :honk_time, data: honk_time)
+      iex> command = %#{__MODULE__}{capability: capability, state: state}
+      iex> #{__MODULE__}.to_bin(command)
+      <<12, 0, 38, 1, 5, 0, 13, 1, 0, 10, 7, 0, 64, 4, 0, 0, 0, 0, 0, 0>>
   """
   @impl true
   @spec to_bin(t()) :: binary()
