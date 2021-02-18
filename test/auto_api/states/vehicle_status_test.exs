@@ -23,7 +23,7 @@
 defmodule AutoApi.VehicleStatusStateTest do
   use ExUnit.Case, async: true
   doctest AutoApi.VehicleStatusState
-  alias AutoApi.{VehicleStatusState, State}
+  alias AutoApi.VehicleStatusState
 
   test "Correctly encodes state in to_bin/1" do
     diag_state =
@@ -44,8 +44,8 @@ defmodule AutoApi.VehicleStatusStateTest do
 
     state =
       VehicleStatusState.base()
-      |> State.put(:states, data: diag_state)
-      |> State.put(:states, data: doors_state)
+      |> VehicleStatusState.put_state(diag_state)
+      |> VehicleStatusState.put_state(doors_state)
 
     state_bin = VehicleStatusState.to_bin(state)
 
@@ -84,11 +84,46 @@ defmodule AutoApi.VehicleStatusStateTest do
 
     assert [diag_state, door_state] = state.states
 
-    assert diag_state.data.speed.data == %{value: 88, unit: :miles_per_hour}
-    assert diag_state.data.speed.timestamp == ~U[2020-12-02 11:27:48.372Z]
-    refute diag_state.data.speed.failure
+    assert diag_state.data.state.speed.data == %{value: 88, unit: :miles_per_hour}
+    assert diag_state.data.state.speed.timestamp == ~U[2020-12-02 11:27:48.372Z]
+    refute diag_state.data.state.speed.failure
 
-    assert [position] = door_state.data.positions
+    assert [position] = door_state.data.state.positions
+    assert position.data.location == :front_left
+    assert position.data.position == :closed
+    refute position.timestamp
+    refute position.failure
+  end
+
+  test "put_state works" do
+    diag_state =
+      AutoApi.DiagnosticsState.base()
+      |> AutoApi.State.put(:speed,
+        data: %{value: 88.0, unit: :miles_per_hour},
+        timestamp: ~U[2020-12-02 11:27:48.372Z]
+      )
+
+    doors_state =
+      AutoApi.DoorsState.base()
+      |> AutoApi.State.put(:positions,
+        data: %{
+          location: :front_left,
+          position: :closed
+        }
+      )
+
+    state =
+      VehicleStatusState.base()
+      |> VehicleStatusState.put_state(diag_state)
+      |> VehicleStatusState.put_state(doors_state)
+
+    assert [diag_state, door_state] = state.states
+
+    assert diag_state.data.state.speed.data == %{value: 88, unit: :miles_per_hour}
+    assert diag_state.data.state.speed.timestamp == ~U[2020-12-02 11:27:48.372Z]
+    refute diag_state.data.state.speed.failure
+
+    assert [position] = door_state.data.state.positions
     assert position.data.location == :front_left
     assert position.data.position == :closed
     refute position.timestamp

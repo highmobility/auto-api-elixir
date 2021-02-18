@@ -227,15 +227,20 @@ defmodule AutoApi.PropertyTest do
           }
         )
 
+      command = %AutoApi.SetCommand{
+        capability: AutoApi.DoorsCapability,
+        state: state
+      }
+
       prop_bin =
         Property.to_bin(
-          %Property{data: state, timestamp: datetime},
+          %Property{data: command, timestamp: datetime},
           spec
         )
 
       prop_comp = Property.to_struct(prop_bin, spec)
 
-      assert prop_comp.data == state
+      assert prop_comp.data == command
       assert DateTime.to_unix(prop_comp.timestamp) == DateTime.to_unix(datetime)
       assert prop_comp.failure == nil
     end

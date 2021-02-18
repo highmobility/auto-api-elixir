@@ -24,20 +24,20 @@ defmodule AutoApi.HistoricalStateTest do
   use ExUnit.Case, async: true
   doctest AutoApi.HistoricalState
 
-  alias AutoApi.{ChargingState, HistoricalState, Property}
+  alias AutoApi.{ChargingState, HistoricalState, Property, SetCommand}
 
   test "from_bin/1 and to_bin/1" do
     states = [
       %Property{
-        data: %ChargingState{battery_level: %Property{data: 0.6}},
+        data: SetCommand.new(%ChargingState{battery_level: %Property{data: 0.6}}),
         timestamp: ~U[2019-10-16 12:34:04.000Z]
       },
       %Property{
-        data: %ChargingState{battery_level: %Property{data: 0.75}},
+        data: SetCommand.new(%ChargingState{battery_level: %Property{data: 0.75}}),
         timestamp: ~U[2019-10-16 13:34:04.000Z]
       },
       %Property{
-        data: %ChargingState{battery_level: %Property{data: 0.89}},
+        data: SetCommand.new(%ChargingState{battery_level: %Property{data: 0.89}}),
         timestamp: ~U[2019-10-16 14:34:04.000Z]
       }
     ]

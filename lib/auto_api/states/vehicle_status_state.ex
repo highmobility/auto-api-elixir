@@ -38,7 +38,8 @@ defmodule AutoApi.VehicleStatusState do
 
     iex> bin = <<153, 0, 14, 1, 0, 11, 12, 0, 103, 1, 1, 0, 4, 1, 0, 1, 2>>
     iex> state = AutoApi.VehicleStatusState.from_bin(bin)
-    iex> [%AutoApi.Property{data: hood_state}] = state.states
+    iex> [%AutoApi.Property{data: hood_command}] = state.states
+    iex> %AutoApi.SetCommand{state: hood_state} = hood_command
     iex> hood_state
     %AutoApi.HoodState{position: %AutoApi.Property{data: :intermediate}}
   """
@@ -51,12 +52,37 @@ defmodule AutoApi.VehicleStatusState do
   Parse state to bin
 
     iex> hood_state = %AutoApi.HoodState{position: %AutoApi.Property{data: :intermediate}}
-    iex> state = %AutoApi.VehicleStatusState{states: [%AutoApi.Property{data: hood_state}]}
+    iex> hood_command = AutoApi.SetCommand.new(AutoApi.HoodCapability, hood_state)
+    iex> state = %AutoApi.VehicleStatusState{states: [%AutoApi.Property{data: hood_command}]}
     iex> AutoApi.VehicleStatusState.to_bin(state)
     <<153, 0, 14, 1, 0, 11, 12, 0, 103, 1, 1, 0, 4, 1, 0, 1, 2>>
   """
   @spec to_bin(__MODULE__.t()) :: binary
   def to_bin(%__MODULE__{} = state) do
     parse_state_properties(state)
+  end
+
+  @doc """
+  Add a state entry to the provided VehicleStatus state.
+
+  This is intended as a convenience wrapper on `AutoApi.State.put` that wraps the provided state into a SetCommand.
+
+  This is because VehicleStatus.states entries makes only sense as a SetCommand (as they contain the states data).
+
+  # Example
+
+      iex> empty_vs_state = AutoApi.VehicleStatusState.base()
+      iex> state = %AutoApi.HoodState{position: %AutoApi.Property{data: :open}}
+      iex> vs_state = AutoApi.VehicleStatusState.put_state(empty_vs_state, state)
+      iex> %{states: [%AutoApi.Property{data: hood_command}]} = vs_state
+      iex> %AutoApi.SetCommand{capability: AutoApi.HoodCapability, state: hood_state} = hood_command
+      iex> hood_state
+      %AutoApi.HoodState{position: %AutoApi.Property{data: :open}}
+
+  """
+  @spec put_state(__MODULE__.t(), AutoApi.State.t()) :: __MODULE__.t()
+  def put_state(vehicle_state, state) do
+    command = AutoApi.SetCommand.new(state)
+    AutoApi.State.put(vehicle_state, :states, data: command)
   end
 end
