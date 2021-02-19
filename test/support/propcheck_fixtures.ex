@@ -3,6 +3,31 @@ defmodule AutoApi.PropCheckFixtures do
 
   use PropCheck
 
+  alias AutoApi.{GetAvailabilityCommand, GetCommand, SetCommand}
+
+  def command() do
+    let [
+      command_type <- oneof([GetAvailabilityCommand, GetCommand, SetCommand]),
+      capability <- capability(),
+      property_or_state <- property_or_state(^command_type, ^capability)
+    ] do
+      command_type.new(capability, property_or_state)
+    end
+  end
+
+  defp property_or_state(command_type, capability) do
+    case command_type do
+      GetAvailabilityCommand ->
+        properties(capability)
+
+      GetCommand ->
+        properties(capability)
+
+      SetCommand ->
+        state(capability)
+    end
+  end
+
   def capability_with_properties() do
     let [
       capability <- capability(),
@@ -27,11 +52,30 @@ defmodule AutoApi.PropCheckFixtures do
   def capability_with_state() do
     let [
       capability <- capability(),
-      properties <- state_properties(^capability),
-      state <- state(^capability, ^properties)
+      state <- state(^capability)
     ] do
       {capability, state}
     end
+  end
+
+  def state(capability) do
+    let [
+      properties <- state_properties(capability),
+      state <- state(capability, ^properties)
+    ] do
+      state
+    end
+  end
+
+  defp state(capability, properties) do
+    state_base = capability.state().base()
+
+    state =
+      Enum.reduce(properties, state_base, fn {name, prop}, state ->
+        AutoApi.State.put(state, name, prop)
+      end)
+
+    exactly(state)
   end
 
   def state_properties(capability) do
@@ -73,17 +117,6 @@ defmodule AutoApi.PropCheckFixtures do
     ] do
       {property, %AutoApi.Property{data: property_data}}
     end
-  end
-
-  defp state(capability, properties) do
-    state_base = capability.state().base()
-
-    state =
-      Enum.reduce(properties, state_base, fn {name, prop}, state ->
-        AutoApi.State.put(state, name, prop)
-      end)
-
-    exactly(state)
   end
 
   defp datetime do
