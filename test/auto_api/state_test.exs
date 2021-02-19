@@ -18,6 +18,10 @@
 # licensing@high-mobility.com
 defmodule AutoApi.StateTest do
   use ExUnit.Case, async: true
+  use PropCheck
+
+  import AutoApi.PropCheckFixtures
+
   doctest AutoApi.State
 
   alias AutoApi.{
@@ -33,6 +37,16 @@ defmodule AutoApi.StateTest do
   }
 
   describe "symmetric from_bin/1 & to_bin/1" do
+    property "empty state" do
+      forall capability <- capability() do
+        state_mod = capability.state()
+        state = state_mod.base()
+
+        assert <<>> == state_mod.to_bin(state)
+        assert state == state_mod.from_bin(<<>>)
+      end
+    end
+
     test "integer size 1" do
       state = %RaceState{selected_gear: %Property{data: 12}}
 

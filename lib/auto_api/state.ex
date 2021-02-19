@@ -97,6 +97,8 @@ defmodule AutoApi.State do
           parse_bin_properties(rest, state)
         end
 
+        defp parse_bin_properties(<<>>, state), do: state
+
         defp parse_bin_properties(extra_data, state) do
           Logger.warn("Skipping malformed state data: #{inspect extra_data}")
 
