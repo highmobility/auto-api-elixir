@@ -30,16 +30,17 @@ defmodule AutoApi.SetCommand do
 
   @behaviour AutoApi.Command
 
+  @version AutoApi.version()
+  @identifier 0x01
+
   @type t :: %__MODULE__{
           capability: AutoApi.Capability.t(),
-          state: AutoApi.State.t()
+          state: AutoApi.State.t(),
+          version: AutoApi.version()
         }
 
   @enforce_keys [:capability, :state]
-  defstruct [:capability, :state]
-
-  @version AutoApi.version()
-  @identifier 0x01
+  defstruct [:capability, :state, version: @version]
 
   @doc """
   Creates a new SetCommand structure with the given `state`.
@@ -50,7 +51,7 @@ defmodule AutoApi.SetCommand do
 
       iex> state = %AutoApi.TrunkState{lock: %AutoApi.Property{data: :locked}}
       iex> #{__MODULE__}.new(state)
-      %#{__MODULE__}{capability: AutoApi.TrunkCapability, state: %AutoApi.TrunkState{lock: %AutoApi.Property{data: :locked}}}
+      %#{__MODULE__}{capability: AutoApi.TrunkCapability, state: %AutoApi.TrunkState{lock: %AutoApi.Property{data: :locked}}, version: 12}
   """
 
   @spec new(AutoApi.State.t()) :: t()
@@ -66,11 +67,11 @@ defmodule AutoApi.SetCommand do
       iex> capability = AutoApi.TrunkCapability
       iex> state = %AutoApi.TrunkState{lock: %AutoApi.Property{data: :locked}}
       iex> #{__MODULE__}.new(capability, state)
-      %#{__MODULE__}{capability: AutoApi.TrunkCapability, state: %AutoApi.TrunkState{lock: %AutoApi.Property{data: :locked}}}
+      %#{__MODULE__}{capability: AutoApi.TrunkCapability, state: %AutoApi.TrunkState{lock: %AutoApi.Property{data: :locked}}, version: 12}
   """
   @spec new(AutoApi.Capability.t(), AutoApi.State.t()) :: t()
   def new(capability, state) do
-    %__MODULE__{capability: capability, state: state}
+    %__MODULE__{capability: capability, state: state, version: @version}
   end
 
   @doc """
@@ -122,7 +123,7 @@ defmodule AutoApi.SetCommand do
 
       iex> # Parses a "lock vehicle doors" command
       iex> #{__MODULE__}.from_bin(<<12, 0, 32, 1, 6, 0, 4, 1, 0, 1, 1>>)
-      %#{__MODULE__}{capability: AutoApi.DoorsCapability, state: %AutoApi.DoorsState{locks_state: %AutoApi.Property{data: :locked}}}
+      %#{__MODULE__}{capability: AutoApi.DoorsCapability, state: %AutoApi.DoorsState{locks_state: %AutoApi.Property{data: :locked}}, version: 12}
   """
   @impl true
   @spec from_bin(binary) :: t()
@@ -130,6 +131,6 @@ defmodule AutoApi.SetCommand do
     capability = AutoApi.Capability.get_by_id(capability_id)
     state = capability.state().from_bin(state_bin)
 
-    %__MODULE__{capability: capability, state: state}
+    new(capability, state)
   end
 end

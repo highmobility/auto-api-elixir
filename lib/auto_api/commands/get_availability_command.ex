@@ -29,18 +29,19 @@ defmodule AutoApi.GetAvailabilityCommand do
 
   @behaviour AutoApi.Command
 
+  @version AutoApi.version()
+  @identifier 0x02
+
   @type properties :: list(AutoApi.Capability.property())
 
   @type t :: %__MODULE__{
           capability: AutoApi.Capability.t(),
-          properties: properties()
+          properties: properties(),
+          version: AutoApi.version()
         }
 
   @enforce_keys [:capability, :properties]
-  defstruct [:capability, :properties]
-
-  @version AutoApi.version()
-  @identifier 0x02
+  defstruct [:capability, :properties, version: @version]
 
   @doc """
   Returns the identifier of the command.
@@ -62,7 +63,7 @@ defmodule AutoApi.GetAvailabilityCommand do
       iex> capability = AutoApi.SeatsCapability
       iex> properties = [:persons_detected]
       iex> #{__MODULE__}.new(capability, properties)
-      %#{__MODULE__}{capability: AutoApi.SeatsCapability, properties: [:persons_detected]}
+      %#{__MODULE__}{capability: AutoApi.SeatsCapability, properties: [:persons_detected], version: 12}
   """
   @spec new(AutoApi.Capability.t(), properties()) :: t()
   def new(capability, properties) do
@@ -100,7 +101,7 @@ defmodule AutoApi.GetAvailabilityCommand do
   ## Examples
 
       iex> #{__MODULE__}.from_bin(<<0x0C, 0x00, 0x33, 0x02, 0x01, 0x04>>)
-      %#{__MODULE__}{capability: AutoApi.DiagnosticsCapability, properties: [:mileage, :engine_rpm]}
+      %#{__MODULE__}{capability: AutoApi.DiagnosticsCapability, properties: [:mileage, :engine_rpm], version: 12}
   """
   @impl true
   @spec from_bin(binary) :: t()
@@ -112,6 +113,6 @@ defmodule AutoApi.GetAvailabilityCommand do
       |> :binary.bin_to_list()
       |> Enum.map(&capability.property_name/1)
 
-    %__MODULE__{capability: capability, properties: property_names}
+    new(capability, property_names)
   end
 end
