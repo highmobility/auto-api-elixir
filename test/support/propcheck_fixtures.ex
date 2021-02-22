@@ -92,8 +92,7 @@ defmodule AutoApi.PropCheckFixtures do
     # Leave out complex types and multiple properties for now
     spec = capability.property_spec(property)
 
-    spec["multiple"] || String.starts_with?(spec["type"], "types.") ||
-      String.starts_with?(spec["type"], "unit.")
+    spec["multiple"] || String.starts_with?(spec["type"], "types.")
   end
 
   defp populate_property(capability, property_name) do
@@ -108,7 +107,7 @@ defmodule AutoApi.PropCheckFixtures do
         "uinteger" -> uint(spec["size"])
         "double" -> float()
         "enum" -> enum(spec)
-        _ -> nil
+        "unit." <> unit -> unit_type(unit)
       end
 
     let [
@@ -156,6 +155,15 @@ defmodule AutoApi.PropCheckFixtures do
     case size do
       1 -> integer(0, 255)
       2 -> integer(0, 65_535)
+    end
+  end
+
+  defp unit_type(unit) do
+    let [
+      unit <- oneof(AutoApi.UnitType.units(unit)),
+      value <- float()
+    ] do
+      %{unit: unit, value: value}
     end
   end
 end
