@@ -59,6 +59,34 @@ defmodule AutoApi.PropCheckFixtures do
     oneof(AutoApi.Capability.all())
   end
 
+  def unit() do
+    let unit_type <- unit_type() do
+      unit(unit_type)
+    end
+  end
+
+  def unit(unit) do
+    let [
+      unit <- oneof(AutoApi.UnitType.units(unit)),
+      value <- float()
+    ] do
+      %{unit: unit, value: value}
+    end
+  end
+
+  def unit_type() do
+    oneof(AutoApi.UnitType.all())
+  end
+
+  def unit_with_type() do
+    let [
+      unit_type <- unit_type(),
+      unit <- unit(^unit_type)
+    ] do
+      {unit_type, unit}
+    end
+  end
+
   def properties(capability) do
     properties =
       capability.properties()
@@ -125,7 +153,7 @@ defmodule AutoApi.PropCheckFixtures do
         "uinteger" -> uint(spec["size"])
         "double" -> float()
         "enum" -> enum(spec)
-        "unit." <> unit -> unit_type(unit)
+        "unit." <> unit -> unit(unit)
       end
 
     let [
@@ -136,7 +164,7 @@ defmodule AutoApi.PropCheckFixtures do
     end
   end
 
-  defp datetime do
+  def datetime do
     let timestamp <-
           oneof([
             nil,
@@ -152,7 +180,7 @@ defmodule AutoApi.PropCheckFixtures do
     end
   end
 
-  defp enum(spec) do
+  def enum(spec) do
     values =
       spec
       |> Map.get("enum_values")
@@ -162,26 +190,18 @@ defmodule AutoApi.PropCheckFixtures do
     oneof(values)
   end
 
-  defp int(size) do
+  def int(size) do
     case size do
       1 -> integer(-128, 127)
       2 -> integer(-32_768, 32_767)
     end
   end
 
-  defp uint(size) do
+  def uint(size) do
     case size do
       1 -> integer(0, 255)
       2 -> integer(0, 65_535)
-    end
-  end
-
-  defp unit_type(unit) do
-    let [
-      unit <- oneof(AutoApi.UnitType.units(unit)),
-      value <- float()
-    ] do
-      %{unit: unit, value: value}
+      3 -> integer(0, 16_777_215)
     end
   end
 end

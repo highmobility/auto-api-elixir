@@ -20,11 +20,13 @@ defmodule AutoApi.PropertyTest do
   use ExUnit.Case, async: true
   use PropCheck
 
-  alias AutoApi.{Property, State}
+  import AutoApi.PropCheckFixtures
+
+  alias AutoApi.Property
 
   describe "to_bin/3 & to_struct/3" do
     property "converts uint24 to bin" do
-      forall data <- [integer: uinteger_3(), datetime: datetime()] do
+      forall data <- [integer: uint(3), datetime: datetime()] do
         spec = %{"type" => "uinteger", "size" => 3}
 
         prop_bin =
@@ -41,7 +43,7 @@ defmodule AutoApi.PropertyTest do
     end
 
     property "converts uint16 to bin" do
-      forall data <- [integer: uinteger_2(), datetime: datetime()] do
+      forall data <- [integer: uint(2), datetime: datetime()] do
         spec = %{"type" => "uinteger", "size" => 2}
 
         prop_bin =
@@ -58,7 +60,7 @@ defmodule AutoApi.PropertyTest do
     end
 
     property "converts uint8 to bin" do
-      forall data <- [integer: uinteger_1(), datetime: datetime()] do
+      forall data <- [integer: uint(1), datetime: datetime()] do
         spec = %{"type" => "uinteger", "size" => 1}
 
         prop_bin =
@@ -75,7 +77,7 @@ defmodule AutoApi.PropertyTest do
     end
 
     property "converts int16 to bin" do
-      forall data <- [integer: integer_2(), datetime: datetime()] do
+      forall data <- [integer: int(2), datetime: datetime()] do
         spec = %{"type" => "integer", "size" => 2}
 
         prop_bin =
@@ -92,7 +94,7 @@ defmodule AutoApi.PropertyTest do
     end
 
     property "converts int8 to bin" do
-      forall data <- [integer: integer_1(), datetime: datetime()] do
+      forall data <- [integer: int(1), datetime: datetime()] do
         spec = %{"type" => "integer", "size" => 1}
 
         prop_bin =
@@ -109,7 +111,7 @@ defmodule AutoApi.PropertyTest do
     end
 
     property "converts double64 to bin" do
-      forall data <- [double: double_8(), datetime: datetime()] do
+      forall data <- [double: float(), datetime: datetime()] do
         spec = %{"type" => "double", "size" => 8}
 
         prop_bin =
@@ -161,30 +163,30 @@ defmodule AutoApi.PropertyTest do
       end
     end
 
-    test "converts enum to bin" do
-      datetime = DateTime.utc_now()
+    property "converts enum to bin" do
+      forall data <- [enum: oneof([:low, :filled]), datetime: datetime()] do
+        spec = %{
+          "type" => "enum",
+          "name" => "brake_fluid_level",
+          "size" => 1,
+          "enum_values" => [
+            %{"id" => 0x00, "name" => "low"},
+            %{"id" => 1, "name" => "filled"}
+          ]
+        }
 
-      spec = %{
-        "type" => "enum",
-        "name" => "brake_fluid_level",
-        "size" => 1,
-        "enum_values" => [
-          %{"id" => 0x00, "name" => "low"},
-          %{"id" => 1, "name" => "filled"}
-        ]
-      }
+        prop_bin =
+          Property.to_bin(
+            %Property{data: data[:enum], timestamp: data[:datetime]},
+            spec
+          )
 
-      prop_bin =
-        Property.to_bin(
-          %Property{data: :low, timestamp: datetime},
-          spec
-        )
+        prop_comp = Property.to_struct(prop_bin, spec)
 
-      prop_comp = Property.to_struct(prop_bin, spec)
-
-      assert prop_comp.data == :low
-      assert DateTime.to_unix(prop_comp.timestamp) == DateTime.to_unix(datetime)
-      assert prop_comp.failure == nil
+        assert prop_comp.data == data[:enum]
+        assert prop_comp.timestamp == data[:datetime]
+        assert prop_comp.failure == nil
+      end
     end
 
     test "converts enum to bin when it's nil" do
@@ -211,38 +213,24 @@ defmodule AutoApi.PropertyTest do
       assert prop_comp.failure == %{reason: :unknown, description: ""}
     end
 
-    test "converts capability_state to bin" do
-      datetime = DateTime.utc_now()
+    property "converts capability_state to bin" do
+      forall data <- [command: command(), datetime: datetime()] do
+        spec = %{
+          "type" => "types.capability_state"
+        }
 
-      spec = %{
-        "type" => "types.capability_state"
-      }
+        prop_bin =
+          Property.to_bin(
+            %Property{data: data[:command], timestamp: data[:datetime]},
+            spec
+          )
 
-      state =
-        AutoApi.DoorsState.base()
-        |> State.put(:positions,
-          data: %{
-            location: :front_left,
-            position: :closed
-          }
-        )
+        prop_comp = Property.to_struct(prop_bin, spec)
 
-      command = %AutoApi.SetCommand{
-        capability: AutoApi.DoorsCapability,
-        state: state
-      }
-
-      prop_bin =
-        Property.to_bin(
-          %Property{data: command, timestamp: datetime},
-          spec
-        )
-
-      prop_comp = Property.to_struct(prop_bin, spec)
-
-      assert prop_comp.data == command
-      assert DateTime.to_unix(prop_comp.timestamp) == DateTime.to_unix(datetime)
-      assert prop_comp.failure == nil
+        assert prop_comp.data == data[:command]
+        assert prop_comp.timestamp == data[:datetime]
+        assert prop_comp.failure == nil
+      end
     end
 
     test "converts custom type to bin" do
@@ -279,23 +267,32 @@ defmodule AutoApi.PropertyTest do
       assert Property.to_struct(bin_comp, spec) == prop_comp
     end
 
-    test "converts unit type to bin" do
-      spec = %{
-        "type" => "unit.length",
-        "size" => 10,
-        "id" => 0xFD
-      }
+    property "converts unit type to bin" do
+      forall data <- [unit_with_type: unit_with_type(), id: int(1), datetime: datetime()] do
+        {unit_type, unit_value} = data[:unit_with_type]
 
-      prop_comp = %Property{data: %{value: 186, unit: :centimeters}}
-      bin_comp = Property.to_bin(prop_comp, spec)
+        spec = %{
+          "type" => "unit.#{unit_type}",
+          "size" => 10,
+          "id" => data[:id]
+        }
 
-      assert bin_comp == <<0x01, 0x00, 0x0A, 0x12, 0x02, 186::float-64>>
+        prop_bin =
+          Property.to_bin(
+            %Property{data: unit_value, timestamp: data[:datetime]},
+            spec
+          )
 
-      assert Property.to_struct(bin_comp, spec) == prop_comp
+        prop_comp = Property.to_struct(prop_bin, spec)
+
+        assert prop_comp.data == unit_value
+        assert prop_comp.timestamp == data[:datetime]
+        assert prop_comp.failure == nil
+      end
     end
 
     property "converts custom value with string to bin" do
-      forall data <- [id: integer_2(), text: utf8(), datetime: datetime()] do
+      forall data <- [id: int(2), text: utf8(), datetime: datetime()] do
         spec = %{
           "type" => "custom",
           "items" => [
@@ -419,7 +416,7 @@ defmodule AutoApi.PropertyTest do
     end
 
     property "converts embedded custom value with strings to bin" do
-      forall data <- [id: integer_2(), text: utf8(), datetime: datetime()] do
+      forall data <- [id: int(2), text: utf8(), datetime: datetime()] do
         spec = %{
           "type" => "custom",
           "items" => [
@@ -709,32 +706,6 @@ defmodule AutoApi.PropertyTest do
 
   def error_reason do
     oneof([:rate_limit, :execution_timeout, :format_error, :unauthorised, :unknown, :pending])
-  end
-
-  def uinteger_3, do: integer(0, 16_777_215)
-  def uinteger_2, do: integer(0, 65_535)
-  def uinteger_1, do: integer(0, 255)
-  def integer_2, do: integer(-32_768, 32_767)
-  def integer_1, do: integer(-128, 127)
-
-  def double_8 do
-    oneof([0.0, float()])
-  end
-
-  def datetime do
-    let timestamp <-
-          oneof([
-            nil,
-            0,
-            range(1, 1_000_000),
-            range(1_550_226_102_909, 9_550_226_102_909),
-            9_999_999_999_999
-          ]) do
-      case timestamp && DateTime.from_unix(timestamp, :millisecond) do
-        {:ok, datetime} -> datetime
-        _ -> nil
-      end
-    end
   end
 
   def update_rate do
