@@ -37,7 +37,7 @@ defmodule AutoApi.CruiseControlCapability do
       {1, :cruise_control}
   """
 
-  @command_module AutoApi.CruiseControlCommand
+  @command_module AutoApi.LegacyCommand
   @state_module AutoApi.CruiseControlState
 
   use AutoApi.Capability, spec_file: "cruise_control.json"

@@ -35,7 +35,7 @@ defmodule AutoApi.MultiCommandCapability do
       7
   """
 
-  @command_module AutoApi.MultiCommandCommand
+  @command_module AutoApi.LegacyCommand
   @state_module AutoApi.MultiCommandState
 
   use AutoApi.Capability, spec_file: "multi_command.json"

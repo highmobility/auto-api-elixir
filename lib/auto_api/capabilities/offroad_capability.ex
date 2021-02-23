@@ -37,7 +37,7 @@ defmodule AutoApi.OffroadCapability do
       {0x01, :route_incline}
   """
 
-  @command_module AutoApi.OffroadCommand
+  @command_module AutoApi.LegacyCommand
   @state_module AutoApi.OffroadState
 
   use AutoApi.Capability, spec_file: "offroad.json"

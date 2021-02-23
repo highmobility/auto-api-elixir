@@ -37,7 +37,7 @@ defmodule AutoApi.MaintenanceCapability do
       {0x01, :days_to_next_service}
   """
 
-  @command_module AutoApi.MaintenanceCommand
+  @command_module AutoApi.LegacyCommand
   @state_module AutoApi.MaintenanceState
 
   use AutoApi.Capability, spec_file: "maintenance.json"

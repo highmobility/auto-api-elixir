@@ -35,7 +35,7 @@ defmodule AutoApi.WindowsCapability do
       {2, :open_percentages}
   """
 
-  @command_module AutoApi.WindowsCommand
+  @command_module AutoApi.LegacyCommand
   @state_module AutoApi.WindowsState
 
   use AutoApi.Capability, spec_file: "windows.json"

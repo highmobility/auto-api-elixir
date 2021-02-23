@@ -37,7 +37,7 @@ defmodule AutoApi.WiFiCapability do
       {1, :status}
   """
 
-  @command_module AutoApi.WiFiCommand
+  @command_module AutoApi.LegacyCommand
   @state_module AutoApi.WiFiState
 
   use AutoApi.Capability, spec_file: "wi_fi.json"

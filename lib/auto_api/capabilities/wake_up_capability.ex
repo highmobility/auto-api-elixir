@@ -35,7 +35,7 @@ defmodule AutoApi.WakeUpCapability do
       {1, :status}
   """
 
-  @command_module AutoApi.WakeUpCommand
+  @command_module AutoApi.LegacyCommand
   @state_module AutoApi.WakeUpState
 
   use AutoApi.Capability, spec_file: "wake_up.json"

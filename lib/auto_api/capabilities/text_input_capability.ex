@@ -35,7 +35,7 @@ defmodule AutoApi.TextInputCapability do
       6
   """
 
-  @command_module AutoApi.TextInputCommand
+  @command_module AutoApi.LegacyCommand
   @state_module AutoApi.TextInputState
 
   use AutoApi.Capability, spec_file: "text_input.json"

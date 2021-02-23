@@ -37,7 +37,7 @@ defmodule AutoApi.ParkingTicketCapability do
       {1, :status}
   """
 
-  @command_module AutoApi.ParkingTicketCommand
+  @command_module AutoApi.LegacyCommand
   @state_module AutoApi.ParkingTicketState
 
   use AutoApi.Capability, spec_file: "parking_ticket.json"

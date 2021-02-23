@@ -37,7 +37,7 @@ defmodule AutoApi.LightConditionsCapability do
       {0x01, :outside_light}
   """
 
-  @command_module AutoApi.LightConditionsCommand
+  @command_module AutoApi.LegacyCommand
   @state_module AutoApi.LightConditionsState
 
   use AutoApi.Capability, spec_file: "light_conditions.json"

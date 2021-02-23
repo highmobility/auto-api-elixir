@@ -37,7 +37,7 @@ defmodule AutoApi.VehicleStatusCapability do
       {0x99, :states}
   """
 
-  @command_module AutoApi.VehicleStatusCommand
+  @command_module AutoApi.LegacyCommand
   @state_module AutoApi.VehicleStatusState
 
   use AutoApi.Capability, spec_file: "vehicle_status.json"

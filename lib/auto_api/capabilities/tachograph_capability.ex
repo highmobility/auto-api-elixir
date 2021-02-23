@@ -37,7 +37,7 @@ defmodule AutoApi.TachographCapability do
       {1, :drivers_working_states}
   """
 
-  @command_module AutoApi.TachographCommand
+  @command_module AutoApi.LegacyCommand
   @state_module AutoApi.TachographState
 
   use AutoApi.Capability, spec_file: "tachograph.json"

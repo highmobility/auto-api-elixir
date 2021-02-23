@@ -37,7 +37,7 @@ defmodule AutoApi.DoorsCapability do
       {0x02, :inside_locks}
   """
 
-  @command_module AutoApi.DoorsCommand
+  @command_module AutoApi.LegacyCommand
   @state_module AutoApi.DoorsState
 
   use AutoApi.Capability, spec_file: "doors.json"

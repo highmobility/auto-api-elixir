@@ -37,7 +37,7 @@ defmodule AutoApi.UsageCapability do
       {0x01, :average_weekly_distance}
   """
 
-  @command_module AutoApi.UsageCommand
+  @command_module AutoApi.LegacyCommand
   @state_module AutoApi.UsageState
 
   use AutoApi.Capability, spec_file: "usage.json"

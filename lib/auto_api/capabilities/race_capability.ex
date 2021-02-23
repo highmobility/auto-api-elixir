@@ -37,7 +37,7 @@ defmodule AutoApi.RaceCapability do
       {1, :accelerations}
   """
 
-  @command_module AutoApi.RaceCommand
+  @command_module AutoApi.LegacyCommand
   @state_module AutoApi.RaceState
 
   use AutoApi.Capability, spec_file: "race.json"

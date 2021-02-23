@@ -37,7 +37,7 @@ defmodule AutoApi.SeatsCapability do
       {0x02, :persons_detected}
   """
 
-  @command_module AutoApi.SeatsCommand
+  @command_module AutoApi.LegacyCommand
   @state_module AutoApi.SeatsState
 
   use AutoApi.Capability, spec_file: "seats.json"

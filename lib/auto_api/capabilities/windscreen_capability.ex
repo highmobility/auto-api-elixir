@@ -37,7 +37,7 @@ defmodule AutoApi.WindscreenCapability do
       {0x01, :wipers_status}
   """
 
-  @command_module AutoApi.WindscreenCommand
+  @command_module AutoApi.LegacyCommand
   @state_module AutoApi.WindscreenState
 
   use AutoApi.Capability, spec_file: "windscreen.json"

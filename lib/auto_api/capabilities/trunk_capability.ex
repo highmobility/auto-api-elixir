@@ -37,7 +37,7 @@ defmodule AutoApi.TrunkCapability do
       {1, :lock}
   """
 
-  @command_module AutoApi.TrunkCommand
+  @command_module AutoApi.LegacyCommand
   @state_module AutoApi.TrunkState
 
   use AutoApi.Capability, spec_file: "trunk.json"

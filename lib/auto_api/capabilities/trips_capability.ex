@@ -37,7 +37,7 @@ defmodule AutoApi.TripsCapability do
       {1, :type}
   """
 
-  @command_module AutoApi.TripsCommand
+  @command_module AutoApi.LegacyCommand
   @state_module AutoApi.TripsState
 
   use AutoApi.Capability, spec_file: "trips.json"

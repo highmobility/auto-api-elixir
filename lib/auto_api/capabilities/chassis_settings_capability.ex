@@ -37,7 +37,7 @@ defmodule AutoApi.ChassisSettingsCapability do
       {0x01, :driving_mode}
   """
 
-  @command_module AutoApi.ChassisSettingsCommand
+  @command_module AutoApi.LegacyCommand
   @state_module AutoApi.ChassisSettingsState
 
   use AutoApi.Capability, spec_file: "chassis_settings.json"

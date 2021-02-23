@@ -37,7 +37,7 @@ defmodule AutoApi.NaviDestinationCapability do
       {0x01, :coordinates}
   """
 
-  @command_module AutoApi.NaviDestinationCommand
+  @command_module AutoApi.LegacyCommand
   @state_module AutoApi.NaviDestinationState
 
   use AutoApi.Capability, spec_file: "navi_destination.json"

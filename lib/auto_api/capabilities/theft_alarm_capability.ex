@@ -37,7 +37,7 @@ defmodule AutoApi.TheftAlarmCapability do
       {1, :status}
   """
 
-  @command_module AutoApi.TheftAlarmCommand
+  @command_module AutoApi.LegacyCommand
   @state_module AutoApi.TheftAlarmState
 
   use AutoApi.Capability, spec_file: "theft_alarm.json"

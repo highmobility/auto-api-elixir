@@ -37,7 +37,7 @@ defmodule AutoApi.ParkingBrakeCapability do
       {1, :status}
   """
 
-  @command_module AutoApi.ParkingBrakeCommand
+  @command_module AutoApi.LegacyCommand
   @state_module AutoApi.ParkingBrakeState
 
   use AutoApi.Capability, spec_file: "parking_brake.json"

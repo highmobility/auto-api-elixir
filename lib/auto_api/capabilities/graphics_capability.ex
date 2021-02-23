@@ -35,7 +35,7 @@ defmodule AutoApi.GraphicsCapability do
       6
   """
 
-  @command_module AutoApi.GraphicsCommand
+  @command_module AutoApi.LegacyCommand
   @state_module AutoApi.GraphicsState
 
   use AutoApi.Capability, spec_file: "graphics.json"
