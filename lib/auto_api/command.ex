@@ -27,14 +27,28 @@ defmodule AutoApi.Command do
 
   alias AutoApi.{GetAvailabilityCommand, GetCommand, SetCommand}
 
-  @type command :: GetAvailabilityCommand.t() | GetCommand.t() | SetCommand.t()
+  @type t :: GetAvailabilityCommand.t() | GetCommand.t() | SetCommand.t()
 
   @callback identifier :: byte()
-  @callback to_bin(command()) :: binary()
-  @callback from_bin(binary()) :: command()
+  @callback to_bin(t()) :: binary()
+  @callback from_bin(binary()) :: t()
 
   @commands [GetAvailabilityCommand, GetCommand, SetCommand]
   @version AutoApi.version()
+
+  @doc """
+  Returns the identifier of the command
+
+  # Example
+
+  iex> command = AutoApi.GetAvailabilityCommand.new(AutoApi.DiagnosticsCapability, [])
+  iex> AutoApi.Command.identifier(command)
+  0x02
+  """
+  @spec identifier(t()) :: identifier()
+  def identifier(%command_module{}) when command_module in @commands do
+    command_module.identifier()
+  end
 
   @doc """
   Parses a binary command and returns a struct with the command data.
@@ -61,7 +75,7 @@ defmodule AutoApi.Command do
       iex> #{__MODULE__}.from_bin(<<12, 0, 32, 1, 6, 0, 4, 1, 0, 1, 1>>)
       %AutoApi.SetCommand{capability: AutoApi.DoorsCapability, state: %AutoApi.DoorsState{locks_state: %AutoApi.Property{data: :locked}}}
   """
-  @spec from_bin(binary()) :: command()
+  @spec from_bin(binary()) :: t()
   def from_bin(<<@version, _cap_id::binary-size(2), action, _::binary>> = bin_command) do
     get_availability_command_id = GetAvailabilityCommand.identifier()
     get_command_id = AutoApi.GetCommand.identifier()
@@ -99,7 +113,7 @@ defmodule AutoApi.Command do
   iex> #{__MODULE__}.to_bin(command)
   <<12, 0, 38, 1, 5, 0, 13, 1, 0, 10, 7, 0, 64, 4, 0, 0, 0, 0, 0, 0>>
   """
-  @spec to_bin(command()) :: binary()
+  @spec to_bin(t()) :: binary()
   def to_bin(%command_mod{} = command) when command_mod in @commands do
     command_mod.to_bin(command)
   end

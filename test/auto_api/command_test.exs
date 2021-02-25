@@ -27,6 +27,32 @@ defmodule AutoApi.CommandTest do
 
   doctest AutoApi.Command
 
+  describe "identifier/1" do
+    property "works with get_availability commands" do
+      forall {capability, properties} <- capability_with_properties() do
+        command = %GetAvailabilityCommand{capability: capability, properties: properties}
+
+        assert SUT.identifier(command) == 0x02
+      end
+    end
+
+    property "works with get commands" do
+      forall {capability, properties} <- capability_with_properties() do
+        command = %GetCommand{capability: capability, properties: properties}
+
+        assert SUT.identifier(command) == 0x00
+      end
+    end
+
+    property "works with set commands" do
+      forall {capability, state} <- capability_with_state() do
+        command = %SetCommand{capability: capability, state: state}
+
+        assert SUT.identifier(command) == 0x01
+      end
+    end
+  end
+
   describe "from_bin/1" do
     property "works with get_availability commands" do
       forall {capability, properties} <- capability_with_properties() do
