@@ -28,8 +28,10 @@ defmodule AutoApi.Command do
   alias AutoApi.{GetAvailabilityCommand, GetCommand, SetCommand}
 
   @type t :: GetAvailabilityCommand.t() | GetCommand.t() | SetCommand.t()
+  @type name :: :get | :get_availability | :set
 
   @callback identifier :: byte()
+  @callback name :: name()
   @callback to_bin(t()) :: binary()
   @callback from_bin(binary()) :: t()
 
@@ -48,6 +50,20 @@ defmodule AutoApi.Command do
   @spec identifier(t()) :: identifier()
   def identifier(%command_module{}) when command_module in @commands do
     command_module.identifier()
+  end
+
+  @doc """
+  Returns the name of the command
+
+  # Example
+
+  iex> command = AutoApi.GetAvailabilityCommand.new(AutoApi.DiagnosticsCapability, [])
+  iex> AutoApi.Command.name(command)
+  :get_availability
+  """
+  @spec name(t()) :: name()
+  def name(%command_module{}) when command_module in @commands do
+    command_module.name()
   end
 
   @doc """

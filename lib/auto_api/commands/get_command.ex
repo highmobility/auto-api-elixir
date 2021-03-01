@@ -30,6 +30,7 @@ defmodule AutoApi.GetCommand do
 
   @version AutoApi.version()
   @identifier 0x00
+  @name :get
 
   @type properties :: list(AutoApi.Capability.property())
 
@@ -53,6 +54,18 @@ defmodule AutoApi.GetCommand do
   @impl true
   @spec identifier() :: byte()
   def identifier(), do: @identifier
+
+  @doc """
+  Returns the name of the command.
+
+  # Example
+
+  iex> #{__MODULE__}.name()
+  :get
+  """
+  @impl true
+  @spec name() :: AutoApi.Command.name()
+  def name(), do: @name
 
   @doc """
   Creates a new GetCommand structure with the given `capability` and `properties`.

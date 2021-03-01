@@ -32,6 +32,7 @@ defmodule AutoApi.SetCommand do
 
   @version AutoApi.version()
   @identifier 0x01
+  @name :set
 
   @type t :: %__MODULE__{
           capability: AutoApi.Capability.t(),
@@ -41,6 +42,30 @@ defmodule AutoApi.SetCommand do
 
   @enforce_keys [:capability, :state]
   defstruct [:capability, :state, version: @version]
+
+  @doc """
+  Returns the identifier of the command.
+
+  # Example
+
+  iex> #{__MODULE__}.identifier()
+  0x01
+  """
+  @impl true
+  @spec identifier() :: byte()
+  def identifier(), do: @identifier
+
+  @doc """
+  Returns the name of the command.
+
+  # Example
+
+  iex> #{__MODULE__}.name()
+  :set
+  """
+  @impl true
+  @spec name() :: AutoApi.Command.name()
+  def name(), do: @name
 
   @doc """
   Creates a new SetCommand structure with the given `state`.
@@ -73,18 +98,6 @@ defmodule AutoApi.SetCommand do
   def new(capability, state) do
     %__MODULE__{capability: capability, state: state, version: @version}
   end
-
-  @doc """
-  Returns the identifier of the command.
-
-  # Example
-
-  iex> #{__MODULE__}.identifier()
-  0x01
-  """
-  @impl true
-  @spec identifier() :: byte()
-  def identifier(), do: @identifier
 
   @doc """
   Transforms a SetCommand struct into binary format.

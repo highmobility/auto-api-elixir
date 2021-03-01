@@ -31,6 +31,7 @@ defmodule AutoApi.GetAvailabilityCommand do
 
   @version AutoApi.version()
   @identifier 0x02
+  @name :get_availability
 
   @type properties :: list(AutoApi.Capability.property())
 
@@ -54,6 +55,18 @@ defmodule AutoApi.GetAvailabilityCommand do
   @impl true
   @spec identifier() :: byte()
   def identifier(), do: @identifier
+
+  @doc """
+  Returns the name of the command.
+
+  # Example
+
+  iex> #{__MODULE__}.name()
+  :get_availability
+  """
+  @impl true
+  @spec name() :: AutoApi.Command.name()
+  def name(), do: @name
 
   @doc """
   Creates a new GetAvailabilityCommand structure with the given `capability` and `properties`.
