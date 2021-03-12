@@ -84,6 +84,31 @@ defmodule AutoApi.GetAvailabilityCommand do
   end
 
   @doc """
+  Returns the properties set in the command.
+
+  If the command specifies all properties (that is, it is an empty list) it will return a list
+  of the state properties as by the specifications of the capability.
+
+  ## Examples
+
+      iex> command = #{__MODULE__}.new(AutoApi.RaceCapability, [:vehicle_moving, :gear_mode])
+      iex> #{__MODULE__}.properties(command)
+      [:vehicle_moving, :gear_mode]
+
+      iex> command = #{__MODULE__}.new(AutoApi.HoodCapability, [])
+      iex> #{__MODULE__}.properties(command)
+      [:position, :nonce, :vehicle_signature, :timestamp, :vin, :brand]
+  """
+  @impl true
+  @spec properties(t()) :: list(AutoApi.Capability.property())
+  def properties(%__MODULE__{capability: capability, properties: properties}) do
+    case properties do
+      [] -> capability.state_properties()
+      properties -> properties
+    end
+  end
+
+  @doc """
   Transforms a GetAvailabilityCommand struct into a binary format.
 
   If the command is somehow invalid, it returns an error.

@@ -100,6 +100,32 @@ defmodule AutoApi.SetCommand do
   end
 
   @doc """
+  Returns the properties set in the command state.
+
+  ## Examples
+
+      iex> state = AutoApi.HoodState.base()
+      iex> command = #{__MODULE__}.new(state)
+      iex> #{__MODULE__}.properties(command)
+      []
+
+      iex> state = AutoApi.RaceState.base()
+      ...>         |> AutoApi.State.put(:vehicle_moving, data: :sport, timestamp: ~U[2021-03-12 10:54:14Z])
+      ...>         |> AutoApi.State.put(:brake_torque_vectorings, data: %{axle: :front, state: :active})
+      iex> command = #{__MODULE__}.new(state)
+      iex> #{__MODULE__}.properties(command)
+      [:brake_torque_vectorings, :vehicle_moving]
+  """
+  @impl true
+  @spec properties(t()) :: list(AutoApi.Capability.property())
+  def properties(%__MODULE__{state: state}) do
+    state
+    |> Map.from_struct()
+    |> Enum.reject(fn {_name, value} -> is_nil(value) or value == [] end)
+    |> Keyword.keys()
+  end
+
+  @doc """
   Transforms a SetCommand struct into binary format.
 
   If the command is somehow invalid, it returns an error.

@@ -21,6 +21,7 @@ defmodule AutoApi.CommandTest do
   use PropCheck
 
   import AutoApi.PropCheckFixtures
+  import Assertions, only: [assert_lists_equal: 2]
 
   alias AutoApi.{GetAvailabilityCommand, GetCommand, SetCommand}
   alias AutoApi.Command, as: SUT
@@ -76,6 +77,73 @@ defmodule AutoApi.CommandTest do
 
         assert SUT.name(command) == :set
       end
+    end
+  end
+
+  describe "properties/1" do
+    property "works with get_availability commands" do
+      forall {capability, properties} <- capability_with_properties() do
+        command = %GetAvailabilityCommand{capability: capability, properties: properties}
+
+        expected =
+          case properties do
+            [] -> capability.state_properties()
+            properties -> properties
+          end
+
+        assert SUT.properties(command) == expected
+      end
+    end
+
+    property "works with get commands" do
+      forall {capability, properties} <- capability_with_properties() do
+        command = %GetCommand{capability: capability, properties: properties}
+
+        expected =
+          case properties do
+            [] -> capability.state_properties()
+            properties -> properties
+          end
+
+        assert SUT.properties(command) == expected
+      end
+    end
+
+    property "works with set commands with empty state" do
+      forall capability <- capability() do
+        state = capability.state().base()
+        command = %SetCommand{capability: capability, state: state}
+
+        assert SUT.properties(command) == []
+      end
+    end
+
+    test "works with set commands with some filled state" do
+      # No point in using propcheck here, we would have to  duplicate the
+      # implementation code in the test for the comparison
+      state =
+        AutoApi.DiagnosticsState.base()
+        |> AutoApi.State.put(:fuel_level, data: 0.89)
+        |> AutoApi.State.put(:estimated_range, timestamp: DateTime.utc_now())
+        |> AutoApi.State.put(:check_control_messages,
+          failure: %{reason: :unknown, description: ""}
+        )
+        |> AutoApi.State.put(:tire_pressures,
+          availability: %{
+            update_rate: :trip,
+            rate_limit: %{unit: :hertz, value: 1.0},
+            applies_per: :vehicle
+          }
+        )
+
+      command = SetCommand.new(state)
+
+      assert_lists_equal(SUT.properties(command), [
+        :estimated_range,
+        :fuel_level,
+        :tire_pressures,
+        :check_control_messages
+      ])
     end
   end
 

@@ -33,6 +33,20 @@ defmodule AutoApi.GetCommandTest do
     end
   end
 
+  property "property/1 works" do
+    forall {capability, properties} <- capability_with_properties() do
+      command = SUT.new(capability, properties)
+
+      expected =
+        case properties do
+          [] -> capability.state_properties()
+          properties -> properties
+        end
+
+      assert SUT.properties(command) == expected
+    end
+  end
+
   property "to_bin/1 and from_bin/1 are inverse" do
     forall {capability, properties} <- capability_with_properties() do
       command = SUT.new(capability, properties)

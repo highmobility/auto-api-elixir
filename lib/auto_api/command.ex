@@ -32,6 +32,7 @@ defmodule AutoApi.Command do
 
   @callback identifier :: byte()
   @callback name :: name()
+  @callback properties(t()) :: list(AutoApi.Capability.property())
   @callback to_bin(t()) :: binary()
   @callback from_bin(binary()) :: t()
 
@@ -64,6 +65,36 @@ defmodule AutoApi.Command do
   @spec name(t()) :: name()
   def name(%command_module{}) when command_module in @commands do
     command_module.name()
+  end
+
+  @doc """
+  Returns the properties set in the command.
+
+  For Get and GetAvailability commands, it returns the list of properties in the command, or
+  all the state properties if the list is empty.
+
+  For SetCommands, it returns the list of properties with anything set in them
+
+  # Examples
+
+      iex> command = AutoApi.GetAvailabilityCommand.new(AutoApi.HoodCapability, [])
+      iex> #{__MODULE__}.properties(command)
+      [:position, :nonce, :vehicle_signature, :timestamp, :vin, :brand]
+
+      iex> command = AutoApi.GetCommand.new(AutoApi.HoodCapability, [])
+      iex> #{__MODULE__}.properties(command)
+      [:position, :nonce, :vehicle_signature, :timestamp, :vin, :brand]
+
+      iex> state = AutoApi.RaceState.base()
+      ...>         |> AutoApi.State.put(:vehicle_moving, data: :sport, timestamp: ~U[2021-03-12 10:54:14Z])
+      ...>         |> AutoApi.State.put(:brake_torque_vectorings, data: %{axle: :front, state: :active})
+      iex> command = AutoApi.SetCommand.new(state)
+      iex> #{__MODULE__}.properties(command)
+      [:brake_torque_vectorings, :vehicle_moving]
+  """
+  @spec properties(t()) :: list(AutoApi.Capability.property())
+  def properties(%command_module{} = command) when command_module in @commands do
+    command_module.properties(command)
   end
 
   @doc """
