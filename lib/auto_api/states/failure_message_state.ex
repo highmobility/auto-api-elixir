@@ -25,7 +25,7 @@ defmodule AutoApi.FailureMessageState do
   Keeps Failure Message state
   """
 
-  alias AutoApi.State
+  alias AutoApi.{Command, State}
 
   use AutoApi.State, spec_file: "failure_message.json"
 
@@ -47,6 +47,32 @@ defmodule AutoApi.FailureMessageState do
           failure_description: State.property(String.t()),
           failed_property_ids: State.property(binary())
         }
+
+  @doc """
+  Creates a failure state based on a command
+
+  # Example
+
+      iex> command = AutoApi.GetCommand.new(AutoApi.RaceCapability, [])
+      iex> #{__MODULE__}.from_command(command, :oem_error, "Vehicle is not available")
+      %#{__MODULE__}{
+        failed_message_id: %AutoApi.Property{data: 87},
+        failed_message_type: %AutoApi.Property{data: 0},
+        failure_reason: %AutoApi.Property{data: :oem_error},
+        failure_description: %AutoApi.Property{data: "Vehicle is not available"}
+      }
+  """
+  @spec from_command(Command.t(), failure_reason(), String.t()) :: t()
+  def from_command(command, reason, description) do
+    <<identifier::integer-16>> = command.capability.identifier()
+    command_id = Command.identifier(command)
+
+    base()
+    |> put(:failed_message_id, data: identifier)
+    |> put(:failed_message_type, data: command_id)
+    |> put(:failure_reason, data: reason)
+    |> put(:failure_description, data: description)
+  end
 
   @doc """
   Build state based on binary value
