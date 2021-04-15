@@ -25,97 +25,143 @@ defmodule AutoApi.Command do
   Command behavior for handling AutoApi commands
   """
 
-  alias AutoApi.Capability
+  alias AutoApi.{GetAvailabilityCommand, GetCommand, SetCommand}
 
-  @type capability_name :: atom()
-  @type action :: atom()
-  @type data :: any()
-  @type get_properties :: list(atom)
-  @type set_properties :: keyword(AutoApi.PropertyComponent.t() | data())
+  @type t :: GetAvailabilityCommand.t() | GetCommand.t() | SetCommand.t()
+  @type name :: :get | :get_availability | :set
 
-  defmacro __using__(_opts) do
-    capability =
-      __CALLER__.module
-      |> Atom.to_string()
-      |> String.replace(~r/Command$/, "Capability")
-      |> String.to_atom()
+  @callback identifier :: byte()
+  @callback name :: name()
+  @callback properties(t()) :: list(AutoApi.Capability.property())
+  @callback to_bin(t()) :: binary()
+  @callback from_bin(binary()) :: t()
 
-    AutoApi.Command.Meta.inject_command_code(capability)
-  end
-
-  @callback execute(struct, binary) :: struct
-  @callback state(struct) :: binary
-
+  @commands [GetAvailabilityCommand, GetCommand, SetCommand]
   @version AutoApi.version()
 
   @doc """
-  Extracts commands meta data  including the capability that
-  the command is using and exact command that is issued
+  Returns the identifier of the command
 
-      iex> AutoApi.Command.meta_data(<<0x0C, 0x00, 0x33, 0x00>>)
-      %{message_id: :diagnostics, message_type: :get, module: AutoApi.DiagnosticsCapability, version: 0x0C, properties: []}
+  # Example
 
-      iex> AutoApi.Command.meta_data(<<0x0C, 0x00, 0x33, 0x02>>)
-      %{message_id: :diagnostics, message_type: :get_availability, module: AutoApi.DiagnosticsCapability, version: 0x0C, properties: []}
-
-      iex> AutoApi.Command.meta_data(<<0x0C, 0x00, 0x57, 0x00, 0x0B, 0x0C>>)
-      %{message_id: :race, message_type: :get, module: AutoApi.RaceCapability, version: 0x0C, properties: [:gear_mode, :selected_gear]}
-
-      iex> binary_command = <<0x0C, 0x00, 0x23, 0x1, 0x17, 0x00, 0x04, 0x01, 0x00, 0x01, 0x08>>
-      iex> AutoApi.Command.meta_data(binary_command)
-      %{message_id: :charging, message_type: :set, module: AutoApi.ChargingCapability, version: 0x0C, properties: [status: %AutoApi.PropertyComponent{data: :fast_charging}]}
+  iex> command = AutoApi.GetAvailabilityCommand.new(AutoApi.DiagnosticsCapability, [])
+  iex> AutoApi.Command.identifier(command)
+  0x02
   """
-  @spec meta_data(binary) :: map()
-  def meta_data(<<@version, id::binary-size(2), _::binary>> = command_bin) do
-    with capability_module when not is_nil(capability_module) <- Capability.get_by_id(id),
-         capability_name <- capability_module.name(),
-         {command_name, properties} <- capability_module.command().from_bin(command_bin) do
-      %{
-        message_id: capability_name,
-        message_type: command_name,
-        module: capability_module,
-        version: AutoApi.version(),
-        properties: properties
-      }
-    else
-      nil ->
-        %{}
+  @spec identifier(t()) :: identifier()
+  def identifier(%command_module{}) when command_module in @commands do
+    command_module.identifier()
+  end
+
+  @doc """
+  Returns the name of the command
+
+  # Example
+
+  iex> command = AutoApi.GetAvailabilityCommand.new(AutoApi.DiagnosticsCapability, [])
+  iex> AutoApi.Command.name(command)
+  :get_availability
+  """
+  @spec name(t()) :: name()
+  def name(%command_module{}) when command_module in @commands do
+    command_module.name()
+  end
+
+  @doc """
+  Returns the properties set in the command.
+
+  For Get and GetAvailability commands, it returns the list of properties in the command, or
+  all the state properties if the list is empty.
+
+  For SetCommands, it returns the list of properties with anything set in them
+
+  # Examples
+
+      iex> command = AutoApi.GetAvailabilityCommand.new(AutoApi.HoodCapability, [])
+      iex> #{__MODULE__}.properties(command)
+      [:position, :nonce, :vehicle_signature, :timestamp, :vin, :brand]
+
+      iex> command = AutoApi.GetCommand.new(AutoApi.HoodCapability, [])
+      iex> #{__MODULE__}.properties(command)
+      [:position, :nonce, :vehicle_signature, :timestamp, :vin, :brand]
+
+      iex> state = AutoApi.RaceState.base()
+      ...>         |> AutoApi.State.put(:vehicle_moving, data: :sport, timestamp: ~U[2021-03-12 10:54:14Z])
+      ...>         |> AutoApi.State.put(:brake_torque_vectorings, data: %{axle: :front, state: :active})
+      iex> command = AutoApi.SetCommand.new(state)
+      iex> #{__MODULE__}.properties(command)
+      [:brake_torque_vectorings, :vehicle_moving]
+  """
+  @spec properties(t()) :: list(AutoApi.Capability.property())
+  def properties(%command_module{} = command) when command_module in @commands do
+    command_module.properties(command)
+  end
+
+  @doc """
+  Parses a binary command and returns a struct with the command data.
+
+  The struct type determines the command action, and further data is contained in the struct fields themselves.
+
+  Possible result types are:
+
+  * AutoApi.GetAvailabilityCommand
+  * AutoApi.GetCommand
+  * AutoApi.SetCommand
+
+  See the documentation for each module to understand what their fields stand for.
+
+  ## Examples
+
+      iex> #{__MODULE__}.from_bin(<<0x0C, 0x00, 0x33, 0x02, 0x01, 0x04>>)
+      %AutoApi.GetAvailabilityCommand{capability: AutoApi.DiagnosticsCapability, properties: [:mileage, :engine_rpm]}
+
+      iex> #{__MODULE__}.from_bin(<<0x0C, 0x00, 0x33, 0x00, 0x01, 0x04>>)
+      %AutoApi.GetCommand{capability: AutoApi.DiagnosticsCapability, properties: [:mileage, :engine_rpm]}
+
+      iex> # Parses a "lock vehicle doors" command
+      iex> #{__MODULE__}.from_bin(<<12, 0, 32, 1, 6, 0, 4, 1, 0, 1, 1>>)
+      %AutoApi.SetCommand{capability: AutoApi.DoorsCapability, state: %AutoApi.DoorsState{locks_state: %AutoApi.Property{data: :locked}}}
+  """
+  @spec from_bin(binary()) :: t()
+  def from_bin(<<@version, _cap_id::binary-size(2), action, _::binary>> = bin_command) do
+    get_availability_command_id = GetAvailabilityCommand.identifier()
+    get_command_id = AutoApi.GetCommand.identifier()
+    set_command_id = AutoApi.SetCommand.identifier()
+
+    case action do
+      ^get_availability_command_id -> AutoApi.GetAvailabilityCommand.from_bin(bin_command)
+      ^get_command_id -> AutoApi.GetCommand.from_bin(bin_command)
+      ^set_command_id -> AutoApi.SetCommand.from_bin(bin_command)
     end
   end
 
   @doc """
-  Converts the command to the binary format.
+  Parses a command and returns it in binary format.
 
-  The command action can be `:get`, ':get_availability', `:set` or one of the setters of the capability.
-
-  In case the action is `:set` or one of the capability setter, the `properties`
-  must be a keyword list with the property name as key and a
-  `AutoApi.PropertyComponent` struct as value.
-
-  It is also permitted, as a shorthand notation, to forego the `PropertyComponent`
-  struct "wrapper" and pass directly the property value. In this case however
-  it is not possible to specify the property timestamp nor a failure.
+  This is a convenience function that only delegates to the `to_bin/1` function of the command module.
 
   ## Examples
 
-      iex> AutoApi.Command.to_bin(:diagnostics, :get, [:mileage, :engine_rpm])
-      <<0x0C, 0x00, 0x33, 0x00, 0x01, 0x04>>
+  iex> # Request all properties for race state
+  iex> command = %AutoApi.GetAvailabilityCommand{capability: AutoApi.RaceCapability, properties: []}
+  iex> #{__MODULE__}.to_bin(command)
+  <<12, 0, 87, 2>>
 
-      iex> AutoApi.Command.to_bin(:diagnostics, :get_availability, [:mileage, :engine_rpm])
-      <<0x0C, 0x00, 0x33, 0x02, 0x01, 0x04>>
+  iex> # Request the door locks state
+  iex> command = %AutoApi.GetCommand{capability: AutoApi.DoorsCapability, properties: [:locks_state]}
+  iex> #{__MODULE__}.to_bin(command)
+  <<12, 0, 32, 0, 6>>
 
-      iex> prop = %AutoApi.PropertyComponent{data: %{value: 88, unit: :miles_per_hour}, timestamp: ~U[2019-07-18 13:58:40.489250Z]}
-      iex> AutoApi.Command.to_bin(:diagnostics, :set, speed: prop)
-      <<12, 0, 51, 1, 3, 0, 24, 1, 0, 10, 22, 2, 64, 86, 0, 0, 0, 0, 0, 0, 2, 0, 8, 0, 0, 1, 108, 5, 96, 184, 105>>
-
-      iex> AutoApi.Command.to_bin(:charging, :set_charge_limit, charge_limit: 0.8)
-      <<0x0C, 0, 35, 1, 8, 0, 11, 1, 0, 8, 63, 233, 153, 153, 153, 153, 153, 154>>
-
+  iex> # Request to honk the horn for 2.5 seconds
+  iex> capability = AutoApi.HonkHornFlashLightsCapability
+  iex> honk_time = %{value: 2.5, unit: :seconds}
+  iex> state = AutoApi.State.put(capability.state().base(), :honk_time, data: honk_time)
+  iex> command = %AutoApi.SetCommand{capability: capability, state: state}
+  iex> #{__MODULE__}.to_bin(command)
+  <<12, 0, 38, 1, 5, 0, 13, 1, 0, 10, 7, 0, 64, 4, 0, 0, 0, 0, 0, 0>>
   """
-  @spec to_bin(capability_name, action, get_properties | set_properties) :: binary
-  def to_bin(capability_name, action, properties) do
-    capability = Capability.get_by_name(capability_name)
-
-    capability.command.to_bin(action, properties)
+  @spec to_bin(t()) :: binary()
+  def to_bin(%command_mod{} = command) when command_mod in @commands do
+    command_mod.to_bin(command)
   end
 end

@@ -37,7 +37,7 @@ defmodule AutoApi.DiagnosticsCapability do
       {0x01, :mileage}
   """
 
-  @command_module AutoApi.DiagnosticsCommand
+  @command_module AutoApi.LegacyCommand
   @state_module AutoApi.DiagnosticsState
 
   use AutoApi.Capability, spec_file: "diagnostics.json"

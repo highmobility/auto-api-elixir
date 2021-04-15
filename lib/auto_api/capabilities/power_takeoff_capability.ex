@@ -37,7 +37,7 @@ defmodule AutoApi.PowerTakeoffCapability do
       {1, :status}
   """
 
-  @command_module AutoApi.PowerTakeoffCommand
+  @command_module AutoApi.LegacyCommand
   @state_module AutoApi.PowerTakeoffState
 
   use AutoApi.Capability, spec_file: "power_takeoff.json"

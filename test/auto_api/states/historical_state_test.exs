@@ -24,29 +24,29 @@ defmodule AutoApi.HistoricalStateTest do
   use ExUnit.Case, async: true
   doctest AutoApi.HistoricalState
 
-  alias AutoApi.{ChargingState, HistoricalState, PropertyComponent}
+  alias AutoApi.{ChargingState, HistoricalState, Property, SetCommand}
 
   test "from_bin/1 and to_bin/1" do
     states = [
-      %PropertyComponent{
-        data: %ChargingState{battery_level: %PropertyComponent{data: 0.6}},
+      %Property{
+        data: SetCommand.new(%ChargingState{battery_level: %Property{data: 0.6}}),
         timestamp: ~U[2019-10-16 12:34:04.000Z]
       },
-      %PropertyComponent{
-        data: %ChargingState{battery_level: %PropertyComponent{data: 0.75}},
+      %Property{
+        data: SetCommand.new(%ChargingState{battery_level: %Property{data: 0.75}}),
         timestamp: ~U[2019-10-16 13:34:04.000Z]
       },
-      %PropertyComponent{
-        data: %ChargingState{battery_level: %PropertyComponent{data: 0.89}},
+      %Property{
+        data: SetCommand.new(%ChargingState{battery_level: %Property{data: 0.89}}),
         timestamp: ~U[2019-10-16 14:34:04.000Z]
       }
     ]
 
     state = %HistoricalState{
       states: states,
-      capability_id: %PropertyComponent{data: 35},
-      start_date: %PropertyComponent{data: ~U[2019-10-16 12:34:04.000Z]},
-      end_date: %PropertyComponent{data: ~U[2019-10-16 14:34:04.000Z]}
+      capability_id: %Property{data: 35},
+      start_date: %Property{data: ~U[2019-10-16 12:34:04.000Z]},
+      end_date: %Property{data: ~U[2019-10-16 14:34:04.000Z]}
     }
 
     restored_state =

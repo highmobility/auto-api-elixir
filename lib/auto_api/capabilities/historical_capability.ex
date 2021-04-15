@@ -37,7 +37,7 @@ defmodule AutoApi.HistoricalCapability do
       {0x01, :states}
   """
 
-  @command_module AutoApi.HistoricalCommand
+  @command_module AutoApi.LegacyCommand
   @state_module AutoApi.HistoricalState
 
   use AutoApi.Capability, spec_file: "historical.json"

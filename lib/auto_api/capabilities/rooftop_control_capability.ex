@@ -37,7 +37,7 @@ defmodule AutoApi.RooftopControlCapability do
       {0x01, :dimming}
   """
 
-  @command_module AutoApi.RooftopControlCommand
+  @command_module AutoApi.LegacyCommand
   @state_module AutoApi.RooftopControlState
 
   use AutoApi.Capability, spec_file: "rooftop_control.json"

@@ -37,7 +37,7 @@ defmodule AutoApi.FailureMessageCapability do
       {1, :failed_message_id}
   """
 
-  @command_module AutoApi.FailureMessageCommand
+  @command_module AutoApi.LegacyCommand
   @state_module AutoApi.FailureMessageState
 
   use AutoApi.Capability, spec_file: "failure_message.json"

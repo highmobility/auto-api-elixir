@@ -65,7 +65,7 @@ defmodule AutoApi.VehicleInformationState do
 
     iex> bin = <<4, 0, 13, 1, 0, 10, 72, 77, 32, 67, 111, 110, 99, 101, 112, 116>>
     iex> AutoApi.VehicleInformationState.from_bin(bin)
-    %AutoApi.VehicleInformationState{name: %AutoApi.PropertyComponent{data: "HM Concept"}}
+    %AutoApi.VehicleInformationState{name: %AutoApi.Property{data: "HM Concept"}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -75,7 +75,7 @@ defmodule AutoApi.VehicleInformationState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.VehicleInformationState{name: %AutoApi.PropertyComponent{data: "HM Concept"}}
+    iex> state = %AutoApi.VehicleInformationState{name: %AutoApi.Property{data: "HM Concept"}}
     iex> AutoApi.VehicleInformationState.to_bin(state)
     <<4, 0, 13, 1, 0, 10, 72, 77, 32, 67, 111, 110, 99, 101, 112, 116>>
   """

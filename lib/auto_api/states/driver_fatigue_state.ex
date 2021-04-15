@@ -46,7 +46,7 @@ defmodule AutoApi.DriverFatigueState do
 
       iex> bin = <<1, 0, 4, 1, 0, 1, 1>>
       iex> AutoApi.DriverFatigueState.from_bin(bin)
-      %AutoApi.DriverFatigueState{detected_fatigue_level: %AutoApi.PropertyComponent{data: :pause_recommended}}
+      %AutoApi.DriverFatigueState{detected_fatigue_level: %AutoApi.Property{data: :pause_recommended}}
 
   """
   @spec from_bin(binary) :: __MODULE__.t()
@@ -59,7 +59,7 @@ defmodule AutoApi.DriverFatigueState do
 
   ## Examples
 
-      iex> state = %AutoApi.DriverFatigueState{detected_fatigue_level: %AutoApi.PropertyComponent{data: :pause_recommended}}
+      iex> state = %AutoApi.DriverFatigueState{detected_fatigue_level: %AutoApi.Property{data: :pause_recommended}}
       iex> AutoApi.DriverFatigueState.to_bin(state)
       <<1, 0, 4, 1, 0, 1, 1>>
 

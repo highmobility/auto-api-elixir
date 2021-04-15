@@ -37,7 +37,7 @@ defmodule AutoApi.VehicleLocationCapability do
       {4, :coordinates}
   """
 
-  @command_module AutoApi.VehicleLocationCommand
+  @command_module AutoApi.LegacyCommand
   @state_module AutoApi.VehicleLocationState
 
   use AutoApi.Capability, spec_file: "vehicle_location.json"

@@ -37,7 +37,7 @@ defmodule AutoApi.DriverFatigueCapability do
       {0x01, :detected_fatigue_level}
   """
 
-  @command_module AutoApi.DriverFatigueCommand
+  @command_module AutoApi.LegacyCommand
   @state_module AutoApi.DriverFatigueState
 
   use AutoApi.Capability, spec_file: "driver_fatigue.json"

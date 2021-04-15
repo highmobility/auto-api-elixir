@@ -37,7 +37,7 @@ defmodule AutoApi.HoodCapability do
       {0x01, :position}
   """
 
-  @command_module AutoApi.HoodCommand
+  @command_module AutoApi.LegacyCommand
   @state_module AutoApi.HoodState
 
   use AutoApi.Capability, spec_file: "hood.json"

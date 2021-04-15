@@ -35,7 +35,7 @@ defmodule AutoApi.HeartRateCapability do
       6
   """
 
-  @command_module AutoApi.HeartRateCommand
+  @command_module AutoApi.LegacyCommand
   @state_module AutoApi.HeartRateState
 
   use AutoApi.Capability, spec_file: "heart_rate.json"

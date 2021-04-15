@@ -37,7 +37,7 @@ defmodule AutoApi.CapabilitiesCapability do
       {0x01, :capabilities}
   """
 
-  @command_module AutoApi.CapabilitiesCommand
+  @command_module AutoApi.LegacyCommand
   @state_module AutoApi.CapabilitiesState
 
   use AutoApi.Capability, spec_file: "capabilities.json"

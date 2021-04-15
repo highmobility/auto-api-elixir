@@ -42,7 +42,7 @@ defmodule AutoApi.WiFiState do
 
     iex> bin = <<1, 0, 4, 1, 0, 1, 1>>
     iex> AutoApi.WiFiState.from_bin(bin)
-    %AutoApi.WiFiState{status: %AutoApi.PropertyComponent{data: :enabled}}
+    %AutoApi.WiFiState{status: %AutoApi.Property{data: :enabled}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -52,7 +52,7 @@ defmodule AutoApi.WiFiState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.WiFiState{status: %AutoApi.PropertyComponent{data: :enabled}}
+    iex> state = %AutoApi.WiFiState{status: %AutoApi.Property{data: :enabled}}
     iex> AutoApi.WiFiState.to_bin(state)
     <<1, 0, 4, 1, 0, 1, 1>>
   """

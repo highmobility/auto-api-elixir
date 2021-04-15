@@ -37,7 +37,7 @@ defmodule AutoApi.FuelingCapability do
       {2, :gas_flap_lock}
   """
 
-  @command_module AutoApi.FuelingCommand
+  @command_module AutoApi.LegacyCommand
   @state_module AutoApi.FuelingState
 
   use AutoApi.Capability, spec_file: "fueling.json"

@@ -39,7 +39,7 @@ defmodule AutoApi.EngineState do
 
     iex> bin = <<1, 0, 4, 1, 0, 1, 0>>
     iex> AutoApi.EngineState.from_bin(bin)
-    %AutoApi.EngineState{status: %AutoApi.PropertyComponent{data: :off}}
+    %AutoApi.EngineState{status: %AutoApi.Property{data: :off}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -50,7 +50,7 @@ defmodule AutoApi.EngineState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.EngineState{status: %AutoApi.PropertyComponent{data: :on}}
+    iex> state = %AutoApi.EngineState{status: %AutoApi.Property{data: :on}}
     iex> AutoApi.EngineState.to_bin(state)
     <<1, 0, 4, 1, 0, 1, 1>>
   """

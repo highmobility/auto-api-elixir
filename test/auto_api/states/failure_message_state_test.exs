@@ -22,15 +22,41 @@
 # THE SOFTWARE.
 defmodule AutoApi.FailureMessageStateTest do
   use ExUnit.Case, async: true
-  doctest AutoApi.FailureMessageState
+  use PropCheck
+
+  import AutoApi.PropCheckFixtures
   alias AutoApi.{FailureMessageState, State}
+
+  doctest AutoApi.FailureMessageState
+
+  property "from_command/1" do
+    reason_spec = AutoApi.FailureMessageCapability.property_spec(:failure_reason)
+
+    forall data <- [command: command(), reason: enum(reason_spec), desc: utf8()] do
+      state = FailureMessageState.from_command(data[:command], data[:reason], data[:desc])
+
+      <<cap_id::integer-16>> = data[:command].capability.identifier()
+      assert state.failed_message_id.data == cap_id
+      assert state.failed_message_type.data == AutoApi.Command.identifier(data[:command])
+      assert state.failure_reason.data == data[:reason]
+      assert state.failure_description.data == data[:desc]
+
+      new_state =
+        state
+        |> FailureMessageState.to_bin()
+        |> FailureMessageState.from_bin()
+
+      assert new_state == state
+    end
+  end
 
   test "to_bin & from_bin" do
     state =
       %FailureMessageState{}
       |> State.put(:failed_message_id, data: 0x35)
       |> State.put(:failed_message_type, data: 0x00)
-      |> State.put(:failure_reason, data: :unauthorized)
+      #      |> State.put(:failure_reason, data: :unauthorized)
+      |> State.put(:failure_reason, data: :unauthorised)
       |> State.put(
         :failure_description,
         data: "Access to this capability was not granted"

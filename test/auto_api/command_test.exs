@@ -18,174 +18,219 @@
 # licensing@high-mobility.com
 defmodule AutoApi.CommandTest do
   use ExUnit.Case, async: true
+  use PropCheck
+
+  import AutoApi.PropCheckFixtures
+  import Assertions, only: [assert_lists_equal: 2]
+
+  alias AutoApi.{GetAvailabilityCommand, GetCommand, SetCommand}
+  alias AutoApi.Command, as: SUT
+
   doctest AutoApi.Command
 
-  alias AutoApi.{Capability, PropertyComponent}
+  describe "identifier/1" do
+    property "works with get_availability commands" do
+      forall {capability, properties} <- capability_with_properties() do
+        command = %GetAvailabilityCommand{capability: capability, properties: properties}
 
-  describe "to_bin/2" do
-    test "get works with all properties and all capabilities" do
-      results =
-        Capability.all()
-        |> Enum.map(&{&1, &1.command})
-        |> Enum.map(fn {cap, command} ->
-          prop_names = Enum.map(cap.properties, &elem(&1, 1))
-
-          {cap, apply(command, :to_bin, [:get, prop_names])}
-        end)
-
-      assert Enum.all?(results, &assert_get_command/1)
+        assert SUT.identifier(command) == 0x02
+      end
     end
 
-    test "set works" do
-      # Generating values automatically is hard so for now I'll just test manually one
-      timestamp = ~U[2019-07-26 15:36:33.867501Z]
-      properties = [inside_locks_state: %PropertyComponent{data: :unlocked, timestamp: timestamp}]
+    property "works with get commands" do
+      forall {capability, properties} <- capability_with_properties() do
+        command = %GetCommand{capability: capability, properties: properties}
 
-      bin_command = AutoApi.DoorsCommand.to_bin(:set, properties)
-
-      assert bin_command ==
-               <<0x0C, 0, 32, 1, 5, 0, 15, 1, 0, 1, 0, 2, 0, 8, 0, 0, 1, 108, 46, 237, 55, 75>>
+        assert SUT.identifier(command) == 0x00
+      end
     end
 
-    test "setter supports constants" do
-      assert <<0x0C, 0, 34, 1, 1, 0, 4, 1, 0, 1, 0>> == AutoApi.WakeUpCommand.to_bin(:wake_up)
-    end
+    property "works with set commands" do
+      forall {capability, state} <- capability_with_state() do
+        command = %SetCommand{capability: capability, state: state}
 
-    test "get_availability works with all properties and all capabilities" do
-      results =
-        Capability.all()
-        |> Enum.map(&{&1, &1.command})
-        |> Enum.map(fn {cap, command} ->
-          prop_names = Enum.map(cap.properties, &elem(&1, 1))
-
-          {cap, apply(command, :to_bin, [:get_availability, prop_names])}
-        end)
-
-      assert Enum.all?(results, &assert_get_availability_command/1)
-    end
-
-    defp assert_get_command({capability, binary_command}) do
-      preamble = <<0x0C, capability.identifier()::binary, 0x00>>
-
-      assert_binary_command(preamble, capability, binary_command)
-    end
-
-    defp assert_get_availability_command({capability, binary_command}) do
-      preamble = <<0x0C, capability.identifier()::binary, 0x02>>
-
-      assert_binary_command(preamble, capability, binary_command)
-    end
-
-    defp assert_binary_command(preamble, capability, binary_command) do
-      command_bin =
-        capability.properties()
-        |> Enum.map(&elem(&1, 0))
-        |> Enum.reduce(<<>>, &(&2 <> <<&1>>))
-
-      assert <<preamble::binary, command_bin::binary>> == binary_command
+        assert SUT.identifier(command) == 0x01
+      end
     end
   end
 
-  describe "to_bin/2 and from_bin/2 are inverse functions" do
-    test ":set" do
-      properties = [
-        speed: %PropertyComponent{
-          data: %{value: 88, unit: :miles_per_hour},
-          timestamp: ~U[2019-07-18 13:58:40.489Z]
-        },
-        tire_pressures: %PropertyComponent{
-          data: %{location: :front_left, pressure: %{value: 2.3, unit: :bars}}
-        },
-        tire_pressures: %PropertyComponent{
-          data: %{location: :rear_right, pressure: %{value: 2.5, unit: :bars}}
-        },
-        engine_rpm: %PropertyComponent{failure: %{reason: :format_error, description: "Error"}}
-      ]
+  describe "name/1" do
+    property "works with get_availability commands" do
+      forall {capability, properties} <- capability_with_properties() do
+        command = %GetAvailabilityCommand{capability: capability, properties: properties}
 
-      assert cmd_bin = AutoApi.DiagnosticsCommand.to_bin(:set, properties)
-      assert {:set, properties} == AutoApi.DiagnosticsCommand.from_bin(cmd_bin)
+        assert SUT.name(command) == :get_availability
+      end
     end
 
-    test ":get" do
-      properties = [:speed, :tire_pressures, :engine_rpm]
+    property "works with get commands" do
+      forall {capability, properties} <- capability_with_properties() do
+        command = %GetCommand{capability: capability, properties: properties}
 
-      assert cmd_bin = AutoApi.DiagnosticsCommand.to_bin(:get, properties)
-      assert {:get, properties} == AutoApi.DiagnosticsCommand.from_bin(cmd_bin)
+        assert SUT.name(command) == :get
+      end
     end
 
-    test ":get with no properties" do
-      assert cmd_bin = AutoApi.DiagnosticsCommand.to_bin(:get)
-      assert {:get, []} == AutoApi.DiagnosticsCommand.from_bin(cmd_bin)
-    end
+    property "works with set commands" do
+      forall {capability, state} <- capability_with_state() do
+        command = %SetCommand{capability: capability, state: state}
 
-    test ":get_availability" do
-      properties = [:speed, :tire_pressures, :engine_rpm]
-
-      assert cmd_bin = AutoApi.DiagnosticsCommand.to_bin(:get_availability, properties)
-      assert {:get_availability, properties} == AutoApi.DiagnosticsCommand.from_bin(cmd_bin)
-    end
-
-    test ":get_availability with no properties" do
-      assert cmd_bin = AutoApi.DiagnosticsCommand.to_bin(:get_availability)
-      assert {:get_availability, []} == AutoApi.DiagnosticsCommand.from_bin(cmd_bin)
+        assert SUT.name(command) == :set
+      end
     end
   end
 
-  describe "execute/2" do
-    test "set overwrites multiple properties" do
-      state = %AutoApi.DoorsState{
-        locks: [
-          %PropertyComponent{data: %{location: :front_right, lock_state: :locked}},
-          %PropertyComponent{data: %{location: :front_left, lock_state: :locked}}
-        ],
-        positions: [
-          %PropertyComponent{data: %{location: :rear_left, position: :open}}
-        ]
-      }
+  describe "properties/1" do
+    property "works with get_availability commands" do
+      forall {capability, properties} <- capability_with_properties() do
+        command = %GetAvailabilityCommand{capability: capability, properties: properties}
 
-      command_props = [
-        locks: %PropertyComponent{data: %{location: :rear_right, lock_state: :locked}},
-        locks: %PropertyComponent{data: %{location: :rear_left, lock_state: :locked}}
-      ]
+        expected =
+          case properties do
+            [] -> capability.state_properties()
+            properties -> properties
+          end
 
-      command_bin = AutoApi.DoorsCommand.to_bin(:set, command_props)
-
-      assert AutoApi.DoorsCommand.execute(state, command_bin) ==
-               %AutoApi.DoorsState{
-                 locks: [
-                   %PropertyComponent{data: %{location: :rear_right, lock_state: :locked}},
-                   %PropertyComponent{data: %{location: :rear_left, lock_state: :locked}}
-                 ],
-                 positions: [
-                   %PropertyComponent{data: %{location: :rear_left, position: :open}}
-                 ]
-               }
+        assert SUT.properties(command) == expected
+      end
     end
 
-    test "get_availability works" do
-      mileage_availability = %{
-        update_rate: :trip,
-        rate_limit: %{value: 2, unit: :times_per_day},
-        applies_per: :app
-      }
+    property "works with get commands" do
+      forall {capability, properties} <- capability_with_properties() do
+        command = %GetCommand{capability: capability, properties: properties}
 
-      speed_availability = %{
-        update_rate: :on_change,
-        rate_limit: %{value: 1, unit: :hertz},
-        applies_per: :vehicle
-      }
+        expected =
+          case properties do
+            [] -> capability.state_properties()
+            properties -> properties
+          end
 
-      state = %AutoApi.DiagnosticsState{
-        mileage: %AutoApi.PropertyComponent{availability: mileage_availability},
-        speed: %AutoApi.PropertyComponent{availability: speed_availability}
-      }
+        assert SUT.properties(command) == expected
+      end
+    end
 
-      command_bin = AutoApi.DiagnosticsCommand.to_bin(:get_availability, [:speed])
+    property "works with set commands with empty state" do
+      forall capability <- capability() do
+        state = capability.state().base()
+        command = %SetCommand{capability: capability, state: state}
 
-      assert AutoApi.DiagnosticsCommand.execute(state, command_bin) ==
-               %AutoApi.DiagnosticsState{
-                 speed: %AutoApi.PropertyComponent{availability: speed_availability}
-               }
+        assert SUT.properties(command) == []
+      end
+    end
+
+    test "works with set commands with some filled state" do
+      # No point in using propcheck here, we would have to  duplicate the
+      # implementation code in the test for the comparison
+      state =
+        AutoApi.DiagnosticsState.base()
+        |> AutoApi.State.put(:fuel_level, data: 0.89)
+        |> AutoApi.State.put(:estimated_range, timestamp: DateTime.utc_now())
+        |> AutoApi.State.put(:check_control_messages,
+          failure: %{reason: :unknown, description: ""}
+        )
+        |> AutoApi.State.put(:tire_pressures,
+          availability: %{
+            update_rate: :trip,
+            rate_limit: %{unit: :hertz, value: 1.0},
+            applies_per: :vehicle
+          }
+        )
+
+      command = SetCommand.new(state)
+
+      assert_lists_equal(SUT.properties(command), [
+        :estimated_range,
+        :fuel_level,
+        :tire_pressures,
+        :check_control_messages
+      ])
+    end
+  end
+
+  describe "from_bin/1" do
+    property "works with get_availability commands" do
+      forall {capability, properties} <- capability_with_properties() do
+        command = %GetAvailabilityCommand{capability: capability, properties: properties}
+        command_bin = GetAvailabilityCommand.to_bin(command)
+
+        assert command == SUT.from_bin(command_bin)
+      end
+    end
+
+    property "works with get commands" do
+      forall {capability, properties} <- capability_with_properties() do
+        command = %GetCommand{capability: capability, properties: properties}
+        command_bin = GetCommand.to_bin(command)
+
+        assert command == SUT.from_bin(command_bin)
+      end
+    end
+
+    property "works with set commands" do
+      forall {capability, state} <- capability_with_state() do
+        command = %SetCommand{capability: capability, state: state}
+        command_bin = SetCommand.to_bin(command)
+
+        assert command == SUT.from_bin(command_bin)
+      end
+    end
+  end
+
+  describe "to_bin/1" do
+    property "works with get_availability commands" do
+      forall {capability, properties} <- capability_with_properties() do
+        command = %GetAvailabilityCommand{capability: capability, properties: properties}
+
+        assert command_bin = SUT.to_bin(command)
+        assert command == GetAvailabilityCommand.from_bin(command_bin)
+      end
+    end
+
+    property "works with get commands" do
+      forall {capability, properties} <- capability_with_properties() do
+        command = %GetCommand{capability: capability, properties: properties}
+
+        assert command_bin = SUT.to_bin(command)
+        assert command == GetCommand.from_bin(command_bin)
+      end
+    end
+
+    property "works with set commands" do
+      forall {capability, state} <- capability_with_state() do
+        command = %SetCommand{capability: capability, state: state}
+
+        assert command_bin = SUT.to_bin(command)
+        assert command == SetCommand.from_bin(command_bin)
+      end
+    end
+  end
+
+  describe "to_bin and from_bin are inverse/1" do
+    property "works with get_availability commands" do
+      forall {capability, properties} <- capability_with_properties() do
+        command = %GetAvailabilityCommand{capability: capability, properties: properties}
+
+        assert command_bin = SUT.to_bin(command)
+        assert command == SUT.from_bin(command_bin)
+      end
+    end
+
+    property "works with get commands" do
+      forall {capability, properties} <- capability_with_properties() do
+        command = %GetCommand{capability: capability, properties: properties}
+
+        assert command_bin = SUT.to_bin(command)
+        assert command == SUT.from_bin(command_bin)
+      end
+    end
+
+    property "works with set commands" do
+      forall {capability, state} <- capability_with_state() do
+        command = %SetCommand{capability: capability, state: state}
+
+        assert command_bin = SUT.to_bin(command)
+        assert command == SUT.from_bin(command_bin)
+      end
     end
   end
 end

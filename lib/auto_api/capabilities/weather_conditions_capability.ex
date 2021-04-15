@@ -35,7 +35,7 @@ defmodule AutoApi.WeatherConditionsCapability do
       {1, :rain_intensity}
   """
 
-  @command_module AutoApi.WeatherConditionsCommand
+  @command_module AutoApi.LegacyCommand
   @state_module AutoApi.WeatherConditionsState
 
   use AutoApi.Capability, spec_file: "weather_conditions.json"

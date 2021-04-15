@@ -37,7 +37,7 @@ defmodule AutoApi.NotificationsCapability do
       {0x01, :text}
   """
 
-  @command_module AutoApi.NotificationsCommand
+  @command_module AutoApi.LegacyCommand
   @state_module AutoApi.NotificationsState
 
   use AutoApi.Capability, spec_file: "notifications.json"

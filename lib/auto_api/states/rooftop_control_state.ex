@@ -58,7 +58,7 @@ defmodule AutoApi.RooftopControlState do
 
     iex> bin = <<1, 0, 11, 1, 0, 8, 63, 197, 194, 143, 92, 40, 245, 195>>
     iex> AutoApi.RooftopControlState.from_bin(bin)
-    %AutoApi.RooftopControlState{dimming: %AutoApi.PropertyComponent{data: 0.17}}
+    %AutoApi.RooftopControlState{dimming: %AutoApi.Property{data: 0.17}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -69,7 +69,7 @@ defmodule AutoApi.RooftopControlState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.RooftopControlState{dimming: %AutoApi.PropertyComponent{data: 0.17}}
+    iex> state = %AutoApi.RooftopControlState{dimming: %AutoApi.Property{data: 0.17}}
     iex> AutoApi.RooftopControlState.to_bin(state)
     <<1, 0, 11, 1, 0, 8, 63, 197, 194, 143, 92, 40, 245, 195>>
   """

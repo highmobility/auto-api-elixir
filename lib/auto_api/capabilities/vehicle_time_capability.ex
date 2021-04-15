@@ -37,7 +37,7 @@ defmodule AutoApi.VehicleTimeCapability do
       {1, :vehicle_time}
   """
 
-  @command_module AutoApi.VehicleTimeCommand
+  @command_module AutoApi.LegacyCommand
   @state_module AutoApi.VehicleTimeState
 
   use AutoApi.Capability, spec_file: "vehicle_time.json"

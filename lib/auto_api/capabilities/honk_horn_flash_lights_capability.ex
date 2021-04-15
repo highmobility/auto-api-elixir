@@ -37,7 +37,7 @@ defmodule AutoApi.HonkHornFlashLightsCapability do
       {0x01, :flashers}
   """
 
-  @command_module AutoApi.HonkHornFlashLightsCommand
+  @command_module AutoApi.LegacyCommand
   @state_module AutoApi.HonkHornFlashLightsState
 
   use AutoApi.Capability, spec_file: "honk_horn_flash_lights.json"

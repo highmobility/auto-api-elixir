@@ -37,7 +37,7 @@ defmodule AutoApi.ChargingCapability do
       {0x02, :estimated_range}
   """
 
-  @command_module AutoApi.ChargingCommand
+  @command_module AutoApi.LegacyCommand
   @state_module AutoApi.ChargingState
 
   use AutoApi.Capability, spec_file: "charging.json"

@@ -37,7 +37,7 @@ defmodule AutoApi.HomeChargerCapability do
       {0x1, :charging_status}
   """
 
-  @command_module AutoApi.HomeChargerCommand
+  @command_module AutoApi.LegacyCommand
   @state_module AutoApi.HomeChargerState
 
   use AutoApi.Capability, spec_file: "home_charger.json"

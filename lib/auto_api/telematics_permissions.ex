@@ -79,4 +79,32 @@ defmodule AutoApi.TelematicsPermissions do
       :error
     end
   end
+
+  @doc """
+  Extracts only the capabilities granted from the given set of permissions.
+
+  Raises ArgumentError if one of the permissions is invalid.
+
+  ## Examples
+
+  iex> AutoApi.TelematicsPermissions.capabilities ["race.set.accelerations", "usage.get.average_weekly_distance_long_run", "race.get.gear_mode"]
+  [AutoApi.RaceCapability, AutoApi.UsageCapability]
+
+  iex> AutoApi.TelematicsPermissions.capabilities ["charging.get.status", "i.dont.exist"]
+  ** (ArgumentError) non existing properties: ["i.dont.exist"]
+  """
+  @spec capabilities(list(String.t())) :: list(AutoApi.Capability.t()) | no_return()
+  def capabilities(permissions) do
+    case permissions -- @permissions_list do
+      [] ->
+        permissions
+        |> Enum.map(&String.split(&1, "."))
+        |> Enum.map(&List.first/1)
+        |> Enum.uniq()
+        |> Enum.map(&AutoApi.Capability.get_by_name/1)
+
+      wrong_properties ->
+        raise ArgumentError, "non existing properties: #{inspect(wrong_properties)}"
+    end
+  end
 end

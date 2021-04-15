@@ -37,7 +37,7 @@ defmodule AutoApi.DashboardLightsCapability do
       {0x01, :dashboard_lights}
   """
 
-  @command_module AutoApi.DashboardLightsCommand
+  @command_module AutoApi.LegacyCommand
   @state_module AutoApi.DashboardLightsState
 
   use AutoApi.Capability, spec_file: "dashboard_lights.json"

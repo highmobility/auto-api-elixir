@@ -35,7 +35,7 @@ defmodule AutoApi.BrowserCapability do
       6
   """
 
-  @command_module AutoApi.BrowserCommand
+  @command_module AutoApi.LegacyCommand
   @state_module AutoApi.BrowserState
 
   use AutoApi.Capability, spec_file: "browser.json"

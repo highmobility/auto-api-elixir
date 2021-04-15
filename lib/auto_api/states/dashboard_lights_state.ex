@@ -135,7 +135,7 @@ defmodule AutoApi.DashboardLightsState do
 
     iex> bin = <<1, 0, 5, 1, 0, 2, 1, 1>>
     iex> AutoApi.DashboardLightsState.from_bin(bin)
-    %AutoApi.DashboardLightsState{dashboard_lights: [%AutoApi.PropertyComponent{data: %{name: :low_beam, state: :on}}]}
+    %AutoApi.DashboardLightsState{dashboard_lights: [%AutoApi.Property{data: %{name: :low_beam, state: :on}}]}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -146,7 +146,7 @@ defmodule AutoApi.DashboardLightsState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.DashboardLightsState{dashboard_lights: [%AutoApi.PropertyComponent{data: %{name: :low_beam, state: :off}}]}
+    iex> state = %AutoApi.DashboardLightsState{dashboard_lights: [%AutoApi.Property{data: %{name: :low_beam, state: :off}}]}
     iex> AutoApi.DashboardLightsState.to_bin(state)
     <<1, 0, 5, 1, 0, 2, 1, 0>>
   """

@@ -37,7 +37,7 @@ defmodule AutoApi.RemoteControlCapability do
       {1, :control_mode}
   """
 
-  @command_module AutoApi.RemoteControlCommand
+  @command_module AutoApi.LegacyCommand
   @state_module AutoApi.RemoteControlState
 
   use AutoApi.Capability, spec_file: "remote_control.json"

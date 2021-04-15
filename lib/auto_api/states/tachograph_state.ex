@@ -65,7 +65,7 @@ defmodule AutoApi.TachographState do
 
     iex> bin = <<4, 0, 4, 1, 0, 1, 1>>
     iex> AutoApi.TachographState.from_bin(bin)
-    %AutoApi.TachographState{vehicle_motion: %AutoApi.PropertyComponent{data: :detected}}
+    %AutoApi.TachographState{vehicle_motion: %AutoApi.Property{data: :detected}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -76,7 +76,7 @@ defmodule AutoApi.TachographState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.TachographState{vehicle_motion: %AutoApi.PropertyComponent{data: :detected}}
+    iex> state = %AutoApi.TachographState{vehicle_motion: %AutoApi.Property{data: :detected}}
     iex> AutoApi.TachographState.to_bin(state)
     <<4, 0, 4, 1, 0, 1, 1>>
   """

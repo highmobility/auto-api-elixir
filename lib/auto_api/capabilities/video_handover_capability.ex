@@ -37,7 +37,7 @@ defmodule AutoApi.VideoHandoverCapability do
       {0x01, :url}
   """
 
-  @command_module AutoApi.VideoHandoverCommand
+  @command_module AutoApi.LegacyCommand
   @state_module AutoApi.VideoHandoverState
 
   use AutoApi.Capability, spec_file: "video_handover.json"

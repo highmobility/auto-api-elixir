@@ -37,7 +37,7 @@ defmodule AutoApi.VehicleInformationCapability do
       {0x02, :powertrain}
   """
 
-  @command_module AutoApi.VehicleInformationCommand
+  @command_module AutoApi.LegacyCommand
   @state_module AutoApi.VehicleInformationState
 
   use AutoApi.Capability, spec_file: "vehicle_information.json"

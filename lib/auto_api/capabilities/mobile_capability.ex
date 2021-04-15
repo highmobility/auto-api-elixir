@@ -37,7 +37,7 @@ defmodule AutoApi.MobileCapability do
       {0x01, :connection}
   """
 
-  @command_module AutoApi.MobileCommand
+  @command_module AutoApi.LegacyCommand
   @state_module AutoApi.MobileState
 
   use AutoApi.Capability, spec_file: "mobile.json"

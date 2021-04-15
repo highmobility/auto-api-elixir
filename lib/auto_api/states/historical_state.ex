@@ -40,7 +40,7 @@ defmodule AutoApi.HistoricalState do
   Build state based on binary value
 
     iex> AutoApi.HistoricalState.from_bin(<<2, 5::integer-16, 1, 2::integer-16, 0x00, 0x60>>)
-    %AutoApi.HistoricalState{capability_id: %AutoApi.PropertyComponent{data: 0x60}}
+    %AutoApi.HistoricalState{capability_id: %AutoApi.Property{data: 0x60}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -50,7 +50,7 @@ defmodule AutoApi.HistoricalState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.HistoricalState{capability_id: %AutoApi.PropertyComponent{data: 0x60}}
+    iex> state = %AutoApi.HistoricalState{capability_id: %AutoApi.Property{data: 0x60}}
     iex> AutoApi.HistoricalState.to_bin(state)
     <<2, 5::integer-16, 1, 2::integer-16, 0x00, 0x60>>
   """

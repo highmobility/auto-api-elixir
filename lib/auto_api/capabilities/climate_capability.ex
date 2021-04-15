@@ -37,7 +37,7 @@ defmodule AutoApi.ClimateCapability do
       {0x01, :inside_temperature}
   """
 
-  @command_module AutoApi.ClimateCommand
+  @command_module AutoApi.LegacyCommand
   @state_module AutoApi.ClimateState
 
   use AutoApi.Capability, spec_file: "climate.json"

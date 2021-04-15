@@ -37,7 +37,7 @@ defmodule AutoApi.MessagingCapability do
       {0x01, :text}
   """
 
-  @command_module AutoApi.MessagingCommand
+  @command_module AutoApi.LegacyCommand
   @state_module AutoApi.MessagingState
 
   use AutoApi.Capability, spec_file: "messaging.json"

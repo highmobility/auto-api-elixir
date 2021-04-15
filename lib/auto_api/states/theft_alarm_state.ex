@@ -81,7 +81,7 @@ defmodule AutoApi.TheftAlarmState do
 
     iex> bin = <<1, 0, 4, 1, 0, 1, 2>>
     iex> AutoApi.TheftAlarmState.from_bin(bin)
-    %AutoApi.TheftAlarmState{status: %AutoApi.PropertyComponent{data: :triggered}}
+    %AutoApi.TheftAlarmState{status: %AutoApi.Property{data: :triggered}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -91,7 +91,7 @@ defmodule AutoApi.TheftAlarmState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.TheftAlarmState{status: %AutoApi.PropertyComponent{data: :triggered}}
+    iex> state = %AutoApi.TheftAlarmState{status: %AutoApi.Property{data: :triggered}}
     iex> AutoApi.TheftAlarmState.to_bin(state)
     <<1, 0, 4, 1, 0, 1, 2>>
   """

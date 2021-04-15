@@ -35,7 +35,7 @@ defmodule AutoApi.FirmwareVersionCapability do
       8
   """
 
-  @command_module AutoApi.FirmwareVersionCommand
+  @command_module AutoApi.LegacyCommand
   @state_module AutoApi.FirmwareVersionState
 
   use AutoApi.Capability, spec_file: "firmware_version.json"

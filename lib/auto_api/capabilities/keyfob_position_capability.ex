@@ -37,7 +37,7 @@ defmodule AutoApi.KeyfobPositionCapability do
       {0x01, :location}
   """
 
-  @command_module AutoApi.KeyfobPositionCommand
+  @command_module AutoApi.LegacyCommand
   @state_module AutoApi.KeyfobPositionState
 
   use AutoApi.Capability, spec_file: "keyfob_position.json"

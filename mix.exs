@@ -30,6 +30,7 @@ defmodule AutoApi.Mixfile do
       app: :auto_api,
       version: @version,
       elixir: "~> 1.6",
+      elixirc_paths: elixirc_paths(Mix.env()),
       build_embedded: Mix.env() == :prod,
       start_permanent: Mix.env() == :prod,
       deps: deps(),
@@ -48,6 +49,10 @@ defmodule AutoApi.Mixfile do
     # Specify extra applications you'll use from Erlang/Elixir
     [extra_applications: [:logger, :public_key]]
   end
+
+  # Specifies which paths to compile per environment.
+  defp elixirc_paths(:test), do: ["lib", "test/support"]
+  defp elixirc_paths(_), do: ["lib"]
 
   defp deps do
     [

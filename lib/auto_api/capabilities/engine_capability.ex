@@ -37,7 +37,7 @@ defmodule AutoApi.EngineCapability do
       {1, :status}
   """
 
-  @command_module AutoApi.EngineCommand
+  @command_module AutoApi.LegacyCommand
   @state_module AutoApi.EngineState
 
   use AutoApi.Capability, spec_file: "engine.json"

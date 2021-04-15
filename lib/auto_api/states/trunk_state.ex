@@ -39,7 +39,7 @@ defmodule AutoApi.TrunkState do
 
     iex> bin = <<1, 0, 4, 1, 0, 1, 1>>
     iex> AutoApi.TrunkState.from_bin(bin)
-    %AutoApi.TrunkState{lock: %AutoApi.PropertyComponent{data: :locked}}
+    %AutoApi.TrunkState{lock: %AutoApi.Property{data: :locked}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -49,7 +49,7 @@ defmodule AutoApi.TrunkState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.TrunkState{lock: %AutoApi.PropertyComponent{data: :locked}}
+    iex> state = %AutoApi.TrunkState{lock: %AutoApi.Property{data: :locked}}
     iex> AutoApi.TrunkState.to_bin(state)
     <<1, 0, 4, 1, 0, 1, 1>>
   """

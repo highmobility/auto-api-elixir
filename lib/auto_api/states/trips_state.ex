@@ -66,7 +66,7 @@ defmodule AutoApi.TripsState do
 
     iex> bin = <<1, 0, 4, 1, 0, 1, 0>>
     iex> AutoApi.TripsState.from_bin(bin)
-    %AutoApi.TripsState{type: %AutoApi.PropertyComponent{data: :single}}
+    %AutoApi.TripsState{type: %AutoApi.Property{data: :single}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -76,7 +76,7 @@ defmodule AutoApi.TripsState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.TripsState{type: %AutoApi.PropertyComponent{data: :multi}}
+    iex> state = %AutoApi.TripsState{type: %AutoApi.Property{data: :multi}}
     iex> AutoApi.TripsState.to_bin(state)
     <<1, 0, 4, 1, 0, 1, 1>>
   """

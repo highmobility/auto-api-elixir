@@ -31,6 +31,8 @@ defmodule AutoApi.Version do
     version = specs["version"]
 
     quote do
+      @type version :: unquote(Macro.escape(version))
+
       @doc """
       Returns the current version of AutoApi
 

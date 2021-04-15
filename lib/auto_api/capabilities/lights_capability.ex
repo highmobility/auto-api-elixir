@@ -37,7 +37,7 @@ defmodule AutoApi.LightsCapability do
       {0x01, :front_exterior_light}
   """
 
-  @command_module AutoApi.LightsCommand
+  @command_module AutoApi.LegacyCommand
   @state_module AutoApi.LightsState
 
   use AutoApi.Capability, spec_file: "lights.json"

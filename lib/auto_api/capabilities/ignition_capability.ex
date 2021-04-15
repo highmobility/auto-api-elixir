@@ -37,7 +37,7 @@ defmodule AutoApi.IgnitionCapability do
       {1, :status}
   """
 
-  @command_module AutoApi.IgnitionCommand
+  @command_module AutoApi.LegacyCommand
   @state_module AutoApi.IgnitionState
 
   use AutoApi.Capability, spec_file: "ignition.json"
