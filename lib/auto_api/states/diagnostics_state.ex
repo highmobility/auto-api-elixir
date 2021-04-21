@@ -65,6 +65,7 @@ defmodule AutoApi.DiagnosticsState do
           | :rear_left
           | :rear_right_outer
           | :rear_left_outer
+          | :spare
 
   @type oem_trouble_code_value :: %{
           id: String.t(),
