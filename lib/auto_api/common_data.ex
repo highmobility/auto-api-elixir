@@ -32,6 +32,7 @@ defmodule AutoApi.CommonData do
   @type location :: :front_left | :front_right | :rear_right | :rear_left
   @type location_longitudinal :: :front | :rear
   @type lock :: :unlocked | :locked
+  @type lock_safety :: :safe | :unsafe
   @type network_security :: :none | :wep | :wpa | :wpa2_personal
   @type on_off :: :on | :off
   @type position :: :closed | :open

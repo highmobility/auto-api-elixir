@@ -32,7 +32,9 @@ defmodule AutoApi.HoodState do
   use AutoApi.State, spec_file: "hood.json"
 
   @type t :: %__MODULE__{
-          position: State.property(position)
+          position: State.property(position),
+          lock: State.property(AutoApi.CommonData.lock()),
+          lock_safety: State.property(AutoApi.CommonData.lock_safety())
         }
 
   @doc """
