@@ -56,7 +56,18 @@ defmodule AutoApi.DiagnosticsState do
           cleaning: :unknown | :in_progress | :complete | :interrupted
         }
 
+  @type engine_oil_pressure_level ::
+          :low
+          | :normal
+          | :high
+          | :low_soft
+          | :low_hard
+          | :no_sensor
+          | :system_fault
+
   @type fluid_level :: :low | :filled
+
+  @type fuel_level_accuracy :: :measured | :calculated
 
   @type location_wheel ::
           :front_left
@@ -66,6 +77,12 @@ defmodule AutoApi.DiagnosticsState do
           | :rear_right_outer
           | :rear_left_outer
           | :spare
+
+  @type low_voltage_battery_charge_level ::
+          :ok
+          | :deactivation_level_1
+          | :deactivation_level_2
+          | :deactivation_level_3
 
   @type oem_trouble_code_value :: %{
           id: String.t(),
@@ -143,7 +160,20 @@ defmodule AutoApi.DiagnosticsState do
           diesel_exhaust_fluid_range: State.property(UnitType.length()),
           diesel_particulate_filter_soot_level: State.property(float),
           confirmed_trouble_codes: State.multiple_property(confirmed_trouble_code()),
-          diesel_exhaust_filter_status: State.property(diesel_exhaust_filter_status())
+          diesel_exhaust_filter_status: State.multiple_property(diesel_exhaust_filter_status()),
+          engine_total_idle_operating_time: State.property(UnitType.duration()),
+          engine_oil_amount: State.property(UnitType.volume()),
+          engine_oil_level: State.property(float),
+          estimated_secondary_powertrain_range: State.property(UnitType.length()),
+          fuel_level_accuracy: State.property(fuel_level_accuracy()),
+          tire_pressures_targets: State.multiple_property(tire_pressure()),
+          tire_pressures_differences: State.multiple_property(tire_pressure()),
+          backup_battery_remaining_time: State.property(UnitType.duration()),
+          engine_coolant_fluid_level: State.property(fluid_level()),
+          engine_oil_fluid_level: State.property(fluid_level()),
+          engine_oil_pressure_level: State.property(engine_oil_pressure_level()),
+          engine_time_to_next_service: State.property(UnitType.duration()),
+          low_voltage_battery_charge_level: State.property(low_voltage_battery_charge_level())
         }
 
   @doc """
