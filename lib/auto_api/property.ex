@@ -57,6 +57,7 @@ defmodule AutoApi.Property do
           | :unknown
           | :pending
           | :oem_error
+          | :privacy_mode_active
 
   @type failure :: %{reason: reason(), description: String.t()}
 

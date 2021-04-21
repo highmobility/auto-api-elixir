@@ -39,6 +39,7 @@ defmodule AutoApi.FailureMessageState do
           | :pending
           | :rate_limit
           | :oem_error
+          | :privacy_mode_active
 
   @type t :: %__MODULE__{
           failed_message_id: State.property(integer()),
