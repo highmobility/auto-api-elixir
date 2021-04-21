@@ -32,7 +32,7 @@ defmodule AutoApi.EngineCapability do
       iex> E.description
       "Engine"
       iex> length(E.properties)
-      7
+      8
       iex> List.first(E.properties)
       {1, :status}
   """
