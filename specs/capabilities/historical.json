@@ -43,6 +43,23 @@
                 }
             ],
             "description": "Request history of trips travelled with the vehicle."
+        },
+        {
+            "name": "get_charging_sessions",
+            "optional": [
+                3,
+                4
+            ],
+            "constants": [
+                {
+                    "property_id": 2,
+                    "value": [
+                        0,
+                        109
+                    ]
+                }
+            ],
+            "description": "Request history of charging sessions for the vehicle."
         }
     ],
     "state": [

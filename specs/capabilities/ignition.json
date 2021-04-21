@@ -17,7 +17,7 @@
         {
             "name": "turn_ignition_on_off",
             "mandatory": [
-                1
+                3
             ],
             "description": "Attempt to turn the vehicle engine ignition on or off. When the engine ignition is on, it is possible for the driver to turn on the engine and drive the vehicle."
         }
@@ -29,10 +29,14 @@
             "name": "status",
             "name_cased": "status",
             "name_pretty": "Status",
-            "type": "types.on_off_state",
+            "deprecated": {
+                "new_name": "state",
+                "reason": "combined with 'accessories_status'"
+            },
+            "type": "types.ignition_state",
             "examples": [
                 {
-                    "data_component": "00",
+                    "data_component": "01",
                     "value": "off",
                     "description": "Ignition is off"
                 }
@@ -43,10 +47,14 @@
             "name": "accessories_status",
             "name_cased": "accessoriesStatus",
             "name_pretty": "Accessories status",
-            "type": "types.on_off_state",
+            "deprecated": {
+                "new_name": "state",
+                "reason": "combined with 'status'"
+            },
+            "type": "types.ignition_state",
             "examples": [
                 {
-                    "data_component": "01",
+                    "data_component": "03",
                     "value": "on",
                     "description": "Accessories power is on"
                 }
@@ -57,30 +65,8 @@
             "name": "state",
             "name_cased": "state",
             "name_pretty": "State",
-            "type": "enum",
-            "size": 1,
-            "enum_values": [
-                {
-                    "id": 0,
-                    "name": "lock"
-                },
-                {
-                    "id": 1,
-                    "name": "off"
-                },
-                {
-                    "id": 2,
-                    "name": "accessory"
-                },
-                {
-                    "id": 3,
-                    "name": "on"
-                },
-                {
-                    "id": 4,
-                    "name": "start"
-                }
-            ],
+            "added": 12,
+            "type": "types.ignition_state",
             "examples": [
                 {
                     "data_component": "02",

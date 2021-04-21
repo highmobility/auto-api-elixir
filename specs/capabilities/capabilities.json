@@ -59,6 +59,7 @@
             "name": "webhooks",
             "name_cased": "webhooks",
             "name_pretty": "Webhooks",
+            "added": 12,
             "type": "types.webhook",
             "multiple": true,
             "examples": [

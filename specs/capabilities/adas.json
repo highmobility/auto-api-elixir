@@ -1,0 +1,234 @@
+{
+    "name": "adas",
+    "name_cased": "adas",
+    "name_pretty": "ADAS",
+    "category": "chassis",
+    "authorization": true,
+    "identifier": {
+        "msb": 0,
+        "lsb": 108
+    },
+    "api": {
+        "intro": 13,
+        "update": 13
+    },
+    "getters": {},
+    "state": "all",
+    "properties": [
+        {
+            "id": 1,
+            "name": "status",
+            "name_cased": "status",
+            "name_pretty": "Status",
+            "added": 13,
+            "type": "types.on_off_state",
+            "description": "Indicates whether the driver assistance system is active or not.",
+            "examples": [
+                {
+                    "data_component": "01",
+                    "value": "on",
+                    "description": "ADAS is on"
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "name": "alertness_system_status",
+            "name_cased": "alertnessSystemStatus",
+            "name_pretty": "Alertness system status",
+            "added": 13,
+            "type": "types.active_state",
+            "description": "Indicates if the driver alertness warning is active or inactive.",
+            "examples": [
+                {
+                    "data_component": "01",
+                    "value": "active",
+                    "description": "Driver alertness warning system is active."
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "name": "forward_collision_warning_system",
+            "name_cased": "forwardCollisionWarningSystem",
+            "name_pretty": "Forward collision warning system",
+            "added": 13,
+            "type": "types.active_state",
+            "description": "Indicates whether the forward collision warning system is active or inactive.",
+            "examples": [
+                {
+                    "data_component": "01",
+                    "value": "active",
+                    "description": "Forward collision warning system is active."
+                }
+            ]
+        },
+        {
+            "id": 4,
+            "name": "blind_spot_warning_state",
+            "name_cased": "blindSpotWarningState",
+            "name_pretty": "Blind spot warning state",
+            "added": 13,
+            "type": "types.active_state",
+            "description": "Indicates whether the blind spot warning system is active or not.",
+            "examples": [
+                {
+                    "data_component": "01",
+                    "value": "active",
+                    "description": "Blind spot warning is active."
+                }
+            ]
+        },
+        {
+            "id": 5,
+            "name": "blind_spot_warning_system_coverage",
+            "name_cased": "blindSpotWarningSystemCoverage",
+            "name_pretty": "Blind spot warning system coverage",
+            "added": 13,
+            "type": "enum",
+            "size": 1,
+            "description": "Blind spot warning system coverage.",
+            "enum_values": [
+                {
+                    "id": 0,
+                    "name": "regular"
+                },
+                {
+                    "id": 1,
+                    "name": "trailer"
+                }
+            ],
+            "examples": [
+                {
+                    "data_component": "00",
+                    "value": "regular",
+                    "description": "Blind spot warning system coverage is regular."
+                }
+            ]
+        },
+        {
+            "id": 6,
+            "name": "rear_cross_warning_system",
+            "name_cased": "rearCrossWarningSystem",
+            "name_pretty": "Rear cross warning system",
+            "added": 13,
+            "type": "types.active_state",
+            "description": "Indicates whether the rear cross warning system is active or not.",
+            "examples": [
+                {
+                    "data_component": "01",
+                    "value": "active",
+                    "description": "Rear cross warning system is active."
+                }
+            ]
+        },
+        {
+            "id": 7,
+            "name": "automated_parking_brake",
+            "name_cased": "automatedParkingBrake",
+            "name_pretty": "Automated parking brake",
+            "added": 13,
+            "type": "types.active_state",
+            "description": "Automatic brake state",
+            "examples": [
+                {
+                    "data_component": "01",
+                    "value": "active",
+                    "description": "Automated parking brake is active."
+                }
+            ]
+        },
+        {
+            "id": 8,
+            "name": "lane_keep_assist_system",
+            "name_cased": "laneKeepAssistSystem",
+            "name_pretty": "Lane keep assist system",
+            "added": 13,
+            "type": "types.on_off_state",
+            "description": "Indicates if the lane keep assist system is turned on or not.",
+            "examples": [
+                {
+                    "data_component": "01",
+                    "value": "on",
+                    "description": "Lane keep assist system is turned on."
+                }
+            ]
+        },
+        {
+            "id": 9,
+            "name": "lane_keep_assists_states",
+            "name_cased": "laneKeepAssistsStates",
+            "name_pretty": "Lane keep assists states",
+            "name_singluar": "lane_keep_assist_state",
+            "added": 13,
+            "type": "types.lane_keep_assist_state",
+            "multiple": true,
+            "description": "Lane keeping assist state indicating the vehicle is actively controlling the wheels.",
+            "examples": [
+                {
+                    "data_component": "0000",
+                    "values": {
+                        "location": "left",
+                        "state": "inactive"
+                    },
+                    "description": "Left lane keeping assist is not actively controlling the wheels."
+                },
+                {
+                    "data_component": "0101",
+                    "values": {
+                        "location": "right",
+                        "state": "active"
+                    },
+                    "description": "Right lane keeping assist is actively controlling the wheels."
+                }
+            ]
+        },
+        {
+            "id": 10,
+            "name": "park_assists",
+            "name_cased": "parkAssists",
+            "name_pretty": "Park assists",
+            "name_singluar": "park_assist",
+            "added": 13,
+            "type": "types.park_assist",
+            "multiple": true,
+            "description": "If the alarm is active and the driver has muted or not park assists.",
+            "examples": [
+                {
+                    "data_component": "000000",
+                    "values": {
+                        "location": "front",
+                        "alarm": "inactive",
+                        "muted": "not_muted"
+                    },
+                    "description": "Front park assist is inactive and not muted."
+                },
+                {
+                    "data_component": "010100",
+                    "values": {
+                        "location": "rear",
+                        "alarm": "active",
+                        "muted": "not_muted"
+                    },
+                    "description": "Rear park assist is active and not muted."
+                }
+            ]
+        },
+        {
+            "id": 11,
+            "name": "blind_spot_warning_system",
+            "name_cased": "blindSpotWarningSystem",
+            "name_pretty": "Blind spot warning system",
+            "added": 13,
+            "type": "types.on_off_state",
+            "description": "Indicates whether the blind spot warning system is turned on or not.",
+            "examples": [
+                {
+                    "data_component": "01",
+                    "value": "on",
+                    "description": "Blind spot warning system is turned on."
+                }
+            ]
+        }
+    ]
+}

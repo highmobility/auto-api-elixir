@@ -18,7 +18,7 @@
             "mandatory": [
                 2
             ],
-            "description": "Send mutliple commands at once."
+            "description": "Send multiple commands at once."
         }
     ],
     "state": [
@@ -88,7 +88,7 @@
                     "data_component": "0c00200106000401000101",
                     "values": {
                         "doors": {
-                            "inside_locks_state": "locked"
+                            "locks_state": "locked"
                         }
                     },
                     "description": "Lock inside door locks"

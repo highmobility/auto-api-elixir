@@ -186,6 +186,7 @@
             "name": "sunroof_rain_event",
             "name_cased": "sunroofRainEvent",
             "name_pretty": "Sunroof rain event",
+            "added": 12,
             "type": "enum",
             "size": 1,
             "description": "Sunroof event happened in case of rain",
