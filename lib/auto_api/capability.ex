@@ -233,9 +233,9 @@ defmodule AutoApi.Capability do
 
   iex> capabilities = AutoApi.Capability.all()
   iex> length(capabilities)
-  55
+  56
   iex> List.first(capabilities)
-  AutoApi.BrowserCapability
+  AutoApi.AdasCapability
   """
   @spec all() :: list(module)
   defdelegate all(), to: AutoApi.Capability.Delegate

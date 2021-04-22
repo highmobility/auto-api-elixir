@@ -25,6 +25,7 @@ defmodule AutoApi.Capability.Meta do
 
   # We could parse the files in `/specs` instead
   @capabilities [
+    AutoApi.AdasCapability,
     AutoApi.BrowserCapability,
     AutoApi.CapabilitiesCapability,
     AutoApi.ChargingCapability,
