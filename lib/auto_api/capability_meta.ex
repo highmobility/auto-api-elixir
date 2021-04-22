@@ -32,6 +32,7 @@ defmodule AutoApi.Capability.Meta do
     AutoApi.ChargingSessionCapability,
     AutoApi.ChassisSettingsCapability,
     AutoApi.ClimateCapability,
+    AutoApi.CrashCapability,
     AutoApi.CruiseControlCapability,
     AutoApi.DashboardLightsCapability,
     AutoApi.DiagnosticsCapability,
