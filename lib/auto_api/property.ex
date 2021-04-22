@@ -191,6 +191,12 @@ defmodule AutoApi.Property do
     data_to_bin(data, type_spec)
   end
 
+  defp data_to_bin(data, %{"type" => "events." <> type} = spec) do
+    type_spec = type |> AutoApi.Event.spec() |> Map.put("embedded", spec["embedded"])
+
+    data_to_bin(data, type_spec)
+  end
+
   defp data_to_bin(%{value: value, unit: unit}, %{"type" => "unit." <> type}) do
     type_id = AutoApi.UnitType.id(type)
     unit_id = AutoApi.UnitType.unit_id(type, unit)
@@ -338,6 +344,12 @@ defmodule AutoApi.Property do
     to_value(binary_data, type_spec)
   end
 
+  defp to_value(binary_data, %{"type" => "events." <> type}) do
+    type_spec = AutoApi.Event.spec(type)
+
+    to_value(binary_data, type_spec)
+  end
+
   defp to_value(<<id, unit_id, value::float-64>>, %{"type" => "unit." <> _type}) do
     unit = AutoApi.UnitType.unit_name(id, unit_id)
 
@@ -375,6 +387,12 @@ defmodule AutoApi.Property do
   defp fetch_item_spec(%{"type" => "types." <> type}) do
     type
     |> AutoApi.CustomType.spec()
+    |> Map.put("embedded", "true")
+  end
+
+  defp fetch_item_spec(%{"type" => "events." <> type}) do
+    type
+    |> AutoApi.Event.spec()
     |> Map.put("embedded", "true")
   end
 

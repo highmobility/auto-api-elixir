@@ -574,6 +574,60 @@ defmodule AutoApi.PropertyTest do
       end
     end
 
+    property "converts custom value with events data to bin" do
+      forall data <- [
+               description: utf8(),
+               state: oneof([:on, :off]),
+               event: event(),
+               timestamp: datetime()
+             ] do
+        spec = %{
+          "id" => 11,
+          "type" => "custom",
+          "items" => [
+            %{
+              "name" => "description",
+              "type" => "string"
+            },
+            %{
+              "name" => "complex",
+              "type" => "custom",
+              "items" => [
+                %{
+                  "name" => "state",
+                  "size" => 1,
+                  "type" => "enum",
+                  "enum_values" => [
+                    %{"id" => 0, "name" => "on"},
+                    %{"id" => 1, "name" => "off"}
+                  ]
+                },
+                %{
+                  "name" => "event",
+                  "type" => "events.event"
+                }
+              ]
+            }
+          ]
+        }
+
+        property = %Property{
+          data: %{
+            description: data[:description],
+            complex: %{
+              state: data[:state],
+              event: data[:event]
+            }
+          },
+          timestamp: data[:datetime]
+        }
+
+        property_bin = Property.to_bin(property, spec)
+
+        assert Property.to_struct(property_bin, spec) == property
+      end
+    end
+
     property "converts failure to bin" do
       forall data <- [description: utf8(), reason: error_reason(), timestamp: datetime()] do
         spec = %{"type" => "integer", "size" => 3}
@@ -706,6 +760,31 @@ defmodule AutoApi.PropertyTest do
 
   def error_reason do
     oneof([:rate_limit, :execution_timeout, :format_error, :unauthorised, :unknown, :pending])
+  end
+
+  def event do
+    oneof([
+      :ping,
+      :trip_started,
+      :trip_ended,
+      :vehicle_location_changed,
+      :authorization_changed,
+      :tire_pressure_changed,
+      :harsh_acceleration_triggered,
+      :harsh_acceleration_pedal_position_triggered,
+      :harsh_braking_triggered,
+      :harsh_cornering_triggered,
+      :seat_belt_triggered,
+      :maintenance_changed,
+      :dashboard_lights_changed,
+      :ignition_changed,
+      :accident_reported,
+      :emergency_reported,
+      :breakdown_reported,
+      :battery_guard_warning,
+      :engine_changed,
+      :fleet_clearance_changed
+    ])
   end
 
   def update_rate do
