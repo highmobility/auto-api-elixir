@@ -122,7 +122,7 @@ defmodule AutoApi.UnitTypeStateTest do
       assert List.first(units) == :volts
 
       assert units = UnitType.units(:energy)
-      assert length(units) == 3
+      assert length(units) == 4
       assert List.first(units) == :joules
 
       assert units = UnitType.units(:energy_efficiency)

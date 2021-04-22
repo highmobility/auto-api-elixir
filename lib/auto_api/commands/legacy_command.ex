@@ -29,7 +29,7 @@ defmodule AutoApi.LegacyCommand do
 
       iex> state =  %AutoApi.EngineState{status: %AutoApi.Property{data: :on}}
       iex> #{__MODULE__}.state(state)
-      <<12, 0, 105, 1, 1, 0, 4, 1, 0, 1, 1>>
+      <<13, 0, 105, 1, 1, 0, 4, 1, 0, 1, 1>>
   """
   @spec state(AutoApi.State.t()) :: binary()
   def state(state) do

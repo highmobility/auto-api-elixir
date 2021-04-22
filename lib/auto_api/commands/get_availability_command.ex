@@ -76,7 +76,7 @@ defmodule AutoApi.GetAvailabilityCommand do
       iex> capability = AutoApi.SeatsCapability
       iex> properties = [:persons_detected]
       iex> #{__MODULE__}.new(capability, properties)
-      %#{__MODULE__}{capability: AutoApi.SeatsCapability, properties: [:persons_detected], version: 12}
+      %#{__MODULE__}{capability: AutoApi.SeatsCapability, properties: [:persons_detected], version: 13}
   """
   @spec new(AutoApi.Capability.t(), properties()) :: t()
   def new(capability, properties) do
@@ -97,7 +97,7 @@ defmodule AutoApi.GetAvailabilityCommand do
 
       iex> command = #{__MODULE__}.new(AutoApi.HoodCapability, [])
       iex> #{__MODULE__}.properties(command)
-      [:position, :nonce, :vehicle_signature, :timestamp, :vin, :brand]
+      [:position, :lock, :lock_safety, :nonce, :vehicle_signature, :timestamp, :vin, :brand]
   """
   @impl true
   @spec properties(t()) :: list(AutoApi.Capability.property())
@@ -118,12 +118,12 @@ defmodule AutoApi.GetAvailabilityCommand do
   iex> # Request the door locks state availability
   iex> command = %#{__MODULE__}{capability: AutoApi.DoorsCapability, properties: [:locks_state]}
   iex> #{__MODULE__}.to_bin(command)
-  <<12, 0, 32, 2, 6>>
+  <<13, 0, 32, 2, 6>>
 
   iex> # Request all properties availability for race state
   iex> command = %#{__MODULE__}{capability: AutoApi.RaceCapability, properties: []}
   iex> #{__MODULE__}.to_bin(command)
-  <<12, 0, 87, 2>>
+  <<13, 0, 87, 2>>
   """
   @impl true
   @spec to_bin(t()) :: binary()
@@ -138,8 +138,8 @@ defmodule AutoApi.GetAvailabilityCommand do
 
   ## Examples
 
-      iex> #{__MODULE__}.from_bin(<<0x0C, 0x00, 0x33, 0x02, 0x01, 0x04>>)
-      %#{__MODULE__}{capability: AutoApi.DiagnosticsCapability, properties: [:mileage, :engine_rpm], version: 12}
+      iex> #{__MODULE__}.from_bin(<<0x0D, 0x00, 0x33, 0x02, 0x01, 0x04>>)
+      %#{__MODULE__}{capability: AutoApi.DiagnosticsCapability, properties: [:mileage, :engine_rpm], version: 13}
   """
   @impl true
   @spec from_bin(binary) :: t()
