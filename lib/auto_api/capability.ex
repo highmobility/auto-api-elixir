@@ -233,7 +233,7 @@ defmodule AutoApi.Capability do
 
   iex> capabilities = AutoApi.Capability.all()
   iex> length(capabilities)
-  56
+  57
   iex> List.first(capabilities)
   AutoApi.AdasCapability
   """
