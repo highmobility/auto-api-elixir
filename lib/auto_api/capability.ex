@@ -184,6 +184,18 @@ defmodule AutoApi.Capability do
         """
         @spec multiple?(atom()) :: boolean()
         def multiple?(name)
+
+        @doc """
+        Returns whether the property is deprecated.
+
+        ## Example
+
+            iex> AutoApi.HoodCapability.deprecated?(:lock)
+            false
+
+            iex> AutoApi.DiagnosticsCapability.deprecated?(:mileage)
+            true
+        """
       end
 
     property_functions =
@@ -191,12 +203,14 @@ defmodule AutoApi.Capability do
         prop_id = prop["id"]
         prop_name = String.to_atom(prop["name"])
         multiple? = prop["multiple"] || false
+        deprecated? = not is_nil(prop["deprecated"])
 
         quote location: :keep do
           def property_id(unquote(prop_name)), do: unquote(prop_id)
           def property_name(unquote(prop_id)), do: unquote(prop_name)
           def property_spec(unquote(prop_name)), do: unquote(Macro.escape(prop))
           def multiple?(unquote(prop_name)), do: unquote(multiple?)
+          def deprecated?(unquote(prop_name)), do: unquote(deprecated?)
         end
       end
 
