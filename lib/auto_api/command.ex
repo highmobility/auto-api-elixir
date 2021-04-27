@@ -36,7 +36,6 @@ defmodule AutoApi.Command do
   @callback to_bin(t()) :: binary()
   @callback from_bin(binary()) :: t()
 
-  @commands [GetAvailabilityCommand, GetCommand, SetCommand]
   @version AutoApi.version()
 
   @doc """
@@ -49,7 +48,7 @@ defmodule AutoApi.Command do
   0x02
   """
   @spec identifier(t()) :: identifier()
-  def identifier(%command_module{}) when command_module in @commands do
+  def identifier(%command_module{}) do
     command_module.identifier()
   end
 
@@ -63,7 +62,7 @@ defmodule AutoApi.Command do
   :get_availability
   """
   @spec name(t()) :: name()
-  def name(%command_module{}) when command_module in @commands do
+  def name(%command_module{}) do
     command_module.name()
   end
 
@@ -93,7 +92,7 @@ defmodule AutoApi.Command do
       [:brake_torque_vectorings, :vehicle_moving]
   """
   @spec properties(t()) :: list(AutoApi.Capability.property())
-  def properties(%command_module{} = command) when command_module in @commands do
+  def properties(%command_module{} = command) do
     command_module.properties(command)
   end
 
@@ -161,7 +160,7 @@ defmodule AutoApi.Command do
   <<13, 0, 38, 1, 5, 0, 13, 1, 0, 10, 7, 0, 64, 4, 0, 0, 0, 0, 0, 0>>
   """
   @spec to_bin(t()) :: binary()
-  def to_bin(%command_mod{} = command) when command_mod in @commands do
+  def to_bin(%command_mod{} = command) do
     command_mod.to_bin(command)
   end
 end
