@@ -21,14 +21,14 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-defmodule AutoApi.DashboardLightsState do
+defmodule AutoApiL12.DashboardLightsState do
   @moduledoc """
   Keeps Dashboard Lights state
   """
 
-  alias AutoApi.{CommonData, State}
+  alias AutoApiL12.{CommonData, State}
 
-  use AutoApi.State, spec_file: "dashboard_lights.json"
+  use AutoApiL12.State, spec_file: "dashboard_lights.json"
 
   @type light_name ::
           :high_beam
@@ -134,8 +134,8 @@ defmodule AutoApi.DashboardLightsState do
   Build state based on binary value
 
     iex> bin = <<1, 0, 5, 1, 0, 2, 1, 1>>
-    iex> AutoApi.DashboardLightsState.from_bin(bin)
-    %AutoApi.DashboardLightsState{dashboard_lights: [%AutoApi.Property{data: %{name: :low_beam, state: :on}}]}
+    iex> AutoApiL12.DashboardLightsState.from_bin(bin)
+    %AutoApiL12.DashboardLightsState{dashboard_lights: [%AutoApiL12.Property{data: %{name: :low_beam, state: :on}}]}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -146,8 +146,8 @@ defmodule AutoApi.DashboardLightsState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.DashboardLightsState{dashboard_lights: [%AutoApi.Property{data: %{name: :low_beam, state: :off}}]}
-    iex> AutoApi.DashboardLightsState.to_bin(state)
+    iex> state = %AutoApiL12.DashboardLightsState{dashboard_lights: [%AutoApiL12.Property{data: %{name: :low_beam, state: :off}}]}
+    iex> AutoApiL12.DashboardLightsState.to_bin(state)
     <<1, 0, 5, 1, 0, 2, 1, 0>>
   """
   def to_bin(%__MODULE__{} = state) do

@@ -20,7 +20,7 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.DashboardLightsCapabilityTest do
+defmodule AutoApiL12.DashboardLightsCapabilityTest do
   use ExUnit.Case, async: true
-  doctest AutoApi.DashboardLightsCapability
+  doctest AutoApiL12.DashboardLightsCapability
 end

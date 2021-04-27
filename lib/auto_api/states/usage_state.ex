@@ -20,14 +20,14 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.UsageState do
+defmodule AutoApiL12.UsageState do
   @moduledoc """
   Usage state
   """
 
-  alias AutoApi.{CommonData, State, UnitType}
+  alias AutoApiL12.{CommonData, State, UnitType}
 
-  use AutoApi.State, spec_file: "usage.json"
+  use AutoApiL12.State, spec_file: "usage.json"
 
   @type distance_over_time :: %{
           distance: UnitType.length(),
@@ -92,8 +92,8 @@ defmodule AutoApi.UsageState do
   Build state based on binary value
 
     iex> bin = <<17, 0, 11, 1, 0, 8, 63, 229, 112, 163, 215, 10, 61, 113>>
-    iex> AutoApi.UsageState.from_bin(bin)
-    %AutoApi.UsageState{safety_driving_score: %AutoApi.Property{data: 0.67}}
+    iex> AutoApiL12.UsageState.from_bin(bin)
+    %AutoApiL12.UsageState{safety_driving_score: %AutoApiL12.Property{data: 0.67}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -103,8 +103,8 @@ defmodule AutoApi.UsageState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.UsageState{safety_driving_score: %AutoApi.Property{data: 0.67}}
-    iex> AutoApi.UsageState.to_bin(state)
+    iex> state = %AutoApiL12.UsageState{safety_driving_score: %AutoApiL12.Property{data: 0.67}}
+    iex> AutoApiL12.UsageState.to_bin(state)
     <<17, 0, 11, 1, 0, 8, 63, 229, 112, 163, 215, 10, 61, 113>>
   """
   @spec to_bin(__MODULE__.t()) :: binary

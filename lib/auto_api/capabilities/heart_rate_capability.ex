@@ -20,11 +20,11 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.HeartRateCapability do
+defmodule AutoApiL12.HeartRateCapability do
   @moduledoc """
   Basic settings for Heart Rate Capability
 
-      iex> alias AutoApi.HeartRateCapability, as: H
+      iex> alias AutoApiL12.HeartRateCapability, as: H
       iex> H.identifier
       <<0x00, 0x29>>
       iex> H.name
@@ -35,8 +35,8 @@ defmodule AutoApi.HeartRateCapability do
       6
   """
 
-  @command_module AutoApi.LegacyCommand
-  @state_module AutoApi.HeartRateState
+  @command_module AutoApiL12.LegacyCommand
+  @state_module AutoApiL12.HeartRateState
 
-  use AutoApi.Capability, spec_file: "heart_rate.json"
+  use AutoApiL12.Capability, spec_file: "heart_rate.json"
 end

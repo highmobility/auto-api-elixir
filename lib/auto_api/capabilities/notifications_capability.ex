@@ -20,11 +20,11 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.NotificationsCapability do
+defmodule AutoApiL12.NotificationsCapability do
   @moduledoc """
   Basic settings for Notifications Capability
 
-      iex> alias AutoApi.NotificationsCapability, as: N
+      iex> alias AutoApiL12.NotificationsCapability, as: N
       iex> N.identifier
       <<0x00, 0x38>>
       iex> N.name
@@ -37,8 +37,8 @@ defmodule AutoApi.NotificationsCapability do
       {0x01, :text}
   """
 
-  @command_module AutoApi.LegacyCommand
-  @state_module AutoApi.NotificationsState
+  @command_module AutoApiL12.LegacyCommand
+  @state_module AutoApiL12.NotificationsState
 
-  use AutoApi.Capability, spec_file: "notifications.json"
+  use AutoApiL12.Capability, spec_file: "notifications.json"
 end

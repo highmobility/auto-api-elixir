@@ -20,10 +20,10 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.ChargingStateTest do
+defmodule AutoApiL12.ChargingStateTest do
   use ExUnit.Case, async: true
-  doctest AutoApi.ChargingState
-  alias AutoApi.{Property, ChargingState}
+  doctest AutoApiL12.ChargingState
+  alias AutoApiL12.{Property, ChargingState}
 
   test "to_bin & from_bin" do
     date = ~U[2019-07-29 10:15:09.654Z]

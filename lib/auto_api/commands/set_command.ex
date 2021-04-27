@@ -16,9 +16,9 @@
 #
 # Please inquire about commercial licensing options at
 # licensing@high-mobility.com
-defmodule AutoApi.SetCommand do
+defmodule AutoApiL12.SetCommand do
   @moduledoc """
-  Abstraction for a `set` command in AutoApi (id `0x01`)
+  Abstraction for a `set` command in AutoApiL12 (id `0x01`)
 
   The `struct` contains two fields:
 
@@ -28,16 +28,16 @@ defmodule AutoApi.SetCommand do
   Capability and State must be of the same capability type, or an error is generated
   """
 
-  @behaviour AutoApi.Command
+  @behaviour AutoApiL12.Command
 
-  @version AutoApi.version()
+  @version AutoApiL12.version()
   @identifier 0x01
   @name :set
 
   @type t :: %__MODULE__{
-          capability: AutoApi.Capability.t(),
-          state: AutoApi.State.t(),
-          version: AutoApi.version()
+          capability: AutoApiL12.Capability.t(),
+          state: AutoApiL12.State.t(),
+          version: AutoApiL12.version()
         }
 
   @enforce_keys [:capability, :state]
@@ -64,7 +64,7 @@ defmodule AutoApi.SetCommand do
   :set
   """
   @impl true
-  @spec name() :: AutoApi.Command.name()
+  @spec name() :: AutoApiL12.Command.name()
   def name(), do: @name
 
   @doc """
@@ -74,12 +74,12 @@ defmodule AutoApi.SetCommand do
 
   # Example
 
-      iex> state = %AutoApi.TrunkState{lock: %AutoApi.Property{data: :locked}}
+      iex> state = %AutoApiL12.TrunkState{lock: %AutoApiL12.Property{data: :locked}}
       iex> #{__MODULE__}.new(state)
-      %#{__MODULE__}{capability: AutoApi.TrunkCapability, state: %AutoApi.TrunkState{lock: %AutoApi.Property{data: :locked}}, version: 12}
+      %#{__MODULE__}{capability: AutoApiL12.TrunkCapability, state: %AutoApiL12.TrunkState{lock: %AutoApiL12.Property{data: :locked}}, version: 12}
   """
 
-  @spec new(AutoApi.State.t()) :: t()
+  @spec new(AutoApiL12.State.t()) :: t()
   def new(%state_mod{} = state) do
     new(state_mod.capability(), state)
   end
@@ -89,12 +89,12 @@ defmodule AutoApi.SetCommand do
 
   # Example
 
-      iex> capability = AutoApi.TrunkCapability
-      iex> state = %AutoApi.TrunkState{lock: %AutoApi.Property{data: :locked}}
+      iex> capability = AutoApiL12.TrunkCapability
+      iex> state = %AutoApiL12.TrunkState{lock: %AutoApiL12.Property{data: :locked}}
       iex> #{__MODULE__}.new(capability, state)
-      %#{__MODULE__}{capability: AutoApi.TrunkCapability, state: %AutoApi.TrunkState{lock: %AutoApi.Property{data: :locked}}, version: 12}
+      %#{__MODULE__}{capability: AutoApiL12.TrunkCapability, state: %AutoApiL12.TrunkState{lock: %AutoApiL12.Property{data: :locked}}, version: 12}
   """
-  @spec new(AutoApi.Capability.t(), AutoApi.State.t()) :: t()
+  @spec new(AutoApiL12.Capability.t(), AutoApiL12.State.t()) :: t()
   def new(capability, state) do
     %__MODULE__{capability: capability, state: state, version: @version}
   end
@@ -104,20 +104,20 @@ defmodule AutoApi.SetCommand do
 
   ## Examples
 
-      iex> state = AutoApi.HoodState.base()
+      iex> state = AutoApiL12.HoodState.base()
       iex> command = #{__MODULE__}.new(state)
       iex> #{__MODULE__}.properties(command)
       []
 
-      iex> state = AutoApi.RaceState.base()
-      ...>         |> AutoApi.State.put(:vehicle_moving, data: :sport, timestamp: ~U[2021-03-12 10:54:14Z])
-      ...>         |> AutoApi.State.put(:brake_torque_vectorings, data: %{axle: :front, state: :active})
+      iex> state = AutoApiL12.RaceState.base()
+      ...>         |> AutoApiL12.State.put(:vehicle_moving, data: :sport, timestamp: ~U[2021-03-12 10:54:14Z])
+      ...>         |> AutoApiL12.State.put(:brake_torque_vectorings, data: %{axle: :front, state: :active})
       iex> command = #{__MODULE__}.new(state)
       iex> #{__MODULE__}.properties(command)
       [:brake_torque_vectorings, :vehicle_moving]
   """
   @impl true
-  @spec properties(t()) :: list(AutoApi.Capability.property())
+  @spec properties(t()) :: list(AutoApiL12.Capability.property())
   def properties(%__MODULE__{state: state}) do
     state
     |> Map.from_struct()
@@ -133,16 +133,16 @@ defmodule AutoApi.SetCommand do
   # Examples
 
       iex> # Request to unlock the doors of the vehicle
-      iex> locks_state = %AutoApi.Property{data: :unlocked}
-      iex> state = AutoApi.State.put(%AutoApi.DoorsState{}, :locks_state, locks_state)
-      iex> command = %#{__MODULE__}{capability: AutoApi.DoorsCapability, state: state}
+      iex> locks_state = %AutoApiL12.Property{data: :unlocked}
+      iex> state = AutoApiL12.State.put(%AutoApiL12.DoorsState{}, :locks_state, locks_state)
+      iex> command = %#{__MODULE__}{capability: AutoApiL12.DoorsCapability, state: state}
       iex> #{__MODULE__}.to_bin(command)
       <<12, 0, 32, 1, 6, 0, 4, 1, 0, 1, 0>>
 
       iex> # Request to honk the horn for 2.5 seconds
-      iex> capability = AutoApi.HonkHornFlashLightsCapability
+      iex> capability = AutoApiL12.HonkHornFlashLightsCapability
       iex> honk_time = %{value: 2.5, unit: :seconds}
-      iex> state = AutoApi.State.put(capability.state().base(), :honk_time, data: honk_time)
+      iex> state = AutoApiL12.State.put(capability.state().base(), :honk_time, data: honk_time)
       iex> command = %#{__MODULE__}{capability: capability, state: state}
       iex> #{__MODULE__}.to_bin(command)
       <<12, 0, 38, 1, 5, 0, 13, 1, 0, 10, 7, 0, 64, 4, 0, 0, 0, 0, 0, 0>>
@@ -162,12 +162,12 @@ defmodule AutoApi.SetCommand do
 
       iex> # Parses a "lock vehicle doors" command
       iex> #{__MODULE__}.from_bin(<<12, 0, 32, 1, 6, 0, 4, 1, 0, 1, 1>>)
-      %#{__MODULE__}{capability: AutoApi.DoorsCapability, state: %AutoApi.DoorsState{locks_state: %AutoApi.Property{data: :locked}}, version: 12}
+      %#{__MODULE__}{capability: AutoApiL12.DoorsCapability, state: %AutoApiL12.DoorsState{locks_state: %AutoApiL12.Property{data: :locked}}, version: 12}
   """
   @impl true
   @spec from_bin(binary) :: t()
   def from_bin(<<@version, capability_id::binary-size(2), @identifier, state_bin::binary>>) do
-    capability = AutoApi.Capability.get_by_id(capability_id)
+    capability = AutoApiL12.Capability.get_by_id(capability_id)
     state = capability.state().from_bin(state_bin)
 
     new(capability, state)

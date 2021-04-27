@@ -20,11 +20,11 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.RooftopControlCapability do
+defmodule AutoApiL12.RooftopControlCapability do
   @moduledoc """
   Basic settings for RooftopControl Capability
 
-      iex> alias AutoApi.RooftopControlCapability, as: R
+      iex> alias AutoApiL12.RooftopControlCapability, as: R
       iex> R.identifier
       <<0x00, 0x25>>
       iex> R.name
@@ -37,8 +37,8 @@ defmodule AutoApi.RooftopControlCapability do
       {0x01, :dimming}
   """
 
-  @command_module AutoApi.LegacyCommand
-  @state_module AutoApi.RooftopControlState
+  @command_module AutoApiL12.LegacyCommand
+  @state_module AutoApiL12.RooftopControlState
 
-  use AutoApi.Capability, spec_file: "rooftop_control.json"
+  use AutoApiL12.Capability, spec_file: "rooftop_control.json"
 end

@@ -20,11 +20,11 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.VehicleLocationCapability do
+defmodule AutoApiL12.VehicleLocationCapability do
   @moduledoc """
   Basic settings for Vehicle Location Capability
 
-      iex> alias AutoApi.VehicleLocationCapability, as: VL
+      iex> alias AutoApiL12.VehicleLocationCapability, as: VL
       iex> VL.identifier
       <<0x00, 0x30>>
       iex> VL.name
@@ -37,8 +37,8 @@ defmodule AutoApi.VehicleLocationCapability do
       {4, :coordinates}
   """
 
-  @command_module AutoApi.LegacyCommand
-  @state_module AutoApi.VehicleLocationState
+  @command_module AutoApiL12.LegacyCommand
+  @state_module AutoApiL12.VehicleLocationState
 
-  use AutoApi.Capability, spec_file: "vehicle_location.json"
+  use AutoApiL12.Capability, spec_file: "vehicle_location.json"
 end

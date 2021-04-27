@@ -20,11 +20,11 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.FailureMessageCapability do
+defmodule AutoApiL12.FailureMessageCapability do
   @moduledoc """
   Basic settings for FailureMessage Capability
 
-      iex> alias AutoApi.FailureMessageCapability, as: F
+      iex> alias AutoApiL12.FailureMessageCapability, as: F
       iex> F.identifier
       <<0x00, 0x2>>
       iex> F.name
@@ -37,8 +37,8 @@ defmodule AutoApi.FailureMessageCapability do
       {1, :failed_message_id}
   """
 
-  @command_module AutoApi.LegacyCommand
-  @state_module AutoApi.FailureMessageState
+  @command_module AutoApiL12.LegacyCommand
+  @state_module AutoApiL12.FailureMessageState
 
-  use AutoApi.Capability, spec_file: "failure_message.json"
+  use AutoApiL12.Capability, spec_file: "failure_message.json"
 end

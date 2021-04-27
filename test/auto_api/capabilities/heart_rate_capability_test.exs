@@ -20,7 +20,7 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.HeartRateCapabilityTest do
+defmodule AutoApiL12.HeartRateCapabilityTest do
   use ExUnit.Case, async: true
-  doctest AutoApi.HeartRateCapability
+  doctest AutoApiL12.HeartRateCapability
 end

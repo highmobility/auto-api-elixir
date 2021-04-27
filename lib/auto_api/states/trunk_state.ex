@@ -20,14 +20,14 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.TrunkState do
+defmodule AutoApiL12.TrunkState do
   @moduledoc """
   Trunk state
   """
 
-  alias AutoApi.{CommonData, State}
+  alias AutoApiL12.{CommonData, State}
 
-  use AutoApi.State, spec_file: "trunk.json"
+  use AutoApiL12.State, spec_file: "trunk.json"
 
   @type t :: %__MODULE__{
           lock: State.property(CommonData.lock()),
@@ -38,8 +38,8 @@ defmodule AutoApi.TrunkState do
   Build state based on binary value
 
     iex> bin = <<1, 0, 4, 1, 0, 1, 1>>
-    iex> AutoApi.TrunkState.from_bin(bin)
-    %AutoApi.TrunkState{lock: %AutoApi.Property{data: :locked}}
+    iex> AutoApiL12.TrunkState.from_bin(bin)
+    %AutoApiL12.TrunkState{lock: %AutoApiL12.Property{data: :locked}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -49,8 +49,8 @@ defmodule AutoApi.TrunkState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.TrunkState{lock: %AutoApi.Property{data: :locked}}
-    iex> AutoApi.TrunkState.to_bin(state)
+    iex> state = %AutoApiL12.TrunkState{lock: %AutoApiL12.Property{data: :locked}}
+    iex> AutoApiL12.TrunkState.to_bin(state)
     <<1, 0, 4, 1, 0, 1, 1>>
   """
   @spec to_bin(__MODULE__.t()) :: binary

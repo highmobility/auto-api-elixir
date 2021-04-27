@@ -20,11 +20,11 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.VehicleStatusCapability do
+defmodule AutoApiL12.VehicleStatusCapability do
   @moduledoc """
   Basic settings for Vehicle Status Capability
 
-      iex> alias AutoApi.VehicleStatusCapability, as: VS
+      iex> alias AutoApiL12.VehicleStatusCapability, as: VS
       iex> VS.identifier
       <<0x00, 0x11>>
       iex> VS.name
@@ -37,8 +37,8 @@ defmodule AutoApi.VehicleStatusCapability do
       {0x99, :states}
   """
 
-  @command_module AutoApi.LegacyCommand
-  @state_module AutoApi.VehicleStatusState
+  @command_module AutoApiL12.LegacyCommand
+  @state_module AutoApiL12.VehicleStatusState
 
-  use AutoApi.Capability, spec_file: "vehicle_status.json"
+  use AutoApiL12.Capability, spec_file: "vehicle_status.json"
 end

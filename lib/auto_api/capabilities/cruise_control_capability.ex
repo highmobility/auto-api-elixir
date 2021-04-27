@@ -20,11 +20,11 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.CruiseControlCapability do
+defmodule AutoApiL12.CruiseControlCapability do
   @moduledoc """
   Basic settings for Cruise Control Capability
 
-      iex> alias AutoApi.CruiseControlCapability, as: CC
+      iex> alias AutoApiL12.CruiseControlCapability, as: CC
       iex> CC.identifier
       <<0x00, 0x62>>
       iex> CC.name
@@ -37,8 +37,8 @@ defmodule AutoApi.CruiseControlCapability do
       {1, :cruise_control}
   """
 
-  @command_module AutoApi.LegacyCommand
-  @state_module AutoApi.CruiseControlState
+  @command_module AutoApiL12.LegacyCommand
+  @state_module AutoApiL12.CruiseControlState
 
-  use AutoApi.Capability, spec_file: "cruise_control.json"
+  use AutoApiL12.Capability, spec_file: "cruise_control.json"
 end

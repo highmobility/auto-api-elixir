@@ -20,7 +20,7 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.CruiseControlStateTest do
+defmodule AutoApiL12.CruiseControlStateTest do
   use ExUnit.Case, async: true
-  doctest AutoApi.CruiseControlState
+  doctest AutoApiL12.CruiseControlState
 end

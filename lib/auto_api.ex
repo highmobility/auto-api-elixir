@@ -20,10 +20,10 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi do
+defmodule AutoApiL12 do
   @moduledoc """
-  Documentation for AutoApi.
+  Documentation for AutoApiL12.
   """
-  require AutoApi.Version
-  @before_compile AutoApi.Version
+  require AutoApiL12.Version
+  @before_compile AutoApiL12.Version
 end

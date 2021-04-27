@@ -20,17 +20,17 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.HonkHornFlashLightsState do
+defmodule AutoApiL12.HonkHornFlashLightsState do
   @moduledoc """
   Keeps HonkHornFlashLights state
   """
 
-  alias AutoApi.{CommonData, State, UnitType}
+  alias AutoApiL12.{CommonData, State, UnitType}
 
   @type flashers ::
           :inactive | :emergency_flasher_active | :left_flasher_active | :right_flasher_active
 
-  use AutoApi.State, spec_file: "honk_horn_flash_lights.json"
+  use AutoApiL12.State, spec_file: "honk_horn_flash_lights.json"
 
   @type t :: %__MODULE__{
           flashers: State.property(flashers),
@@ -45,8 +45,8 @@ defmodule AutoApi.HonkHornFlashLightsState do
   Build state based on binary value
 
     iex> bin = <<1, 0, 4, 1, 0, 1, 0>>
-    iex> AutoApi.HonkHornFlashLightsState.from_bin(bin)
-    %AutoApi.HonkHornFlashLightsState{flashers: %AutoApi.Property{data: :inactive}}
+    iex> AutoApiL12.HonkHornFlashLightsState.from_bin(bin)
+    %AutoApiL12.HonkHornFlashLightsState{flashers: %AutoApiL12.Property{data: :inactive}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -57,8 +57,8 @@ defmodule AutoApi.HonkHornFlashLightsState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.HonkHornFlashLightsState{flashers: %AutoApi.Property{data: :inactive}}
-    iex> AutoApi.HonkHornFlashLightsState.to_bin(state)
+    iex> state = %AutoApiL12.HonkHornFlashLightsState{flashers: %AutoApiL12.Property{data: :inactive}}
+    iex> AutoApiL12.HonkHornFlashLightsState.to_bin(state)
     <<1, 0, 4, 1, 0, 1, 0>>
   """
   def to_bin(%__MODULE__{} = state) do

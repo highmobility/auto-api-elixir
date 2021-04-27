@@ -20,14 +20,14 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.LightConditionsState do
+defmodule AutoApiL12.LightConditionsState do
   @moduledoc """
   LightConditions state
   """
 
-  alias AutoApi.{State, UnitType}
+  alias AutoApiL12.{State, UnitType}
 
-  use AutoApi.State, spec_file: "light_conditions.json"
+  use AutoApiL12.State, spec_file: "light_conditions.json"
 
   @type t :: %__MODULE__{
           outside_light: State.property(UnitType.illuminance()),
@@ -38,8 +38,8 @@ defmodule AutoApi.LightConditionsState do
   Build state based on binary value
 
     iex> bin = <<1, 0, 13, 1, 0, 10, 17, 0, 64, 57, 43, 133, 30, 184, 81, 236>>
-    iex> AutoApi.LightConditionsState.from_bin(bin)
-    %AutoApi.LightConditionsState{outside_light: %AutoApi.Property{data: %{value: 25.17, unit: :lux}}}
+    iex> AutoApiL12.LightConditionsState.from_bin(bin)
+    %AutoApiL12.LightConditionsState{outside_light: %AutoApiL12.Property{data: %{value: 25.17, unit: :lux}}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -49,8 +49,8 @@ defmodule AutoApi.LightConditionsState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.LightConditionsState{outside_light: %AutoApi.Property{data: %{value: 25.17, unit: :lux}}}
-    iex> AutoApi.LightConditionsState.to_bin(state)
+    iex> state = %AutoApiL12.LightConditionsState{outside_light: %AutoApiL12.Property{data: %{value: 25.17, unit: :lux}}}
+    iex> AutoApiL12.LightConditionsState.to_bin(state)
     <<1, 0, 13, 1, 0, 10, 17, 0, 64, 57, 43, 133, 30, 184, 81, 236>>
   """
   @spec to_bin(__MODULE__.t()) :: binary

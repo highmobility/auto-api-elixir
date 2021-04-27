@@ -20,14 +20,14 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.WiFiState do
+defmodule AutoApiL12.WiFiState do
   @moduledoc """
   WiFi state
   """
 
-  alias AutoApi.{CommonData, State}
+  alias AutoApiL12.{CommonData, State}
 
-  use AutoApi.State, spec_file: "wi_fi.json"
+  use AutoApiL12.State, spec_file: "wi_fi.json"
 
   @type t :: %__MODULE__{
           status: State.property(CommonData.enabled_state()),
@@ -41,8 +41,8 @@ defmodule AutoApi.WiFiState do
   Build state based on binary value
 
     iex> bin = <<1, 0, 4, 1, 0, 1, 1>>
-    iex> AutoApi.WiFiState.from_bin(bin)
-    %AutoApi.WiFiState{status: %AutoApi.Property{data: :enabled}}
+    iex> AutoApiL12.WiFiState.from_bin(bin)
+    %AutoApiL12.WiFiState{status: %AutoApiL12.Property{data: :enabled}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -52,8 +52,8 @@ defmodule AutoApi.WiFiState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.WiFiState{status: %AutoApi.Property{data: :enabled}}
-    iex> AutoApi.WiFiState.to_bin(state)
+    iex> state = %AutoApiL12.WiFiState{status: %AutoApiL12.Property{data: :enabled}}
+    iex> AutoApiL12.WiFiState.to_bin(state)
     <<1, 0, 4, 1, 0, 1, 1>>
   """
   @spec to_bin(__MODULE__.t()) :: binary

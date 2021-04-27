@@ -16,14 +16,14 @@
 #
 # Please inquire about commercial licensing options at
 # licensing@high-mobility.com
-defmodule AutoApi.GetAvailabilityCommandTest do
+defmodule AutoApiL12.GetAvailabilityCommandTest do
   use ExUnit.Case, async: true
   use PropCheck
-  import AutoApi.PropCheckFixtures
+  import AutoApiL12.PropCheckFixtures
 
-  doctest AutoApi.GetAvailabilityCommand
+  doctest AutoApiL12.GetAvailabilityCommand
 
-  alias AutoApi.GetAvailabilityCommand, as: SUT
+  alias AutoApiL12.GetAvailabilityCommand, as: SUT
 
   property "new/2 works" do
     forall {capability, properties} <- capability_with_properties() do

@@ -20,11 +20,11 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.HomeChargerCapability do
+defmodule AutoApiL12.HomeChargerCapability do
   @moduledoc """
   Basic settings for HomeCharger Capability
 
-      iex> alias AutoApi.HomeChargerCapability, as: H
+      iex> alias AutoApiL12.HomeChargerCapability, as: H
       iex> H.identifier
       <<0x00, 0x60>>
       iex> H.name
@@ -37,8 +37,8 @@ defmodule AutoApi.HomeChargerCapability do
       {0x1, :charging_status}
   """
 
-  @command_module AutoApi.LegacyCommand
-  @state_module AutoApi.HomeChargerState
+  @command_module AutoApiL12.LegacyCommand
+  @state_module AutoApiL12.HomeChargerState
 
-  use AutoApi.Capability, spec_file: "home_charger.json"
+  use AutoApiL12.Capability, spec_file: "home_charger.json"
 end

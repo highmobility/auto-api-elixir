@@ -20,14 +20,14 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.WindscreenState do
+defmodule AutoApiL12.WindscreenState do
   @moduledoc """
   Windscreen state
   """
 
-  alias AutoApi.State
+  alias AutoApiL12.State
 
-  use AutoApi.State, spec_file: "windscreen.json"
+  use AutoApiL12.State, spec_file: "windscreen.json"
 
   @type wipers_status :: :inactive | :active | :automatic
   @type wipers_intensity :: :level_0 | :level_1 | :level_2 | :level_3
@@ -57,8 +57,8 @@ defmodule AutoApi.WindscreenState do
   Build state based on binary value
 
     iex> bin = <<1, 0, 4, 1, 0, 1, 2>>
-    iex> AutoApi.WindscreenState.from_bin(bin)
-    %AutoApi.WindscreenState{wipers_status: %AutoApi.Property{data: :automatic}}
+    iex> AutoApiL12.WindscreenState.from_bin(bin)
+    %AutoApiL12.WindscreenState{wipers_status: %AutoApiL12.Property{data: :automatic}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -68,8 +68,8 @@ defmodule AutoApi.WindscreenState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.WindscreenState{wipers_status: %AutoApi.Property{data: :automatic}}
-    iex> AutoApi.WindscreenState.to_bin(state)
+    iex> state = %AutoApiL12.WindscreenState{wipers_status: %AutoApiL12.Property{data: :automatic}}
+    iex> AutoApiL12.WindscreenState.to_bin(state)
     <<1, 0, 4, 1, 0, 1, 2>>
   """
   @spec to_bin(__MODULE__.t()) :: binary

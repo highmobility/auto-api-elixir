@@ -20,11 +20,11 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.UsageCapability do
+defmodule AutoApiL12.UsageCapability do
   @moduledoc """
   Basic settings for usage Capability
 
-      iex> alias AutoApi.UsageCapability, as: U
+      iex> alias AutoApiL12.UsageCapability, as: U
       iex> U.identifier
       <<0x00, 0x68>>
       iex> U.name
@@ -37,8 +37,8 @@ defmodule AutoApi.UsageCapability do
       {0x01, :average_weekly_distance}
   """
 
-  @command_module AutoApi.LegacyCommand
-  @state_module AutoApi.UsageState
+  @command_module AutoApiL12.LegacyCommand
+  @state_module AutoApiL12.UsageState
 
-  use AutoApi.Capability, spec_file: "usage.json"
+  use AutoApiL12.Capability, spec_file: "usage.json"
 end

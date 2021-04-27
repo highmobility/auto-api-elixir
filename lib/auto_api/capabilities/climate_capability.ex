@@ -20,11 +20,11 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.ClimateCapability do
+defmodule AutoApiL12.ClimateCapability do
   @moduledoc """
   Basic settings for Climate Capability
 
-      iex> alias AutoApi.ClimateCapability, as: C
+      iex> alias AutoApiL12.ClimateCapability, as: C
       iex> C.identifier
       <<0x00, 0x24>>
       iex> C.name
@@ -37,8 +37,8 @@ defmodule AutoApi.ClimateCapability do
       {0x01, :inside_temperature}
   """
 
-  @command_module AutoApi.LegacyCommand
-  @state_module AutoApi.ClimateState
+  @command_module AutoApiL12.LegacyCommand
+  @state_module AutoApiL12.ClimateState
 
-  use AutoApi.Capability, spec_file: "climate.json"
+  use AutoApiL12.Capability, spec_file: "climate.json"
 end

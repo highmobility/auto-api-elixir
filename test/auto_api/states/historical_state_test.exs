@@ -20,11 +20,11 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.HistoricalStateTest do
+defmodule AutoApiL12.HistoricalStateTest do
   use ExUnit.Case, async: true
-  doctest AutoApi.HistoricalState
+  doctest AutoApiL12.HistoricalState
 
-  alias AutoApi.{ChargingState, HistoricalState, Property, SetCommand}
+  alias AutoApiL12.{ChargingState, HistoricalState, Property, SetCommand}
 
   test "from_bin/1 and to_bin/1" do
     states = [

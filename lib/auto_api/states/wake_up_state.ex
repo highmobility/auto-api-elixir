@@ -20,14 +20,14 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.WakeUpState do
+defmodule AutoApiL12.WakeUpState do
   @moduledoc """
   WakeUp state
   """
 
-  alias AutoApi.State
+  alias AutoApiL12.State
 
-  use AutoApi.State, spec_file: "wake_up.json"
+  use AutoApiL12.State, spec_file: "wake_up.json"
 
   @type wake_up_state :: :wake_up | :sleep
 
@@ -39,8 +39,8 @@ defmodule AutoApi.WakeUpState do
   Build state based on binary value
 
     iex> bin = <<1, 0, 4, 1, 0, 1, 0>>
-    iex> AutoApi.WakeUpState.from_bin(bin)
-    %AutoApi.WakeUpState{status: %AutoApi.Property{data: :wake_up}}
+    iex> AutoApiL12.WakeUpState.from_bin(bin)
+    %AutoApiL12.WakeUpState{status: %AutoApiL12.Property{data: :wake_up}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -50,8 +50,8 @@ defmodule AutoApi.WakeUpState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.WakeUpState{status: %AutoApi.Property{data: :sleep}}
-    iex> AutoApi.WakeUpState.to_bin(state)
+    iex> state = %AutoApiL12.WakeUpState{status: %AutoApiL12.Property{data: :sleep}}
+    iex> AutoApiL12.WakeUpState.to_bin(state)
     <<1, 0, 4, 1, 0, 1, 1>>
   """
   @spec to_bin(__MODULE__.t()) :: binary

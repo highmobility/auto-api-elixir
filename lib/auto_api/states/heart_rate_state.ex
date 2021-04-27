@@ -20,14 +20,14 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.HeartRateState do
+defmodule AutoApiL12.HeartRateState do
   @moduledoc """
   HeartRate state
   """
 
-  alias AutoApi.{State, UnitType}
+  alias AutoApiL12.{State, UnitType}
 
-  use AutoApi.State, spec_file: "heart_rate.json"
+  use AutoApiL12.State, spec_file: "heart_rate.json"
 
   @type t :: %__MODULE__{
           heart_rate: State.property(UnitType.frequency())
@@ -36,8 +36,8 @@ defmodule AutoApi.HeartRateState do
   @doc """
   Build state based on binary value
 
-    iex> AutoApi.HeartRateState.from_bin(<<1, 13::integer-16, 1, 0, 10, 14, 8, 64, 84, 0, 0, 0, 0, 0, 0>>)
-    %AutoApi.HeartRateState{heart_rate: %AutoApi.Property{data: %{value: 80.0, unit: :times_per_minute}}}
+    iex> AutoApiL12.HeartRateState.from_bin(<<1, 13::integer-16, 1, 0, 10, 14, 8, 64, 84, 0, 0, 0, 0, 0, 0>>)
+    %AutoApiL12.HeartRateState{heart_rate: %AutoApiL12.Property{data: %{value: 80.0, unit: :times_per_minute}}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -47,8 +47,8 @@ defmodule AutoApi.HeartRateState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.HeartRateState{heart_rate: %AutoApi.Property{data: %{value: 80.0, unit: :times_per_minute}}}
-    iex> AutoApi.HeartRateState.to_bin(state)
+    iex> state = %AutoApiL12.HeartRateState{heart_rate: %AutoApiL12.Property{data: %{value: 80.0, unit: :times_per_minute}}}
+    iex> AutoApiL12.HeartRateState.to_bin(state)
     <<1, 13::integer-16, 1, 0, 10, 14, 8, 64, 84, 0, 0, 0, 0, 0, 0>>
   """
   @spec to_bin(__MODULE__.t()) :: binary

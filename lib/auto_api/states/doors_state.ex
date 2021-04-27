@@ -20,15 +20,15 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.DoorsState do
+defmodule AutoApiL12.DoorsState do
   @moduledoc """
   Door position possible values: :closed, :open
   Door lock possible values: :unlocked, :locked
   """
 
-  alias AutoApi.{CommonData, State}
+  alias AutoApiL12.{CommonData, State}
 
-  use AutoApi.State, spec_file: "doors.json"
+  use AutoApiL12.State, spec_file: "doors.json"
 
   @type lock :: %{
           location: CommonData.location(),
@@ -51,11 +51,11 @@ defmodule AutoApi.DoorsState do
   @doc """
   Build state based on binary value
 
-    iex> AutoApi.DoorsState.from_bin(<<0x03, 5::integer-16, 0x01, 2::integer-16, 0x00, 0x01>>)
-    %AutoApi.DoorsState{locks: [%AutoApi.Property{data: %{location: :front_left, lock_state: :locked}}]}
+    iex> AutoApiL12.DoorsState.from_bin(<<0x03, 5::integer-16, 0x01, 2::integer-16, 0x00, 0x01>>)
+    %AutoApiL12.DoorsState{locks: [%AutoApiL12.Property{data: %{location: :front_left, lock_state: :locked}}]}
 
-    iex> AutoApi.DoorsState.from_bin(<<0x04, 5::integer-16,  0x01, 2::integer-16, 0x05, 0x00>>)
-    %AutoApi.DoorsState{positions: [%AutoApi.Property{data: %{location: :all, position: :closed}}]}
+    iex> AutoApiL12.DoorsState.from_bin(<<0x04, 5::integer-16,  0x01, 2::integer-16, 0x05, 0x00>>)
+    %AutoApiL12.DoorsState{positions: [%AutoApiL12.Property{data: %{location: :all, position: :closed}}]}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -64,7 +64,7 @@ defmodule AutoApi.DoorsState do
 
   @doc """
   Parse state to bin
-    iex> AutoApi.DoorsState.to_bin(%AutoApi.DoorsState{positions: [%AutoApi.Property{data: %{location: :front_left, position: :open}}]})
+    iex> AutoApiL12.DoorsState.to_bin(%AutoApiL12.DoorsState{positions: [%AutoApiL12.Property{data: %{location: :front_left, position: :open}}]})
     <<0x04, 5::integer-16, 0x01, 2::integer-16, 0x00, 0x01>>
   """
   @spec to_bin(__MODULE__.t()) :: binary

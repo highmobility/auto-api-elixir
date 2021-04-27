@@ -20,15 +20,15 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.FirmwareVersionState do
+defmodule AutoApiL12.FirmwareVersionState do
   @moduledoc """
   Keeps Firmware Version state
 
   """
 
-  alias AutoApi.State
+  alias AutoApiL12.State
 
-  use AutoApi.State, spec_file: "firmware_version.json"
+  use AutoApiL12.State, spec_file: "firmware_version.json"
 
   @type hmkit_version :: %{
           major: integer,
@@ -46,8 +46,8 @@ defmodule AutoApi.FirmwareVersionState do
   Build state based on binary value
 
     iex> bin = <<3, 0, 8, 1, 0, 5, 51, 46, 49, 46, 55>>
-    iex> AutoApi.FirmwareVersionState.from_bin(bin)
-    %AutoApi.FirmwareVersionState{application_version: %AutoApi.Property{data: "3.1.7"}}
+    iex> AutoApiL12.FirmwareVersionState.from_bin(bin)
+    %AutoApiL12.FirmwareVersionState{application_version: %AutoApiL12.Property{data: "3.1.7"}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -58,8 +58,8 @@ defmodule AutoApi.FirmwareVersionState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.FirmwareVersionState{application_version: %AutoApi.Property{data: "3.1.7"}}
-    iex> AutoApi.FirmwareVersionState.to_bin(state)
+    iex> state = %AutoApiL12.FirmwareVersionState{application_version: %AutoApiL12.Property{data: "3.1.7"}}
+    iex> AutoApiL12.FirmwareVersionState.to_bin(state)
     <<3, 0, 8, 1, 0, 5, 51, 46, 49, 46, 55>>
   """
   def to_bin(%__MODULE__{} = state) do

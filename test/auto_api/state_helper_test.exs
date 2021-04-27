@@ -16,10 +16,10 @@
 #
 # Please inquire about commercial licensing options at
 # licensing@high-mobility.com
-defmodule AutoApi.StateHelperTest do
+defmodule AutoApiL12.StateHelperTest do
   use ExUnit.Case, async: true
 
-  alias AutoApi.StateHelper, as: SUT
+  alias AutoApiL12.StateHelper, as: SUT
 
   test "generate_struct/1" do
     properties = [

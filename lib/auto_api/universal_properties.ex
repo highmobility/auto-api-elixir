@@ -20,15 +20,15 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.UniversalProperties do
+defmodule AutoApiL12.UniversalProperties do
   @moduledoc """
   Utility functions for Universal Properties.
 
   Universal properties are properties that can be included in any State.
   """
-  require AutoApi.UniversalProperties.Meta
+  require AutoApiL12.UniversalProperties.Meta
 
-  @before_compile AutoApi.UniversalProperties.Meta
+  @before_compile AutoApiL12.UniversalProperties.Meta
 
   @doc """
   Returns all possible values for `brand` property

@@ -20,11 +20,11 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.RemoteControlCapability do
+defmodule AutoApiL12.RemoteControlCapability do
   @moduledoc """
   Basic settings for RemoteControl Capability
 
-      iex> alias AutoApi.RemoteControlCapability, as: R
+      iex> alias AutoApiL12.RemoteControlCapability, as: R
       iex> R.identifier
       <<0x00, 0x27>>
       iex> R.name
@@ -37,8 +37,8 @@ defmodule AutoApi.RemoteControlCapability do
       {1, :control_mode}
   """
 
-  @command_module AutoApi.LegacyCommand
-  @state_module AutoApi.RemoteControlState
+  @command_module AutoApiL12.LegacyCommand
+  @state_module AutoApiL12.RemoteControlState
 
-  use AutoApi.Capability, spec_file: "remote_control.json"
+  use AutoApiL12.Capability, spec_file: "remote_control.json"
 end

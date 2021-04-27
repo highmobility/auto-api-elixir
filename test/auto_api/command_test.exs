@@ -16,17 +16,17 @@
 #
 # Please inquire about commercial licensing options at
 # licensing@high-mobility.com
-defmodule AutoApi.CommandTest do
+defmodule AutoApiL12.CommandTest do
   use ExUnit.Case, async: true
   use PropCheck
 
-  import AutoApi.PropCheckFixtures
+  import AutoApiL12.PropCheckFixtures
   import Assertions, only: [assert_lists_equal: 2]
 
-  alias AutoApi.{GetAvailabilityCommand, GetCommand, SetCommand}
-  alias AutoApi.Command, as: SUT
+  alias AutoApiL12.{GetAvailabilityCommand, GetCommand, SetCommand}
+  alias AutoApiL12.Command, as: SUT
 
-  doctest AutoApi.Command
+  doctest AutoApiL12.Command
 
   describe "identifier/1" do
     property "works with get_availability commands" do
@@ -122,13 +122,13 @@ defmodule AutoApi.CommandTest do
       # No point in using propcheck here, we would have to  duplicate the
       # implementation code in the test for the comparison
       state =
-        AutoApi.DiagnosticsState.base()
-        |> AutoApi.State.put(:fuel_level, data: 0.89)
-        |> AutoApi.State.put(:estimated_range, timestamp: DateTime.utc_now())
-        |> AutoApi.State.put(:check_control_messages,
+        AutoApiL12.DiagnosticsState.base()
+        |> AutoApiL12.State.put(:fuel_level, data: 0.89)
+        |> AutoApiL12.State.put(:estimated_range, timestamp: DateTime.utc_now())
+        |> AutoApiL12.State.put(:check_control_messages,
           failure: %{reason: :unknown, description: ""}
         )
-        |> AutoApi.State.put(:tire_pressures,
+        |> AutoApiL12.State.put(:tire_pressures,
           availability: %{
             update_rate: :trip,
             rate_limit: %{unit: :hertz, value: 1.0},

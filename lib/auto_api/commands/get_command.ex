@@ -16,9 +16,9 @@
 #
 # Please inquire about commercial licensing options at
 # licensing@high-mobility.com
-defmodule AutoApi.GetCommand do
+defmodule AutoApiL12.GetCommand do
   @moduledoc """
-  Abstraction for a `get` command in AutoApi (id `0x00`).
+  Abstraction for a `get` command in AutoApiL12 (id `0x00`).
 
   The `struct` contains two fields:
 
@@ -26,18 +26,18 @@ defmodule AutoApi.GetCommand do
   * `properties` specifies which properties are requested. An empty list indicates all properties
   """
 
-  @behaviour AutoApi.Command
+  @behaviour AutoApiL12.Command
 
-  @version AutoApi.version()
+  @version AutoApiL12.version()
   @identifier 0x00
   @name :get
 
-  @type properties :: list(AutoApi.Capability.property())
+  @type properties :: list(AutoApiL12.Capability.property())
 
   @type t :: %__MODULE__{
-          capability: AutoApi.Capability.t(),
+          capability: AutoApiL12.Capability.t(),
           properties: properties,
-          version: AutoApi.version()
+          version: AutoApiL12.version()
         }
 
   @enforce_keys [:capability, :properties]
@@ -64,7 +64,7 @@ defmodule AutoApi.GetCommand do
   :get
   """
   @impl true
-  @spec name() :: AutoApi.Command.name()
+  @spec name() :: AutoApiL12.Command.name()
   def name(), do: @name
 
   @doc """
@@ -72,12 +72,12 @@ defmodule AutoApi.GetCommand do
 
   # Example
 
-      iex> capability = AutoApi.ClimateCapability
+      iex> capability = AutoApiL12.ClimateCapability
       iex> properties = [:hvac_state, :defogging_state]
       iex> #{__MODULE__}.new(capability, properties)
-      %#{__MODULE__}{capability: AutoApi.ClimateCapability, properties: [:hvac_state, :defogging_state]}
+      %#{__MODULE__}{capability: AutoApiL12.ClimateCapability, properties: [:hvac_state, :defogging_state]}
   """
-  @spec new(AutoApi.Capability.t(), properties()) :: t()
+  @spec new(AutoApiL12.Capability.t(), properties()) :: t()
   def new(capability, properties) do
     %__MODULE__{capability: capability, properties: properties}
   end
@@ -90,16 +90,16 @@ defmodule AutoApi.GetCommand do
 
   ## Examples
 
-      iex> command = #{__MODULE__}.new(AutoApi.RaceCapability, [:vehicle_moving, :gear_mode])
+      iex> command = #{__MODULE__}.new(AutoApiL12.RaceCapability, [:vehicle_moving, :gear_mode])
       iex> #{__MODULE__}.properties(command)
       [:vehicle_moving, :gear_mode]
 
-      iex> command = #{__MODULE__}.new(AutoApi.HoodCapability, [])
+      iex> command = #{__MODULE__}.new(AutoApiL12.HoodCapability, [])
       iex> #{__MODULE__}.properties(command)
       [:position,  :nonce, :vehicle_signature, :timestamp, :vin, :brand]
   """
   @impl true
-  @spec properties(t()) :: list(AutoApi.Capability.property())
+  @spec properties(t()) :: list(AutoApiL12.Capability.property())
   def properties(%__MODULE__{capability: capability, properties: properties}) do
     case properties do
       [] -> capability.state_properties()
@@ -115,12 +115,12 @@ defmodule AutoApi.GetCommand do
   # Examples
 
   iex> # Request the door locks state
-  iex> command = %#{__MODULE__}{capability: AutoApi.DoorsCapability, properties: [:locks_state]}
+  iex> command = %#{__MODULE__}{capability: AutoApiL12.DoorsCapability, properties: [:locks_state]}
   iex> #{__MODULE__}.to_bin(command)
   <<12, 0, 32, 0, 6>>
 
   iex> # Request all properties for race state
-  iex> command = %#{__MODULE__}{capability: AutoApi.RaceCapability, properties: []}
+  iex> command = %#{__MODULE__}{capability: AutoApiL12.RaceCapability, properties: []}
   iex> #{__MODULE__}.to_bin(command)
   <<12, 0, 87, 0>>
   """
@@ -138,12 +138,12 @@ defmodule AutoApi.GetCommand do
   ## Examples
 
       iex> #{__MODULE__}.from_bin(<<0x0C, 0x00, 0x33, 0x00, 0x01, 0x04>>)
-      %#{__MODULE__}{capability: AutoApi.DiagnosticsCapability, properties: [:mileage, :engine_rpm], version: 12}
+      %#{__MODULE__}{capability: AutoApiL12.DiagnosticsCapability, properties: [:mileage, :engine_rpm], version: 12}
   """
   @impl true
   @spec from_bin(binary) :: t()
   def from_bin(<<@version, capability_id::binary-size(2), @identifier, properties::binary>>) do
-    capability = AutoApi.Capability.get_by_id(capability_id)
+    capability = AutoApiL12.Capability.get_by_id(capability_id)
 
     property_names =
       properties

@@ -20,7 +20,7 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.Property do
+defmodule AutoApiL12.Property do
   @moduledoc """
   Data wrapper for state properties.
 
@@ -42,7 +42,7 @@ defmodule AutoApi.Property do
 
   require Logger
 
-  alias AutoApi.UnitType
+  alias AutoApiL12.UnitType
 
   defstruct [:data, :timestamp, :failure, :availability]
 
@@ -181,18 +181,18 @@ defmodule AutoApi.Property do
 
   # Workaround while `capability_state` type is `bytes`
   defp data_to_bin(command, %{"type" => "types.capability_state"}) do
-    AutoApi.Command.to_bin(command)
+    AutoApiL12.Command.to_bin(command)
   end
 
   defp data_to_bin(data, %{"type" => "types." <> type} = spec) do
-    type_spec = type |> AutoApi.CustomType.spec() |> Map.put("embedded", spec["embedded"])
+    type_spec = type |> AutoApiL12.CustomType.spec() |> Map.put("embedded", spec["embedded"])
 
     data_to_bin(data, type_spec)
   end
 
   defp data_to_bin(%{value: value, unit: unit}, %{"type" => "unit." <> type}) do
-    type_id = AutoApi.UnitType.id(type)
-    unit_id = AutoApi.UnitType.unit_id(type, unit)
+    type_id = AutoApiL12.UnitType.id(type)
+    unit_id = AutoApiL12.UnitType.unit_id(type, unit)
 
     <<type_id, unit_id, value::float-size(64)>>
   end
@@ -219,7 +219,7 @@ defmodule AutoApi.Property do
   defp failure_to_bin(nil), do: <<>>
 
   defp failure_to_bin(%{reason: reason, description: description}) do
-    reason_bin = AutoApi.CommonData.convert_state_to_bin_failure_reason(reason)
+    reason_bin = AutoApiL12.CommonData.convert_state_to_bin_failure_reason(reason)
     description_size = byte_size(description)
 
     <<reason_bin, description_size::integer-16, description::binary>>
@@ -262,23 +262,23 @@ defmodule AutoApi.Property do
   end
 
   defp to_value(binary_data, %{"type" => "float"}) do
-    AutoApi.CommonData.convert_bin_to_float(binary_data)
+    AutoApiL12.CommonData.convert_bin_to_float(binary_data)
   end
 
   defp to_value(binary_data, %{"type" => "double"}) do
-    AutoApi.CommonData.convert_bin_to_double(binary_data)
+    AutoApiL12.CommonData.convert_bin_to_double(binary_data)
   end
 
   defp to_value(binary_data, %{"type" => "integer"}) do
-    AutoApi.CommonData.convert_bin_to_integer(binary_data)
+    AutoApiL12.CommonData.convert_bin_to_integer(binary_data)
   end
 
   defp to_value(binary_data, %{"type" => "uinteger"}) do
-    AutoApi.CommonData.convert_bin_to_uinteger(binary_data)
+    AutoApiL12.CommonData.convert_bin_to_uinteger(binary_data)
   end
 
   defp to_value(binary_data, %{"type" => "timestamp"}) do
-    timestamp_in_milisec = AutoApi.CommonData.convert_bin_to_uinteger(binary_data)
+    timestamp_in_milisec = AutoApiL12.CommonData.convert_bin_to_uinteger(binary_data)
 
     case DateTime.from_unix(timestamp_in_milisec, :millisecond) do
       {:ok, datetime} -> datetime
@@ -328,17 +328,17 @@ defmodule AutoApi.Property do
 
   # Workaround while `capability_state` type is `bytes`
   defp to_value(binary_data, %{"type" => "types.capability_state"}) do
-    AutoApi.Command.from_bin(binary_data)
+    AutoApiL12.Command.from_bin(binary_data)
   end
 
   defp to_value(binary_data, %{"type" => "types." <> type}) do
-    type_spec = AutoApi.CustomType.spec(type)
+    type_spec = AutoApiL12.CustomType.spec(type)
 
     to_value(binary_data, type_spec)
   end
 
   defp to_value(<<id, unit_id, value::float-64>>, %{"type" => "unit." <> _type}) do
-    unit = AutoApi.UnitType.unit_name(id, unit_id)
+    unit = AutoApiL12.UnitType.unit_name(id, unit_id)
 
     %{value: value, unit: unit}
   end
@@ -349,7 +349,7 @@ defmodule AutoApi.Property do
     <<reason, size::integer-16, description::binary-size(size)>> = failure
 
     %{
-      reason: AutoApi.CommonData.convert_bin_to_state_failure_reason(reason),
+      reason: AutoApiL12.CommonData.convert_bin_to_state_failure_reason(reason),
       description: description
     }
   end
@@ -373,7 +373,7 @@ defmodule AutoApi.Property do
 
   defp fetch_item_spec(%{"type" => "types." <> type}) do
     type
-    |> AutoApi.CustomType.spec()
+    |> AutoApiL12.CustomType.spec()
     |> Map.put("embedded", "true")
   end
 
@@ -389,7 +389,7 @@ defmodule AutoApi.Property do
   defp fetch_item_size(binary_data, counter, %{"type" => type}) when type in @sizeless_types do
     binary_data
     |> :binary.part(counter, 2)
-    |> AutoApi.CommonData.convert_bin_to_uinteger()
+    |> AutoApiL12.CommonData.convert_bin_to_uinteger()
   end
 
   defp fetch_item_size(_, _, spec) do

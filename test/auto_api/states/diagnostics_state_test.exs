@@ -20,9 +20,9 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.DiagnosticsStateTest do
+defmodule AutoApiL12.DiagnosticsStateTest do
   use ExUnit.Case, async: true
-  alias AutoApi.{Property, DiagnosticsState}
+  alias AutoApiL12.{Property, DiagnosticsState}
   doctest DiagnosticsState
 
   test "to_bin & from_bin" do

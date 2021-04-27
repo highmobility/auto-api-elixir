@@ -20,14 +20,14 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.VehicleLocationState do
+defmodule AutoApiL12.VehicleLocationState do
   @moduledoc """
   VehicleLocationState
   """
 
-  alias AutoApi.{CommonData, State, UnitType}
+  alias AutoApiL12.{CommonData, State, UnitType}
 
-  use AutoApi.State, spec_file: "vehicle_location.json"
+  use AutoApiL12.State, spec_file: "vehicle_location.json"
 
   @type t :: %__MODULE__{
           coordinates: State.property(CommonData.coordinates()),
@@ -40,8 +40,8 @@ defmodule AutoApi.VehicleLocationState do
   Build state based on binary value
 
     iex> bin = <<5, 0, 13, 1, 0, 10, 2, 0, 64, 101, 249, 235, 133, 30, 184, 82>>
-    iex> AutoApi.VehicleLocationState.from_bin(bin)
-    %AutoApi.VehicleLocationState{heading: %AutoApi.Property{data: %{value: 175.81, unit: :degrees}}}
+    iex> AutoApiL12.VehicleLocationState.from_bin(bin)
+    %AutoApiL12.VehicleLocationState{heading: %AutoApiL12.Property{data: %{value: 175.81, unit: :degrees}}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -51,8 +51,8 @@ defmodule AutoApi.VehicleLocationState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.VehicleLocationState{heading: %AutoApi.Property{data: %{value: 175.81, unit: :degrees}}}
-    iex> AutoApi.VehicleLocationState.to_bin(state)
+    iex> state = %AutoApiL12.VehicleLocationState{heading: %AutoApiL12.Property{data: %{value: 175.81, unit: :degrees}}}
+    iex> AutoApiL12.VehicleLocationState.to_bin(state)
     <<5, 0, 13, 1, 0, 10, 2, 0, 64, 101, 249, 235, 133, 30, 184, 82>>
   """
   @spec to_bin(__MODULE__.t()) :: binary

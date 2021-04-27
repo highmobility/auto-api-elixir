@@ -20,14 +20,14 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.ChargingState do
+defmodule AutoApiL12.ChargingState do
   @moduledoc """
   Keeps Charging state
   """
 
-  alias AutoApi.{CommonData, State, UnitType}
+  alias AutoApiL12.{CommonData, State, UnitType}
 
-  use AutoApi.State, spec_file: "charging.json"
+  use AutoApiL12.State, spec_file: "charging.json"
 
   @type charge_mode :: :immediate | :timer_based | :inductive
   @type charging :: :disconnected | :plugged_in | :charging | :charging_complete
@@ -110,8 +110,8 @@ defmodule AutoApi.ChargingState do
   Build state based on binary value
 
     iex> bin = <<23, 0, 4, 1, 0, 1, 8>>
-    iex> AutoApi.ChargingState.from_bin(bin)
-    %AutoApi.ChargingState{status: %AutoApi.Property{data: :fast_charging}}
+    iex> AutoApiL12.ChargingState.from_bin(bin)
+    %AutoApiL12.ChargingState{status: %AutoApiL12.Property{data: :fast_charging}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -122,8 +122,8 @@ defmodule AutoApi.ChargingState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.ChargingState{status: %AutoApi.Property{data: :fast_charging}}
-    iex> AutoApi.ChargingState.to_bin(state)
+    iex> state = %AutoApiL12.ChargingState{status: %AutoApiL12.Property{data: :fast_charging}}
+    iex> AutoApiL12.ChargingState.to_bin(state)
     <<23, 0, 4, 1, 0, 1, 8>>
   """
   def to_bin(%__MODULE__{} = state) do

@@ -16,15 +16,15 @@
 #
 # Please inquire about commercial licensing options at
 # licensing@high-mobility.com
-defmodule AutoApi.StateTest do
+defmodule AutoApiL12.StateTest do
   use ExUnit.Case, async: true
   use PropCheck
 
-  import AutoApi.PropCheckFixtures
+  import AutoApiL12.PropCheckFixtures
 
-  doctest AutoApi.State
+  doctest AutoApiL12.State
 
-  alias AutoApi.{
+  alias AutoApiL12.{
     CapabilitiesState,
     DiagnosticsState,
     Property,
@@ -129,8 +129,8 @@ defmodule AutoApi.StateTest do
 
       assert new_state.states == [
                %Property{
-                 data: %AutoApi.SetCommand{
-                   capability: AutoApi.DiagnosticsCapability,
+                 data: %AutoApiL12.SetCommand{
+                   capability: AutoApiL12.DiagnosticsCapability,
                    state: inner_state
                  }
                }
@@ -243,7 +243,7 @@ defmodule AutoApi.StateTest do
     test "update a property with single value" do
       now = DateTime.utc_now()
       state = %DiagnosticsState{}
-      new_state = AutoApi.State.put(state, :mileage, data: 1000, timestamp: now)
+      new_state = AutoApiL12.State.put(state, :mileage, data: 1000, timestamp: now)
 
       assert new_state.mileage.data == 1000
       assert new_state.mileage.timestamp == now

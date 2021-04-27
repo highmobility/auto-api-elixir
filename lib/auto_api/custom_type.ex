@@ -20,11 +20,11 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.CustomType do
+defmodule AutoApiL12.CustomType do
   @moduledoc """
     Retrieves custom types specifications
   """
-  require AutoApi.CustomType.Meta
+  require AutoApiL12.CustomType.Meta
 
-  @before_compile AutoApi.CustomType.Meta
+  @before_compile AutoApiL12.CustomType.Meta
 end

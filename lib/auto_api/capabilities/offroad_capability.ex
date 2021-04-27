@@ -20,11 +20,11 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.OffroadCapability do
+defmodule AutoApiL12.OffroadCapability do
   @moduledoc """
   Basic settings for Offroad Capability
 
-      iex> alias AutoApi.OffroadCapability, as: O
+      iex> alias AutoApiL12.OffroadCapability, as: O
       iex> O.identifier
       <<0x00, 0x52>>
       iex> O.name
@@ -37,8 +37,8 @@ defmodule AutoApi.OffroadCapability do
       {0x01, :route_incline}
   """
 
-  @command_module AutoApi.LegacyCommand
-  @state_module AutoApi.OffroadState
+  @command_module AutoApiL12.LegacyCommand
+  @state_module AutoApiL12.OffroadState
 
-  use AutoApi.Capability, spec_file: "offroad.json"
+  use AutoApiL12.Capability, spec_file: "offroad.json"
 end

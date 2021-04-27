@@ -20,14 +20,14 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.ClimateState do
+defmodule AutoApiL12.ClimateState do
   @moduledoc """
   Climate state
   """
 
-  alias AutoApi.{CommonData, State, UnitType}
+  alias AutoApiL12.{CommonData, State, UnitType}
 
-  use AutoApi.State, spec_file: "climate.json"
+  use AutoApiL12.State, spec_file: "climate.json"
 
   @type weekday ::
           :monday | :tuesday | :wednesday | :thursday | :friday | :saturday | :sunday | :automatic
@@ -54,8 +54,8 @@ defmodule AutoApi.ClimateState do
   @doc """
   Build state based on binary value
 
-    iex> AutoApi.ClimateState.from_bin(<<1, 0, 13, 1, 0, 10, 23, 1, 64, 60, 0, 0, 0, 0, 0, 0>>)
-    %AutoApi.ClimateState{inside_temperature: %AutoApi.Property{data: %{value: 28.0, unit: :celsius}}}
+    iex> AutoApiL12.ClimateState.from_bin(<<1, 0, 13, 1, 0, 10, 23, 1, 64, 60, 0, 0, 0, 0, 0, 0>>)
+    %AutoApiL12.ClimateState{inside_temperature: %AutoApiL12.Property{data: %{value: 28.0, unit: :celsius}}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -65,8 +65,8 @@ defmodule AutoApi.ClimateState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.ClimateState{inside_temperature: %AutoApi.Property{data: %{value: 28.00, unit: :celsius}}}
-    iex> AutoApi.ClimateState.to_bin(state)
+    iex> state = %AutoApiL12.ClimateState{inside_temperature: %AutoApiL12.Property{data: %{value: 28.00, unit: :celsius}}}
+    iex> AutoApiL12.ClimateState.to_bin(state)
     <<1, 0, 13, 1, 0, 10, 23, 1, 64, 60, 0, 0, 0, 0, 0, 0>>
   """
   @spec to_bin(__MODULE__.t()) :: binary

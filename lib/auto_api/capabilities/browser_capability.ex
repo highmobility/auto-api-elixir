@@ -20,11 +20,11 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.BrowserCapability do
+defmodule AutoApiL12.BrowserCapability do
   @moduledoc """
   Basic settings for Browser Capability
 
-      iex> alias AutoApi.BrowserCapability, as: B
+      iex> alias AutoApiL12.BrowserCapability, as: B
       iex> B.identifier
       <<0x00, 0x49>>
       iex> B.name
@@ -35,8 +35,8 @@ defmodule AutoApi.BrowserCapability do
       6
   """
 
-  @command_module AutoApi.LegacyCommand
-  @state_module AutoApi.BrowserState
+  @command_module AutoApiL12.LegacyCommand
+  @state_module AutoApiL12.BrowserState
 
-  use AutoApi.Capability, spec_file: "browser.json"
+  use AutoApiL12.Capability, spec_file: "browser.json"
 end

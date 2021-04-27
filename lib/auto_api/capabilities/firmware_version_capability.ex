@@ -20,11 +20,11 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.FirmwareVersionCapability do
+defmodule AutoApiL12.FirmwareVersionCapability do
   @moduledoc """
   Basic settings for Browser Capability
 
-      iex> alias AutoApi.FirmwareVersionCapability, as: F
+      iex> alias AutoApiL12.FirmwareVersionCapability, as: F
       iex> F.identifier
       <<0x00, 0x03>>
       iex> F.name
@@ -35,8 +35,8 @@ defmodule AutoApi.FirmwareVersionCapability do
       8
   """
 
-  @command_module AutoApi.LegacyCommand
-  @state_module AutoApi.FirmwareVersionState
+  @command_module AutoApiL12.LegacyCommand
+  @state_module AutoApiL12.FirmwareVersionState
 
-  use AutoApi.Capability, spec_file: "firmware_version.json"
+  use AutoApiL12.Capability, spec_file: "firmware_version.json"
 end

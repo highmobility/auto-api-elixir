@@ -20,11 +20,11 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.PowerTakeoffCapability do
+defmodule AutoApiL12.PowerTakeoffCapability do
   @moduledoc """
   Basic settings for Power Takeoff Capability
 
-      iex> alias AutoApi.PowerTakeoffCapability, as: PT
+      iex> alias AutoApiL12.PowerTakeoffCapability, as: PT
       iex> PT.identifier
       <<0x0, 0x65>>
       iex> PT.name
@@ -37,8 +37,8 @@ defmodule AutoApi.PowerTakeoffCapability do
       {1, :status}
   """
 
-  @command_module AutoApi.LegacyCommand
-  @state_module AutoApi.PowerTakeoffState
+  @command_module AutoApiL12.LegacyCommand
+  @state_module AutoApiL12.PowerTakeoffState
 
-  use AutoApi.Capability, spec_file: "power_takeoff.json"
+  use AutoApiL12.Capability, spec_file: "power_takeoff.json"
 end

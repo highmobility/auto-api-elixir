@@ -16,7 +16,7 @@
 #
 # Please inquire about commercial licensing options at
 # licensing@high-mobility.com
-defmodule AutoApi.TelematicsPermissionsTest do
+defmodule AutoApiL12.TelematicsPermissionsTest do
   use ExUnit.Case, async: true
-  doctest AutoApi.TelematicsPermissions
+  doctest AutoApiL12.TelematicsPermissions
 end

@@ -20,11 +20,11 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.DriverFatigueCapability do
+defmodule AutoApiL12.DriverFatigueCapability do
   @moduledoc """
   Basic settings for Driver Fatigue Capability
 
-      iex> alias AutoApi.DriverFatigueCapability, as: D
+      iex> alias AutoApiL12.DriverFatigueCapability, as: D
       iex> D.identifier
       <<0x00, 0x41>>
       iex> D.name
@@ -37,8 +37,8 @@ defmodule AutoApi.DriverFatigueCapability do
       {0x01, :detected_fatigue_level}
   """
 
-  @command_module AutoApi.LegacyCommand
-  @state_module AutoApi.DriverFatigueState
+  @command_module AutoApiL12.LegacyCommand
+  @state_module AutoApiL12.DriverFatigueState
 
-  use AutoApi.Capability, spec_file: "driver_fatigue.json"
+  use AutoApiL12.Capability, spec_file: "driver_fatigue.json"
 end

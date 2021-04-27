@@ -20,11 +20,11 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.ParkingBrakeCapability do
+defmodule AutoApiL12.ParkingBrakeCapability do
   @moduledoc """
   Basic settings for ParkingBrake Capability
 
-      iex> alias AutoApi.ParkingBrakeCapability, as: P
+      iex> alias AutoApiL12.ParkingBrakeCapability, as: P
       iex> P.identifier
       <<0x00, 0x58>>
       iex> P.name
@@ -37,8 +37,8 @@ defmodule AutoApi.ParkingBrakeCapability do
       {1, :status}
   """
 
-  @command_module AutoApi.LegacyCommand
-  @state_module AutoApi.ParkingBrakeState
+  @command_module AutoApiL12.LegacyCommand
+  @state_module AutoApiL12.ParkingBrakeState
 
-  use AutoApi.Capability, spec_file: "parking_brake.json"
+  use AutoApiL12.Capability, spec_file: "parking_brake.json"
 end

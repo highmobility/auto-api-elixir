@@ -20,11 +20,11 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.WeatherConditionsCapability do
+defmodule AutoApiL12.WeatherConditionsCapability do
   @moduledoc """
   Basic settings for WeatherConditions Capability
 
-      iex> alias AutoApi.WeatherConditionsCapability, as: W
+      iex> alias AutoApiL12.WeatherConditionsCapability, as: W
       iex> W.identifier
       <<0x00, 0x55>>
       iex> W.name
@@ -35,8 +35,8 @@ defmodule AutoApi.WeatherConditionsCapability do
       {1, :rain_intensity}
   """
 
-  @command_module AutoApi.LegacyCommand
-  @state_module AutoApi.WeatherConditionsState
+  @command_module AutoApiL12.LegacyCommand
+  @state_module AutoApiL12.WeatherConditionsState
 
-  use AutoApi.Capability, spec_file: "weather_conditions.json"
+  use AutoApiL12.Capability, spec_file: "weather_conditions.json"
 end

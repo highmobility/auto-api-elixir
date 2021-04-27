@@ -20,11 +20,11 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.MaintenanceCapability do
+defmodule AutoApiL12.MaintenanceCapability do
   @moduledoc """
   Basic settings for Maintenance Capability
 
-      iex> alias AutoApi.MaintenanceCapability, as: M
+      iex> alias AutoApiL12.MaintenanceCapability, as: M
       iex> M.identifier
       <<0x00, 0x34>>
       iex> M.name
@@ -37,8 +37,8 @@ defmodule AutoApi.MaintenanceCapability do
       {0x01, :days_to_next_service}
   """
 
-  @command_module AutoApi.LegacyCommand
-  @state_module AutoApi.MaintenanceState
+  @command_module AutoApiL12.LegacyCommand
+  @state_module AutoApiL12.MaintenanceState
 
-  use AutoApi.Capability, spec_file: "maintenance.json"
+  use AutoApiL12.Capability, spec_file: "maintenance.json"
 end

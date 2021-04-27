@@ -20,12 +20,12 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.Capability do
+defmodule AutoApiL12.Capability do
   @moduledoc """
   Capability behaviour
   """
 
-  alias AutoApi.{CapabilityHelper, UniversalProperties}
+  alias AutoApiL12.{CapabilityHelper, UniversalProperties}
 
   @type t :: module()
   @type property :: atom()
@@ -91,10 +91,10 @@ defmodule AutoApi.Capability do
 
         ## Examples
 
-            iex> AutoApi.SeatsCapability.state_properties()
+            iex> AutoApiL12.SeatsCapability.state_properties()
             [:persons_detected, :seatbelts_state, :nonce, :vehicle_signature, :timestamp, :vin, :brand]
 
-            iex> AutoApi.WakeUpCapability.state_properties()
+            iex> AutoApiL12.WakeUpCapability.state_properties()
             [:nonce, :vehicle_signature, :timestamp, :vin, :brand]
         """
         @spec state_properties() :: list(atom)
@@ -206,7 +206,7 @@ defmodule AutoApi.Capability do
   @doc """
     Returns full capabilities with all of them marked as disabled
 
-      ie> <<cap_len, first_cap :: binary-size(3), _::binary>> = AutoApi.Capability.blank_capabilities
+      ie> <<cap_len, first_cap :: binary-size(3), _::binary>> = AutoApiL12.Capability.blank_capabilities
       ie> cap_len
       8
       ie> first_cap
@@ -231,14 +231,14 @@ defmodule AutoApi.Capability do
 
   ## Examples
 
-  iex> capabilities = AutoApi.Capability.all()
+  iex> capabilities = AutoApiL12.Capability.all()
   iex> length(capabilities)
   55
   iex> List.first(capabilities)
-  AutoApi.BrowserCapability
+  AutoApiL12.BrowserCapability
   """
   @spec all() :: list(module)
-  defdelegate all(), to: AutoApi.Capability.Delegate
+  defdelegate all(), to: AutoApiL12.Capability.Delegate
 
   @doc """
   Returns a capability module by its binary id.
@@ -247,14 +247,14 @@ defmodule AutoApi.Capability do
 
   ## Examples
 
-  iex> AutoApi.Capability.get_by_id(<<0x00, 0x35>>)
-  AutoApi.IgnitionCapability
+  iex> AutoApiL12.Capability.get_by_id(<<0x00, 0x35>>)
+  AutoApiL12.IgnitionCapability
 
-  iex> AutoApi.Capability.get_by_id(<<0xDE, 0xAD>>)
+  iex> AutoApiL12.Capability.get_by_id(<<0xDE, 0xAD>>)
   nil
   """
   @spec get_by_id(binary) :: module | nil
-  defdelegate get_by_id(id), to: AutoApi.Capability.Delegate
+  defdelegate get_by_id(id), to: AutoApiL12.Capability.Delegate
 
   @doc """
   Returns a capability module by its name.
@@ -265,15 +265,15 @@ defmodule AutoApi.Capability do
 
   ## Examples
 
-  iex> AutoApi.Capability.get_by_name("doors")
-  AutoApi.DoorsCapability
+  iex> AutoApiL12.Capability.get_by_name("doors")
+  AutoApiL12.DoorsCapability
 
-  iex> AutoApi.Capability.get_by_name(:wake_up)
-  AutoApi.WakeUpCapability
+  iex> AutoApiL12.Capability.get_by_name(:wake_up)
+  AutoApiL12.WakeUpCapability
 
-  iex> AutoApi.Capability.get_by_name("Nobody")
+  iex> AutoApiL12.Capability.get_by_name("Nobody")
   nil
   """
   @spec get_by_name(binary | atom) :: module | nil
-  defdelegate get_by_name(name), to: AutoApi.Capability.Delegate
+  defdelegate get_by_name(name), to: AutoApiL12.Capability.Delegate
 end

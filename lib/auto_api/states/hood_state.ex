@@ -20,16 +20,16 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.HoodState do
+defmodule AutoApiL12.HoodState do
   @moduledoc """
   Keeps Hood state
   """
 
-  alias AutoApi.State
+  alias AutoApiL12.State
 
   @type position :: :closed | :open | :intermediate
 
-  use AutoApi.State, spec_file: "hood.json"
+  use AutoApiL12.State, spec_file: "hood.json"
 
   @type t :: %__MODULE__{
           position: State.property(position)
@@ -39,8 +39,8 @@ defmodule AutoApi.HoodState do
   Build state based on binary value
 
     iex> bin = <<1, 0, 4, 1, 0, 1, 1>>
-    iex> AutoApi.HoodState.from_bin(bin)
-    %AutoApi.HoodState{position: %AutoApi.Property{data: :open}}
+    iex> AutoApiL12.HoodState.from_bin(bin)
+    %AutoApiL12.HoodState{position: %AutoApiL12.Property{data: :open}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -51,8 +51,8 @@ defmodule AutoApi.HoodState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.HoodState{position: %AutoApi.Property{data: :open}}
-    iex> AutoApi.HoodState.to_bin(state)
+    iex> state = %AutoApiL12.HoodState{position: %AutoApiL12.Property{data: :open}}
+    iex> AutoApiL12.HoodState.to_bin(state)
     <<1, 0, 4, 1, 0, 1, 1>>
   """
   def to_bin(%__MODULE__{} = state) do

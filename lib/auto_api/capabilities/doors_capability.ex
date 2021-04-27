@@ -20,11 +20,11 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.DoorsCapability do
+defmodule AutoApiL12.DoorsCapability do
   @moduledoc """
   Basic settings for Door Locks Capability
 
-      iex> alias AutoApi.DoorsCapability, as: D
+      iex> alias AutoApiL12.DoorsCapability, as: D
       iex> D.identifier
       <<0x00, 0x20>>
       iex> D.name
@@ -37,8 +37,8 @@ defmodule AutoApi.DoorsCapability do
       {0x02, :inside_locks}
   """
 
-  @command_module AutoApi.LegacyCommand
-  @state_module AutoApi.DoorsState
+  @command_module AutoApiL12.LegacyCommand
+  @state_module AutoApiL12.DoorsState
 
-  use AutoApi.Capability, spec_file: "doors.json"
+  use AutoApiL12.Capability, spec_file: "doors.json"
 end

@@ -20,11 +20,11 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.WindowsCapability do
+defmodule AutoApiL12.WindowsCapability do
   @moduledoc """
   Basic settings for Windows Capability
 
-      iex> alias AutoApi.WindowsCapability, as: W
+      iex> alias AutoApiL12.WindowsCapability, as: W
       iex> W.identifier
       <<0x00, 0x45>>
       iex> W.name
@@ -35,8 +35,8 @@ defmodule AutoApi.WindowsCapability do
       {2, :open_percentages}
   """
 
-  @command_module AutoApi.LegacyCommand
-  @state_module AutoApi.WindowsState
+  @command_module AutoApiL12.LegacyCommand
+  @state_module AutoApiL12.WindowsState
 
-  use AutoApi.Capability, spec_file: "windows.json"
+  use AutoApiL12.Capability, spec_file: "windows.json"
 end

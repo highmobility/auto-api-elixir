@@ -20,8 +20,8 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.TripsStateTest do
+defmodule AutoApiL12.TripsStateTest do
   use ExUnit.Case, async: true
-  alias AutoApi.TripsState
+  alias AutoApiL12.TripsState
   doctest TripsState
 end

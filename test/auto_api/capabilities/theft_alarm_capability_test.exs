@@ -20,7 +20,7 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.TheftAlarmCapabilityTest do
+defmodule AutoApiL12.TheftAlarmCapabilityTest do
   use ExUnit.Case, async: true
-  doctest AutoApi.TheftAlarmCapability
+  doctest AutoApiL12.TheftAlarmCapability
 end

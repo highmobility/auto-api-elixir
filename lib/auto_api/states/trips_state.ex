@@ -20,14 +20,14 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.TripsState do
+defmodule AutoApiL12.TripsState do
   @moduledoc """
   Trips state
   """
 
-  alias AutoApi.{CommonData, State, UnitType}
+  alias AutoApiL12.{CommonData, State, UnitType}
 
-  use AutoApi.State, spec_file: "trips.json"
+  use AutoApiL12.State, spec_file: "trips.json"
 
   @type type :: :single | :multi
 
@@ -65,8 +65,8 @@ defmodule AutoApi.TripsState do
   Build state based on binary value
 
     iex> bin = <<1, 0, 4, 1, 0, 1, 0>>
-    iex> AutoApi.TripsState.from_bin(bin)
-    %AutoApi.TripsState{type: %AutoApi.Property{data: :single}}
+    iex> AutoApiL12.TripsState.from_bin(bin)
+    %AutoApiL12.TripsState{type: %AutoApiL12.Property{data: :single}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -76,8 +76,8 @@ defmodule AutoApi.TripsState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.TripsState{type: %AutoApi.Property{data: :multi}}
-    iex> AutoApi.TripsState.to_bin(state)
+    iex> state = %AutoApiL12.TripsState{type: %AutoApiL12.Property{data: :multi}}
+    iex> AutoApiL12.TripsState.to_bin(state)
     <<1, 0, 4, 1, 0, 1, 1>>
   """
   @spec to_bin(__MODULE__.t()) :: binary

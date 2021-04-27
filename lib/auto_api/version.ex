@@ -20,7 +20,7 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.Version do
+defmodule AutoApiL12.Version do
   @moduledoc false
 
   @spec_file "specs/misc/version.json"
@@ -34,11 +34,11 @@ defmodule AutoApi.Version do
       @type version :: unquote(Macro.escape(version))
 
       @doc """
-      Returns the current version of AutoApi
+      Returns the current version of AutoApiL12
 
       ## Examples
 
-          iex> AutoApi.version()
+          iex> AutoApiL12.version()
           12
       """
       def version(), do: unquote(Macro.escape(version))

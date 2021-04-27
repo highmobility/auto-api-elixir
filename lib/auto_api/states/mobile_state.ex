@@ -20,14 +20,14 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.MobileState do
+defmodule AutoApiL12.MobileState do
   @moduledoc """
   Browser state
   """
 
-  alias AutoApi.State
+  alias AutoApiL12.State
 
-  use AutoApi.State, spec_file: "mobile.json"
+  use AutoApiL12.State, spec_file: "mobile.json"
 
   @type connection :: :disconnected | :connected
 
@@ -38,8 +38,8 @@ defmodule AutoApi.MobileState do
   @doc """
   Build state based on binary value
 
-    iex> AutoApi.MobileState.from_bin(<<1, 4::integer-16, 1, 0, 1, 1>>)
-    %AutoApi.MobileState{connection: %AutoApi.Property{data: :connected}}
+    iex> AutoApiL12.MobileState.from_bin(<<1, 4::integer-16, 1, 0, 1, 1>>)
+    %AutoApiL12.MobileState{connection: %AutoApiL12.Property{data: :connected}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -49,8 +49,8 @@ defmodule AutoApi.MobileState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.MobileState{connection: %AutoApi.Property{data: :connected}}
-    iex> AutoApi.MobileState.to_bin(state)
+    iex> state = %AutoApiL12.MobileState{connection: %AutoApiL12.Property{data: :connected}}
+    iex> AutoApiL12.MobileState.to_bin(state)
     <<1, 4::integer-16, 1, 0, 1, 1>>
   """
   @spec to_bin(__MODULE__.t()) :: binary

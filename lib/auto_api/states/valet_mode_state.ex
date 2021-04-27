@@ -20,14 +20,14 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.ValetModeState do
+defmodule AutoApiL12.ValetModeState do
   @moduledoc """
   ValetMode state
   """
 
-  alias AutoApi.{CommonData, State}
+  alias AutoApiL12.{CommonData, State}
 
-  use AutoApi.State, spec_file: "valet_mode.json"
+  use AutoApiL12.State, spec_file: "valet_mode.json"
 
   @type t :: %__MODULE__{
           status: State.property(CommonData.activity())
@@ -37,8 +37,8 @@ defmodule AutoApi.ValetModeState do
   Build state based on binary value
 
     iex> bin = <<1, 0, 4, 1, 0, 1, 1>>
-    iex> AutoApi.ValetModeState.from_bin(bin)
-    %AutoApi.ValetModeState{status: %AutoApi.Property{data: :active}}
+    iex> AutoApiL12.ValetModeState.from_bin(bin)
+    %AutoApiL12.ValetModeState{status: %AutoApiL12.Property{data: :active}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -48,8 +48,8 @@ defmodule AutoApi.ValetModeState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.ValetModeState{status: %AutoApi.Property{data: :active}}
-    iex> AutoApi.ValetModeState.to_bin(state)
+    iex> state = %AutoApiL12.ValetModeState{status: %AutoApiL12.Property{data: :active}}
+    iex> AutoApiL12.ValetModeState.to_bin(state)
     <<1, 0, 4, 1, 0, 1, 1>>
   """
   @spec to_bin(__MODULE__.t()) :: binary

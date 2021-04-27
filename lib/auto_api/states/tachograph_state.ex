@@ -20,15 +20,15 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.TachographState do
+defmodule AutoApiL12.TachographState do
   @moduledoc """
   Keeps Tachograph state
 
   """
 
-  alias AutoApi.{State, UnitType}
+  alias AutoApiL12.{State, UnitType}
 
-  use AutoApi.State, spec_file: "tachograph.json"
+  use AutoApiL12.State, spec_file: "tachograph.json"
 
   @type vehicle_motion :: :not_detected | :detected
   @type vehicle_overspeed :: :no_overspeed | :overspeed
@@ -64,8 +64,8 @@ defmodule AutoApi.TachographState do
   Build state based on binary value
 
     iex> bin = <<4, 0, 4, 1, 0, 1, 1>>
-    iex> AutoApi.TachographState.from_bin(bin)
-    %AutoApi.TachographState{vehicle_motion: %AutoApi.Property{data: :detected}}
+    iex> AutoApiL12.TachographState.from_bin(bin)
+    %AutoApiL12.TachographState{vehicle_motion: %AutoApiL12.Property{data: :detected}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -76,8 +76,8 @@ defmodule AutoApi.TachographState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.TachographState{vehicle_motion: %AutoApi.Property{data: :detected}}
-    iex> AutoApi.TachographState.to_bin(state)
+    iex> state = %AutoApiL12.TachographState{vehicle_motion: %AutoApiL12.Property{data: :detected}}
+    iex> AutoApiL12.TachographState.to_bin(state)
     <<4, 0, 4, 1, 0, 1, 1>>
   """
   def to_bin(%__MODULE__{} = state) do

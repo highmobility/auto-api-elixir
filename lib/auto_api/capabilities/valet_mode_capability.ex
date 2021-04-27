@@ -20,11 +20,11 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.ValetModeCapability do
+defmodule AutoApiL12.ValetModeCapability do
   @moduledoc """
   Basic settings for ValetMode Capability
 
-      iex> alias AutoApi.ValetModeCapability, as: V
+      iex> alias AutoApiL12.ValetModeCapability, as: V
       iex> V.identifier
       <<0x00, 0x28>>
       iex> V.name
@@ -37,8 +37,8 @@ defmodule AutoApi.ValetModeCapability do
       {0x01, :status}
   """
 
-  @command_module AutoApi.LegacyCommand
-  @state_module AutoApi.ValetModeState
+  @command_module AutoApiL12.LegacyCommand
+  @state_module AutoApiL12.ValetModeState
 
-  use AutoApi.Capability, spec_file: "valet_mode.json"
+  use AutoApiL12.Capability, spec_file: "valet_mode.json"
 end

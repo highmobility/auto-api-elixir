@@ -20,7 +20,7 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.Capability.Delegate do
+defmodule AutoApiL12.Capability.Delegate do
   @moduledoc false
-  @before_compile AutoApi.Capability.Meta
+  @before_compile AutoApiL12.Capability.Meta
 end

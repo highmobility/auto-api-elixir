@@ -20,7 +20,7 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.WiFiStateTest do
+defmodule AutoApiL12.WiFiStateTest do
   use ExUnit.Case, async: true
-  doctest AutoApi.WiFiState
+  doctest AutoApiL12.WiFiState
 end

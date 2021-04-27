@@ -20,14 +20,14 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.HistoricalState do
+defmodule AutoApiL12.HistoricalState do
   @moduledoc """
   Historical state
   """
 
-  alias AutoApi.State
+  alias AutoApiL12.State
 
-  use AutoApi.State, spec_file: "historical.json"
+  use AutoApiL12.State, spec_file: "historical.json"
 
   @type t :: %__MODULE__{
           states: State.multiple_property(struct()),
@@ -39,8 +39,8 @@ defmodule AutoApi.HistoricalState do
   @doc """
   Build state based on binary value
 
-    iex> AutoApi.HistoricalState.from_bin(<<2, 5::integer-16, 1, 2::integer-16, 0x00, 0x60>>)
-    %AutoApi.HistoricalState{capability_id: %AutoApi.Property{data: 0x60}}
+    iex> AutoApiL12.HistoricalState.from_bin(<<2, 5::integer-16, 1, 2::integer-16, 0x00, 0x60>>)
+    %AutoApiL12.HistoricalState{capability_id: %AutoApiL12.Property{data: 0x60}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -50,8 +50,8 @@ defmodule AutoApi.HistoricalState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.HistoricalState{capability_id: %AutoApi.Property{data: 0x60}}
-    iex> AutoApi.HistoricalState.to_bin(state)
+    iex> state = %AutoApiL12.HistoricalState{capability_id: %AutoApiL12.Property{data: 0x60}}
+    iex> AutoApiL12.HistoricalState.to_bin(state)
     <<2, 5::integer-16, 1, 2::integer-16, 0x00, 0x60>>
   """
   @spec to_bin(__MODULE__.t()) :: binary

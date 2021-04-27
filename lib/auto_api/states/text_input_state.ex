@@ -20,14 +20,14 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.TextInputState do
+defmodule AutoApiL12.TextInputState do
   @moduledoc """
   TextInput state
   """
 
-  alias AutoApi.State
+  alias AutoApiL12.State
 
-  use AutoApi.State, spec_file: "text_input.json"
+  use AutoApiL12.State, spec_file: "text_input.json"
 
   @type t :: %__MODULE__{
           text: State.property(String.t())
@@ -38,8 +38,8 @@ defmodule AutoApi.TextInputState do
 
     iex> text = "Rendezvous with Rama"
     iex> size = byte_size(text)
-    iex> AutoApi.TextInputState.from_bin(<<1, size + 3::integer-16, 1, size::integer-16, text::binary>>)
-    %AutoApi.TextInputState{text: %AutoApi.Property{data: "Rendezvous with Rama"}}
+    iex> AutoApiL12.TextInputState.from_bin(<<1, size + 3::integer-16, 1, size::integer-16, text::binary>>)
+    %AutoApiL12.TextInputState{text: %AutoApiL12.Property{data: "Rendezvous with Rama"}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -50,8 +50,8 @@ defmodule AutoApi.TextInputState do
   Parse state to bin
 
     iex> text = "Rendezvous with Rama"
-    iex> state = %AutoApi.TextInputState{text: %AutoApi.Property{data: text}}
-    iex> AutoApi.TextInputState.to_bin(state)
+    iex> state = %AutoApiL12.TextInputState{text: %AutoApiL12.Property{data: text}}
+    iex> AutoApiL12.TextInputState.to_bin(state)
     <<1, 23::integer-16, 1, 20::integer-16, 0x52, 0x65, 0x6E, 0x64, 0x65, 0x7A, 0x76, 0x6F, 0x75, 0x73, 0x20, 0x77, 0x69,  0x74, 0x68, 0x20, 0x52, 0x61, 0x6D, 0x61>>
   """
   @spec to_bin(__MODULE__.t()) :: binary

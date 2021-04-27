@@ -20,11 +20,11 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.WiFiCapability do
+defmodule AutoApiL12.WiFiCapability do
   @moduledoc """
   Basic settings for WiFi Capability
 
-      iex> alias AutoApi.WiFiCapability, as: W
+      iex> alias AutoApiL12.WiFiCapability, as: W
       iex> W.identifier
       <<0x00, 0x59>>
       iex> W.name
@@ -37,8 +37,8 @@ defmodule AutoApi.WiFiCapability do
       {1, :status}
   """
 
-  @command_module AutoApi.LegacyCommand
-  @state_module AutoApi.WiFiState
+  @command_module AutoApiL12.LegacyCommand
+  @state_module AutoApiL12.WiFiState
 
-  use AutoApi.Capability, spec_file: "wi_fi.json"
+  use AutoApiL12.Capability, spec_file: "wi_fi.json"
 end

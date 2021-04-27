@@ -20,11 +20,11 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.ChassisSettingsCapability do
+defmodule AutoApiL12.ChassisSettingsCapability do
   @moduledoc """
   Basic settings for Chassis Settings Capability
 
-      iex> alias AutoApi.ChassisSettingsCapability, as: C
+      iex> alias AutoApiL12.ChassisSettingsCapability, as: C
       iex> C.identifier
       <<0x00, 0x53>>
       iex> C.name
@@ -37,8 +37,8 @@ defmodule AutoApi.ChassisSettingsCapability do
       {0x01, :driving_mode}
   """
 
-  @command_module AutoApi.LegacyCommand
-  @state_module AutoApi.ChassisSettingsState
+  @command_module AutoApiL12.LegacyCommand
+  @state_module AutoApiL12.ChassisSettingsState
 
-  use AutoApi.Capability, spec_file: "chassis_settings.json"
+  use AutoApiL12.Capability, spec_file: "chassis_settings.json"
 end

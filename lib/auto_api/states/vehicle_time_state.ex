@@ -20,14 +20,14 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.VehicleTimeState do
+defmodule AutoApiL12.VehicleTimeState do
   @moduledoc """
   VehicleTime state
   """
 
-  alias AutoApi.{CommonData, State}
+  alias AutoApiL12.{CommonData, State}
 
-  use AutoApi.State, spec_file: "vehicle_time.json"
+  use AutoApiL12.State, spec_file: "vehicle_time.json"
 
   @type t :: %__MODULE__{
           vehicle_time: State.property(CommonData.time())
@@ -37,8 +37,8 @@ defmodule AutoApi.VehicleTimeState do
   Build state based on binary value
 
     iex> bin = <<1, 0, 5, 1, 0, 2, 12, 42>>
-    iex> AutoApi.VehicleTimeState.from_bin(bin)
-    %AutoApi.VehicleTimeState{vehicle_time: %AutoApi.Property{data: %{hour: 12, minute: 42}}}
+    iex> AutoApiL12.VehicleTimeState.from_bin(bin)
+    %AutoApiL12.VehicleTimeState{vehicle_time: %AutoApiL12.Property{data: %{hour: 12, minute: 42}}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -48,8 +48,8 @@ defmodule AutoApi.VehicleTimeState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.VehicleTimeState{vehicle_time: %AutoApi.Property{data: %{hour: 12, minute: 42}}}
-    iex> AutoApi.VehicleTimeState.to_bin(state)
+    iex> state = %AutoApiL12.VehicleTimeState{vehicle_time: %AutoApiL12.Property{data: %{hour: 12, minute: 42}}}
+    iex> AutoApiL12.VehicleTimeState.to_bin(state)
     <<1, 0, 5, 1, 0, 2, 12, 42>>
   """
   @spec to_bin(__MODULE__.t()) :: binary

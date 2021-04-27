@@ -20,12 +20,12 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.RooftopControlState do
+defmodule AutoApiL12.RooftopControlState do
   @moduledoc """
   Keeps RooftopControl state
   """
 
-  alias AutoApi.State
+  alias AutoApiL12.State
 
   @type convertible_roof_state ::
           :closed
@@ -42,7 +42,7 @@ defmodule AutoApi.RooftopControlState do
   @type sunroof_rain_event ::
           :no_event | :in_stroke_position_because_of_rain | :automatically_in_stroke_position
 
-  use AutoApi.State, spec_file: "rooftop_control.json"
+  use AutoApiL12.State, spec_file: "rooftop_control.json"
 
   @type t :: %__MODULE__{
           dimming: State.property(float),
@@ -57,8 +57,8 @@ defmodule AutoApi.RooftopControlState do
   Build state based on binary value
 
     iex> bin = <<1, 0, 11, 1, 0, 8, 63, 197, 194, 143, 92, 40, 245, 195>>
-    iex> AutoApi.RooftopControlState.from_bin(bin)
-    %AutoApi.RooftopControlState{dimming: %AutoApi.Property{data: 0.17}}
+    iex> AutoApiL12.RooftopControlState.from_bin(bin)
+    %AutoApiL12.RooftopControlState{dimming: %AutoApiL12.Property{data: 0.17}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -69,8 +69,8 @@ defmodule AutoApi.RooftopControlState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.RooftopControlState{dimming: %AutoApi.Property{data: 0.17}}
-    iex> AutoApi.RooftopControlState.to_bin(state)
+    iex> state = %AutoApiL12.RooftopControlState{dimming: %AutoApiL12.Property{data: 0.17}}
+    iex> AutoApiL12.RooftopControlState.to_bin(state)
     <<1, 0, 11, 1, 0, 8, 63, 197, 194, 143, 92, 40, 245, 195>>
   """
   def to_bin(%__MODULE__{} = state) do

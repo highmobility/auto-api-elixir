@@ -16,12 +16,12 @@
 #
 # Please inquire about commercial licensing options at
 # licensing@high-mobility.com
-defmodule AutoApi.PropCheckFixtures do
+defmodule AutoApiL12.PropCheckFixtures do
   @moduledoc false
 
   use PropCheck
 
-  alias AutoApi.{GetAvailabilityCommand, GetCommand, SetCommand}
+  alias AutoApiL12.{GetAvailabilityCommand, GetCommand, SetCommand}
 
   def command() do
     let [
@@ -56,7 +56,7 @@ defmodule AutoApi.PropCheckFixtures do
   end
 
   def capability() do
-    oneof(AutoApi.Capability.all())
+    oneof(AutoApiL12.Capability.all())
   end
 
   def unit() do
@@ -67,7 +67,7 @@ defmodule AutoApi.PropCheckFixtures do
 
   def unit(unit) do
     let [
-      unit <- oneof(AutoApi.UnitType.units(unit)),
+      unit <- oneof(AutoApiL12.UnitType.units(unit)),
       value <- float()
     ] do
       %{unit: unit, value: value}
@@ -75,7 +75,7 @@ defmodule AutoApi.PropCheckFixtures do
   end
 
   def unit_type() do
-    oneof(AutoApi.UnitType.all())
+    oneof(AutoApiL12.UnitType.all())
   end
 
   def unit_with_type() do
@@ -118,7 +118,7 @@ defmodule AutoApi.PropCheckFixtures do
 
     state =
       Enum.reduce(properties, state_base, fn {name, prop}, state ->
-        AutoApi.State.put(state, name, prop)
+        AutoApiL12.State.put(state, name, prop)
       end)
 
     exactly(state)
@@ -160,7 +160,7 @@ defmodule AutoApi.PropCheckFixtures do
       property <- exactly(property_name),
       property_data <- data
     ] do
-      {property, %AutoApi.Property{data: property_data}}
+      {property, %AutoApiL12.Property{data: property_data}}
     end
   end
 

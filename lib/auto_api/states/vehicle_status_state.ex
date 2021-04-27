@@ -20,14 +20,14 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.VehicleStatusState do
+defmodule AutoApiL12.VehicleStatusState do
   @moduledoc """
   VehicleStatus state
   """
 
-  alias AutoApi.State
+  alias AutoApiL12.State
 
-  use AutoApi.State, spec_file: "vehicle_status.json"
+  use AutoApiL12.State, spec_file: "vehicle_status.json"
 
   @type t :: %__MODULE__{
           states: State.multiple_property(struct())
@@ -37,11 +37,11 @@ defmodule AutoApi.VehicleStatusState do
   Build state based on binary value
 
     iex> bin = <<153, 0, 14, 1, 0, 11, 12, 0, 103, 1, 1, 0, 4, 1, 0, 1, 2>>
-    iex> state = AutoApi.VehicleStatusState.from_bin(bin)
-    iex> [%AutoApi.Property{data: hood_command}] = state.states
-    iex> %AutoApi.SetCommand{state: hood_state} = hood_command
+    iex> state = AutoApiL12.VehicleStatusState.from_bin(bin)
+    iex> [%AutoApiL12.Property{data: hood_command}] = state.states
+    iex> %AutoApiL12.SetCommand{state: hood_state} = hood_command
     iex> hood_state
-    %AutoApi.HoodState{position: %AutoApi.Property{data: :intermediate}}
+    %AutoApiL12.HoodState{position: %AutoApiL12.Property{data: :intermediate}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -51,10 +51,10 @@ defmodule AutoApi.VehicleStatusState do
   @doc """
   Parse state to bin
 
-    iex> hood_state = %AutoApi.HoodState{position: %AutoApi.Property{data: :intermediate}}
-    iex> hood_command = AutoApi.SetCommand.new(AutoApi.HoodCapability, hood_state)
-    iex> state = %AutoApi.VehicleStatusState{states: [%AutoApi.Property{data: hood_command}]}
-    iex> AutoApi.VehicleStatusState.to_bin(state)
+    iex> hood_state = %AutoApiL12.HoodState{position: %AutoApiL12.Property{data: :intermediate}}
+    iex> hood_command = AutoApiL12.SetCommand.new(AutoApiL12.HoodCapability, hood_state)
+    iex> state = %AutoApiL12.VehicleStatusState{states: [%AutoApiL12.Property{data: hood_command}]}
+    iex> AutoApiL12.VehicleStatusState.to_bin(state)
     <<153, 0, 14, 1, 0, 11, 12, 0, 103, 1, 1, 0, 4, 1, 0, 1, 2>>
   """
   @spec to_bin(__MODULE__.t()) :: binary
@@ -65,24 +65,24 @@ defmodule AutoApi.VehicleStatusState do
   @doc """
   Add a state entry to the provided VehicleStatus state.
 
-  This is intended as a convenience wrapper on `AutoApi.State.put` that wraps the provided state into a SetCommand.
+  This is intended as a convenience wrapper on `AutoApiL12.State.put` that wraps the provided state into a SetCommand.
 
   This is because VehicleStatus.states entries makes only sense as a SetCommand (as they contain the states data).
 
   # Example
 
-      iex> empty_vs_state = AutoApi.VehicleStatusState.base()
-      iex> state = %AutoApi.HoodState{position: %AutoApi.Property{data: :open}}
-      iex> vs_state = AutoApi.VehicleStatusState.put_state(empty_vs_state, state)
-      iex> %{states: [%AutoApi.Property{data: hood_command}]} = vs_state
-      iex> %AutoApi.SetCommand{capability: AutoApi.HoodCapability, state: hood_state} = hood_command
+      iex> empty_vs_state = AutoApiL12.VehicleStatusState.base()
+      iex> state = %AutoApiL12.HoodState{position: %AutoApiL12.Property{data: :open}}
+      iex> vs_state = AutoApiL12.VehicleStatusState.put_state(empty_vs_state, state)
+      iex> %{states: [%AutoApiL12.Property{data: hood_command}]} = vs_state
+      iex> %AutoApiL12.SetCommand{capability: AutoApiL12.HoodCapability, state: hood_state} = hood_command
       iex> hood_state
-      %AutoApi.HoodState{position: %AutoApi.Property{data: :open}}
+      %AutoApiL12.HoodState{position: %AutoApiL12.Property{data: :open}}
 
   """
-  @spec put_state(__MODULE__.t(), AutoApi.State.t()) :: __MODULE__.t()
+  @spec put_state(__MODULE__.t(), AutoApiL12.State.t()) :: __MODULE__.t()
   def put_state(vehicle_state, state) do
-    command = AutoApi.SetCommand.new(state)
-    AutoApi.State.put(vehicle_state, :states, data: command)
+    command = AutoApiL12.SetCommand.new(state)
+    AutoApiL12.State.put(vehicle_state, :states, data: command)
   end
 end

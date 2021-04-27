@@ -20,21 +20,21 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.Mixfile do
+defmodule AutoApiL12.Mixfile do
   use Mix.Project
 
   @version "0.2.0"
 
   def project do
     [
-      app: :auto_api,
+      app: :auto_api_l12,
       version: @version,
       elixir: "~> 1.6",
       elixirc_paths: elixirc_paths(Mix.env()),
       build_embedded: Mix.env() == :prod,
       start_permanent: Mix.env() == :prod,
       deps: deps(),
-      docs: [source_ref: "#{@version}", main: "AutoApi"],
+      docs: [source_ref: "#{@version}", main: "AutoApiL12"],
       source_url: "https://github.com/highmobility/hm-auto-api-elixir",
       description: description(),
       package: package(),
@@ -79,7 +79,7 @@ defmodule AutoApi.Mixfile do
 
   defp description do
     """
-    AutoApi is able to parse and execute Auto API binary data
+    AutoApiL12 is able to parse and execute Auto API binary data
     """
   end
 end

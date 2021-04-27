@@ -20,26 +20,26 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.MultiCommandStateTest do
+defmodule AutoApiL12.MultiCommandStateTest do
   use ExUnit.Case, async: true
   use PropCheck
-  import AutoApi.PropCheckFixtures
+  import AutoApiL12.PropCheckFixtures
 
-  doctest AutoApi.MultiCommandState
+  doctest AutoApiL12.MultiCommandState
 
   property "to_bin/1 and from_bin/1 are inverse" do
     forall data <- [multi_states: list(command()), multi_commands: list(command())] do
-      state = %AutoApi.MultiCommandState{
+      state = %AutoApiL12.MultiCommandState{
         multi_states: wrap_in_property_data(data[:multi_states]),
         multi_commands: wrap_in_property_data(data[:multi_commands])
       }
 
-      assert state_bin = AutoApi.MultiCommandState.to_bin(state)
-      assert state == AutoApi.MultiCommandState.from_bin(state_bin)
+      assert state_bin = AutoApiL12.MultiCommandState.to_bin(state)
+      assert state == AutoApiL12.MultiCommandState.from_bin(state_bin)
     end
   end
 
   defp wrap_in_property_data(items) do
-    for item <- items, do: %AutoApi.Property{data: item}
+    for item <- items, do: %AutoApiL12.Property{data: item}
   end
 end

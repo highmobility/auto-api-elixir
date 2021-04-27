@@ -16,16 +16,16 @@
 #
 # Please inquire about commercial licensing options at
 # licensing@high-mobility.com
-defmodule AutoApi.SetCommandTest do
+defmodule AutoApiL12.SetCommandTest do
   use ExUnit.Case, async: true
   use PropCheck
 
-  import AutoApi.PropCheckFixtures
+  import AutoApiL12.PropCheckFixtures
   import Assertions, only: [assert_lists_equal: 2]
 
-  doctest AutoApi.SetCommand
+  doctest AutoApiL12.SetCommand
 
-  alias AutoApi.SetCommand, as: SUT
+  alias AutoApiL12.SetCommand, as: SUT
 
   property "new/1 works" do
     forall {capability, state} <- capability_with_state() do
@@ -57,13 +57,13 @@ defmodule AutoApi.SetCommandTest do
       # No point in using propcheck here, we would have to  duplicate the
       # implementation code in the test for the comparison
       state =
-        AutoApi.DiagnosticsState.base()
-        |> AutoApi.State.put(:fuel_level, data: 0.89)
-        |> AutoApi.State.put(:estimated_range, timestamp: DateTime.utc_now())
-        |> AutoApi.State.put(:check_control_messages,
+        AutoApiL12.DiagnosticsState.base()
+        |> AutoApiL12.State.put(:fuel_level, data: 0.89)
+        |> AutoApiL12.State.put(:estimated_range, timestamp: DateTime.utc_now())
+        |> AutoApiL12.State.put(:check_control_messages,
           failure: %{reason: :unknown, description: ""}
         )
-        |> AutoApi.State.put(:tire_pressures,
+        |> AutoApiL12.State.put(:tire_pressures,
           availability: %{
             update_rate: :trip,
             rate_limit: %{unit: :hertz, value: 1.0},

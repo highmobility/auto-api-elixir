@@ -20,11 +20,11 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.ChargingCapability do
+defmodule AutoApiL12.ChargingCapability do
   @moduledoc """
   Basic settings for Charging Capability
 
-      iex> alias AutoApi.ChargingCapability, as: C
+      iex> alias AutoApiL12.ChargingCapability, as: C
       iex> C.identifier
       <<0x00, 0x23>>
       iex> C.name
@@ -37,8 +37,8 @@ defmodule AutoApi.ChargingCapability do
       {0x02, :estimated_range}
   """
 
-  @command_module AutoApi.LegacyCommand
-  @state_module AutoApi.ChargingState
+  @command_module AutoApiL12.LegacyCommand
+  @state_module AutoApiL12.ChargingState
 
-  use AutoApi.Capability, spec_file: "charging.json"
+  use AutoApiL12.Capability, spec_file: "charging.json"
 end

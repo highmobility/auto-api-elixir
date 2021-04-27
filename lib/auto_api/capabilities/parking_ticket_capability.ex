@@ -20,11 +20,11 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.ParkingTicketCapability do
+defmodule AutoApiL12.ParkingTicketCapability do
   @moduledoc """
   Basic settings for ParkingTicket Capability
 
-      iex> alias AutoApi.ParkingTicketCapability, as: P
+      iex> alias AutoApiL12.ParkingTicketCapability, as: P
       iex> P.identifier
       <<0x00, 0x47>>
       iex> P.name
@@ -37,8 +37,8 @@ defmodule AutoApi.ParkingTicketCapability do
       {1, :status}
   """
 
-  @command_module AutoApi.LegacyCommand
-  @state_module AutoApi.ParkingTicketState
+  @command_module AutoApiL12.LegacyCommand
+  @state_module AutoApiL12.ParkingTicketState
 
-  use AutoApi.Capability, spec_file: "parking_ticket.json"
+  use AutoApiL12.Capability, spec_file: "parking_ticket.json"
 end

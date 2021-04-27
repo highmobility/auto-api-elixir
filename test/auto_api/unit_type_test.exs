@@ -16,11 +16,11 @@
 #
 # Please inquire about commercial licensing options at
 # licensing@high-mobility.com
-defmodule AutoApi.UnitTypeStateTest do
+defmodule AutoApiL12.UnitTypeStateTest do
   use ExUnit.Case, async: true
-  doctest AutoApi.UnitType
+  doctest AutoApiL12.UnitType
 
-  alias AutoApi.UnitType
+  alias AutoApiL12.UnitType
 
   setup_all do
     specs = Jason.decode!(File.read!("specs/misc/unit_types.json"), keys: :atoms)

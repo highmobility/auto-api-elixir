@@ -20,14 +20,14 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.NaviDestinationState do
+defmodule AutoApiL12.NaviDestinationState do
   @moduledoc """
   Keeps Navigation Destination state
   """
 
-  alias AutoApi.{CommonData, State, UnitType}
+  alias AutoApiL12.{CommonData, State, UnitType}
 
-  use AutoApi.State, spec_file: "navi_destination.json"
+  use AutoApiL12.State, spec_file: "navi_destination.json"
 
   @type t :: %__MODULE__{
           coordinates: State.property(CommonData.coordinates()),
@@ -42,8 +42,8 @@ defmodule AutoApi.NaviDestinationState do
   Build state based on binary value
 
     iex> bin = <<2, 0, 7, 1, 0, 4, 72, 111, 109, 101>>
-    iex> AutoApi.NaviDestinationState.from_bin(bin)
-    %AutoApi.NaviDestinationState{destination_name: %AutoApi.Property{data: "Home"}}
+    iex> AutoApiL12.NaviDestinationState.from_bin(bin)
+    %AutoApiL12.NaviDestinationState{destination_name: %AutoApiL12.Property{data: "Home"}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -53,8 +53,8 @@ defmodule AutoApi.NaviDestinationState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.NaviDestinationState{destination_name: %AutoApi.Property{data: "Home"}}
-    iex> AutoApi.NaviDestinationState.to_bin(state)
+    iex> state = %AutoApiL12.NaviDestinationState{destination_name: %AutoApiL12.Property{data: "Home"}}
+    iex> AutoApiL12.NaviDestinationState.to_bin(state)
     <<2, 0, 7, 1, 0, 4, 72, 111, 109, 101>>
   """
   @spec to_bin(__MODULE__.t()) :: binary

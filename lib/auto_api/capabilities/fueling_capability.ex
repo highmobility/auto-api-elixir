@@ -20,11 +20,11 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.FuelingCapability do
+defmodule AutoApiL12.FuelingCapability do
   @moduledoc """
   Basic settings for Fueling Capability
 
-      iex> alias AutoApi.FuelingCapability, as: F
+      iex> alias AutoApiL12.FuelingCapability, as: F
       iex> F.identifier
       <<0x00, 0x40>>
       iex> F.name
@@ -37,8 +37,8 @@ defmodule AutoApi.FuelingCapability do
       {2, :gas_flap_lock}
   """
 
-  @command_module AutoApi.LegacyCommand
-  @state_module AutoApi.FuelingState
+  @command_module AutoApiL12.LegacyCommand
+  @state_module AutoApiL12.FuelingState
 
-  use AutoApi.Capability, spec_file: "fueling.json"
+  use AutoApiL12.Capability, spec_file: "fueling.json"
 end

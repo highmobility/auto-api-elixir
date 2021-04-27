@@ -20,14 +20,14 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.FailureMessageState do
+defmodule AutoApiL12.FailureMessageState do
   @moduledoc """
   Keeps Failure Message state
   """
 
-  alias AutoApi.{Command, State}
+  alias AutoApiL12.{Command, State}
 
-  use AutoApi.State, spec_file: "failure_message.json"
+  use AutoApiL12.State, spec_file: "failure_message.json"
 
   @type failure_reason ::
           :unsupported_capability
@@ -53,13 +53,13 @@ defmodule AutoApi.FailureMessageState do
 
   # Example
 
-      iex> command = AutoApi.GetCommand.new(AutoApi.RaceCapability, [])
+      iex> command = AutoApiL12.GetCommand.new(AutoApiL12.RaceCapability, [])
       iex> #{__MODULE__}.from_command(command, :oem_error, "Vehicle is not available")
       %#{__MODULE__}{
-        failed_message_id: %AutoApi.Property{data: 87},
-        failed_message_type: %AutoApi.Property{data: 0},
-        failure_reason: %AutoApi.Property{data: :oem_error},
-        failure_description: %AutoApi.Property{data: "Vehicle is not available"}
+        failed_message_id: %AutoApiL12.Property{data: 87},
+        failed_message_type: %AutoApiL12.Property{data: 0},
+        failure_reason: %AutoApiL12.Property{data: :oem_error},
+        failure_description: %AutoApiL12.Property{data: "Vehicle is not available"}
       }
   """
   @spec from_command(Command.t(), failure_reason(), String.t()) :: t()
@@ -78,8 +78,8 @@ defmodule AutoApi.FailureMessageState do
   Build state based on binary value
 
     iex> bin = <<4, 0, 21, 1, 0, 18, 115, 111, 109, 101, 116, 104, 105, 110, 103, 32, 104, 97, 112, 112, 101, 110, 101, 100>>
-    iex> AutoApi.FailureMessageState.from_bin(bin)
-    %AutoApi.FailureMessageState{failure_description: %AutoApi.Property{data: "something happened"}}
+    iex> AutoApiL12.FailureMessageState.from_bin(bin)
+    %AutoApiL12.FailureMessageState{failure_description: %AutoApiL12.Property{data: "something happened"}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -92,8 +92,8 @@ defmodule AutoApi.FailureMessageState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.FailureMessageState{failure_description: %AutoApi.Property{data: "something happened"}}
-    iex> AutoApi.FailureMessageState.to_bin(state)
+    iex> state = %AutoApiL12.FailureMessageState{failure_description: %AutoApiL12.Property{data: "something happened"}}
+    iex> AutoApiL12.FailureMessageState.to_bin(state)
     <<4, 0, 21, 1, 0, 18, 115, 111, 109, 101, 116, 104, 105, 110, 103, 32, 104, 97, 112, 112, 101, 110, 101, 100>>
   """
   def to_bin(%__MODULE__{} = state) do

@@ -1,18 +1,18 @@
-defmodule AutoApi.UniversalPropertiesTest do
+defmodule AutoApiL12.UniversalPropertiesTest do
   use ExUnit.Case, async: true
   use PropCheck
 
-  doctest AutoApi.UniversalProperties
+  doctest AutoApiL12.UniversalProperties
 
-  alias AutoApi.{DoorsState, State, UniversalProperties}
+  alias AutoApiL12.{DoorsState, State, UniversalProperties}
 
   test "converts the state properties and the universal properties" do
     bin_state = <<4, 0, 5, 1, 0, 2, 0, 1, 162, 0, 11, 1, 0, 8, 0, 0, 1, 99, 224, 39, 154, 208>>
 
-    timestamp = %AutoApi.Property{data: ~U[2018-06-08 16:08:02.000Z]}
+    timestamp = %AutoApiL12.Property{data: ~U[2018-06-08 16:08:02.000Z]}
 
     positions = [
-      %AutoApi.Property{data: %{location: :front_left, position: :open}}
+      %AutoApiL12.Property{data: %{location: :front_left, position: :open}}
     ]
 
     assert state = DoorsState.from_bin(bin_state)
@@ -62,7 +62,7 @@ defmodule AutoApi.UniversalPropertiesTest do
   end
 
   defp capabilities() do
-    oneof(AutoApi.Capability.all())
+    oneof(AutoApiL12.Capability.all())
   end
 
   defp datetime do

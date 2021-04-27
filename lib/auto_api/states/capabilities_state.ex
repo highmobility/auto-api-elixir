@@ -20,7 +20,7 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.CapabilitiesState do
+defmodule AutoApiL12.CapabilitiesState do
   @moduledoc """
   Capabilities state
 
@@ -29,9 +29,9 @@ defmodule AutoApi.CapabilitiesState do
   will translate those into modules and property names.
   """
 
-  alias AutoApi.State
+  alias AutoApiL12.State
 
-  use AutoApi.State, spec_file: "capabilities.json"
+  use AutoApiL12.State, spec_file: "capabilities.json"
 
   @type capability :: %{
           capability_id: integer(),
@@ -62,8 +62,8 @@ defmodule AutoApi.CapabilitiesState do
   ## Examples
 
       iex> bin = <<1, 0, 9, 1, 0, 6, 0, 51, 0, 2, 4, 13>>
-      iex> AutoApi.CapabilitiesState.from_bin(bin)
-      %AutoApi.CapabilitiesState{capabilities: [%AutoApi.Property{data: %{capability_id: 0x33, supported_property_ids: <<0x04, 0x0D>>}}]}
+      iex> AutoApiL12.CapabilitiesState.from_bin(bin)
+      %AutoApiL12.CapabilitiesState{capabilities: [%AutoApiL12.Property{data: %{capability_id: 0x33, supported_property_ids: <<0x04, 0x0D>>}}]}
 
   """
   @spec from_bin(binary) :: __MODULE__.t()
@@ -76,8 +76,8 @@ defmodule AutoApi.CapabilitiesState do
 
   ## Examples
 
-      iex> state = %AutoApi.CapabilitiesState{capabilities: [%AutoApi.Property{data: %{capability_id: 0x33, supported_property_ids: <<0x04, 0x0D>>}}]}
-      iex> AutoApi.CapabilitiesState.to_bin(state)
+      iex> state = %AutoApiL12.CapabilitiesState{capabilities: [%AutoApiL12.Property{data: %{capability_id: 0x33, supported_property_ids: <<0x04, 0x0D>>}}]}
+      iex> AutoApiL12.CapabilitiesState.to_bin(state)
       <<1, 0, 9, 1, 0, 6, 0, 51, 0, 2, 4, 13>>
 
   """

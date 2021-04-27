@@ -20,14 +20,14 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.OffroadState do
+defmodule AutoApiL12.OffroadState do
   @moduledoc """
   Offroad state
   """
 
-  alias AutoApi.{State, UnitType}
+  alias AutoApiL12.{State, UnitType}
 
-  use AutoApi.State, spec_file: "offroad.json"
+  use AutoApiL12.State, spec_file: "offroad.json"
 
   @type t :: %__MODULE__{
           route_incline: State.property(UnitType.angle()),
@@ -38,8 +38,8 @@ defmodule AutoApi.OffroadState do
   Build state based on binary value
 
     iex> bin = <<2, 0, 11, 1, 0, 8, 63, 204, 40, 245, 194, 143, 92, 41>>
-    iex> AutoApi.OffroadState.from_bin(bin)
-    %AutoApi.OffroadState{wheel_suspension: %AutoApi.Property{data: 0.22}}
+    iex> AutoApiL12.OffroadState.from_bin(bin)
+    %AutoApiL12.OffroadState{wheel_suspension: %AutoApiL12.Property{data: 0.22}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -49,8 +49,8 @@ defmodule AutoApi.OffroadState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.OffroadState{wheel_suspension: %AutoApi.Property{data: 0.22}}
-    iex> AutoApi.OffroadState.to_bin(state)
+    iex> state = %AutoApiL12.OffroadState{wheel_suspension: %AutoApiL12.Property{data: 0.22}}
+    iex> AutoApiL12.OffroadState.to_bin(state)
     <<2, 0, 11, 1, 0, 8, 63, 204, 40, 245, 194, 143, 92, 41>>
   """
   @spec to_bin(__MODULE__.t()) :: binary

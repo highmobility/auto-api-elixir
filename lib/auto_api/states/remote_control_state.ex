@@ -20,14 +20,14 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.RemoteControlState do
+defmodule AutoApiL12.RemoteControlState do
   @moduledoc """
   RemoteControl state
   """
 
-  alias AutoApi.{State, UnitType}
+  alias AutoApiL12.{State, UnitType}
 
-  use AutoApi.State, spec_file: "remote_control.json"
+  use AutoApiL12.State, spec_file: "remote_control.json"
 
   @type modes ::
           :unavailable
@@ -47,8 +47,8 @@ defmodule AutoApi.RemoteControlState do
   Build state based on binary value
 
     iex> bin = <<1, 0, 4, 1, 0, 1, 2>>
-    iex> AutoApi.RemoteControlState.from_bin(bin)
-    %AutoApi.RemoteControlState{control_mode: %AutoApi.Property{data: :started}}
+    iex> AutoApiL12.RemoteControlState.from_bin(bin)
+    %AutoApiL12.RemoteControlState{control_mode: %AutoApiL12.Property{data: :started}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -58,8 +58,8 @@ defmodule AutoApi.RemoteControlState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.RemoteControlState{control_mode: %AutoApi.Property{data: :started}}
-    iex> AutoApi.RemoteControlState.to_bin(state)
+    iex> state = %AutoApiL12.RemoteControlState{control_mode: %AutoApiL12.Property{data: :started}}
+    iex> AutoApiL12.RemoteControlState.to_bin(state)
     <<1, 0, 4, 1, 0, 1, 2>>
   """
   @spec to_bin(__MODULE__.t()) :: binary

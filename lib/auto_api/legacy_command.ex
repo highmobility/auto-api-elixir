@@ -16,7 +16,7 @@
 #
 # Please inquire about commercial licensing options at
 # licensing@high-mobility.com
-defmodule AutoApi.LegacyCommand do
+defmodule AutoApiL12.LegacyCommand do
   @moduledoc """
   This module is only intended to provide a compatibility layer for code that relies
   on the removed per-capability command modules.
@@ -27,12 +27,12 @@ defmodule AutoApi.LegacyCommand do
 
   # Example
 
-      iex> state =  %AutoApi.EngineState{status: %AutoApi.Property{data: :on}}
+      iex> state =  %AutoApiL12.EngineState{status: %AutoApiL12.Property{data: :on}}
       iex> #{__MODULE__}.state(state)
       <<12, 0, 105, 1, 1, 0, 4, 1, 0, 1, 1>>
   """
-  @spec state(AutoApi.State.t()) :: binary()
+  @spec state(AutoApiL12.State.t()) :: binary()
   def state(state) do
-    state |> AutoApi.SetCommand.new() |> AutoApi.SetCommand.to_bin()
+    state |> AutoApiL12.SetCommand.new() |> AutoApiL12.SetCommand.to_bin()
   end
 end

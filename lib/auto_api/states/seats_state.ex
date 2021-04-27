@@ -20,14 +20,14 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.SeatsState do
+defmodule AutoApiL12.SeatsState do
   @moduledoc """
   Seats state
   """
 
-  alias AutoApi.State
+  alias AutoApiL12.State
 
-  use AutoApi.State, spec_file: "seats.json"
+  use AutoApiL12.State, spec_file: "seats.json"
 
   @type seat_location :: :front_left | :front_right | :rear_right | :rear_left | :rear_center
   @type detected :: :detected | :not_detected
@@ -44,8 +44,8 @@ defmodule AutoApi.SeatsState do
   Build state based on binary value
 
     iex> bin = <<2, 0, 5, 1, 0, 2, 4, 1>>
-    iex> AutoApi.SeatsState.from_bin(bin)
-    %AutoApi.SeatsState{persons_detected: [%AutoApi.Property{data: %{location: :rear_center, detected: :detected}}]}
+    iex> AutoApiL12.SeatsState.from_bin(bin)
+    %AutoApiL12.SeatsState{persons_detected: [%AutoApiL12.Property{data: %{location: :rear_center, detected: :detected}}]}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -55,8 +55,8 @@ defmodule AutoApi.SeatsState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.SeatsState{persons_detected: [%AutoApi.Property{data: %{location: :rear_center, detected: :detected}}]}
-    iex> AutoApi.SeatsState.to_bin(state)
+    iex> state = %AutoApiL12.SeatsState{persons_detected: [%AutoApiL12.Property{data: %{location: :rear_center, detected: :detected}}]}
+    iex> AutoApiL12.SeatsState.to_bin(state)
     <<2, 0, 5, 1, 0, 2, 4, 1>>
   """
   @spec to_bin(__MODULE__.t()) :: binary

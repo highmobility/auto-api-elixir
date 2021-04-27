@@ -20,11 +20,11 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.SeatsCapability do
+defmodule AutoApiL12.SeatsCapability do
   @moduledoc """
   Basic settings for Seats Capability
 
-      iex> alias AutoApi.SeatsCapability, as: S
+      iex> alias AutoApiL12.SeatsCapability, as: S
       iex> S.identifier
       <<0x00, 0x56>>
       iex> S.name
@@ -37,8 +37,8 @@ defmodule AutoApi.SeatsCapability do
       {0x02, :persons_detected}
   """
 
-  @command_module AutoApi.LegacyCommand
-  @state_module AutoApi.SeatsState
+  @command_module AutoApiL12.LegacyCommand
+  @state_module AutoApiL12.SeatsState
 
-  use AutoApi.Capability, spec_file: "seats.json"
+  use AutoApiL12.Capability, spec_file: "seats.json"
 end

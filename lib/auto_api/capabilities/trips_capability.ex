@@ -20,11 +20,11 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.TripsCapability do
+defmodule AutoApiL12.TripsCapability do
   @moduledoc """
   Basic settings for Trips Capability
 
-      iex> alias AutoApi.TripsCapability, as: T
+      iex> alias AutoApiL12.TripsCapability, as: T
       iex> T.identifier
       <<0x00, 0x6A>>
       iex> T.name
@@ -37,8 +37,8 @@ defmodule AutoApi.TripsCapability do
       {1, :type}
   """
 
-  @command_module AutoApi.LegacyCommand
-  @state_module AutoApi.TripsState
+  @command_module AutoApiL12.LegacyCommand
+  @state_module AutoApiL12.TripsState
 
-  use AutoApi.Capability, spec_file: "trips.json"
+  use AutoApiL12.Capability, spec_file: "trips.json"
 end

@@ -20,14 +20,14 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.MaintenanceState do
+defmodule AutoApiL12.MaintenanceState do
   @moduledoc """
   Maintenance state
   """
 
-  alias AutoApi.{State, UnitType}
+  alias AutoApiL12.{State, UnitType}
 
-  use AutoApi.State, spec_file: "maintenance.json"
+  use AutoApiL12.State, spec_file: "maintenance.json"
 
   @type condition_based_services :: %{
           year: integer,
@@ -68,8 +68,8 @@ defmodule AutoApi.MaintenanceState do
 
   ## Example
 
-      iex> AutoApi.MaintenanceState.from_bin(<<3, 0, 4, 1, 0, 1, 42>>)
-      %AutoApi.MaintenanceState{cbs_reports_count: %AutoApi.Property{data: 42}}
+      iex> AutoApiL12.MaintenanceState.from_bin(<<3, 0, 4, 1, 0, 1, 42>>)
+      %AutoApiL12.MaintenanceState{cbs_reports_count: %AutoApiL12.Property{data: 42}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -81,8 +81,8 @@ defmodule AutoApi.MaintenanceState do
 
   ## Example
 
-      iex> state = %AutoApi.MaintenanceState{cbs_reports_count: %AutoApi.Property{data: 42}}
-      iex> AutoApi.MaintenanceState.to_bin(state)
+      iex> state = %AutoApiL12.MaintenanceState{cbs_reports_count: %AutoApiL12.Property{data: 42}}
+      iex> AutoApiL12.MaintenanceState.to_bin(state)
       <<3, 0, 4, 1, 0, 1, 42>>
   """
   @spec to_bin(__MODULE__.t()) :: binary

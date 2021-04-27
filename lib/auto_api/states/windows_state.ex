@@ -20,14 +20,14 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.WindowsState do
+defmodule AutoApiL12.WindowsState do
   @moduledoc """
   Keeps Windows state
   """
 
-  alias AutoApi.{CommonData, State}
+  alias AutoApiL12.{CommonData, State}
 
-  use AutoApi.State, spec_file: "windows.json"
+  use AutoApiL12.State, spec_file: "windows.json"
 
   @type location :: CommonData.location() | :hatch
   @type position :: :closed | :open | :intermediate
@@ -43,8 +43,8 @@ defmodule AutoApi.WindowsState do
   Build state based on binary value
 
     iex> bin = <<2, 0, 12, 1, 0, 9, 4, 63, 199, 10, 61, 112, 163, 215, 10>>
-    iex> AutoApi.WindowsState.from_bin(bin)
-    %AutoApi.WindowsState{open_percentages: [%AutoApi.Property{data: %{location: :hatch, open_percentage: 0.18}}]}
+    iex> AutoApiL12.WindowsState.from_bin(bin)
+    %AutoApiL12.WindowsState{open_percentages: [%AutoApiL12.Property{data: %{location: :hatch, open_percentage: 0.18}}]}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -54,8 +54,8 @@ defmodule AutoApi.WindowsState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.WindowsState{open_percentages: [%AutoApi.Property{data: %{location: :hatch, open_percentage: 0.18}}]}
-    iex> AutoApi.WindowsState.to_bin(state)
+    iex> state = %AutoApiL12.WindowsState{open_percentages: [%AutoApiL12.Property{data: %{location: :hatch, open_percentage: 0.18}}]}
+    iex> AutoApiL12.WindowsState.to_bin(state)
     <<2, 0, 12, 1, 0, 9, 4, 63, 199, 10, 61, 112, 163, 215, 10>>
   """
   @spec to_bin(__MODULE__.t()) :: binary

@@ -20,14 +20,14 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.GraphicsState do
+defmodule AutoApiL12.GraphicsState do
   @moduledoc """
   Graphics state
   """
 
-  alias AutoApi.State
+  alias AutoApiL12.State
 
-  use AutoApi.State, spec_file: "graphics.json"
+  use AutoApiL12.State, spec_file: "graphics.json"
 
   @type t :: %__MODULE__{
           image_url: State.property(String.t())
@@ -38,8 +38,8 @@ defmodule AutoApi.GraphicsState do
 
     iex> url = "https://about.high-mobility.com"
     iex> size = byte_size(url)
-    iex> AutoApi.GraphicsState.from_bin(<<1, size + 3::integer-16, 1, size::integer-16, url::binary>>)
-    %AutoApi.GraphicsState{image_url: %AutoApi.Property{data: "https://about.high-mobility.com"}}
+    iex> AutoApiL12.GraphicsState.from_bin(<<1, size + 3::integer-16, 1, size::integer-16, url::binary>>)
+    %AutoApiL12.GraphicsState{image_url: %AutoApiL12.Property{data: "https://about.high-mobility.com"}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -50,8 +50,8 @@ defmodule AutoApi.GraphicsState do
   Parse state to bin
 
     iex> url = "https://about.high-mobility.com"
-    iex> state = %AutoApi.GraphicsState{image_url: %AutoApi.Property{data: url}}
-    iex> AutoApi.GraphicsState.to_bin(state)
+    iex> state = %AutoApiL12.GraphicsState{image_url: %AutoApiL12.Property{data: url}}
+    iex> AutoApiL12.GraphicsState.to_bin(state)
     <<1, 34::integer-16, 1, 31::integer-16, 0x68, 0x74, 0x74, 0x70, 0x73, 0x3A, 0x2F, 0x2F, 0x61, 0x62, 0x6F, 0x75, 0x74, 0x2E, 0x68, 0x69, 0x67, 0x68, 0x2D, 0x6D, 0x6F, 0x62, 0x69, 0x6C, 0x69, 0x74, 0x79, 0x2E, 0x63, 0x6F, 0x6D>>
   """
   @spec to_bin(__MODULE__.t()) :: binary

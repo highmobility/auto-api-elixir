@@ -20,20 +20,20 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.State do
+defmodule AutoApiL12.State do
   @moduledoc """
   State behaviour
   """
 
-  alias AutoApi.{Property, UniversalProperties}
+  alias AutoApiL12.{Property, UniversalProperties}
 
   @callback from_bin(binary) :: struct
   @callback to_bin(struct) :: binary
   @callback base() :: struct
 
   @type t() :: struct()
-  @type property(type) :: AutoApi.Property.t(type) | nil
-  @type multiple_property(type) :: list(AutoApi.Property.t(type))
+  @type property(type) :: AutoApiL12.Property.t(type) | nil
+  @type multiple_property(type) :: list(AutoApiL12.Property.t(type))
 
   defmacro __using__(spec_file: spec_file) do
     spec_path = Path.join(["specs", "capabilities", spec_file])
@@ -42,13 +42,13 @@ defmodule AutoApi.State do
     properties =
       (raw_spec["properties"] || []) ++ UniversalProperties.raw_spec()["universal_properties"]
 
-    struct_def = AutoApi.StateHelper.generate_struct(properties)
+    struct_def = AutoApiL12.StateHelper.generate_struct(properties)
 
     base =
       quote location: :keep do
         require Logger
 
-        @behaviour AutoApi.State
+        @behaviour AutoApiL12.State
 
         @external_resource unquote(spec_path)
 
@@ -71,19 +71,19 @@ defmodule AutoApi.State do
         @doc """
         Convenience function to build the State properties.
 
-        See `AutoApi.State.put/3`.
+        See `AutoApiL12.State.put/3`.
 
         ## Examples
 
-            iex> state_base = AutoApi.DiagnosticsState.base()
+            iex> state_base = AutoApiL12.DiagnosticsState.base()
             iex> odometer = %{value: 10_921, unit: :kilometers}
-            iex> state_1 = AutoApi.DiagnosticsState.put(state_base, :odometer, data: odometer)
-            iex> state_2 = AutoApi.State.put(state_base, :odometer, data: odometer)
+            iex> state_1 = AutoApiL12.DiagnosticsState.put(state_base, :odometer, data: odometer)
+            iex> state_2 = AutoApiL12.State.put(state_base, :odometer, data: odometer)
             iex> state_1 === state_2
             true
         """
         @spec put(struct(), atom(), Property.t() | keyword() | map()) :: struct()
-        defdelegate put(state, property, property_component_or_params), to: AutoApi.State
+        defdelegate put(state, property, property_component_or_params), to: AutoApiL12.State
 
         defp parse_bin_properties(<<id, size::integer-16, data::binary-size(size)>>, state) do
           do_parse_bin_properties(id, size, data, state)
@@ -108,7 +108,7 @@ defmodule AutoApi.State do
         defp do_parse_bin_properties(id, size, data, state) do
           {prop, value} = parse_bin_property(id, size, data)
 
-          AutoApi.State.put(state, prop, value)
+          AutoApiL12.State.put(state, prop, value)
         end
 
         defp parse_state_properties(state) do
@@ -147,7 +147,7 @@ defmodule AutoApi.State do
 
         quote location: :keep do
           defp parse_bin_property(unquote(prop_id), size, bin_data) do
-            value = AutoApi.Property.to_struct(bin_data, unquote(Macro.escape(prop)))
+            value = AutoApiL12.Property.to_struct(bin_data, unquote(Macro.escape(prop)))
 
             {String.to_atom(unquote(prop["name"])), value}
           end
@@ -159,7 +159,7 @@ defmodule AutoApi.State do
           end
 
           defp parse_state_property(unquote(prop_name), data) do
-            data_bin = AutoApi.Property.to_bin(data, unquote(Macro.escape(prop)))
+            data_bin = AutoApiL12.Property.to_bin(data, unquote(Macro.escape(prop)))
 
             head = <<unquote(prop_id), byte_size(data_bin)::integer-16>>
             head <> data_bin
@@ -176,7 +176,7 @@ defmodule AutoApi.State do
   If the property is multiple the new value will be appended to the list of existing
   values.
 
-  The value can be passed either as an `%AutoApi.Property{}` struct, in which
+  The value can be passed either as an `%AutoApiL12.Property{}` struct, in which
   case it will be saved unchanged, or as a keyword list or map containing one of more of the
   components to be set. In this case a Property structure will be created.
 
@@ -189,24 +189,24 @@ defmodule AutoApi.State do
 
   # Examples
 
-      iex> state = %AutoApi.DiagnosticsState{}
-      iex> AutoApi.State.put(state, :odometer, data: %{value: 4325.4, unit: :miles}, timestamp: ~U[2020-10-28 13:45:56Z])
-      %AutoApi.DiagnosticsState{odometer: %AutoApi.Property{data: %{value: 4325.4, unit: :miles}, timestamp: ~U[2020-10-28 13:45:56Z]}}
+      iex> state = %AutoApiL12.DiagnosticsState{}
+      iex> AutoApiL12.State.put(state, :odometer, data: %{value: 4325.4, unit: :miles}, timestamp: ~U[2020-10-28 13:45:56Z])
+      %AutoApiL12.DiagnosticsState{odometer: %AutoApiL12.Property{data: %{value: 4325.4, unit: :miles}, timestamp: ~U[2020-10-28 13:45:56Z]}}
 
-      iex> locks = [%AutoApi.Property{data: %{location: :front_left, lock_state: :locked}}]
-      iex> state = %AutoApi.DoorsState{locks: locks}
-      iex> new_value = %AutoApi.Property{data: %{location: :rear_right, lock_state: :unlocked}}
-      iex> AutoApi.State.put(state, :locks, new_value)
-      %AutoApi.DoorsState{locks: [
-        %AutoApi.Property{data: %{location: :front_left, lock_state: :locked}},
-        %AutoApi.Property{data: %{location: :rear_right, lock_state: :unlocked}}
+      iex> locks = [%AutoApiL12.Property{data: %{location: :front_left, lock_state: :locked}}]
+      iex> state = %AutoApiL12.DoorsState{locks: locks}
+      iex> new_value = %AutoApiL12.Property{data: %{location: :rear_right, lock_state: :unlocked}}
+      iex> AutoApiL12.State.put(state, :locks, new_value)
+      %AutoApiL12.DoorsState{locks: [
+        %AutoApiL12.Property{data: %{location: :front_left, lock_state: :locked}},
+        %AutoApiL12.Property{data: %{location: :rear_right, lock_state: :unlocked}}
       ]}
 
       iex> failure = %{reason: :rate_limit, description: "Try again tomorrow"}
       iex> availability = %{update_rate: :trip, rate_limit: %{value: 2, unit: :times_per_day}, applies_per: :app}
-      iex> state = %AutoApi.HoodState{}
-      iex> AutoApi.State.put(state, :position, %{failure: failure, availability: availability})
-      %AutoApi.HoodState{position: %AutoApi.Property{
+      iex> state = %AutoApiL12.HoodState{}
+      iex> AutoApiL12.State.put(state, :position, %{failure: failure, availability: availability})
+      %AutoApiL12.HoodState{position: %AutoApiL12.Property{
         failure: %{reason: :rate_limit, description: "Try again tomorrow"},
         availability: %{update_rate: :trip, rate_limit: %{value: 2, unit: :times_per_day}, applies_per: :app}
       }}
@@ -224,7 +224,7 @@ defmodule AutoApi.State do
   end
 
   def put(%{} = state, property, params) when is_list(params) or is_map(params) do
-    value = struct(%AutoApi.Property{}, params)
+    value = struct(%AutoApiL12.Property{}, params)
 
     put(state, property, value)
   end
@@ -236,14 +236,14 @@ defmodule AutoApi.State do
 
   # Examples
 
-      iex> locks = [%AutoApi.Property{data: %{location: :front_left, lock_state: :locked}}]
-      iex> state = %AutoApi.DoorsState{locks: locks}
-      iex> AutoApi.State.clear(state, :locks)
-      %AutoApi.DoorsState{locks: []}
+      iex> locks = [%AutoApiL12.Property{data: %{location: :front_left, lock_state: :locked}}]
+      iex> state = %AutoApiL12.DoorsState{locks: locks}
+      iex> AutoApiL12.State.clear(state, :locks)
+      %AutoApiL12.DoorsState{locks: []}
 
-      iex> state = %AutoApi.HoodState{position: %AutoApi.Property{data: :intermediate}}
-      iex> AutoApi.State.clear(state, :position)
-      %AutoApi.HoodState{position: nil}
+      iex> state = %AutoApiL12.HoodState{position: %AutoApiL12.Property{data: :intermediate}}
+      iex> AutoApiL12.State.clear(state, :position)
+      %AutoApiL12.HoodState{position: nil}
   """
   @spec clear(struct(), atom()) :: struct()
   def clear(%state_module{} = state, property) do

@@ -20,24 +20,24 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.FailureMessageStateTest do
+defmodule AutoApiL12.FailureMessageStateTest do
   use ExUnit.Case, async: true
   use PropCheck
 
-  import AutoApi.PropCheckFixtures
-  alias AutoApi.{FailureMessageState, State}
+  import AutoApiL12.PropCheckFixtures
+  alias AutoApiL12.{FailureMessageState, State}
 
-  doctest AutoApi.FailureMessageState
+  doctest AutoApiL12.FailureMessageState
 
   property "from_command/1" do
-    reason_spec = AutoApi.FailureMessageCapability.property_spec(:failure_reason)
+    reason_spec = AutoApiL12.FailureMessageCapability.property_spec(:failure_reason)
 
     forall data <- [command: command(), reason: enum(reason_spec), desc: utf8()] do
       state = FailureMessageState.from_command(data[:command], data[:reason], data[:desc])
 
       <<cap_id::integer-16>> = data[:command].capability.identifier()
       assert state.failed_message_id.data == cap_id
-      assert state.failed_message_type.data == AutoApi.Command.identifier(data[:command])
+      assert state.failed_message_type.data == AutoApiL12.Command.identifier(data[:command])
       assert state.failure_reason.data == data[:reason]
       assert state.failure_description.data == data[:desc]
 

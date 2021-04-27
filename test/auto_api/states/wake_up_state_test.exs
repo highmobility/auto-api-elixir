@@ -20,7 +20,7 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.WakeUpStateTest do
+defmodule AutoApiL12.WakeUpStateTest do
   use ExUnit.Case, async: true
-  doctest AutoApi.WakeUpState
+  doctest AutoApiL12.WakeUpState
 end

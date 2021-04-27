@@ -20,11 +20,11 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.HistoricalCapability do
+defmodule AutoApiL12.HistoricalCapability do
   @moduledoc """
   Basic settings for Historical Capability
 
-      iex> alias AutoApi.HistoricalCapability, as: H
+      iex> alias AutoApiL12.HistoricalCapability, as: H
       iex> H.identifier
       <<0x00, 0x12>>
       iex> H.name
@@ -37,8 +37,8 @@ defmodule AutoApi.HistoricalCapability do
       {0x01, :states}
   """
 
-  @command_module AutoApi.LegacyCommand
-  @state_module AutoApi.HistoricalState
+  @command_module AutoApiL12.LegacyCommand
+  @state_module AutoApiL12.HistoricalState
 
-  use AutoApi.Capability, spec_file: "historical.json"
+  use AutoApiL12.Capability, spec_file: "historical.json"
 end

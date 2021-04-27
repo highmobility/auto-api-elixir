@@ -20,11 +20,11 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.VideoHandoverCapability do
+defmodule AutoApiL12.VideoHandoverCapability do
   @moduledoc """
   Basic settings for Video Handover Capability
 
-      iex> alias AutoApi.VideoHandoverCapability, as: VH
+      iex> alias AutoApiL12.VideoHandoverCapability, as: VH
       iex> VH.identifier
       <<0x00, 0x43>>
       iex> VH.name
@@ -37,8 +37,8 @@ defmodule AutoApi.VideoHandoverCapability do
       {0x01, :url}
   """
 
-  @command_module AutoApi.LegacyCommand
-  @state_module AutoApi.VideoHandoverState
+  @command_module AutoApiL12.LegacyCommand
+  @state_module AutoApiL12.VideoHandoverState
 
-  use AutoApi.Capability, spec_file: "video_handover.json"
+  use AutoApiL12.Capability, spec_file: "video_handover.json"
 end

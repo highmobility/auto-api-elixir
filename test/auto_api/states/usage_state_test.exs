@@ -20,7 +20,7 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.UsageStateTest do
+defmodule AutoApiL12.UsageStateTest do
   use ExUnit.Case, async: true
-  doctest AutoApi.UsageState
+  doctest AutoApiL12.UsageState
 end

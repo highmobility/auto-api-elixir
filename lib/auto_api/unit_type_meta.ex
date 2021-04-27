@@ -20,7 +20,7 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.UnitType.Meta do
+defmodule AutoApiL12.UnitType.Meta do
   @moduledoc false
 
   # credo:disable-for-this-file Credo.Check.Refactor.CyclomaticComplexity
@@ -42,7 +42,7 @@ defmodule AutoApi.UnitType.Meta do
 
         # Example
 
-            iex> types = AutoApi.UnitType.all()
+            iex> types = AutoApiL12.UnitType.all()
             iex> length(types)
             18
             iex> List.first(types)
@@ -58,9 +58,9 @@ defmodule AutoApi.UnitType.Meta do
 
         # Examples
 
-            iex> AutoApi.UnitType.id(:length)
+            iex> AutoApiL12.UnitType.id(:length)
             0x12
-            iex> AutoApi.UnitType.id("power")
+            iex> AutoApiL12.UnitType.id("power")
             0x14
         """
         @spec id(String.t() | atom()) :: id()
@@ -71,7 +71,7 @@ defmodule AutoApi.UnitType.Meta do
 
         # Example
 
-            iex> AutoApi.UnitType.name(0x18)
+            iex> AutoApiL12.UnitType.name(0x18)
             :torque
         """
         @spec name(id()) :: atom()
@@ -84,11 +84,11 @@ defmodule AutoApi.UnitType.Meta do
 
         # Examples
 
-            iex> AutoApi.UnitType.units(:speed) |> List.first()
+            iex> AutoApiL12.UnitType.units(:speed) |> List.first()
             :meters_per_second
-            iex> AutoApi.UnitType.units("torque") |> List.first()
+            iex> AutoApiL12.UnitType.units("torque") |> List.first()
             :newton_meters
-            iex> AutoApi.UnitType.units(0x11) |> List.first()
+            iex> AutoApiL12.UnitType.units(0x11) |> List.first()
             :lux
         """
         @spec units(atom() | String.t() | id()) :: list(atom())
@@ -101,9 +101,9 @@ defmodule AutoApi.UnitType.Meta do
 
         # Examples
 
-            iex> AutoApi.UnitType.unit_id(:volume, :liters)
+            iex> AutoApiL12.UnitType.unit_id(:volume, :liters)
             0x02
-            iex> AutoApi.UnitType.unit_id("power", :megawatts)
+            iex> AutoApiL12.UnitType.unit_id("power", :megawatts)
             0x03
         """
         @spec unit_id(String.t() | atom(), atom()) :: id()
@@ -116,7 +116,7 @@ defmodule AutoApi.UnitType.Meta do
 
         # Example
 
-            iex> AutoApi.UnitType.unit_name(0x16, 0x02)
+            iex> AutoApiL12.UnitType.unit_name(0x16, 0x02)
             :miles_per_hour
         """
         @spec unit_name(id(), id()) :: atom()

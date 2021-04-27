@@ -16,11 +16,11 @@
 #
 # Please inquire about commercial licensing options at
 # licensing@high-mobility.com
-defmodule AutoApi.CapabilityHelperTest do
+defmodule AutoApiL12.CapabilityHelperTest do
   use ExUnit.Case, async: true
 
-  alias AutoApi.CapabilityHelper, as: CH
-  alias AutoApi.UniversalProperties
+  alias AutoApiL12.CapabilityHelper, as: CH
+  alias AutoApiL12.UniversalProperties
 
   test "extract_setters_data/1" do
     specs = %{

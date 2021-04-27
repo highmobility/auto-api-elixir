@@ -20,11 +20,11 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.RaceCapability do
+defmodule AutoApiL12.RaceCapability do
   @moduledoc """
   Basic settings for Race Capability
 
-      iex> alias AutoApi.RaceCapability, as: R
+      iex> alias AutoApiL12.RaceCapability, as: R
       iex> R.identifier
       <<0x00, 0x57>>
       iex> R.name
@@ -37,8 +37,8 @@ defmodule AutoApi.RaceCapability do
       {1, :accelerations}
   """
 
-  @command_module AutoApi.LegacyCommand
-  @state_module AutoApi.RaceState
+  @command_module AutoApiL12.LegacyCommand
+  @state_module AutoApiL12.RaceState
 
-  use AutoApi.Capability, spec_file: "race.json"
+  use AutoApiL12.Capability, spec_file: "race.json"
 end

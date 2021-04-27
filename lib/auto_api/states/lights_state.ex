@@ -20,14 +20,14 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.LightsState do
+defmodule AutoApiL12.LightsState do
   @moduledoc """
   Lights state
   """
 
-  alias AutoApi.{CommonData, State}
+  alias AutoApiL12.{CommonData, State}
 
-  use AutoApi.State, spec_file: "lights.json"
+  use AutoApiL12.State, spec_file: "lights.json"
 
   @type front_exterior_light :: :inactive | :active | :active_with_full_beam | :dlr | :automatic
   @type ambient_light :: %{
@@ -66,8 +66,8 @@ defmodule AutoApi.LightsState do
   Build state based on binary value
 
     iex> bin = <<5, 0, 4, 1, 0, 1, 1>>
-    iex> AutoApi.LightsState.from_bin(bin)
-    %AutoApi.LightsState{reverse_light: %AutoApi.Property{data: :active}}
+    iex> AutoApiL12.LightsState.from_bin(bin)
+    %AutoApiL12.LightsState{reverse_light: %AutoApiL12.Property{data: :active}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -77,8 +77,8 @@ defmodule AutoApi.LightsState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.LightsState{reverse_light: %AutoApi.Property{data: :active}}
-    iex> AutoApi.LightsState.to_bin(state)
+    iex> state = %AutoApiL12.LightsState{reverse_light: %AutoApiL12.Property{data: :active}}
+    iex> AutoApiL12.LightsState.to_bin(state)
     <<5, 0, 4, 1, 0, 1, 1>>
   """
   @spec to_bin(__MODULE__.t()) :: binary

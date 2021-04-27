@@ -20,10 +20,10 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.VehicleInformationStateTest do
+defmodule AutoApiL12.VehicleInformationStateTest do
   use ExUnit.Case, async: true
-  doctest AutoApi.VehicleInformationState
-  alias AutoApi.{VehicleInformationState, State}
+  doctest AutoApiL12.VehicleInformationState
+  alias AutoApiL12.{VehicleInformationState, State}
 
   test "to_bin/1 & from_bin/1" do
     state =

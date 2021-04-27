@@ -20,11 +20,11 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.LightConditionsCapability do
+defmodule AutoApiL12.LightConditionsCapability do
   @moduledoc """
   Basic settings for Light Conditions Capability
 
-      iex> alias AutoApi.LightConditionsCapability, as: L
+      iex> alias AutoApiL12.LightConditionsCapability, as: L
       iex> L.identifier
       <<0x00, 0x54>>
       iex> L.name
@@ -37,8 +37,8 @@ defmodule AutoApi.LightConditionsCapability do
       {0x01, :outside_light}
   """
 
-  @command_module AutoApi.LegacyCommand
-  @state_module AutoApi.LightConditionsState
+  @command_module AutoApiL12.LegacyCommand
+  @state_module AutoApiL12.LightConditionsState
 
-  use AutoApi.Capability, spec_file: "light_conditions.json"
+  use AutoApiL12.Capability, spec_file: "light_conditions.json"
 end

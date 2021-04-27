@@ -20,11 +20,11 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.DiagnosticsCapability do
+defmodule AutoApiL12.DiagnosticsCapability do
   @moduledoc """
   Basic settings for Diagnostics Capability
 
-      iex> alias AutoApi.DiagnosticsCapability, as: D
+      iex> alias AutoApiL12.DiagnosticsCapability, as: D
       iex> D.identifier
       <<0x00, 0x33>>
       iex> D.name
@@ -37,8 +37,8 @@ defmodule AutoApi.DiagnosticsCapability do
       {0x01, :mileage}
   """
 
-  @command_module AutoApi.LegacyCommand
-  @state_module AutoApi.DiagnosticsState
+  @command_module AutoApiL12.LegacyCommand
+  @state_module AutoApiL12.DiagnosticsState
 
-  use AutoApi.Capability, spec_file: "diagnostics.json"
+  use AutoApiL12.Capability, spec_file: "diagnostics.json"
 end

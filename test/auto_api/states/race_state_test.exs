@@ -20,17 +20,17 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.RaceStateTest do
+defmodule AutoApiL12.RaceStateTest do
   use ExUnit.Case, async: true
-  doctest AutoApi.RaceState
+  doctest AutoApiL12.RaceState
 
   test "selected gear can be negative" do
     state =
-      AutoApi.RaceState.base()
-      |> AutoApi.State.put(:selected_gear, data: -7)
+      AutoApiL12.RaceState.base()
+      |> AutoApiL12.State.put(:selected_gear, data: -7)
 
-    state_bin = AutoApi.RaceState.to_bin(state)
-    parsed_state = AutoApi.RaceState.from_bin(state_bin)
+    state_bin = AutoApiL12.RaceState.to_bin(state)
+    parsed_state = AutoApiL12.RaceState.from_bin(state_bin)
 
     assert parsed_state.selected_gear.data == -7
     assert parsed_state == state

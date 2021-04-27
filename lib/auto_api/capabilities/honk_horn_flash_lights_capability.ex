@@ -20,11 +20,11 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.HonkHornFlashLightsCapability do
+defmodule AutoApiL12.HonkHornFlashLightsCapability do
   @moduledoc """
   Basic settings for HonkHornFlashLights Capability
 
-      iex> alias AutoApi.HonkHornFlashLightsCapability, as: H
+      iex> alias AutoApiL12.HonkHornFlashLightsCapability, as: H
       iex> H.identifier
       <<0x00, 0x26>>
       iex> H.name
@@ -37,8 +37,8 @@ defmodule AutoApi.HonkHornFlashLightsCapability do
       {0x01, :flashers}
   """
 
-  @command_module AutoApi.LegacyCommand
-  @state_module AutoApi.HonkHornFlashLightsState
+  @command_module AutoApiL12.LegacyCommand
+  @state_module AutoApiL12.HonkHornFlashLightsState
 
-  use AutoApi.Capability, spec_file: "honk_horn_flash_lights.json"
+  use AutoApiL12.Capability, spec_file: "honk_horn_flash_lights.json"
 end

@@ -20,11 +20,11 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.TheftAlarmCapability do
+defmodule AutoApiL12.TheftAlarmCapability do
   @moduledoc """
   Basic settings for TheftAlarm Capability
 
-      iex> alias AutoApi.TheftAlarmCapability, as: T
+      iex> alias AutoApiL12.TheftAlarmCapability, as: T
       iex> T.identifier
       <<0x00, 0x46>>
       iex> T.name
@@ -37,8 +37,8 @@ defmodule AutoApi.TheftAlarmCapability do
       {1, :status}
   """
 
-  @command_module AutoApi.LegacyCommand
-  @state_module AutoApi.TheftAlarmState
+  @command_module AutoApiL12.LegacyCommand
+  @state_module AutoApiL12.TheftAlarmState
 
-  use AutoApi.Capability, spec_file: "theft_alarm.json"
+  use AutoApiL12.Capability, spec_file: "theft_alarm.json"
 end

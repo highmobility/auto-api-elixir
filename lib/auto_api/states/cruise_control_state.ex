@@ -20,14 +20,14 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.CruiseControlState do
+defmodule AutoApiL12.CruiseControlState do
   @moduledoc """
   CruiseControl state
   """
 
-  alias AutoApi.{CommonData, State, UnitType}
+  alias AutoApiL12.{CommonData, State, UnitType}
 
-  use AutoApi.State, spec_file: "cruise_control.json"
+  use AutoApiL12.State, spec_file: "cruise_control.json"
 
   @type limiter :: :not_set | :higher_speed_requested | :lower_speed_requested | :speed_fixed
 
@@ -43,8 +43,8 @@ defmodule AutoApi.CruiseControlState do
   Build state based on binary value
 
     iex> bin = <<1, 0, 4, 1, 0, 1, 1>>
-    iex> AutoApi.CruiseControlState.from_bin(bin)
-    %AutoApi.CruiseControlState{cruise_control: %AutoApi.Property{data: :active}}
+    iex> AutoApiL12.CruiseControlState.from_bin(bin)
+    %AutoApiL12.CruiseControlState{cruise_control: %AutoApiL12.Property{data: :active}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -54,8 +54,8 @@ defmodule AutoApi.CruiseControlState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.CruiseControlState{cruise_control: %AutoApi.Property{data: :active}}
-    iex> AutoApi.CruiseControlState.to_bin(state)
+    iex> state = %AutoApiL12.CruiseControlState{cruise_control: %AutoApiL12.Property{data: :active}}
+    iex> AutoApiL12.CruiseControlState.to_bin(state)
     <<1, 0, 4, 1, 0, 1, 1>>
   """
   @spec to_bin(__MODULE__.t()) :: binary

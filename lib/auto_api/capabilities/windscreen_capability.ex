@@ -20,11 +20,11 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.WindscreenCapability do
+defmodule AutoApiL12.WindscreenCapability do
   @moduledoc """
   Basic settings for Windscreen Capability
 
-      iex> alias AutoApi.WindscreenCapability, as: W
+      iex> alias AutoApiL12.WindscreenCapability, as: W
       iex> W.identifier
       <<0x00, 0x42>>
       iex> W.name
@@ -37,8 +37,8 @@ defmodule AutoApi.WindscreenCapability do
       {0x01, :wipers_status}
   """
 
-  @command_module AutoApi.LegacyCommand
-  @state_module AutoApi.WindscreenState
+  @command_module AutoApiL12.LegacyCommand
+  @state_module AutoApiL12.WindscreenState
 
-  use AutoApi.Capability, spec_file: "windscreen.json"
+  use AutoApiL12.Capability, spec_file: "windscreen.json"
 end

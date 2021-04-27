@@ -16,15 +16,15 @@
 #
 # Please inquire about commercial licensing options at
 # licensing@high-mobility.com
-defmodule AutoApi.LegacyCommandTest do
+defmodule AutoApiL12.LegacyCommandTest do
   use ExUnit.Case, async: true
   use PropCheck
-  import AutoApi.PropCheckFixtures
+  import AutoApiL12.PropCheckFixtures
 
-  doctest AutoApi.LegacyCommand
+  doctest AutoApiL12.LegacyCommand
 
-  alias AutoApi.LegacyCommand, as: SUT
-  alias AutoApi.SetCommand
+  alias AutoApiL12.LegacyCommand, as: SUT
+  alias AutoApiL12.SetCommand
 
   property "state/1 works" do
     forall {_capability, state} <- capability_with_state() do

@@ -20,10 +20,10 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.CapabilityHelper do
+defmodule AutoApiL12.CapabilityHelper do
   @moduledoc false
 
-  alias AutoApi.UniversalProperties
+  alias AutoApiL12.UniversalProperties
 
   def extract_state_properties(specs) do
     properties = extract_property_data(specs)

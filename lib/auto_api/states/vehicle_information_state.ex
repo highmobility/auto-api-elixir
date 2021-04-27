@@ -20,14 +20,14 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.VehicleInformationState do
+defmodule AutoApiL12.VehicleInformationState do
   @moduledoc """
   VehicleInformation state
   """
 
-  alias AutoApi.{State, UnitType}
+  alias AutoApiL12.{State, UnitType}
 
-  use AutoApi.State, spec_file: "vehicle_information.json"
+  use AutoApiL12.State, spec_file: "vehicle_information.json"
 
   @type powertrain ::
           :unknown | :all_electric | :combustion_engine | :phev | :hydrogen | :hydrogen_hybrid
@@ -64,8 +64,8 @@ defmodule AutoApi.VehicleInformationState do
   Build state based on binary value
 
     iex> bin = <<4, 0, 13, 1, 0, 10, 72, 77, 32, 67, 111, 110, 99, 101, 112, 116>>
-    iex> AutoApi.VehicleInformationState.from_bin(bin)
-    %AutoApi.VehicleInformationState{name: %AutoApi.Property{data: "HM Concept"}}
+    iex> AutoApiL12.VehicleInformationState.from_bin(bin)
+    %AutoApiL12.VehicleInformationState{name: %AutoApiL12.Property{data: "HM Concept"}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -75,8 +75,8 @@ defmodule AutoApi.VehicleInformationState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.VehicleInformationState{name: %AutoApi.Property{data: "HM Concept"}}
-    iex> AutoApi.VehicleInformationState.to_bin(state)
+    iex> state = %AutoApiL12.VehicleInformationState{name: %AutoApiL12.Property{data: "HM Concept"}}
+    iex> AutoApiL12.VehicleInformationState.to_bin(state)
     <<4, 0, 13, 1, 0, 10, 72, 77, 32, 67, 111, 110, 99, 101, 112, 116>>
   """
   @spec to_bin(__MODULE__.t()) :: binary

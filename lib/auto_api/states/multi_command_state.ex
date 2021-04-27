@@ -20,14 +20,14 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.MultiCommandState do
+defmodule AutoApiL12.MultiCommandState do
   @moduledoc """
   MultiCommand state
   """
 
-  alias AutoApi.State
+  alias AutoApiL12.State
 
-  use AutoApi.State, spec_file: "multi_command.json"
+  use AutoApiL12.State, spec_file: "multi_command.json"
 
   @type t :: %__MODULE__{
           multi_states: State.multiple_property(struct()),
@@ -37,11 +37,11 @@ defmodule AutoApi.MultiCommandState do
   @doc """
   Build state based on binary value
 
-    iex> state = AutoApi.MultiCommandState.from_bin(<<1, 0, 14, 1, 0, 11, 12, 0, 103, 1, 1, 0, 4, 1, 0, 1, 0>>)
-    iex> %AutoApi.MultiCommandState{multi_states: [%AutoApi.Property{data: command}]} = state
-    iex> %AutoApi.SetCommand{state: hood_state} = command
+    iex> state = AutoApiL12.MultiCommandState.from_bin(<<1, 0, 14, 1, 0, 11, 12, 0, 103, 1, 1, 0, 4, 1, 0, 1, 0>>)
+    iex> %AutoApiL12.MultiCommandState{multi_states: [%AutoApiL12.Property{data: command}]} = state
+    iex> %AutoApiL12.SetCommand{state: hood_state} = command
     iex> hood_state
-    %AutoApi.HoodState{position: %AutoApi.Property{data: :closed}}
+    %AutoApiL12.HoodState{position: %AutoApiL12.Property{data: :closed}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -51,9 +51,9 @@ defmodule AutoApi.MultiCommandState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.HoodState{position: %AutoApi.Property{data: :closed}}
-    iex> states = %AutoApi.Property{data: AutoApi.SetCommand.new(state)}
-    iex> AutoApi.MultiCommandState.to_bin(%AutoApi.MultiCommandState{multi_states: [states]})
+    iex> state = %AutoApiL12.HoodState{position: %AutoApiL12.Property{data: :closed}}
+    iex> states = %AutoApiL12.Property{data: AutoApiL12.SetCommand.new(state)}
+    iex> AutoApiL12.MultiCommandState.to_bin(%AutoApiL12.MultiCommandState{multi_states: [states]})
     <<1, 0, 14, 1, 0, 11, 12, 0, 103, 1, 1, 0, 4, 1, 0, 1, 0>>
   """
   @spec to_bin(__MODULE__.t()) :: binary

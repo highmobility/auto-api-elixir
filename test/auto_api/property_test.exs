@@ -16,13 +16,13 @@
 #
 # Please inquire about commercial licensing options at
 # licensing@high-mobility.com
-defmodule AutoApi.PropertyTest do
+defmodule AutoApiL12.PropertyTest do
   use ExUnit.Case, async: true
   use PropCheck
 
-  import AutoApi.PropCheckFixtures
+  import AutoApiL12.PropCheckFixtures
 
-  alias AutoApi.Property
+  alias AutoApiL12.Property
 
   describe "to_bin/3 & to_struct/3" do
     property "converts uint24 to bin" do
@@ -713,7 +713,7 @@ defmodule AutoApi.PropertyTest do
   end
 
   def rate_limit do
-    let [value <- float(), unit <- oneof(AutoApi.UnitType.units(:frequency))] do
+    let [value <- float(), unit <- oneof(AutoApiL12.UnitType.units(:frequency))] do
       %{value: value, unit: unit}
     end
   end

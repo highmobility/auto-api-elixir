@@ -20,11 +20,11 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.DashboardLightsCapability do
+defmodule AutoApiL12.DashboardLightsCapability do
   @moduledoc """
   Basic settings for Browser Capability
 
-      iex> alias AutoApi.DashboardLightsCapability, as: F
+      iex> alias AutoApiL12.DashboardLightsCapability, as: F
       iex> F.identifier
       <<0x00, 0x61>>
       iex> F.name
@@ -37,8 +37,8 @@ defmodule AutoApi.DashboardLightsCapability do
       {0x01, :dashboard_lights}
   """
 
-  @command_module AutoApi.LegacyCommand
-  @state_module AutoApi.DashboardLightsState
+  @command_module AutoApiL12.LegacyCommand
+  @state_module AutoApiL12.DashboardLightsState
 
-  use AutoApi.Capability, spec_file: "dashboard_lights.json"
+  use AutoApiL12.Capability, spec_file: "dashboard_lights.json"
 end

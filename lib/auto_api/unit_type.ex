@@ -20,13 +20,13 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.UnitType do
+defmodule AutoApiL12.UnitType do
   @moduledoc """
   Handles unit types
   """
-  require AutoApi.UnitType.Meta
+  require AutoApiL12.UnitType.Meta
 
-  @before_compile AutoApi.UnitType.Meta
+  @before_compile AutoApiL12.UnitType.Meta
 
   @type t(unit_type) :: %{value: float(), unit: unit_type}
 end

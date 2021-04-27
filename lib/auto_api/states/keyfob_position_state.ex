@@ -20,14 +20,14 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.KeyfobPositionState do
+defmodule AutoApiL12.KeyfobPositionState do
   @moduledoc """
   KeyfobPosition state
   """
 
-  alias AutoApi.State
+  alias AutoApiL12.State
 
-  use AutoApi.State, spec_file: "keyfob_position.json"
+  use AutoApiL12.State, spec_file: "keyfob_position.json"
 
   @type position ::
           :out_of_range
@@ -44,8 +44,8 @@ defmodule AutoApi.KeyfobPositionState do
   @doc """
   Build state based on binary value
 
-    iex> AutoApi.KeyfobPositionState.from_bin(<<1, 4::integer-16, 1, 0, 1, 0>>)
-    %AutoApi.KeyfobPositionState{location: %AutoApi.Property{data: :out_of_range}}
+    iex> AutoApiL12.KeyfobPositionState.from_bin(<<1, 4::integer-16, 1, 0, 1, 0>>)
+    %AutoApiL12.KeyfobPositionState{location: %AutoApiL12.Property{data: :out_of_range}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -55,8 +55,8 @@ defmodule AutoApi.KeyfobPositionState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.KeyfobPositionState{location: %AutoApi.Property{data: :out_of_range}}
-    iex> AutoApi.KeyfobPositionState.to_bin(state)
+    iex> state = %AutoApiL12.KeyfobPositionState{location: %AutoApiL12.Property{data: :out_of_range}}
+    iex> AutoApiL12.KeyfobPositionState.to_bin(state)
     <<1, 4::integer-16, 1, 0, 1, 0>>
   """
   @spec to_bin(__MODULE__.t()) :: binary

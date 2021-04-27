@@ -20,12 +20,12 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.IgnitionState do
+defmodule AutoApiL12.IgnitionState do
   @moduledoc """
   Keeps Ignition state
   """
 
-  alias AutoApi.{CommonData, State}
+  alias AutoApiL12.{CommonData, State}
 
   @type state :: :lock | :off | :accessory | :on | :start
 
@@ -35,14 +35,14 @@ defmodule AutoApi.IgnitionState do
           state: State.property(state())
         }
 
-  use AutoApi.State, spec_file: "ignition.json"
+  use AutoApiL12.State, spec_file: "ignition.json"
 
   @doc """
   Build state based on binary value
 
     iex> bin = <<1, 0, 4, 1, 0, 1, 0>>
-    iex> AutoApi.IgnitionState.from_bin(bin)
-    %AutoApi.IgnitionState{status: %AutoApi.Property{data: :off}}
+    iex> AutoApiL12.IgnitionState.from_bin(bin)
+    %AutoApiL12.IgnitionState{status: %AutoApiL12.Property{data: :off}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -53,8 +53,8 @@ defmodule AutoApi.IgnitionState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.IgnitionState{status: %AutoApi.Property{data: :off}}
-    iex> AutoApi.IgnitionState.to_bin(state)
+    iex> state = %AutoApiL12.IgnitionState{status: %AutoApiL12.Property{data: :off}}
+    iex> AutoApiL12.IgnitionState.to_bin(state)
     <<1, 0, 4, 1, 0, 1, 0>>
   """
   def to_bin(%__MODULE__{} = state) do

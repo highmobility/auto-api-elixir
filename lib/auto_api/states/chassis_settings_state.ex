@@ -20,14 +20,14 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.ChassisSettingsState do
+defmodule AutoApiL12.ChassisSettingsState do
   @moduledoc """
   ChassisSettings state
   """
 
-  alias AutoApi.{CommonData, State, UnitType}
+  alias AutoApiL12.{CommonData, State, UnitType}
 
-  use AutoApi.State, spec_file: "chassis_settings.json"
+  use AutoApiL12.State, spec_file: "chassis_settings.json"
 
   @type sport_chrono :: :inactive | :active | :reset
   @type spring_rate :: %{
@@ -49,8 +49,8 @@ defmodule AutoApi.ChassisSettingsState do
   @doc """
   Build state based on binary value
 
-    iex> AutoApi.ChassisSettingsState.from_bin(<<1, 4::integer-16, 1, 0, 1, 0>>)
-    %AutoApi.ChassisSettingsState{driving_mode: %AutoApi.Property{data: :regular}}
+    iex> AutoApiL12.ChassisSettingsState.from_bin(<<1, 4::integer-16, 1, 0, 1, 0>>)
+    %AutoApiL12.ChassisSettingsState{driving_mode: %AutoApiL12.Property{data: :regular}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -60,8 +60,8 @@ defmodule AutoApi.ChassisSettingsState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.ChassisSettingsState{driving_mode: %AutoApi.Property{data: :regular}}
-    iex> AutoApi.ChassisSettingsState.to_bin(state)
+    iex> state = %AutoApiL12.ChassisSettingsState{driving_mode: %AutoApiL12.Property{data: :regular}}
+    iex> AutoApiL12.ChassisSettingsState.to_bin(state)
     <<1, 4::integer-16, 1, 0, 1, 0>>
   """
   @spec to_bin(__MODULE__.t()) :: binary

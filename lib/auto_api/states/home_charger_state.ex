@@ -20,14 +20,14 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.HomeChargerState do
+defmodule AutoApiL12.HomeChargerState do
   @moduledoc """
   HomeCharger state
   """
 
-  alias AutoApi.{CommonData, State, UnitType}
+  alias AutoApiL12.{CommonData, State, UnitType}
 
-  use AutoApi.State, spec_file: "home_charger.json"
+  use AutoApiL12.State, spec_file: "home_charger.json"
 
   @type charging_status :: :disconnected | :plugged_in | :charging
   @type authentication_mechanism :: :pin | :app
@@ -63,8 +63,8 @@ defmodule AutoApi.HomeChargerState do
   @doc """
   Build state based on binary value
 
-    iex> AutoApi.HomeChargerState.from_bin(<<1, 4::integer-16, 1, 0, 1, 1>>)
-    %AutoApi.HomeChargerState{charging_status: %AutoApi.Property{data: :plugged_in}}
+    iex> AutoApiL12.HomeChargerState.from_bin(<<1, 4::integer-16, 1, 0, 1, 1>>)
+    %AutoApiL12.HomeChargerState{charging_status: %AutoApiL12.Property{data: :plugged_in}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -74,8 +74,8 @@ defmodule AutoApi.HomeChargerState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.HomeChargerState{charging_status: %AutoApi.Property{data: :plugged_in}}
-    iex> AutoApi.HomeChargerState.to_bin(state)
+    iex> state = %AutoApiL12.HomeChargerState{charging_status: %AutoApiL12.Property{data: :plugged_in}}
+    iex> AutoApiL12.HomeChargerState.to_bin(state)
     <<1, 4::integer-16, 1, 0, 1, 1>>
   """
   @spec to_bin(__MODULE__.t()) :: binary

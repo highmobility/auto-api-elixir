@@ -20,7 +20,7 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.CustomType.Meta do
+defmodule AutoApiL12.CustomType.Meta do
   @moduledoc false
 
   @spec_file "specs/misc/custom_types.json"

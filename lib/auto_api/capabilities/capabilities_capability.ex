@@ -20,11 +20,11 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.CapabilitiesCapability do
+defmodule AutoApiL12.CapabilitiesCapability do
   @moduledoc """
   Basic settings for Capabilities "Capability".
 
-      iex> alias AutoApi.CapabilitiesCapability, as: C
+      iex> alias AutoApiL12.CapabilitiesCapability, as: C
       iex> C.identifier
       <<0x00, 0x10>>
       iex> C.name
@@ -37,8 +37,8 @@ defmodule AutoApi.CapabilitiesCapability do
       {0x01, :capabilities}
   """
 
-  @command_module AutoApi.LegacyCommand
-  @state_module AutoApi.CapabilitiesState
+  @command_module AutoApiL12.LegacyCommand
+  @state_module AutoApiL12.CapabilitiesState
 
-  use AutoApi.Capability, spec_file: "capabilities.json"
+  use AutoApiL12.Capability, spec_file: "capabilities.json"
 end

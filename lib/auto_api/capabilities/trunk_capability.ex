@@ -20,11 +20,11 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.TrunkCapability do
+defmodule AutoApiL12.TrunkCapability do
   @moduledoc """
   Basic settings for Trunk Capability
 
-      iex> alias AutoApi.TrunkCapability, as: T
+      iex> alias AutoApiL12.TrunkCapability, as: T
       iex> T.identifier
       <<0x00, 0x21>>
       iex> T.name
@@ -37,8 +37,8 @@ defmodule AutoApi.TrunkCapability do
       {1, :lock}
   """
 
-  @command_module AutoApi.LegacyCommand
-  @state_module AutoApi.TrunkState
+  @command_module AutoApiL12.LegacyCommand
+  @state_module AutoApiL12.TrunkState
 
-  use AutoApi.Capability, spec_file: "trunk.json"
+  use AutoApiL12.Capability, spec_file: "trunk.json"
 end

@@ -20,22 +20,22 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.VehicleStatusStateTest do
+defmodule AutoApiL12.VehicleStatusStateTest do
   use ExUnit.Case, async: true
-  doctest AutoApi.VehicleStatusState
-  alias AutoApi.VehicleStatusState
+  doctest AutoApiL12.VehicleStatusState
+  alias AutoApiL12.VehicleStatusState
 
   test "Correctly encodes state in to_bin/1" do
     diag_state =
-      AutoApi.DiagnosticsState.base()
-      |> AutoApi.State.put(:speed,
+      AutoApiL12.DiagnosticsState.base()
+      |> AutoApiL12.State.put(:speed,
         data: %{value: 88.0, unit: :miles_per_hour},
         timestamp: ~U[2020-12-02 11:27:48.372Z]
       )
 
     doors_state =
-      AutoApi.DoorsState.base()
-      |> AutoApi.State.put(:positions,
+      AutoApiL12.DoorsState.base()
+      |> AutoApiL12.State.put(:positions,
         data: %{
           location: :front_left,
           position: :closed
@@ -49,20 +49,20 @@ defmodule AutoApi.VehicleStatusStateTest do
 
     state_bin = VehicleStatusState.to_bin(state)
 
-    diag_command = %AutoApi.SetCommand{
-      capability: AutoApi.DiagnosticsCapability,
+    diag_command = %AutoApiL12.SetCommand{
+      capability: AutoApiL12.DiagnosticsCapability,
       state: diag_state
     }
 
-    diag_command_bin = AutoApi.SetCommand.to_bin(diag_command)
+    diag_command_bin = AutoApiL12.SetCommand.to_bin(diag_command)
     diag_command_bin_size = byte_size(diag_command_bin)
 
-    doors_command = %AutoApi.SetCommand{
-      capability: AutoApi.DoorsCapability,
+    doors_command = %AutoApiL12.SetCommand{
+      capability: AutoApiL12.DoorsCapability,
       state: doors_state
     }
 
-    doors_command_bin = AutoApi.SetCommand.to_bin(doors_command)
+    doors_command_bin = AutoApiL12.SetCommand.to_bin(doors_command)
     doors_command_bin_size = byte_size(doors_command_bin)
 
     assert state_bin ==
@@ -97,15 +97,15 @@ defmodule AutoApi.VehicleStatusStateTest do
 
   test "put_state works" do
     diag_state =
-      AutoApi.DiagnosticsState.base()
-      |> AutoApi.State.put(:speed,
+      AutoApiL12.DiagnosticsState.base()
+      |> AutoApiL12.State.put(:speed,
         data: %{value: 88.0, unit: :miles_per_hour},
         timestamp: ~U[2020-12-02 11:27:48.372Z]
       )
 
     doors_state =
-      AutoApi.DoorsState.base()
-      |> AutoApi.State.put(:positions,
+      AutoApiL12.DoorsState.base()
+      |> AutoApiL12.State.put(:positions,
         data: %{
           location: :front_left,
           position: :closed

@@ -20,11 +20,11 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.KeyfobPositionCapability do
+defmodule AutoApiL12.KeyfobPositionCapability do
   @moduledoc """
   Basic settings for KeyfobPosition Capability
 
-      iex> alias AutoApi.KeyfobPositionCapability, as: K
+      iex> alias AutoApiL12.KeyfobPositionCapability, as: K
       iex> K.identifier
       <<0x00, 0x48>>
       iex> K.name
@@ -37,8 +37,8 @@ defmodule AutoApi.KeyfobPositionCapability do
       {0x01, :location}
   """
 
-  @command_module AutoApi.LegacyCommand
-  @state_module AutoApi.KeyfobPositionState
+  @command_module AutoApiL12.LegacyCommand
+  @state_module AutoApiL12.KeyfobPositionState
 
-  use AutoApi.Capability, spec_file: "keyfob_position.json"
+  use AutoApiL12.Capability, spec_file: "keyfob_position.json"
 end

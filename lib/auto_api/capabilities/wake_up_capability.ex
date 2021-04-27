@@ -20,11 +20,11 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.WakeUpCapability do
+defmodule AutoApiL12.WakeUpCapability do
   @moduledoc """
   Basic settings for Wake Up Capability
 
-      iex> alias AutoApi.WakeUpCapability, as: W
+      iex> alias AutoApiL12.WakeUpCapability, as: W
       iex> W.identifier
       <<0x00, 0x22>>
       iex> W.name
@@ -35,8 +35,8 @@ defmodule AutoApi.WakeUpCapability do
       {1, :status}
   """
 
-  @command_module AutoApi.LegacyCommand
-  @state_module AutoApi.WakeUpState
+  @command_module AutoApiL12.LegacyCommand
+  @state_module AutoApiL12.WakeUpState
 
-  use AutoApi.Capability, spec_file: "wake_up.json"
+  use AutoApiL12.Capability, spec_file: "wake_up.json"
 end

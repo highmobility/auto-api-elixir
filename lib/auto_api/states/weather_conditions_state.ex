@@ -20,14 +20,14 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.WeatherConditionsState do
+defmodule AutoApiL12.WeatherConditionsState do
   @moduledoc """
   WeatherConditions state
   """
 
-  alias AutoApi.State
+  alias AutoApiL12.State
 
-  use AutoApi.State, spec_file: "weather_conditions.json"
+  use AutoApiL12.State, spec_file: "weather_conditions.json"
 
   @type t :: %__MODULE__{
           rain_intensity: State.property(float)
@@ -37,8 +37,8 @@ defmodule AutoApi.WeatherConditionsState do
   Build state based on binary value
 
     iex> bin = <<1, 0, 11, 1, 0, 8, 64, 41, 102, 102, 102, 102, 102, 102>>
-    iex> AutoApi.WeatherConditionsState.from_bin(bin)
-    %AutoApi.WeatherConditionsState{rain_intensity: %AutoApi.Property{data: 12.7}}
+    iex> AutoApiL12.WeatherConditionsState.from_bin(bin)
+    %AutoApiL12.WeatherConditionsState{rain_intensity: %AutoApiL12.Property{data: 12.7}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -48,8 +48,8 @@ defmodule AutoApi.WeatherConditionsState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.WeatherConditionsState{rain_intensity: %AutoApi.Property{data: 12.7}}
-    iex> AutoApi.WeatherConditionsState.to_bin(state)
+    iex> state = %AutoApiL12.WeatherConditionsState{rain_intensity: %AutoApiL12.Property{data: 12.7}}
+    iex> AutoApiL12.WeatherConditionsState.to_bin(state)
     <<1, 0, 11, 1, 0, 8, 64, 41, 102, 102, 102, 102, 102, 102>>
   """
   @spec to_bin(__MODULE__.t()) :: binary

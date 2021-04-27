@@ -20,14 +20,14 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.ParkingBrakeState do
+defmodule AutoApiL12.ParkingBrakeState do
   @moduledoc """
   ParkingBrake state
   """
 
-  alias AutoApi.{CommonData, State}
+  alias AutoApiL12.{CommonData, State}
 
-  use AutoApi.State, spec_file: "parking_brake.json"
+  use AutoApiL12.State, spec_file: "parking_brake.json"
 
   @type t :: %__MODULE__{
           status: State.property(CommonData.activity())
@@ -37,8 +37,8 @@ defmodule AutoApi.ParkingBrakeState do
   Build state based on binary value
 
     iex> bin = <<1, 0, 4, 1, 0, 1, 1>>
-    iex> AutoApi.ParkingBrakeState.from_bin(bin)
-    %AutoApi.ParkingBrakeState{status: %AutoApi.Property{data: :active}}
+    iex> AutoApiL12.ParkingBrakeState.from_bin(bin)
+    %AutoApiL12.ParkingBrakeState{status: %AutoApiL12.Property{data: :active}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -48,8 +48,8 @@ defmodule AutoApi.ParkingBrakeState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.ParkingBrakeState{status: %AutoApi.Property{data: :active}}
-    iex> AutoApi.ParkingBrakeState.to_bin(state)
+    iex> state = %AutoApiL12.ParkingBrakeState{status: %AutoApiL12.Property{data: :active}}
+    iex> AutoApiL12.ParkingBrakeState.to_bin(state)
     <<1, 0, 4, 1, 0, 1, 1>>
   """
   @spec to_bin(__MODULE__.t()) :: binary

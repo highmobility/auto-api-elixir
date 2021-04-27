@@ -20,11 +20,11 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.GraphicsCapability do
+defmodule AutoApiL12.GraphicsCapability do
   @moduledoc """
   Basic settings for Graphics Capability
 
-      iex> alias AutoApi.GraphicsCapability, as: G
+      iex> alias AutoApiL12.GraphicsCapability, as: G
       iex> G.identifier
       <<0x00, 0x51>>
       iex> G.name
@@ -35,8 +35,8 @@ defmodule AutoApi.GraphicsCapability do
       6
   """
 
-  @command_module AutoApi.LegacyCommand
-  @state_module AutoApi.GraphicsState
+  @command_module AutoApiL12.LegacyCommand
+  @state_module AutoApiL12.GraphicsState
 
-  use AutoApi.Capability, spec_file: "graphics.json"
+  use AutoApiL12.Capability, spec_file: "graphics.json"
 end

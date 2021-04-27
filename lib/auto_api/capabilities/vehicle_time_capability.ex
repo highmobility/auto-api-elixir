@@ -20,11 +20,11 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.VehicleTimeCapability do
+defmodule AutoApiL12.VehicleTimeCapability do
   @moduledoc """
   Basic settings for Vehicle Time Capability
 
-      iex> alias AutoApi.VehicleTimeCapability, as: VT
+      iex> alias AutoApiL12.VehicleTimeCapability, as: VT
       iex> VT.identifier
       <<0x00, 0x50>>
       iex> VT.name
@@ -37,8 +37,8 @@ defmodule AutoApi.VehicleTimeCapability do
       {1, :vehicle_time}
   """
 
-  @command_module AutoApi.LegacyCommand
-  @state_module AutoApi.VehicleTimeState
+  @command_module AutoApiL12.LegacyCommand
+  @state_module AutoApiL12.VehicleTimeState
 
-  use AutoApi.Capability, spec_file: "vehicle_time.json"
+  use AutoApiL12.Capability, spec_file: "vehicle_time.json"
 end

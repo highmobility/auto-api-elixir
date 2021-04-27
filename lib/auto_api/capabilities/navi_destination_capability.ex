@@ -20,11 +20,11 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.NaviDestinationCapability do
+defmodule AutoApiL12.NaviDestinationCapability do
   @moduledoc """
   Basic settings for Navi Destination Capability
 
-      iex> alias AutoApi.NaviDestinationCapability, as: N
+      iex> alias AutoApiL12.NaviDestinationCapability, as: N
       iex> N.identifier
       <<0x00, 0x31>>
       iex> N.name
@@ -37,8 +37,8 @@ defmodule AutoApi.NaviDestinationCapability do
       {0x01, :coordinates}
   """
 
-  @command_module AutoApi.LegacyCommand
-  @state_module AutoApi.NaviDestinationState
+  @command_module AutoApiL12.LegacyCommand
+  @state_module AutoApiL12.NaviDestinationState
 
-  use AutoApi.Capability, spec_file: "navi_destination.json"
+  use AutoApiL12.Capability, spec_file: "navi_destination.json"
 end

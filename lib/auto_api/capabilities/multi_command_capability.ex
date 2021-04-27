@@ -20,11 +20,11 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.MultiCommandCapability do
+defmodule AutoApiL12.MultiCommandCapability do
   @moduledoc """
   Basic settings for MultiCommand Capability
 
-      iex> alias AutoApi.MultiCommandCapability, as: M
+      iex> alias AutoApiL12.MultiCommandCapability, as: M
       iex> M.identifier
       <<0x00, 0x13>>
       iex> M.name
@@ -35,8 +35,8 @@ defmodule AutoApi.MultiCommandCapability do
       7
   """
 
-  @command_module AutoApi.LegacyCommand
-  @state_module AutoApi.MultiCommandState
+  @command_module AutoApiL12.LegacyCommand
+  @state_module AutoApiL12.MultiCommandState
 
-  use AutoApi.Capability, spec_file: "multi_command.json"
+  use AutoApiL12.Capability, spec_file: "multi_command.json"
 end

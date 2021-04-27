@@ -20,14 +20,14 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.FuelingState do
+defmodule AutoApiL12.FuelingState do
   @moduledoc """
   Fueling state
   """
 
-  alias AutoApi.{CommonData, State}
+  alias AutoApiL12.{CommonData, State}
 
-  use AutoApi.State, spec_file: "fueling.json"
+  use AutoApiL12.State, spec_file: "fueling.json"
 
   @type t :: %__MODULE__{
           gas_flap_position: State.property(CommonData.position()),
@@ -38,8 +38,8 @@ defmodule AutoApi.FuelingState do
   Build state based on binary value
 
     iex> bin = <<3, 0, 4, 1, 0, 1, 0>>
-    iex> AutoApi.FuelingState.from_bin(bin)
-    %AutoApi.FuelingState{gas_flap_position: %AutoApi.Property{data: :closed}}
+    iex> AutoApiL12.FuelingState.from_bin(bin)
+    %AutoApiL12.FuelingState{gas_flap_position: %AutoApiL12.Property{data: :closed}}
   """
   @spec from_bin(binary) :: __MODULE__.t()
   def from_bin(bin) do
@@ -49,8 +49,8 @@ defmodule AutoApi.FuelingState do
   @doc """
   Parse state to bin
 
-    iex> state = %AutoApi.FuelingState{gas_flap_position: %AutoApi.Property{data: :closed}}
-    iex> AutoApi.FuelingState.to_bin(state)
+    iex> state = %AutoApiL12.FuelingState{gas_flap_position: %AutoApiL12.Property{data: :closed}}
+    iex> AutoApiL12.FuelingState.to_bin(state)
     <<3, 0, 4, 1, 0, 1, 0>>
   """
   @spec to_bin(__MODULE__.t()) :: binary

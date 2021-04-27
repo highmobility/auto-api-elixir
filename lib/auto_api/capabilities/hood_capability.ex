@@ -20,11 +20,11 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.HoodCapability do
+defmodule AutoApiL12.HoodCapability do
   @moduledoc """
   Basic settings for HoodCapability
 
-      iex> alias AutoApi.HoodCapability, as: H
+      iex> alias AutoApiL12.HoodCapability, as: H
       iex> H.identifier
       <<0x00, 0x67>>
       iex> H.name
@@ -37,8 +37,8 @@ defmodule AutoApi.HoodCapability do
       {0x01, :position}
   """
 
-  @command_module AutoApi.LegacyCommand
-  @state_module AutoApi.HoodState
+  @command_module AutoApiL12.LegacyCommand
+  @state_module AutoApiL12.HoodState
 
-  use AutoApi.Capability, spec_file: "hood.json"
+  use AutoApiL12.Capability, spec_file: "hood.json"
 end

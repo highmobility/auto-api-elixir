@@ -20,11 +20,11 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.IgnitionCapability do
+defmodule AutoApiL12.IgnitionCapability do
   @moduledoc """
   Basic settings for Ignition Capability
 
-      iex> alias AutoApi.IgnitionCapability, as: E
+      iex> alias AutoApiL12.IgnitionCapability, as: E
       iex> E.identifier
       <<0x00, 0x35>>
       iex> E.name
@@ -37,8 +37,8 @@ defmodule AutoApi.IgnitionCapability do
       {1, :status}
   """
 
-  @command_module AutoApi.LegacyCommand
-  @state_module AutoApi.IgnitionState
+  @command_module AutoApiL12.LegacyCommand
+  @state_module AutoApiL12.IgnitionState
 
-  use AutoApi.Capability, spec_file: "ignition.json"
+  use AutoApiL12.Capability, spec_file: "ignition.json"
 end

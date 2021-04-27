@@ -20,11 +20,11 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.TextInputCapability do
+defmodule AutoApiL12.TextInputCapability do
   @moduledoc """
   Basic settings for TextInput Capability
 
-      iex> alias AutoApi.TextInputCapability, as: T
+      iex> alias AutoApiL12.TextInputCapability, as: T
       iex> T.identifier
       <<0x00, 0x44>>
       iex> T.name
@@ -35,8 +35,8 @@ defmodule AutoApi.TextInputCapability do
       6
   """
 
-  @command_module AutoApi.LegacyCommand
-  @state_module AutoApi.TextInputState
+  @command_module AutoApiL12.LegacyCommand
+  @state_module AutoApiL12.TextInputState
 
-  use AutoApi.Capability, spec_file: "text_input.json"
+  use AutoApiL12.Capability, spec_file: "text_input.json"
 end

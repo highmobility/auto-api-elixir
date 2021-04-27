@@ -20,7 +20,7 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.UniversalProperties.Meta do
+defmodule AutoApiL12.UniversalProperties.Meta do
   @moduledoc false
 
   # credo:disable-for-this-file Credo.Check.Refactor.CyclomaticComplexity
@@ -45,7 +45,7 @@ defmodule AutoApi.UniversalProperties.Meta do
 
         # Example
 
-            iex> properties = AutoApi.UniversalProperties.all()
+            iex> properties = AutoApiL12.UniversalProperties.all()
             iex> length(properties)
             5
             iex> List.last(properties)
