@@ -196,6 +196,8 @@ defmodule AutoApi.Capability do
             iex> AutoApi.DiagnosticsCapability.deprecated?(:mileage)
             true
         """
+        @spec deprecated?(atom()) :: boolean()
+        def deprecated?(name)
       end
 
     property_functions =
