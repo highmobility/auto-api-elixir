@@ -147,6 +147,20 @@ defmodule AutoApi.Capability do
         def setters(), do: @setters
 
         @doc """
+        Returns whether the capability requires authorization to be queried
+
+        ## Examples
+
+            iex> AutoApi.DiagnosticsCapability.authorization?()
+            true
+
+            iex> AutoApi.HistoricalCapability.authorization?()
+            false
+        """
+        @spec authorization?() :: boolean()
+        def authorization?(), do: @raw_spec["authorization"] || false
+
+        @doc """
         Returns the ID of a property given its name.
 
         ## Example
