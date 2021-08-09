@@ -1022,7 +1022,7 @@
                     "name": "street_address",
                     "name_cased": "streetAddress",
                     "type": "string",
-                    "description": "Streed address component"
+                    "description": "Street address component"
                 }
             ]
         },

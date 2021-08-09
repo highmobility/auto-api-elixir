@@ -55,7 +55,7 @@ defmodule AutoApi.CrashState do
           tipped_state: State.property(tipped_state()),
           automatic_ecall: State.property(CommonData.enabled_state()),
           severity: State.property(integer()),
-          impact_zone: State.property(impact_zone())
+          impact_zone: State.multiple_property(impact_zone())
         }
 
   @doc """
