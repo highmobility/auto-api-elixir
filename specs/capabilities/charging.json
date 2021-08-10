@@ -307,11 +307,13 @@
             "enum_values": [
                 {
                     "id": 0,
-                    "name": "type_1"
+                    "name": "type_1",
+                    "name_pretty": "Connector type SAE J1772"
                 },
                 {
                     "id": 1,
-                    "name": "type_2"
+                    "name": "type_2",
+                    "name_pretty": "IEC 62196 Type 2 connector"
                 },
                 {
                     "id": 2,
