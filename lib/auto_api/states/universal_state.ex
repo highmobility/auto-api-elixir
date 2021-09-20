@@ -26,12 +26,13 @@ defmodule AutoApi.UniversalState do
   """
 
   alias AutoApi.State
+  alias AutoApi.UniversalProperties
 
   use AutoApi.State, spec_file: "universal.json"
 
   @type t :: %__MODULE__{
-          vin: State.property(String.t()), # TODO: any spec of VIn?
-          brand: State.property(:atom) # TODO: any spec for brand?
+          vin: State.property(UniversalProperties.vin()),
+          brand: State.property(UniversalProperties.brand())
         }
 
   @doc """
