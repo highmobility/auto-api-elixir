@@ -72,6 +72,7 @@ defmodule AutoApi.Capability.Meta do
     AutoApi.TripsCapability,
     AutoApi.TrunkCapability,
     AutoApi.UsageCapability,
+    AutoApi.UniversalCapability,
     AutoApi.ValetModeCapability,
     AutoApi.VehicleLocationCapability,
     AutoApi.VehicleStatusCapability,
