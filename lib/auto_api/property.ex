@@ -201,6 +201,13 @@ defmodule AutoApi.Property do
     type_id = AutoApi.UnitType.id(type)
     unit_id = AutoApi.UnitType.unit_id(type, unit)
 
+    unless unit_id,
+      do:
+        Logger.warn([
+          "type `#{type}` doesn't support unit `#{unit}`",
+          " stacktrace: #{inspect Process.info(self(), :current_stacktrace)}"
+        ])
+
     <<type_id, unit_id, value::float-size(64)>>
   end
 

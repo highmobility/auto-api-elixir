@@ -21,6 +21,7 @@ defmodule AutoApi.PropertyTest do
   use PropCheck
 
   import AutoApi.PropCheckFixtures
+  import ExUnit.CaptureLog
 
   alias AutoApi.Property
 
@@ -755,6 +756,27 @@ defmodule AutoApi.PropertyTest do
         assert prop_comp.failure == component.failure
         assert prop_comp.availability == component.availability
       end
+    end
+  end
+
+  describe "to_binary/2" do
+    test "emmits warn log and raise ArgumentError  when an invalid unit type to binary" do
+      spec = %{
+        "id" => 24,
+        "name" => "charging_rate",
+        "type" => "unit.power",
+        size: 10
+      }
+
+      prop_comp = %Property{data: %{value: 10.009, unit: :celsius}}
+
+      fun = fn ->
+        assert_raise ArgumentError, fn ->
+          Property.to_bin(prop_comp, spec)
+        end
+      end
+
+      assert capture_log(fun) =~ "type `power` doesn't support unit `celsius`"
     end
   end
 
