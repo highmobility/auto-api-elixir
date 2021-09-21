@@ -1,7 +1,7 @@
 # AutoAPI
 # The MIT License
 #
-# Copyright (c) 2018- High-Mobility GmbH (https://high-mobility.com)
+# Copyright (c) 2021- High-Mobility GmbH (https://high-mobility.com)
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -20,13 +20,25 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.UniversalProperties do
+defmodule AutoApi.UniversalCapability do
   @moduledoc """
-  Utility functions for Universal Properties.
+  Basic settings for Universal Capability
 
-  Universal properties are properties that can be included in any State.
+      iex> alias AutoApi.UniversalCapability, as: U
+      iex> U.identifier
+      <<0x00, 0x15>>
+      iex> U.name
+      :universal
+      iex> U.description
+      "Universal"
+      iex> length(U.properties)
+      5
+      iex> U.properties
+      [{160, :nonce}, {161, :vehicle_signature}, {162, :timestamp}, {163, :vin}, {164, :brand}]
   """
-  require AutoApi.UniversalProperties.Meta
 
-  @before_compile AutoApi.UniversalProperties.Meta
+  @command_module AutoApi.LegacyCommand
+  @state_module AutoApi.UniversalState
+
+  use AutoApi.Capability, spec_file: "universal.json"
 end
