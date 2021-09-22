@@ -760,7 +760,7 @@ defmodule AutoApi.PropertyTest do
   end
 
   describe "to_binary/2" do
-    test "emmits warn log and raise ArgumentError  when an invalid unit type to binary" do
+    test "emmits log when an invalid unit type to binary" do
       spec = %{
         "id" => 24,
         "name" => "charging_rate",
@@ -768,15 +768,26 @@ defmodule AutoApi.PropertyTest do
         size: 10
       }
 
-      prop_comp = %Property{data: %{value: 10.009, unit: :celsius}}
+      prop_comp = %Property{data: %{value: 10.009, unit: :celsius}, timestamp: DateTime.utc_now()}
 
       fun = fn ->
-        assert_raise ArgumentError, fn ->
-          Property.to_bin(prop_comp, spec)
-        end
+        assert failure_prop = Property.to_bin(prop_comp, spec)
+
+        assert Property.to_struct(failure_prop, spec) ==
+                 %AutoApi.Property{
+                   availability: nil,
+                   data: nil,
+                   failure: %{
+                     description: "not able to serialize the value",
+                     reason: :format_error
+                   },
+                   timestamp: nil
+                 }
       end
 
-      assert capture_log(fun) =~ "type `power` doesn't support unit `celsius`"
+      logs = capture_log(fun)
+      assert logs =~ "type `power` doesn't support unit `celsius`"
+      assert logs =~ "[error] Not able to serialize value for spec"
     end
   end
 

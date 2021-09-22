@@ -201,6 +201,21 @@ defmodule AutoApi.StateTest do
       assert state == new_state
     end
 
+    test "converts invalid input to failure property" do
+      state = %RooftopControlState{
+        sunroof_tilt_state: %Property{data: :boo}
+      }
+
+      new_state =
+        state
+        |> RooftopControlState.to_bin()
+        |> RooftopControlState.from_bin()
+
+      assert new_state.sunroof_tilt_state == %AutoApi.Property{
+               failure: %{description: "not able to serialize the value", reason: :format_error}
+             }
+    end
+
     test "failure on list property" do
       pressures = %Property{failure: %{reason: :unknown, description: "Unknown"}}
       state = %DiagnosticsState{tire_pressures: [pressures]}
