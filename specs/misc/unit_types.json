@@ -151,6 +151,11 @@
                     "conversion_linear": 1000.0
                 },
                 {
+                    "name": "watt_hours",
+                    "id": 3,
+                    "conversion_linear": 3600.0
+                },
+                {
                     "name": "kilowatt_hours",
                     "id": 4,
                     "conversion_linear": 3600000.0

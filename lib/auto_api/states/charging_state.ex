@@ -103,7 +103,8 @@ defmodule AutoApi.ChargingState do
           preconditioning_departure_status: State.property(CommonData.activity()),
           preconditioning_immediate_status: State.property(CommonData.activity()),
           preconditioning_departure_enabled: State.property(CommonData.enabled_state()),
-          preconditioning_error: State.property(preconditioning_error())
+          preconditioning_error: State.property(preconditioning_error()),
+          battery_capacity: State.property(UnitType.energy())
         }
 
   @doc """

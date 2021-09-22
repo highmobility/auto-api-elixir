@@ -57,6 +57,7 @@ defmodule AutoApi.Property do
           | :unknown
           | :pending
           | :oem_error
+          | :privacy_mode_active
 
   @type failure :: %{reason: reason(), description: String.t()}
 
@@ -92,10 +93,29 @@ defmodule AutoApi.Property do
   """
   @spec to_bin(__MODULE__.t(), spec()) :: binary()
   def to_bin(%__MODULE__{} = prop, spec) do
-    wrap_with_size(prop, :data, &data_to_bin(&1, spec)) <>
-      wrap_with_size(prop, :timestamp, &timestamp_to_bin/1) <>
-      wrap_with_size(prop, :failure, &failure_to_bin/1) <>
-      wrap_with_size(prop, :availability, &availability_to_bin/1)
+    try do
+      wrap_with_size(prop, :data, &data_to_bin(&1, spec)) <>
+        wrap_with_size(prop, :timestamp, &timestamp_to_bin/1) <>
+        wrap_with_size(prop, :failure, &failure_to_bin/1) <>
+        wrap_with_size(prop, :availability, &availability_to_bin/1)
+    rescue
+      error ->
+        Logger.error([
+          "Not able to serialize value for spec #{inspect(spec)} to binary ",
+          inspect(error),
+          " stacktrace: #{inspect Process.info(self(), :current_stacktrace)}"
+        ])
+
+        failure = %__MODULE__{
+          failure: %{reason: :format_error, description: "not able to serialize the value"}
+        }
+
+        wrap_with_size(
+          failure,
+          :failure,
+          &failure_to_bin/1
+        )
+    end
   end
 
   defp wrap_with_size(prop, field, conversion_fun) do
@@ -190,9 +210,18 @@ defmodule AutoApi.Property do
     data_to_bin(data, type_spec)
   end
 
+  defp data_to_bin(data, %{"type" => "events." <> type} = spec) do
+    type_spec = type |> AutoApi.Event.spec() |> Map.put("embedded", spec["embedded"])
+
+    data_to_bin(data, type_spec)
+  end
+
   defp data_to_bin(%{value: value, unit: unit}, %{"type" => "unit." <> type}) do
     type_id = AutoApi.UnitType.id(type)
     unit_id = AutoApi.UnitType.unit_id(type, unit)
+
+    unless unit_id,
+      do: Logger.warn("type `#{type}` doesn't support unit `#{unit}`")
 
     <<type_id, unit_id, value::float-size(64)>>
   end
@@ -337,6 +366,12 @@ defmodule AutoApi.Property do
     to_value(binary_data, type_spec)
   end
 
+  defp to_value(binary_data, %{"type" => "events." <> type}) do
+    type_spec = AutoApi.Event.spec(type)
+
+    to_value(binary_data, type_spec)
+  end
+
   defp to_value(<<id, unit_id, value::float-64>>, %{"type" => "unit." <> _type}) do
     unit = AutoApi.UnitType.unit_name(id, unit_id)
 
@@ -374,6 +409,12 @@ defmodule AutoApi.Property do
   defp fetch_item_spec(%{"type" => "types." <> type}) do
     type
     |> AutoApi.CustomType.spec()
+    |> Map.put("embedded", "true")
+  end
+
+  defp fetch_item_spec(%{"type" => "events." <> type}) do
+    type
+    |> AutoApi.Event.spec()
     |> Map.put("embedded", "true")
   end
 

@@ -64,7 +64,8 @@ defmodule AutoApi.ChargingStateTest do
       preconditioning_departure_status: %Property{data: :inactive},
       preconditioning_immediate_status: %Property{data: :active},
       preconditioning_departure_enabled: %Property{data: :enabled},
-      preconditioning_error: %Property{data: :available_after_engine_restart}
+      preconditioning_error: %Property{data: :available_after_engine_restart},
+      battery_capacity: %Property{data: %{value: 45.456, unit: :kilowatt_hours}}
     }
 
     new_state =

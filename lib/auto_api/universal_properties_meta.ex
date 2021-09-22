@@ -33,12 +33,21 @@ defmodule AutoApi.UniversalProperties.Meta do
 
     properties = raw_spec["universal_properties"]
 
+    brands =
+      properties
+      |> Enum.filter(fn prop -> prop["name"] == "brand" end)
+      |> Enum.flat_map(fn prop -> prop["enum_values"] end)
+      |> Enum.map(fn brand -> String.to_atom(brand["name"]) end)
+
     base_functions =
       quote do
         @properties unquote(Macro.escape(properties))
                     |> Enum.map(fn prop ->
                       {prop["id"], String.to_atom(prop["name"])}
                     end)
+
+        @type vin :: <<_::138>>
+        @type brand :: unquote(Enum.reduce(brands, &{:|, [], [&1, &2]}))
 
         @doc """
         Returns all universal properties
@@ -61,6 +70,12 @@ defmodule AutoApi.UniversalProperties.Meta do
         @doc false
         @spec property_spec(atom()) :: map()
         def property_spec(name)
+
+        @doc """
+        Returns all possible values for `brand` property
+        """
+        @spec brands() :: list(atom())
+        def brands(), do: unquote(Macro.escape(brands))
       end
 
     property_functions =

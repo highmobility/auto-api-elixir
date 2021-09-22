@@ -23,7 +23,7 @@
 defmodule AutoApi.Mixfile do
   use Mix.Project
 
-  @version "0.2.0"
+  @version "13.0.0"
 
   def project do
     [

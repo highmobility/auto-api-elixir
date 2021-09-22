@@ -124,10 +124,135 @@ defmodule AutoApi.DashboardLightsState do
           | :tire_warning_system_error
           | :battery_low_warning
           | :brake_fluid_warning
+          | :active_hood_fault
+          | :active_spoiler_fault
+          | :adjust_tire_pressure
+          | :steering_lock_alert
+          | :anti_pollution_failure_engine_start_impossible
+          | :anti_pollution_system_failure
+          | :anti_reverse_system_failing
+          | :auto_parking_brake
+          | :automatic_braking_deactive
+          | :automatic_braking_system_fault
+          | :automatic_lights_settings_failure
+          | :keyfob_battery_alarm
+          | :trunk_open
+          | :check_reversing_lamp
+          | :crossing_line_system_alert_failure
+          | :dipped_beam_headlamps_front_left_failure
+          | :dipped_beam_headlamps_front_right_failure
+          | :directional_headlamps_failure
+          | :directional_light_failure
+          | :dsg_failing
+          | :electric_mode_not_available
+          | :electronic_lock_failure
+          | :engine_control_system_failure
+          | :engine_oil_pressure_alert
+          | :esp_failure
+          | :excessive_oil_temperature
+          | :tire_front_left_flat
+          | :tire_front_right_flat
+          | :tire_rear_left_flat
+          | :tire_rear_right_flat
+          | :fog_light_front_left_failure
+          | :fog_light_front_right_failure
+          | :fog_light_rear_left_failure
+          | :fog_light_rear_right_failure
+          | :fog_light_front_fault
+          | :door_front_left_open
+          | :door_front_left_open_high_speed
+          | :tire_front_left_not_monitored
+          | :door_front_right_open
+          | :door_front_right_open_high_speed
+          | :tire_front_right_not_monitored
+          | :headlights_left_failure
+          | :headlights_right_failure
+          | :hybrid_system_fault
+          | :hybrid_system_fault_repaired_vehicle
+          | :hydraulic_pressure_or_brake_fuild_insufficient
+          | :lane_departure_fault
+          | :limited_visibility_aids_camera
+          | :tire_pressure_low
+          | :maintenance_date_exceeded
+          | :maintenance_odometer_exceeded
+          | :other_failing_system
+          | :parking_brake_control_failing
+          | :parking_space_measuring_system_failure
+          | :place_gear_to_parking
+          | :power_steering_assitance_failure
+          | :power_steering_failure
+          | :preheating_deactivated_battery_too_low
+          | :preheating_deactivated_fuel_level_too_low
+          | :preheating_deactivated_battery_set_the_clock
+          | :fog_light_rear_fault
+          | :door_rear_left_open
+          | :door_rear_left_open_high_speed
+          | :tire_rear_left_not_monitored
+          | :door_rear_right_open
+          | :door_rear_right_open_high_speed
+          | :tire_rear_right_not_monitored
+          | :screen_rear_open
+          | :retractable_roof_mechanism_fault
+          | :reverse_light_left_failure
+          | :reverse_light_right_failure
+          | :risk_of_ice
+          | :roof_operation_impossible_apply_parking_break
+          | :roof_operation_impossible_apply_start_engine
+          | :roof_operation_impossible_temperature_too_high
+          | :seatbelt_passenger_front_right_unbuckled
+          | :seatbelt_passenger_rear_left_unbuckled
+          | :seatbelt_passenger_rear_center_unbuckled
+          | :seatbelt_passenger_rear_right_unbuckled
+          | :battery_secondary_low
+          | :shock_sensor_failing
+          | :side_lights_front_left_failure
+          | :side_lights_front_right_failure
+          | :side_lights_rear_left_failure
+          | :side_lights_rear_right_failure
+          | :spare_wheel_fitter_driving_aids_deactivated
+          | :speed_control_failure
+          | :stop_light_left_failure
+          | :stop_light_right_failure
+          | :suspension_failure
+          | :suspension_failure_reduce_speed
+          | :suspension_fault_limited_to_90kmh
+          | :tire_pressure_sensor_failure
+          | :trunk_open_high_speed
+          | :trunk_window_open
+          | :turn_signal_front_left_failure
+          | :turn_signal_front_right_failure
+          | :turn_signal_rear_left_failure
+          | :turn_signal_rear_right_failure
+          | :tire_under_inflation
+          | :wheel_pressure_fault
+          | :oil_change_warning
+          | :inspection_warning
+
+  @type bulb_failure ::
+          :turn_signal_left
+          | :turn_signal_right
+          | :low_beam
+          | :low_beam_left
+          | :low_beam_right
+          | :high_beam
+          | :high_beam_left
+          | :high_beam_right
+          | :fog_light_front
+          | :fog_light_rear
+          | :stop
+          | :position
+          | :day_running
+          | :trailer_turn
+          | :trailer_turn_left
+          | :trailer_turn_right
+          | :trailer_stop
+          | :trailer_electrical_failure
+          | :multiple
 
   @type dashboard_light :: %{name: light_name, state: CommonData.on_off()}
   @type t :: %__MODULE__{
-          dashboard_lights: State.multiple_property(dashboard_light())
+          dashboard_lights: State.multiple_property(dashboard_light()),
+          bulb_failures: State.multiple_property(bulb_failure())
         }
 
   @doc """

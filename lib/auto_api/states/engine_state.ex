@@ -31,7 +31,8 @@ defmodule AutoApi.EngineState do
 
   @type t :: %__MODULE__{
           status: State.property(CommonData.on_off()),
-          start_stop_state: State.property(CommonData.activity())
+          start_stop_state: State.property(CommonData.activity()),
+          start_stop_enabled: State.property(CommonData.enabled_state())
         }
 
   @doc """

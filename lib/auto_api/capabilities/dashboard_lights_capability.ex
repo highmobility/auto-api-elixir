@@ -32,7 +32,7 @@ defmodule AutoApi.DashboardLightsCapability do
       iex> F.description
       "Dashboard Lights"
       iex> length(F.properties)
-      6
+      7
       iex> List.first(F.properties)
       {0x01, :dashboard_lights}
   """

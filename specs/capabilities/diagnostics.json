@@ -10,7 +10,7 @@
     },
     "api": {
         "intro": 3,
-        "update": 12
+        "update": 13
     },
     "getters": {},
     "state": "all",
@@ -221,7 +221,7 @@
                     "value": {
                         "liters": 35.5
                     },
-                    "description": "35.5L of fuel remaining"
+                    "description": "35.5 L of fuel remaining"
                 }
             ]
         },
@@ -293,7 +293,7 @@
                     "value": {
                         "liters": 27587.0
                     },
-                    "description": "The engine has consumend 27'587.0L of fuel over it's lifespan"
+                    "description": "The engine has consumend 27'587.0 L of fuel over it's lifespan"
                 }
             ]
         },
@@ -465,6 +465,16 @@
                         }
                     },
                     "description": "Rear left outer tire pressure is 2.25BAR"
+                },
+                {
+                    "data_component": "0615064002000000000000",
+                    "values": {
+                        "location": "spare",
+                        "pressure": {
+                            "bars": 2.25
+                        }
+                    },
+                    "description": "Spare tire pressure is 2.25BAR"
                 }
             ]
         },
@@ -536,6 +546,16 @@
                         }
                     },
                     "description": "Rear left outer tire temperature is 40.6\u00b0C"
+                },
+                {
+                    "data_component": "0617014024666666666666",
+                    "values": {
+                        "location": "spare",
+                        "temperature": {
+                            "celsius": 10.2
+                        }
+                    },
+                    "description": "Spare tire temperature is 10.2\u00b0C"
                 }
             ]
         },
@@ -607,6 +627,16 @@
                         }
                     },
                     "description": "Rear left outer wheel is doing 807.0RPM"
+                },
+                {
+                    "data_component": "0603000000000000000000",
+                    "values": {
+                        "location": "spare",
+                        "rpm": {
+                            "revolutions_per_minute": 0.0
+                        }
+                    },
+                    "description": "Spare wheel is doing 0.0RPM"
                 }
             ]
         },
@@ -670,6 +700,7 @@
             "name": "odometer",
             "name_cased": "odometer",
             "name_pretty": "Odometer",
+            "added": 12,
             "type": "unit.length",
             "size": 10,
             "description": "The vehicle odometer value in a given units",
@@ -688,6 +719,7 @@
             "name": "engine_total_operating_time",
             "name_cased": "engineTotalOperatingTime",
             "name_pretty": "Engine total operation time",
+            "added": 12,
             "type": "unit.duration",
             "size": 10,
             "description": "The accumulated time of engine operation",
@@ -706,9 +738,10 @@
             "name": "tire_pressure_statuses",
             "name_cased": "tirePressureStatuses",
             "name_pretty": "Tire pressure statuses",
+            "name_singular": "tire_pressure_status",
+            "added": 12,
             "type": "types.tire_pressure_status",
             "multiple": true,
-            "name_singular": "tire_pressure_status",
             "examples": [
                 {
                     "data_component": "0000",
@@ -757,6 +790,14 @@
                         "status": "normal"
                     },
                     "description": "Rear left outer tire pressure is normal"
+                },
+                {
+                    "data_component": "0600",
+                    "values": {
+                        "location": "spare",
+                        "status": "normal"
+                    },
+                    "description": "Spare tire pressure is normal"
                 }
             ]
         },
@@ -765,6 +806,7 @@
             "name": "brake_lining_wear_pre_warning",
             "name_cased": "brakeLiningWearPreWarning",
             "name_pretty": "Brake lining wear pre-warning",
+            "added": 12,
             "type": "types.active_state",
             "description": "Status of brake lining wear pre-warning",
             "examples": [
@@ -780,6 +822,7 @@
             "name": "engine_oil_life_remaining",
             "name_cased": "engineOilLifeRemaining",
             "name_pretty": "Engine oil life remaining",
+            "added": 12,
             "type": "types.percentage",
             "size": 8,
             "description": "Remaining life of engine oil which decreases over time",
@@ -796,6 +839,8 @@
             "name": "oem_trouble_code_values",
             "name_cased": "oemTroubleCodeValues",
             "name_pretty": "OEM trouble code values",
+            "name_singular": "engine_trouble_code_value",
+            "added": 12,
             "type": "types.oem_trouble_code_value",
             "multiple": true,
             "description": "Additional OEM trouble codes",
@@ -829,6 +874,7 @@
             "name": "diesel_exhaust_fluid_range",
             "name_cased": "dieselExhaustFluidRange",
             "name_pretty": "Diesel exhaust fluid range",
+            "added": 12,
             "type": "unit.length",
             "size": 10,
             "description": "Distance remaining until diesel exhaust fluid is empty",
@@ -847,6 +893,7 @@
             "name": "diesel_particulate_filter_soot_level",
             "name_cased": "dieselParticulateFilterSootLevel",
             "name_pretty": "Diesel particulate filter soot level",
+            "added": 12,
             "type": "types.percentage",
             "size": 8,
             "description": "Level of soot in diesel exhaust particulate filter",
@@ -863,9 +910,10 @@
             "name": "confirmed_trouble_codes",
             "name_cased": "confirmedTroubleCodes",
             "name_pretty": "Confirmed trouble codes",
+            "name_singular": "confirmed_trouble_code",
+            "added": 12,
             "type": "types.confirmed_trouble_code",
             "multiple": true,
-            "name_singular": "confirmed_trouble_code",
             "examples": [
                 {
                     "data_component": "00063830314331300002313600034341530006414354495645",
@@ -894,7 +942,9 @@
             "name": "diesel_exhaust_filter_status",
             "name_cased": "dieselExhaustFilterStatus",
             "name_pretty": "Diesel exhaust filter status",
+            "added": 12,
             "type": "types.diesel_exhaust_filter_status",
+            "multiple": true,
             "examples": [
                 {
                     "data_component": "000100",
@@ -940,6 +990,428 @@
                         "cleaning": "unknown"
                     },
                     "description": "Diesel 'exhaust filter' is in 'over_limit' status and unknown cleaning state"
+                }
+            ]
+        },
+        {
+            "id": 42,
+            "name": "engine_total_idle_operating_time",
+            "name_cased": "engineTotalIdleOperatingTime",
+            "name_pretty": "Engine total idle operation time",
+            "added": 13,
+            "type": "unit.duration",
+            "size": 10,
+            "description": "The accumulated time of engine operation",
+            "examples": [
+                {
+                    "data_component": "0702406ab1eb851eb852",
+                    "value": {
+                        "hours": 213.56
+                    },
+                    "description": "The engine has operated 213.56h in idle"
+                }
+            ]
+        },
+        {
+            "id": 43,
+            "name": "engine_oil_amount",
+            "name_cased": "engineOilAmount",
+            "name_pretty": "Engine oil amount",
+            "added": 13,
+            "type": "unit.volume",
+            "size": 10,
+            "description": "The current estimated oil tank liquid fill.",
+            "examples": [
+                {
+                    "data_component": "1902400c000000000000",
+                    "value": {
+                        "liters": 3.5
+                    },
+                    "description": "Engine oil tank is filled by 3.5 l"
+                }
+            ]
+        },
+        {
+            "id": 44,
+            "name": "engine_oil_level",
+            "name_cased": "engineOilLevel",
+            "name_pretty": "Engine oil level",
+            "added": 13,
+            "type": "types.percentage",
+            "description": "The current estimated oil tank liquid fill in percentage.",
+            "examples": [
+                {
+                    "data_component": "3fe999999999999a",
+                    "value": 0.8,
+                    "description": "Engile oil level is at 80%"
+                }
+            ]
+        },
+        {
+            "id": 45,
+            "name": "estimated_secondary_powertrain_range",
+            "name_cased": "estimatedSecondaryPowertrainRange",
+            "name_pretty": "Estimated secondary powertrain range",
+            "added": 13,
+            "type": "unit.length",
+            "size": 10,
+            "description": "Estimated secondary powertrain range",
+            "examples": [
+                {
+                    "data_component": "12044070900000000000",
+                    "value": {
+                        "kilometers": 265.0
+                    },
+                    "description": "Estimated secondary powertrain`s range is 256.0km"
+                }
+            ]
+        },
+        {
+            "id": 46,
+            "name": "fuel_level_accuracy",
+            "name_cased": "fuelLevelAccuracy",
+            "name_pretty": "Fuel level accuracy",
+            "added": 13,
+            "type": "enum",
+            "size": 1,
+            "description": "This value includes the information, if the fuel level has been calculated or measured.",
+            "enum_values": [
+                {
+                    "id": 0,
+                    "name": "measured"
+                },
+                {
+                    "id": 1,
+                    "name": "calculated"
+                }
+            ],
+            "examples": [
+                {
+                    "data_component": "00",
+                    "value": "measured",
+                    "description": "Fuel level has been measured"
+                }
+            ]
+        },
+        {
+            "id": 47,
+            "name": "tire_pressures_targets",
+            "name_cased": "tirePressuresTargets",
+            "name_pretty": "Tire pressures targets",
+            "name_singular": "tire_pressure_target",
+            "added": 13,
+            "type": "types.tire_pressure",
+            "multiple": true,
+            "description": "Target tire pressures for the vehicle.",
+            "examples": [
+                {
+                    "data_component": "00150640027ae147ae147b",
+                    "values": {
+                        "location": "front_left",
+                        "pressure": {
+                            "bars": 2.31
+                        }
+                    },
+                    "description": "Front left tire pressure target is 2.31BAR"
+                },
+                {
+                    "data_component": "01150640027ae147ae147b",
+                    "values": {
+                        "location": "front_right",
+                        "pressure": {
+                            "bars": 2.31
+                        }
+                    },
+                    "description": "Front right tire pressure target is 2.31BAR"
+                },
+                {
+                    "data_component": "0215064001eb851eb851ec",
+                    "values": {
+                        "location": "rear_right",
+                        "pressure": {
+                            "bars": 2.24
+                        }
+                    },
+                    "description": "Rear right tire pressure target is 2.24BAR"
+                },
+                {
+                    "data_component": "0315064001eb851eb851ec",
+                    "values": {
+                        "location": "rear_left",
+                        "pressure": {
+                            "bars": 2.24
+                        }
+                    },
+                    "description": "Rear left tire pressure target is 2.24BAR"
+                },
+                {
+                    "data_component": "0415064002000000000000",
+                    "values": {
+                        "location": "rear_right_outer",
+                        "pressure": {
+                            "bars": 2.25
+                        }
+                    },
+                    "description": "Rear right outer tire target pressure is 2.25BAR"
+                },
+                {
+                    "data_component": "0515064002000000000000",
+                    "values": {
+                        "location": "rear_left_outer",
+                        "pressure": {
+                            "bars": 2.25
+                        }
+                    },
+                    "description": "Rear left outer tire target pressure is 2.25BAR"
+                },
+                {
+                    "data_component": "0615064002000000000000",
+                    "values": {
+                        "location": "spare",
+                        "pressure": {
+                            "bars": 2.25
+                        }
+                    },
+                    "description": "Spear tire target pressure is 2.25BAR"
+                }
+            ]
+        },
+        {
+            "id": 48,
+            "name": "tire_pressures_differences",
+            "name_cased": "tirePressuresDifferences",
+            "name_pretty": "Tire pressures differences",
+            "name_singular": "tire_pressure_difference",
+            "added": 13,
+            "type": "types.tire_pressure",
+            "multiple": true,
+            "description": "Tire pressures difference from the target pressure.",
+            "examples": [
+                {
+                    "data_component": "0015063fb999999999999a",
+                    "values": {
+                        "location": "front_left",
+                        "pressure": {
+                            "bars": 0.1
+                        }
+                    },
+                    "description": "Front left tire pressure difference is 0.1BAR"
+                },
+                {
+                    "data_component": "0115063fb999999999999a",
+                    "values": {
+                        "location": "front_right",
+                        "pressure": {
+                            "bars": 0.1
+                        }
+                    },
+                    "description": "Front right tire pressure difference is 0.1BAR"
+                },
+                {
+                    "data_component": "0215063fb999999999999a",
+                    "values": {
+                        "location": "rear_right",
+                        "pressure": {
+                            "bars": 0.1
+                        }
+                    },
+                    "description": "Rear right tire pressure difference is 0.1BAR"
+                },
+                {
+                    "data_component": "0315063fb999999999999a",
+                    "values": {
+                        "location": "rear_left",
+                        "pressure": {
+                            "bars": 0.1
+                        }
+                    },
+                    "description": "Rear left tire pressure difference is 0.1BAR"
+                },
+                {
+                    "data_component": "0415063fb999999999999a",
+                    "values": {
+                        "location": "rear_right_outer",
+                        "pressure": {
+                            "bars": 0.1
+                        }
+                    },
+                    "description": "Rear right outer tire pressure difference is 0.1BAR"
+                },
+                {
+                    "data_component": "0515063fb999999999999a",
+                    "values": {
+                        "location": "rear_left_outer",
+                        "pressure": {
+                            "bars": 0.1
+                        }
+                    },
+                    "description": "Rear left outer tire pressure difference is 0.1BAR"
+                },
+                {
+                    "data_component": "0615063fb999999999999a",
+                    "values": {
+                        "location": "spare",
+                        "pressure": {
+                            "bars": 0.1
+                        }
+                    },
+                    "description": "Spare tire pressure difference is 0.1BAR"
+                }
+            ]
+        },
+        {
+            "id": 49,
+            "name": "backup_battery_remaining_time",
+            "name_cased": "backupBatteryRemainingTime",
+            "name_pretty": "Backup battery remaining time",
+            "added": 13,
+            "type": "unit.duration",
+            "size": 10,
+            "description": "Remaining time the backup battery can work.",
+            "examples": [
+                {
+                    "data_component": "0701402e000000000000",
+                    "value": {
+                        "minutes": 15.0
+                    },
+                    "description": "The backup battery has 15min remaining."
+                }
+            ]
+        },
+        {
+            "id": 50,
+            "name": "engine_coolant_fluid_level",
+            "name_cased": "engineCoolantFluidLevel",
+            "name_pretty": "Engine coolant fluid level",
+            "added": 13,
+            "type": "types.fluid_level",
+            "description": "Engine coolant fluid level",
+            "examples": [
+                {
+                    "data_component": "04",
+                    "value": "high",
+                    "description": "Engine coolant level is high"
+                }
+            ]
+        },
+        {
+            "id": 51,
+            "name": "engine_oil_fluid_level",
+            "name_cased": "engineOilFluidLevel",
+            "name_pretty": "Engine oil fluid level",
+            "added": 13,
+            "type": "types.fluid_level",
+            "description": "Engine oil fluid level",
+            "examples": [
+                {
+                    "data_component": "03",
+                    "value": "normal",
+                    "description": "Engile oil level is at normal"
+                }
+            ]
+        },
+        {
+            "id": 52,
+            "name": "engine_oil_pressure_level",
+            "name_cased": "engineOilPressureLevel",
+            "name_pretty": "Engine oil pressure level",
+            "added": 13,
+            "type": "enum",
+            "size": 1,
+            "description": "Engine oil pressure level",
+            "enum_values": [
+                {
+                    "id": 0,
+                    "name": "low"
+                },
+                {
+                    "id": 1,
+                    "name": "normal"
+                },
+                {
+                    "id": 2,
+                    "name": "high"
+                },
+                {
+                    "id": 3,
+                    "name": "low_soft"
+                },
+                {
+                    "id": 4,
+                    "name": "low_hard"
+                },
+                {
+                    "id": 5,
+                    "name": "no_sensor"
+                },
+                {
+                    "id": 6,
+                    "name": "system_fault"
+                }
+            ],
+            "examples": [
+                {
+                    "data_component": "01",
+                    "value": "normal",
+                    "description": "Engine oil pressure is normal"
+                }
+            ]
+        },
+        {
+            "id": 53,
+            "name": "engine_time_to_next_service",
+            "name_cased": "engineTimeToNextService",
+            "name_pretty": "Engine time to next service",
+            "added": 13,
+            "type": "unit.duration",
+            "size": 10,
+            "description": "Engine time until next service of the vehicle",
+            "examples": [
+                {
+                    "data_component": "0702407f500000000000",
+                    "value": {
+                        "hours": 501.0
+                    },
+                    "description": "501.0 engine hours until next service"
+                }
+            ]
+        },
+        {
+            "id": 54,
+            "name": "low_voltage_battery_charge_level",
+            "name_cased": "lowVoltageBatteryChargeLevel",
+            "name_pretty": "Low voltage battery charge level",
+            "added": 13,
+            "type": "enum",
+            "size": 1,
+            "description": "Indicates if the charge level of the low voltage battery is too low to use other systems",
+            "enum_values": [
+                {
+                    "id": 0,
+                    "name": "ok",
+                    "description": "Charge level is ok and no other systems are deactivated"
+                },
+                {
+                    "id": 1,
+                    "name": "deactivation_level_1",
+                    "description": "High voltage users are cut off from low voltage management"
+                },
+                {
+                    "id": 2,
+                    "name": "deactivation_level_2",
+                    "description": "Infotainment cut off, from that point on no data will be sent to vehicle backend"
+                },
+                {
+                    "id": 3,
+                    "name": "deactivation_level_3",
+                    "description": "Wake up blocked, vehicle cannot be woken up externally"
+                }
+            ],
+            "examples": [
+                {
+                    "data_component": "00",
+                    "value": "ok",
+                    "description": "Low voltage battery charge level is ok"
                 }
             ]
         }

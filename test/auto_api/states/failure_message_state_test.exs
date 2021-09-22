@@ -25,7 +25,7 @@ defmodule AutoApi.FailureMessageStateTest do
   use PropCheck
 
   import AutoApi.PropCheckFixtures
-  alias AutoApi.{FailureMessageState, State}
+  alias AutoApi.{FailureMessageState, State, Property}
 
   doctest AutoApi.FailureMessageState
 
@@ -55,7 +55,6 @@ defmodule AutoApi.FailureMessageStateTest do
       %FailureMessageState{}
       |> State.put(:failed_message_id, data: 0x35)
       |> State.put(:failed_message_type, data: 0x00)
-      #      |> State.put(:failure_reason, data: :unauthorized)
       |> State.put(:failure_reason, data: :unauthorised)
       |> State.put(
         :failure_description,
@@ -68,5 +67,25 @@ defmodule AutoApi.FailureMessageStateTest do
       |> FailureMessageState.from_bin()
 
     assert new_state == state
+  end
+
+  test "to_bin accepts reason with unauthorized spelling" do
+    state =
+      %FailureMessageState{}
+      |> State.put(:failed_message_id, data: 0x35)
+      |> State.put(:failed_message_type, data: 0x00)
+      |> State.put(:failure_reason, data: :unauthorized)
+      |> State.put(
+        :failure_description,
+        data: "Access to this capability was not granted"
+      )
+
+    new_state =
+      state
+      |> FailureMessageState.to_bin()
+      |> FailureMessageState.from_bin()
+
+    expected_state = %{state | failure_reason: %Property{data: :unauthorised}}
+    assert new_state == expected_state
   end
 end

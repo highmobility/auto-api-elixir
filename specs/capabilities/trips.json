@@ -10,7 +10,7 @@
     },
     "api": {
         "intro": 12,
-        "update": 12
+        "update": 13
     },
     "state": "all",
     "properties": [
@@ -19,6 +19,7 @@
             "name": "type",
             "name_cased": "type",
             "name_pretty": "Type",
+            "added": 12,
             "type": "enum",
             "size": 1,
             "description": "Type of the trip",
@@ -30,6 +31,10 @@
                 {
                     "id": 1,
                     "name": "multi"
+                },
+                {
+                    "id": 2,
+                    "name": "eco"
                 }
             ],
             "examples": [
@@ -45,6 +50,7 @@
             "name": "driver_name",
             "name_cased": "driverName",
             "name_pretty": "Driver name",
+            "added": 12,
             "type": "string",
             "description": "Name of the driver of the trip",
             "examples": [
@@ -60,6 +66,7 @@
             "name": "description",
             "name_cased": "description",
             "name_pretty": "Description",
+            "added": 12,
             "type": "string",
             "description": "Description of the trip",
             "examples": [
@@ -75,6 +82,7 @@
             "name": "start_time",
             "name_cased": "startTime",
             "name_pretty": "Start time",
+            "added": 12,
             "type": "timestamp",
             "size": 8,
             "description": "Start time of the trip",
@@ -91,6 +99,7 @@
             "name": "end_time",
             "name_cased": "endTime",
             "name_pretty": "End time",
+            "added": 12,
             "type": "timestamp",
             "size": 8,
             "description": "End time of the trip",
@@ -107,6 +116,7 @@
             "name": "start_address",
             "name_cased": "startAddress",
             "name_pretty": "Start address",
+            "added": 12,
             "type": "string",
             "description": "Start address of the trip",
             "examples": [
@@ -122,6 +132,7 @@
             "name": "end_address",
             "name_cased": "endAddress",
             "name_pretty": "End address",
+            "added": 12,
             "type": "string",
             "description": "End address of the trip",
             "examples": [
@@ -137,6 +148,7 @@
             "name": "start_coordinates",
             "name_cased": "startCoordinates",
             "name_pretty": "Start coordinates",
+            "added": 12,
             "type": "types.coordinates",
             "description": "Start coordinates of the trip",
             "examples": [
@@ -155,6 +167,7 @@
             "name": "end_coordinates",
             "name_cased": "endCoordinates",
             "name_pretty": "End coordinates",
+            "added": 12,
             "type": "types.coordinates",
             "description": "End coordinates of the trip",
             "examples": [
@@ -173,6 +186,7 @@
             "name": "start_odometer",
             "name_cased": "startOdometer",
             "name_pretty": "Start odometer",
+            "added": 12,
             "type": "unit.length",
             "size": 10,
             "description": "Odometer reading at the start of the trip",
@@ -191,6 +205,7 @@
             "name": "end_odometer",
             "name_cased": "endOdometer",
             "name_pretty": "End odometer",
+            "added": 12,
             "type": "unit.length",
             "size": 10,
             "description": "Odometer reading at the end of the trip",
@@ -209,6 +224,7 @@
             "name": "average_fuel_consumption",
             "name_cased": "averageFuelConsumption",
             "name_pretty": "Average fuel consumption",
+            "added": 12,
             "type": "unit.fuel_efficiency",
             "size": 10,
             "description": "Average fuel consumption during the trip",
@@ -227,6 +243,7 @@
             "name": "distance",
             "name_cased": "distance",
             "name_pretty": "Distance",
+            "added": 12,
             "type": "unit.length",
             "size": 10,
             "description": "Distance of the trip",
@@ -245,6 +262,8 @@
             "name": "start_address_components",
             "name_cased": "startAddressComponents",
             "name_pretty": "Start address components",
+            "name_singluar": "start_address_component",
+            "added": 12,
             "type": "types.address_component",
             "multiple": true,
             "description": "Start address components",
@@ -320,6 +339,8 @@
             "name": "end_address_components",
             "name_cased": "endAddressComponents",
             "name_pretty": "End address components",
+            "name_singluar": "end_address_component",
+            "added": 12,
             "type": "types.address_component",
             "multiple": true,
             "description": "End address components",
@@ -387,6 +408,161 @@
                         "value": "Germany"
                     },
                     "description": "Other component value is 'Germany'"
+                }
+            ]
+        },
+        {
+            "id": 16,
+            "name": "event",
+            "name_cased": "event",
+            "name_pretty": "Event",
+            "added": 13,
+            "type": "enum",
+            "size": 1,
+            "enum_values": [
+                {
+                    "id": 0,
+                    "name": "harsh_braking"
+                },
+                {
+                    "id": 1,
+                    "name": "harsh_acceleration"
+                },
+                {
+                    "id": 2,
+                    "name": "sharp_turn"
+                },
+                {
+                    "id": 3,
+                    "name": "over_rpm",
+                    "name_pretty": "Over RPM"
+                },
+                {
+                    "id": 4,
+                    "name": "overspeed"
+                },
+                {
+                    "id": 5,
+                    "name": "idling_engine_on"
+                }
+            ],
+            "examples": [
+                {
+                    "data_component": "01",
+                    "value": "harsh_acceleration",
+                    "description": "Driving event of harsh acceleration encountered"
+                }
+            ]
+        },
+        {
+            "id": 17,
+            "name": "eco_level",
+            "name_cased": "ecoLevel",
+            "name_pretty": "Eco level",
+            "added": 13,
+            "type": "enum",
+            "size": 1,
+            "enum_values": [
+                {
+                    "id": 0,
+                    "name": "high"
+                },
+                {
+                    "id": 1,
+                    "name": "medium"
+                }
+            ],
+            "examples": [
+                {
+                    "data_component": "00",
+                    "value": "high",
+                    "description": "Eco driving level is high"
+                }
+            ]
+        },
+        {
+            "id": 18,
+            "name": "thresholds",
+            "name_cased": "thresholds",
+            "name_pretty": "Thresholds",
+            "name_singluar": "Threshold",
+            "added": 13,
+            "type": "types.eco_driving_threshold",
+            "multiple": true,
+            "description": "Eco driving thresholds",
+            "examples": [
+                {
+                    "data_component": "000000000000000000",
+                    "values": {
+                        "type": "zero",
+                        "value": 0.0
+                    },
+                    "description": "Eco driving zero-threshold is set at 0.0"
+                },
+                {
+                    "data_component": "010000000000000000",
+                    "values": {
+                        "type": "one",
+                        "value": 0.0
+                    },
+                    "description": "Eco driving one-threshold is set at 0.0"
+                }
+            ]
+        },
+        {
+            "id": 19,
+            "name": "total_fuel_consumption",
+            "name_cased": "totalFuelConsumption",
+            "name_pretty": "Total fuel consumption",
+            "added": 13,
+            "type": "unit.volume",
+            "size": 10,
+            "description": "Total fuel consumption during the trip",
+            "examples": [
+                {
+                    "data_component": "19024037666666666666",
+                    "value": {
+                        "liters": 23.4
+                    },
+                    "description": "Total fuel consumption during the trip was 23.4 l"
+                }
+            ]
+        },
+        {
+            "id": 20,
+            "name": "total_idle_fuel_consumption",
+            "name_cased": "totalIdleFuelConsumption",
+            "name_pretty": "Total idle fuel consumption",
+            "added": 13,
+            "type": "unit.volume",
+            "size": 10,
+            "description": "Fuel consumed while idle since the last ignition on.",
+            "examples": [
+                {
+                    "data_component": "19024004000000000000",
+                    "value": {
+                        "liters": 2.5
+                    },
+                    "description": "Since the last ignition the vehicle has consumed 2.5 l while ideling."
+                }
+            ]
+        },
+        {
+            "id": 21,
+            "name": "maximum_speed",
+            "name_cased": "maximumSpeed",
+            "name_pretty": "Maximum speed",
+            "added": 13,
+            "type": "unit.speed",
+            "size": 10,
+            "description": "Maximum speed recorded since the last igntion on.",
+            "examples": [
+                {
+                    "data_component": "16014050d33333333333",
+                    "value": {
+                        "kilometers_per_hour": 67.3
+                    },
+                    "description": "Maximum speed since last ignition on is 67.3km/h"
                 }
             ]
         }

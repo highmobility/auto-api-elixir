@@ -31,7 +31,8 @@ defmodule AutoApi.TrunkState do
 
   @type t :: %__MODULE__{
           lock: State.property(CommonData.lock()),
-          position: State.property(CommonData.position())
+          position: State.property(CommonData.position()),
+          lock_safety: State.property(CommonData.lock_safety())
         }
 
   @doc """

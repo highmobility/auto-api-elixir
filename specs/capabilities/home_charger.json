@@ -377,6 +377,7 @@
             "name": "charging_power",
             "name_cased": "chargingPower",
             "name_pretty": "Charging power",
+            "added": 12,
             "type": "unit.power",
             "size": 10,
             "description": "Charging power output from the charger",

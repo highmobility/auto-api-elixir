@@ -76,7 +76,7 @@ defmodule AutoApi.SetCommand do
 
       iex> state = %AutoApi.TrunkState{lock: %AutoApi.Property{data: :locked}}
       iex> #{__MODULE__}.new(state)
-      %#{__MODULE__}{capability: AutoApi.TrunkCapability, state: %AutoApi.TrunkState{lock: %AutoApi.Property{data: :locked}}, version: 12}
+      %#{__MODULE__}{capability: AutoApi.TrunkCapability, state: %AutoApi.TrunkState{lock: %AutoApi.Property{data: :locked}}, version: 13}
   """
 
   @spec new(AutoApi.State.t()) :: t()
@@ -92,7 +92,7 @@ defmodule AutoApi.SetCommand do
       iex> capability = AutoApi.TrunkCapability
       iex> state = %AutoApi.TrunkState{lock: %AutoApi.Property{data: :locked}}
       iex> #{__MODULE__}.new(capability, state)
-      %#{__MODULE__}{capability: AutoApi.TrunkCapability, state: %AutoApi.TrunkState{lock: %AutoApi.Property{data: :locked}}, version: 12}
+      %#{__MODULE__}{capability: AutoApi.TrunkCapability, state: %AutoApi.TrunkState{lock: %AutoApi.Property{data: :locked}}, version: 13}
   """
   @spec new(AutoApi.Capability.t(), AutoApi.State.t()) :: t()
   def new(capability, state) do
@@ -137,7 +137,7 @@ defmodule AutoApi.SetCommand do
       iex> state = AutoApi.State.put(%AutoApi.DoorsState{}, :locks_state, locks_state)
       iex> command = %#{__MODULE__}{capability: AutoApi.DoorsCapability, state: state}
       iex> #{__MODULE__}.to_bin(command)
-      <<12, 0, 32, 1, 6, 0, 4, 1, 0, 1, 0>>
+      <<13, 0, 32, 1, 6, 0, 4, 1, 0, 1, 0>>
 
       iex> # Request to honk the horn for 2.5 seconds
       iex> capability = AutoApi.HonkHornFlashLightsCapability
@@ -145,7 +145,7 @@ defmodule AutoApi.SetCommand do
       iex> state = AutoApi.State.put(capability.state().base(), :honk_time, data: honk_time)
       iex> command = %#{__MODULE__}{capability: capability, state: state}
       iex> #{__MODULE__}.to_bin(command)
-      <<12, 0, 38, 1, 5, 0, 13, 1, 0, 10, 7, 0, 64, 4, 0, 0, 0, 0, 0, 0>>
+      <<13, 0, 38, 1, 5, 0, 13, 1, 0, 10, 7, 0, 64, 4, 0, 0, 0, 0, 0, 0>>
   """
   @impl true
   @spec to_bin(t()) :: binary()
@@ -161,8 +161,8 @@ defmodule AutoApi.SetCommand do
   ## Examples
 
       iex> # Parses a "lock vehicle doors" command
-      iex> #{__MODULE__}.from_bin(<<12, 0, 32, 1, 6, 0, 4, 1, 0, 1, 1>>)
-      %#{__MODULE__}{capability: AutoApi.DoorsCapability, state: %AutoApi.DoorsState{locks_state: %AutoApi.Property{data: :locked}}, version: 12}
+      iex> #{__MODULE__}.from_bin(<<13, 0, 32, 1, 6, 0, 4, 1, 0, 1, 1>>)
+      %#{__MODULE__}{capability: AutoApi.DoorsCapability, state: %AutoApi.DoorsState{locks_state: %AutoApi.Property{data: :locked}}, version: 13}
   """
   @impl true
   @spec from_bin(binary) :: t()

@@ -307,11 +307,13 @@
             "enum_values": [
                 {
                     "id": 0,
-                    "name": "type_1"
+                    "name": "type_1",
+                    "name_pretty": "Connector type SAE J1772"
                 },
                 {
                     "id": 1,
-                    "name": "type_2"
+                    "name": "type_2",
+                    "name_pretty": "IEC 62196 Type 2 connector"
                 },
                 {
                     "id": 2,
@@ -446,9 +448,9 @@
             "name": "timers",
             "name_cased": "timers",
             "name_pretty": "Timers",
+            "name_singular": "timer",
             "type": "types.timer",
             "multiple": true,
-            "name_singular": "timer",
             "examples": [
                 {
                     "data_component": "00000001598938e788",
@@ -578,6 +580,7 @@
             "name": "charging_rate",
             "name_cased": "chargingRate",
             "name_pretty": "Charging rate",
+            "added": 12,
             "type": "unit.power",
             "size": 10,
             "description": "Charge rate when charging",
@@ -596,6 +599,7 @@
             "name": "battery_current",
             "name_cased": "batteryCurrent",
             "name_pretty": "Battery current",
+            "added": 12,
             "type": "unit.electric_current",
             "size": 10,
             "description": "Battery current",
@@ -614,6 +618,7 @@
             "name": "charger_voltage",
             "name_cased": "chargerVoltage",
             "name_pretty": "Charger voltage",
+            "added": 12,
             "type": "unit.electric_potential_difference",
             "size": 10,
             "description": "Charger voltage",
@@ -632,6 +637,7 @@
             "name": "current_type",
             "name_cased": "currentType",
             "name_pretty": "Current type",
+            "added": 12,
             "type": "enum",
             "size": 1,
             "description": "Type of current in use",
@@ -660,6 +666,7 @@
             "name": "max_range",
             "name_cased": "maxRange",
             "name_pretty": "Max range",
+            "added": 12,
             "type": "unit.length",
             "size": 10,
             "description": "Maximum electric range with 100% of battery",
@@ -678,6 +685,7 @@
             "name": "starter_battery_state",
             "name_cased": "starterBatteryState",
             "name_pretty": "Starter battery state",
+            "added": 12,
             "type": "enum",
             "size": 1,
             "description": "State of the starter battery",
@@ -711,6 +719,7 @@
             "name": "smart_charging_status",
             "name_cased": "smartChargingStatus",
             "name_pretty": "Smart charging status",
+            "added": 12,
             "type": "enum",
             "size": 1,
             "description": "Status of optimized/intelligent charging",
@@ -743,6 +752,7 @@
             "name": "battery_level_at_departure",
             "name_cased": "batteryLevelAtDeparture",
             "name_pretty": "Battery level at departure",
+            "added": 12,
             "type": "types.percentage",
             "description": "Battery charge level expected at time of departure",
             "examples": [
@@ -758,6 +768,7 @@
             "name": "preconditioning_departure_status",
             "name_cased": "preconditioningDepartureStatus",
             "name_pretty": "Preconditioning departure status",
+            "added": 12,
             "type": "types.active_state",
             "description": "Status of preconditioning at departure time",
             "examples": [
@@ -773,6 +784,7 @@
             "name": "preconditioning_immediate_status",
             "name_cased": "preconditioningImmediateStatus",
             "name_pretty": "Preconditioning immediate status",
+            "added": 12,
             "type": "types.active_state",
             "description": "Status of immediate preconditioning",
             "examples": [
@@ -788,6 +800,7 @@
             "name": "preconditioning_departure_enabled",
             "name_cased": "preconditioningDepartureEnabled",
             "name_pretty": "Preconditioning departure enabled",
+            "added": 12,
             "type": "types.enabled_state",
             "description": "Preconditioning activation status at departure",
             "examples": [
@@ -803,6 +816,7 @@
             "name": "preconditioning_error",
             "name_cased": "preconditioningError",
             "name_pretty": "Preconditioning error",
+            "added": 12,
             "type": "enum",
             "size": 1,
             "description": "Preconditioning error if one is encountered",
@@ -835,6 +849,25 @@
                     "data_component": "01",
                     "value": "not_possible_low",
                     "description": "Preconditioning not possible because battery or fuel is low"
+                }
+            ]
+        },
+        {
+            "id": 36,
+            "name": "battery_capacity",
+            "name_cased": "batteryCapacity",
+            "name_pretty": "Battery capacity",
+            "added": 13,
+            "type": "unit.energy",
+            "size": 10,
+            "description": "Indicates the battery capacity",
+            "examples": [
+                {
+                    "data_component": "0c044051800000000000",
+                    "value": {
+                        "kilowatt_hours": 70.0
+                    },
+                    "description": "Battery capacity is 70.0Kwh"
                 }
             ]
         }

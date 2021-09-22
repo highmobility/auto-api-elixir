@@ -1,0 +1,19 @@
+{
+    "api": {
+        "intro": 13,
+        "update": 13
+    },
+    "authorization": false,
+    "category": "api_structure",
+    "getters": {
+        "name": "get_universal_properties"
+    },
+    "identifier": {
+        "lsb": 21,
+        "msb": 0
+    },
+    "name": "universal",
+    "name_cased": "universal",
+    "name_pretty": "Universal",
+    "properties": []
+}

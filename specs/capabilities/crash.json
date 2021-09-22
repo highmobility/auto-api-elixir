@@ -1,0 +1,205 @@
+{
+    "name": "crash",
+    "name_cased": "crash",
+    "name_pretty": "Crash",
+    "category": "diagnostics",
+    "authorization": true,
+    "identifier": {
+        "msb": 0,
+        "lsb": 107
+    },
+    "api": {
+        "intro": 13,
+        "update": 13
+    },
+    "getters": {},
+    "state": "all",
+    "properties": [
+        {
+            "id": 1,
+            "name": "incidents",
+            "name_cased": "incidents",
+            "name_pretty": "Incidents",
+            "name_singular": "incident",
+            "added": 13,
+            "type": "types.crash_incident",
+            "multiple": true,
+            "examples": [
+                {
+                    "data_component": "000101",
+                    "values": {
+                        "location": "front",
+                        "severity": "high",
+                        "repairs": "needed"
+                    },
+                    "description": "High severity front crash incident needs repairs"
+                },
+                {
+                    "data_component": "010201",
+                    "values": {
+                        "location": "lateral",
+                        "severity": "medium",
+                        "repairs": "needed"
+                    },
+                    "description": "Medium severity lateral crash incident needs repairs"
+                },
+                {
+                    "data_component": "020302",
+                    "values": {
+                        "location": "rear",
+                        "severity": "low",
+                        "repairs": "not_needed"
+                    },
+                    "description": "Low severity rear crash incident does not need repairs"
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "name": "type",
+            "name_cased": "type",
+            "name_pretty": "Type",
+            "added": 13,
+            "type": "enum",
+            "size": 1,
+            "enum_values": [
+                {
+                    "id": 0,
+                    "name": "pedestrian"
+                },
+                {
+                    "id": 1,
+                    "name": "non_pedestrian"
+                }
+            ],
+            "examples": [
+                {
+                    "data_component": "01",
+                    "value": "non_pedestrian",
+                    "description": "Crash type is non-pedestrian (i.e. a another vehicle)"
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "name": "tipped_state",
+            "name_cased": "tippedState",
+            "name_pretty": "Tipped state",
+            "added": 13,
+            "type": "enum",
+            "size": 1,
+            "enum_values": [
+                {
+                    "id": 0,
+                    "name": "tipped_over"
+                },
+                {
+                    "id": 1,
+                    "name": "not_tipped"
+                }
+            ],
+            "examples": [
+                {
+                    "data_component": "01",
+                    "value": "not_tipped",
+                    "description": "Crash did not tip over the vehicle"
+                }
+            ]
+        },
+        {
+            "id": 4,
+            "name": "automatic_ecall",
+            "name_cased": "automaticECall",
+            "name_pretty": "Automatic eCall",
+            "added": 13,
+            "type": "types.enabled_state",
+            "description": "Automatic emergency call enabled state",
+            "examples": [
+                {
+                    "data_component": "01",
+                    "value": "enabled",
+                    "description": "Automatic eCall is enabled"
+                }
+            ]
+        },
+        {
+            "id": 5,
+            "name": "severity",
+            "name_cased": "severity",
+            "name_pretty": "Severity",
+            "added": 13,
+            "type": "uinteger",
+            "size": 1,
+            "description": "Severity of the crash (from 0 to 7 - very high severity)",
+            "examples": [
+                {
+                    "data_component": "02",
+                    "value": 2,
+                    "description": "Crash severity is 2"
+                }
+            ]
+        },
+        {
+            "id": 6,
+            "name": "impact_zone",
+            "name_cased": "impactZone",
+            "name_pretty": "Impact zone",
+            "added": 13,
+            "type": "enum",
+            "size": 1,
+            "multiple": true,
+            "description": "Impact zone of the crash",
+            "enum_values": [
+                {
+                    "id": 0,
+                    "name": "predestrian_protection"
+                },
+                {
+                    "id": 1,
+                    "name": "rollover"
+                },
+                {
+                    "id": 2,
+                    "name": "rear_passenger_side"
+                },
+                {
+                    "id": 3,
+                    "name": "rear_driver_side"
+                },
+                {
+                    "id": 4,
+                    "name": "side_passeger_side"
+                },
+                {
+                    "id": 5,
+                    "name": "side_driver_side"
+                },
+                {
+                    "id": 6,
+                    "name": "front_passenger_side"
+                },
+                {
+                    "id": 7,
+                    "name": "front_driver_side"
+                }
+            ],
+            "examples": [
+                {
+                    "data_component": "03",
+                    "value": "rear_driver_side",
+                    "description": "Impact zone is rear driver side"
+                },
+                {
+                    "data_component": "05",
+                    "value": "side_driver_side",
+                    "description": "Impact zone is side driver side"
+                },
+                {
+                    "data_component": "07",
+                    "value": "front_driver_side",
+                    "description": "Impact zone is front driver side"
+                }
+            ]
+        }
+    ]
+}

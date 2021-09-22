@@ -32,7 +32,7 @@ defmodule AutoApi.HoodCapability do
       iex> H.description
       "Hood"
       iex> length(H.properties)
-      6
+      8
       iex> List.first(H.properties)
       {0x01, :position}
   """

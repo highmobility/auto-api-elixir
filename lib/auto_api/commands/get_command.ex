@@ -96,7 +96,7 @@ defmodule AutoApi.GetCommand do
 
       iex> command = #{__MODULE__}.new(AutoApi.HoodCapability, [])
       iex> #{__MODULE__}.properties(command)
-      [:position,  :nonce, :vehicle_signature, :timestamp, :vin, :brand]
+      [:position, :lock, :lock_safety, :nonce, :vehicle_signature, :timestamp, :vin, :brand]
   """
   @impl true
   @spec properties(t()) :: list(AutoApi.Capability.property())
@@ -117,12 +117,12 @@ defmodule AutoApi.GetCommand do
   iex> # Request the door locks state
   iex> command = %#{__MODULE__}{capability: AutoApi.DoorsCapability, properties: [:locks_state]}
   iex> #{__MODULE__}.to_bin(command)
-  <<12, 0, 32, 0, 6>>
+  <<13, 0, 32, 0, 6>>
 
   iex> # Request all properties for race state
   iex> command = %#{__MODULE__}{capability: AutoApi.RaceCapability, properties: []}
   iex> #{__MODULE__}.to_bin(command)
-  <<12, 0, 87, 0>>
+  <<13, 0, 87, 0>>
   """
   @impl true
   @spec to_bin(t()) :: binary()
@@ -137,8 +137,8 @@ defmodule AutoApi.GetCommand do
 
   ## Examples
 
-      iex> #{__MODULE__}.from_bin(<<0x0C, 0x00, 0x33, 0x00, 0x01, 0x04>>)
-      %#{__MODULE__}{capability: AutoApi.DiagnosticsCapability, properties: [:mileage, :engine_rpm], version: 12}
+      iex> #{__MODULE__}.from_bin(<<0x0D, 0x00, 0x33, 0x00, 0x01, 0x04>>)
+      %#{__MODULE__}{capability: AutoApi.DiagnosticsCapability, properties: [:mileage, :engine_rpm], version: 13}
   """
   @impl true
   @spec from_bin(binary) :: t()

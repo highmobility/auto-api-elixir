@@ -25,11 +25,14 @@ defmodule AutoApi.Capability.Meta do
 
   # We could parse the files in `/specs` instead
   @capabilities [
+    AutoApi.AdasCapability,
     AutoApi.BrowserCapability,
     AutoApi.CapabilitiesCapability,
     AutoApi.ChargingCapability,
+    AutoApi.ChargingSessionCapability,
     AutoApi.ChassisSettingsCapability,
     AutoApi.ClimateCapability,
+    AutoApi.CrashCapability,
     AutoApi.CruiseControlCapability,
     AutoApi.DashboardLightsCapability,
     AutoApi.DiagnosticsCapability,
@@ -69,6 +72,7 @@ defmodule AutoApi.Capability.Meta do
     AutoApi.TripsCapability,
     AutoApi.TrunkCapability,
     AutoApi.UsageCapability,
+    AutoApi.UniversalCapability,
     AutoApi.ValetModeCapability,
     AutoApi.VehicleLocationCapability,
     AutoApi.VehicleStatusCapability,

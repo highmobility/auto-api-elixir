@@ -30,7 +30,19 @@ defmodule AutoApi.VehicleInformationState do
   use AutoApi.State, spec_file: "vehicle_information.json"
 
   @type powertrain ::
-          :unknown | :all_electric | :combustion_engine | :phev | :hydrogen | :hydrogen_hybrid
+          :unknown
+          | :all_electric
+          | :combustion_engine
+          | :phev
+          | :hydrogen
+          | :hydrogen_hybrid
+          | :petrol
+          | :electric
+          | :gas
+          | :diesel
+          | :gasoline
+          | :cng
+          | :lpg
 
   @type gearbox :: :manual | :automatic | :semi_automatic
 
@@ -57,7 +69,8 @@ defmodule AutoApi.VehicleInformationState do
           power: State.property(UnitType.power()),
           language: State.property(String.t()),
           timeformat: State.property(:twelve_h | :twenty_four_h),
-          drive: State.property(drive())
+          drive: State.property(drive()),
+          powertrain_secondary: State.property(powertrain())
         }
 
   @doc """

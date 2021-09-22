@@ -61,6 +61,7 @@
             "name": "interior_protection_status",
             "name_cased": "interiorProtectionStatus",
             "name_pretty": "Interior protection status",
+            "added": 12,
             "type": "types.active_selected_state",
             "description": "Interior protection sensor status",
             "examples": [
@@ -76,6 +77,7 @@
             "name": "tow_protection_status",
             "name_cased": "towProtectionStatus",
             "name_pretty": "Tow protection status",
+            "added": 12,
             "type": "types.active_selected_state",
             "description": "Tow protection sensor status",
             "examples": [
@@ -91,6 +93,7 @@
             "name": "last_warning_reason",
             "name_cased": "lastWarningReason",
             "name_pretty": "Last warning reason",
+            "added": 12,
             "type": "enum",
             "size": 1,
             "enum_values": [
@@ -192,13 +195,14 @@
             "name": "last_event",
             "name_cased": "lastEvent",
             "name_pretty": "Last event",
+            "added": 12,
             "type": "timestamp",
             "description": "Last event happening date",
             "examples": [
                 {
                     "data_component": "00000172bcd25b10",
                     "value": "2020-06-16T11:10:02.000Z",
-                    "description": "Last trip happened at 16. June 2020 at 11:10:02 GMT"
+                    "description": "Last event happened at 16. June 2020 at 11:10:02 GMT"
                 }
             ]
         },
@@ -207,6 +211,7 @@
             "name": "last_event_level",
             "name_cased": "lastEventLevel",
             "name_pretty": "Last event level",
+            "added": 12,
             "type": "enum",
             "size": 1,
             "description": "Level of impact for the last event",
@@ -237,6 +242,7 @@
             "name": "event_type",
             "name_cased": "eventType",
             "name_pretty": "Event type",
+            "added": 12,
             "type": "enum",
             "size": 1,
             "description": "Position of the last even relative to the vehicle",

@@ -233,6 +233,7 @@
             "name": "switch_position",
             "name_cased": "switchPosition",
             "name_pretty": "Switch position",
+            "added": 12,
             "type": "enum",
             "size": 1,
             "description": "Position of the rotary light switch",
@@ -263,6 +264,41 @@
                     "data_component": "02",
                     "value": "parking_light_right",
                     "description": "Rotary light switch position parking light right"
+                }
+            ]
+        },
+        {
+            "id": 11,
+            "name": "parking_light_status",
+            "name_cased": "parkingLightStatus",
+            "name_pretty": "Parking light status",
+            "added": 13,
+            "type": "enum",
+            "size": 1,
+            "description": "Indicates the status of the parking light.",
+            "enum_values": [
+                {
+                    "id": 0,
+                    "name": "off"
+                },
+                {
+                    "id": 1,
+                    "name": "left"
+                },
+                {
+                    "id": 2,
+                    "name": "right"
+                },
+                {
+                    "id": 3,
+                    "name": "both"
+                }
+            ],
+            "examples": [
+                {
+                    "data_component": "03",
+                    "value": "both",
+                    "description": "Both parking lights are on."
                 }
             ]
         }

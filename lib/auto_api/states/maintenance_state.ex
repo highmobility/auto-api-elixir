@@ -60,7 +60,9 @@ defmodule AutoApi.MaintenanceState do
           time_to_next_service: State.property(UnitType.duration()),
           distance_to_next_service: State.property(UnitType.length()),
           time_to_exhaust_inspection: State.property(UnitType.duration()),
-          last_ecall: State.property(DateTime.t())
+          last_ecall: State.property(DateTime.t()),
+          distance_to_next_oil_service: State.property(UnitType.length()),
+          time_to_next_oil_service: State.property(UnitType.duration())
         }
 
   @doc """

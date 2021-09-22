@@ -23,4 +23,13 @@
 defmodule AutoApi.CapabilitiesStateTest do
   use ExUnit.Case, async: true
   doctest AutoApi.CapabilitiesState
+
+  alias AutoApi.CapabilitiesState, as: SUT
+
+  test "events work" do
+    webhook = %{available: :available, event: :fleet_clearance_changed}
+    state = SUT.base() |> SUT.put(:webhooks, data: webhook)
+
+    assert state == state |> SUT.to_bin() |> SUT.from_bin()
+  end
 end
