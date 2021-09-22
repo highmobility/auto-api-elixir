@@ -1,7 +1,7 @@
 # AutoAPI
 # The MIT License
 #
-# Copyright (c) 2018- High-Mobility GmbH (https://high-mobility.com)
+# Copyright (c) 2021- High-Mobility GmbH (https://high-mobility.com)
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -20,13 +20,8 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
-defmodule AutoApi.UniversalProperties do
-  @moduledoc """
-  Utility functions for Universal Properties.
-
-  Universal properties are properties that can be included in any State.
-  """
-  require AutoApi.UniversalProperties.Meta
-
-  @before_compile AutoApi.UniversalProperties.Meta
+defmodule AutoApi.UniversalStateTest do
+  use ExUnit.Case, async: true
+  alias AutoApi.UniversalState
+  doctest UniversalState
 end
