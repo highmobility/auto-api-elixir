@@ -21,6 +21,7 @@ defmodule AutoApi.PropertyTest do
   use PropCheck
 
   import AutoApi.PropCheckFixtures
+  import ExUnit.CaptureLog
 
   alias AutoApi.Property
 
@@ -755,6 +756,38 @@ defmodule AutoApi.PropertyTest do
         assert prop_comp.failure == component.failure
         assert prop_comp.availability == component.availability
       end
+    end
+  end
+
+  describe "to_binary/2" do
+    test "emmits log when an invalid unit type to binary" do
+      spec = %{
+        "id" => 24,
+        "name" => "charging_rate",
+        "type" => "unit.power",
+        size: 10
+      }
+
+      prop_comp = %Property{data: %{value: 10.009, unit: :celsius}, timestamp: DateTime.utc_now()}
+
+      fun = fn ->
+        assert failure_prop = Property.to_bin(prop_comp, spec)
+
+        assert Property.to_struct(failure_prop, spec) ==
+                 %AutoApi.Property{
+                   availability: nil,
+                   data: nil,
+                   failure: %{
+                     description: "not able to serialize the value",
+                     reason: :format_error
+                   },
+                   timestamp: nil
+                 }
+      end
+
+      logs = capture_log(fun)
+      assert logs =~ "type `power` doesn't support unit `celsius`"
+      assert logs =~ "[error] Not able to serialize value for spec"
     end
   end
 
