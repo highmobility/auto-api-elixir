@@ -269,6 +269,10 @@
                     "id": 2,
                     "name": "inductive",
                     "disabled_in_setter": true
+                },
+                {
+                    "id": 3,
+                    "name": "conductive"
                 }
             ],
             "examples": [
@@ -493,6 +497,10 @@
                 {
                     "id": 1,
                     "name": "plugged_in"
+                },
+                {
+                    "id": 2,
+                    "name": "plugged_in_both_sides"
                 }
             ],
             "examples": [
@@ -693,17 +701,27 @@
                 {
                     "id": 0,
                     "name": "red",
-                    "description": "Battery charge is greater than 0%"
+                    "description": "Vehicle engine will not start anymore, battery must be charged using an external system (battery charge is greater than 0%)."
                 },
                 {
                     "id": 1,
                     "name": "yellow",
-                    "description": "Battery charge is greater than 40%"
+                    "description": "Battery partly discharged, battery should be charged by driving the vehicle to avoid loosing functionality (battery charge is greater than 40%)."
                 },
                 {
                     "id": 2,
                     "name": "green",
-                    "description": "Battery charge is greater than 70%"
+                    "description": "Ok, (battery charge is greater than 70%)."
+                },
+                {
+                    "id": 3,
+                    "name": "orange",
+                    "description": "Battery is now in saving mode, remote commands are not possible anymore, battery should be charged by driving the vehicle."
+                },
+                {
+                    "id": 4,
+                    "name": "green_yellow",
+                    "description": "Battery partly discharged but ok."
                 }
             ],
             "examples": [
@@ -867,7 +885,522 @@
                     "value": {
                         "kilowatt_hours": 70.0
                     },
-                    "description": "Battery capacity is 70.0Kwh"
+                    "description": "Battery capacity is 70.0kWh"
+                }
+            ]
+        },
+        {
+            "id": 37,
+            "name": "auxiliary_power",
+            "name_cased": "auxiliaryPower",
+            "name_pretty": "Auxiliary power",
+            "added": 13,
+            "type": "unit.power",
+            "size": 10,
+            "description": "Auxiliary power used for predictions.",
+            "examples": [
+                {
+                    "data_component": "1402405e000000000000",
+                    "value": {
+                        "kilowatts": 120.0
+                    },
+                    "description": "Auxiliary power is 120.0kW."
+                }
+            ]
+        },
+        {
+            "id": 38,
+            "name": "charging_complete_lock",
+            "name_cased": "chargingCompleteLock",
+            "name_pretty": "Charging complete lock",
+            "added": 13,
+            "type": "types.active_state",
+            "description": "Locking status of the charging plug after charging complete.",
+            "examples": [
+                {
+                    "data_component": "00",
+                    "value": "inactive",
+                    "description": "Charging complete lock status is 'inactive'."
+                }
+            ]
+        },
+        {
+            "id": 39,
+            "name": "battery_max_available",
+            "name_cased": "batteryMaxAvailable",
+            "name_pretty": "Battery max available",
+            "added": 13,
+            "type": "unit.energy",
+            "size": 10,
+            "description": "Maximum energy content of the high-voltage battery.",
+            "examples": [
+                {
+                    "data_component": "0c044058c00000000000",
+                    "value": {
+                        "kilowatt_hours": 99.0
+                    },
+                    "description": "Maximum available battery capacity is 99.0kWh"
+                }
+            ]
+        },
+        {
+            "id": 40,
+            "name": "charging_end_reason",
+            "name_cased": "chargingEndReason",
+            "name_pretty": "Charging end reason",
+            "added": 13,
+            "type": "enum",
+            "size": 1,
+            "description": "Reason for ending a charging process.",
+            "enum_values": [
+                {
+                    "id": 0,
+                    "name": "unknown"
+                },
+                {
+                    "id": 1,
+                    "name": "goal_reached"
+                },
+                {
+                    "id": 2,
+                    "name": "requested_by_driver"
+                },
+                {
+                    "id": 3,
+                    "name": "connector_removed"
+                },
+                {
+                    "id": 4,
+                    "name": "powergrid_failed"
+                },
+                {
+                    "id": 5,
+                    "name": "hv_system_failure",
+                    "name_pretty": "High-Voltage system failure"
+                },
+                {
+                    "id": 6,
+                    "name": "charging_station_failure"
+                },
+                {
+                    "id": 7,
+                    "name": "parking_lock_failed"
+                },
+                {
+                    "id": 8,
+                    "name": "no_parking_lock"
+                },
+                {
+                    "id": 9,
+                    "name": "signal_invalid"
+                }
+            ],
+            "examples": [
+                {
+                    "data_component": "01",
+                    "value": "goal_reached",
+                    "description": "Charging ended because 'goal_reached'."
+                }
+            ]
+        },
+        {
+            "id": 41,
+            "name": "charging_phases",
+            "name_cased": "chargingPhases",
+            "name_pretty": "Charging phases",
+            "added": 13,
+            "type": "enum",
+            "size": 1,
+            "description": "Charging process count of the high-voltage battery (phases).",
+            "enum_values": [
+                {
+                    "id": 0,
+                    "name": "no_charging"
+                },
+                {
+                    "id": 1,
+                    "name": "one"
+                },
+                {
+                    "id": 2,
+                    "name": "two"
+                },
+                {
+                    "id": 3,
+                    "name": "three"
+                }
+            ],
+            "examples": [
+                {
+                    "data_component": "01",
+                    "value": "one",
+                    "description": "Charging has 'one' phase."
+                }
+            ]
+        },
+        {
+            "id": 42,
+            "name": "battery_energy",
+            "name_cased": "batteryEnergy",
+            "name_pretty": "Battery energy",
+            "added": 13,
+            "type": "unit.energy",
+            "size": 10,
+            "description": "Energy content of the high-voltage battery.",
+            "examples": [
+                {
+                    "data_component": "0c04405de00000000000",
+                    "value": {
+                        "kilowatt_hours": 119.5
+                    },
+                    "description": "Current energy content of the high-voltage battery is 119.5kWh."
+                }
+            ]
+        },
+        {
+            "id": 43,
+            "name": "battery_energy_chargable",
+            "name_cased": "batteryEnergyChargable",
+            "name_pretty": "Battery energy chargable",
+            "added": 13,
+            "type": "unit.energy",
+            "size": 10,
+            "description": "Energy required until high-voltage battery is fully charged.",
+            "examples": [
+                {
+                    "data_component": "0c04403ec00000000000",
+                    "value": {
+                        "kilowatt_hours": 30.75
+                    },
+                    "description": "Energy required to fully charge the battery is 30.75kWh."
+                }
+            ]
+        },
+        {
+            "id": 44,
+            "name": "charging_single_immediate",
+            "name_cased": "chargingSingleImmediate",
+            "name_pretty": "Charging single immediate",
+            "added": 13,
+            "type": "types.active_state",
+            "description": "Single instant charging function status.",
+            "examples": [
+                {
+                    "data_component": "01",
+                    "value": "active",
+                    "description": "Single instant charging function is 'active'."
+                }
+            ]
+        },
+        {
+            "id": 45,
+            "name": "charging_time_display",
+            "name_cased": "chargingTimeDisplay",
+            "name_pretty": "Charging time display",
+            "added": 13,
+            "type": "enum",
+            "size": 1,
+            "description": "Charging time displayed in the vehicle.",
+            "enum_values": [
+                {
+                    "id": 0,
+                    "name": "no_display"
+                },
+                {
+                    "id": 1,
+                    "name": "display_duration"
+                },
+                {
+                    "id": 2,
+                    "name": "no_display_duration"
+                }
+            ],
+            "examples": [
+                {
+                    "data_component": "01",
+                    "value": "display_charging_duration",
+                    "description": "Charging duration is displayed in the vehicle."
+                }
+            ]
+        },
+        {
+            "id": 46,
+            "name": "departure_time_display",
+            "name_cased": "departureTimeDisplay",
+            "name_pretty": "Departure time display",
+            "added": 13,
+            "type": "enum",
+            "size": 1,
+            "description": "Departure time displayed in the vehicle.",
+            "enum_values": [
+                {
+                    "id": 0,
+                    "name": "no_display"
+                },
+                {
+                    "id": 1,
+                    "name": "reachable"
+                },
+                {
+                    "id": 2,
+                    "name": "not_reachable"
+                }
+            ],
+            "examples": [
+                {
+                    "data_component": "01",
+                    "value": "reachable",
+                    "description": "Departure time display is showing 'reachable'."
+                }
+            ]
+        },
+        {
+            "id": 47,
+            "name": "restriction",
+            "name_cased": "restriction",
+            "name_pretty": "Restriction",
+            "added": 13,
+            "type": "types.charging_restriction",
+            "description": "Charging limit and state",
+            "examples": [
+                {
+                    "data_component": "0100",
+                    "value": {
+                        "active": "active",
+                        "limit": "max"
+                    },
+                    "description": "Charging restriction is 'active' and set to 'max'."
+                }
+            ]
+        },
+        {
+            "id": 48,
+            "name": "limit_status",
+            "name_cased": "limitStatus",
+            "name_pretty": "Limit status",
+            "added": 13,
+            "type": "types.active_state",
+            "description": "Indicates whether charging limit is active.",
+            "examples": [
+                {
+                    "data_component": "00",
+                    "value": "inactive",
+                    "description": "Charging limit is 'inactive'."
+                }
+            ]
+        },
+        {
+            "id": 49,
+            "name": "current_limit",
+            "name_cased": "currentLimit",
+            "name_pretty": "Current limit",
+            "added": 13,
+            "type": "unit.electric_current",
+            "size": 10,
+            "description": "Limit for the charging current.",
+            "examples": [
+                {
+                    "data_component": "09004059000000000000",
+                    "value": {
+                        "amperes": 100.0
+                    },
+                    "description": "Charging current limit is 100.0A."
+                }
+            ]
+        },
+        {
+            "id": 50,
+            "name": "smart_charging_option",
+            "name_cased": "smartChargingOption",
+            "name_pretty": "Smart charging option",
+            "added": 13,
+            "type": "enum",
+            "size": 1,
+            "description": "Smart charging option being used to charge with.",
+            "enum_values": [
+                {
+                    "id": 0,
+                    "name": "price_optimized"
+                },
+                {
+                    "id": 1,
+                    "name": "renewable_energy"
+                },
+                {
+                    "id": 2,
+                    "name": "co2_optimized",
+                    "name_pretty": "CO2 optimized"
+                }
+            ],
+            "examples": [
+                {
+                    "data_component": "01",
+                    "value": "renewable_energy",
+                    "description": "Smart charging option is set to 'renewable_energy'."
+                }
+            ]
+        },
+        {
+            "id": 51,
+            "name": "plug_lock_status",
+            "name_cased": "plugLockStatus",
+            "name_pretty": "Plug lock status",
+            "added": 13,
+            "type": "types.lock_state",
+            "description": "Locking status of charging plug.",
+            "examples": [
+                {
+                    "data_component": "00",
+                    "value": "unlocked",
+                    "description": "Charging plug is 'unlocked'."
+                }
+            ]
+        },
+        {
+            "id": 52,
+            "name": "flap_lock_status",
+            "name_cased": "flapLockStatus",
+            "name_pretty": "Flap lock status",
+            "added": 13,
+            "type": "types.lock_state",
+            "description": "Locking status of charging flap.",
+            "examples": [
+                {
+                    "data_component": "01",
+                    "value": "locked",
+                    "description": "Charging flap is 'locked'."
+                }
+            ]
+        },
+        {
+            "id": 53,
+            "name": "acoustic_limit",
+            "name_cased": "acousticLimit",
+            "name_pretty": "Acoustic limit",
+            "added": 13,
+            "type": "enum",
+            "size": 1,
+            "description": "Acoustic limitation of charging process.",
+            "enum_values": [
+                {
+                    "id": 0,
+                    "name": "no_action"
+                },
+                {
+                    "id": 1,
+                    "name": "automatic"
+                },
+                {
+                    "id": 2,
+                    "name": "unlimited"
+                },
+                {
+                    "id": 3,
+                    "name": "limited"
+                }
+            ],
+            "examples": [
+                {
+                    "data_component": "01",
+                    "value": "automatic",
+                    "description": "Charging process acoustic limitation is 'automatic'."
+                }
+            ]
+        },
+        {
+            "id": 54,
+            "name": "min_charging_current",
+            "name_cased": "minChargingCurrent",
+            "name_pretty": "Minimum charging current",
+            "type": "unit.electric_current",
+            "size": 10,
+            "description": "Minimum charging current.",
+            "examples": [
+                {
+                    "data_component": "09004014000000000000",
+                    "value": {
+                        "amperes": 5.0
+                    },
+                    "description": "Minimum charging current is 5.0A."
+                }
+            ]
+        },
+        {
+            "id": 55,
+            "name": "estimated_range_target",
+            "name_cased": "estimatedRangeTarget",
+            "name_pretty": "Estimated range target",
+            "added": 13,
+            "type": "unit.length",
+            "size": 10,
+            "description": "Remaining electric range depending on target charging status.",
+            "examples": [
+                {
+                    "data_component": "12044072c00000000000",
+                    "value": {
+                        "kilometers": 300.0
+                    },
+                    "description": "Remaining electric range target is 300.0km."
+                }
+            ]
+        },
+        {
+            "id": 56,
+            "name": "fully_charged_end_times",
+            "name_cased": "fullyChargedEndTimes",
+            "name_pretty": "Fully charged end times",
+            "added": 13,
+            "type": "types.weekday_time",
+            "description": "Time and weekday when the vehicle will be fully charged.",
+            "examples": [
+                {
+                    "data_component": "00051e",
+                    "values": {
+                        "weekday": "monday",
+                        "time": {
+                            "hour": 5,
+                            "minute": 30
+                        }
+                    },
+                    "description": "Vehicle will be fully charged on monday at 05:30."
+                }
+            ]
+        },
+        {
+            "id": 57,
+            "name": "preconditioning_scheduled_time",
+            "name_cased": "preconditioningScheduledTime",
+            "name_pretty": "Preconditioning scheduled time",
+            "added": 13,
+            "type": "types.time",
+            "description": "Preconditioning scheduled departure time.",
+            "examples": [
+                {
+                    "data_component": "051e",
+                    "values": {
+                        "hour": 5,
+                        "minute": 30
+                    },
+                    "description": "Preconditioning scheduled departure time is at 05:30."
+                }
+            ]
+        },
+        {
+            "id": 58,
+            "name": "preconditioning_remaining_time",
+            "name_cased": "preconditioningRemainingTime",
+            "name_pretty": "Preconditioning remaining time",
+            "added": 13,
+            "type": "unit.duration",
+            "size": 10,
+            "description": "Time until preconditioning is complete.",
+            "examples": [
+                {
+                    "data_component": "0701405b800000000000",
+                    "value": {
+                        "minutes": 110.0
+                    },
+                    "description": "Preconditioning is completed in 110.0min."
                 }
             ]
         }

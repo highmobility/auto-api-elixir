@@ -40,7 +40,10 @@ defmodule AutoApi.RooftopControlState do
   @type sunroof_tilt_state :: :closed | :tilted | :half_tilted
   @type sunroof_state :: :closed | :open | :intermediate
   @type sunroof_rain_event ::
-          :no_event | :in_stroke_position_because_of_rain | :automatically_in_stroke_position
+          :no_event
+          | :in_stroke_position_because_of_rain
+          | :automatically_in_stroke_position
+          | :timer
 
   use AutoApi.State, spec_file: "rooftop_control.json"
 
@@ -50,7 +53,8 @@ defmodule AutoApi.RooftopControlState do
           convertible_roof_state: State.property(convertible_roof_state),
           sunroof_tilt_state: State.property(sunroof_tilt_state),
           sunroof_state: State.property(sunroof_state),
-          sunroof_rain_event: State.property(sunroof_rain_event)
+          sunroof_rain_event: State.property(sunroof_rain_event),
+          tilt_position: State.property(float)
         }
 
   @doc """

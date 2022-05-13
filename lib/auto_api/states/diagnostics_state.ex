@@ -65,7 +65,7 @@ defmodule AutoApi.DiagnosticsState do
           | :no_sensor
           | :system_fault
 
-  @type fluid_level :: :low | :filled
+  @type fluid_level :: :low | :filled | :very_low | :normal | :high | :very_high
 
   @type fuel_level_accuracy :: :measured | :calculated
 
@@ -99,7 +99,7 @@ defmodule AutoApi.DiagnosticsState do
 
   @type tire_pressure_status :: %{
           location: location_wheel(),
-          status: :normal | :low | :alert
+          status: :normal | :low | :alert | :soft | :deflation
         }
 
   @type tire_temperature :: %{
@@ -173,7 +173,8 @@ defmodule AutoApi.DiagnosticsState do
           engine_oil_fluid_level: State.property(fluid_level()),
           engine_oil_pressure_level: State.property(engine_oil_pressure_level()),
           engine_time_to_next_service: State.property(UnitType.duration()),
-          low_voltage_battery_charge_level: State.property(low_voltage_battery_charge_level())
+          low_voltage_battery_charge_level: State.property(low_voltage_battery_charge_level()),
+          engine_oil_service_status: State.property(CommonData.service_status())
         }
 
   @doc """

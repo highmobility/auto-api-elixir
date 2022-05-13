@@ -32,7 +32,7 @@ defmodule AutoApi.CrashCapability do
       iex> H.description
       "Crash"
       iex> length(H.properties)
-      11
+      12
       iex> List.first(H.properties)
       {0x01, :incidents}
   """

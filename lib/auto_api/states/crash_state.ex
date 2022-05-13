@@ -40,14 +40,16 @@ defmodule AutoApi.CrashState do
   @type tipped_state :: :tipped_over | :not_tipped
 
   @type impact_zone ::
-          :predestrian_protection
+          :pedestrian_protection
           | :rollover
           | :rear_passenger_side
           | :rear_driver_side
-          | :side_passeger_side
+          | :side_passenger_side
           | :side_driver_side
           | :front_passenger_side
           | :front_driver_side
+
+  @type crash_status :: :normal | :restraints_engaged | :airbag_triggered
 
   @type t :: %__MODULE__{
           incidents: State.multiple_property(crash_incident()),
@@ -55,7 +57,8 @@ defmodule AutoApi.CrashState do
           tipped_state: State.property(tipped_state()),
           automatic_ecall: State.property(CommonData.enabled_state()),
           severity: State.property(integer()),
-          impact_zone: State.multiple_property(impact_zone())
+          impact_zone: State.multiple_property(impact_zone()),
+          status: State.property(crash_status)
         }
 
   @doc """

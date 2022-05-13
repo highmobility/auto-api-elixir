@@ -202,6 +202,10 @@
                 {
                     "id": 2,
                     "name": "automatically_in_stroke_position"
+                },
+                {
+                    "id": 3,
+                    "name": "timer"
                 }
             ],
             "examples": [
@@ -209,6 +213,21 @@
                     "data_component": "00",
                     "value": "no_event",
                     "description": "Sunroof had no rain event"
+                }
+            ]
+        },
+        {
+            "id": 7,
+            "name": "tilt_position",
+            "name_cased": "tiltPosition",
+            "name_pretty": "Tilt position",
+            "type": "types.percentage",
+            "description": "1.0 (100%) is fully tilted, 0.0 (0%) is not",
+            "examples": [
+                {
+                    "data_component": "3fe0000000000000",
+                    "value": 0.5,
+                    "description": "Rooftop is half-tilted (50%)"
                 }
             ]
         }

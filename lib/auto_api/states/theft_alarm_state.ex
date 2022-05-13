@@ -44,7 +44,7 @@ defmodule AutoApi.TheftAlarmState do
           | :unknown
   @type last_warning_reason ::
           :no_alarm
-          | :basis_alarm
+          | :basic_alarm
           | :door_front_left
           | :door_front_right
           | :door_rear_left
@@ -64,7 +64,9 @@ defmodule AutoApi.TheftAlarmState do
           | :hold_com
           | :remote
           | :unknown
+          | :siren
   @type level :: :low | :medium | :high
+  @type triggered :: :not_triggered | :triggered
 
   @type t :: %__MODULE__{
           status: State.property(alarm),
@@ -73,7 +75,9 @@ defmodule AutoApi.TheftAlarmState do
           last_warning_reason: State.property(last_warning_reason),
           last_event: State.property(DateTime.t()),
           last_event_level: State.property(level),
-          event_type: State.property(event_type)
+          event_type: State.property(event_type),
+          interior_protection_triggered: State.property(triggered),
+          tow_protection_triggered: State.property(triggered)
         }
 
   @doc """

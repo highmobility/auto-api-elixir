@@ -37,7 +37,8 @@ defmodule AutoApi.VehicleLocationState do
           altitude: State.property(UnitType.length()),
           precision: State.property(UnitType.length()),
           gps_source: State.property(gps_source()),
-          gps_signal_strength: State.property(float())
+          gps_signal_strength: State.property(float()),
+          fuzzy_coordinates: State.property(CommonData.coordinates())
         }
 
   @doc """

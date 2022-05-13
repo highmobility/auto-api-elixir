@@ -76,7 +76,7 @@
                 {
                     "data_component": "01",
                     "value": "non_pedestrian",
-                    "description": "Crash type is non-pedestrian (i.e. a another vehicle)"
+                    "description": "Crash type is non-pedestrian (i.e. another vehicle)"
                 }
             ]
         },
@@ -152,7 +152,7 @@
             "enum_values": [
                 {
                     "id": 0,
-                    "name": "predestrian_protection"
+                    "name": "pedestrian_protection"
                 },
                 {
                     "id": 1,
@@ -168,7 +168,7 @@
                 },
                 {
                     "id": 4,
-                    "name": "side_passeger_side"
+                    "name": "side_passenger_side"
                 },
                 {
                     "id": 5,
@@ -198,6 +198,37 @@
                     "data_component": "07",
                     "value": "front_driver_side",
                     "description": "Impact zone is front driver side"
+                }
+            ]
+        },
+        {
+            "id": 7,
+            "name": "status",
+            "name_cased": "status",
+            "name_pretty": "Status",
+            "added": 13,
+            "type": "enum",
+            "size": 1,
+            "description": "The system effect an inpact had on the vehicle.",
+            "enum_values": [
+                {
+                    "id": 0,
+                    "name": "normal"
+                },
+                {
+                    "id": 1,
+                    "name": "restraints_engaged"
+                },
+                {
+                    "id": 2,
+                    "name": "airbag_triggered"
+                }
+            ],
+            "examples": [
+                {
+                    "data_component": "00",
+                    "value": "normal",
+                    "description": "Impact effect on the vehicle was 'normal'."
                 }
             ]
         }

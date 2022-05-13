@@ -29,14 +29,6 @@ defmodule AutoApi.ClimateState do
 
   use AutoApi.State, spec_file: "climate.json"
 
-  @type weekday ::
-          :monday | :tuesday | :wednesday | :thursday | :friday | :saturday | :sunday | :automatic
-
-  @type hvac_weekday_starting_time :: %{
-          weekday: weekday(),
-          time: CommonData.time()
-        }
-
   @type t :: %__MODULE__{
           inside_temperature: State.property(UnitType.temperature()),
           outside_temperature: State.property(UnitType.temperature()),
@@ -47,7 +39,7 @@ defmodule AutoApi.ClimateState do
           defrosting_state: State.property(CommonData.activity()),
           ionising_state: State.property(CommonData.activity()),
           defrosting_temperature_setting: State.property(UnitType.temperature()),
-          hvac_weekday_starting_times: State.multiple_property(hvac_weekday_starting_time()),
+          hvac_weekday_starting_times: State.multiple_property(CommonData.weekday_time()),
           rear_temperature_setting: State.property(UnitType.temperature())
         }
 

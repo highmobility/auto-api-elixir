@@ -1414,6 +1414,22 @@
                     "description": "Low voltage battery charge level is ok"
                 }
             ]
+        },
+        {
+            "id": 55,
+            "name": "engine_oil_service_status",
+            "name_cased": "engineOilServiceStatus",
+            "name_pretty": "Engine oil service-status",
+            "added": 13,
+            "type": "types.service_status",
+            "description": "Engine oil service status",
+            "examples": [
+                {
+                    "data_component": "00",
+                    "value": "ok",
+                    "description": "Engine oil service status is 'ok'"
+                }
+            ]
         }
     ]
 }

@@ -27,7 +27,7 @@ defmodule AutoApi.CommonData do
   @type activity_switched :: :deactivated | :activated
   @type connection_state :: :disconnected | :connected
   @type coordinates :: %{latitude: float, longitude: float}
-  @type driving_mode :: :regular | :eco | :sport | :sport_plus | :ecoPlus | :comfort
+  @type driving_mode :: :regular | :eco | :sport | :sport_plus | :eco_plus | :comfort
   @type enabled_state :: :disabled | :enabled
   @type location :: :front_left | :front_right | :rear_right | :rear_left
   @type location_longitudinal :: :front | :rear
@@ -36,6 +36,10 @@ defmodule AutoApi.CommonData do
   @type network_security :: :none | :wep | :wpa | :wpa2_personal
   @type on_off :: :on | :off
   @type position :: :closed | :open
+  @type service_status :: :ok | :warning | :critical
+  @type muted :: :muted | :not_muted
+  @type weekday_time ::
+          :monday | :tuesday | :wednesday | :thursday | :friday | :saturday | :sunday
   @type time :: %{hour: integer, minute: integer}
 
   def bin_to_ieee_754_float(<<f_value::float-32>>) do
