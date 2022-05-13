@@ -25,7 +25,7 @@ defmodule AutoApi.MaintenanceState do
   Maintenance state
   """
 
-  alias AutoApi.{State, UnitType}
+  alias AutoApi.{CommonData, State, UnitType}
 
   use AutoApi.State, spec_file: "maintenance.json"
 
@@ -40,6 +40,21 @@ defmodule AutoApi.MaintenanceState do
 
   @type activity :: :inactive | :active
   @type teleservice_availability :: :pending | :idle | :successful | :error
+
+  @type due_dates :: %{
+          axle: CommonData.location_longitudinal(),
+          due_date: DateTime.t()
+        }
+
+  @type service_statuses :: %{
+          axle: CommonData.location_longitudinal(),
+          status: CommonData.service_status()
+        }
+
+  @type remaining_distances :: %{
+          axle: CommonData.location_longitudinal(),
+          distance: UnitType.length()
+        }
 
   @type t :: %__MODULE__{
           # Deprecated
@@ -62,7 +77,24 @@ defmodule AutoApi.MaintenanceState do
           time_to_exhaust_inspection: State.property(UnitType.duration()),
           last_ecall: State.property(DateTime.t()),
           distance_to_next_oil_service: State.property(UnitType.length()),
-          time_to_next_oil_service: State.property(UnitType.duration())
+          time_to_next_oil_service: State.property(UnitType.duration()),
+          brake_fluid_remaining_distance: State.property(UnitType.length()),
+          brake_fluid_status: State.property(CommonData.service_status()),
+          brakes_service_due_dates: State.multiple_property(due_dates),
+          brakes_service_remaining_distances: State.multiple_property(remaining_distances),
+          brakes_service_statuses: State.multiple_property(service_statuses),
+          drive_in_inspection_date: State.property(DateTime.t()),
+          drive_in_inspection_status: State.property(CommonData.service_status()),
+          next_oil_service_date: State.property(DateTime.t()),
+          next_inspection_distance_to: State.property(UnitType.length()),
+          legal_inspection_date: State.property(DateTime.t()),
+          service_status: State.property(CommonData.service_status()),
+          service_date: State.property(DateTime.t()),
+          inspection_status: State.property(CommonData.service_status()),
+          drive_in_inspection_distance_to: State.property(UnitType.length()),
+          vehicle_check_date: State.property(DateTime.t()),
+          vehicle_check_status: State.property(CommonData.service_status()),
+          vehicle_check_distance_to: State.property(UnitType.length())
         }
 
   @doc """

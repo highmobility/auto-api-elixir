@@ -150,7 +150,7 @@
                 },
                 {
                     "id": 4,
-                    "name": "ecoPlus"
+                    "name": "eco_plus"
                 },
                 {
                     "id": 5,
@@ -239,6 +239,10 @@
                     "id": 12,
                     "name": "lpg",
                     "name_pretty": "Liquefied petroleum gas"
+                },
+                {
+                    "id": 13,
+                    "name": "hybrid"
                 }
             ]
         },
@@ -581,6 +585,27 @@
                 {
                     "id": 4,
                     "name": "rear_center"
+                }
+            ]
+        },
+        {
+            "name": "service_status",
+            "name_cased": "serviceStatus",
+            "name_pretty": "Service-Status",
+            "type": "enum",
+            "size": 1,
+            "enum_values": [
+                {
+                    "id": 0,
+                    "name": "ok"
+                },
+                {
+                    "id": 1,
+                    "name": "warning"
+                },
+                {
+                    "id": 2,
+                    "name": "critical"
                 }
             ]
         },
@@ -945,6 +970,63 @@
             ]
         },
         {
+            "name": "brake_service_due_date",
+            "name_cased": "brakeServiceDueDate",
+            "name_pretty": "Brake service due date",
+            "type": "custom",
+            "size": 9,
+            "items": [
+                {
+                    "name": "axle",
+                    "name_cased": "axle",
+                    "type": "types.axle"
+                },
+                {
+                    "name": "due_date",
+                    "name_cased": "dueDate",
+                    "type": "timestamp"
+                }
+            ]
+        },
+        {
+            "name": "brake_service_remaining_distance",
+            "name_cased": "brakeServiceRemainingDistance",
+            "name_pretty": "Brake service remaining distance",
+            "type": "custom",
+            "size": 11,
+            "items": [
+                {
+                    "name": "axle",
+                    "name_cased": "axle",
+                    "type": "types.axle"
+                },
+                {
+                    "name": "distance",
+                    "name_cased": "distance",
+                    "type": "unit.length"
+                }
+            ]
+        },
+        {
+            "name": "brake_service_status",
+            "name_cased": "brakeServiceStatus",
+            "name_pretty": "Brake service status",
+            "type": "custom",
+            "size": 2,
+            "items": [
+                {
+                    "name": "axle",
+                    "name_cased": "axle",
+                    "type": "types.axle"
+                },
+                {
+                    "name": "status",
+                    "name_cased": "status",
+                    "type": "types.service_status"
+                }
+            ]
+        },
+        {
             "name": "brake_torque_vectoring",
             "name_cased": "brakeTorqueVectoring",
             "name_pretty": "Brake torque vectoring",
@@ -1055,6 +1137,41 @@
                     "name_cased": "provider",
                     "type": "string",
                     "description": "The provider name of the charging point."
+                }
+            ]
+        },
+        {
+            "name": "charging_restriction",
+            "name_cased": "chargingRestriction",
+            "name_pretty": "Charging restriction",
+            "type": "custom",
+            "size": 2,
+            "items": [
+                {
+                    "name": "active",
+                    "name_cased": "active",
+                    "type": "types.active_state",
+                    "description": "Indicates whether the charging current used to charge the vehicle is limited."
+                },
+                {
+                    "name": "limit",
+                    "name_cased": "limit",
+                    "type": "enum",
+                    "size": 1,
+                    "enum_values": [
+                        {
+                            "id": 0,
+                            "name": "max"
+                        },
+                        {
+                            "id": 1,
+                            "name": "reduced"
+                        },
+                        {
+                            "id": 2,
+                            "name": "min"
+                        }
+                    ]
                 }
             ]
         },
@@ -1239,6 +1356,10 @@
                         {
                             "id": 3,
                             "name": "low"
+                        },
+                        {
+                            "id": 4,
+                            "name": "unknown"
                         }
                     ]
                 },

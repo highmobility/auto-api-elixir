@@ -32,7 +32,7 @@ defmodule AutoApi.RooftopControlCapability do
       iex> R.description
       "Rooftop Control"
       iex> length(R.properties)
-      11
+      12
       iex> List.first(R.properties)
       {0x01, :dimming}
   """

@@ -76,6 +76,143 @@
                     "description": "Automatic start-stop system is enabled"
                 }
             ]
+        },
+        {
+            "id": 4,
+            "name": "preconditioning_enabled",
+            "name_cased": "preconditioningEnabled",
+            "name_pretty": "Pre-conditioning enabled",
+            "added": 13,
+            "type": "types.enabled_state",
+            "description": "Use of the engine pre-conditioning is enabled.",
+            "examples": [
+                {
+                    "data_component": "01",
+                    "value": "enabled",
+                    "description": "Use of engine pre-conditioning is 'enabled'."
+                }
+            ]
+        },
+        {
+            "id": 5,
+            "name": "preconditioning_active",
+            "name_cased": "preconditioningActive",
+            "name_pretty": "Pre-conditioning active",
+            "added": 13,
+            "type": "types.active_state",
+            "description": "Pre-conditioning is running.",
+            "examples": [
+                {
+                    "data_component": "01",
+                    "value": "active",
+                    "description": "Pre-conditioning is 'active'."
+                }
+            ]
+        },
+        {
+            "id": 6,
+            "name": "preconditioning_remaining_time",
+            "name_cased": "preconditioningRemainingTime",
+            "name_pretty": "Pre-conditioning remaining time",
+            "added": 13,
+            "type": "unit.duration",
+            "size": 10,
+            "description": "Remaining time of pre-conditioning.",
+            "examples": [
+                {
+                    "data_component": "0701402f000000000000",
+                    "value": {
+                        "minutes": 15.5
+                    },
+                    "description": "Pre-conditioning remaining time is 15.5min."
+                }
+            ]
+        },
+        {
+            "id": 7,
+            "name": "preconditioning_error",
+            "name_cased": "preconditioningError",
+            "name_pretty": "Pre-conditioning error",
+            "added": 13,
+            "type": "enum",
+            "size": 1,
+            "description": "Reason for not carrying out pre-conditioning.",
+            "enum_values": [
+                {
+                    "id": 0,
+                    "name": "low_fuel"
+                },
+                {
+                    "id": 1,
+                    "name": "low_battery"
+                },
+                {
+                    "id": 2,
+                    "name": "quota_exceeded"
+                },
+                {
+                    "id": 3,
+                    "name": "heater_failure"
+                },
+                {
+                    "id": 4,
+                    "name": "component_failure"
+                },
+                {
+                    "id": 5,
+                    "name": "open_or_unlocked"
+                },
+                {
+                    "id": 6,
+                    "name": "ok"
+                }
+            ],
+            "examples": [
+                {
+                    "data_component": "00",
+                    "value": "low_fuel",
+                    "description": "Pre-conditioning error is 'low_fuel'."
+                }
+            ]
+        },
+        {
+            "id": 8,
+            "name": "preconditioning_status",
+            "name_cased": "preconditioningStatus",
+            "name_pretty": "Pre-conditioning status",
+            "added": 13,
+            "type": "enum",
+            "size": 1,
+            "description": "Status of the pre-conditioning system.",
+            "enum_values": [
+                {
+                    "id": 0,
+                    "name": "standby"
+                },
+                {
+                    "id": 1,
+                    "name": "heating"
+                },
+                {
+                    "id": 2,
+                    "name": "cooling"
+                },
+                {
+                    "id": 3,
+                    "name": "ventilation"
+                },
+                {
+                    "id": 4,
+                    "name": "inactive"
+                }
+            ],
+            "examples": [
+                {
+                    "data_component": "00",
+                    "value": "standby",
+                    "description": "Pre-conditioning status is 'standby'."
+                }
+            ]
         }
     ]
 }

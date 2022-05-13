@@ -58,7 +58,7 @@ defmodule AutoApi.TripsState do
           value: float()
         }
 
-  @type type :: :single | :multi
+  @type type :: :single | :multi | :eco
 
   @type t :: %__MODULE__{
           type: State.property(type()),

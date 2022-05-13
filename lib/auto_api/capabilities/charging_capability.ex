@@ -32,7 +32,7 @@ defmodule AutoApi.ChargingCapability do
       iex> C.description
       "Charging"
       iex> length(C.properties)
-      38
+      57
       iex> List.first(C.properties)
       {0x02, :estimated_range}
   """

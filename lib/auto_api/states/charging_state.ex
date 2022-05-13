@@ -29,7 +29,7 @@ defmodule AutoApi.ChargingState do
 
   use AutoApi.State, spec_file: "charging.json"
 
-  @type charge_mode :: :immediate | :timer_based | :inductive
+  @type charge_mode :: :immediate | :timer_based | :inductive | :conductive
   @type charging :: :disconnected | :plugged_in | :charging | :charging_complete
   @type charging_state ::
           :not_charging
@@ -65,6 +65,23 @@ defmodule AutoApi.ChargingState do
             timer_type: timer_type,
             date: DateTime.t()
           }
+  @type charging_end_reason ::
+          :unknown
+          | :goal_reached
+          | :requested_by_driver
+          | :connector_removed
+          | :powergrid_failed
+          | :hv_system_failure
+          | :charging_station_failure
+          | :parking_lock_failed
+          | :no_parking_lock
+          | :signal_invalid
+  @type charging_phase :: :no_charging | :one | :two | :three
+  @type charging_time_display :: :no_display | :display_duration | :no_display_duration
+  @type departure_time_display :: :no_display | :reachable | :not_reachable
+  @type restriction :: %{active: CommonData.activity(), limit: :max | :reduced | :min}
+  @type smart_charging_option :: :price_optimized | :renewable_energy | :co2_optimized
+  @type acoustic_limit :: :no_action | :automatic | :unlimited | :limited
 
   @type t :: %__MODULE__{
           estimated_range: State.property(UnitType.length()),
@@ -104,7 +121,26 @@ defmodule AutoApi.ChargingState do
           preconditioning_immediate_status: State.property(CommonData.activity()),
           preconditioning_departure_enabled: State.property(CommonData.enabled_state()),
           preconditioning_error: State.property(preconditioning_error()),
-          battery_capacity: State.property(UnitType.energy())
+          battery_capacity: State.property(UnitType.energy()),
+          auxiliary_power: State.property(UnitType.power()),
+          charging_complete_lock: State.property(CommonData.activity()),
+          battery_max_available: State.property(UnitType.energy()),
+          charging_end_reason: State.property(charging_end_reason),
+          charging_phases: State.property(charging_phase),
+          battery_energy: State.property(UnitType.energy()),
+          battery_energy_chargable: State.property(UnitType.energy()),
+          charging_single_immediate: State.property(CommonData.activity()),
+          charging_time_display: State.property(charging_time_display),
+          departure_time_display: State.property(departure_time_display),
+          restriction: State.property(restriction),
+          limit_status: State.property(CommonData.activity()),
+          current_limit: State.property(UnitType.electric_current()),
+          smart_charging_option: State.property(smart_charging_option),
+          plug_lock_status: State.property(CommonData.lock()),
+          flap_lock_status: State.property(CommonData.lock()),
+          acoustic_limit: State.property(acoustic_limit),
+          min_charging_current: State.property(UnitType.electric_current()),
+          estimated_range_target: State.property(UnitType.length())
         }
 
   @doc """

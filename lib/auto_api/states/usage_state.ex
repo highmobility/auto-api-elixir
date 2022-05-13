@@ -91,7 +91,10 @@ defmodule AutoApi.UsageState do
           eco_score_free_wheel: State.property(float()),
           eco_score_constant: State.property(float()),
           eco_score_bonus_range: State.property(UnitType.length()),
-          trip_meters: State.multiple_property(trip_meter())
+          trip_meters: State.multiple_property(trip_meter()),
+          electric_consumption_average: State.property(UnitType.energy_efficiency()),
+          braking_evaluation: State.property(float()),
+          average_speed: State.property(UnitType.speed())
         }
 
   @doc """

@@ -50,7 +50,8 @@ defmodule AutoApi.RooftopControlState do
           convertible_roof_state: State.property(convertible_roof_state),
           sunroof_tilt_state: State.property(sunroof_tilt_state),
           sunroof_state: State.property(sunroof_state),
-          sunroof_rain_event: State.property(sunroof_rain_event)
+          sunroof_rain_event: State.property(sunroof_rain_event),
+          tilt_position: State.property(float)
         }
 
   @doc """
