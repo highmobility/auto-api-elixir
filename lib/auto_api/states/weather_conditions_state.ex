@@ -25,13 +25,7 @@ defmodule AutoApi.WeatherConditionsState do
   WeatherConditions state
   """
 
-  alias AutoApi.State
-
   use AutoApi.State, spec_file: "weather_conditions.json"
-
-  @type t :: %__MODULE__{
-          rain_intensity: State.property(float)
-        }
 
   @doc """
   Build state based on binary value

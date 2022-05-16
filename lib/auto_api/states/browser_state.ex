@@ -24,14 +24,7 @@ defmodule AutoApi.BrowserState do
   @moduledoc """
   Browser state
   """
-
-  alias AutoApi.State
-
   use AutoApi.State, spec_file: "browser.json"
-
-  @type t :: %__MODULE__{
-          url: State.property(String.t())
-        }
 
   @doc """
   Build state based on binary value

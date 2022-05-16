@@ -24,7 +24,8 @@ defmodule AutoApi.CustomType do
   @moduledoc """
     Retrieves custom types specifications
   """
+  @external_resource "specs/misc/custom_types.json"
+  @spec_file {@external_resource, "types"}
   require AutoApi.CustomType.Meta
-
   @before_compile AutoApi.CustomType.Meta
 end

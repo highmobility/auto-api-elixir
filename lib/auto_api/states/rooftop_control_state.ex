@@ -25,34 +25,7 @@ defmodule AutoApi.RooftopControlState do
   Keeps RooftopControl state
   """
 
-  alias AutoApi.State
-
-  @type convertible_roof_state ::
-          :closed
-          | :open
-          | :emergency_locked
-          | :closed_secured
-          | :open_secured
-          | :hard_top_mounted
-          | :intermediate_position
-          | :loading_position
-          | :loading_position_immediate
-  @type sunroof_tilt_state :: :closed | :tilted | :half_tilted
-  @type sunroof_state :: :closed | :open | :intermediate
-  @type sunroof_rain_event ::
-          :no_event | :in_stroke_position_because_of_rain | :automatically_in_stroke_position
-
   use AutoApi.State, spec_file: "rooftop_control.json"
-
-  @type t :: %__MODULE__{
-          dimming: State.property(float),
-          position: State.property(float),
-          convertible_roof_state: State.property(convertible_roof_state),
-          sunroof_tilt_state: State.property(sunroof_tilt_state),
-          sunroof_state: State.property(sunroof_state),
-          sunroof_rain_event: State.property(sunroof_rain_event),
-          tilt_position: State.property(float)
-        }
 
   @doc """
   Build state based on binary value

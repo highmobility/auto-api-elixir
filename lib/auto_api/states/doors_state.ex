@@ -26,27 +26,7 @@ defmodule AutoApi.DoorsState do
   Door lock possible values: :unlocked, :locked
   """
 
-  alias AutoApi.{CommonData, State}
-
   use AutoApi.State, spec_file: "doors.json"
-
-  @type lock :: %{
-          location: CommonData.location(),
-          lock_state: CommonData.lock()
-        }
-
-  @type position :: %{
-          location: CommonData.location() | :all,
-          position: CommonData.position()
-        }
-
-  @type t :: %__MODULE__{
-          inside_locks: State.multiple_property(lock),
-          locks: State.multiple_property(lock),
-          positions: State.multiple_property(position),
-          inside_locks_state: State.property(CommonData.lock()),
-          locks_state: State.property(CommonData.lock())
-        }
 
   @doc """
   Build state based on binary value

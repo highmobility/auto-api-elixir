@@ -25,30 +25,7 @@ defmodule AutoApi.EngineState do
   Keeps Engine state
   """
 
-  alias AutoApi.{CommonData, State, UnitType}
-
   use AutoApi.State, spec_file: "engine.json"
-
-  @type preconditioning_error ::
-          :low_fuel
-          | :low_battery
-          | :quota_exceeded
-          | :heater_failure
-          | :component_failure
-          | :open_or_unlocked
-          | :ok
-  @type preconditioning_status :: :standby | :heating | :cooling | :ventilation | :inactive
-
-  @type t :: %__MODULE__{
-          status: State.property(CommonData.on_off()),
-          start_stop_state: State.property(CommonData.activity()),
-          start_stop_enabled: State.property(CommonData.enabled_state()),
-          preconditioning_enabled: State.property(CommonData.enabled_state()),
-          preconditioning_active: State.property(CommonData.activity()),
-          preconditioning_remaining_time: State.property(UnitType.duration()),
-          preconditioning_error: State.property(preconditioning_error),
-          preconditioning_status: State.property(preconditioning_status)
-        }
 
   @doc """
   Build state based on binary value

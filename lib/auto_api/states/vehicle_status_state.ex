@@ -25,13 +25,7 @@ defmodule AutoApi.VehicleStatusState do
   VehicleStatus state
   """
 
-  alias AutoApi.State
-
   use AutoApi.State, spec_file: "vehicle_status.json"
-
-  @type t :: %__MODULE__{
-          states: State.multiple_property(struct())
-        }
 
   @doc """
   Build state based on binary value

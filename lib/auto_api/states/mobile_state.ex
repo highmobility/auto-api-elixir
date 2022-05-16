@@ -25,15 +25,7 @@ defmodule AutoApi.MobileState do
   Browser state
   """
 
-  alias AutoApi.State
-
   use AutoApi.State, spec_file: "mobile.json"
-
-  @type connection :: :disconnected | :connected
-
-  @type t :: %__MODULE__{
-          connection: State.property(connection)
-        }
 
   @doc """
   Build state based on binary value

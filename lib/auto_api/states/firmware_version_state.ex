@@ -26,21 +26,7 @@ defmodule AutoApi.FirmwareVersionState do
 
   """
 
-  alias AutoApi.State
-
   use AutoApi.State, spec_file: "firmware_version.json"
-
-  @type hmkit_version :: %{
-          major: integer,
-          minor: integer,
-          patch: integer
-        }
-
-  @type t :: %__MODULE__{
-          hmkit_version: State.property(hmkit_version()),
-          hmkit_build_name: State.property(String.t()),
-          application_version: State.property(String.t())
-        }
 
   @doc """
   Build state based on binary value

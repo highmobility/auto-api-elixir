@@ -29,46 +29,7 @@ defmodule AutoApi.CapabilitiesState do
   will translate those into modules and property names.
   """
 
-  alias AutoApi.State
-
   use AutoApi.State, spec_file: "capabilities.json"
-
-  @type capability :: %{
-          capability_id: integer(),
-          supported_property_ids: binary()
-        }
-
-  @type event ::
-          :ping
-          | :trip_started
-          | :trip_ended
-          | :vehicle_location_changed
-          | :authorization_changed
-          | :tire_pressure_changed
-          | :harsh_acceleration_triggered
-          | :harsh_acceleration_pedal_position_triggered
-          | :harsh_braking_triggered
-          | :harsh_cornering_triggered
-          | :seat_belt_triggered
-          | :maintenance_changed
-          | :dashboard_lights_changed
-          | :ignition_changed
-          | :accident_reported
-          | :emergency_reported
-          | :breakdown_reported
-          | :battery_guard_warning
-          | :engine_changed
-          | :fleet_clearance_changed
-
-  @type webhook :: %{
-          available: :available | :unavailable,
-          event: event()
-        }
-
-  @type t :: %__MODULE__{
-          capabilities: State.multiple_property(capability()),
-          webhooks: State.multiple_property(webhook())
-        }
 
   @doc """
   Build state based on binary value

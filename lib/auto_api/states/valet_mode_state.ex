@@ -25,13 +25,7 @@ defmodule AutoApi.ValetModeState do
   ValetMode state
   """
 
-  alias AutoApi.{CommonData, State}
-
   use AutoApi.State, spec_file: "valet_mode.json"
-
-  @type t :: %__MODULE__{
-          status: State.property(CommonData.activity())
-        }
 
   @doc """
   Build state based on binary value

@@ -248,7 +248,7 @@ defmodule AutoApi.Property do
   defp failure_to_bin(nil), do: <<>>
 
   defp failure_to_bin(%{reason: reason, description: description}) do
-    reason_bin = AutoApi.CommonData.convert_state_to_bin_failure_reason(reason)
+    reason_bin = AutoApi.FailureMessageState.failure_reason_name_to_bin(reason)
     description_size = byte_size(description)
 
     <<reason_bin, description_size::integer-16, description::binary>>
@@ -290,24 +290,32 @@ defmodule AutoApi.Property do
     binary_data
   end
 
-  defp to_value(binary_data, %{"type" => "float"}) do
-    AutoApi.CommonData.convert_bin_to_float(binary_data)
+  defp to_value(<<f_value::float-32>>, %{"type" => "float"}) do
+    f_value
+    |> Float.ceil(7)
+    |> Float.round(6)
   end
 
-  defp to_value(binary_data, %{"type" => "double"}) do
-    AutoApi.CommonData.convert_bin_to_double(binary_data)
+  defp to_value(<<f_value::float-64>>, %{"type" => "double"}) do
+    f_value
   end
 
-  defp to_value(binary_data, %{"type" => "integer"}) do
-    AutoApi.CommonData.convert_bin_to_integer(binary_data)
-  end
+  defp to_value(<<i_value::integer-signed-8>>, %{"type" => "integer"}), do: i_value
+  defp to_value(<<i_value::integer-signed-16>>, %{"type" => "integer"}), do: i_value
+  defp to_value(<<i_value::integer-signed-24>>, %{"type" => "integer"}), do: i_value
+  defp to_value(<<i_value::integer-signed-32>>, %{"type" => "integer"}), do: i_value
+  defp to_value(<<i_value::integer-signed-64>>, %{"type" => "integer"}), do: i_value
+  defp to_value(o, %{"type" => "integer"}), do: throw({:can_not_parse_integer, o})
 
-  defp to_value(binary_data, %{"type" => "uinteger"}) do
-    AutoApi.CommonData.convert_bin_to_uinteger(binary_data)
-  end
+  defp to_value(<<i_value::integer-unsigned-8>>, %{"type" => "uinteger"}), do: i_value
+  defp to_value(<<i_value::integer-unsigned-16>>, %{"type" => "uinteger"}), do: i_value
+  defp to_value(<<i_value::integer-unsigned-24>>, %{"type" => "uinteger"}), do: i_value
+  defp to_value(<<i_value::integer-unsigned-32>>, %{"type" => "uinteger"}), do: i_value
+  defp to_value(<<i_value::integer-unsigned-64>>, %{"type" => "uinteger"}), do: i_value
+  defp to_value(o, %{"type" => "uinteger"}), do: throw({:can_not_parse_uinteger, o})
 
   defp to_value(binary_data, %{"type" => "timestamp"}) do
-    timestamp_in_milisec = AutoApi.CommonData.convert_bin_to_uinteger(binary_data)
+    timestamp_in_milisec = to_value(binary_data, %{"type" => "uinteger"})
 
     case DateTime.from_unix(timestamp_in_milisec, :millisecond) do
       {:ok, datetime} -> datetime
@@ -384,7 +392,7 @@ defmodule AutoApi.Property do
     <<reason, size::integer-16, description::binary-size(size)>> = failure
 
     %{
-      reason: AutoApi.CommonData.convert_bin_to_state_failure_reason(reason),
+      reason: AutoApi.FailureMessageState.failure_reason_bin_to_name(reason),
       description: description
     }
   end
@@ -430,7 +438,7 @@ defmodule AutoApi.Property do
   defp fetch_item_size(binary_data, counter, %{"type" => type}) when type in @sizeless_types do
     binary_data
     |> :binary.part(counter, 2)
-    |> AutoApi.CommonData.convert_bin_to_uinteger()
+    |> to_value(%{"type" => "uinteger"})
   end
 
   defp fetch_item_size(_, _, spec) do
