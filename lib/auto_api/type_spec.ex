@@ -38,29 +38,15 @@ defmodule AutoApi.TypeSpec do
         @type t :: unquote(typespec)
       end
 
-    enum_typespecs =
+    local_typespecs =
       Enum.flat_map(properties_specs, fn
-        %{"type" => "enum"} = spec -> [for_custom_type(spec)]
-        _ -> []
+        %{"type" => "unit." <> _} -> []
+        %{"type" => "types." <> _} -> []
+        %{"type" => "events." <> _} -> []
+        spec -> [for_custom_type(spec)]
       end)
 
-    [enum_typespecs, base_typespec]
-  end
-
-  def for_custom_type(%{"type" => "double"} = spec) do
-    name = name_atom(spec)
-
-    quote do
-      @type unquote({name, [], []}) :: float()
-    end
-  end
-
-  def for_custom_type(%{"type" => "bytes"} = spec) do
-    name = name_atom(spec)
-
-    quote do
-      @type unquote({name, [], []}) :: binary()
-    end
+    [local_typespecs, base_typespec]
   end
 
   def for_custom_type(%{"type" => "enum"} = spec) do
@@ -81,6 +67,15 @@ defmodule AutoApi.TypeSpec do
     end
   end
 
+  def for_custom_type(spec) do
+    name = name_atom(spec)
+    typespec = typespec(spec)
+
+    quote do
+      @type unquote({name, [], []}) :: unquote(typespec)
+    end
+  end
+
   defp custom(items) do
     typespec = Enum.reduce(items, [], &(&2 ++ [{atom(&1["name"]), typespec(&1)}]))
     {:%{}, [], typespec}
@@ -95,40 +90,40 @@ defmodule AutoApi.TypeSpec do
   defp wrap(content, _),
     do: {{:., [], [AutoApi.State, :property]}, [], [content]}
 
-  defp typespec(%{"type" => "string"}),
+  def typespec(%{"type" => "string"}),
     do: {{:., [], [String, :t]}, [], []}
 
-  defp typespec(%{"type" => "double"}),
-    do: {:float, [], []}
+  def typespec(%{"type" => "double"}),
+    do: {:|, [], [{:float, [], []}, {:integer, [], []}]}
 
-  defp typespec(%{"type" => "uinteger"}),
+  def typespec(%{"type" => "uinteger"}),
     do: {:integer, [], []}
 
-  defp typespec(%{"type" => "integer"}),
+  def typespec(%{"type" => "integer"}),
     do: {:integer, [], []}
 
-  defp typespec(%{"type" => "bytes"}),
+  def typespec(%{"type" => "bytes"}),
     do: {:binary, [], []}
 
-  defp typespec(%{"type" => "enum", "enum_values" => enums}),
+  def typespec(%{"type" => "enum", "enum_values" => enums}),
     do: enum(enums)
 
-  defp typespec(%{"type" => "unit." <> unit}),
+  def typespec(%{"type" => "unit." <> unit}),
     do: {{:., [], [AutoApi.UnitType, atom(unit)]}, [], []}
 
-  defp typespec(%{"type" => "types." <> type}),
+  def typespec(%{"type" => "types." <> type}),
     do: {{:., [], [AutoApi.CustomType, atom(type)]}, [], []}
 
-  defp typespec(%{"type" => "timestamp"}),
+  def typespec(%{"type" => "timestamp"}),
     do: {{:., [], [DateTime, :t]}, [], []}
 
-  defp typespec(%{"type" => "events." <> type}),
+  def typespec(%{"type" => "events." <> type}),
     do: {{:., [], [AutoApi.Event, atom(type)]}, [], []}
 
-  defp enum_typespec([item]),
+  def enum_typespec([item]),
     do: item
 
-  defp enum_typespec([head | tail]),
+  def enum_typespec([head | tail]),
     do: {:|, [], [head, enum_typespec(tail)]}
 
   defp name_atom(spec),
