@@ -497,6 +497,10 @@
                 {
                     "id": 1,
                     "name": "plugged_in"
+                },
+                {
+                    "id": 2,
+                    "name": "plugged_in_both_sides"
                 }
             ],
             "examples": [
@@ -697,17 +701,27 @@
                 {
                     "id": 0,
                     "name": "red",
-                    "description": "Battery charge is greater than 0%"
+                    "description": "Vehicle engine will not start anymore, battery must be charged using an external system (battery charge is greater than 0%)."
                 },
                 {
                     "id": 1,
                     "name": "yellow",
-                    "description": "Battery charge is greater than 40%"
+                    "description": "Battery partly discharged, battery should be charged by driving the vehicle to avoid loosing functionality (battery charge is greater than 40%)."
                 },
                 {
                     "id": 2,
                     "name": "green",
-                    "description": "Battery charge is greater than 70%"
+                    "description": "Ok, (battery charge is greater than 70%)."
+                },
+                {
+                    "id": 3,
+                    "name": "orange",
+                    "description": "Battery is now in saving mode, remote commands are not possible anymore, battery should be charged by driving the vehicle."
+                },
+                {
+                    "id": 4,
+                    "name": "green_yellow",
+                    "description": "Battery partly discharged but ok."
                 }
             ],
             "examples": [
@@ -1327,6 +1341,66 @@
                         "kilometers": 300.0
                     },
                     "description": "Remaining electric range target is 300.0km."
+                }
+            ]
+        },
+        {
+            "id": 56,
+            "name": "fully_charged_end_times",
+            "name_cased": "fullyChargedEndTimes",
+            "name_pretty": "Fully charged end times",
+            "added": 13,
+            "type": "types.weekday_time",
+            "description": "Time and weekday when the vehicle will be fully charged.",
+            "examples": [
+                {
+                    "data_component": "00051e",
+                    "values": {
+                        "weekday": "monday",
+                        "time": {
+                            "hour": 5,
+                            "minute": 30
+                        }
+                    },
+                    "description": "Vehicle will be fully charged on monday at 05:30."
+                }
+            ]
+        },
+        {
+            "id": 57,
+            "name": "preconditioning_scheduled_time",
+            "name_cased": "preconditioningScheduledTime",
+            "name_pretty": "Preconditioning scheduled time",
+            "added": 13,
+            "type": "types.time",
+            "description": "Preconditioning scheduled departure time.",
+            "examples": [
+                {
+                    "data_component": "051e",
+                    "values": {
+                        "hour": 5,
+                        "minute": 30
+                    },
+                    "description": "Preconditioning scheduled departure time is at 05:30."
+                }
+            ]
+        },
+        {
+            "id": 58,
+            "name": "preconditioning_remaining_time",
+            "name_cased": "preconditioningRemainingTime",
+            "name_pretty": "Preconditioning remaining time",
+            "added": 13,
+            "type": "unit.duration",
+            "size": 10,
+            "description": "Time until preconditioning is complete.",
+            "examples": [
+                {
+                    "data_component": "0701405b800000000000",
+                    "value": {
+                        "minutes": 110.0
+                    },
+                    "description": "Preconditioning is completed in 110.0min."
                 }
             ]
         }

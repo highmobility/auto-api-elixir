@@ -213,7 +213,7 @@
             "name_cased": "hvacWeekdayStartingTimes",
             "name_singular": "hvac_weekday_starting_time",
             "name_pretty": "HVAC weekday starting times",
-            "type": "types.hvac_weekday_starting_time",
+            "type": "types.weekday_time",
             "multiple": true,
             "examples": [
                 {

@@ -677,6 +677,23 @@
             ]
         },
         {
+            "name": "triggered",
+            "name_cased": "triggered",
+            "name_pretty": "Triggered",
+            "type": "enum",
+            "size": 1,
+            "enum_values": [
+                {
+                    "id": 0,
+                    "name": "not_triggered"
+                },
+                {
+                    "id": 1,
+                    "name": "triggered"
+                }
+            ]
+        },
+        {
             "name": "weekday",
             "name_cased": "weekday",
             "name_pretty": "Weekday",
@@ -2695,25 +2712,6 @@
             ]
         },
         {
-            "name": "hvac_weekday_starting_time",
-            "name_cased": "HVACWeekdayStartingTime",
-            "name_pretty": "HVAC weekday starting time",
-            "type": "custom",
-            "size": 3,
-            "items": [
-                {
-                    "name": "weekday",
-                    "name_cased": "weekday",
-                    "type": "types.weekday"
-                },
-                {
-                    "name": "time",
-                    "name_cased": "time",
-                    "type": "types.time"
-                }
-            ]
-        },
-        {
             "name": "lane_keep_assist_state",
             "name_cased": "laneKeepAssistState",
             "name_pretty": "Lane keep assist state",
@@ -3096,6 +3094,14 @@
                         {
                             "id": 2,
                             "name": "alert"
+                        },
+                        {
+                            "id": 3,
+                            "name": "soft"
+                        },
+                        {
+                            "id": 4,
+                            "name": "deflation"
                         }
                     ]
                 }
@@ -3237,6 +3243,25 @@
                     "name": "event",
                     "name_cased": "event",
                     "type": "events.event"
+                }
+            ]
+        },
+        {
+            "name": "weekday_time",
+            "name_cased": "weekdayTime",
+            "name_pretty": "Weekday time",
+            "type": "custom",
+            "size": 3,
+            "items": [
+                {
+                    "name": "weekday",
+                    "name_cased": "weekday",
+                    "type": "types.weekday"
+                },
+                {
+                    "name": "time",
+                    "name_cased": "time",
+                    "type": "types.time"
                 }
             ]
         },

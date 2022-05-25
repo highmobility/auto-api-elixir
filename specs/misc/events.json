@@ -39,26 +39,6 @@
                     "description": "Sent when the tire pressure changed to low or too high."
                 },
                 {
-                    "id": 6,
-                    "name": "harsh_acceleration_triggered",
-                    "description": "Sent when the vehicle\u2019s acceleration rate exceeds the configurable limit for hard acceleration for a duration exceeding the configurable time duration limit."
-                },
-                {
-                    "id": 7,
-                    "name": "harsh_acceleration_pedal_position_triggered",
-                    "description": "Sent when the vehicle\u2019s acceleration pedal position exceeds the configurable limit for hard acceleration for a duration exceeding the configurable time duration limit."
-                },
-                {
-                    "id": 8,
-                    "name": "harsh_braking_triggered",
-                    "description": "Indicates if the vehicle\u2019s deceleration rate exceeds the configurable limit for harsh braking for a duration exceeding the configurable time limit."
-                },
-                {
-                    "id": 9,
-                    "name": "harsh_cornering_triggered",
-                    "description": "Indicates if the vehicle\u2019s lateral acceleration rate exceeds the configurable limit for harsh cornering for a duration exceeding the configurable time duration limit."
-                },
-                {
                     "id": 10,
                     "name": "seat_belt_triggered",
                     "description": "Indicates a seat belt is buckled while the vehicle is moving."
