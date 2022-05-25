@@ -44,7 +44,7 @@ defmodule AutoApi.UnitType.Meta do
 
             iex> types = AutoApi.UnitType.all()
             iex> length(types)
-            18
+            19
             iex> List.first(types)
             :acceleration
         """

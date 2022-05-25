@@ -1015,11 +1015,13 @@
                 {
                     "name": "axle",
                     "name_cased": "axle",
+                    "size": 1,
                     "type": "types.axle"
                 },
                 {
                     "name": "distance",
                     "name_cased": "distance",
+                    "size": 10,
                     "type": "unit.length"
                 }
             ]
@@ -3005,6 +3007,36 @@
                     "type": "unit.torque",
                     "size": 10,
                     "description": "The suspension spring rate"
+                }
+            ]
+        },
+        {
+            "name": "temperature_extreme",
+            "name_cased": "temperatureExtreme",
+            "name_pretty": "Temperature extreme",
+            "type": "custom",
+            "size": 11,
+            "items": [
+                {
+                    "name": "extreme",
+                    "name_cased": "extreme",
+                    "type": "enum",
+                    "size": 1,
+                    "enum_values": [
+                        {
+                            "id": 0,
+                            "name": "highest"
+                        },
+                        {
+                            "id": 1,
+                            "name": "lowest"
+                        }
+                    ]
+                },
+                {
+                    "name": "temperature",
+                    "name_cased": "temperature",
+                    "type": "unit.temperature"
                 }
             ]
         },

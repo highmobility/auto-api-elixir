@@ -272,7 +272,13 @@
                 },
                 {
                     "id": 3,
-                    "name": "conductive"
+                    "name": "conductive",
+                    "disabled_in_setter": true
+                },
+                {
+                    "id": 4,
+                    "name": "push_button",
+                    "disabled_in_setter": true
                 }
             ],
             "examples": [
@@ -610,7 +616,7 @@
             "added": 12,
             "type": "unit.electric_current",
             "size": 10,
-            "description": "Battery current",
+            "description": "Battery current - charging if posititive and discharning when negative.",
             "examples": [
                 {
                     "data_component": "0900bfe3333333333333",
@@ -932,7 +938,7 @@
             "added": 13,
             "type": "unit.energy",
             "size": 10,
-            "description": "Maximum energy content of the high-voltage battery.",
+            "description": "Maximum available energy content of the high-voltage battery.",
             "examples": [
                 {
                     "data_component": "0c044058c00000000000",
@@ -1401,6 +1407,230 @@
                         "minutes": 110.0
                     },
                     "description": "Preconditioning is completed in 110.0min."
+                }
+            ]
+        },
+        {
+            "id": 59,
+            "name": "battery_voltage",
+            "name_cased": "batteryVoltage",
+            "name_pretty": "Battery voltage",
+            "added": 13,
+            "type": "unit.electric_potential_difference",
+            "size": 10,
+            "description": "High-voltage battery electric potential difference (aka voltage).",
+            "examples": [
+                {
+                    "data_component": "0a00405e000000000000",
+                    "value": {
+                        "volts": 120.0
+                    },
+                    "description": "HV battery voltage is 120.0V."
+                }
+            ]
+        },
+        {
+            "id": 60,
+            "name": "battery_tempretature_extremes",
+            "name_cased": "batteryTempretatureExtremes",
+            "name_pretty": "Battery tempretature extremes",
+            "added": 13,
+            "type": "types.temperature_extreme",
+            "description": "Current highest-lowest temperature inside the battery.",
+            "examples": [
+                {
+                    "data_component": "0017014055400000000000",
+                    "values": {
+                        "extreme": "highest",
+                        "temperature": {
+                            "celsius": 85.0
+                        }
+                    },
+                    "description": "Battery highest temperature is 85.0C."
+                }
+            ]
+        },
+        {
+            "id": 61,
+            "name": "battery_temperature_control_demand",
+            "name_cased": "batteryTemperatureControlDemand",
+            "name_pretty": "Battery temperature control demand",
+            "added": 13,
+            "type": "enum",
+            "size": 1,
+            "description": "Current demand of HV battery temperature control system.",
+            "enum_values": [
+                {
+                    "id": 0,
+                    "name": "high_cooling"
+                },
+                {
+                    "id": 1,
+                    "name": "medium_cooling"
+                },
+                {
+                    "id": 2,
+                    "name": "low_cooling"
+                },
+                {
+                    "id": 3,
+                    "name": "no_temperature_requirement"
+                },
+                {
+                    "id": 4,
+                    "name": "low_heating"
+                },
+                {
+                    "id": 5,
+                    "name": "medium_heating"
+                },
+                {
+                    "id": 6,
+                    "name": "high_heating"
+                },
+                {
+                    "id": 7,
+                    "name": "circulation_requirement"
+                }
+            ],
+            "examples": [
+                {
+                    "data_component": "00",
+                    "value": "high_cooling_demand",
+                    "description": "Battery temperature control system demands high cooling."
+                }
+            ]
+        },
+        {
+            "id": 62,
+            "name": "charging_current",
+            "name_cased": "chargingCurrent",
+            "name_pretty": "Charging current",
+            "added": 13,
+            "type": "unit.electric_current",
+            "size": 10,
+            "description": "Charging electric current.",
+            "examples": [
+                {
+                    "data_component": "090040091eb851eb851f",
+                    "value": {
+                        "amperes": 3.14
+                    },
+                    "description": "Charging current is 3.14A."
+                }
+            ]
+        },
+        {
+            "id": 63,
+            "name": "battery_status",
+            "name_cased": "batteryStatus",
+            "name_pretty": "Battery status",
+            "added": 13,
+            "type": "enum",
+            "size": 1,
+            "description": "Battery state.",
+            "enum_values": [
+                {
+                    "id": 0,
+                    "name": "inactive"
+                },
+                {
+                    "id": 1,
+                    "name": "active"
+                },
+                {
+                    "id": 2,
+                    "name": "balancing"
+                },
+                {
+                    "id": 3,
+                    "name": "external_load"
+                },
+                {
+                    "id": 4,
+                    "name": "load"
+                },
+                {
+                    "id": 5,
+                    "name": "error"
+                },
+                {
+                    "id": 6,
+                    "name": "initialising"
+                }
+            ],
+            "examples": [
+                {
+                    "data_component": "01",
+                    "value": "active",
+                    "description": "Battery is in an active state."
+                }
+            ]
+        },
+        {
+            "id": 64,
+            "name": "battery_led",
+            "name_cased": "batteryLed",
+            "name_pretty": "Battery led",
+            "added": 13,
+            "type": "enum",
+            "size": 1,
+            "description": "State of LED for the battery.",
+            "enum_values": [
+                {
+                    "id": 0,
+                    "name": "no_colour"
+                },
+                {
+                    "id": 1,
+                    "name": "white"
+                },
+                {
+                    "id": 2,
+                    "name": "yellow"
+                },
+                {
+                    "id": 3,
+                    "name": "green"
+                },
+                {
+                    "id": 4,
+                    "name": "red"
+                },
+                {
+                    "id": 5,
+                    "name": "yellow_pulsing"
+                },
+                {
+                    "id": 6,
+                    "name": "green_pulsing"
+                },
+                {
+                    "id": 7,
+                    "name": "red_pulsing"
+                },
+                {
+                    "id": 8,
+                    "name": "green_red_pulsing"
+                },
+                {
+                    "id": 9,
+                    "name": "green_flashing"
+                },
+                {
+                    "id": 10,
+                    "name": "initialising"
+                },
+                {
+                    "id": 11,
+                    "name": "error"
+                }
+            ],
+            "examples": [
+                {
+                    "data_component": "00",
+                    "value": "no_colour",
+                    "description": "State of battery LED is no colour."
                 }
             ]
         }

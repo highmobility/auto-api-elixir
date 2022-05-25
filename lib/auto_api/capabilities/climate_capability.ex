@@ -32,7 +32,7 @@ defmodule AutoApi.ClimateCapability do
       iex> C.description
       "Climate"
       iex> length(C.properties)
-      16
+      18
       iex> List.first(C.properties)
       {0x01, :inside_temperature}
   """

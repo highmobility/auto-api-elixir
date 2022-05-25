@@ -441,6 +441,14 @@ defmodule AutoApi.Property do
     |> to_value(%{"type" => "uinteger"})
   end
 
+  defp fetch_item_size(_binary_data, _counter, %{"type" => "timestamp"}) do
+    8
+  end
+
+  defp fetch_item_size(_binary_data, _counter, %{"type" => "unit." <> _}) do
+    10
+  end
+
   defp fetch_item_size(_, _, spec) do
     raise("couldn't find size for #{inspect(spec)}")
   end

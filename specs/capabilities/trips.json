@@ -565,6 +565,49 @@
                     "description": "Maximum speed since last ignition on is 67.3km/h"
                 }
             ]
+        },
+        {
+            "id": 22,
+            "name": "road_type",
+            "name_cased": "roadType",
+            "name_pretty": "Road type",
+            "added": 13,
+            "type": "enum",
+            "size": 1,
+            "description": "Type of road travelled on.",
+            "enum_values": [
+                {
+                    "id": 0,
+                    "name": "private_or_gravel"
+                },
+                {
+                    "id": 1,
+                    "name": "local"
+                },
+                {
+                    "id": 2,
+                    "name": "county"
+                },
+                {
+                    "id": 3,
+                    "name": "rural"
+                },
+                {
+                    "id": 4,
+                    "name": "federal_highway"
+                },
+                {
+                    "id": 5,
+                    "name": "highway"
+                }
+            ],
+            "examples": [
+                {
+                    "data_component": "01",
+                    "value": "local",
+                    "description": "Road was of local type."
+                }
+            ]
         }
     ]
 }

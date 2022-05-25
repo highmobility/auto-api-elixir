@@ -51,6 +51,10 @@
                 {
                     "id": 5,
                     "name": "inside_car"
+                },
+                {
+                    "id": 6,
+                    "name": "not_inside"
                 }
             ],
             "examples": [
