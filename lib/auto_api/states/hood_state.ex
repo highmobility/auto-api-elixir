@@ -25,17 +25,7 @@ defmodule AutoApi.HoodState do
   Keeps Hood state
   """
 
-  alias AutoApi.State
-
-  @type position :: :closed | :open | :intermediate
-
   use AutoApi.State, spec_file: "hood.json"
-
-  @type t :: %__MODULE__{
-          position: State.property(position),
-          lock: State.property(AutoApi.CommonData.lock()),
-          lock_safety: State.property(AutoApi.CommonData.lock_safety())
-        }
 
   @doc """
   Build state based on binary value

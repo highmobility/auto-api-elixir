@@ -25,64 +25,7 @@ defmodule AutoApi.TripsState do
   Trips state
   """
 
-  alias AutoApi.{CommonData, State, UnitType}
-
   use AutoApi.State, spec_file: "trips.json"
-
-  @type address_component :: %{type: address_component_types(), value: String.t()}
-
-  @type address_component_types ::
-          :city
-          | :country
-          | :country_short
-          | :district
-          | :postal_code
-          | :street
-          | :state_province
-          | :other
-
-  @type eco_level ::
-          :high
-          | :medium
-
-  @type event ::
-          :harsh_braking
-          | :harsh_acceleration
-          | :sharp_turn
-          | :over_rpm
-          | :overspeed
-          | :idling_engine_on
-
-  @type threshold :: %{
-          type: :zero | :one,
-          value: float()
-        }
-
-  @type type :: :single | :multi | :eco
-
-  @type t :: %__MODULE__{
-          type: State.property(type()),
-          driver_name: State.property(String.t()),
-          description: State.property(String.t()),
-          start_time: State.property(DateTime.t()),
-          end_time: State.property(DateTime.t()),
-          start_address: State.property(String.t()),
-          end_address: State.property(String.t()),
-          start_coordinates: State.property(CommonData.coordinates()),
-          end_coordinates: State.property(CommonData.coordinates()),
-          start_odometer: State.property(UnitType.length()),
-          end_odometer: State.property(UnitType.length()),
-          average_fuel_consumption: State.property(UnitType.fuel_efficiency()),
-          distance: State.property(UnitType.length()),
-          start_address_components: State.multiple_property(address_component()),
-          end_address_components: State.multiple_property(address_component()),
-          event: State.property(event()),
-          eco_level: State.property(eco_level()),
-          thresholds: State.multiple_property(threshold()),
-          total_fuel_consumption: State.property(UnitType.volume()),
-          total_idle_fuel_consumption: State.property(UnitType.length()),
-          maximum_speed: State.property(UnitType.speed())
-        }
 
   @doc """
   Build state based on binary value

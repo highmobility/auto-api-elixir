@@ -25,13 +25,7 @@ defmodule AutoApi.ParkingBrakeState do
   ParkingBrake state
   """
 
-  alias AutoApi.{CommonData, State}
-
   use AutoApi.State, spec_file: "parking_brake.json"
-
-  @type t :: %__MODULE__{
-          status: State.property(CommonData.activity())
-        }
 
   @doc """
   Build state based on binary value

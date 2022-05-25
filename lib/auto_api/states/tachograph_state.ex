@@ -26,39 +26,7 @@ defmodule AutoApi.TachographState do
 
   """
 
-  alias AutoApi.{State, UnitType}
-
   use AutoApi.State, spec_file: "tachograph.json"
-
-  @type vehicle_motion :: :not_detected | :detected
-  @type vehicle_overspeed :: :no_overspeed | :overspeed
-  @type vehicle_direction :: :forward | :reverse
-  @type working_state :: :resting | :driver_available | :working | :driving
-  @type time_state ::
-          :normal
-          | :fifteen_min_before_four
-          | :four_reached
-          | :fifteen_min_before_nine
-          | :nine_reached
-          | :fifteen_min_before_sixteen
-          | :sixteen_reached
-  @type card_present :: :not_present | :present
-  @type driver_working_state ::
-          %{working_state: working_state, driver_number: integer}
-  @type driver_time_state ::
-          %{time_state: time_state, driver_number: integer}
-  @type drivers_cards_present ::
-          %{card_present: card_present, driver_number: integer}
-
-  @type t :: %__MODULE__{
-          drivers_working_states: State.multiple_property(driver_working_state),
-          drivers_time_states: State.multiple_property(driver_time_state),
-          drivers_cards_present: State.multiple_property(drivers_cards_present),
-          vehicle_motion: State.property(vehicle_motion),
-          vehicle_overspeed: State.property(vehicle_overspeed),
-          vehicle_direction: State.property(vehicle_direction),
-          vehicle_speed: State.property(UnitType.speed())
-        }
 
   @doc """
   Build state based on binary value

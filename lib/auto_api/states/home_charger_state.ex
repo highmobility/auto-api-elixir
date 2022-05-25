@@ -25,40 +25,7 @@ defmodule AutoApi.HomeChargerState do
   HomeCharger state
   """
 
-  alias AutoApi.{CommonData, State, UnitType}
-
   use AutoApi.State, spec_file: "home_charger.json"
-
-  @type charging_status :: :disconnected | :plugged_in | :charging
-  @type authentication_mechanism :: :pin | :app
-  @type plug_type :: :type_1 | :type_2 | :ccs | :chademo
-  @type authentication_state :: :authenticated | :unauthenticated
-  @type pricing_type :: :starting_fee | :per_minute | :per_kwh
-  @type price_tariff :: %{
-          currency: String.t(),
-          price: float,
-          pricing_type: pricing_type
-        }
-
-  @type t :: %__MODULE__{
-          charging_status: State.property(charging_status),
-          authentication_mechanism: State.property(authentication_mechanism),
-          plug_type: State.property(plug_type),
-          # Deprecated
-          charging_power_kw: State.property(UnitType.power()),
-          solar_charging: State.property(CommonData.activity()),
-          wi_fi_hotspot_enabled: State.property(CommonData.enabled_state()),
-          wi_fi_hotspot_ssid: State.property(String.t()),
-          wi_fi_hotspot_security: State.property(CommonData.network_security()),
-          wi_fi_hotspot_password: State.property(String.t()),
-          authentication_state: State.property(authentication_state),
-          charge_current: State.property(UnitType.electric_current()),
-          maximum_charge_current: State.property(UnitType.electric_current()),
-          minimum_charge_current: State.property(UnitType.electric_current()),
-          coordinates: State.property(CommonData.coordinates()),
-          price_tariffs: State.multiple_property(price_tariff),
-          charging_power: State.property(UnitType.power())
-        }
 
   @doc """
   Build state based on binary value

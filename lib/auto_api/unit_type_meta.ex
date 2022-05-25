@@ -143,9 +143,14 @@ defmodule AutoApi.UnitType.Meta do
               into: %{},
               do: {String.to_atom(unit["name"]), unit["id"]}
 
+        units_typespec = AutoApi.TypeSpec.enum_typespec(units)
+        value_typespec = AutoApi.TypeSpec.typespec(%{"type" => "double"})
+
         quote do
-          # Here we could expand atom() to the actual values instead
-          @type unquote(name_atom)() :: %{value: float(), unit: atom()}
+          @type unquote(name_atom)() :: %{
+                  value: unquote(value_typespec),
+                  unit: unquote(units_typespec)
+                }
 
           @units unquote(Macro.escape(units))
           @unit_names unquote(Macro.escape(unit_names))

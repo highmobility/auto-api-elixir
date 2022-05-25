@@ -25,20 +25,7 @@ defmodule AutoApi.SeatsState do
   Seats state
   """
 
-  alias AutoApi.State
-
   use AutoApi.State, spec_file: "seats.json"
-
-  @type seat_location :: :front_left | :front_right | :rear_right | :rear_left | :rear_center
-  @type detected :: :detected | :not_detected
-  @type persons_detected :: %{location: seat_location, detected: detected}
-  @type seatbelt_state :: :not_fastened | :fastened
-  @type seatbelts_state :: %{location: seat_location, fastened_state: seatbelt_state}
-
-  @type t :: %__MODULE__{
-          persons_detected: State.multiple_property(persons_detected),
-          seatbelts_state: State.multiple_property(seatbelts_state)
-        }
 
   @doc """
   Build state based on binary value

@@ -25,41 +25,7 @@ defmodule AutoApi.CrashState do
   Keeps Crash state
   """
 
-  alias AutoApi.{CommonData, State}
-
   use AutoApi.State, spec_file: "crash.json"
-
-  @type crash_incident :: %{
-          location: :front | :lateral | :rear,
-          severity: :very_high | :high | :medium | :low,
-          repairs: :unknown | :needed | :not_needed
-        }
-
-  @type type :: :pedestrian | :non_pedestrian
-
-  @type tipped_state :: :tipped_over | :not_tipped
-
-  @type impact_zone ::
-          :pedestrian_protection
-          | :rollover
-          | :rear_passenger_side
-          | :rear_driver_side
-          | :side_passenger_side
-          | :side_driver_side
-          | :front_passenger_side
-          | :front_driver_side
-
-  @type crash_status :: :normal | :restraints_engaged | :airbag_triggered
-
-  @type t :: %__MODULE__{
-          incidents: State.multiple_property(crash_incident()),
-          type: State.property(type()),
-          tipped_state: State.property(tipped_state()),
-          automatic_ecall: State.property(CommonData.enabled_state()),
-          severity: State.property(integer()),
-          impact_zone: State.multiple_property(impact_zone()),
-          status: State.property(crash_status)
-        }
 
   @doc """
   Build state based on binary value

@@ -25,19 +25,7 @@ defmodule AutoApi.ParkingTicketState do
   ParkingTicket state
   """
 
-  alias AutoApi.State
-
   use AutoApi.State, spec_file: "parking_ticket.json"
-
-  @type parking_ticket_state :: :ended | :started
-
-  @type t :: %__MODULE__{
-          status: State.property(parking_ticket_state),
-          operator_name: State.property(String.t()),
-          operator_ticket_id: State.property(String.t()),
-          ticket_start_time: State.property(DateTime.t()),
-          ticket_end_time: State.property(DateTime.t())
-        }
 
   @doc """
   Build state based on binary value

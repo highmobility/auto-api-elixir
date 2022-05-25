@@ -25,14 +25,7 @@ defmodule AutoApi.MultiCommandState do
   MultiCommand state
   """
 
-  alias AutoApi.State
-
   use AutoApi.State, spec_file: "multi_command.json"
-
-  @type t :: %__MODULE__{
-          multi_states: State.multiple_property(struct()),
-          multi_commands: State.multiple_property(struct())
-        }
 
   @doc """
   Build state based on binary value

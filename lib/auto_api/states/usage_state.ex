@@ -25,77 +25,7 @@ defmodule AutoApi.UsageState do
   Usage state
   """
 
-  alias AutoApi.{CommonData, State, UnitType}
-
   use AutoApi.State, spec_file: "usage.json"
-
-  @type distance_over_time :: %{
-          distance: UnitType.length(),
-          time: UnitType.duration()
-        }
-  @type driving_modes_activation_period :: %{
-          driving_mode: CommonData.driving_mode(),
-          period: float
-        }
-  @type driving_mode_energy_consumption :: %{
-          driving_mode: CommonData.driving_mode(),
-          consumption: UnitType.energy()
-        }
-  @type grade :: :excellent | :normal | :warning
-
-  @type trip_meter :: %{
-          id: byte(),
-          distance: UnitType.length()
-        }
-
-  @type t :: %__MODULE__{
-          average_weekly_distance: State.property(UnitType.length()),
-          average_weekly_distance_long_run: State.property(UnitType.length()),
-          acceleration_evaluation: State.property(float),
-          driving_style_evaluation: State.property(float),
-          driving_modes_activation_periods:
-            State.multiple_property(driving_modes_activation_period),
-          driving_modes_energy_consumptions:
-            State.multiple_property(driving_mode_energy_consumption),
-          last_trip_energy_consumption: State.property(UnitType.energy()),
-          last_trip_fuel_consumption: State.property(UnitType.volume()),
-          # Deprecated
-          mileage_after_last_trip: State.property(UnitType.length()),
-          last_trip_electric_portion: State.property(float),
-          last_trip_average_energy_recuperation: State.property(UnitType.energy_efficiency()),
-          last_trip_battery_remaining: State.property(float),
-          last_trip_date: State.property(DateTime.t()),
-          average_fuel_consumption: State.property(UnitType.fuel_efficiency()),
-          current_fuel_consumption: State.property(UnitType.fuel_efficiency()),
-          odometer_after_last_trip: State.property(UnitType.length()),
-          safety_driving_score: State.property(float),
-          rapid_acceleration_grade: State.property(grade()),
-          rapid_deceleration_grade: State.property(grade()),
-          late_night_grade: State.property(grade()),
-          distance_over_time: State.property(distance_over_time),
-          electric_consumption_rate_since_start: State.property(UnitType.energy_efficiency()),
-          electric_consumption_rate_since_reset: State.property(UnitType.energy_efficiency()),
-          electric_distance_last_trip: State.property(UnitType.length()),
-          electric_distance_since_reset: State.property(UnitType.length()),
-          electric_duration_last_trip: State.property(UnitType.duration()),
-          electric_duration_since_reset: State.property(UnitType.duration()),
-          fuel_consumption_rate_last_trip: State.property(UnitType.fuel_efficiency()),
-          fuel_consumption_rate_since_reset: State.property(UnitType.fuel_efficiency()),
-          average_speed_last_trip: State.property(UnitType.speed()),
-          average_speed_since_reset: State.property(UnitType.speed()),
-          fuel_distance_last_trip: State.property(UnitType.length()),
-          fuel_distance_since_reset: State.property(UnitType.length()),
-          driving_duration_last_trip: State.property(UnitType.duration()),
-          driving_duration_since_reset: State.property(UnitType.duration()),
-          eco_score_total: State.property(float()),
-          eco_score_free_wheel: State.property(float()),
-          eco_score_constant: State.property(float()),
-          eco_score_bonus_range: State.property(UnitType.length()),
-          trip_meters: State.multiple_property(trip_meter()),
-          electric_consumption_average: State.property(UnitType.energy_efficiency()),
-          braking_evaluation: State.property(float()),
-          average_speed: State.property(UnitType.speed())
-        }
 
   @doc """
   Build state based on binary value

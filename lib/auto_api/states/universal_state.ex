@@ -25,15 +25,7 @@ defmodule AutoApi.UniversalState do
   Universal state
   """
 
-  alias AutoApi.State
-  alias AutoApi.UniversalProperties
-
   use AutoApi.State, spec_file: "universal.json"
-
-  @type t :: %__MODULE__{
-          vin: State.property(UniversalProperties.vin()),
-          brand: State.property(UniversalProperties.brand())
-        }
 
   @doc """
   Build state based on binary value

@@ -25,17 +25,7 @@ defmodule AutoApi.WiFiState do
   WiFi state
   """
 
-  alias AutoApi.{CommonData, State}
-
   use AutoApi.State, spec_file: "wi_fi.json"
-
-  @type t :: %__MODULE__{
-          status: State.property(CommonData.enabled_state()),
-          network_connected: State.property(CommonData.connection_state()),
-          network_ssid: State.property(String.t()),
-          network_security: State.property(CommonData.network_security()),
-          password: State.property(String.t())
-        }
 
   @doc """
   Build state based on binary value

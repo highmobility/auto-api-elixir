@@ -25,21 +25,7 @@ defmodule AutoApi.VehicleLocationState do
   VehicleLocationState
   """
 
-  alias AutoApi.{CommonData, State, UnitType}
-
   use AutoApi.State, spec_file: "vehicle_location.json"
-
-  @type gps_source :: :dead_reckoning | :real | :none
-
-  @type t :: %__MODULE__{
-          coordinates: State.property(CommonData.coordinates()),
-          heading: State.property(UnitType.angle()),
-          altitude: State.property(UnitType.length()),
-          precision: State.property(UnitType.length()),
-          gps_source: State.property(gps_source()),
-          gps_signal_strength: State.property(float()),
-          fuzzy_coordinates: State.property(CommonData.coordinates())
-        }
 
   @doc """
   Build state based on binary value

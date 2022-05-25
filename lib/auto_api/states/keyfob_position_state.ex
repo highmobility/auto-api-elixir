@@ -25,21 +25,7 @@ defmodule AutoApi.KeyfobPositionState do
   KeyfobPosition state
   """
 
-  alias AutoApi.State
-
   use AutoApi.State, spec_file: "keyfob_position.json"
-
-  @type position ::
-          :out_of_range
-          | :outside_driver_side
-          | :outside_in_front_of_car
-          | :outside_passenger_side
-          | :outside_behind_car
-          | :inside_car
-
-  @type t :: %__MODULE__{
-          location: State.property(position)
-        }
 
   @doc """
   Build state based on binary value
