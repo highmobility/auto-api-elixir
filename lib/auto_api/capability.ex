@@ -49,8 +49,7 @@ defmodule AutoApi.Capability do
         else
           @desc @raw_spec["name"]
                 |> String.split("_")
-                |> Enum.map(&String.capitalize/1)
-                |> Enum.join(" ")
+                |> Enum.map_join(&String.capitalize/1)
         end
 
         @properties unquote(Macro.escape(properties))
