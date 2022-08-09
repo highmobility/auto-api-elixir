@@ -579,6 +579,11 @@
                     "id": 10,
                     "name": "foreign_object_detected",
                     "disabled_in_setter": true
+                },
+                {
+                    "id": 11,
+                    "name": "conditioning",
+                    "disabled_in_setter": true
                 }
             ],
             "examples": [
@@ -1434,6 +1439,10 @@
             "name": "battery_tempretature_extremes",
             "name_cased": "batteryTempretatureExtremes",
             "name_pretty": "Battery tempretature extremes",
+            "deprecated": {
+                "new_name": "battery_temperature_extremes",
+                "reason": "fixed the name typo"
+            },
             "added": 13,
             "type": "types.temperature_extreme",
             "description": "Current highest-lowest temperature inside the battery.",
@@ -1557,6 +1566,10 @@
                 {
                     "id": 6,
                     "name": "initialising"
+                },
+                {
+                    "id": 7,
+                    "name": "conditioning"
                 }
             ],
             "examples": [
@@ -1631,6 +1644,46 @@
                     "data_component": "00",
                     "value": "no_colour",
                     "description": "State of battery LED is no colour."
+                }
+            ]
+        },
+        {
+            "id": 65,
+            "name": "battery_cooling_temperature",
+            "name_cased": "batteryCoolingTemperature",
+            "name_pretty": "Battery cooling temperature",
+            "added": 13,
+            "type": "unit.temperature",
+            "size": 10,
+            "description": "Battery cooling temperature.",
+            "examples": [
+                {
+                    "data_component": "1701404fb33333333333",
+                    "value": {
+                        "celsius": 63.4
+                    },
+                    "description": "Battery cooling temperature is 63.4C."
+                }
+            ]
+        },
+        {
+            "id": 66,
+            "name": "battery_temperature_extremes",
+            "name_cased": "batteryTemperatureExtremes",
+            "name_pretty": "Battery temperature extremes",
+            "added": 12,
+            "type": "types.temperature_extreme",
+            "description": "Current highest-lowest temperature inside the battery.",
+            "examples": [
+                {
+                    "data_component": "0017014055400000000000",
+                    "values": {
+                        "extreme": "highest",
+                        "temperature": {
+                            "celsius": 85.0
+                        }
+                    },
+                    "description": "Battery highest temperature is 85.0C."
                 }
             ]
         }

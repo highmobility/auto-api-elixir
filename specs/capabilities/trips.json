@@ -599,6 +599,14 @@
                 {
                     "id": 5,
                     "name": "highway"
+                },
+                {
+                    "id": 6,
+                    "name": "country"
+                },
+                {
+                    "id": 7,
+                    "name": "national"
                 }
             ],
             "examples": [
