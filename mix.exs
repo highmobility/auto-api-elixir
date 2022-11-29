@@ -62,7 +62,6 @@ defmodule AutoApi.Mixfile do
       {:ex_unit_notifier, "~> 1.0", only: :test},
       {:dialyxir, "~> 1.0", only: [:dev, :test], runtime: false},
       {:ex_doc, "~> 0.23", only: :dev},
-      {:earmark, "~> 1.2", only: :dev},
       {:credo, "~> 1.5", only: [:dev, :test], runtime: false},
       {:assertions, "~> 0.10", only: :test}
     ]
