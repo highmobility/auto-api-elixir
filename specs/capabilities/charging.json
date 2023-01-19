@@ -449,7 +449,7 @@
                     "value": {
                         "celsius": 38.4
                     },
-                    "description": "The battery temperature is 38.4\u00b0C"
+                    "description": "The battery temperature is 38.4°C"
                 }
             ]
         },
@@ -583,6 +583,11 @@
                 {
                     "id": 11,
                     "name": "conditioning",
+                    "disabled_in_setter": true
+                },
+                {
+                    "id": 12,
+                    "name": "flap_open",
                     "disabled_in_setter": true
                 }
             ],
@@ -1129,7 +1134,7 @@
             "examples": [
                 {
                     "data_component": "01",
-                    "value": "display_charging_duration",
+                    "value": "display_duration",
                     "description": "Charging duration is displayed in the vehicle."
                 }
             ]
@@ -1176,7 +1181,7 @@
             "examples": [
                 {
                     "data_component": "0100",
-                    "value": {
+                    "values": {
                         "active": "active",
                         "limit": "max"
                     },
@@ -1505,7 +1510,7 @@
             "examples": [
                 {
                     "data_component": "00",
-                    "value": "high_cooling_demand",
+                    "value": "high_cooling",
                     "description": "Battery temperature control system demands high cooling."
                 }
             ]
@@ -1680,10 +1685,81 @@
                     "values": {
                         "extreme": "highest",
                         "temperature": {
-                            "celsius": 85.0
+                            "celsius": 85
                         }
                     },
                     "description": "Battery highest temperature is 85.0C."
+                }
+            ]
+        },
+        {
+            "id": 67,
+            "name": "driving_mode_phev",
+            "name_cased": "drivingModePHEV",
+            "name_pretty": "Driving mode PHEV",
+            "added": 13,
+            "type": "types.driving_mode_phev",
+            "description": "Indicates the current driving mode for Plug-In Hybrid Vehicle.",
+            "examples": [
+                {
+                    "data_component": "05",
+                    "value": "hybrid_parallel",
+                    "description": "Driving mode for PHEV is hybrid parallel."
+                }
+            ]
+        },
+        {
+            "id": 68,
+            "name": "battery_charge_type",
+            "name_cased": "batteryChargeType",
+            "name_pretty": "Battery charge type",
+            "added": 13,
+            "type": "enum",
+            "size": 1,
+            "description": "Battery charge type.",
+            "enum_values": [
+                {
+                    "id": 0,
+                    "name": "no_charge"
+                },
+                {
+                    "id": 1,
+                    "name": "normal"
+                },
+                {
+                    "id": 2,
+                    "name": "accelerated"
+                },
+                {
+                    "id": 3,
+                    "name": "fast"
+                },
+                {
+                    "id": 4,
+                    "name": "quick"
+                },
+                {
+                    "id": 5,
+                    "name": "ultra_fast"
+                },
+                {
+                    "id": 6,
+                    "name": "not_used"
+                },
+                {
+                    "id": 7,
+                    "name": "vehicle_to_home"
+                },
+                {
+                    "id": 8,
+                    "name": "vehicle_to_grid"
+                }
+            ],
+            "examples": [
+                {
+                    "data_component": "04",
+                    "value": "quick",
+                    "description": "Battery charge type is quick."
                 }
             ]
         }

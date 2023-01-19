@@ -159,6 +159,39 @@
             ]
         },
         {
+            "name": "driving_mode_phev",
+            "name_cased": "drivingModePHEV",
+            "name_pretty": "Driving mode PHEV",
+            "type": "enum",
+            "size": 1,
+            "enum_values": [
+                {
+                    "id": 0,
+                    "name": "not_in_traction"
+                },
+                {
+                    "id": 1,
+                    "name": "in_charge"
+                },
+                {
+                    "id": 2,
+                    "name": "full_electric"
+                },
+                {
+                    "id": 3,
+                    "name": "hybrid_serial"
+                },
+                {
+                    "id": 4,
+                    "name": "thermic"
+                },
+                {
+                    "id": 5,
+                    "name": "hybrid_parallel"
+                }
+            ]
+        },
+        {
             "name": "enabled_state",
             "name_cased": "enabledState",
             "name_pretty": "Enabled state",
@@ -824,6 +857,31 @@
                     "type": "unit.acceleration",
                     "size": 10,
                     "description": "The accelaration"
+                }
+            ]
+        },
+        {
+            "name": "accelerator_duration",
+            "name_cased": "acceleratorDuration",
+            "name_pretty": "Accelerator duration",
+            "type": "custom",
+            "size": 18,
+            "items": [
+                {
+                    "name": "pedal_position_threshold",
+                    "name_cased": "pedalPositionThreshold",
+                    "name_pretty": "Pedal position threshold",
+                    "type": "types.percentage",
+                    "size": 8,
+                    "description": "The accelerator pedal position threshold percentage"
+                },
+                {
+                    "name": "duration",
+                    "name_cased": "duration",
+                    "name_pretty": "Duration",
+                    "type": "unit.duration",
+                    "size": 10,
+                    "description": "The duration of the accelerator pedal position"
                 }
             ]
         },
@@ -2235,6 +2293,15 @@
                         {
                             "id": 195,
                             "name": "inspection_warning"
+                        },
+                        {
+                            "id": 196,
+                            "name": "diesel_oil_filter_water_presence",
+                            "name_pretty": "Diesel oil filter has water in it"
+                        },
+                        {
+                            "id": 197,
+                            "name": "engine_drag_torque_control_failure"
                         }
                     ]
                 },
@@ -2479,13 +2546,13 @@
                             "id": 1,
                             "name": "fifteen_min_before_four",
                             "name_cased": "15minBefore4",
-                            "name_pretty": "15 minutes before 4\u00bd hours"
+                            "name_pretty": "15 minutes before 4½ hours"
                         },
                         {
                             "id": 2,
                             "name": "four_reached",
                             "name_cased": "4Reached",
-                            "name_pretty": "4\u00bd hours reached"
+                            "name_pretty": "4½ hours reached"
                         },
                         {
                             "id": 3,
@@ -2955,6 +3022,51 @@
                     "type": "uinteger",
                     "size": 1,
                     "description": "The blue component of RGB"
+                }
+            ]
+        },
+        {
+            "name": "seatbelt_reminder",
+            "name_cased": "seatbeltReminder",
+            "name_pretty": "Seatbelt reminder",
+            "type": "custom",
+            "size": 2,
+            "items": [
+                {
+                    "name": "location",
+                    "name_cased": "location",
+                    "type": "enum",
+                    "size": 1,
+                    "enum_values": [
+                        {
+                            "id": 0,
+                            "name": "driver"
+                        },
+                        {
+                            "id": 1,
+                            "name": "passenger"
+                        }
+                    ]
+                },
+                {
+                    "name": "warning",
+                    "name_cased": "state",
+                    "type": "enum",
+                    "size": 1,
+                    "enum_values": [
+                        {
+                            "id": 0,
+                            "name": "none"
+                        },
+                        {
+                            "id": 1,
+                            "name": "warning_level_1"
+                        },
+                        {
+                            "id": 2,
+                            "name": "warning_level_2"
+                        }
+                    ]
                 }
             ]
         },

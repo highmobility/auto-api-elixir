@@ -51,7 +51,7 @@
                     "value": {
                         "celsius": 99.5
                     },
-                    "description": "Engine oil temperature is 99.5\u00b0C"
+                    "description": "Engine oil temperature is 99.5°C"
                 }
             ]
         },
@@ -251,9 +251,9 @@
                 {
                     "data_component": "17014034000000000000",
                     "value": {
-                        "celsius": 20.0
+                        "celsius": 20
                     },
-                    "description": "Engine coolant temperature is 20\u00b0C"
+                    "description": "Engine coolant temperature is 20°C"
                 }
             ]
         },
@@ -495,7 +495,7 @@
                             "celsius": 40.1
                         }
                     },
-                    "description": "Front left tire temperature is 40.1\u00b0C"
+                    "description": "Front left tire temperature is 40.1°C"
                 },
                 {
                     "data_component": "011701404419999999999a",
@@ -515,7 +515,7 @@
                             "celsius": 40.3
                         }
                     },
-                    "description": "Rear right tire temperature is 40.3\u00b0C"
+                    "description": "Rear right tire temperature is 40.3°C"
                 },
                 {
                     "data_component": "0317014044333333333333",
@@ -525,7 +525,7 @@
                             "celsius": 40.4
                         }
                     },
-                    "description": "Rear left tire temperature is 40.4\u00b0C"
+                    "description": "Rear left tire temperature is 40.4°C"
                 },
                 {
                     "data_component": "0417014044400000000000",
@@ -535,7 +535,7 @@
                             "celsius": 40.5
                         }
                     },
-                    "description": "Rear right outer tire temperature is 40.5\u00b0C"
+                    "description": "Rear right outer tire temperature is 40.5°C"
                 },
                 {
                     "data_component": "05170140444ccccccccccd",
@@ -545,7 +545,7 @@
                             "celsius": 40.6
                         }
                     },
-                    "description": "Rear left outer tire temperature is 40.6\u00b0C"
+                    "description": "Rear left outer tire temperature is 40.6°C"
                 },
                 {
                     "data_component": "0617014024666666666666",
@@ -555,7 +555,7 @@
                             "celsius": 10.2
                         }
                     },
-                    "description": "Spare tire temperature is 10.2\u00b0C"
+                    "description": "Spare tire temperature is 10.2°C"
                 }
             ]
         },
@@ -1428,6 +1428,22 @@
                     "data_component": "00",
                     "value": "ok",
                     "description": "Engine oil service status is 'ok'"
+                }
+            ]
+        },
+        {
+            "id": 56,
+            "name": "passenger_airbag_status",
+            "name_cased": "passengerAirbagStatus",
+            "name_pretty": "Passenger airbag status",
+            "added": 13,
+            "type": "types.active_state",
+            "description": "Passenger airbag is activated or not",
+            "examples": [
+                {
+                    "data_component": "01",
+                    "value": "active",
+                    "description": "Passenger airbag is `active`"
                 }
             ]
         }

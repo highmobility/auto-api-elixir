@@ -122,8 +122,8 @@
             "examples": [
                 {
                     "data_component": "536b616c69747a65722053747261c39f652036382c203130393937204265726c696e2c204765726d616e79",
-                    "value": "Skalitzer Stra\u00dfe 68, 10997 Berlin, Germany",
-                    "description": "Trip started from Skalitzer Stra\u00dfe 68, 10997 Berlin, Germany"
+                    "value": "Skalitzer Straße 68, 10997 Berlin, Germany",
+                    "description": "Trip started from Skalitzer Straße 68, 10997 Berlin, Germany"
                 }
             ]
         },
@@ -138,8 +138,8 @@
             "examples": [
                 {
                     "data_component": "536b616c69747a65722053747261c39f652036382c203130393937204265726c696e2c204765726d616e79",
-                    "value": "Skalitzer Stra\u00dfe 68, 10997 Berlin, Germany",
-                    "description": "Trip ended at Skalitzer Stra\u00dfe 68, 10997 Berlin, Germany"
+                    "value": "Skalitzer Straße 68, 10997 Berlin, Germany",
+                    "description": "Trip ended at Skalitzer Straße 68, 10997 Berlin, Germany"
                 }
             ]
         },
@@ -312,9 +312,9 @@
                     "data_component": "050014536b616c69747a65722053747261c39f65203638",
                     "values": {
                         "type": "street",
-                        "value": "Skalitzer Stra\u00dfe 68"
+                        "value": "Skalitzer Straße 68"
                     },
-                    "description": "Street component value is 'Skalitzer Stra\u00dfe 68'"
+                    "description": "Street component value is 'Skalitzer Straße 68'"
                 },
                 {
                     "data_component": "06000b4272616e64656e62757267",
@@ -389,9 +389,9 @@
                     "data_component": "050014536b616c69747a65722053747261c39f65203638",
                     "values": {
                         "type": "street",
-                        "value": "Skalitzer Stra\u00dfe 68"
+                        "value": "Skalitzer Straße 68"
                     },
-                    "description": "Street component value is 'Skalitzer Stra\u00dfe 68'"
+                    "description": "Street component value is 'Skalitzer Straße 68'"
                 },
                 {
                     "data_component": "06000b4272616e64656e62757267",
@@ -444,6 +444,10 @@
                 {
                     "id": 5,
                     "name": "idling_engine_on"
+                },
+                {
+                    "id": 6,
+                    "name": "emergency_braking"
                 }
             ],
             "examples": [
@@ -614,6 +618,23 @@
                     "data_component": "01",
                     "value": "local",
                     "description": "Road was of local type."
+                }
+            ]
+        },
+        {
+            "id": 23,
+            "name": "braking_count",
+            "name_cased": "brakingCount",
+            "name_pretty": "Braking count",
+            "added": 13,
+            "type": "uinteger",
+            "size": 2,
+            "description": "Number of times the brakes were applied during the trip.",
+            "examples": [
+                {
+                    "data_component": "00a1",
+                    "value": 161,
+                    "description": "Brakes were applied 161 times during the trip."
                 }
             ]
         }

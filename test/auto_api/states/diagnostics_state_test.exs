@@ -135,7 +135,8 @@ defmodule AutoApi.DiagnosticsStateTest do
       engine_oil_fluid_level: %Property{data: :low},
       engine_oil_pressure_level: %Property{data: :low_soft},
       engine_time_to_next_service: %Property{data: %{value: 24, unit: :months}},
-      low_voltage_battery_charge_level: %Property{data: :deactivation_level_1}
+      low_voltage_battery_charge_level: %Property{data: :deactivation_level_1},
+      passenger_airbag_status: %Property{data: :active}
     }
 
     new_state =

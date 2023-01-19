@@ -125,7 +125,7 @@
                     "value": {
                         "degrees": 10.0
                     },
-                    "description": "Steering angle is 10\u00b0 to right"
+                    "description": "Steering angle is 10° to right"
                 }
             ]
         },
@@ -161,7 +161,7 @@
                     "value": {
                         "degrees_per_second": 6.66
                     },
-                    "description": "Yaw rate is 6.66\u00b0/s"
+                    "description": "Yaw rate is 6.66°/s"
                 }
             ]
         },
@@ -179,7 +179,7 @@
                     "value": {
                         "degrees": 3.3
                     },
-                    "description": "Rear suspension steering is +3\u00b0"
+                    "description": "Rear suspension steering is +3°"
                 }
             ]
         },
@@ -434,6 +434,27 @@
                     "data_component": "02",
                     "value": "race_start",
                     "description": "Drivetrain is in `race_start` state."
+                }
+            ]
+        },
+        {
+            "id": 20,
+            "name": "accelerator_durations",
+            "name_cased": "acceleratorDurations",
+            "name_pretty": "Accelerator durations",
+            "name_singluar": "accelerator_duration",
+            "added": 13,
+            "type": "types.accelerator_duration",
+            "multiple": true,
+            "description": "Duration during which the accelerator pedal has been pressed more than the given percentage.",
+            "examples": [
+                {
+                    "data_component": "3fe0000000000000 07004093480000000000",
+                    "values": {
+                        "pedal_position_threshold": 0.5,
+                        "duration": 1234
+                    },
+                    "description": "Accelerator pedal has been pressed more than 50% for 1234 seconds."
                 }
             ]
         }

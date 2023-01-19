@@ -32,7 +32,7 @@ defmodule AutoApi.TripsCapability do
       iex> T.description
       "Trips"
       iex> length(T.properties)
-      27
+      28
       iex> List.first(T.properties)
       {1, :type}
   """

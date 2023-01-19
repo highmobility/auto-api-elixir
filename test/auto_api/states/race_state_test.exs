@@ -33,6 +33,29 @@ defmodule AutoApi.RaceStateTest do
     parsed_state = AutoApi.RaceState.from_bin(state_bin)
 
     assert parsed_state.selected_gear.data == -7
+
+    assert parsed_state == state
+  end
+
+  test "converts accelerator_durations struct to binary and vice versa" do
+    state =
+      AutoApi.RaceState.base()
+      |> AutoApi.State.put(
+        :accelerator_durations,
+        %AutoApi.Property{
+          data: %{pedal_position_threshold: 0.5, duration: %{unit: :minutes, value: 4}}
+        }
+      )
+
+    state_bin = AutoApi.RaceState.to_bin(state)
+    parsed_state = AutoApi.RaceState.from_bin(state_bin)
+
+    assert parsed_state.accelerator_durations == [
+             %AutoApi.Property{
+               data: %{duration: %{unit: :minutes, value: 4.0}, pedal_position_threshold: 0.5}
+             }
+           ]
+
     assert parsed_state == state
   end
 end
