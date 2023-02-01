@@ -111,7 +111,7 @@ defmodule AutoApi.UnitTypeStateTest do
       assert List.first(units) == :revolutions_per_minute
 
       assert units = UnitType.units(:duration)
-      assert length(units) == 6
+      assert length(units) == 7
       assert List.first(units) == :seconds
 
       assert units = UnitType.units(:electric_current)

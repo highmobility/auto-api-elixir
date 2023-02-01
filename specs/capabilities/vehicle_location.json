@@ -147,7 +147,7 @@
             "examples": [
                 {
                     "data_component": "404a428f5c28f5c3402acf4f0d844d01",
-                    "value": {
+                    "values": {
                         "latitude": 52.52,
                         "longitude": 13.4049
                     },

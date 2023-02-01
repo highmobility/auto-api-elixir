@@ -618,6 +618,14 @@
                 {
                     "id": 4,
                     "name": "rear_center"
+                },
+                {
+                    "id": 5,
+                    "name": "driver"
+                },
+                {
+                    "id": 6,
+                    "name": "passenger"
                 }
             ]
         },
@@ -857,6 +865,59 @@
                     "type": "unit.acceleration",
                     "size": 10,
                     "description": "The accelaration"
+                }
+            ]
+        },
+        {
+            "name": "acceleration_duration",
+            "name_cased": "accelerationDuration",
+            "name_pretty": "Acceleration duration",
+            "type": "custom",
+            "size": 12,
+            "items": [
+                {
+                    "name": "direction",
+                    "name_cased": "direction",
+                    "type": "enum",
+                    "size": 1,
+                    "enum_values": [
+                        {
+                            "id": 0,
+                            "name": "longitudinal"
+                        },
+                        {
+                            "id": 1,
+                            "name": "lateral"
+                        }
+                    ]
+                },
+                {
+                    "name": "type",
+                    "name_cased": "type",
+                    "type": "enum",
+                    "size": 1,
+                    "enum_values": [
+                        {
+                            "id": 0,
+                            "name": "regular"
+                        },
+                        {
+                            "id": 1,
+                            "name": "positive_outlier"
+                        },
+                        {
+                            "id": 2,
+                            "name": "negative_outlier"
+                        }
+                    ]
+                },
+                {
+                    "name": "duration",
+                    "name_cased": "duration",
+                    "name_pretty": "Duration",
+                    "type": "unit.duration",
+                    "size": 10,
+                    "description": "The duration of the acceleration"
                 }
             ]
         },
@@ -3022,51 +3083,6 @@
                     "type": "uinteger",
                     "size": 1,
                     "description": "The blue component of RGB"
-                }
-            ]
-        },
-        {
-            "name": "seatbelt_reminder",
-            "name_cased": "seatbeltReminder",
-            "name_pretty": "Seatbelt reminder",
-            "type": "custom",
-            "size": 2,
-            "items": [
-                {
-                    "name": "location",
-                    "name_cased": "location",
-                    "type": "enum",
-                    "size": 1,
-                    "enum_values": [
-                        {
-                            "id": 0,
-                            "name": "driver"
-                        },
-                        {
-                            "id": 1,
-                            "name": "passenger"
-                        }
-                    ]
-                },
-                {
-                    "name": "warning",
-                    "name_cased": "state",
-                    "type": "enum",
-                    "size": 1,
-                    "enum_values": [
-                        {
-                            "id": 0,
-                            "name": "none"
-                        },
-                        {
-                            "id": 1,
-                            "name": "warning_level_1"
-                        },
-                        {
-                            "id": 2,
-                            "name": "warning_level_2"
-                        }
-                    ]
                 }
             ]
         },

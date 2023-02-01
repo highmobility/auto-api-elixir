@@ -251,7 +251,7 @@
                 {
                     "data_component": "17014034000000000000",
                     "value": {
-                        "celsius": 20
+                        "celsius": 20.0
                     },
                     "description": "Engine coolant temperature is 20°C"
                 }

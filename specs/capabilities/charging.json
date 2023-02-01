@@ -1685,7 +1685,7 @@
                     "values": {
                         "extreme": "highest",
                         "temperature": {
-                            "celsius": 85
+                            "celsius": 85.0
                         }
                     },
                     "description": "Battery highest temperature is 85.0C."
