@@ -1762,6 +1762,24 @@
                     "description": "Battery charge type is quick."
                 }
             ]
+        },
+        {
+            "id": 69,
+            "name": "distance_to_complete_charge",
+            "name_cased": "distanceToCompleteCharge",
+            "name_pretty": "Distance to complete charge",
+            "type": "unit.length",
+            "size": 10,
+            "description": "Distance until charging completed",
+            "examples": [
+              {
+                  "data_component": "1204405e200000000000",
+                  "value": {
+                    "kilometers": 120.5
+                  },
+                  "description": "Distance to complete charge is 120.5 kilometers."
+              }
+            ]
         }
     ]
 }
