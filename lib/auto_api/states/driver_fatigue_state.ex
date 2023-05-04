@@ -29,15 +29,7 @@ defmodule AutoApi.DriverFatigueState do
   will translate those into modules and property names.
   """
 
-  alias AutoApi.State
-
   use AutoApi.State, spec_file: "driver_fatigue.json"
-
-  @type fatigue_level :: :light | :pause_recommended | :action_needed | :car_ready_to_take_over
-
-  @type t :: %__MODULE__{
-          detected_fatigue_level: State.property(fatigue_level)
-        }
 
   @doc """
   Build state based on binary value

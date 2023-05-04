@@ -25,37 +25,7 @@ defmodule AutoApi.AdasState do
   Keeps Adas state
   """
 
-  alias AutoApi.{CommonData, State}
-
   use AutoApi.State, spec_file: "adas.json"
-
-  @type blind_spot_coverage :: :regular | :trailer
-
-  @type lane_keep_assist_state :: %{
-          location: :left | :right,
-          state: CommonData.activity()
-        }
-  @type muted :: :muted | :not_muted
-
-  @type park_assist :: %{
-          location: CommonData.location_longitudinal(),
-          alarm: CommonData.activity(),
-          muted: muted()
-        }
-
-  @type t :: %__MODULE__{
-          status: State.property(CommonData.on_off()),
-          alertness_system_status: State.property(CommonData.activity()),
-          forward_collision_warning_system: State.property(CommonData.activity()),
-          blind_spot_warning_state: State.property(CommonData.activity()),
-          blind_spot_warning_system_coverage: State.property(blind_spot_coverage()),
-          rear_cross_warning_system: State.property(CommonData.activity()),
-          automated_parking_brake: State.property(CommonData.activity()),
-          lane_keep_assist_system: State.property(CommonData.on_off()),
-          lane_keep_assists_states: State.multiple_property(lane_keep_assist_state()),
-          park_assists: State.multiple_property(park_assist()),
-          blind_spot_warning_system: State.property(CommonData.on_off())
-        }
 
   @doc """
   Build state based on binary value

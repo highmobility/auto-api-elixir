@@ -42,6 +42,7 @@ defmodule AutoApi.UnitTypeStateTest do
              :fuel_efficiency,
              :illuminance,
              :length,
+             :mass,
              :power,
              :pressure,
              :speed,
@@ -110,7 +111,7 @@ defmodule AutoApi.UnitTypeStateTest do
       assert List.first(units) == :revolutions_per_minute
 
       assert units = UnitType.units(:duration)
-      assert length(units) == 6
+      assert length(units) == 7
       assert List.first(units) == :seconds
 
       assert units = UnitType.units(:electric_current)
@@ -122,7 +123,7 @@ defmodule AutoApi.UnitTypeStateTest do
       assert List.first(units) == :volts
 
       assert units = UnitType.units(:energy)
-      assert length(units) == 4
+      assert length(units) == 5
       assert List.first(units) == :joules
 
       assert units = UnitType.units(:energy_efficiency)

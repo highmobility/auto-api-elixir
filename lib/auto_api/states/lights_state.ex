@@ -25,48 +25,7 @@ defmodule AutoApi.LightsState do
   Lights state
   """
 
-  alias AutoApi.{CommonData, State}
-
   use AutoApi.State, spec_file: "lights.json"
-
-  @type ambient_light :: %{
-          red: integer,
-          green: integer,
-          blue: integer
-        }
-
-  @type front_exterior_light :: :inactive | :active | :active_with_full_beam | :dlr | :automatic
-
-  @type light :: %{
-          location: CommonData.location_longitudinal(),
-          state: CommonData.activity()
-        }
-
-  @type parking_light_status :: :off | :left | :right | :both
-
-  @type reading_lamp :: %{
-          location: CommonData.location(),
-          state: CommonData.activity()
-        }
-  @type switch_position ::
-          :automatic
-          | :dipped_headlights
-          | :parking_light_right
-          | :parking_light_left
-          | :sidelights
-
-  @type t :: %__MODULE__{
-          front_exterior_light: State.property(front_exterior_light),
-          rear_exterior_light: State.property(CommonData.activity()),
-          ambient_light_colour: State.property(ambient_light),
-          reverse_light: State.property(CommonData.activity()),
-          emergency_brake_light: State.property(CommonData.activity()),
-          fog_lights: State.multiple_property(light),
-          reading_lamps: State.multiple_property(reading_lamp),
-          interior_lights: State.multiple_property(light),
-          switch_position: State.property(switch_position()),
-          parking_light_status: State.property(parking_light_status())
-        }
 
   @doc """
   Build state based on binary value

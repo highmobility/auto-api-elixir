@@ -167,7 +167,9 @@ defmodule AutoApi.State do
         end
       end
 
-    [base, prop_funs]
+    type_funs = AutoApi.TypeSpec.for_state(properties)
+
+    [base, prop_funs, type_funs]
   end
 
   @doc """

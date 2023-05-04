@@ -25,16 +25,7 @@ defmodule AutoApi.HistoricalState do
   Historical state
   """
 
-  alias AutoApi.State
-
   use AutoApi.State, spec_file: "historical.json"
-
-  @type t :: %__MODULE__{
-          states: State.multiple_property(struct()),
-          capability_id: State.property(integer),
-          start_date: State.property(DateTime.t()),
-          end_date: State.property(DateTime.t())
-        }
 
   @doc """
   Build state based on binary value

@@ -25,15 +25,7 @@ defmodule AutoApi.TrunkState do
   Trunk state
   """
 
-  alias AutoApi.{CommonData, State}
-
   use AutoApi.State, spec_file: "trunk.json"
-
-  @type t :: %__MODULE__{
-          lock: State.property(CommonData.lock()),
-          position: State.property(CommonData.position()),
-          lock_safety: State.property(CommonData.lock_safety())
-        }
 
   @doc """
   Build state based on binary value

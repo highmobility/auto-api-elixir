@@ -150,11 +150,44 @@
                 },
                 {
                     "id": 4,
-                    "name": "ecoPlus"
+                    "name": "eco_plus"
                 },
                 {
                     "id": 5,
                     "name": "comfort"
+                }
+            ]
+        },
+        {
+            "name": "driving_mode_phev",
+            "name_cased": "drivingModePHEV",
+            "name_pretty": "Driving mode PHEV",
+            "type": "enum",
+            "size": 1,
+            "enum_values": [
+                {
+                    "id": 0,
+                    "name": "not_in_traction"
+                },
+                {
+                    "id": 1,
+                    "name": "in_charge"
+                },
+                {
+                    "id": 2,
+                    "name": "full_electric"
+                },
+                {
+                    "id": 3,
+                    "name": "hybrid_serial"
+                },
+                {
+                    "id": 4,
+                    "name": "thermic"
+                },
+                {
+                    "id": 5,
+                    "name": "hybrid_parallel"
                 }
             ]
         },
@@ -239,6 +272,10 @@
                     "id": 12,
                     "name": "lpg",
                     "name_pretty": "Liquefied petroleum gas"
+                },
+                {
+                    "id": 13,
+                    "name": "hybrid"
                 }
             ]
         },
@@ -581,6 +618,35 @@
                 {
                     "id": 4,
                     "name": "rear_center"
+                },
+                {
+                    "id": 5,
+                    "name": "driver"
+                },
+                {
+                    "id": 6,
+                    "name": "passenger"
+                }
+            ]
+        },
+        {
+            "name": "service_status",
+            "name_cased": "serviceStatus",
+            "name_pretty": "Service-Status",
+            "type": "enum",
+            "size": 1,
+            "enum_values": [
+                {
+                    "id": 0,
+                    "name": "ok"
+                },
+                {
+                    "id": 1,
+                    "name": "warning"
+                },
+                {
+                    "id": 2,
+                    "name": "critical"
                 }
             ]
         },
@@ -648,6 +714,23 @@
                     "type": "uinteger",
                     "size": 1,
                     "description": "Value between 0 and 59"
+                }
+            ]
+        },
+        {
+            "name": "triggered",
+            "name_cased": "triggered",
+            "name_pretty": "Triggered",
+            "type": "enum",
+            "size": 1,
+            "enum_values": [
+                {
+                    "id": 0,
+                    "name": "not_triggered"
+                },
+                {
+                    "id": 1,
+                    "name": "triggered"
                 }
             ]
         },
@@ -782,6 +865,84 @@
                     "type": "unit.acceleration",
                     "size": 10,
                     "description": "The accelaration"
+                }
+            ]
+        },
+        {
+            "name": "acceleration_duration",
+            "name_cased": "accelerationDuration",
+            "name_pretty": "Acceleration duration",
+            "type": "custom",
+            "size": 12,
+            "items": [
+                {
+                    "name": "direction",
+                    "name_cased": "direction",
+                    "type": "enum",
+                    "size": 1,
+                    "enum_values": [
+                        {
+                            "id": 0,
+                            "name": "longitudinal"
+                        },
+                        {
+                            "id": 1,
+                            "name": "lateral"
+                        }
+                    ]
+                },
+                {
+                    "name": "type",
+                    "name_cased": "type",
+                    "type": "enum",
+                    "size": 1,
+                    "enum_values": [
+                        {
+                            "id": 0,
+                            "name": "regular"
+                        },
+                        {
+                            "id": 1,
+                            "name": "positive_outlier"
+                        },
+                        {
+                            "id": 2,
+                            "name": "negative_outlier"
+                        }
+                    ]
+                },
+                {
+                    "name": "duration",
+                    "name_cased": "duration",
+                    "name_pretty": "Duration",
+                    "type": "unit.duration",
+                    "size": 10,
+                    "description": "The duration of the acceleration"
+                }
+            ]
+        },
+        {
+            "name": "accelerator_duration",
+            "name_cased": "acceleratorDuration",
+            "name_pretty": "Accelerator duration",
+            "type": "custom",
+            "size": 18,
+            "items": [
+                {
+                    "name": "pedal_position_threshold",
+                    "name_cased": "pedalPositionThreshold",
+                    "name_pretty": "Pedal position threshold",
+                    "type": "types.percentage",
+                    "size": 8,
+                    "description": "The accelerator pedal position threshold percentage"
+                },
+                {
+                    "name": "duration",
+                    "name_cased": "duration",
+                    "name_pretty": "Duration",
+                    "type": "unit.duration",
+                    "size": 10,
+                    "description": "The duration of the accelerator pedal position"
                 }
             ]
         },
@@ -945,6 +1106,65 @@
             ]
         },
         {
+            "name": "brake_service_due_date",
+            "name_cased": "brakeServiceDueDate",
+            "name_pretty": "Brake service due date",
+            "type": "custom",
+            "size": 9,
+            "items": [
+                {
+                    "name": "axle",
+                    "name_cased": "axle",
+                    "type": "types.axle"
+                },
+                {
+                    "name": "due_date",
+                    "name_cased": "dueDate",
+                    "type": "timestamp"
+                }
+            ]
+        },
+        {
+            "name": "brake_service_remaining_distance",
+            "name_cased": "brakeServiceRemainingDistance",
+            "name_pretty": "Brake service remaining distance",
+            "type": "custom",
+            "size": 11,
+            "items": [
+                {
+                    "name": "axle",
+                    "name_cased": "axle",
+                    "size": 1,
+                    "type": "types.axle"
+                },
+                {
+                    "name": "distance",
+                    "name_cased": "distance",
+                    "size": 10,
+                    "type": "unit.length"
+                }
+            ]
+        },
+        {
+            "name": "brake_service_status",
+            "name_cased": "brakeServiceStatus",
+            "name_pretty": "Brake service status",
+            "type": "custom",
+            "size": 2,
+            "items": [
+                {
+                    "name": "axle",
+                    "name_cased": "axle",
+                    "type": "types.axle"
+                },
+                {
+                    "name": "status",
+                    "name_cased": "status",
+                    "type": "types.service_status"
+                }
+            ]
+        },
+        {
             "name": "brake_torque_vectoring",
             "name_cased": "brakeTorqueVectoring",
             "name_pretty": "Brake torque vectoring",
@@ -1055,6 +1275,41 @@
                     "name_cased": "provider",
                     "type": "string",
                     "description": "The provider name of the charging point."
+                }
+            ]
+        },
+        {
+            "name": "charging_restriction",
+            "name_cased": "chargingRestriction",
+            "name_pretty": "Charging restriction",
+            "type": "custom",
+            "size": 2,
+            "items": [
+                {
+                    "name": "active",
+                    "name_cased": "active",
+                    "type": "types.active_state",
+                    "description": "Indicates whether the charging current used to charge the vehicle is limited."
+                },
+                {
+                    "name": "limit",
+                    "name_cased": "limit",
+                    "type": "enum",
+                    "size": 1,
+                    "enum_values": [
+                        {
+                            "id": 0,
+                            "name": "max"
+                        },
+                        {
+                            "id": 1,
+                            "name": "reduced"
+                        },
+                        {
+                            "id": 2,
+                            "name": "min"
+                        }
+                    ]
                 }
             ]
         },
@@ -1239,6 +1494,10 @@
                         {
                             "id": 3,
                             "name": "low"
+                        },
+                        {
+                            "id": 4,
+                            "name": "unknown"
                         }
                     ]
                 },
@@ -2095,6 +2354,15 @@
                         {
                             "id": 195,
                             "name": "inspection_warning"
+                        },
+                        {
+                            "id": 196,
+                            "name": "diesel_oil_filter_water_presence",
+                            "name_pretty": "Diesel oil filter has water in it"
+                        },
+                        {
+                            "id": 197,
+                            "name": "engine_drag_torque_control_failure"
                         }
                     ]
                 },
@@ -2339,13 +2607,13 @@
                             "id": 1,
                             "name": "fifteen_min_before_four",
                             "name_cased": "15minBefore4",
-                            "name_pretty": "15 minutes before 4\u00bd hours"
+                            "name_pretty": "15 minutes before 4½ hours"
                         },
                         {
                             "id": 2,
                             "name": "four_reached",
                             "name_cased": "4Reached",
-                            "name_pretty": "4\u00bd hours reached"
+                            "name_pretty": "4½ hours reached"
                         },
                         {
                             "id": 3,
@@ -2570,25 +2838,6 @@
                     "type": "uinteger",
                     "size": 1,
                     "description": "HMKit version patch number"
-                }
-            ]
-        },
-        {
-            "name": "hvac_weekday_starting_time",
-            "name_cased": "HVACWeekdayStartingTime",
-            "name_pretty": "HVAC weekday starting time",
-            "type": "custom",
-            "size": 3,
-            "items": [
-                {
-                    "name": "weekday",
-                    "name_cased": "weekday",
-                    "type": "types.weekday"
-                },
-                {
-                    "name": "time",
-                    "name_cased": "time",
-                    "type": "types.time"
                 }
             ]
         },
@@ -2890,6 +3139,36 @@
             ]
         },
         {
+            "name": "temperature_extreme",
+            "name_cased": "temperatureExtreme",
+            "name_pretty": "Temperature extreme",
+            "type": "custom",
+            "size": 11,
+            "items": [
+                {
+                    "name": "extreme",
+                    "name_cased": "extreme",
+                    "type": "enum",
+                    "size": 1,
+                    "enum_values": [
+                        {
+                            "id": 0,
+                            "name": "highest"
+                        },
+                        {
+                            "id": 1,
+                            "name": "lowest"
+                        }
+                    ]
+                },
+                {
+                    "name": "temperature",
+                    "name_cased": "temperature",
+                    "type": "unit.temperature"
+                }
+            ]
+        },
+        {
             "name": "timer",
             "name_cased": "timer",
             "name_pretty": "Timer",
@@ -2975,6 +3254,14 @@
                         {
                             "id": 2,
                             "name": "alert"
+                        },
+                        {
+                            "id": 3,
+                            "name": "soft"
+                        },
+                        {
+                            "id": 4,
+                            "name": "deflation"
                         }
                     ]
                 }
@@ -3116,6 +3403,25 @@
                     "name": "event",
                     "name_cased": "event",
                     "type": "events.event"
+                }
+            ]
+        },
+        {
+            "name": "weekday_time",
+            "name_cased": "weekdayTime",
+            "name_pretty": "Weekday time",
+            "type": "custom",
+            "size": 3,
+            "items": [
+                {
+                    "name": "weekday",
+                    "name_cased": "weekday",
+                    "type": "types.weekday"
+                },
+                {
+                    "name": "time",
+                    "name_cased": "time",
+                    "type": "types.time"
                 }
             ]
         },

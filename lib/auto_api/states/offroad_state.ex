@@ -25,14 +25,7 @@ defmodule AutoApi.OffroadState do
   Offroad state
   """
 
-  alias AutoApi.{State, UnitType}
-
   use AutoApi.State, spec_file: "offroad.json"
-
-  @type t :: %__MODULE__{
-          route_incline: State.property(UnitType.angle()),
-          wheel_suspension: State.property(float)
-        }
 
   @doc """
   Build state based on binary value

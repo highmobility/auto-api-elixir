@@ -25,13 +25,7 @@ defmodule AutoApi.HeartRateState do
   HeartRate state
   """
 
-  alias AutoApi.{State, UnitType}
-
   use AutoApi.State, spec_file: "heart_rate.json"
-
-  @type t :: %__MODULE__{
-          heart_rate: State.property(UnitType.frequency())
-        }
 
   @doc """
   Build state based on binary value

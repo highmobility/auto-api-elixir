@@ -25,56 +25,7 @@ defmodule AutoApi.TheftAlarmState do
   TheftAlarm state
   """
 
-  alias AutoApi.State
-
   use AutoApi.State, spec_file: "theft_alarm.json"
-
-  @type active_selected_state :: :inactive_selected | :inactive_not_selected | :active
-  @type alarm :: :unarmed | :armed | :triggered
-  @type event_type ::
-          :idle
-          | :front_left
-          | :front_middle
-          | :front_right
-          | :right
-          | :rear_right
-          | :rear_middle
-          | :rear_left
-          | :left
-          | :unknown
-  @type last_warning_reason ::
-          :no_alarm
-          | :basis_alarm
-          | :door_front_left
-          | :door_front_right
-          | :door_rear_left
-          | :door_rear_right
-          | :hood
-          | :trunk
-          | :common_alm_in
-          | :panic
-          | :glovebox
-          | :center_box
-          | :rear_box
-          | :sensor_vta
-          | :its
-          | :its_slv
-          | :tps
-          | :horn
-          | :hold_com
-          | :remote
-          | :unknown
-  @type level :: :low | :medium | :high
-
-  @type t :: %__MODULE__{
-          status: State.property(alarm),
-          interior_protection_status: State.property(active_selected_state),
-          tow_protection_status: State.property(active_selected_state),
-          last_warning_reason: State.property(last_warning_reason),
-          last_event: State.property(DateTime.t()),
-          last_event_level: State.property(level),
-          event_type: State.property(event_type)
-        }
 
   @doc """
   Build state based on binary value

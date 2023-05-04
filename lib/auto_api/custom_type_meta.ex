@@ -22,21 +22,26 @@
 # THE SOFTWARE.
 defmodule AutoApi.CustomType.Meta do
   @moduledoc false
+  defmacro __before_compile__(%{context_modules: [module]}) do
+    {file, key} = Module.get_attribute(module, :spec_file)
+    raw_spec = file |> File.read!() |> Jason.decode!()
 
-  @spec_file "specs/misc/custom_types.json"
-  @external_resource @spec_file
+    base_functions =
+      for type <- raw_spec[key] do
+        name_atom = String.to_atom(type["name"])
+        name_string = type["name"]
 
-  defmacro __before_compile__(_env) do
-    specs = Jason.decode!(File.read!(@spec_file))
-
-    for type <- specs["types"] do
-      name_atom = String.to_atom(type["name"])
-      name_string = type["name"]
-
-      quote do
-        def spec(unquote(name_atom)), do: unquote(Macro.escape(type))
-        def spec(unquote(name_string)), do: unquote(Macro.escape(type))
+        quote do
+          def spec(unquote(name_atom)), do: unquote(Macro.escape(type))
+          def spec(unquote(name_string)), do: unquote(Macro.escape(type))
+        end
       end
-    end
+
+    types_functions =
+      for type <- raw_spec[key] do
+        AutoApi.TypeSpec.for_custom_type(type)
+      end
+
+    [base_functions, types_functions]
   end
 end

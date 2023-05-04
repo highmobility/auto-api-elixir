@@ -25,13 +25,7 @@ defmodule AutoApi.GraphicsState do
   Graphics state
   """
 
-  alias AutoApi.State
-
   use AutoApi.State, spec_file: "graphics.json"
-
-  @type t :: %__MODULE__{
-          image_url: State.property(String.t())
-        }
 
   @doc """
   Build state based on binary value

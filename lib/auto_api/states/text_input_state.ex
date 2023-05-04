@@ -25,13 +25,7 @@ defmodule AutoApi.TextInputState do
   TextInput state
   """
 
-  alias AutoApi.State
-
   use AutoApi.State, spec_file: "text_input.json"
-
-  @type t :: %__MODULE__{
-          text: State.property(String.t())
-        }
 
   @doc """
   Build state based on binary value

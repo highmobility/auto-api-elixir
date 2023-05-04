@@ -25,46 +25,7 @@ defmodule AutoApi.ChargingSessionState do
   Keeps ChargingSession state
   """
 
-  alias AutoApi.{CommonData, State, UnitType}
-
   use AutoApi.State, spec_file: "charging_session.json"
-
-  @type charging_cost :: %{
-          currency: String.t(),
-          calculated_charging_cost: float(),
-          calculated_savings: float(),
-          simulated_immediate_charging_cost: float()
-        }
-
-  @type charging_location :: %{
-          municipality: String.t(),
-          formatted_address: String.t(),
-          street_address: String.t()
-        }
-
-  @type public_charging_points :: %{
-          city: String.t(),
-          postal_code: String.t(),
-          street: String.t(),
-          provider: String.t()
-        }
-
-  @type t :: %__MODULE__{
-          public_charging_points: State.multiple_property(public_charging_points()),
-          displayed_state_of_charge: State.property(float()),
-          displayed_start_state_of_charge: State.property(float()),
-          business_errors: State.multiple_property(String.t()),
-          time_zone: State.property(String.t()),
-          start_time: State.property(DateTime.t()),
-          end_time: State.property(DateTime.t()),
-          total_charging_duration: State.property(UnitType.duration()),
-          calculated_energy_charged: State.property(UnitType.energy()),
-          energy_charged: State.property(UnitType.energy()),
-          preconditioning_state: State.property(CommonData.activity()),
-          odometer: State.property(UnitType.length()),
-          charging_cost: State.property(charging_cost()),
-          location: State.property(charging_location())
-        }
 
   @doc """
   Build state based on binary value

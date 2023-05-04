@@ -229,6 +229,22 @@
                     "description": "Blind spot warning system is turned on."
                 }
             ]
+        },
+        {
+            "id": 12,
+            "name": "launch_control",
+            "name_cased": "launchControl",
+            "name_pretty": "Launch control",
+            "added": 13,
+            "type": "types.active_state",
+            "description": "State of launch control activation.",
+            "examples": [
+                {
+                    "data_component": "01",
+                    "value": "active",
+                    "description": "Launch control is active."
+                }
+            ]
         }
     ]
 }

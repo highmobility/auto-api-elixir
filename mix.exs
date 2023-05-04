@@ -23,7 +23,7 @@
 defmodule AutoApi.Mixfile do
   use Mix.Project
 
-  @version "13.0.0"
+  @version "13.2.1"
 
   def project do
     [
@@ -70,7 +70,7 @@ defmodule AutoApi.Mixfile do
     [
       files: ["lib", "mix.exs", "README.md", "LICENSE", "specs"],
       maintainers: ["Milad Rastian"],
-      licenses: ["GPL 3.0"],
+      licenses: ["MIT"],
       links: %{GitHub: "https://github.com/highmobility/hm-auto-api-elixir"}
     ]
   end

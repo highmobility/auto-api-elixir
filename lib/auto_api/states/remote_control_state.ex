@@ -25,23 +25,7 @@ defmodule AutoApi.RemoteControlState do
   RemoteControl state
   """
 
-  alias AutoApi.{State, UnitType}
-
   use AutoApi.State, spec_file: "remote_control.json"
-
-  @type modes ::
-          :unavailable
-          | :available
-          | :started
-          | :failed_to_start
-          | :aborted
-          | :ended
-
-  @type t :: %__MODULE__{
-          control_mode: State.property(modes),
-          angle: State.property(UnitType.angle()),
-          speed: State.property(UnitType.speed())
-        }
 
   @doc """
   Build state based on binary value

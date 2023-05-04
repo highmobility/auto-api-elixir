@@ -1,32 +1,11 @@
-# AutoAPI
-# The MIT License
-#
-# Copyright (c) 2018- High-Mobility GmbH (https://high-mobility.com)
-#
-# Permission is hereby granted, free of charge, to any person obtaining a copy
-# of this software and associated documentation files (the "Software"), to deal
-# in the Software without restriction, including without limitation the rights
-# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-# copies of the Software, and to permit persons to whom the Software is
-# furnished to do so, subject to the following conditions:
-#
-# The above copyright notice and this permission notice shall be included in
-# all copies or substantial portions of the Software.
-#
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-# THE SOFTWARE.
-defmodule AutoApi.DiagnosticsStateTest do
-  use ExUnit.Case, async: true
-  alias AutoApi.{Property, DiagnosticsState}
-  doctest DiagnosticsState
+defmodule AutoApi.TypeSpecTestHelper do
+  @moduledoc false
 
-  test "to_bin & from_bin" do
-    state = %DiagnosticsState{
+  alias AutoApi.{Property, DiagnosticsState}
+
+  @spec diagnostics_state_example() :: AutoApi.DiagnosticsState.t()
+  def diagnostics_state_example() do
+    %DiagnosticsState{
       mileage: %Property{data: %{value: 10.0, unit: :miles}},
       engine_oil_temperature: %Property{data: %{value: 2, unit: :kelvin}},
       speed: %Property{data: %{value: 3, unit: :meters_per_second}},
@@ -135,15 +114,7 @@ defmodule AutoApi.DiagnosticsStateTest do
       engine_oil_fluid_level: %Property{data: :low},
       engine_oil_pressure_level: %Property{data: :low_soft},
       engine_time_to_next_service: %Property{data: %{value: 24, unit: :months}},
-      low_voltage_battery_charge_level: %Property{data: :deactivation_level_1},
-      passenger_airbag_status: %Property{data: :active}
+      low_voltage_battery_charge_level: %Property{data: :deactivation_level_1}
     }
-
-    new_state =
-      state
-      |> DiagnosticsState.to_bin()
-      |> DiagnosticsState.from_bin()
-
-    assert new_state == state
   end
 end

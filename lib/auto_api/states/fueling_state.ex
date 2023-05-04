@@ -25,14 +25,7 @@ defmodule AutoApi.FuelingState do
   Fueling state
   """
 
-  alias AutoApi.{CommonData, State}
-
   use AutoApi.State, spec_file: "fueling.json"
-
-  @type t :: %__MODULE__{
-          gas_flap_position: State.property(CommonData.position()),
-          gas_flap_lock: State.property(CommonData.lock())
-        }
 
   @doc """
   Build state based on binary value
