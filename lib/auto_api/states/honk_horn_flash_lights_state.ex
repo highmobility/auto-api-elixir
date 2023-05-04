@@ -25,21 +25,7 @@ defmodule AutoApi.HonkHornFlashLightsState do
   Keeps HonkHornFlashLights state
   """
 
-  alias AutoApi.{CommonData, State, UnitType}
-
-  @type flashers ::
-          :inactive | :emergency_flasher_active | :left_flasher_active | :right_flasher_active
-
   use AutoApi.State, spec_file: "honk_horn_flash_lights.json"
-
-  @type t :: %__MODULE__{
-          flashers: State.property(flashers),
-          # Deprecated
-          honk_seconds: State.property(UnitType.duration()),
-          flash_times: State.property(non_neg_integer()),
-          emergency_flashers_state: State.property(CommonData.activity()),
-          honk_time: State.property(UnitType.duration())
-        }
 
   @doc """
   Build state based on binary value

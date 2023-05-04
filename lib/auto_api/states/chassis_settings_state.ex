@@ -25,26 +25,7 @@ defmodule AutoApi.ChassisSettingsState do
   ChassisSettings state
   """
 
-  alias AutoApi.{CommonData, State, UnitType}
-
   use AutoApi.State, spec_file: "chassis_settings.json"
-
-  @type sport_chrono :: :inactive | :active | :reset
-  @type spring_rate :: %{
-          value: UnitType.torque(),
-          axle: CommonData.location_longitudinal()
-        }
-
-  @type t :: %__MODULE__{
-          driving_mode: State.property(CommonData.driving_mode()),
-          sport_chrono: State.property(sport_chrono()),
-          current_spring_rates: State.multiple_property(spring_rate),
-          maximum_spring_rates: State.multiple_property(spring_rate),
-          minimum_spring_rates: State.multiple_property(spring_rate),
-          current_chassis_position: State.property(UnitType.length()),
-          maximum_chassis_position: State.property(UnitType.length()),
-          minimum_chassis_position: State.property(UnitType.length())
-        }
 
   @doc """
   Build state based on binary value

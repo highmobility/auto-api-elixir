@@ -25,15 +25,7 @@ defmodule AutoApi.EngineState do
   Keeps Engine state
   """
 
-  alias AutoApi.{CommonData, State}
-
   use AutoApi.State, spec_file: "engine.json"
-
-  @type t :: %__MODULE__{
-          status: State.property(CommonData.on_off()),
-          start_stop_state: State.property(CommonData.activity()),
-          start_stop_enabled: State.property(CommonData.enabled_state())
-        }
 
   @doc """
   Build state based on binary value

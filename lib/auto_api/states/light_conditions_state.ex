@@ -25,14 +25,7 @@ defmodule AutoApi.LightConditionsState do
   LightConditions state
   """
 
-  alias AutoApi.{State, UnitType}
-
   use AutoApi.State, spec_file: "light_conditions.json"
-
-  @type t :: %__MODULE__{
-          outside_light: State.property(UnitType.illuminance()),
-          inside_light: State.property(UnitType.illuminance())
-        }
 
   @doc """
   Build state based on binary value

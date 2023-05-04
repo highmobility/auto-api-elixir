@@ -25,33 +25,7 @@ defmodule AutoApi.WindscreenState do
   Windscreen state
   """
 
-  alias AutoApi.State
-
   use AutoApi.State, spec_file: "windscreen.json"
-
-  @type wipers_status :: :inactive | :active | :automatic
-  @type wipers_intensity :: :level_0 | :level_1 | :level_2 | :level_3
-  @type windscreen_damage ::
-          :no_impact_detected
-          | :impact_but_no_damage_detected
-          | :damage_smaller_than_1_inch
-          | :damage_larger_than_1_inch
-  @type zone :: %{
-          horizontal: integer(),
-          vertical: integer()
-        }
-  @type windscreen_needs_replacement :: :unknown | :no_replacement_needed | :replacement_needed
-
-  @type t :: %__MODULE__{
-          wipers_status: State.property(wipers_status),
-          wipers_intensity: State.property(wipers_intensity),
-          windscreen_damage: State.property(windscreen_damage),
-          windscreen_zone_matrix: State.property(zone()),
-          windscreen_damage_zone: State.property(zone()),
-          windscreen_needs_replacement: State.property(windscreen_needs_replacement),
-          windscreen_damage_confidence: State.property(float),
-          windscreen_damage_detection_time: State.property(DateTime.t())
-        }
 
   @doc """
   Build state based on binary value

@@ -32,7 +32,7 @@ defmodule AutoApi.VehicleLocationCapability do
       iex> VL.description
       "Vehicle Location"
       iex> length(VL.properties)
-      11
+      12
       iex> List.first(VL.properties)
       {4, :coordinates}
   """

@@ -25,13 +25,7 @@ defmodule AutoApi.VehicleTimeState do
   VehicleTime state
   """
 
-  alias AutoApi.{CommonData, State}
-
   use AutoApi.State, spec_file: "vehicle_time.json"
-
-  @type t :: %__MODULE__{
-          vehicle_time: State.property(CommonData.time())
-        }
 
   @doc """
   Build state based on binary value

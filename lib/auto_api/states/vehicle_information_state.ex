@@ -25,53 +25,7 @@ defmodule AutoApi.VehicleInformationState do
   VehicleInformation state
   """
 
-  alias AutoApi.{State, UnitType}
-
   use AutoApi.State, spec_file: "vehicle_information.json"
-
-  @type powertrain ::
-          :unknown
-          | :all_electric
-          | :combustion_engine
-          | :phev
-          | :hydrogen
-          | :hydrogen_hybrid
-          | :petrol
-          | :electric
-          | :gas
-          | :diesel
-          | :gasoline
-          | :cng
-          | :lpg
-
-  @type gearbox :: :manual | :automatic | :semi_automatic
-
-  @type drive :: :fwd | :rwd | :four_wd | :awd
-
-  @type t :: %__MODULE__{
-          powertrain: State.property(powertrain()),
-          model_name: State.property(String.t()),
-          name: State.property(String.t()),
-          license_plate: State.property(String.t()),
-          sales_designation: State.property(String.t()),
-          model_year: State.property(integer()),
-          colour_name: State.property(String.t()),
-          # Deprecated!
-          power_in_kw: State.property(UnitType.power()),
-          number_of_doors: State.property(integer()),
-          number_of_seats: State.property(integer()),
-          engine_volume: State.property(UnitType.volume()),
-          engine_max_torque: State.property(UnitType.torque()),
-          gearbox: State.property(gearbox()),
-          display_unit: State.property(:km | :miles),
-          driver_seat_location: State.property(:left | :right | :center),
-          equipments: State.multiple_property(String.t()),
-          power: State.property(UnitType.power()),
-          language: State.property(String.t()),
-          timeformat: State.property(:twelve_h | :twenty_four_h),
-          drive: State.property(drive()),
-          powertrain_secondary: State.property(powertrain())
-        }
 
   @doc """
   Build state based on binary value

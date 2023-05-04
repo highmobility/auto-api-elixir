@@ -26,43 +26,7 @@ defmodule AutoApi.RaceState do
 
   """
 
-  alias AutoApi.{CommonData, State, UnitType}
-
   use AutoApi.State, spec_file: "race.json"
-
-  @type direction ::
-          :longitudinal
-          | :lateral
-          | :front_lateral
-          | :rear_lateral
-  @type acceleration :: %{direction: direction(), acceleration: UnitType.acceleration()}
-  @type gear_mode :: :manual | :park | :reverse | :neutral | :drive | :low_gear | :sport
-  @type brake_torque_vectoring :: %{
-          axle: CommonData.location_longitudinal(),
-          vectoring: CommonData.activity()
-        }
-  @type vehicle_moving :: :moving | :not_moving
-
-  @type t :: %__MODULE__{
-          accelerations: State.multiple_property(acceleration()),
-          understeering: State.property(float),
-          oversteering: State.property(float),
-          gas_pedal_position: State.property(float),
-          steering_angle: State.property(UnitType.angle()),
-          brake_pressure: State.property(UnitType.pressure()),
-          yaw_rate: State.property(UnitType.angular_velocity()),
-          rear_suspension_steering: State.property(UnitType.angle()),
-          electronic_stability_program: State.property(CommonData.activity()),
-          brake_torque_vectorings: State.multiple_property(brake_torque_vectoring),
-          gear_mode: State.property(gear_mode),
-          selected_gear: State.property(integer),
-          brake_pedal_position: State.property(float),
-          brake_pedal_switch: State.property(CommonData.activity()),
-          clutch_pedal_switch: State.property(CommonData.activity()),
-          accelerator_pedal_idle_switch: State.property(CommonData.activity()),
-          accelerator_pedal_kickdown_switch: State.property(CommonData.activity()),
-          vehicle_moving: State.property(vehicle_moving)
-        }
 
   @doc """
   Build state based on binary value

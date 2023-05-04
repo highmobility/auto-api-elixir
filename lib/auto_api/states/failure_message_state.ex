@@ -25,29 +25,9 @@ defmodule AutoApi.FailureMessageState do
   Keeps Failure Message state
   """
 
-  alias AutoApi.{Command, State}
+  alias AutoApi.Command
 
   use AutoApi.State, spec_file: "failure_message.json"
-
-  @type failure_reason ::
-          :unsupported_capability
-          | :unauthorised
-          | :incorrect_state
-          | :execution_timeout
-          | :vehicle_asleep
-          | :invalid_command
-          | :pending
-          | :rate_limit
-          | :oem_error
-          | :privacy_mode_active
-
-  @type t :: %__MODULE__{
-          failed_message_id: State.property(integer()),
-          failed_message_type: State.property(integer()),
-          failure_reason: State.property(failure_reason()),
-          failure_description: State.property(String.t()),
-          failed_property_ids: State.property(binary())
-        }
 
   @doc """
   Creates a failure state based on a command
@@ -118,4 +98,21 @@ defmodule AutoApi.FailureMessageState do
   end
 
   defp unify_unauthorized_to_bin(value), do: value
+
+  @failure_reason_map %{
+    0x00 => :rate_limit,
+    0x01 => :execution_timeout,
+    0x02 => :format_error,
+    0x03 => :unauthorised,
+    0x04 => :unknown,
+    0x05 => :pending,
+    0x06 => :oem_error,
+    0x07 => :privacy_mode_active
+  }
+
+  def failure_reason_bin_to_name(id), do: Map.fetch!(@failure_reason_map, id)
+
+  def failure_reason_name_to_bin(name) do
+    @failure_reason_map |> Enum.into(%{}, fn {k, v} -> {v, k} end) |> Map.fetch!(name)
+  end
 end

@@ -28,5 +28,5 @@ defmodule AutoApi.UnitType do
 
   @before_compile AutoApi.UnitType.Meta
 
-  @type t(unit_type) :: %{value: float(), unit: unit_type}
+  @type t(unit_type) :: %{value: float() | integer(), unit: unit_type}
 end

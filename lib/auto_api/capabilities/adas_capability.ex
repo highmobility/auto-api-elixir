@@ -32,7 +32,7 @@ defmodule AutoApi.AdasCapability do
       iex> H.description
       "ADAS"
       iex> length(H.properties)
-      16
+      17
       iex> List.first(H.properties)
       {0x01, :status}
   """

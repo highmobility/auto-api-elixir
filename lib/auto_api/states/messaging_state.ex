@@ -25,14 +25,7 @@ defmodule AutoApi.MessagingState do
   Messaging state
   """
 
-  alias AutoApi.State
-
   use AutoApi.State, spec_file: "messaging.json"
-
-  @type t :: %__MODULE__{
-          text: State.property(String.t()),
-          handle: State.property(String.t())
-        }
 
   @doc """
   Build state based on binary value

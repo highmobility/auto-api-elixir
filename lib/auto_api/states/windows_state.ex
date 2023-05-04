@@ -25,19 +25,7 @@ defmodule AutoApi.WindowsState do
   Keeps Windows state
   """
 
-  alias AutoApi.{CommonData, State}
-
   use AutoApi.State, spec_file: "windows.json"
-
-  @type location :: CommonData.location() | :hatch
-  @type position :: :closed | :open | :intermediate
-  @type positions :: %{location: location, position: position}
-  @type open_percentages :: %{location: location, open_percentage: float}
-
-  @type t :: %__MODULE__{
-          open_percentages: State.multiple_property(open_percentages),
-          positions: State.multiple_property(positions)
-        }
 
   @doc """
   Build state based on binary value

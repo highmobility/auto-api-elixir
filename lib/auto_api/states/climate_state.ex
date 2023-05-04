@@ -25,31 +25,7 @@ defmodule AutoApi.ClimateState do
   Climate state
   """
 
-  alias AutoApi.{CommonData, State, UnitType}
-
   use AutoApi.State, spec_file: "climate.json"
-
-  @type weekday ::
-          :monday | :tuesday | :wednesday | :thursday | :friday | :saturday | :sunday | :automatic
-
-  @type hvac_weekday_starting_time :: %{
-          weekday: weekday(),
-          time: CommonData.time()
-        }
-
-  @type t :: %__MODULE__{
-          inside_temperature: State.property(UnitType.temperature()),
-          outside_temperature: State.property(UnitType.temperature()),
-          driver_temperature_setting: State.property(UnitType.temperature()),
-          passenger_temperature_setting: State.property(UnitType.temperature()),
-          hvac_state: State.property(CommonData.activity()),
-          defogging_state: State.property(CommonData.activity()),
-          defrosting_state: State.property(CommonData.activity()),
-          ionising_state: State.property(CommonData.activity()),
-          defrosting_temperature_setting: State.property(UnitType.temperature()),
-          hvac_weekday_starting_times: State.multiple_property(hvac_weekday_starting_time()),
-          rear_temperature_setting: State.property(UnitType.temperature())
-        }
 
   @doc """
   Build state based on binary value

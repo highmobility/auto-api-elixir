@@ -25,18 +25,6 @@ defmodule AutoApi.IgnitionState do
   Keeps Ignition state
   """
 
-  alias AutoApi.State
-
-  @type state :: :lock | :off | :accessory | :on | :start
-
-  @type t :: %__MODULE__{
-          # Deprecated
-          status: State.property(state()),
-          # Deprecated
-          accessories_status: State.property(state()),
-          state: State.property(state())
-        }
-
   use AutoApi.State, spec_file: "ignition.json"
 
   @doc """

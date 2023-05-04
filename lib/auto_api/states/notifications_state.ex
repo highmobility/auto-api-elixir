@@ -25,18 +25,7 @@ defmodule AutoApi.NotificationsState do
   Notifications state
   """
 
-  alias AutoApi.State
-
   use AutoApi.State, spec_file: "notifications.json"
-
-  @type action_item :: %{id: integer, name: String.t()}
-
-  @type t :: %__MODULE__{
-          text: State.property(String.t()),
-          action_items: State.multiple_property(action_item),
-          activated_action: State.property(integer),
-          clear: State.property(:clear)
-        }
 
   @doc """
   Build state based on binary value

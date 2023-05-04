@@ -25,19 +25,7 @@ defmodule AutoApi.CruiseControlState do
   CruiseControl state
   """
 
-  alias AutoApi.{CommonData, State, UnitType}
-
   use AutoApi.State, spec_file: "cruise_control.json"
-
-  @type limiter :: :not_set | :higher_speed_requested | :lower_speed_requested | :speed_fixed
-
-  @type t :: %__MODULE__{
-          cruise_control: State.property(CommonData.activity()),
-          limiter: State.property(limiter),
-          target_speed: State.property(UnitType.speed()),
-          adaptive_cruise_control: State.property(CommonData.activity()),
-          acc_target_speed: State.property(UnitType.speed())
-        }
 
   @doc """
   Build state based on binary value

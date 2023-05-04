@@ -25,18 +25,7 @@ defmodule AutoApi.NaviDestinationState do
   Keeps Navigation Destination state
   """
 
-  alias AutoApi.{CommonData, State, UnitType}
-
   use AutoApi.State, spec_file: "navi_destination.json"
-
-  @type t :: %__MODULE__{
-          coordinates: State.property(CommonData.coordinates()),
-          destination_name: State.property(String.t()),
-          data_slots_free: State.property(integer),
-          data_slots_max: State.property(integer),
-          arrival_duration: State.property(UnitType.duration()),
-          distance_to_destination: State.property(UnitType.length())
-        }
 
   @doc """
   Build state based on binary value

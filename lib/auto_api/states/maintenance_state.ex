@@ -25,45 +25,7 @@ defmodule AutoApi.MaintenanceState do
   Maintenance state
   """
 
-  alias AutoApi.{State, UnitType}
-
   use AutoApi.State, spec_file: "maintenance.json"
-
-  @type condition_based_services :: %{
-          year: integer,
-          month: integer,
-          identifier: integer,
-          due_status: :ok | :pending | :overdue,
-          text: String.t(),
-          description: String.t()
-        }
-
-  @type activity :: :inactive | :active
-  @type teleservice_availability :: :pending | :idle | :successful | :error
-
-  @type t :: %__MODULE__{
-          # Deprecated
-          days_to_next_service: State.property(UnitType.duration()),
-          # Deprecated
-          kilometers_to_next_service: State.property(UnitType.length()),
-          cbs_reports_count: State.property(integer),
-          # Deprecated
-          months_to_exhaust_inspection: State.property(UnitType.duration()),
-          teleservice_availability: State.property(teleservice_availability),
-          service_distance_threshold: State.property(UnitType.length()),
-          service_time_threshold: State.property(UnitType.duration()),
-          automatic_teleservice_call_date: State.property(DateTime.t()),
-          teleservice_battery_call_date: State.property(DateTime.t()),
-          next_inspection_date: State.property(DateTime.t()),
-          condition_based_services: State.multiple_property(condition_based_services),
-          brake_fluid_change_date: State.property(DateTime.t()),
-          time_to_next_service: State.property(UnitType.duration()),
-          distance_to_next_service: State.property(UnitType.length()),
-          time_to_exhaust_inspection: State.property(UnitType.duration()),
-          last_ecall: State.property(DateTime.t()),
-          distance_to_next_oil_service: State.property(UnitType.length()),
-          time_to_next_oil_service: State.property(UnitType.duration())
-        }
 
   @doc """
   Build state based on binary value
