@@ -32,7 +32,7 @@ defmodule AutoApi.LightsCapability do
       iex> L.description
       "Lights"
       iex> length(L.properties)
-      14
+      15
       iex> List.first(L.properties)
       {0x01, :front_exterior_light}
   """

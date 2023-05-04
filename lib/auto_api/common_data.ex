@@ -32,6 +32,7 @@ defmodule AutoApi.CommonData do
   @type location :: :front_left | :front_right | :rear_right | :rear_left
   @type location_longitudinal :: :front | :rear
   @type lock :: :unlocked | :locked
+  @type lock_safety :: :safe | :unsafe
   @type network_security :: :none | :wep | :wpa | :wpa2_personal
   @type on_off :: :on | :off
   @type position :: :closed | :open
@@ -120,6 +121,7 @@ defmodule AutoApi.CommonData do
   def convert_bin_to_state_failure_reason(0x04), do: :unknown
   def convert_bin_to_state_failure_reason(0x05), do: :pending
   def convert_bin_to_state_failure_reason(0x06), do: :oem_error
+  def convert_bin_to_state_failure_reason(0x07), do: :privacy_mode_active
 
   def convert_state_to_bin_failure_reason(:rate_limit), do: 0x00
   def convert_state_to_bin_failure_reason(:execution_timeout), do: 0x01
@@ -128,4 +130,5 @@ defmodule AutoApi.CommonData do
   def convert_state_to_bin_failure_reason(:unknown), do: 0x04
   def convert_state_to_bin_failure_reason(:pending), do: 0x05
   def convert_state_to_bin_failure_reason(:oem_error), do: 0x06
+  def convert_state_to_bin_failure_reason(:privacy_mode_active), do: 0x07
 end

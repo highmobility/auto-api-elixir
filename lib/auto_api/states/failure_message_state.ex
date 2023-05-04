@@ -39,6 +39,7 @@ defmodule AutoApi.FailureMessageState do
           | :pending
           | :rate_limit
           | :oem_error
+          | :privacy_mode_active
 
   @type t :: %__MODULE__{
           failed_message_id: State.property(integer()),
@@ -110,11 +111,11 @@ defmodule AutoApi.FailureMessageState do
 
   defp unify_unauthorized_from_bin(value), do: value
 
-  #  defp unify_unauthorized_to_bin(
-  #         %{failure_reason: %{data: :unauthorized} = failure_reason} = state
-  #       ) do
-  #    %{state | failure_reason: %{failure_reason | data: :unauthorised}}
-  #  end
+  defp unify_unauthorized_to_bin(
+         %{failure_reason: %{data: :unauthorized} = failure_reason} = state
+       ) do
+    %{state | failure_reason: %{failure_reason | data: :unauthorised}}
+  end
 
   defp unify_unauthorized_to_bin(value), do: value
 end

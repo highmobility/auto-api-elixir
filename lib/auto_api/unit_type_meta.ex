@@ -105,8 +105,10 @@ defmodule AutoApi.UnitType.Meta do
             0x02
             iex> AutoApi.UnitType.unit_id("power", :megawatts)
             0x03
+            iex> AutoApi.UnitType.unit_id("power", :foobar)
+            nil
         """
-        @spec unit_id(String.t() | atom(), atom()) :: id()
+        @spec unit_id(String.t() | atom(), atom()) :: id() | nil
         def unit_id(type_name, unit_name)
 
         @doc """

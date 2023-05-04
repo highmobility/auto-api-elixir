@@ -21,6 +21,7 @@ defmodule AutoApi.PropertyTest do
   use PropCheck
 
   import AutoApi.PropCheckFixtures
+  import ExUnit.CaptureLog
 
   alias AutoApi.Property
 
@@ -574,6 +575,60 @@ defmodule AutoApi.PropertyTest do
       end
     end
 
+    property "converts custom value with events data to bin" do
+      forall data <- [
+               description: utf8(),
+               state: oneof([:on, :off]),
+               event: event(),
+               timestamp: datetime()
+             ] do
+        spec = %{
+          "id" => 11,
+          "type" => "custom",
+          "items" => [
+            %{
+              "name" => "description",
+              "type" => "string"
+            },
+            %{
+              "name" => "complex",
+              "type" => "custom",
+              "items" => [
+                %{
+                  "name" => "state",
+                  "size" => 1,
+                  "type" => "enum",
+                  "enum_values" => [
+                    %{"id" => 0, "name" => "on"},
+                    %{"id" => 1, "name" => "off"}
+                  ]
+                },
+                %{
+                  "name" => "event",
+                  "type" => "events.event"
+                }
+              ]
+            }
+          ]
+        }
+
+        property = %Property{
+          data: %{
+            description: data[:description],
+            complex: %{
+              state: data[:state],
+              event: data[:event]
+            }
+          },
+          timestamp: data[:datetime]
+        }
+
+        property_bin = Property.to_bin(property, spec)
+
+        assert Property.to_struct(property_bin, spec) == property
+      end
+    end
+
     property "converts failure to bin" do
       forall data <- [description: utf8(), reason: error_reason(), timestamp: datetime()] do
         spec = %{"type" => "integer", "size" => 3}
@@ -704,8 +759,65 @@ defmodule AutoApi.PropertyTest do
     end
   end
 
+  describe "to_binary/2" do
+    test "emmits log when an invalid unit type to binary" do
+      spec = %{
+        "id" => 24,
+        "name" => "charging_rate",
+        "type" => "unit.power",
+        size: 10
+      }
+
+      prop_comp = %Property{data: %{value: 10.009, unit: :celsius}, timestamp: DateTime.utc_now()}
+
+      fun = fn ->
+        assert failure_prop = Property.to_bin(prop_comp, spec)
+
+        assert Property.to_struct(failure_prop, spec) ==
+                 %AutoApi.Property{
+                   availability: nil,
+                   data: nil,
+                   failure: %{
+                     description: "not able to serialize the value",
+                     reason: :format_error
+                   },
+                   timestamp: nil
+                 }
+      end
+
+      logs = capture_log(fun)
+      assert logs =~ "type `power` doesn't support unit `celsius`"
+      assert logs =~ "[error] Not able to serialize value for spec"
+    end
+  end
+
   def error_reason do
     oneof([:rate_limit, :execution_timeout, :format_error, :unauthorised, :unknown, :pending])
+  end
+
+  def event do
+    oneof([
+      :ping,
+      :trip_started,
+      :trip_ended,
+      :vehicle_location_changed,
+      :authorization_changed,
+      :tire_pressure_changed,
+      :harsh_acceleration_triggered,
+      :harsh_acceleration_pedal_position_triggered,
+      :harsh_braking_triggered,
+      :harsh_cornering_triggered,
+      :seat_belt_triggered,
+      :maintenance_changed,
+      :dashboard_lights_changed,
+      :ignition_changed,
+      :accident_reported,
+      :emergency_reported,
+      :breakdown_reported,
+      :battery_guard_warning,
+      :engine_changed,
+      :fleet_clearance_changed
+    ])
   end
 
   def update_rate do

@@ -36,7 +36,7 @@ defmodule AutoApi.VehicleStatusState do
   @doc """
   Build state based on binary value
 
-    iex> bin = <<153, 0, 14, 1, 0, 11, 12, 0, 103, 1, 1, 0, 4, 1, 0, 1, 2>>
+    iex> bin = <<153, 0, 14, 1, 0, 11, 13, 0, 103, 1, 1, 0, 4, 1, 0, 1, 2>>
     iex> state = AutoApi.VehicleStatusState.from_bin(bin)
     iex> [%AutoApi.Property{data: hood_command}] = state.states
     iex> %AutoApi.SetCommand{state: hood_state} = hood_command
@@ -55,7 +55,7 @@ defmodule AutoApi.VehicleStatusState do
     iex> hood_command = AutoApi.SetCommand.new(AutoApi.HoodCapability, hood_state)
     iex> state = %AutoApi.VehicleStatusState{states: [%AutoApi.Property{data: hood_command}]}
     iex> AutoApi.VehicleStatusState.to_bin(state)
-    <<153, 0, 14, 1, 0, 11, 12, 0, 103, 1, 1, 0, 4, 1, 0, 1, 2>>
+    <<153, 0, 14, 1, 0, 11, 13, 0, 103, 1, 1, 0, 4, 1, 0, 1, 2>>
   """
   @spec to_bin(__MODULE__.t()) :: binary
   def to_bin(%__MODULE__{} = state) do

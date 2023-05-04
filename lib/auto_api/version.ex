@@ -39,7 +39,7 @@ defmodule AutoApi.Version do
       ## Examples
 
           iex> AutoApi.version()
-          12
+          13
       """
       def version(), do: unquote(Macro.escape(version))
     end

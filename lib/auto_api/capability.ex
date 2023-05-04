@@ -146,6 +146,20 @@ defmodule AutoApi.Capability do
         def setters(), do: @setters
 
         @doc """
+        Returns whether the capability requires authorization to be queried
+
+        ## Examples
+
+            iex> AutoApi.DiagnosticsCapability.authorization?()
+            true
+
+            iex> AutoApi.HistoricalCapability.authorization?()
+            false
+        """
+        @spec authorization?() :: boolean()
+        def authorization?(), do: @raw_spec["authorization"] || false
+
+        @doc """
         Returns the ID of a property given its name.
 
         ## Example
@@ -183,6 +197,20 @@ defmodule AutoApi.Capability do
         """
         @spec multiple?(atom()) :: boolean()
         def multiple?(name)
+
+        @doc """
+        Returns whether the property is deprecated.
+
+        ## Example
+
+            iex> AutoApi.HoodCapability.deprecated?(:lock)
+            false
+
+            iex> AutoApi.DiagnosticsCapability.deprecated?(:mileage)
+            true
+        """
+        @spec deprecated?(atom()) :: boolean()
+        def deprecated?(name)
       end
 
     property_functions =
@@ -190,12 +218,14 @@ defmodule AutoApi.Capability do
         prop_id = prop["id"]
         prop_name = String.to_atom(prop["name"])
         multiple? = prop["multiple"] || false
+        deprecated? = not is_nil(prop["deprecated"])
 
         quote location: :keep do
           def property_id(unquote(prop_name)), do: unquote(prop_id)
           def property_name(unquote(prop_id)), do: unquote(prop_name)
           def property_spec(unquote(prop_name)), do: unquote(Macro.escape(prop))
           def multiple?(unquote(prop_name)), do: unquote(multiple?)
+          def deprecated?(unquote(prop_name)), do: unquote(deprecated?)
         end
       end
 
@@ -232,9 +262,9 @@ defmodule AutoApi.Capability do
 
   iex> capabilities = AutoApi.Capability.all()
   iex> length(capabilities)
-  55
+  59
   iex> List.first(capabilities)
-  AutoApi.BrowserCapability
+  AutoApi.AdasCapability
   """
   @spec all() :: list(module)
   defdelegate all(), to: AutoApi.Capability.Delegate

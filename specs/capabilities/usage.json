@@ -10,7 +10,7 @@
     },
     "api": {
         "intro": 8,
-        "update": 12
+        "update": 13
     },
     "getters": {
         "name": "get_usage"
@@ -245,7 +245,7 @@
                     "value": {
                         "liters": 22.5
                     },
-                    "description": "Last trip consumed 22.5L of fuel"
+                    "description": "Last trip consumed 22.5 L of fuel"
                 }
             ]
         },
@@ -351,7 +351,7 @@
                     "value": {
                         "liters_per_100_kilometers": 6.5
                     },
-                    "description": "Average fuel consumption is 6.5L per 100km"
+                    "description": "Average fuel consumption is 6.5 L per 100km"
                 }
             ]
         },
@@ -369,7 +369,7 @@
                     "value": {
                         "liters_per_100_kilometers": 7.5
                     },
-                    "description": "Current fuel consumption is 7.5L per 100km"
+                    "description": "Current fuel consumption is 7.5 L per 100km"
                 }
             ]
         },
@@ -378,6 +378,7 @@
             "name": "odometer_after_last_trip",
             "name_cased": "odometerAfterLastTrip",
             "name_pretty": "Odometer after last trip",
+            "added": 12,
             "type": "unit.length",
             "size": 10,
             "description": "Odometer after the last trip",
@@ -396,6 +397,7 @@
             "name": "safety_driving_score",
             "name_cased": "safetyDrivingScore",
             "name_pretty": "Safety driving score",
+            "added": 12,
             "type": "types.percentage",
             "description": "Safety driving score as percentage",
             "examples": [
@@ -411,6 +413,7 @@
             "name": "rapid_acceleration_grade",
             "name_cased": "rapidAccelerationGrade",
             "name_pretty": "Rapid acceleration grade",
+            "added": 12,
             "type": "types.grade",
             "description": "Grade given for rapid acceleration over time",
             "examples": [
@@ -426,6 +429,7 @@
             "name": "rapid_deceleration_grade",
             "name_cased": "rapidDecelerationGrade",
             "name_pretty": "Rapid deceleration grade",
+            "added": 12,
             "type": "types.grade",
             "description": "Grade given for rapid deceleration over time",
             "examples": [
@@ -441,6 +445,7 @@
             "name": "late_night_grade",
             "name_cased": "lateNightGrade",
             "name_pretty": "Late night grade",
+            "added": 12,
             "type": "types.grade",
             "description": "Grade given for late night driving over time",
             "examples": [
@@ -456,6 +461,7 @@
             "name": "distance_over_time",
             "name_cased": "distanceOverTime",
             "name_pretty": "Distance over time",
+            "added": 12,
             "type": "types.distance_over_time",
             "description": "Distance driven over a given time period",
             "examples": [
@@ -478,6 +484,7 @@
             "name": "electric_consumption_rate_since_start",
             "name_cased": "electricConsumptionRateSinceStart",
             "name_pretty": "Electric consumption rate since start",
+            "added": 12,
             "type": "unit.energy_efficiency",
             "size": 10,
             "description": "Electric energy consumption rate since the start of a trip",
@@ -496,6 +503,7 @@
             "name": "electric_consumption_rate_since_reset",
             "name_cased": "electricConsumptionRateSinceReset",
             "name_pretty": "Electric consumption rate since reset",
+            "added": 12,
             "type": "unit.energy_efficiency",
             "size": 10,
             "description": "Electric energy consumption rate since a reset",
@@ -514,6 +522,7 @@
             "name": "electric_distance_last_trip",
             "name_cased": "electricDistanceLastTrip",
             "name_pretty": "Electric distance last trip",
+            "added": 12,
             "type": "unit.length",
             "size": 10,
             "description": "Distance travelled with electricity in last trip",
@@ -532,6 +541,7 @@
             "name": "electric_distance_since_reset",
             "name_cased": "electricDistanceSinceReset",
             "name_pretty": "Electric distance since reset",
+            "added": 12,
             "type": "unit.length",
             "size": 10,
             "description": "Distance travelled with electricity since reset",
@@ -550,6 +560,7 @@
             "name": "electric_duration_last_trip",
             "name_cased": "electricDurationLastTrip",
             "name_pretty": "Electric duration last trip",
+            "added": 12,
             "type": "unit.duration",
             "size": 10,
             "description": "Duration of travelling using electricity during last trip",
@@ -568,6 +579,7 @@
             "name": "electric_duration_since_reset",
             "name_cased": "electricDurationSinceReset",
             "name_pretty": "Electric duration since reset",
+            "added": 12,
             "type": "unit.duration",
             "size": 10,
             "description": "Duration of travelling using electricity since reset",
@@ -586,6 +598,7 @@
             "name": "fuel_consumption_rate_last_trip",
             "name_cased": "fuelConsumptionRateLastTrip",
             "name_pretty": "Fuel consumption rate last trip",
+            "added": 12,
             "type": "unit.fuel_efficiency",
             "size": 10,
             "description": "Liquid fuel consumption rate during last trip",
@@ -604,6 +617,7 @@
             "name": "fuel_consumption_rate_since_reset",
             "name_cased": "fuelConsumptionRateSinceReset",
             "name_pretty": "Fuel consumption rate since reset",
+            "added": 12,
             "type": "unit.fuel_efficiency",
             "size": 10,
             "description": "Liquid fuel consumption rate since reset",
@@ -622,6 +636,7 @@
             "name": "average_speed_last_trip",
             "name_cased": "averageSpeedLastTrip",
             "name_pretty": "Average speed last trip",
+            "added": 12,
             "type": "unit.speed",
             "size": 10,
             "description": "Average speed during last trip",
@@ -640,6 +655,7 @@
             "name": "average_speed_since_reset",
             "name_cased": "averageSpeedSinceReset",
             "name_pretty": "Average speed since reset",
+            "added": 12,
             "type": "unit.speed",
             "size": 10,
             "description": "Average speed since reset",
@@ -658,6 +674,7 @@
             "name": "fuel_distance_last_trip",
             "name_cased": "fuelDistanceLastTrip",
             "name_pretty": "Fuel distance last trip",
+            "added": 12,
             "type": "unit.length",
             "size": 10,
             "description": "Distance travelled with (liquid) fuel during last trip",
@@ -676,6 +693,7 @@
             "name": "fuel_distance_since_reset",
             "name_cased": "fuelDistanceSinceReset",
             "name_pretty": "Fuel distance since reset",
+            "added": 12,
             "type": "unit.length",
             "size": 10,
             "description": "Distance travelled with (liquid) fuel since reset",
@@ -694,6 +712,7 @@
             "name": "driving_duration_last_trip",
             "name_cased": "drivingDurationLastTrip",
             "name_pretty": "Driving duration last trip",
+            "added": 12,
             "type": "unit.duration",
             "size": 10,
             "description": "Duration of last trip",
@@ -712,6 +731,7 @@
             "name": "driving_duration_since_reset",
             "name_cased": "drivingDurationSinceReset",
             "name_pretty": "Driving duration since reset",
+            "added": 12,
             "type": "unit.duration",
             "size": 10,
             "description": "Duration of travelling since reset",
@@ -730,6 +750,7 @@
             "name": "eco_score_total",
             "name_cased": "ecoScoreTotal",
             "name_pretty": "Eco-score total",
+            "added": 12,
             "type": "types.percentage",
             "description": "Overall eco-score rating",
             "examples": [
@@ -745,6 +766,7 @@
             "name": "eco_score_free_wheel",
             "name_cased": "ecoScoreFreeWheel",
             "name_pretty": "Eco-score free wheel",
+            "added": 12,
             "type": "types.percentage",
             "description": "Eco-score rating for free-wheeling",
             "examples": [
@@ -760,6 +782,7 @@
             "name": "eco_score_constant",
             "name_cased": "ecoScoreConstant",
             "name_pretty": "Eco-score constant",
+            "added": 12,
             "type": "types.percentage",
             "description": "Eco-score rating constant",
             "examples": [
@@ -775,6 +798,7 @@
             "name": "eco_score_bonus_range",
             "name_cased": "ecoScoreBonusRange",
             "name_pretty": "Eco-score bonus range",
+            "added": 12,
             "type": "unit.length",
             "size": 10,
             "description": "Eco-score bonus range",
@@ -785,6 +809,38 @@
                         "kilometers": 0.7
                     },
                     "description": "Eco-score bonus range is 0.7km"
+                }
+            ]
+        },
+        {
+            "id": 40,
+            "name": "trip_meters",
+            "name_cased": "tripMeters",
+            "name_pretty": "Trip meters",
+            "name_singular": "trip_meter",
+            "added": 13,
+            "type": "types.trip_meter",
+            "multiple": true,
+            "examples": [
+                {
+                    "data_component": "011204407c833333333333",
+                    "values": {
+                        "id": 1,
+                        "distance": {
+                            "kilometers": 456.2
+                        }
+                    },
+                    "description": "Trip meter 1`s distance is 456.2km"
+                },
+                {
+                    "data_component": "02120440a372999999999a",
+                    "values": {
+                        "id": 2,
+                        "distance": {
+                            "kilometers": 2489.3
+                        }
+                    },
+                    "description": "Trip meter 2`s distance is 2489.3km"
                 }
             ]
         }

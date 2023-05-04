@@ -43,6 +43,11 @@ defmodule AutoApi.UsageState do
         }
   @type grade :: :excellent | :normal | :warning
 
+  @type trip_meter :: %{
+          id: byte(),
+          distance: UnitType.length()
+        }
+
   @type t :: %__MODULE__{
           average_weekly_distance: State.property(UnitType.length()),
           average_weekly_distance_long_run: State.property(UnitType.length()),
@@ -85,7 +90,8 @@ defmodule AutoApi.UsageState do
           eco_score_total: State.property(float()),
           eco_score_free_wheel: State.property(float()),
           eco_score_constant: State.property(float()),
-          eco_score_bonus_range: State.property(UnitType.length())
+          eco_score_bonus_range: State.property(UnitType.length()),
+          trip_meters: State.multiple_property(trip_meter())
         }
 
   @doc """

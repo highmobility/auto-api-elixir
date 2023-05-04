@@ -45,6 +45,20 @@ defmodule AutoApi.CapabilitiesState do
           | :vehicle_location_changed
           | :authorization_changed
           | :tire_pressure_changed
+          | :harsh_acceleration_triggered
+          | :harsh_acceleration_pedal_position_triggered
+          | :harsh_braking_triggered
+          | :harsh_cornering_triggered
+          | :seat_belt_triggered
+          | :maintenance_changed
+          | :dashboard_lights_changed
+          | :ignition_changed
+          | :accident_reported
+          | :emergency_reported
+          | :breakdown_reported
+          | :battery_guard_warning
+          | :engine_changed
+          | :fleet_clearance_changed
 
   @type webhook :: %{
           available: :available | :unavailable,
