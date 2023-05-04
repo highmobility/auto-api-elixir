@@ -21,6 +21,7 @@ defmodule AutoApi.StateTest do
   use PropCheck
 
   import AutoApi.PropCheckFixtures
+  import ExUnit.CaptureLog
 
   doctest AutoApi.State
 
@@ -206,14 +207,22 @@ defmodule AutoApi.StateTest do
         sunroof_tilt_state: %Property{data: :boo}
       }
 
-      new_state =
-        state
-        |> RooftopControlState.to_bin()
-        |> RooftopControlState.from_bin()
+      log =
+        capture_log(fn ->
+          new_state =
+            state
+            |> RooftopControlState.to_bin()
+            |> RooftopControlState.from_bin()
 
-      assert new_state.sunroof_tilt_state == %AutoApi.Property{
-               failure: %{description: "not able to serialize the value", reason: :format_error}
-             }
+          assert new_state.sunroof_tilt_state == %AutoApi.Property{
+                   failure: %{
+                     description: "not able to serialize the value",
+                     reason: :format_error
+                   }
+                 }
+        end)
+
+      assert log =~ "Not able to serialize value for spec"
     end
 
     test "failure on list property" do
