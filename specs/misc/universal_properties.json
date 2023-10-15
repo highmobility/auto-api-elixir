@@ -326,7 +326,13 @@
                 {
                     "id": 42,
                     "name": "emulator"
+                },
+                {
+                    "id": 43,
+                    "name": "tesla",
+                    "name_pretty": "Tesla"
                 }
+
             ],
             "examples": [
                 {
