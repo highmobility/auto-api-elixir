@@ -331,6 +331,11 @@
                     "id": 43,
                     "name": "tesla",
                     "name_pretty": "Tesla"
+                },
+                {
+                    "id": 44,
+                    "name": "maserati",
+                    "name_pretty": "Maserati"
                 }
 
             ],
