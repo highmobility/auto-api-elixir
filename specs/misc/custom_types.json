@@ -2125,7 +2125,7 @@
                         },
                         {
                             "id": 138,
-                            "name": "hydraulic_pressure_or_brake_fuild_insufficient"
+                            "name": "hydraulic_pressure_or_brake_fluid_insufficient"
                         },
                         {
                             "id": 139,
@@ -2165,7 +2165,7 @@
                         },
                         {
                             "id": 148,
-                            "name": "hydraulic_pressure_or_brake_fluid_insufficient"
+                            "name": "power_steering_assistance_failure"
                         },
                         {
                             "id": 149,
