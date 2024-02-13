@@ -864,7 +864,7 @@
                     "name_pretty": "Acceleration",
                     "type": "unit.acceleration",
                     "size": 10,
-                    "description": "The accelaration"
+                    "description": "The acceleration"
                 }
             ]
         },
