@@ -136,7 +136,7 @@
                     "data_component": "050000000000000000",
                     "values": {
                         "driving_mode": "comfort",
-                        "period": 0.0
+                        "period": 0
                     },
                     "description": "Driving mode 'eco' is engaged 0% of the time"
                 }
@@ -196,7 +196,7 @@
                     "values": {
                         "driving_mode": "eco_plus",
                         "consumption": {
-                            "kilowatt_hours": 18.0
+                            "kilowatt_hours": 18
                         }
                     },
                     "description": "Driving mode 'eco_plus' consumed 18.0kWh of electric energy"
@@ -265,7 +265,7 @@
                 {
                     "data_component": "120440f7590000000000",
                     "value": {
-                        "kilometers": 95632.0
+                        "kilometers": 95632
                     },
                     "description": "Mileage is 95'632km after last trip"
                 }
@@ -386,7 +386,7 @@
                 {
                     "data_component": "120440f7590000000000",
                     "value": {
-                        "kilometers": 95632.0
+                        "kilometers": 95632
                     },
                     "description": "Odometer is 95'632km after last trip"
                 }
@@ -472,7 +472,7 @@
                             "kilometers": 1500.88
                         },
                         "time": {
-                            "weeks": 10.0
+                            "weeks": 10
                         }
                     },
                     "description": "During the last 10.0 weeks the vehicle travelled 1500.88km"
@@ -530,7 +530,7 @@
                 {
                     "data_component": "120040fb198000000000",
                     "value": {
-                        "meters": 111000.0
+                        "meters": 111000
                     },
                     "description": "Vehicle travelled 111000.0m using electricity during the last trip"
                 }
@@ -549,7 +549,7 @@
                 {
                     "data_component": "1200410b198000000000",
                     "value": {
-                        "meters": 222000.0
+                        "meters": 222000
                     },
                     "description": "Vehicle travelled 222000.0m using electricity since last reset"
                 }
@@ -568,7 +568,7 @@
                 {
                     "data_component": "07014053400000000000",
                     "value": {
-                        "minutes": 77.0
+                        "minutes": 77
                     },
                     "description": "Vehicle travelled 77.0min using electricity during last trip"
                 }
@@ -587,7 +587,7 @@
                 {
                     "data_component": "07014056000000000000",
                     "value": {
-                        "minutes": 88.0
+                        "minutes": 88
                     },
                     "description": "Vehicle travelled 88.0min using electricity since last reset"
                 }
@@ -682,7 +682,7 @@
                 {
                     "data_component": "120040fb198000000000",
                     "value": {
-                        "meters": 111000.0
+                        "meters": 111000
                     },
                     "description": "Vehicle travelled 111000.0m using fuel during the last trip"
                 }
@@ -701,7 +701,7 @@
                 {
                     "data_component": "1200410b198000000000",
                     "value": {
-                        "meters": 222000.0
+                        "meters": 222000
                     },
                     "description": "Vehicle travelled 222000.0m using fuel since last reset"
                 }
@@ -720,7 +720,7 @@
                 {
                     "data_component": "07014053400000000000",
                     "value": {
-                        "minutes": 77.0
+                        "minutes": 77
                     },
                     "description": "Vehicle travelled 77.0min during last trip"
                 }
@@ -739,7 +739,7 @@
                 {
                     "data_component": "07014056000000000000",
                     "value": {
-                        "minutes": 88.0
+                        "minutes": 88
                     },
                     "description": "Vehicle travelled 88.0min since last reset"
                 }
@@ -910,7 +910,7 @@
                 {
                     "data_component": "140040a1f80000000000",
                     "value": {
-                        "watts": 2300.0
+                        "watts": 2300
                     },
                     "description": "Recuperation energy is 2300.0W."
                 }
@@ -931,9 +931,9 @@
                     "data_component": "000007064093480000000000",
                     "values": {
                         "direction": "longitudinal",
-                        "type": "normal",
+                        "type": "regular",
                         "duration": {
-                            "milliseconds": 1234.0
+                            "milliseconds": 1234
                         }
                     },
                     "description": "Normal longitudinal acceleration lasted 1234.0ms."
@@ -944,10 +944,25 @@
                         "direction": "lateral",
                         "type": "positive_outlier",
                         "duration": {
-                            "milliseconds": 1234.0
+                            "milliseconds": 1234
                         }
                     },
                     "description": "Positive outlier lateral acceleration lasted 1234.0ms."
+                }
+            ]
+        },
+        {
+            "id": 46,
+            "name": "last_trip_battery_regenerated",
+            "name_cased": "lastTripBatteryRegenerated",
+            "name_pretty": "Last trip battery regenerated",
+            "type": "types.percentage",
+            "description": "Estimated electrical charge (in %) that was recovered through regeneration during a trip.",
+            "examples": [
+                {
+                    "data_component": "3fc1eb851eb851ec",
+                    "value": 0.14,
+                    "description": "Battery recovered 14% of charge through regeneration."
                 }
             ]
         }
