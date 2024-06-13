@@ -589,6 +589,11 @@
                     "id": 12,
                     "name": "flap_open",
                     "disabled_in_setter": true
+                },
+                {
+                    "id": 13,
+                    "name": "ready_for_charging",
+                    "disabled_in_setter": true
                 }
             ],
             "examples": [
@@ -1642,6 +1647,10 @@
                 {
                     "id": 11,
                     "name": "error"
+                },
+                {
+                    "id": 12,
+                    "name": "blue"
                 }
             ],
             "examples": [
@@ -1842,6 +1851,10 @@
                 {
                     "id": 4,
                     "name": "station_ready"
+                },
+                {
+                    "id": 5,
+                    "name": "active"
                 }
             ],
             "examples": [
@@ -2048,6 +2061,136 @@
                         "kilowatts": 120
                     },
                     "description": "Charger power is 120.0kW."
+                }
+            ]
+        },
+        {
+            "id": 77,
+            "name": "conserving_charge",
+            "name_cased": "conservingCharge",
+            "name_pretty": "Conserving charge",
+            "added": 13,
+            "type": "types.active_state",
+            "description": "Indicates if the vehicle is conserving charge.",
+            "examples": [
+                {
+                    "data_component": "01",
+                    "value": "active",
+                    "description": "Vehicle is conserving charge."
+                }
+            ]
+        },
+        {
+            "id": 78,
+            "name": "charging_rate_distance",
+            "name_cased": "chargingRateDistance",
+            "name_pretty": "Charging rate distance",
+            "added": 13,
+            "type": "types.distance_over_time",
+            "description": "Range increase per time unit during ongoing charging process based on the average energy comsumption for driving.",
+            "examples": [
+                {
+                    "data_component": "12044062c0000000000007023ff0000000000000",
+                    "values": {
+                        "distance": {
+                            "kilometers": 150
+                        },
+                        "time": {
+                            "hours": 1
+                        }
+                    },
+                    "description": "Range increases by 150.0km in 1.0h."
+                }
+            ]
+        },
+        {
+            "id": 79,
+            "name": "charging_scenario",
+            "name_cased": "chargingScenario",
+            "name_pretty": "Charging scenario",
+            "added": 13,
+            "type": "enum",
+            "size": 1,
+            "description": "Charging scenario.",
+            "enum_values": [
+                {
+                    "id": 0,
+                    "name": "off"
+                },
+                {
+                    "id": 1,
+                    "name": "charging_to_departure_time_finished"
+                },
+                {
+                    "id": 2,
+                    "name": "immediately_charging_finished"
+                },
+                {
+                    "id": 3,
+                    "name": "optimised_charging_finished"
+                },
+                {
+                    "id": 4,
+                    "name": "charging_to_departure_time_active"
+                },
+                {
+                    "id": 5,
+                    "name": "immediately_charging_active"
+                },
+                {
+                    "id": 6,
+                    "name": "optimised_charging_active"
+                },
+                {
+                    "id": 7,
+                    "name": "charging_to_departure_time_waiting"
+                },
+                {
+                    "id": 8,
+                    "name": "optimised_charging_waiting"
+                },
+                {
+                    "id": 9,
+                    "name": "no_grid_voltage"
+                },
+                {
+                    "id": 10,
+                    "name": "error_lock"
+                },
+                {
+                    "id": 11,
+                    "name": "error_charging_system"
+                },
+                {
+                    "id": 12,
+                    "name": "initialization_charging_communication"
+                },
+                {
+                    "id": 13,
+                    "name": "immediately_optimised_charging_active"
+                },
+                {
+                    "id": 14,
+                    "name": "immediately_optimised_charging_finished"
+                },
+                {
+                    "id": 15,
+                    "name": "emergency_charging"
+                },
+                {
+                    "id": 16,
+                    "name": "charging_interrupt_by_user"
+                },
+                {
+                    "id": 17,
+                    "name": "plug_releasable"
+                }
+            ],
+            "examples": [
+                {
+                    "data_component": "01",
+                    "value": "charging_to_departure_time_finished",
+                    "description": "Charging scenario is 'charging_to_departure_time_finished'."
                 }
             ]
         }

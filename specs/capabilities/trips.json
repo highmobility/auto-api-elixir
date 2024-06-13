@@ -194,7 +194,7 @@
                 {
                     "data_component": "120440c4820000000000",
                     "value": {
-                        "kilometers": 10500.0
+                        "kilometers": 10500
                     },
                     "description": "At the start of the trip the odometer was showing 10500.0km"
                 }
@@ -213,7 +213,7 @@
                 {
                     "data_component": "120440c4978000000000",
                     "value": {
-                        "kilometers": 10543.0
+                        "kilometers": 10543
                     },
                     "description": "At the start of the trip the odometer was showing 10543.0km"
                 }
@@ -251,7 +251,7 @@
                 {
                     "data_component": "12044045800000000000",
                     "value": {
-                        "kilometers": 43.0
+                        "kilometers": 43
                     },
                     "description": "Distance of trip was 43.0km"
                 }
@@ -499,7 +499,7 @@
                     "data_component": "000000000000000000",
                     "values": {
                         "type": "zero",
-                        "value": 0.0
+                        "value": 0
                     },
                     "description": "Eco driving zero-threshold is set at 0.0"
                 },
@@ -507,7 +507,7 @@
                     "data_component": "010000000000000000",
                     "values": {
                         "type": "one",
-                        "value": 0.0
+                        "value": 0
                     },
                     "description": "Eco driving one-threshold is set at 0.0"
                 }
@@ -635,6 +635,41 @@
                     "data_component": "00a1",
                     "value": 161,
                     "description": "Brakes were applied 161 times during the trip."
+                }
+            ]
+        },
+        {
+            "id": 24,
+            "name": "id",
+            "name_cased": "id",
+            "name_pretty": "ID",
+            "added": 13,
+            "type": "string",
+            "description": "ID of the trip",
+            "examples": [
+                {
+                    "data_component": "313233616263",
+                    "value": "123abc",
+                    "description": "ID of the trip is '123abc'."
+                }
+            ]
+        },
+        {
+            "id": 25,
+            "name": "duration",
+            "name_cased": "duration",
+            "name_pretty": "Duration",
+            "added": 13,
+            "type": "unit.duration",
+            "size": 10,
+            "description": "Duration of the trip",
+            "examples": [
+                {
+                    "data_component": "0701405ec00000000000",
+                    "value": {
+                        "hours": 123
+                    },
+                    "description": "Duration of trip was 123.0 minutes."
                 }
             ]
         }

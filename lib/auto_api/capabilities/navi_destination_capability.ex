@@ -32,7 +32,7 @@ defmodule AutoApi.NaviDestinationCapability do
       iex> N.description
       "Navi Destination"
       iex> length(N.properties)
-      11
+      13
       iex> List.first(N.properties)
       {0x01, :coordinates}
   """

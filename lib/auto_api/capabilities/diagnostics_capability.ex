@@ -32,7 +32,7 @@ defmodule AutoApi.DiagnosticsCapability do
       iex> D.description
       "Diagnostics"
       iex> length(D.properties)
-      57
+      58
       iex> List.first(D.properties)
       {0x01, :mileage}
   """
